@@ -29,7 +29,7 @@ class TemplateListComponent extends React.Component {
     }
 
     onClick() {
-        hashHistory.push('/template/add');
+        hashHistory.push('/operate/add');
     }
 
     render() {

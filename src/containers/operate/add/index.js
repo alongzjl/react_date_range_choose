@@ -36,7 +36,7 @@ class TemplateAddComponent extends React.Component {
     }
 
     onClick() {
-        hashHistory.push(`/template/edit/pageList/${this.state.resolution}`)
+        hashHistory.push(`/operate/edit/pageList/${this.state.resolution}`)
     }
 
     render() {

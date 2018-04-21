@@ -22,7 +22,7 @@
     "release:patch": "npm version patch && npm publish && git push --follow-tags",
     "serve:dist": "node server.js --env=dist",
     "start": "node server.js --env=dev",
-    "dev": "webpack-dev-server --inline --open --hot --config ./cfg/dev.js"
+    "dev": "node server.js --env=dev"
   },
   "repository": "",
   "keywords": [],

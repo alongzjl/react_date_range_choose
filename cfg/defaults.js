@@ -23,14 +23,19 @@ const dfltPort = 8111;
  */
 function getDefaultModules() {
     return {
-        preLoaders: [
+        // preLoaders: [
+        //     {
+        //         test: /\.(js|jsx)$/,
+        //         include: srcPath,
+        //         loader: 'eslint-loader'
+        //     }
+        // ],
+        loaders: [
             {
                 test: /\.(js|jsx)$/,
                 include: srcPath,
                 loader: 'eslint-loader'
-            }
-        ],
-        loaders: [
+            },
             {
                 test: /\.css$/,
                 loader: 'style-loader!css-loader!postcss-loader'

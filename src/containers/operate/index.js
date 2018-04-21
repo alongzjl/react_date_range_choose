@@ -23,7 +23,7 @@ class TemplateComponent extends React.Component {
     }
 
     componentDidMount() {
-        hashHistory.push('/template/list');
+        hashHistory.push('/operate/list');
     }
 
     render() {

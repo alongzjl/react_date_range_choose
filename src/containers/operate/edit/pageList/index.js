@@ -32,7 +32,7 @@ class TemplateListPageListComponent extends React.Component {
 
     editPage(route) {
         let { params } = this.props;
-        hashHistory.push(`/template/edit/pageEdit/${params.resolution}/${route}`);
+        hashHistory.push(`/operate/edit/pageEdit/${params.resolution}/${route}`);
     }
 
     render() {
