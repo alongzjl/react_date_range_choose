@@ -2,7 +2,7 @@
 * @Author: liaohui
 * @Date:   2017-06-26 17:06:16
  * @Last modified by:   Liao Hui
- * @Last modified time: 2018-04-21T18:00:11+08:00
+ * @Last modified time: 2018-04-21T18:37:02+08:00
 */
 
 'use strict';
@@ -15,7 +15,7 @@ import RyBorder from 'components/RyBorder';
 import RyComponentList from 'components/RyComponentList';
 import RyPreviewWrapper from 'components/RyPreviewWrapper';
 import RyLayerList from 'components/RyLayerList';
-// import RyComponentConfig from 'components/RyComponentConfig';
+import RyComponentConfig from 'components/RyComponentConfig';
 import * as actions from 'actions';
 import './index.less';
 
@@ -225,6 +225,7 @@ class TemplateListPageEditComponent extends React.Component {
     }
 
     render() {
+        let { layers, scaleVal, focusData, actions } = this.props;
         return (
             <div className="pg-template-edit-page-edit">
                 <div className="ui-left scrollbar">
@@ -241,12 +242,12 @@ class TemplateListPageEditComponent extends React.Component {
                 <div className="ui-center scrollbar">
                     <RyPreviewWrapper
                         classnames="preview-wrapper"
-                        actions={this.props.actions}
-                        data={this.props.layers}
+                        actions={actions}
+                        data={layers}
                         range={this.state.range}
-                        scaleVal={this.props.scaleVal}
-                        focusItem={this.props.focusData.focusItem}
-                        focusDataIndex={this.props.focusData.focusDataIndex}
+                        scaleVal={scaleVal}
+                        focusItem={focusData.focusItem}
+                        focusDataIndex={focusData.focusDataIndex}
                     ></RyPreviewWrapper>
                 </div>
                 <div className="ui-right scrollbar">
@@ -265,7 +266,7 @@ class TemplateListPageEditComponent extends React.Component {
                             </div>
                         </div>
                     </RyBorder>
-                    {this.props.focusData.focusDataIndex >= 0 && (
+                    {focusData.focusDataIndex >= 0 && (
                         <div>
                             <div className="ui-layer">
                                 <RyBorder config="{
@@ -278,8 +279,8 @@ class TemplateListPageEditComponent extends React.Component {
                                 </RyBorder>
                                 <RyLayerList config={{
                                     fnSetFocusIndex: this.setFocusIndex,
-                                    iFocusDataIndex: this.props.focusData.focusDataIndex,
-                                    aRollScreenData: this.props.layers,
+                                    iFocusDataIndex: focusData.focusDataIndex,
+                                    aRollScreenData: layers,
                                     fnRemoveItem: this.removeItem,
                                     fnChange: this.changeLayerList
                                 }}>
@@ -288,10 +289,10 @@ class TemplateListPageEditComponent extends React.Component {
                             {/* <div className="ui-form">
                                 <RyComponentConfig
                                     mallId={this.state.mall_id}
-                                    focusItem={this.state.focusItem}
-                                    components={this.props.layers}
-                                    focusIndex={this.props.focusData.focusDataIndex}
-                                    scaleVal={this.props.scaleVal}
+                                    focusItem={focusData.focusItem}
+                                    components={layers}
+                                    focusIndex={focusData.focusDataIndex}
+                                    scaleVal={scaleVal}
                                     range={this.state.range}
                                 ></RyComponentConfig>
                             </div> */}

@@ -2,7 +2,7 @@
  * @Author: Liao Hui <liaohui>
  * @Date:   2018-01-25T11:52:09+08:00
  * @Last modified by:   Liao Hui
- * @Last modified time: 2018-04-21T17:55:54+08:00
+ * @Last modified time: 2018-04-21T18:06:46+08:00
  */
 
 import React from 'react';
@@ -108,7 +108,7 @@ class RyLayerList extends React.Component {
    */
     fnWatchConfig() {
         let {config} = this.props;
-        var isEqual = this.state.beforeVal && this.state.beforeVal === config.aRollScreenData.map((item) => {
+        var isEqual = config && this.state.beforeVal && this.state.beforeVal === config.aRollScreenData.map((item) => {
             return item.index;
         }).join(',');
 
@@ -153,10 +153,6 @@ class RyLayerList extends React.Component {
         })
         return (
             <div
-                config={{
-                    fnChange: this.fnChange,
-                    fnClick: this.fnClick
-                }}
                 className="ui-layer-list ry-roll-screen-layer-list"
             >
                 {childNodes}

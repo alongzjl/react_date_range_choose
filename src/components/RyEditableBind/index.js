@@ -2,7 +2,7 @@
  * @Author: Liao Hui
  * @Date:   2018-04-19T10:15:40+08:00
  * @Last modified by:   Liao Hui
- * @Last modified time: 2018-04-21T17:50:40+08:00
+ * @Last modified time: 2018-04-21T18:03:10+08:00
  */
 
 import React from 'react';
@@ -497,7 +497,6 @@ class RyEditableBind extends React.Component {
         if (this.state.isCtrl) {
             this.fnCopy();
         }
-        console.log(this.state.clickArea);
         if (this.state.clickArea === 'body' && this.state.beforePos.item.move) {
             this.moveBody(e);
         } else if (this.state.clickArea === 'se' && this.state.beforePos.item.resize) {
