@@ -2,7 +2,7 @@
 * @Author: liaohui
 * @Date:   2017-06-26 17:06:16
  * @Last modified by:   Liao Hui
- * @Last modified time: 2018-04-21T16:33:25+08:00
+ * @Last modified time: 2018-04-21T18:00:11+08:00
 */
 
 'use strict';
@@ -14,7 +14,7 @@ import RyTitle from 'components/RyTitle';
 import RyBorder from 'components/RyBorder';
 import RyComponentList from 'components/RyComponentList';
 import RyPreviewWrapper from 'components/RyPreviewWrapper';
-// import RyLayerList from 'components/RyLayerList';
+import RyLayerList from 'components/RyLayerList';
 // import RyComponentConfig from 'components/RyComponentConfig';
 import * as actions from 'actions';
 import './index.less';
@@ -276,14 +276,14 @@ class TemplateListPageEditComponent extends React.Component {
                                     }">
                                     </RyTitle>
                                 </RyBorder>
-                                {/* <RyLayerList config={{
-                                    fnSetFocusIndex: this.state.setFocusIndex,
+                                <RyLayerList config={{
+                                    fnSetFocusIndex: this.setFocusIndex,
                                     iFocusDataIndex: this.props.focusData.focusDataIndex,
                                     aRollScreenData: this.props.layers,
-                                    fnRemoveItem: this.state.removeItem,
-                                    fnChange: this.state.changeLayerList
+                                    fnRemoveItem: this.removeItem,
+                                    fnChange: this.changeLayerList
                                 }}>
-                                </RyLayerList> */}
+                                </RyLayerList>
                             </div>
                             {/* <div className="ui-form">
                                 <RyComponentConfig

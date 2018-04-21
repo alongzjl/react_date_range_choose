@@ -2,7 +2,7 @@
  * @Author: Liao Hui <liaohui>
  * @Date:   2018-01-25T11:52:09+08:00
  * @Last modified by:   Liao Hui
- * @Last modified time: 2018-04-21T17:13:25+08:00
+ * @Last modified time: 2018-04-21T17:39:44+08:00
  */
 
 import React from 'react';
@@ -44,6 +44,9 @@ class RyPreviewWrapper extends React.Component {
        */
     changeDock(key, val) {
         this.state.dockConfig[key] = val;
+        this.setState({
+            dockConfig: this.state.dockConfig
+        });
     }
 
     /**

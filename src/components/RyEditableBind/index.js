@@ -2,7 +2,7 @@
  * @Author: Liao Hui
  * @Date:   2018-04-19T10:15:40+08:00
  * @Last modified by:   Liao Hui
- * @Last modified time: 2018-04-21T17:00:02+08:00
+ * @Last modified time: 2018-04-21T17:50:40+08:00
  */
 
 import React from 'react';
@@ -99,7 +99,6 @@ class RyEditableBind extends React.Component {
             $ryEditable = this.getRyEditable(e),
             parentWidth = this.props.config.fParentWidth * this.props.config.fScaleVal,
             parentHeight = this.props.config.fParentHeight * this.props.config.fScaleVal;
-        console.log($ryEditable)
 
         if ($ryEditable && !this.state.isMouseDown) {
             this.state.isMouseDown = true;
@@ -154,7 +153,6 @@ class RyEditableBind extends React.Component {
                     width: $ryEditable.outerWidth(),
                     height: $ryEditable.outerHeight()
                 };
-                console.log('top:' + parseInt($ryEditable.css('top')));
 
                 if ($target.hasClass('ui-resizable-se')) {
                     this.state.clickArea = 'se';

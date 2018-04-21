@@ -2,7 +2,7 @@
  * @Author: Liao Hui <liaohui>
  * @Date:   2018-01-25T11:52:09+08:00
  * @Last modified by:   Liao Hui
- * @Last modified time: 2018-04-21T13:21:47+08:00
+ * @Last modified time: 2018-04-21T17:59:49+08:00
  */
 
 import React from 'react';
@@ -34,7 +34,7 @@ class RyComponentList extends React.Component {
                 <div className="ui-drag-inactive-preview c-wraper">
                     <div className="c-thumbnail c-thumbnail-5"></div>{item.text}
                 </div>
-                <div className="ui-drag-active-preview">释放鼠标添加组件</div>
+                {/* <div className="ui-drag-active-preview">释放鼠标添加组件</div> */}
             </RyEditable>
         );
     });
