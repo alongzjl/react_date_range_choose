@@ -1,8 +1,8 @@
-import {Component} from 'react';
+import React from 'react'
 
-class NoMatchComponent extends Component {
+class NoMatchComponent extends React.Component {
     constructor(props) {
-        super(props);
+        super(props)
         this.state = {}
     }
 
@@ -17,8 +17,8 @@ class NoMatchComponent extends Component {
             <div className="">
 				您输入的URL地址有误~
 			</div>
-        );
+        )
     }
 }
 
-export default NoMatchComponent;
+export default NoMatchComponent

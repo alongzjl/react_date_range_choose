@@ -2,7 +2,7 @@
  * @Author: Liao Hui <liaohui>
  * @Date:   2018-01-25T11:52:09+08:00
  * @Last modified by:   Liao Hui
- * @Last modified time: 2018-04-21T13:13:00+08:00
+ * @Last modified time: 2018-04-21T17:39:44+08:00
  */
 
 import React from 'react';
@@ -43,7 +43,10 @@ class RyPreviewWrapper extends React.Component {
        * @return {[type]}          [description]
        */
     changeDock(key, val) {
-        this.state.this.state.dockConfig[key] = val;
+        this.state.dockConfig[key] = val;
+        this.setState({
+            dockConfig: this.state.dockConfig
+        });
     }
 
     /**
@@ -53,7 +56,7 @@ class RyPreviewWrapper extends React.Component {
        */
     changeWeb(index) {
         return function(url) {
-            this.props.data[index].detailMap.url = url;
+            this.props.data[index].url = url;
         };
     }
 
@@ -82,9 +85,20 @@ class RyPreviewWrapper extends React.Component {
        * @return {[type]}      [description]
        */
     setFocusIndex(index) {
-        this.state.distance = 10;
-        setFocusIndexUtil(index, this.state);
-        this.setRangeStyle(this.props.focusItem);
+        let { data } = this.props;
+        const realIndex = data.findIndex((item) => {
+            return item.index === index;
+        });
+        const item = data[realIndex];
+
+        if (!item) {
+            this.props.actions.setFocusItemIndex(-1);
+            return;
+        }
+
+        this.props.actions.setFocusItem(item);
+        this.props.actions.setFocusItemIndex(index);
+        // this.setRangeStyle(this.props.focusItem);
     }
 
     /**
@@ -95,29 +109,23 @@ class RyPreviewWrapper extends React.Component {
        * @return {[type]}            [description]
        */
     changeCss(realIndex, css, isPause) {
+        let { data, actions, scaleVal, focusItem } = this.props;
         if (isPause) {
-            // console.log('isPause');
-            realIndex = this.props.data.findIndex((item) => {
-                return item.index === this.props.focusItem.index;
+            realIndex = data.findIndex((item) => {
+                return item.index === focusItem.index;
             });
         }
 
-        //  console.log(oldIndex, realIndex);
-
         $.each(css, (k, v) => {
-            let val = v / this.props.scaleVal;
+            let val = v / scaleVal;
             if (k === 'top') {
                 let minTop = 0;
                 val = Math.max(minTop, val);
             }
             css[k] = val;
         });
-
-        // $applyAsync(() => {
-        //     RollScreenUtil.changeStickerCss(this.props.focusItem, css.width, css.height);
-        // });
-        $.extend(this.props.data[realIndex], css);
-        this.setRangeStyle(this.props.data[realIndex]);
+        $.extend(data[realIndex], css);
+        actions.updateLayer(data[realIndex]);
     }
 
     /**
@@ -131,30 +139,31 @@ class RyPreviewWrapper extends React.Component {
 
     render() {
         let childNodes = this.props.data.map((item, index) => {
+            let style = {
+                'position': 'absolute',
+                'width': item.width * this.props.scaleVal,
+                'height': item.height * this.props.scaleVal,
+                'top': item.top * this.props.scaleVal,
+                'left': item.left * this.props.scaleVal
+            }
             return (
                 <RyEditable
                     key={index}
                     config={{
                         bMove: item.move,
-                        bResize: !item.detailMap.baseMap,
+                        bResize: true,
                         aEdit: item.edit,
                         fScaleVal: this.props.scaleVal,
                         bFocus: this.props.focusDataIndex === item.index,
                         iWidth: item.width,
                         iHeight: item.height
                     }}
-                    style={{
-                        'position': 'absolute',
-                        'width': item.width * this.props.scaleVal,
-                        'height': item.height * this.props.scaleVal,
-                        'top': item.top * this.props.scaleVal,
-                        'left': item.left * this.props.scaleVal
-                    }}
+                    style={style}
                 >
                     <RyPreviewWeb className={
                         classnames([this.props.focusDataIndex === index ? 'preview-weather' : ''])
                     } config={{
-                        sSrc: item.detailMap.url,
+                        sSrc: item.url,
                         fnChangeTextEdit: this.changeTextEdit,
                         fnChangeWeb: this.changeWeb(index)
                     }}>
@@ -176,16 +185,16 @@ class RyPreviewWrapper extends React.Component {
                         <div className="inductionLine-v" style={{left: this.state.dockConfig.left}}></div>
                     )}
                     <RyEditableBind config={{
-                        fnClick: this.clickItem,
+                        fnClick: this.clickItem.bind(this),
                         fScaleVal: this.props.scaleVal,
                         fParentWidth: this.props.range.width,
                         fParentHeight: this.props.range.height,
                         bRadio: this.props.range.radio,
-                        fnDragMove: this.changeCss,
+                        fnDragMove: this.changeCss.bind(this),
                         aData: this.props.data,
                         iFocusDataIndex: this.props.focusDataIndex,
                         oDockConfig: this.state.dockConfig,
-                        fnChangeDock: this.changeDock,
+                        fnChangeDock: this.changeDock.bind(this),
                         bTextEdit: this.state.textEdit
                     }}>
                         {childNodes}

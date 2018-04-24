@@ -28,8 +28,46 @@ let config = Object.assign({}, baseConfig, {
 			searchResolveModulesDirectories: false
 		})
 	],
-	module: defaultSettings.getDefaultModules()
+	module: defaultSettings.getDefaultModules(),
 });
+
+let target = 'http://java1.rongyi.com'
+
+config.devServer = {
+	contentBase: './src/',
+	historyApiFallback: true,
+	stats: 'errors-only',
+	hot: true,
+	port: defaultSettings.port,
+	publicPath: defaultSettings.publicPath,
+	noInfo: false,
+	proxy: {
+		'/easy-roa/v1/user/**': {
+			target: target,
+			secure: false,
+			changeOrigin: 'true',
+		},
+		'/bsoms/**': {
+			target: target,
+			secure: false,
+			changeOrigin: 'true',
+			onProxyRes:function(proxyRes, req, res) {
+				//登录处理
+				let cookies  =  proxyRes.headers['set-cookie']
+				var newCookies = []
+				console.log('========== 登录成功 ==========')
+				if(cookies){
+					cookies.forEach(function(cookie,index){
+						newCookies.push(cookie.replace(/\.rongyi\.com/,'localhost'))
+					})
+					proxyRes.headers['set-cookie']=newCookies
+				}else{
+					console.log('========== 登录失败 ==========')
+				}
+			}
+		},
+	}
+}
 
 // Add needed loaders to the defaults here
 config.module.loaders.push({
@@ -39,6 +77,8 @@ config.module.loaders.push({
 		config.additionalPaths,
 		[ path.join(__dirname, '/../src') ]
 	)
-})
+});
+
+console.log(config.module.loaders)
 
 module.exports = config;

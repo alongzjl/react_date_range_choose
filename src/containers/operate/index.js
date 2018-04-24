@@ -2,7 +2,7 @@
 * @Author: liaohui
 * @Date:   2017-06-26 17:06:16
  * @Last modified by:   Liao Hui
- * @Last modified time: 2018-04-18T19:00:50+08:00
+ * @Last modified time: 2018-04-24T16:33:06+08:00
 */
 
 'use strict';
@@ -14,16 +14,16 @@ import { hashHistory } from 'react-router';
 import * as actions from 'actions';
 import './index.less';
 
-class TemplateComponent extends React.Component {
+class OperateComponent extends React.Component {
     constructor(props) {
-        super(props);
+        super(props)
     }
 
     componentWillMount() {
     }
 
     componentDidMount() {
-        hashHistory.push('/operate/list');
+        hashHistory.push('/operate/edit/1080*1920/home')
     }
 
     render() {
@@ -35,7 +35,7 @@ class TemplateComponent extends React.Component {
     }
 }
 
-TemplateComponent.defaultProps = {
+OperateComponent.defaultProps = {
 };
 
 const mapStateToProps = state => state;
@@ -47,4 +47,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(TemplateComponent)
+)(OperateComponent)

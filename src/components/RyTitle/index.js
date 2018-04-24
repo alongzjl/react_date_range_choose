@@ -23,11 +23,11 @@ class RyTitle extends React.Component {
     let { config } = this.props;
     return (
         <section className="ry-title">
-            { config.sTitle !== '' && (
-                <h3 className="ui-title" title={config.sTitle}>
+            { config.sTitle !== '' ?
+               ( <h3 className="ui-title" title={config.sTitle}>
                     {config.sTitle}
-                </h3>
-            )}
+                </h3>) : null 
+            }
             { config.sSubTitle !== '' && (
                 <p className="ui-desc">
                     {config.sSubTitle}

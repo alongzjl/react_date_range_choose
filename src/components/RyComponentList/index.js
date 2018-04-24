@@ -2,7 +2,7 @@
  * @Author: Liao Hui <liaohui>
  * @Date:   2018-01-25T11:52:09+08:00
  * @Last modified by:   Liao Hui
- * @Last modified time: 2018-04-21T13:21:47+08:00
+ * @Last modified time: 2018-04-24T14:11:17+08:00
  */
 
 import React from 'react';
@@ -31,10 +31,12 @@ class RyComponentList extends React.Component {
                 config={{
                     bMove: true
                 }}>
-                <div className="ui-drag-inactive-preview c-wraper">
-                    <div className="c-thumbnail c-thumbnail-5"></div>{item.text}
+                <div className="ry-roll-screen-componment-list-item">
+                    <div className="ui-drag-inactive-preview c-wraper">
+                        <div className="c-thumbnail c-thumbnail-5"></div>{item.text}
+                    </div>
                 </div>
-                <div className="ui-drag-active-preview">释放鼠标添加组件</div>
+                {/* <div className="ui-drag-active-preview">释放鼠标添加组件</div> */}
             </RyEditable>
         );
     });

@@ -9,9 +9,7 @@
 
 // Settings configured here will be merged into the final config object.
 export default {
-    // devUrl:  'http://node.rongyi.com/pro_fdxm/',
-    // qaUrl:   'http://activity.dev.rongyi.com',
-    // distUrl: 'http://node.rongyi.com/pro_fdxm/',
+    // devUrl:  'http://localhost:4080/api/store',
     devUrl:  '',
     qaUrl:   '',
     distUrl: '',

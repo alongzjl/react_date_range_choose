@@ -20,8 +20,6 @@ if (envMap[REACT_WEBPACK_ENV]) {
     REACT_WEBPACK_ENV = envMap[REACT_WEBPACK_ENV]
 }
 
-let target = 'http://java1.rongyi.com'
-
 module.exports = {
     additionalPaths: additionalPaths,
     port: defaultSettings.port,
@@ -32,42 +30,14 @@ module.exports = {
         filename: 'app.js',
         publicPath: defaultSettings.publicPath
     },
-    devServer: {
-        contentBase: './src/',
-        // host: 'localhost',
-        port: defaultSettings.port,
-        historyApiFallback: true,
-        stats: 'errors-only',
-        hot: true,
-        publicPath: defaultSettings.publicPath,
-        noInfo: false,
-        proxy: {
-            '/easy-roa/v1/user/**': {
-                target: target,
-                secure: false,
-                changeOrigin: 'true',
-            },
-            '/bsoms/**': {
-                target: target,
-                secure: false,
-                changeOrigin: 'true',
-                onProxyRes:function(proxyRes, req, res) {
-                    //登录处理
-                    let cookies  =  proxyRes.headers['set-cookie']
-                    var newCookies = []
-                    console.log('================ 登录成功 ================')
-                    if(cookies){
-                        cookies.forEach(function(cookie,index){
-                            newCookies.push(cookie.replace(/\.rongyi\.com/,'localhost'))
-                        })
-                        proxyRes.headers['set-cookie']=newCookies
-                    }else{
-                        console.log('================ 登录失败 ================')
-                    }
-                }
-            },
-        },
-    },
+    // devServer: {
+    //     contentBase: './src/',
+    //     historyApiFallback: true,
+    //     hot: true,
+    //     port: defaultSettings.port,
+    //     publicPath: defaultSettings.publicPath,
+    //     noInfo: false
+    // },
     resolve: {
         extensions: ['', '.js', '.jsx'],
         alias: {

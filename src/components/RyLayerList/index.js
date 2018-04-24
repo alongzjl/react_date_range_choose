@@ -2,7 +2,7 @@
  * @Author: Liao Hui <liaohui>
  * @Date:   2018-01-25T11:52:09+08:00
  * @Last modified by:   Liao Hui
- * @Last modified time: 2018-04-21T11:24:45+08:00
+ * @Last modified time: 2018-04-24T09:46:25+08:00
  */
 
 import React from 'react';
@@ -25,7 +25,7 @@ class RyLayerList extends React.Component {
 
     componentWillUnmount() {}
 
-    componentWillReceiveProps() {
+    componentWillReceiveProps(nextProps) {
         this.fnWatchConfig();
     }
 
@@ -106,62 +106,56 @@ class RyLayerList extends React.Component {
    * @param  {[type]} newVal [新值]
    * @return {[type]}        [description]
    */
-    fnWatchConfig(newVal) {
-        var isEqual = newVal && this.state.beforeVal && this.state.beforeVal === newVal.aRollScreenData.map((item) => {
-            return item.index + (item.detailMap && item.detailMap.text || '');
+    fnWatchConfig() {
+        let {config} = this.props;
+        var isEqual = config && this.state.beforeVal && this.state.beforeVal === config.aRollScreenData.map((item) => {
+            return item.index;
         }).join(',');
 
         // console.log(newVal.aRollScreenData.length, isEqual);
 
-        if (newVal && newVal.aRollScreenData && newVal.aRollScreenData.length && !isEqual) {
+        if (config && config.aRollScreenData && config.aRollScreenData.length && !isEqual) {
             this.state.reverseData = [];
             setTimeout(() => {
-                this.state.beforeVal = newVal.aRollScreenData.map((item) => {
-                    return item.index + (item.detailMap && item.detailMap.text || '');
+                this.state.beforeVal = config.aRollScreenData.map((item) => {
+                    return item.index;
                 }).join(',');
-                this.state.reverseData = this.addLayerName(newVal.aRollScreenData);
+                this.state.reverseData = this.addLayerName(config.aRollScreenData);
+                this.setState({
+                    reverseData: this.state.reverseData
+                })
             });
         }
-        this.props.config = newVal;
     }
 
     render() {
         let {config} = this.props;
-        this.state.reverseData.map((item, index) => {
-            if (item.type !== 10) {
-                return (
-                    <div
-                        key={index}
-                        index={item.index}
-                        className={
-                            classnames([item.index === config.iFocusDataIndex ? 'active' : ''])
-                        }
-                        class="ry-roll-screen-layer-item"
-                        ng-repeat="item in vm.reverseData track by $index">
-                        <div class="ly-df ly-aic c-wraper">
-                            <div class="c-thumbnail c-thumbnail-right c-thumbnail-{{item.type}}"></div>
-                            <span ng-if="item.type == 9" class="ui-show-text" title="{{item.detailMap.text}}">
-                                {item.detailMap.text}
-                            </span>
-                            <span ng-if="item.type != 9">
-                                {item.layerName}
-                            </span>
-                        </div>
-                        <div class="ui-hidden" ng-if="!item.detailMap.baseMap">
-                            <a class="ui-close"></a>
-                        </div>
+        let childNodes = this.state.reverseData.map((item, index) => {
+            return (
+                <div
+                    key={index}
+                    index={item.index}
+                    className={
+                        classnames(['ry-roll-screen-layer-item', item.index === config.iFocusDataIndex ? 'active' : ''])
+                    }
+                >
+                    <div className="c-wraper">
+                        <div className="c-thumbnail c-thumbnail-right c-thumbnail-5"></div>
+                        <span>
+                            {item.layerName}
+                        </span>
                     </div>
-                );
-            }
+                    <div className="ui-hidden">
+                        <a className="ui-close"></a>
+                    </div>
+                </div>
+            );
         })
         return (
             <div
-                config="{
-                    fnChange: vm.fnChange,
-                    fnClick: vm.fnClick
-                }"
-                class="ui-layer-list ry-roll-screen-layer-list">
-
+                className="ui-layer-list ry-roll-screen-layer-list"
+            >
+                {childNodes}
             </div>
         );
     }

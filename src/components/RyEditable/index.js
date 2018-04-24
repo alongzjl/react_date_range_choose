@@ -2,7 +2,7 @@
  * @Author: Liao Hui <liaohui>
  * @Date:   2018-01-25T11:52:09+08:00
  * @Last modified by:   Liao Hui
- * @Last modified time: 2018-04-21T10:48:06+08:00
+ * @Last modified time: 2018-04-21T17:13:49+08:00
  */
 
 import React from 'react';
@@ -20,7 +20,7 @@ class RyEditable extends React.Component {
   }
 
   render() {
-    let { config } = this.props;
+    let { config, style } = this.props;
     return (
         <section
             className={
@@ -31,6 +31,7 @@ class RyEditable extends React.Component {
                     config.bMove || config.bResize || config.aEdit !== undefined && config.aEdit.length ? 'can-edit' : ''
                 ])
             }
+            style={style}
         >
             <div className="ui-content" style={{
                 'width': config.iWidth,
