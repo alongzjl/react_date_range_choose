@@ -5,6 +5,7 @@
  * @Last modified time: 2018-04-21T16:29:18+08:00
 */
 
-export * from './scale';
-export * from './layers';
-export * from './focusData';
+export * from './scale'
+export * from './layers'
+export * from './focusData'
+export * from './comp'

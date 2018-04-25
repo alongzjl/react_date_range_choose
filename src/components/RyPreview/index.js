@@ -25,21 +25,21 @@ class RyPreview extends React.Component {
     componentWillUnmount() {}
 
     componentWillReceiveProps() {
-        this.doResize();
+        this.doResize()
     }
 
     doResize() {
-        const $parent = $(this.element);
-        const parentWidth = $parent.width() - 8;
-        const parentHeight = $parent.height() - 8;
-        const parentBit = parentWidth / parentHeight;
-        const childWidth = this.props.config.width;
-        const childHeight = this.props.config.height;
-        const childBit = childWidth / childHeight;
-        let scale = 1;
-        let width;
-        let height;
+        const $parent      = $(this.element)
+        const parentWidth  = $parent.width()  - 8
+        const parentHeight = $parent.height() - 8
+        const parentBit    = parentWidth / parentHeight
+        const childWidth   = this.props.config.width
+        const childHeight  = this.props.config.height
+        const childBit     = childWidth / childHeight
 
+        let scale = 1, width, height
+
+        debugger
         if (parentBit > childBit) {
             scale = parentHeight / childHeight;
             height = parentHeight;

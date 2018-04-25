@@ -7,12 +7,12 @@
 
 import * as types from '../constants'
 
-const initialState = 1;
+const initialState = 1
 
 export default function scaleVal(state = initialState, action) {
     switch (action.type) {
         case types.SET_SCALE_VAL:
-            return action.scaleVal;
+            return action.scaleVal
 
         default:
             return state

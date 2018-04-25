@@ -7,6 +7,7 @@
 
 'use strict';
 
-export * from './scale';
-export * from './layers';
-export * from './focusData';
+export * from './scale'
+export * from './layers'
+export * from './focusData'
+export * from './comp'

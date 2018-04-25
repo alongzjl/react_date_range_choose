@@ -4,15 +4,17 @@
  * @Last modified by:   Liao Hui
  * @Last modified time: 2018-04-21T16:29:49+08:00
 */
-import { combineReducers } from 'redux';
-import scaleVal from './scale';
-import layers from './layers';
-import focusData from './focusData';
+import { combineReducers } from 'redux'
+import scaleVal from './scale'
+import layers from './layers'
+import focusData from './focusData'
+import comp from './comp'
 
 const rootReducer = combineReducers({
     scaleVal,
     layers,
-    focusData
-});
+    focusData,
+    comp,
+})
 
-export default rootReducer;
+export default rootReducer

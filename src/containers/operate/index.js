@@ -28,7 +28,7 @@ class OperateComponent extends React.Component {
 
     render() {
         return (
-            <div className="pg-template">
+            <div className="pg-edit">
                 { this.props.children }
             </div>
         );

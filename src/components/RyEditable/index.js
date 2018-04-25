@@ -31,8 +31,7 @@ class RyEditable extends React.Component {
                     config.bMove || config.bResize || config.aEdit !== undefined && config.aEdit.length ? 'can-edit' : ''
                 ])
             }
-            style={style}
-        >
+            style={style}>
             <div className="ui-content" style={{
                 'width': config.iWidth,
                 'height': config.iHeight,
@@ -69,9 +68,8 @@ class RyEditable extends React.Component {
                 <div className="ui-btns"></div>
             )}
         </section>
-
-    );
+    )
   }
 }
 
-export default RyEditable;
+export default RyEditable
