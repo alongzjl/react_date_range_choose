@@ -30,8 +30,8 @@ class RyPreview extends React.Component {
 
     doResize() {
         const $parent      = $(this.element)
-        const parentWidth  = $parent.width()  - 8
-        const parentHeight = $parent.height() - 8
+        const parentWidth  = $parent.width()
+        const parentHeight = $parent.height() || 768
         const parentBit    = parentWidth / parentHeight
         const childWidth   = this.props.config.width
         const childHeight  = this.props.config.height
@@ -39,7 +39,6 @@ class RyPreview extends React.Component {
 
         let scale = 1, width, height
 
-        debugger
         if (parentBit > childBit) {
             scale = parentHeight / childHeight;
             height = parentHeight;

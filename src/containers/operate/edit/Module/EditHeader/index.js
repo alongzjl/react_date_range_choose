@@ -10,6 +10,9 @@ import $ from 'jquery'
 import './index.less'
 import { bindActionCreators } from 'redux'
 import { connect }  from 'react-redux'
+
+import EditCompList   from '../EditCompList'
+
 import * as actions from 'actions'
 
 class Header extends React.Component {
@@ -30,9 +33,7 @@ class Header extends React.Component {
 			<div className="pe-header e-flex">
 				<div className="peh-left"></div>
 				<div className="peh-center">
-					<ul>
-						<li></li>
-					</ul>
+					<EditCompList />
 				</div>
 				<div className="peh-right"></div>
 			</div>

@@ -10,15 +10,20 @@
 import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import Header from './Module/Header'	
-import RyTitle from 'components/RyTitle'
+
+import EditHeader    from './Module/EditHeader'
+import EditContent   from './Module/EditContent'
+
+import RyTitle  from 'components/RyTitle'
 import RyBorder from 'components/RyBorder'
-import RyComponentList from 'components/RyComponentList'
-import RyPreviewWrapper from 'components/RyPreviewWrapper'
-import RyLayerList from 'components/RyLayerList'
+import RyComponentList   from 'components/RyComponentList'
+import RyPreviewWrapper  from 'components/RyPreviewWrapper'
 import RyComponentConfig from 'components/RyComponentConfig'
 import * as actions from 'actions'
-import './index.less';
+import './index.less'
+
+import { Tabs } from 'antd'
+const TabPane = Tabs.TabPane
 
 class TemplateListPageEditComponent extends React.Component {
 	constructor(props) {
@@ -229,30 +234,28 @@ class TemplateListPageEditComponent extends React.Component {
 		let { layers, scaleVal, focusData, actions } = this.props;
 		return (
 			<div className="pg-edit-box e-flex-fdc">
-				<Header></Header>
-				<div className="pg-body e-flex e-flex-box">
-					<div className="pg-left">
-						<div className="ui-left scrollbar">
-							<RyTitle config={{
-								sTitle: '页面组件',
-								sSubTitle: '点击或拖放来添加组件'
-							}}>
-							</RyTitle>
-							<RyComponentList
-								componmentList={this.state.componmentList}
-								onDragEnd={this.dragEnd.bind(this)}
-							/>
-						</div>
+				<EditHeader></EditHeader>
+				<div className="pg-body e-flex-box">
+					<div className="pg-left scrollbar">
+						<RyTitle config={{
+							sTitle: '页面组件',
+							sSubTitle: '点击或拖放来添加组件'
+						}}>
+						</RyTitle>
+						<RyComponentList
+							componmentList={this.state.componmentList}
+							onDragEnd={this.dragEnd.bind(this)}
+						/>
 					</div>
 					<div className="pg-center e-flex-box scrollbar">
 						<RyPreviewWrapper
 							classnames="preview-wrapper"
 							actions={actions}
-							data={layers}
+						//	data={layers}
 							range={this.state.range}
 							scaleVal={scaleVal}
 							focusItem={focusData.focusItem}
-							focusDataIndex={focusData.focusDataIndex}
+						//	focusDataIndex={focusData.focusDataIndex}
 						></RyPreviewWrapper>
 					</div>
 					<div className="pg-right scrollbar">
@@ -271,26 +274,13 @@ class TemplateListPageEditComponent extends React.Component {
 								</div>
 							</div>
 						</RyBorder>
+						<Tabs defaultActiveKey="1" type="card">
+							<TabPane tab="内容" key="1"><EditContent></EditContent></TabPane>
+							<TabPane tab="样式" key="2">样式</TabPane>
+							<TabPane tab="动画" key="3">动画</TabPane>
+						</Tabs>
 						{focusData.focusDataIndex >= 0 && (
 							<div>
-								<div className="ui-layer">
-									<RyBorder config="{
-										bBg: true
-									}">
-										<RyTitle config="{
-											sSubTitle: '图层'
-										}">
-										</RyTitle>
-									</RyBorder>
-									<RyLayerList config={{
-										fnSetFocusIndex: this.setFocusIndex,
-										iFocusDataIndex: focusData.focusDataIndex,
-										aRollScreenData: layers,
-										fnRemoveItem: this.removeItem,
-										fnChange: this.changeLayerList
-									}}>
-									</RyLayerList>
-								</div>
 								<div className="ui-form">
 									<RyComponentConfig
 										mallId={this.state.mall_id}

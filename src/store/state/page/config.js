@@ -9,7 +9,7 @@ module.exports = {
 		// 页面内容
 		content: {
 			// 以路由名称命名
-			'p_1000': {},
+			'p_1000': require('./content'),
 		},
 		// 页面管理
 		list: {

@@ -41,7 +41,9 @@
 	height: 100%;
 }
 .pg-body {
+	display: flex;
 	width: 100%;
+	min-height: 820px;
 	& > div {
 		height: 100%;
 	}
@@ -53,7 +55,7 @@
 
 	}
 	.pg-center {
-		
+		padding-top: 20px;
 	}
 	.pg-right {
 		.edit-img{
@@ -128,15 +130,6 @@
 	// 		width: 200px;
 	// 	}
 	// }
-	.ui-left {
-		width: 160px;
-		position: absolute;
-		top: 0;
-		overflow: auto;
-		bottom: 0;
-		padding: 20px 15px;
-		box-sizing: border-box;
-	}
 	.ui-center {
 		position: absolute;
 		top: 0;
@@ -152,62 +145,12 @@
 			min-height: 1000px;
 		}
 	}
-	.ui-preview-btn {
-	}
-	.ui-form {
-		position: absolute;
-		top: 53px;
-		right: 0;
-		bottom: 0;
-		left: 160px;
-	}
 	.ui-hidden {
 		display: none;
 		position: absolute;
 		right: 10px;
 		top: 50%;
 		transform: translateY(-50%);
-	}
-	.ui-layer-list {
-		li {
-			padding: 8px 15px;
-			background: #FAFAFA;
-			border-bottom: 1px solid #D9D9D9;
-			position: relative;
-			&.active {
-				background: #E6F1FA;
-				.ui-hidden {
-					display: block;
-				}
-			}
-		}
-	}
-	.ui-layer {
-		position: absolute;
-		top: 53px;
-		left: 0;
-		bottom: 0;
-		width: 160px;
-		border-right:1px solid #ccc;
-	}
-	.ui-close {
-		width: 15px;
-		height: 15px;
-		border-radius: 50%;
-		background: #FF2E48;
-		position: relative;
-		display: inline-block;
-		vertical-align: middle;
-		&::before {
-			position: absolute;
-			content: '';
-			background: #FFFFFF;
-			width: 9px;
-			height: 1px;
-			top: 50%;
-			left: 50%;
-			transform: translateX(-50%) translateY(-50%);
-		}
 	}
 	.cd {
 		cursor: default;

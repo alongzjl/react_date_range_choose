@@ -1,6 +1,6 @@
-// 图片
+// 文本
 module.exports = {
-	name: 'picture',
+	name: 'text',
 	// 样式管理
 	style: {
 		// 组件样式

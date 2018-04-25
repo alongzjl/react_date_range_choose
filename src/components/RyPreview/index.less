@@ -6,51 +6,49 @@
 */
 
 .ry-roll-screen-preview {
-    overflow: hidden;
-    margin: auto;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, .2);
-    background-color: #fff;
-
-    .ry-editable {
-        &.ui-move {
-            cursor: move;
-        }
-        &.can-edit:hover {
-            outline: 1px dashed #fff;
-        }
-        &.can-edit.is-click {
-            outline: 1px dashed #2383F0;
-            box-shadow: 0 1px 10px 0 rgba(0,0,0,0.35);
-            .ui-btn {
-                display: block;
-            }
-        }
-        &.is-move {
-            opacity: 0.7;
-            z-index: 1;
-        }
-        .ui-content {
-            // position: absolute;
-            // top: 0;
-            // left: 0;
-            // right: 0;
-            // bottom: 0;
-            // overflow: hidden;
-            transform-origin: 0 0;
-            .can-edit & {
-                cursor: move;
-            }
-        }
-        .ui-content2 {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            overflow: hidden;
-            .can-edit & {
-                cursor: move;
-            }
-        }
-    }
+	position: relative;
+	overflow: hidden;
+	margin: auto;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, .2);
+	background-color: #fff;
+	&-wrap {
+		width: 100%;
+		height: 100%;
+	}
+	.ry-editable {
+		&.ui-move {
+			cursor: move;
+		}
+		&.can-edit:hover {
+			outline: 1px dashed #fff;
+		}
+		&.can-edit.is-click {
+			outline: 1px dashed #2383F0;
+			box-shadow: 0 1px 10px 0 rgba(0,0,0,0.35);
+			.ui-btn {
+				display: block;
+			}
+		}
+		&.is-move {
+			opacity: 0.7;
+			z-index: 1;
+		}
+		.ui-content {
+			transform-origin: 0 0;
+			.can-edit & {
+				cursor: move;
+			}
+		}
+		.ui-content2 {
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			overflow: hidden;
+			.can-edit & {
+				cursor: move;
+			}
+		}
+	}
 }

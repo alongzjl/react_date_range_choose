@@ -7,7 +7,7 @@ module.exports = {
 	// 当前操作数据
 	curData: {
 		router: 'p_1000',	// 页面路由
-		page: {},			// 页面信息
+		page: require('./page').page.content['p_1000'],			// 页面信息
 		comIdx: 0,			// 组件索引
 		comp: {},			// 组件内容
 	},

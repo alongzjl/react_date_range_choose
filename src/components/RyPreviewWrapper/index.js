@@ -7,11 +7,18 @@
 
 import React from 'react';
 import $ from 'jquery';
+
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+
 import classnames from 'classnames';
 import RyEditable from '../RyEditable';
 import RyEditableBind from '../RyEditableBind';
 import RyPreviewWeb from '../RyPreviewWeb';
 import RyPreview from '../RyPreview';
+
+import * as actions from 'actions'
+
 import { setFocusIndexUtil, setRangeStyleUtil } from 'services';
 import './index.less';
 
@@ -138,13 +145,16 @@ class RyPreviewWrapper extends React.Component {
 	}
 
 	render() {
-		let childNodes = this.props.data.map((item, index) => {
+		let { comp, scaleVal, focusItem } = this.props
+		debugger
+		let childNodes = comp.curData.page.elements.map((item, index) => {
+			debugger
 			let style = {
 				position: 'absolute',
-				width:    item.width  * this.props.scaleVal,
-				height:   item.height * this.props.scaleVal,
-				top:      item.top    * this.props.scaleVal,
-				left:     item.left   * this.props.scaleVal,
+				width:    item.width  * scaleVal,
+				height:   item.height * scaleVal,
+				top:      item.top    * scaleVal,
+				left:     item.left   * scaleVal,
 			}
 			return (
 				<RyEditable
@@ -153,14 +163,14 @@ class RyPreviewWrapper extends React.Component {
 						bMove:     item.move,
 						bResize:   true,
 						aEdit:     item.edit,
-						fScaleVal: this.props.scaleVal,
-						bFocus:    this.props.focusDataIndex === item.index,
+						fScaleVal: scaleVal,
+						bFocus:    comp.curData.compIdx === item.index,
 						iWidth:    item.width,
 						iHeight:   item.height
 					}}
 					style={style}>
 					<RyPreviewWeb className={
-						classnames([this.props.focusDataIndex === index ? 'preview-weather' : ''])
+						classnames([comp.curData.compIdx === index ? 'preview-weather' : ''])
 					} config={{
 						sSrc: item.url,
 						fnChangeTextEdit: this.changeTextEdit,
@@ -200,8 +210,21 @@ class RyPreviewWrapper extends React.Component {
 					</RyEditableBind>
 				</RyPreview>
 			</section>
-		);
+		)
 	}
 }
 
-export default RyPreviewWrapper;
+RyPreviewWrapper.defaultProps = {
+};
+
+const mapStateToProps = state => state;
+
+const mapDispatchToProps = dispatch => ({
+	actions: bindActionCreators(actions, dispatch)
+});
+
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(RyPreviewWrapper)
+

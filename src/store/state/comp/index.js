@@ -10,4 +10,5 @@ module.exports = {
 	text:        require('./text'),
 	// 自定义
 	custom:      require('./custom'),
+	web:         require('./web'),
 }
