@@ -8,8 +8,8 @@ module.exports = {
 			position: 'absolute',
 			top:       0,
 			left:      0,
-			width:     120,
-			height:    120,
+			width:     432,
+			height:    240,
 		},
 	},
 	// 内容管理
@@ -26,4 +26,11 @@ module.exports = {
 	// 功能特性
 	feature: {
 	},
+	// 组件拖拽限制
+	layout: {
+		top:    0,
+		left:   0,
+		width:  432,
+		height: 240,
+	}
 }

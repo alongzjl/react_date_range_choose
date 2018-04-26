@@ -20,8 +20,8 @@ class Web extends React.Component {
 	render() {
 		let { focusItem, components, focusIndex, range, actions } = this.props
 		return (
-			<div className="c-web">
-				我是网页组件内容
+			<div className="e-web">
+				我是网页组件元素
 			</div>
 		)
 	}

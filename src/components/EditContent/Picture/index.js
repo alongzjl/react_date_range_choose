@@ -20,7 +20,7 @@ class Picture extends React.Component {
 	render() {
 		let { focusItem, components, focusIndex, range, actions } = this.props
 		return (
-			<div className="e-picture">
+			<div className="c-picture">
 				我是图片组件内容
 			</div>
 		)

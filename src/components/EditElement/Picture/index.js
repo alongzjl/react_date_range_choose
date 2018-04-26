@@ -10,7 +10,7 @@ import $ from 'jquery'
 import classnames from 'classnames'
 import './index.less'
 
-class Web extends React.Component {
+class Picture extends React.Component {
 	componentWillMount() {}
 
 	componentDidMount() {}
@@ -20,11 +20,11 @@ class Web extends React.Component {
 	render() {
 		let { focusItem, components, focusIndex, range, actions } = this.props
 		return (
-			<div className="c-web">
-				我是网页组件内容
+			<div className="e-picture">
+				我是图片组件元素
 			</div>
 		)
 	}
 }
 
-export default Web
+export default Picture

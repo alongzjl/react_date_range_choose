@@ -12,13 +12,33 @@ const initialState = state
 
 export default function comp(state = initialState, action) {
 	switch (action.type) {
+		// 添加组件
 		case types.ADD_COMP:
-			// var con = JSON.parse(JSON.stringify(state.compData[action.comp]))
-			var con  = state.compData[action.comp],
+			var con = JSON.parse(JSON.stringify(state.compData[action.comp]))
+			// var con  = state.compData[action.comp],
 				home = state.curData.router
 			state.pageData.page.content[home].elements.push(con)
-			// debugger
 			state.curData.comp = con
+			return Object.assign({}, state)
+		
+		case types.UPDATE_COMP:
+			var page = state.pageData.page.content,
+				home = state.curData.router,
+				idx  = state.curData.compIdx
+			page[home].elements[idx] = action.comp
+			state.curData.comp = action.comp
+			return Object.assign({}, state)
+		
+		// 选择组件
+		case types.SELECE_COMP:
+			debugger
+			state.curData.comp = action.comp
+			return Object.assign({}, state)
+		
+		// 更新选择组件索引
+		case types.UPDATE_COMPIDX:
+			if (state.curData.compIdx === action.comp) return state
+			state.curData.compIdx = action.comp
 			return Object.assign({}, state)
 		default:
 			return state
