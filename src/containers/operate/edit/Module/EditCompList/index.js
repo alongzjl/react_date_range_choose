@@ -33,16 +33,9 @@ class EditCompList extends React.Component {
 		let { comp } = this.props
 		let childNodes = comp.compList.map((_, i) => {
 			return (
-				<div className="cl-item" onClick={this.addComp.bind(this, _)}>{_.name}</div>
+				<div key={_.name} className="cl-item" onClick={this.addComp.bind(this, _)}>{_.name}</div>
 			)
 		})
-			// <RyEditableBind config={{
-			// 	sRange: '.ry-roll-screen-preview',
-			// 	aData: componmentList,
-			// 	bClone: true,
-			// 	fnDragEnd: onDragEnd
-			// }}>
-			// </RyEditableBind>
 		return (
 			<section className="comp-list">
 				{childNodes}

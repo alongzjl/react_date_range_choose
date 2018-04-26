@@ -13,13 +13,13 @@ import { bindActionCreators } from 'redux'
 import { connect }  from 'react-redux'
 import * as actions from 'actions'
 
-import Picture from 'components/EditContent/Picture'
-import Web     from 'components/EditContent/Web'
+import Picture from 'components/EditStyle/Picture'
+import Web     from 'components/EditStyle/Web'
 
 
 import './index.less'
 
-class EditContent extends React.Component {
+class EditStyle extends React.Component {
 	componentWillMount() {}
 
 	componentDidMount() {}
@@ -39,7 +39,7 @@ class EditContent extends React.Component {
 		var compName = data.name,
 			compCon
 		if (compName === 'picture')  compCon = (<Picture data={data}></Picture>)
-		else if (compName === 'web') compCon = (<Web data={data}></Web>)
+		else if (compName === 'web') compCon = (<Web     data={data}></Web>)
 		return (
 			<section className="ry-roll-screen-config">
 				{ compCon }
@@ -48,7 +48,7 @@ class EditContent extends React.Component {
 	}
 }
 
-EditContent.defaultProps = {
+EditStyle.defaultProps = {
 }
 
 const mapStateToProps = state => state
@@ -60,4 +60,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(EditContent)
+)(EditStyle)

@@ -26,11 +26,4 @@ module.exports = {
 	// 功能特性
 	feature: {
 	},
-	// 组件拖拽限制
-	layout: {
-		top:    0,
-		left:   0,
-		width:  432,
-		height: 240,
-	}
 }

@@ -38,18 +38,15 @@ class EditElement extends React.Component {
 		actions.updateCompIdx(idx)
 	}
 
-	resizeStop(e, item, idx) {
+	resizeStop(ref, delta, pos, item, idx) {
 		let { actions } = this.props
-		let lay = item.style.layout,
-			sty = e.style,
-			xy  = sty.transform.match(/(\d+)/g)
+		let lay = item.style.layout
 		console.clear()
-		lay.left   = xy[0] * 1
-		lay.top    = xy[1] * 1
-		lay.width  = parseInt(sty.width)
-		lay.height = parseInt(sty.height)
+		lay.left   = pos.x
+		lay.top    = pos.y
+		lay.width  = ref.offsetWidth
+		lay.height = ref.offsetHeight
 		console.log(item.style.layout)
-		actions.updateCompIdx(idx)
 		actions.updateComp(item)
 	}
 
@@ -72,11 +69,23 @@ class EditElement extends React.Component {
 		let { comp, data } = this.props
 		let childNode = data.elements.map((_, i) => {
 			var compName = _.name,
-				compCon
-			if (compName === 'picture')  compCon = (<Picture data={_}></Picture>)
-			else if (compName === 'web') compCon = (<Web data={_}></Web>)
+				compCon,
+				isEdit = true
+			if (compName === 'picture')  compCon = (<Picture data={_}/>)
+			else if (compName === 'web') compCon = (<Web     data={_}/>)
 			return (
 				<Rnd
+					key={_.name}
+					bounds={'.pg-center'}
+					className={i === comp.curData.compIdx? 's-active': ''}
+					size={{
+						width:  _.style.layout.width,
+						height: _.style.layout.height
+					}}
+					position={{
+						x: _.style.layout.left,
+						y: _.style.layout.top
+					}}
 					default={{
 						x:      _.style.layout.left,
 						y:      _.style.layout.top,
@@ -86,9 +95,9 @@ class EditElement extends React.Component {
 					onDragStart={this.dragStart.bind(this, i)}
 					onDragStop={(e, d) => this.dragStop(d, _, i)}
 					onResizeStart={this.resizeStart.bind(this, i)}
-					onResizeStop={(e, n, d) => this.resizeStop(d, _, i)}
+					onResizeStop={(e, dir, ref, delta, pos) => this.resizeStop(ref, delta, pos, _, i)}
 				>
-					<div>{ compCon }</div>
+					<div className="pge-layout" style={!isEdit? _.style.layout: {}}>{ compCon }</div>
 				</Rnd>
 			)
 		})

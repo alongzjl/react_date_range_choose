@@ -18,10 +18,10 @@ class Web extends React.Component {
 	componentWillUnmount() {}
 
 	render() {
-		let { focusItem, components, focusIndex, range, actions } = this.props
+		let { data } = this.props
 		return (
 			<div className="e-web">
-				我是网页组件元素
+				<iframe className="ew-iframe" src={data.content.url} scrolling={'no'} />
 			</div>
 		)
 	}

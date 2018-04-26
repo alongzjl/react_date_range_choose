@@ -14,14 +14,14 @@ export default function comp(state = initialState, action) {
 	switch (action.type) {
 		// 添加组件
 		case types.ADD_COMP:
-			var con = JSON.parse(JSON.stringify(state.compData[action.comp]))
-			// var con  = state.compData[action.comp],
+			var con = Object.assign({}, state.compData[action.comp]),
 				home = state.curData.router
 			state.pageData.page.content[home].elements.push(con)
 			state.curData.comp = con
 			return Object.assign({}, state)
 		
 		case types.UPDATE_COMP:
+			// debugger
 			var page = state.pageData.page.content,
 				home = state.curData.router,
 				idx  = state.curData.compIdx
@@ -31,7 +31,7 @@ export default function comp(state = initialState, action) {
 		
 		// 选择组件
 		case types.SELECE_COMP:
-			debugger
+			// debugger
 			state.curData.comp = action.comp
 			return Object.assign({}, state)
 		

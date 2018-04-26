@@ -13,13 +13,13 @@ import { bindActionCreators } from 'redux'
 import { connect }  from 'react-redux'
 import * as actions from 'actions'
 
-import Picture from 'components/EditContent/Picture'
-import Web     from 'components/EditContent/Web'
+import Picture from 'components/EditAnimation/Picture'
+import Web     from 'components/EditAnimation/Web'
 
 
 import './index.less'
 
-class EditContent extends React.Component {
+class EditAnimation extends React.Component {
 	componentWillMount() {}
 
 	componentDidMount() {}
@@ -48,7 +48,7 @@ class EditContent extends React.Component {
 	}
 }
 
-EditContent.defaultProps = {
+EditAnimation.defaultProps = {
 }
 
 const mapStateToProps = state => state
@@ -60,4 +60,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(EditContent)
+)(EditAnimation)

@@ -11,4 +11,52 @@
 	height: 768px;
 	background-color: #fff;
 	box-shadow: 2px 4px 8px rgba(0, 0, 0, .1);
+	.pge-layout {
+		width:  100%;
+		height: 100%;
+	}
+}
+
+// 
+.react-draggable {
+	&:after {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		display: block;
+		width:  100%;
+		height: 100%;
+		border: 1px solid rgba(0, 0, 0, 0);
+		pointer-events: none;
+	}
+	& > span {
+		& > div:nth-child(n+5) {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			&:after {
+				content: '';
+				display: none;
+				width: 6px;
+				height: 6px;
+				background-color: #000;
+			}
+		}
+	}
+	&.s-active {
+		&:after {
+			border: 1px solid #000;
+		}
+		& > span {
+			& > div:nth-child(n+5) {
+				&:after {
+					display: block;
+				}
+			}
+		}
+	}
+	&:hover {
+		box-shadow: 2px 4px 8px rgba(0, 0, 0, .1);
+	}
 }

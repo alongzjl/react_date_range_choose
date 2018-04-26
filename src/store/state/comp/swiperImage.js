@@ -50,11 +50,4 @@ module.exports = {
 		switch: true,		// 播放开关
 		autoPlayTime: 5000,	// 自动播放时间 (ms)
 	},
-	// 组件拖拽限制
-	layout: {
-		top:    0,
-		left:   0,
-		width:  120,
-		height: 120,
-	}
 }
