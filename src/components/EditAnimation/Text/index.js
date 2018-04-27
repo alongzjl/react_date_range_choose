@@ -12,7 +12,7 @@ import { bindActionCreators } from 'redux'
 import { connect }  from 'react-redux'
 import * as actions from 'actions'
 
-class Picture extends React.Component {
+class Text extends React.Component {
 	componentWillMount() {}
 
 	componentDidMount() {}
@@ -22,14 +22,14 @@ class Picture extends React.Component {
 	render() {
 		let { focusItem, components, focusIndex, range, actions } = this.props
 		return (
-			<div className="c-text">
-				我是文本组件内容 
+			<div className="c-picture">
+				我是图片组件内容
 			</div>
 		)
 	}
 }
 
-Picture.defaultProps = {
+Text.defaultProps = {
 }
 
 const mapStateToProps = state => state
@@ -41,4 +41,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(Picture)
+)(Text) 

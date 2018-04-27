@@ -6,7 +6,7 @@
  */
 
 import React from 'react'
-import $ from 'jquery'
+//import $ from 'jquery'
 import classnames from 'classnames'
 import './index.less'
 
@@ -16,13 +16,17 @@ class Picture extends React.Component {
 	componentDidMount() {}
 
 	componentWillUnmount() {}
+	to = event => {
 
+		event.preventDefault();
+	} 
 	render() {
-		let { focusItem, components, focusIndex, range, actions } = this.props
+		let { data } = this.props
+		console.log(1,this.props);
 		return (
 			<div className="e-picture">
-				我是图片组件元素
-			</div>
+				<img src={data.content.img} onClick={this.to} onDragStart={(event)=>{event.preventDefault();}}/>	
+			</div> 
 		)
 	}
 }

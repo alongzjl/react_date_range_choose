@@ -15,8 +15,8 @@ import * as actions from 'actions'
 
 import Picture from 'components/EditAnimation/Picture'
 import Web     from 'components/EditAnimation/Web'
-
-
+import Text     from 'components/EditAnimation/Text' 
+ 
 import './index.less'
 
 class EditAnimation extends React.Component {
@@ -40,6 +40,7 @@ class EditAnimation extends React.Component {
 			compCon
 		if (compName === 'picture')  compCon = (<Picture data={data}></Picture>)
 		else if (compName === 'web') compCon = (<Web data={data}></Web>)
+		else if (compName === 'text') compCon = (<Text data={data}></Text>)
 		return (
 			<section className="ry-roll-screen-config">
 				{ compCon }

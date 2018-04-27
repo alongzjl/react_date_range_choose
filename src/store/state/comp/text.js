@@ -9,25 +9,25 @@ module.exports = {
 			top:       0,
 			left:      0,
 			width:     120,
-			height:    120,
+			height:    30, 
 		},
-		text: {
-			color:          '#333',
-			fontSize:       12,
-			fontStyle:      'normal',
-			fontWeight:     'normal',
+		text: { 
 			textAlign:      'left',
+			fontSize:       '16px', 
+			fontStyle:      'normal', 
+			fontWeight:     'normal',
 			textDecoration: 'none',
 			transform:      '',
-			animation:      '0s 0s 1',			// 动画 (0: 开始时间, 1: 持续时间, 2: 循环次数)
+			animation:      '0s 0s 1',
+			color:          '#333',			// 动画 (0: 开始时间, 1: 持续时间, 2: 循环次数)
 		},
 	},
 	// 内容管理
 	content: {
-		text: '',			// 文字内容
+		text: '右侧输入内容', 			// 文字内容
 		routerType: 0,		// 链接类型
 		router: '',			// 路由
-		routerOption: {},	// 链接设置
+		routerOption: '',	// 链接设置
 	},
 	// 动画设置
 	animation: {

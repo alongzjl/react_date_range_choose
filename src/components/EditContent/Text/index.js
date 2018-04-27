@@ -13,33 +13,46 @@ import { connect }  from 'react-redux'
 import * as actions from 'actions'
 import { Input } from 'antd'
 
-class Picture extends React.Component {
+class Text extends React.Component {
 	componentWillMount() {}
 
 	componentDidMount() {}
 
+	handleFocusBlurText(e) {
+		let { data, actions } = this.props
+		data.content.text = e.currentTarget.value
+		actions.updateComp(data)
+	}
 	handleFocusBlur(e) {
 		let { data, actions } = this.props
 		data.content.routerOption = e.currentTarget.value
 		actions.updateComp(data)
-	}
+	}  
 
 	render() {
 		let { data } = this.props
 		return (
-			<div className="c-picture">
+			<div className="c-text">
+				<h2>文本内容:</h2>
 				<Input
 					type="textarea"
-					placeholder="请输入要跳转的网址"
-					defaultValue={data.content.routerOption}
-					onBlur={this.handleFocusBlur.bind(this)} 
+					placeholder="请输入文本内容"
+					defaultValue={data.content.text}
+					onKeyUp={this.handleFocusBlurText.bind(this)} 
 				/>
+				<h2>跳转链接:</h2>
+				<Input 
+					type="textarea"
+					placeholder="请输入点击跳转链接可不写"
+					defaultValue={data.content.routerOption}
+					onKeyUp={this.handleFocusBlur.bind(this)} 
+				/> 
 			</div>
 		)
 	}
 }
 
-Picture.defaultProps = {
+Text.defaultProps = {
 }
 
 const mapStateToProps = state => state
@@ -51,4 +64,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(Picture)
+)(Text)

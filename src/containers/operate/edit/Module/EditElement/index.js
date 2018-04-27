@@ -6,7 +6,7 @@
  */
 
 import React from 'react'
-import $ from 'jquery'
+//import $ from 'jquery'
 import classnames from 'classnames'
 
 import { bindActionCreators } from 'redux'
@@ -16,6 +16,7 @@ import Rnd from 'react-rnd'
 
 import Picture from 'components/EditElement/Picture'
 import Web     from 'components/EditElement/Web'
+import Text     from 'components/EditElement/Text' 
 
 import * as actions from 'actions'
 
@@ -73,6 +74,7 @@ class EditElement extends React.Component {
 				isEdit = true
 			if (compName === 'picture')  compCon = (<Picture data={_}/>)
 			else if (compName === 'web') compCon = (<Web     data={_}/>)
+				else if (compName === 'text') compCon = (<Text data={_}></Text>) 
 			return (
 				<Rnd
 					key={_.name}

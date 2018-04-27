@@ -6,7 +6,7 @@
  */
 
 import React from 'react'
-import $ from 'jquery'
+//import $ from 'jquery'
 import classnames from 'classnames'
 
 import { bindActionCreators } from 'redux'
@@ -15,7 +15,7 @@ import * as actions from 'actions'
 
 import Picture from 'components/EditContent/Picture'
 import Web     from 'components/EditContent/Web'
-
+import Text     from 'components/EditContent/Text'
 
 import './index.less'
 
@@ -40,6 +40,7 @@ class EditContent extends React.Component {
 			compCon
 		if (compName === 'picture')  compCon = (<Picture data={data}></Picture>)
 		else if (compName === 'web') compCon = (<Web data={data}></Web>)
+			else if (compName === 'text') compCon = (<Text data={data}></Text>)
 		return (
 			<section className="ry-roll-screen-config">
 				{ compCon }

@@ -18,11 +18,11 @@ module.exports = {
 	},
 	// 内容管理
 	content: {
-		img: '',			// 图片url
+		img: "http://oxwmr019d.bkt.clouddn.com/default.jpg",			// 图片url
 		routerType: 0,		// 链接类型
 		router: '',			// 路由
-		routerOption: {},	// 链接设置
-	},
+		url: '',	// 链接设置
+	}, 
 	// 动画设置
 	animation: {
 		className: '',	// 动画样式
