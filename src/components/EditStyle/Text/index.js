@@ -104,8 +104,8 @@ class Text extends React.Component {
 				}else if(cm.type === 'select'){
 					return (
 							<div>
-								 <Select defaultValue="lucy" style={{ width: 120 }} onChange={this.changeFontSize}>
-							     	{
+								 <Select defaultValue="16px" style={{ width: 120 }} onChange={this.changeFontSize}>
+							     	{  
 							     		fontSizeList.map(item => <Option value={item.value}>{item.value}</Option>)
 							     	}
 							    </Select>
