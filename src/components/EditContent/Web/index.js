@@ -22,9 +22,9 @@ class Web extends React.Component {
 	componentWillUnmount() {}
 
 	handleFocusBlur(e) {
-		let { data, actions } = this.props
+		let { data, actions, editConfig } = this.props
 		data.content.url = e.currentTarget.value
-		actions.updateComp(data)
+		actions.updateComp(editConfig.curData.compIdx, data)
 	}
 
 	render() {

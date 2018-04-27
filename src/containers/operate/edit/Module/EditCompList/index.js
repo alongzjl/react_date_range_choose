@@ -6,12 +6,11 @@
  */
 
 import React from 'react'
-//import $ from 'jquery'
 import { bindActionCreators } from 'redux'
 import { connect }  from 'react-redux'
-// import RyEditable from '../RyEditable'
-// import RyEditableBind from '../RyEditableBind'
 import * as actions from 'actions'
+
+const compList = require('state/compList')
 
 import './index.less'
 
@@ -26,16 +25,15 @@ class EditCompList extends React.Component {
 	}
 
 	addComp(item) {
-		this.props.actions.addComp(item.key)
+		let { actions, editConfig } = this.props
+		actions.addComp(editConfig.curData.router, item.key)
 	}
 
 	render() {
-		let { comp } = this.props
-		let childNodes = comp.compList.map((_, i) => {
+		let childNodes = compList.map((_, i) => {
 			return (
 				<div key={_.name} className="cl-item" onClick={this.addComp.bind(this, _)}>{_.name}</div>
 			)
-
 		})
 		return (
 			<section className="comp-list">

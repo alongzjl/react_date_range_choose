@@ -61,7 +61,7 @@ class TemplateListPageEditComponent extends React.Component {
 	}
 
 	render() {
-		let { comp, scaleVal, actions } = this.props
+		let { editConfig, scaleVal, actions } = this.props
 
 		return (
 			<div className="pg-edit-box e-flex-fdc">
@@ -75,7 +75,7 @@ class TemplateListPageEditComponent extends React.Component {
 						</RyTitle>
 					</div>
 					<div className="pg-center e-flex e-flex-box scrollbar">
-						<EditElement data={comp.curData.page}></EditElement>
+						<EditElement data={editConfig.curPage}></EditElement>
 					</div>
 					<div className="pg-right scrollbar">
 						<RyBorder config="{bBg: true}">
@@ -89,9 +89,9 @@ class TemplateListPageEditComponent extends React.Component {
 							</div>
 						</RyBorder>
 						<Tabs defaultActiveKey="1" type="card">
-							<TabPane tab="内容" key="1"><EditContent   data={comp.curData.comp} /></TabPane>
-							<TabPane tab="样式" key="2"><EditStyle     data={comp.curData.comp} /></TabPane>
-							<TabPane tab="动画" key="3"><EditAnimation data={comp.curData.comp} /></TabPane>
+							<TabPane tab="内容" key="1"><EditContent   data={editConfig.curComp} /></TabPane>
+							<TabPane tab="样式" key="2"><EditStyle     data={editConfig.curComp} /></TabPane>
+							<TabPane tab="动画" key="3"><EditAnimation data={editConfig.curComp} /></TabPane>
 						</Tabs>
 					</div>
 				</div>

@@ -1,16 +1,13 @@
 // 组件元素数据
 module.exports = {
-	// 组件数据
-	compData: require('./comp'),
-	// 页面数据
-	pageData: require('./page'),
-	// 当前操作数据
-	curData: {
-		router:  'p_1000',	// 页面路由
-		page:    require('./page').page.content['p_1000'],			// 页面信息
-		compIdx: 0,			// 组件索引
-		comp:    {},		// 组件内容
-	},
-	compList:    require('./compList'),		// 组件列表
-	compNameMap: require('./compNameMap'),	// 组件Map
+	// 当前组件
+	curComp: {},
+	// 当前数据
+	curData:     require('./cur/curData'),
+	// 当前页面
+	curPage:     require('./cur/curPage'),
+	// 页面所有
+	pageContent: require('./page/pageContent'),
+	// 页面管理
+	pageList:    require('./page/pageList'),
 }
