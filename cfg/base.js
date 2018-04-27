@@ -46,6 +46,7 @@ module.exports = {
             operate:    `${defaultSettings.srcPath}/containers/operate`,
             actions:    `${defaultSettings.srcPath}/store/actions`,
             components: `${defaultSettings.srcPath}/components`,
+            compEdit:   `${defaultSettings.srcPath}/containers/operate/edit/Module`,
             public:     `${defaultSettings.srcPath}/public`,
             styles:     `${defaultSettings.srcPath}/styles`,
             images:     `${defaultSettings.srcPath}/images`,

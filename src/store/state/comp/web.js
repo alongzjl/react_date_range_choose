@@ -8,8 +8,8 @@ module.exports = {
 			position: 'absolute',
 			top:       0,
 			left:      0,
-			width:     120,
-			height:    120,
+			width:     432,
+			height:    240,
 		},
 	},
 	// 内容管理

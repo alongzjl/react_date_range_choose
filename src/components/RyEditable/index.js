@@ -35,7 +35,7 @@ class RyEditable extends React.Component {
             <div className="ui-content" style={{
                 'width': config.iWidth,
                 'height': config.iHeight,
-                'transform': 'scale(' + config.fScaleVal + ')'
+                // 'transform': 'scale(' + config.fScaleVal + ')'
             }}>
                 { this.props.children }
             </div>

@@ -6,11 +6,9 @@
  */
 
 import React from 'react'
+import $ from 'jquery'
+import classnames from 'classnames'
 import './index.less'
-
-import { bindActionCreators } from 'redux'
-import { connect }  from 'react-redux'
-import * as actions from 'actions'
 
 class Picture extends React.Component {
 	componentWillMount() {}
@@ -22,23 +20,11 @@ class Picture extends React.Component {
 	render() {
 		let { focusItem, components, focusIndex, range, actions } = this.props
 		return (
-			<div className="c-picture">
-				我是图片组件内容
+			<div className="e-picture">
+				我是图片组件元素
 			</div>
 		)
 	}
 }
 
-Picture.defaultProps = {
-}
-
-const mapStateToProps = state => state
-
-const mapDispatchToProps = dispatch => ({
-	actions: bindActionCreators(actions, dispatch)
-})
-
-export default connect(
-	mapStateToProps,
-	mapDispatchToProps
-)(Picture)
+export default Picture

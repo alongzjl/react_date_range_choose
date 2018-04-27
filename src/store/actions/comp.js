@@ -23,3 +23,13 @@ export const deleteComp = (comp) => ({
 	type: types.DELETE_COMP,
 	comp
 })
+
+export const selectComp = (comp) => ({
+	type: types.SELECE_COMP,
+	comp
+})
+
+export const updateCompIdx = (comp) => ({
+	type: types.UPDATE_COMPIDX,
+	comp
+})
