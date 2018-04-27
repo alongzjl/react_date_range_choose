@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import $ from 'jquery';
+//import $ from 'jquery';
 import RyEditable from '../RyEditable';
 import RyEditableBind from '../RyEditableBind';
 import './index.less';

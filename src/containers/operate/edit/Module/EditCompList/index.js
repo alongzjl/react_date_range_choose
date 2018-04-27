@@ -6,7 +6,7 @@
  */
 
 import React from 'react'
-import $ from 'jquery'
+//import $ from 'jquery'
 import { bindActionCreators } from 'redux'
 import { connect }  from 'react-redux'
 // import RyEditable from '../RyEditable'
@@ -33,8 +33,8 @@ class EditCompList extends React.Component {
 		let { comp } = this.props
 		let childNodes = comp.compList.map((_, i) => {
 			return (
-				<div className="cl-item" onClick={this.addComp.bind(this, _)}>{_.name}</div>
-			)
+				<div className="cl-item" key={i} onClick={this.addComp.bind(this, _)}>{_.name}</div>
+			) 
 		})
 			// <RyEditableBind config={{
 			// 	sRange: '.ry-roll-screen-preview',

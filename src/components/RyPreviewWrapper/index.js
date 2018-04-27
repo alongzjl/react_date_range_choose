@@ -146,16 +146,14 @@ class RyPreviewWrapper extends React.Component {
 
 	render() {
 		let { comp, scaleVal, focusItem } = this.props
-		debugger
 		let childNodes = comp.curData.page.elements.map((item, index) => {
-			debugger
 			let style = {
 				position: 'absolute',
 				width:    item.width  * scaleVal,
 				height:   item.height * scaleVal,
 				top:      item.top    * scaleVal,
 				left:     item.left   * scaleVal,
-			}
+			} 
 			return (
 				<RyEditable
 					key={index}
@@ -179,7 +177,7 @@ class RyPreviewWrapper extends React.Component {
 					</RyPreviewWeb>
 				</RyEditable>
 			)
-		})
+		}) 
 		return (
 			<section className="ry-roll-screen-preview-wrapper">
 				<RyPreview config={{

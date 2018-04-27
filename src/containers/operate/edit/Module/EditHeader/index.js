@@ -6,15 +6,15 @@
  */
 
 import React from 'react'
-import $ from 'jquery'
-import './index.less'
+//import $ from 'jquery'
+import './index.less' 
 import { bindActionCreators } from 'redux'
 import { connect }  from 'react-redux'
 
 import EditCompList   from '../EditCompList'
 
 import * as actions from 'actions'
-
+ 
 class Header extends React.Component {
 	componentWillMount() {
 	}
@@ -27,6 +27,7 @@ class Header extends React.Component {
 
 	render() {
 		let { config } = this.props
+		console.log(this.props);
 		// debugger
 		// this.props.actions.addComp('picture')
 		return (
