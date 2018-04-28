@@ -6,14 +6,15 @@
  */
 
 import React from 'react'
-//import $ from 'jquery'
 import './index.less' 
 import { bindActionCreators } from 'redux'
 import { connect }  from 'react-redux'
 
-import EditCompList   from '../EditCompList'
+const compList = require('state/compList')
 
 import * as actions from 'actions'
+
+import { Icon } from 'antd'
  
 class Header extends React.Component {
 	componentWillMount() {
@@ -25,18 +26,63 @@ class Header extends React.Component {
 	componentWillUnmount() {
 	}
 
+	addComp(item) {
+		let { actions, editConfig } = this.props
+		actions.addComp(editConfig.curData.router, item.key)
+	}
+
+	selectTheme() {
+		let { actions, editConfig } = this.props
+		editConfig.curData.contentType = 'theme'
+		actions.updateCur(editConfig.curData)
+	}
+
+	createData() {
+		let { actions, editConfig } = this.props
+		console.clear()
+		let cfg = JSON.parse(JSON.stringify(editConfig))
+		console.log(cfg)
+		let config = {
+			configPC: {
+				pageContent: cfg.pageContent,
+				pageList:    cfg.pageList,
+				globalData:  cfg.globalData,
+			},
+			configTerminal: {
+				pageContent: cfg.pageContent,
+				pageList:    cfg.pageList,
+				globalData:  cfg.globalData,
+			},
+		}
+		console.log(JSON.stringify(config))
+	}
+
 	render() {
-		let { config } = this.props
-		console.log(this.props);
-		// debugger
-		// this.props.actions.addComp('picture')
+		let compListNode = compList.map((_, i) => {
+			return (
+				<div key={i} className="cl-item" onClick={this.addComp.bind(this, _)}>{_.name}</div>
+			)
+		})
 		return (
 			<div className="pe-header e-flex">
 				<div className="peh-left"></div>
+
 				<div className="peh-center">
-					<EditCompList />
+					<section className="comp-list">
+						{ compListNode }
+					</section>
 				</div>
-				<div className="peh-right"></div>
+
+				<div className="peh-right">
+					<section className="comp-list">
+						<div className="cl-item" onClick={this.selectTheme.bind(this)}>
+							<Icon type="appstore" /> 主题
+						</div>
+						<div className="cl-item" onClick={this.createData.bind(this)}>
+							<Icon type="code" /> 数据
+						</div>
+					</section>
+				</div>
 			</div>
 		)
 	}

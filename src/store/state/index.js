@@ -10,4 +10,6 @@ module.exports = {
 	pageContent: require('./page/pageContent'),
 	// 页面管理
 	pageList:    require('./page/pageList'),
+	// 全局数据
+	globalData:  require('./globalData'),
 }

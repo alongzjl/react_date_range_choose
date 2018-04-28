@@ -6,41 +6,40 @@
  */
 
 import React from 'react'
+import './index.less'
 
 import { bindActionCreators } from 'redux'
 import { connect }  from 'react-redux'
 import * as actions from 'actions'
+import { Input } from 'antd'
 
-import Picture from './Picture'
-import Web     from './Web'
-import Text    from './Text'
-
-import './index.less'
-
-class EditContent extends React.Component {
+class Picture extends React.Component {
 	componentWillMount() {}
 
 	componentDidMount() {}
 
-	componentWillUnmount() {}
+	handleFocusBlur(e) {
+		let { data, actions } = this.props
+		data.content.routerOption = e.currentTarget.value
+		actions.updateComp(null, data)
+	}
 
 	render() {
 		let { data } = this.props
-
-		var compName = data.name,
-			compCon
-		if (compName === 'picture')   compCon = (<Picture data={data}></Picture>)
-		else if (compName === 'web')  compCon = (<Web data={data}></Web>)
-		else if (compName === 'text') compCon = (<Text data={data}></Text>)
 		return (
-			<section className="ry-roll-screen-config">
-				{ compCon }
-			</section>
+			<div className="c-picture">
+				<Input
+					type="textarea"
+					placeholder="请输入要跳转的网址"
+					defaultValue={data.content.routerOption}
+					onBlur={this.handleFocusBlur.bind(this)} 
+				/>
+			</div>
 		)
 	}
 }
 
-EditContent.defaultProps = {
+Picture.defaultProps = {
 }
 
 const mapStateToProps = state => state
@@ -52,4 +51,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(EditContent)
+)(Picture)

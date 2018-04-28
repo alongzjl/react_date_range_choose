@@ -6,18 +6,19 @@
  */
 
 import React from 'react'
-import classnames from 'classnames'
 
 import { bindActionCreators } from 'redux'
 import { connect }  from 'react-redux'
 
 import Rnd from 'react-rnd'
 
-import Picture from 'components/EditElement/Picture'
-import Web     from 'components/EditElement/Web'
-import Text    from 'components/EditElement/Text' 
+import Picture from './Picture'
+import Web     from './Web'
+import Text    from './Text' 
 
 import * as actions from 'actions'
+
+import { Icon } from 'antd'
 
 import './index.less'
 
@@ -28,10 +29,11 @@ class EditElement extends React.Component {
 
 	componentWillUnmount() {}
 
-	selectComp(idx) {
+	selectComp(data, idx) {
 		let { actions, editConfig } = this.props
 		editConfig.curData.compIdx = idx
 		actions.updateCur(editConfig.curData)	// 更新 当前数据
+		actions.selectComp(data)
 	}
 
 	resizeFn(ref, delta, pos, item, idx) {
@@ -48,7 +50,7 @@ class EditElement extends React.Component {
 	}
 
 	dragStop(e, item, idx) {
-		let { actions, editConfig } = this.props
+		let { actions } = this.props
 		let lay  = item.style.layout
 		lay.left = e.x
 		lay.top  = e.y
@@ -58,12 +60,19 @@ class EditElement extends React.Component {
 		actions.updateComp(idx, item)
 	}
 
+	removeComp(idx) {
+		let { actions } = this.props
+		actions.deleteComp(idx)
+	} 
+
 	render() {
 		let { editConfig, data } = this.props
-		let childNode = data.elements.map((_, i) => {
+		let eles      = data.elements || []
+		let bgStyle   = data.feature? { backgroundColor: data.feature.backgroundColor }: {}
+		let childNode = eles.map((_, i) => {
 			var compName = _.name,
 				compCon,
-				isEdit = true
+				isEdit  = true
 			if (compName === 'picture')   compCon = (<Picture data={_}/>)
 			else if (compName === 'web')  compCon = (<Web     data={_}/>)
 			else if (compName === 'text') compCon = (<Text    data={_}></Text>) 
@@ -72,6 +81,7 @@ class EditElement extends React.Component {
 					key={i}
 					bounds={'.pg-center'}
 					className={i === editConfig.curData.compIdx? 's-active': ''}
+					dragHandleClassName={'.handle-drag'}
 					size={{
 						width:  _.style.layout.width,
 						height: _.style.layout.height
@@ -80,17 +90,19 @@ class EditElement extends React.Component {
 						x: _.style.layout.left,
 						y: _.style.layout.top
 					}}
-					onDragStart={this.selectComp.bind(this, i)}
+					onDragStart={this.selectComp.bind(this, _, i)}
 					onDragStop={(e, d) => this.dragStop(d, _, i)}
-					onResizeStart={this.selectComp.bind(this, i)}
+					onResizeStart={this.selectComp.bind(this, _, i)}
 					onResizeStop={(e, dir, ref, delta, pos) => this.resizeFn(ref, delta, pos, _, i)}
 				>
-					<div className="pge-layout" style={!isEdit? _.style.layout: {}}>{ compCon }</div>
+					<div className="pge-layout" onClick={this.selectComp.bind(this, _, i)} style={!isEdit? _.style.layout: {}}>{ compCon }</div>
+					<a className="pge-remove" onClick={this.removeComp.bind(this, i)}><Icon type="cross-circle" /></a>
+					<div className="handle-drag"></div>
 				</Rnd>
 			)
 		})
 		return (
-			<section className="pg-element">
+			<section className="pg-element" style={bgStyle}>
 				{ childNode }
 			</section>
 		)

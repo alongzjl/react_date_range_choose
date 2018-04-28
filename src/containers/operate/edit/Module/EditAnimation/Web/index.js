@@ -6,18 +6,15 @@
  */
 
 import React from 'react'
+import './index.less'
 
 import { bindActionCreators } from 'redux'
 import { connect }  from 'react-redux'
 import * as actions from 'actions'
 
-import Picture from './Picture'
-import Web     from './Web'
-import Text    from './Text'
+import { Input } from 'antd'
 
-import './index.less'
-
-class EditContent extends React.Component {
+class Web extends React.Component {
 	componentWillMount() {}
 
 	componentDidMount() {}
@@ -25,22 +22,15 @@ class EditContent extends React.Component {
 	componentWillUnmount() {}
 
 	render() {
-		let { data } = this.props
-
-		var compName = data.name,
-			compCon
-		if (compName === 'picture')   compCon = (<Picture data={data}></Picture>)
-		else if (compName === 'web')  compCon = (<Web data={data}></Web>)
-		else if (compName === 'text') compCon = (<Text data={data}></Text>)
+		let { comp, data, actions } = this.props
 		return (
-			<section className="ry-roll-screen-config">
-				{ compCon }
-			</section>
+			<div className="a-web">
+			</div>
 		)
 	}
 }
 
-EditContent.defaultProps = {
+Web.defaultProps = {
 }
 
 const mapStateToProps = state => state
@@ -52,4 +42,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(EditContent)
+)(Web)

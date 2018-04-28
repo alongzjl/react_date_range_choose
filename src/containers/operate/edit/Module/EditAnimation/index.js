@@ -6,16 +6,14 @@
  */
 
 import React from 'react'
-import $ from 'jquery'
-import classnames from 'classnames'
 
 import { bindActionCreators } from 'redux'
 import { connect }  from 'react-redux'
 import * as actions from 'actions'
 
-import Picture from 'components/EditAnimation/Picture'
-import Web     from 'components/EditAnimation/Web'
-import Text     from 'components/EditAnimation/Text' 
+import Picture from './Picture'
+import Web     from './Web'
+import Text    from './Text' 
  
 import './index.less'
 
@@ -25,13 +23,6 @@ class EditAnimation extends React.Component {
 	componentDidMount() {}
 
 	componentWillUnmount() {}
-
-	componentWillReceiveProps(nv) {
-		this.props.comp.curData.comp
-		nv.comp.curData.comp
-		// debugger
-		if (this.props.comp.curData.comp) {}
-	}
 
 	render() {
 		let { comp, data } = this.props

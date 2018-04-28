@@ -23,9 +23,8 @@ export const updateComp = (idx, data) => ({
 	data
 })
 
-export const deleteComp = (router, idx) => ({
+export const deleteComp = (idx) => ({
 	type: types.DELETE_COMP,
-	router,
 	idx
 })
 
@@ -50,19 +49,26 @@ export const updatePage = (groupIdx, idx, data) => ({
 	data
 })
 
-export const deletePage = (groupIdx, idx) => ({
+export const deletePage = (router, groupIdx, idx) => ({
 	type: types.DELETE_PAGE,
+	router,
 	groupIdx,
 	idx
 })
 
-export const selectPage = (groupIdx, idx) => ({
+export const selectPage = (router) => ({
 	type: types.SELECE_PAGE,
-	groupIdx,
-	idx
+	router
 })
 
+// 当前操作项
 export const updateCur = (data) => ({
 	type: types.UPDATE_CUR,
+	data
+})
+
+// 全局项
+export const updateGlobal = (data) => ({
+	type: types.UPDATE_GLOBAL,
 	data
 })
