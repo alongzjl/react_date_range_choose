@@ -24,15 +24,17 @@ class EditTheme extends React.Component {
 	componentWillUnmount() {}
 
 	changeColor(c, key) {
-		// var col = c.color.replace(/#((\S{2})(\S{2})(\S{2})|(\S)(\S)(\S))$/, `rgba(${parseInt($2, 16)}, ${parseInt($3, 16)}, ${parseInt($4, 16)}, ${c.alpha/100})`)
-		var col = c.color.replace(/#((\S{2})(\S{2})(\S{2})|(\S)(\S)(\S))$/, ($0, $1, $2, $3, $4) => {
-			return `rgba(${parseInt($2, 16)}, ${parseInt($3, 16)}, ${parseInt($4, 16)}, ${c.alpha/100})`
-		})
+		var col = c.color.colorRGB()
+		col.push(c.alpha/100)
+		col = `rgba(${col.join(',')})`
 		let { data, actions, editConfig } = this.props
 		let colors = data.list[data.idx].colors
 		colors[key].color = col
+		colors[key].alpha = c.alpha
+		colors[key].rgb   = c.color
 		editConfig.globalData.theme = data
 		actions.updateGlobal(editConfig.globalData)
+		window.curThemeColor = colors
 	}
 
 	render() {
@@ -41,8 +43,8 @@ class EditTheme extends React.Component {
 		let childNode = Object.keys(colors).map((_, i) => {
 			let col = colors[_]
 			return (
-				<div key={i}>
-					{col.name} <ColorPicker color={col.color} onClose={c => this.changeColor(c, _)} placement="bottomLeft" />
+				<div key={_}>
+					{col.name} <ColorPicker alpha={col.alpha || 100} color={col.rgb || col.color} onClose={c => this.changeColor(c, _)} placement="bottomLeft" />
 				</div>
 			)
 		})

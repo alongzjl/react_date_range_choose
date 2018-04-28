@@ -11,10 +11,9 @@ import { bindActionCreators } from 'redux'
 import { connect }  from 'react-redux'
 import * as actions from 'actions'
 
-import ColorPicker from 'rc-color-picker'
 import { Input } from 'antd'
 
-import Color      from 'compEdit/EditCommon/Color'
+import Color from 'compEdit/EditCommon/Color'
 
 import './index.less'
 
@@ -36,6 +35,7 @@ class EditPage extends React.Component {
 		var col = c.color.replace(/#((\S{2})(\S{2})(\S{2})|(\S)(\S)(\S))$/, ($0, $1, $2, $3, $4) => {
 			return `rgba(${parseInt($2, 16)}, ${parseInt($3, 16)}, ${parseInt($4, 16)}, ${c.alpha/100})`
 		})
+		debugger
 		let { data, actions, editConfig } = this.props
 		let curData = editConfig.curData
 		data.feature.backgroundColor = col
@@ -55,7 +55,7 @@ class EditPage extends React.Component {
 				<Color
 					data={data}
 					color={data.feature.backgroundColor}
-					type={'feature.backgroundColor'}
+					path={'feature.backgroundColor'}
 					action={'updatePage'}
 					placement="bottomLeft"
 				/>

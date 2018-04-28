@@ -83,7 +83,7 @@ export default function editConfig(state = initialState, action) {
 		case types.UPDATE_PAGE:
 			var pgp = pageList.group[groupIdx].pages[idx]
 			pgp.title = data.title
-			pageC[router] = data
+			pageC[data.router] = data
 			state.curPage = data
 			return Object.assign({}, state)
 		

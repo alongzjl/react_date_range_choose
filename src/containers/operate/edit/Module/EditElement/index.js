@@ -67,8 +67,12 @@ class EditElement extends React.Component {
 
 	render() {
 		let { editConfig, data } = this.props
-		let eles      = data.elements || []
-		let bgStyle   = data.feature? { backgroundColor: data.feature.backgroundColor }: {}
+		let eles      = data.elements || [],
+			theme     = editConfig.globalData.theme,
+			colors    = theme.list[theme.idx].colors,
+			color     = data.feature.backgroundColor,
+			type      = color.type
+		let bgStyle   = data.feature? { backgroundColor: type === 'custom'? color.color: colors[type].color }: {}
 		let childNode = eles.map((_, i) => {
 			var compName = _.name,
 				compCon,

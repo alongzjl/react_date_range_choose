@@ -24,42 +24,66 @@ class Color extends React.Component {
 
 	componentWillUnmount() {}
 
-	changeColor(c, key) {
-		var col = c.color.replace(/#((\S{2})(\S{2})(\S{2})|(\S)(\S)(\S))$/, ($0, $1, $2, $3, $4) => {
-			return `rgba(${parseInt($2, 16)}, ${parseInt($3, 16)}, ${parseInt($4, 16)}, ${c.alpha/100})`
-		})
-		let { data, actions, editConfig } = this.props
-		let colors = data.list[data.idx].colors
-		colors[key].color = col
-		editConfig.globalData.theme = data
-		actions.updateGlobal(editConfig.globalData)
+	changeCustomColor(c) {
+		var col = c.color.colorRGB()
+		col.push(c.alpha/100)
+		col = `rgba(${col.join(',')})`
+		let { data, color, path, action, actions, editConfig }  = this.props
+		let curData = editConfig.curData
+		color.color = col
+		color.alpha = c.alpha
+		color.rgb   = c.color
+		if (action === 'updatePage') return actions[action](curData.pageGroupIdx, curData.pageIdx, data)
+		if (action === 'updateComp') return actions[action](null, data)
 	}
 
 	changeColorType(val) {
-		debugger
+		let { data, color, action, actions, editConfig }  = this.props
+		let curData = editConfig.curData
+		color.type  = val
+		if (action === 'updatePage') return actions[action](curData.pageGroupIdx, curData.pageIdx, data)
+		if (action === 'updateComp') return actions[action](null, data)
 	}
 
 	render() {
-		let { data, color, type, action, placement, editConfig }  = this.props
-		let theme     = editConfig.globalData.theme
-		let colors    = theme.list[theme.idx].colors
+		let { data, color, placement, editConfig }  = this.props
+		let theme   = editConfig.globalData.theme
+		let colors  = theme.list[theme.idx].colors
+		let cp
+		colors.custom = {
+			name:  '自定义',
+			color: color.color,
+		}
 		let options = Object.keys(colors).map((_, i) => {
 			let col = colors[_]
 			return (
-				<Option key={_} value={_}>{col.name}</Option>
+				<Option key={col.name} value={_}>{col.name}</Option>
 			)
 		})
-		debugger
+		if (color.type === 'custom') {
+			cp = (
+				<ColorPicker
+					alpha={color.alpha || 100}
+					color={color.rgb || color.color}
+					onClose={this.changeCustomColor.bind(this)}
+					placement={ placement || 'bottomLeft' }
+				/>
+			)
+		}
 		return (
-			<Select
-				size="large"
-				defaultValue={color.color}
-				onChange={this.changeColorType}
-			>
-				{ options }
-			</Select>
+			<div>
+				{ cp }
+				<Select
+					size="small"
+					style={{ width: 110 }}
+					value={color.type}
+					defaultValue={color.type}
+					onChange={this.changeColorType.bind(this)}
+				>
+					{ options }
+				</Select>
+			</div>
 		)
-			//<ColorPicker color={col.color} onClose={c => this.changeColor(c, _)} placement="bottomLeft" />
 	}
 }
 

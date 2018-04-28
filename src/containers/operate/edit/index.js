@@ -26,13 +26,17 @@ import RyBorder from 'components/RyBorder'
 import RyComponentList   from 'components/RyComponentList'
 import RyPreviewWrapper  from 'components/RyPreviewWrapper'
 import RyComponentConfig from 'components/RyComponentConfig'
+import tools from 'services/tools'
 import * as actions from 'actions'
 
 import 'rc-color-picker/assets/index.css'
+
 import './index.less'
 
 import { Tabs } from 'antd'
 const TabPane = Tabs.TabPane
+
+tools()
 
 class TemplateListPageEditComponent extends React.Component {
 	constructor(props) {
@@ -43,18 +47,7 @@ class TemplateListPageEditComponent extends React.Component {
 			range: {
 				width: parseInt(resolution[0]),
 				height: parseInt(resolution[1]),
-				styleTop: 0,
-				styleLeft: 0,
-				styleWidth: 0,
-				styleHeight: 0,
-				radio: true
 			},
-			componmentList: [
-				{
-					val: 5,
-					text: '网页'
-				}
-			]
 		}
 	}
 
@@ -66,8 +59,11 @@ class TemplateListPageEditComponent extends React.Component {
 
 	render() {
 		let { editConfig, scaleVal, actions } = this.props
-		let type = editConfig.curData.contentType,
-			editTab
+		let theme   = editConfig.globalData.theme
+		let colors  = theme.list[theme.idx].colors
+		let type = editConfig.curData.contentType
+		let editTab
+		window.curThemeColor = colors
 		if (type === 'page') {
 			editTab = (<EditPage data={editConfig.curPage} />)
 		} else if(type === 'comp') {
@@ -81,7 +77,6 @@ class TemplateListPageEditComponent extends React.Component {
 		} else if (type === 'theme') {
 			editTab = (<EditTheme data={editConfig.globalData.theme} />)
 		}
-
 		return (
 			<div className="pg-edit-box e-flex-fdc">
 				<EditHeader/>

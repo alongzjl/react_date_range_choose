@@ -12,6 +12,8 @@ import { bindActionCreators } from 'redux'
 import { connect }  from 'react-redux'
 import * as actions from 'actions'
 
+import Color from 'compEdit/EditCommon/Color'
+
 import { InputNumber, Card, Button, Select } from 'antd'
 
  
@@ -86,13 +88,13 @@ class Text extends React.Component {
 		]
 		let childNode = Object.keys(data.style).map(p => {
 			if (!styleMap[p]) return
-			let cnode = Object.keys(data.style[p]).map(q => {
+			let cnode = Object.keys(data.style[p]).map((q, j) => {
 				if (!cssMap[q]) return
 				var cm  = cssMap[q],
 					val = data.style[p][q]
 				if (cm.type === 'number') {
 					return (
-						<div key={q}>
+						<div key={j}>
 							{cm.name}
 							<InputNumber
 								defaultValue={val}
@@ -103,25 +105,32 @@ class Text extends React.Component {
 					)
 				}else if(cm.type === 'select'){
 					return (
-							<div>
-								 <Select defaultValue="16px" style={{ width: 120 }} onChange={this.changeFontSize}>
-									{  
-										fontSizeList.map(item => <Option value={item.value}>{item.value}</Option>)
-									}
-								</Select>
-							</div> 
-						)
+						<div key={j}>
+							 <Select defaultValue="16px" style={{ width: 120 }} onChange={this.changeFontSize}>
+								{  
+									fontSizeList.map(item => <Option value={item.value}>{item.value}</Option>)
+								}
+							</Select>
+						</div> 
+					)
 				}else if(cm.type === 'string'){
 					return (
-						<div>
+						<div key={j}>
 							<Button type={val=='left'?'primary':''} onClick={() => this.onChange('left', p, q)}>居左</Button>
 							<Button type={val=='center'?'primary':''} onClick={() => this.onChange('center', p, q)}>居中</Button>
 							<Button type={val=='right'?'primary':''} onClick={() => this.onChange('right', p, q)}>居右</Button>
 						</div> 
 					) 
 				}else if(cm.type === 'color'){
+						// <SketchPicker onChangeComplete={this.changeFontColor} color={val} />
 					return (
-						<SketchPicker onChangeComplete={this.changeFontColor} color={val} />
+						<Color
+							data={data}
+							color={data.style[p][q]}
+							path={`style.${p}.${q}`}
+							action={'updateComp'}
+							placement="bottomLeft"
+						/>
 					) 
 				}	
 			}) 
