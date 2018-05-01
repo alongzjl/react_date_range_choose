@@ -40,8 +40,8 @@ tools()
 
 class TemplateListPageEditComponent extends React.Component {
 	constructor(props) {
-		super(props);
-		let resolution = props.routeParams.resolution.split('*');
+		super(props)
+		let resolution = props.routeParams.resolution.split('*')
 		this.state = {
 			ryRollScreenDataIndex: 1,
 			range: {

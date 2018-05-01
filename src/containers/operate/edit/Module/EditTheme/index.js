@@ -12,7 +12,10 @@ import { connect }  from 'react-redux'
 import * as actions from 'actions'
 
 import ColorPicker from 'rc-color-picker'
-import { Input } from 'antd'
+import { Collapse, Input, Radio } from 'antd'
+const Panel       = Collapse.Panel
+const RadioButton = Radio.Button
+const RadioGroup  = Radio.Group
 
 import './index.less'
 
@@ -39,18 +42,35 @@ class EditTheme extends React.Component {
 
 	render() {
 		let { data }  = this.props
+		let activeKey = ['0', '1']
 		let colors    = data.list[data.idx].colors
 		let childNode = Object.keys(colors).map((_, i) => {
 			let col = colors[_]
 			return (
-				<div key={_}>
-					{col.name} <ColorPicker alpha={col.alpha || 100} color={col.rgb || col.color} onClose={c => this.changeColor(c, _)} placement="bottomLeft" />
+				<div className="pgs-row" key={_}>
+					<div className="pgsr-name">{col.name}</div>
+					<div className="pgsr-ctrl">
+						<ColorPicker
+							alpha={col.alpha || 100}
+							color={col.rgb || col.color}
+							onClose={c => this.changeColor(c, _)}
+							placement="bottomLeft"
+						/>
+					</div>
+					<div className="pgsr-auth"></div>
 				</div>
 			)
 		})
 		return (
-			<section className="ry-roll-screen-config">
-				{ childNode }
+			<section className="pg-theme">
+				<Collapse defaultActiveKey={activeKey}>
+					<Panel header={'管理'} key="0">
+						
+					</Panel>
+					<Panel header={'编辑'} key="1">
+						{ childNode }
+					</Panel>
+				</Collapse>
 			</section>
 		)
 	}

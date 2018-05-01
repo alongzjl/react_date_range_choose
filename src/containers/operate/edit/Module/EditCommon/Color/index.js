@@ -12,7 +12,7 @@ import { connect }  from 'react-redux'
 import * as actions from 'actions'
 
 import ColorPicker from 'rc-color-picker'
-import { Input, Select } from 'antd'
+import { Row, Col, Input, Select } from 'antd'
 const Option = Select.Option
 
 import './index.less'
@@ -57,31 +57,43 @@ class Color extends React.Component {
 		let options = Object.keys(colors).map((_, i) => {
 			let col = colors[_]
 			return (
-				<Option key={col.name} value={_}>{col.name}</Option>
+				<Option key={col.name} value={_}>
+					<div className="pgt-row">
+						<span className="pgt-color mr5">
+							<span className="pgt-color-icon" style={{backgroundColor: col.color}}></span>
+						</span>
+						{col.name}
+					</div>
+				</Option>
 			)
 		})
 		if (color.type === 'custom') {
 			cp = (
-				<ColorPicker
-					alpha={color.alpha || 100}
-					color={color.rgb || color.color}
-					onClose={this.changeCustomColor.bind(this)}
-					placement={ placement || 'bottomLeft' }
-				/>
+				<Col span={6}>
+					<ColorPicker
+						alpha={color.alpha || 100}
+						color={color.rgb || color.color}
+						onClose={this.changeCustomColor.bind(this)}
+						placement={ placement || 'bottomLeft' }
+					/>
+				</Col>
 			)
 		}
 		return (
 			<div>
+			<Row>
 				{ cp }
-				<Select
-					size="small"
-					style={{ width: 110 }}
-					value={color.type}
-					defaultValue={color.type}
-					onChange={this.changeColorType.bind(this)}
-				>
-					{ options }
-				</Select>
+				<Col span={18}>
+					<Select
+						style={{ width: '100%' }}
+						value={color.type}
+						defaultValue={color.type}
+						onChange={this.changeColorType.bind(this)}
+					>
+						{ options }
+					</Select>
+				</Col>
+			</Row>
 			</div>
 		)
 	}

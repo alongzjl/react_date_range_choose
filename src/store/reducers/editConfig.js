@@ -51,7 +51,8 @@ export default function editConfig(state = initialState, action) {
 			pageC[curData.router].elements.splice(idx, 1)
 			state.curPage = pageC[curData.router]
 			state.curComp = {}
-			curData.compIdx = -1
+			curData.compIdx     = -1
+			curData.contentType = 'page'
 			return Object.assign({}, state)
 
 

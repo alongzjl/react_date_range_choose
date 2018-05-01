@@ -11,7 +11,8 @@ import { bindActionCreators } from 'redux'
 import { connect }  from 'react-redux'
 import * as actions from 'actions'
 
-import { Input } from 'antd'
+import { Collapse, Input } from 'antd'
+const Panel = Collapse.Panel
 
 import Color from 'compEdit/EditCommon/Color'
 
@@ -44,21 +45,39 @@ class EditPage extends React.Component {
 
 	render() {
 		let { data } = this.props
+		let activeKey = ['0', '1']
 		return (
-			<section className="ry-roll-screen-config">
-				标题 <Input
-						placeholder="页面标题"
-						value={data.title}
-						onChange={this.handleFocus.bind(this)}
-					/>
-				背景色
-				<Color
-					data={data}
-					color={data.feature.backgroundColor}
-					path={'feature.backgroundColor'}
-					action={'updatePage'}
-					placement="bottomLeft"
-				/>
+			<section className="pg-page">
+				<Collapse defaultActiveKey={activeKey}>
+					<Panel header={'管理'} key="0">
+						<div className="pgs-row">
+							<div className="pgsr-name">标题</div>
+							<div className="pgsr-ctrl">
+								<Input
+									placeholder="页面标题"
+									value={data.title}
+									onChange={this.handleFocus.bind(this)}
+								/>
+							</div>
+							<div className="pgsr-auth"></div>
+						</div>
+					</Panel>
+					<Panel header={'编辑'} key="1">
+						<div className="pgs-row">
+							<div className="pgsr-name">背景色</div>
+							<div className="pgsr-ctrl">
+								<Color
+									data={data}
+									color={data.feature.backgroundColor}
+									path={'feature.backgroundColor'}
+									action={'updatePage'}
+									placement="bottomLeft"
+								/>
+							</div>
+							<div className="pgsr-auth"></div>
+						</div>
+					</Panel>
+				</Collapse>
 			</section>
 		)
 	}
