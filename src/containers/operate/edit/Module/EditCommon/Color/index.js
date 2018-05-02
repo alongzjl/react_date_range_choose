@@ -48,7 +48,7 @@ class Color extends React.Component {
 	render() {
 		let { data, color, placement, editConfig }  = this.props
 		let theme   = editConfig.globalData.theme
-		let colors  = theme.list[theme.idx].colors
+		let colors  = JSON.parse(JSON.stringify(theme.list[theme.idx].colors))
 		let cp
 		colors.custom = {
 			name:  '自定义',
@@ -56,6 +56,7 @@ class Color extends React.Component {
 		}
 		let options = Object.keys(colors).map((_, i) => {
 			let col = colors[_]
+			if (!col.color) return false
 			return (
 				<Option key={col.name} value={_}>
 					<div className="pgt-row">

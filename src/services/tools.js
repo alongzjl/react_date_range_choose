@@ -37,30 +37,40 @@ String.prototype.colorRGB = function(){
 	if (sColor && reg.test(sColor)) {
 		if (sColor.length === 4) {
 			var sColorNew = '#'
-			for (var i=1; i<4; i+=1) {
-				sColorNew += sColor.slice(i, i+1).concat(sColor.slice(i, i+1))
+			for (var i = 1; i < 4; i += 1) {
+				sColorNew += sColor.slice(i, i + 1).concat(sColor.slice(i, i + 1))
 			}
 			sColor = sColorNew
 		}
 		//处理六位的颜色值
 		var sColorChange = []
-		for (var i=1; i<7; i+=2) {
-			sColorChange.push(parseInt('0x'+sColor.slice(i, i+2)))
+		for (var i = 1; i < 7; i += 2) {
+			sColorChange.push(parseInt('0x'+sColor.slice(i, i + 2)))
 		}
 		return sColorChange
 	}
 	return sColor
 }
 
-window.cssColorFormat = function(obj) {
-	var st  = Date.now(),
-		obj = JSON.parse(JSON.stringify(obj))
-	for (var p in obj) {
-		var v = obj[p]
+window.cssColorFormat = function(props, key) {
+	let { data, actions } = props
+	let obj = JSON.parse(JSON.stringify(data.style[key]))
+	let st  = Date.now()
+	let colorChange = 0
+	for (let p in obj) {
+		let v = obj[p]
 		if (formatColorMap[p]) {
-			var type = v.type
-			obj[p] = type === 'custom'? v.color: window.curThemeColor[type].color
+			let type = v.type
+			if (!window.curThemeColor[type] && type !== 'custom') {
+				v.type = 'custom'
+				colorChange = 1
+			}
+			if (!colorChange) obj[p] = type === 'custom'? v.color: window.curThemeColor[type].color
 		}
+	}
+	if (colorChange) {
+		data.style[key] = obj
+		return actions.updateComp(null, data)
 	}
 	console.log(`耗时${Date.now() - st}ms`)
 	return obj

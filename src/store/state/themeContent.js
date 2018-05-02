@@ -18,25 +18,17 @@ module.exports = {
 			name:  '背景色',
 			color: '#f4f4f4',
 		},
-		background2: {
-			name:  '辅助背景色',
-			color: '#ececec',
-		},
 		title: {
 			name:  '标题色',
 			color: '#424242',
 		},
-		content: {
-			name:  '内容色',
-			color: '#666666',
-		},
 		text: {
-			name:  '次级文本色',
+			name:  '文本色',
 			color: '#999999',
 		},
-		textBackground: {
-			name:  '文本背景色',
-			color: '#ffffff',
+		logo: {
+			name:  'LOGO',
+			img:   '',
 		},
 	}
 }

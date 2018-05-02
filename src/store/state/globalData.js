@@ -7,6 +7,10 @@ module.exports = {
 	},
 	theme: {
 		idx: 0,
+		max: {
+			color:   0,
+			picture: 0,
+		},
 		list: [JSON.parse(JSON.stringify(tc))],
 	},
 	// 全局特征 

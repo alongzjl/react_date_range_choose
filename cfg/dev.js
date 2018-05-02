@@ -79,6 +79,4 @@ config.module.loaders.push({
 	)
 });
 
-console.log(config.module.loaders)
-
 module.exports = config;

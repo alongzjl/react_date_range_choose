@@ -16,7 +16,7 @@ class Text extends React.Component {
 		console.log(1,this.props);
 		return (
 			<div className="e-text">
-				<div style={cssColorFormat(data.style.text)}>{data.content.text}</div>
+				<div style={cssColorFormat(this.props, 'text')}>{data.content.text}</div>
 			</div>   
 		)
 	}

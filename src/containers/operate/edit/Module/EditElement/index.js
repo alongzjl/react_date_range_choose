@@ -66,20 +66,25 @@ class EditElement extends React.Component {
 	} 
 
 	render() {
-		let { editConfig, data } = this.props
-		let eles      = data.elements || [],
-			theme     = editConfig.globalData.theme,
-			colors    = theme.list[theme.idx].colors,
-			color     = data.feature.backgroundColor,
-			type      = color.type
+		let { data, actions, editConfig } = this.props
+		let eles   = data.elements || [],
+			theme  = editConfig.globalData.theme,
+			colors = theme.list[theme.idx].colors,
+			color  = data.feature.backgroundColor,
+			type   = color.type
+		if (!colors[type] && type !== 'custom') {
+			let curData = editConfig.curData
+			color.type = 'custom'
+			return actions.updatePage(curData.pageGroupIdx, curData.pageIdx, data)
+		}
 		let bgStyle   = data.feature? { backgroundColor: type === 'custom'? color.color: colors[type].color }: {}
 		let childNode = eles.map((_, i) => {
 			var compName = _.name,
 				compCon,
 				isEdit  = true
-			if (compName === 'picture')   compCon = (<Picture data={_}/>)
-			else if (compName === 'web')  compCon = (<Web     data={_}/>)
-			else if (compName === 'text') compCon = (<Text    data={_}></Text>) 
+			if (compName === 'picture')   compCon = (<Picture data={_} actions={actions} />)
+			else if (compName === 'web')  compCon = (<Web     data={_} actions={actions} />)
+			else if (compName === 'text') compCon = (<Text    data={_} actions={actions} />) 
 			return (
 				<Rnd
 					key={i}
