@@ -23,7 +23,11 @@ import 'styles/common.less'
 import 'styles/animate.less'
 import 'antd/dist/antd.less'
 
-const store = createStore(reducer, applyMiddleware(thunk))
+const store = createStore(
+	reducer,
+	applyMiddleware(thunk),
+	window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+)
 
 // Render the main component into the dom
 ReactDOM.render((

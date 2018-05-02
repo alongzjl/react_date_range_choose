@@ -7,12 +7,12 @@
 
 'use strict';
 
-import React from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import { hashHistory } from 'react-router';
-import * as actions from 'actions';
-import './index.less';
+import React from 'react'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import { hashHistory } from 'react-router'
+import * as actions from 'actions'
+import './index.less'
 
 class OperateComponent extends React.Component {
     constructor(props) {
@@ -31,18 +31,18 @@ class OperateComponent extends React.Component {
             <div className="pg-edit">
                 { this.props.children }
             </div>
-        );
+        )
     }
 }
 
 OperateComponent.defaultProps = {
-};
+}
 
-const mapStateToProps = state => state;
+const mapStateToProps = state => state
 
 const mapDispatchToProps = dispatch => ({
     actions: bindActionCreators(actions, dispatch)
-});
+})
 
 export default connect(
     mapStateToProps,

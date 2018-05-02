@@ -32,14 +32,18 @@ export default function editConfig(state = initialState, action) {
 		case types.ADD_COMP:
 			var compData = JSON.parse(JSON.stringify(comp[action.key]))
 			pageC[router].elements.push(compData)
-			state.curPage = pageC[router]
-			state.curComp = compData
+			state.curPage       = pageC[router]
+			state.curComp       = compData
 			curData.compIdx     = state.curPage.elements.length - 1
 			curData.contentType = 'comp'
 			return Object.assign({}, state)
 
 
 		case types.UPDATE_COMP:
+			var sl = data.styleList,
+				sd = sl.list[sl.idx]
+			sd.data = JSON.parse(JSON.stringify(data.style))
+			delete sd.data.layout
 			pageC[curData.router].elements[curData.compIdx] = data
 			state.curPage   = pageC[curData.router]
 			state.curComp   = data
@@ -66,14 +70,14 @@ export default function editConfig(state = initialState, action) {
 		case types.ADD_PAGE:
 			var pageData = JSON.parse(JSON.stringify(pagec)),
 				route    = `p_${++state.pageList.maxPageIdx}`
-			pageData.router = route
-			pageData.title  = name
-			curData.router  = route
-			curData.compIdx = -1
+			pageData.router     = route
+			pageData.title      = name
+			curData.router      = route
+			curData.compIdx     = -1
 			curData.contentType = 'page'
-			pageC[route]    = pageData
-			state.curPage   = pageData
-			state.curComp   = {}
+			pageC[route]        = pageData
+			state.curPage       = pageData
+			state.curComp       = {}
 			pageList.group[groupIdx].pages.push({
 				router: route,
 				title:  name
@@ -83,30 +87,30 @@ export default function editConfig(state = initialState, action) {
 
 		case types.UPDATE_PAGE:
 			var pgp = pageList.group[groupIdx].pages[idx]
-			pgp.title = data.title
+			pgp.title          = data.title
 			pageC[data.router] = data
-			state.curPage = data
+			state.curPage      = data
 			return Object.assign({}, state)
 		
 
 		case types.DELETE_PAGE:
 			delete pageC[router]
 			pageList.group[groupIdx].pages.splice(idx, 1)
-			state.curPage  = {}
-			state.curComp  = {}
-			curData.router  = ''
-			curData.compIdx = -1
+			state.curPage       = {}
+			state.curComp       = {}
+			curData.router      = ''
+			curData.compIdx     = -1
 			curData.contentType = ''
 			return Object.assign({}, state)
 
 
 		case types.SELECE_PAGE:
 			// if (curData.router === router) return state
-			curData.router  = router
-			state.curPage   = pageC[router]
-			state.curComp   = {}
-			curData.router  = router
-			curData.compIdx = -1
+			curData.router      = router
+			state.curPage       = pageC[router]
+			state.curComp       = {}
+			curData.router      = router
+			curData.compIdx     = -1
 			curData.contentType = 'page'
 			return Object.assign({}, state)
 

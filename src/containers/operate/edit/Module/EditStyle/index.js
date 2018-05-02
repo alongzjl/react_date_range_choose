@@ -11,11 +11,12 @@ import { bindActionCreators } from 'redux'
 import { connect }  from 'react-redux'
 import * as actions from 'actions'
 
-import Color from 'compEdit/EditCommon/Color'
+import Color       from 'compEdit/EditCommon/Color'
+import StyleManage from 'compEdit/EditCommon/StyleManage'
 
 import {
 	Row, Col,
-	Button, Card, Checkbox, Collapse, InputNumber ,Radio, Select, Slider, Switch
+	Button, Card, Checkbox, Collapse, Input, InputNumber, Radio, Select, Slider, Switch
 } from 'antd'
 const Option      = Select.Option
 const Panel       = Collapse.Panel
@@ -61,6 +62,14 @@ class EditStyle extends React.Component {
 		console.log(val)
 		let { data, actions } = this.props
 		data.style[style][css] = val
+		actions.updateComp(null, data)
+	}
+
+	onChangeAuth(val, style, css) {
+		console.clear()
+		console.log(val)
+		let { data, actions } = this.props
+		data.auth[style][css] = val
 		actions.updateComp(null, data)
 	}
 
@@ -136,36 +145,48 @@ class EditStyle extends React.Component {
 	render() {
 		let { data, actions } = this.props
 		if (!data.style) return false
-		let styles    = Object.keys(data.style)
-		let activeKey = Array.from(new Array(styles.length), (_, i) => i + '')
+		let styleList = data.styleList				// 样式列表
+		let styles    = Object.keys(data.style)		// 具体样式
+		let activeKey = Array.from(new Array(styles.length + 2), (_, i) => `${i}`)
 		let childNode = styles.map((p, i) => {
 			if (!styleMap[p]) return
 			let ci    = 0
 			let cnode = Object.keys(data.style[p]).map((q, j) => {
 				if (!cssMap[q]) return
 				++ci
-				var cm     = cssMap[q],
+				let cm     = cssMap[q],
 					val    = data.style[p][q],
 					render = this[`render${cm.type}`]
 				if (!render) return
-				var dom = this[`render${cm.type}`].bind(this, cm, data, val, p, q)()
+				let dom = this[`render${cm.type}`].bind(this, cm, data, val, p, q)()
 				return (
 					<div className="pgs-row" key={j}>
-						<div className="pgsr-name">{cm.name}</div>
+						<div className="pgsr-name">{ cm.name }</div>
 						<div className="pgsr-ctrl">{ dom }</div>
-						<div className="pgsr-auth"></div>
+						<div className="pgsr-auth">
+							<Checkbox checked={data.auth[p][q]} onChange={_ => this.onChangeAuth(_.target.checked, p, q)}></Checkbox>
+						</div>
 					</div>
 				)
 			})
 			if (ci === 0) return
 			return ( 
-				<Panel header={styleMap[p]} key={i}>
+				<Panel header={styleMap[p]} key={i + 2}>
 					{ cnode }
 				</Panel>
 			)
 		})
 		return (
 			<section className="pg-style">
+				<StyleManage
+					data={data}
+					list={styleList.list}
+					idx={styleList.idx}
+					parentKey={'styleList'}
+					action={'updateComp'}
+					name={'样式'}
+					max={10}
+				/>
 				<Collapse defaultActiveKey={activeKey} onChange={this.cb}>
 					{ childNode }
 				</Collapse>

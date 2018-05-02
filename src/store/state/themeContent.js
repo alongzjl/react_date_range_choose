@@ -1,5 +1,6 @@
 module.exports = {
-	name: '红色',
+	name: '主题1',
+	img:  '',
 	colors: {
 		main: {
 			name:  '主色',

@@ -12,10 +12,10 @@ import { connect }  from 'react-redux'
 import * as actions from 'actions'
 
 import ColorPicker from 'rc-color-picker'
-import { Collapse, Input, Radio } from 'antd'
-const Panel       = Collapse.Panel
-const RadioButton = Radio.Button
-const RadioGroup  = Radio.Group
+import StyleManage from 'compEdit/EditCommon/StyleManage'
+import { Collapse, Icon, Input, Select } from 'antd'
+const Panel  = Collapse.Panel
+const Option = Select.Option
 
 import './index.less'
 
@@ -41,9 +41,29 @@ class EditTheme extends React.Component {
 	}
 
 	render() {
-		let { data }  = this.props
+		let { data, editConfig }  = this.props
 		let activeKey = ['0', '1']
 		let colors    = data.list[data.idx].colors
+		let addNode
+		if (Object.keys(colors).length < 50) {
+			addNode = (
+				<div className="pgs-row">
+					<div className="pgsr-name">
+						<Select
+							style={{ width: '90%' }}
+						>
+							<Option value="color">颜色</Option>
+						</Select>
+					</div>
+					<div className="pgsr-ctrl">
+						<Input placeholder="字段名" />
+					</div>
+					<div className="pgsr-auth">
+						<Icon type="plus" />
+					</div>
+				</div>
+			)
+		}
 		let childNode = Object.keys(colors).map((_, i) => {
 			let col = colors[_]
 			return (
@@ -63,11 +83,18 @@ class EditTheme extends React.Component {
 		})
 		return (
 			<section className="pg-theme">
+				<StyleManage
+					data={editConfig.globalData}
+					list={data.list}
+					idx={data.idx}
+					parentKey={'theme'}
+					action={'updateGlobal'}
+					name={'主题'}
+					max={10}
+				/>
 				<Collapse defaultActiveKey={activeKey}>
-					<Panel header={'管理'} key="0">
-						
-					</Panel>
-					<Panel header={'编辑'} key="1">
+					<Panel header={'主题编辑'}>
+						{ addNode }
 						{ childNode }
 					</Panel>
 				</Collapse>
