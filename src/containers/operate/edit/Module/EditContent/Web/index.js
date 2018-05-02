@@ -6,41 +6,43 @@
  */
 
 import React from 'react'
+import './index.less'
 
 import { bindActionCreators } from 'redux'
 import { connect }  from 'react-redux'
 import * as actions from 'actions'
 
-import Picture from './Picture'
-import Web     from './Web'
-import Text    from './Text'
+import { Input } from 'antd'
 
-import './index.less'
-
-class EditContent extends React.Component {
+class Web extends React.Component {
 	componentWillMount() {}
 
 	componentDidMount() {}
 
 	componentWillUnmount() {}
 
-	render() {
-		let { data } = this.props
+	handleFocusBlur(e) {
+		let { data, actions } = this.props
+		data.content.url = e.currentTarget.value
+		actions.updateComp(null, data)
+	}
 
-		var compName = data.name,
-			compCon
-		if (compName === 'picture')   compCon = (<Picture data={data}></Picture>)
-		else if (compName === 'web')  compCon = (<Web data={data}></Web>)
-		else if (compName === 'text') compCon = (<Text data={data}></Text>)
+	render() {
+		let { comp, data, actions } = this.props
 		return (
-			<section className="ry-roll-screen-config">
-				{ compCon }
-			</section>
+			<div className="c-web">
+				<Input
+					type="textarea"
+					placeholder="请输入要打开的网址"
+					defaultValue={data.content.url}
+					onBlur={this.handleFocusBlur.bind(this)}
+				/>
+			</div>
 		)
 	}
 }
 
-EditContent.defaultProps = {
+Web.defaultProps = {
 }
 
 const mapStateToProps = state => state
@@ -52,4 +54,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(EditContent)
+)(Web)

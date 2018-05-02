@@ -13,13 +13,14 @@ module.exports = {
 		},
 		text: { 
 			textAlign:      'left',
-			fontSize:       '16px', 
+			fontSize:       16, 
 			fontStyle:      'normal', 
 			fontWeight:     'normal',
 			textDecoration: 'none',
 			transform:      '',
-			animation:      '0s 0s 1',
-			color:          '#333',			// 动画 (0: 开始时间, 1: 持续时间, 2: 循环次数)
+			opacity:        1,
+			color:          { type: 'custom', color: '#333' },
+			animation:      '0s 0s 1',			// 动画 (0: 开始时间, 1: 持续时间, 2: 循环次数)
 		},
 	},
 	// 内容管理

@@ -42,6 +42,7 @@ module.exports = {
         extensions: ['', '.js', '.jsx'],
         alias: {
             store:      `${defaultSettings.srcPath}/store`,
+            state:      `${defaultSettings.srcPath}/store/state`,
             business:   `${defaultSettings.srcPath}/containers/business`,
             operate:    `${defaultSettings.srcPath}/containers/operate`,
             actions:    `${defaultSettings.srcPath}/store/actions`,
