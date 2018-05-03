@@ -94,9 +94,9 @@ class EditElement extends React.Component {
 					className={i === editConfig.curData.compIdx? 's-active': ''}
 					dragHandleClassName={'.handle-drag'}
 					size={{
-						width:  _.style.layout.width,
+						width:  _.style.layout.width || '100%',
 						height: _.style.layout.height
-					}}
+					}}  
 					position={{
 						x: _.style.layout.left,
 						y: _.style.layout.top

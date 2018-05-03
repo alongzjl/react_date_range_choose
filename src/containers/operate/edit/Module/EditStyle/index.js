@@ -43,6 +43,7 @@ var cssMap = {
 	fontStyle:         { name: '斜体',    type: 'Switch', true: 'italic',    false: 'normal' },
 	textDecoration:    { name: '下划线',  type: 'Switch', true: 'underline', false: 'none' },
 	opacity:           { name: '透明度',  type: 'Slider', min: 0, max: 1, step: 0.01 },
+	
 }
 
 import './index.less'
@@ -54,24 +55,24 @@ class EditStyle extends React.Component {
 
 	componentWillUnmount() {}
 
-	onSliderChange(data, val, style, css) {
-		data.style[style][css] = val
-	}
-	onChange(val, style, css) {
-		console.clear()
-		console.log(val)
-		let { data, actions } = this.props
-		data.style[style][css] = val
-		actions.updateComp(null, data)
-	}
+	onSliderChange = (data, val, style, css) => {
+		data.style[style][css] = val;
+	};
+	onChange = (val, style, css) => {
+		console.clear();
+		console.log(val);
+		let { data, actions } = this.props;
+		style == 'feature' ? data[style][css] = val : data.style[style][css] = val;
+		actions.updateComp(null, data); 
+	}; 
 
-	onChangeAuth(val, style, css) {
+	onChangeAuth = (val, style, css) => {
 		console.clear()
 		console.log(val)
 		let { data, actions } = this.props
 		data.auth[style][css] = val
 		actions.updateComp(null, data)
-	}
+	};
 
 	cb(key) {
 		console.log(key)
@@ -112,7 +113,7 @@ class EditStyle extends React.Component {
 				checked={val === cfg.true} onChange={v => this.onChange(v.target.checked? cfg.true: cfg.false, cls, key)}
 			/>
 		)
-	}
+	} 
 	renderSwitch(cfg, data, val, cls, key) {
 		return (
 			<Switch
@@ -148,6 +149,7 @@ class EditStyle extends React.Component {
 		let styleList = data.styleList				// 样式列表
 		let styles    = Object.keys(data.style)		// 具体样式
 		let activeKey = Array.from(new Array(styles.length + 2), (_, i) => `${i}`)
+		console.log(activeKey)
 		let childNode = styles.map((p, i) => {
 			if (!styleMap[p]) return
 			let ci    = 0
@@ -175,7 +177,7 @@ class EditStyle extends React.Component {
 					{ cnode }
 				</Panel>
 			)
-		})
+		}) 
 		return (
 			<section className="pg-style">
 				<StyleManage
@@ -189,12 +191,47 @@ class EditStyle extends React.Component {
 				/>
 				<Collapse defaultActiveKey={activeKey} onChange={this.cb}>
 					{ childNode }
-				</Collapse>
+				</Collapse> 
+				<StyleManageSwiper feature={data} onChange={this.onChange} onChangeAuth={this.onChangeAuth} ></StyleManageSwiper>
 			</section>
+		) 
+	} 
+} 
+
+class StyleManageSwiper extends React.Component {
+	
+	render (){ 
+		let activeKey = Array.from(new Array(1), (_, i) => `${i}`)
+		const feature = this.props.feature.feature;  
+		return ( 
+			<Collapse defaultActiveKey={activeKey}>   
+				<Panel header={`轮播设置`} key={20}>
+					<div className="pgs-row" key={20}>
+						<div className="pgsr-name">自动循环</div>
+						<div className="pgsr-ctrl">
+							<Switch
+								size="small"
+								checked={feature.switch} onChange={v => this.props.onChange(v? true: false,'feature','switch')}
+							/> 
+						</div>
+						
+					</div> 
+					<div className="pgs-row" key={21}>
+						<div className="pgsr-name">循环间隔</div> 
+						<div className="pgsr-ctrl">
+							<InputNumber
+								min={100} max={5000} step={100}
+								value={feature.autoPlayTime} onChange={v => this.props.onChange(v,'feature','autoPlayTime')}
+								style={{ width: '100%' }}
+							/> 
+						</div> 
+						
+					</div>
+				</Panel>
+			</Collapse>
 		)
 	}
 }
-
 EditStyle.defaultProps = {
 }
 
