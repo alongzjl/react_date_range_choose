@@ -19,7 +19,7 @@ const { TextArea } = Input
 const { Panel }    = Collapse
 
 import RouterJump  from 'compEdit/EditCommon/RouterJump'
-import ImageUpload from 'compEdit/EditCommon/ImageUpload'
+import ImageUploadComp from 'compEdit/EditCommon/ImageUploadComp'
 
 import Picture     from './Picture'
 import Web         from './Web'
@@ -86,11 +86,12 @@ class EditContent extends React.Component {
 	// 上传图片
 	renderImage(cfg, data, val, key, content) {
 		return (
-			<ImageUpload
+			<ImageUploadComp
 				data={data}
 				img={val}
 				name={key}
 				content={content}
+				action={'updateComp'}
 				style={{ width: '100%' }}
 			/>
 		)

@@ -19,7 +19,7 @@ import PictureList from '../PictureList'
 
 import './index.less'
 
-class ImageUpload extends React.Component {
+class ImageUploadTheme extends React.Component {
 	constructor(props) {
 		super(props)
 	}
@@ -35,9 +35,9 @@ class ImageUpload extends React.Component {
 	}
 
 	enter(imgUrl) {
-		let { data, img, name, content, actions, editConfig } = this.props
+		let { data, img, name, action, content, actions, editConfig } = this.props
 		content[name] = imgUrl
-		actions.updateComp(null, data)
+		actions[action](editConfig.globalData)
 	}
 
 	cb(key) {
@@ -51,15 +51,14 @@ class ImageUpload extends React.Component {
 			btnNode = (
 				<div className="add_img" style={{ backgroundImage: `url('${img}')` }} onClick={this.showList.bind(this)}>
 					<div className="shadow">
-						<div className="add_text_change">更换图片</div>
+						<div className="add_text_change"><Icon type="reload" /></div>
 					</div>
 				</div>
 			)
 		} else {
 			btnNode = (
 				<div className="add_img" onClick={this.showList.bind(this)}>
-					<div className="add_text">+</div>
-					<div>添加图片</div>
+					<div className="add_text"><Icon type="plus" /></div>
 				</div>
 			)
 		}
@@ -79,7 +78,7 @@ class ImageUpload extends React.Component {
 	}
 }
 
-ImageUpload.defaultProps = {
+ImageUploadTheme.defaultProps = {
 }
 
 const mapStateToProps = state => state
@@ -91,4 +90,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(ImageUpload)
+)(ImageUploadTheme)

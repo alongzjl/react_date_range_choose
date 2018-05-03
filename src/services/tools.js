@@ -76,6 +76,21 @@ window.cssColorFormat = function(props, key) {
 	return obj
 }
 
+window.compImgFormat = function(props, content) {
+	let { data, actions } = props
+	let imgChange = 0
+	let type = content.type
+	if (!window.curThemeColor[type] && type !== 'custom') {
+		content.type = 'custom'
+		imgChange = 1
+	}
+	if (!imgChange) content = type === 'custom'? content.img: window.curThemeColor[type].img
+	else {
+		return actions.updateComp(null, data)
+	}
+	return content
+}
+
 
 }(window))
 }

@@ -56,7 +56,7 @@ class Color extends React.Component {
 		}
 		let options = Object.keys(colors).map((_, i) => {
 			let col = colors[_]
-			if (!col.color) return false
+			if (col.color === undefined) return false
 			return (
 				<Option key={col.name} value={_}>
 					<div className="pgt-row">

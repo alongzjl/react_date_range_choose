@@ -17,6 +17,8 @@ import { Collapse, Icon, Input, Select } from 'antd'
 const Panel  = Collapse.Panel
 const Option = Select.Option
 
+import ImageUploadTheme from 'compEdit/EditCommon/ImageUploadTheme'
+
 const keyMap = {
 	color:   { color: '#000000', },
 	picture: { img: '', },
@@ -106,7 +108,8 @@ class EditTheme extends React.Component {
 			keyType: '',
 			keyValue: col.name
 		}
-		if (col.color) da.cache[key].keyType = 'color'
+		if (col.color !== undefined)    da.cache[key].keyType = 'color'
+		else if (col.img !== undefined) da.cache[key].keyType = 'picture'
 		this.setState(da)
 	}
 	cancelEditKey(key) {
@@ -138,15 +141,26 @@ class EditTheme extends React.Component {
 			</div>
 		)
 	}
-	renderTheme(_, col) {
+	renderTheme(_, col, data) {
 		let dom
-		if (col.color) {
+		if (col.color !== undefined) {
 			dom = (
 				<ColorPicker
 					alpha={col.alpha || 100}
 					color={col.rgb || col.color}
 					onClose={c => this.changeColor(c, _)}
 					placement="bottomLeft"
+				/>
+			)
+		} else if (col.img !== undefined) {
+			dom = (
+				<ImageUploadTheme
+					data={data}
+					img={col.img}
+					name={'img'}
+					content={col}
+					action={'updateGlobal'}
+					style={{ width: '100%' }}
 				/>
 			)
 		}
@@ -192,7 +206,7 @@ class EditTheme extends React.Component {
 		}
 		let childNode = Object.keys(colors).map((_, i) => {
 			let col = colors[_]
-			let dom = this[state.editKey === _? 'renderEdit': 'renderTheme'](_, col)
+			let dom = this[state.editKey === _? 'renderEdit': 'renderTheme'](_, col, data)
 			return (
 				<div key={_}>{ dom }</div>
 			)
