@@ -12,7 +12,7 @@ import { connect }  from 'react-redux'
 import * as actions from 'actions'
 
 import ColorPicker from 'rc-color-picker'
-import StyleManage from 'compEdit/EditCommon/StyleManage'
+import ThemeManage from 'compEdit/EditCommon/ThemeManage'
 import { Collapse, Icon, Input, Select } from 'antd'
 const Panel  = Collapse.Panel
 const Option = Select.Option
@@ -67,7 +67,7 @@ class EditTheme extends React.Component {
 		let obj     = JSON.parse(JSON.stringify(keyMap[keyType]))
 		obj.name    = keyValue
 		data.list.map(_ => {
-			_.colors[`${keyType}${++data.max[keyType]}`] = obj
+			_.colors[`${keyType}${++data.max[keyType]}`] = JSON.parse(JSON.stringify(obj))
 		})
 		actions.updateGlobal(editConfig.globalData)
 		window.curThemeColor = data.list[data.idx].colors
@@ -94,7 +94,7 @@ class EditTheme extends React.Component {
 			obj.img = obj.img || ''
 		}
 		data.list.map(_ => {
-			_.colors[key] = obj
+			_.colors[key] = JSON.parse(JSON.stringify(obj))
 		})
 		actions.updateGlobal(editConfig.globalData)
 		window.curThemeColor = data.list[data.idx].colors
@@ -199,7 +199,7 @@ class EditTheme extends React.Component {
 		})
 		return (
 			<section className="pg-theme">
-				<StyleManage
+				<ThemeManage
 					data={editConfig.globalData}
 					list={data.list}
 					idx={data.idx}

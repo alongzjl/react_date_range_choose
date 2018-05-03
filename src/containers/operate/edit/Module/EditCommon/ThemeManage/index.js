@@ -22,7 +22,7 @@ var keyMap = {
 	// img:  { name: '图片', type: 'Input', minlength: 0, maxlength: 30, },
 }
 
-class StyleManage extends React.Component {
+class ThemeManage extends React.Component {
 	componentWillMount() {}
 
 	componentDidMount() {}
@@ -88,10 +88,9 @@ class StyleManage extends React.Component {
 	}
 
 	render() {
-		let { add = true, edit = true, data, list, idx, name, max, editConfig } = this.props
+		let { data, list, idx, name, max, editConfig } = this.props
 		let activeKey = Array.from(new Array(2), (_, i) => `${i}`)
 		let curData   = list[idx]
-		let editNode
 		let listNode  = list.map((_, k) => {
 			let remDom
 			if (list.length > 1) remDom = (<a className="pgs-sl-remove" onClick={this.onRemove.bind(this, k)}><Icon type="close" /></a>)
@@ -106,7 +105,7 @@ class StyleManage extends React.Component {
 			)
 		})
 		let addNode
-		if (add && list.length < (max || 10)) {
+		if (list.length < (max || 10)) {
 			addNode = (
 				<li
 					key={-1}
@@ -130,13 +129,6 @@ class StyleManage extends React.Component {
 				</div>
 			)
 		})
-		if (edit) {
-			editNode = (
-				<Panel header={`${name}设置`} key={1}>
-					{ keyNode }
-				</Panel>
-			)
-		}
 		return (
 			<Collapse defaultActiveKey={activeKey} onChange={this.cb}>
 				<Panel header={`${name}管理`} key={0}>
@@ -145,13 +137,15 @@ class StyleManage extends React.Component {
 						{ listNode }
 					</ul>
 				</Panel>
-				{ editNode }
+				<Panel header={`${name}设置`} key={1}>
+					{ keyNode }
+				</Panel>
 			</Collapse>
 		)
 	}
 }
 
-StyleManage.defaultProps = {
+ThemeManage.defaultProps = {
 }
 
 const mapStateToProps = state => state
@@ -163,4 +157,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(StyleManage)
+)(ThemeManage)

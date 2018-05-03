@@ -81,12 +81,13 @@ class EditElement extends React.Component {
 		let bgStyle   = data.feature? { backgroundColor: type === 'custom'? color.color: colors[type].color }: {}
 		let childNode = eles.map((_, i) => {
 			var compName = _.name,
+				compSty  = _.styleList,
 				compCon,
 				isEdit  = true
-			if (compName === 'picture')   compCon = (<Picture data={_} actions={actions} />)
-			else if (compName === 'web')  compCon = (<Web data={_} actions={actions} />)
-			else if (compName === 'text') compCon = (<Text data={_} actions={actions} />)
-			else if (compName === 'swiper-image') compCon = (<SwiperImage data={_} actions={actions} />) 
+			if (compName === 'picture')           compCon = (<Picture     data={_} actions={actions} type={`Style${i + 1}`} />)
+			else if (compName === 'web')          compCon = (<Web         data={_} actions={actions} type={`Style${i + 1}`} />)
+			else if (compName === 'text')         compCon = (<Text        data={_} actions={actions} type={`Style${i + 1}`} />)
+			else if (compName === 'swiper-image') compCon = (<SwiperImage data={_} actions={actions} type={`Style${i + 1}`} />) 
 			return (
 				<Rnd
 					key={i}
@@ -96,7 +97,7 @@ class EditElement extends React.Component {
 					size={{
 						width:  _.style.layout.width || '100%',
 						height: _.style.layout.height
-					}}  
+					}}
 					position={{
 						x: _.style.layout.left,
 						y: _.style.layout.top

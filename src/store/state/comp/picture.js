@@ -20,10 +20,8 @@ module.exports = {
 	style: JSON.parse(JSON.stringify(style)),
 	// 内容管理
 	content: {
-		img: "http://oxwmr019d.bkt.clouddn.com/default.jpg",			// 图片url
-		routerType: 0,		// 链接类型
-		router: '',			// 路由
-		url: '',	// 链接设置
+		img:    '',	// 图片url
+		router: {},	// 路由
 	}, 
 	// 动画设置
 	animation: {

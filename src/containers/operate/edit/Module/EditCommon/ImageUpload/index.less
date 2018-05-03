@@ -1,0 +1,52 @@
+/*
+* @Author: weijie
+* @Date:   2017-09-28 10:49:49
+ * @Last Modified by: lishengpeng
+ * @Last Modified time: 2018-03-26 12:37:34
+*/
+
+.add_img {
+	position: relative;
+	cursor: pointer;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width:  64px;
+	height: 64px;
+	background-color: #fafafa;
+	border: 1px solid #eee;
+	line-height: 28px;
+	background: rgba(255, 255, 255, .5) center no-repeat;
+	background-size: contain;
+	&:hover {
+		border: 1px solid #2382EF;
+		.shadow {
+			display: flex;
+		}
+	}
+	&.add {
+		border: 2px solid #2382EF;
+	}
+	.shadow {
+		display: none;
+		align-items: center;
+		justify-content: center;
+		width:  100%; 
+		height: 100%;
+		background: rgba(255, 255, 255, .5);
+		.add_text_change {
+		}
+	}
+	.add_text {
+		font-size: 30px;
+		padding-left: 0;
+	} 
+}
+
+.skylight-wrapper .add_img {
+	width:  110px;
+	height: 110px;
+	margin-top: 10px;
+	margin-left: 10px;
+}

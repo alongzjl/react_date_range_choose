@@ -6,7 +6,6 @@
  */
 
 import React from 'react'
-//import $ from 'jquery'
 import './index.less' 
 import { bindActionCreators } from 'redux'
 import { connect }  from 'react-redux'

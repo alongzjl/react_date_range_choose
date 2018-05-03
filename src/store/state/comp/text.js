@@ -27,10 +27,8 @@ module.exports = {
 	style: JSON.parse(JSON.stringify(style)),
 	// 内容管理
 	content: {
-		text: '右侧输入内容', 			// 文字内容
-		routerType: 0,		// 链接类型
-		router: '',			// 路由
-		routerOption: '',	// 链接设置
+		text: '', 			// 文字内容
+		router: {},			// 路由
 	},
 	// 动画设置
 	animation: {
@@ -43,9 +41,9 @@ module.exports = {
 	styleList: {
 		idx:  0,
 		list: [{
-			name: '样式1',
-			img:  '',
-			data: JSON.parse(JSON.stringify(style))
+			name:  '样式1',
+			img:   '',
+			data:  JSON.parse(JSON.stringify(style))
 		}],
 	},
 	// 功能特性

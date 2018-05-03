@@ -40,7 +40,7 @@ class SwiperImage extends React.Component {
 				{
 					data.content.map((item,index) => <ContentEvery item={item} key={index} index={index} handleFocusBlur={this.handleFocusBlur} handleTextFocusBlur={this.handleTextFocusBlur} add_img={this.add_img}></ContentEvery>)
 				}
-				 <PictureList ref={com => { this.addImgModal = com; }} data={this.props} index={this.state.index} /> 
+				<PictureList ref={com => { this.addImgModal = com; }} data={this.props} index={this.state.index} /> 
 			</div>   
 		)
 	}

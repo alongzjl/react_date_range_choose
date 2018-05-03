@@ -21,11 +21,6 @@ import EditStyle      from 'compEdit/EditStyle'
 import EditAnimation  from 'compEdit/EditAnimation'
 import EditTheme      from 'compEdit/EditTheme'
 
-import RyTitle  from 'components/RyTitle'
-import RyBorder from 'components/RyBorder'
-import RyComponentList   from 'components/RyComponentList'
-import RyPreviewWrapper  from 'components/RyPreviewWrapper'
-import RyComponentConfig from 'components/RyComponentConfig'
 import tools from 'services/tools'
 import * as actions from 'actions'
 
@@ -38,7 +33,7 @@ const TabPane = Tabs.TabPane
 
 tools()
 
-class TemplateListPageEditComponent extends React.Component {
+class EditComponent extends React.Component {
 	constructor(props) {
 		super(props)
 		let resolution = props.routeParams.resolution.split('*')
@@ -96,7 +91,7 @@ class TemplateListPageEditComponent extends React.Component {
 	}
 }
 
-TemplateListPageEditComponent.defaultProps = {
+EditComponent.defaultProps = {
 };
 
 const mapStateToProps = state => state;
@@ -108,4 +103,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(TemplateListPageEditComponent)
+)(EditComponent)

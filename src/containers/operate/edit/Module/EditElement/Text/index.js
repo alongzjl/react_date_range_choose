@@ -10,13 +10,26 @@ import './index.less'
 
 class Text extends React.Component {
 	
+	renderStyle1(props, style) {
+		let { data } = props
+		return (
+			<div style={cssColorFormat(props, style)}>{data.content.text}</div>
+		)
+	}
+	renderStyle2(props, style) {
+		let { data } = props
+		return (
+			<div style={cssColorFormat(props, style)}>{data.content.text}哇哈哈😁</div>
+		)
+	}
 	
 	render() {
-		let { data } = this.props
-		console.log(1,this.props);
+		let { data, type } = this.props
+		console.log(1, this.props)
+		let dom = this[`render${type}`](this.props, 'text')
 		return (
-			<div className="e-text">
-				<div style={cssColorFormat(this.props, 'text')}>{data.content.text}</div>
+			<div className={`e-text ${type}`}>
+				{ dom }
 			</div>   
 		)
 	}

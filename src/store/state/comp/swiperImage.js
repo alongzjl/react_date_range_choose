@@ -19,7 +19,7 @@ var style = {
 		textAlign:      'center',
 		textDecoration: 'none',
 	},
-} 
+}
 
 module.exports = {
 	name: 'swiper-image',
@@ -27,20 +27,21 @@ module.exports = {
 	style: JSON.parse(JSON.stringify(style)),
 	// 内容管理
 	content: [
-		{ 
-			img: 'http://oxwmr019d.bkt.clouddn.com/default.jpg',			// 图片url
-			text: '图片1',		// 图片标题
-			routerType: 0,		// 链接类型
-			router: '',			// 路由
-			routerOption: '',	// 链接设置
+		{
+			img: '',			// 图片url
+			title: '图片1',		// 图片标题
+			router: {},			// 路由
 		},
-		{  
-			img: 'http://oxwmr019d.bkt.clouddn.com/default.jpg',			// 图片url
-			text: '图片2', 		// 图片标题
-			routerType: 0,		// 链接类型
-			router: '',			// 路由
-			routerOption: '',	// 链接设置
-		} 
+		{
+			img: '',			// 图片url
+			title: '图片2',		// 图片标题
+			router: {},			// 路由
+		},
+		{
+			img: '',			// 图片url
+			title: '图片3',		// 图片标题
+			router: {},			// 路由
+		},
 	],
 	// 动画设置
 	animation: {

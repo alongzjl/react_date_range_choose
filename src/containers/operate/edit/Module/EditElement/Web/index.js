@@ -6,7 +6,6 @@
  */
 
 import React from 'react'
-import $ from 'jquery'
 import classnames from 'classnames'
 import './index.less'
 
