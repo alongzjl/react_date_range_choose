@@ -204,9 +204,9 @@ class StyleManageSwiper extends React.Component {
 		let activeKey = Array.from(new Array(1), (_, i) => `${i}`)
 		const feature = this.props.feature.feature;  
 		return ( 
-			<Collapse defaultActiveKey={activeKey}>   
-				<Panel header={`轮播设置`} key={20}>
-					<div className="pgs-row" key={20}>
+			<Collapse defaultActiveKey={activeKey}>    
+				<Panel header={`轮播设置`} key={0}>
+					<div className="pgs-row" key={2}>
 						<div className="pgsr-name">自动循环</div>
 						<div className="pgsr-ctrl">
 							<Switch
@@ -216,7 +216,7 @@ class StyleManageSwiper extends React.Component {
 						</div>
 						
 					</div> 
-					<div className="pgs-row" key={21}>
+					<div className="pgs-row" key={4}>
 						<div className="pgsr-name">循环间隔</div> 
 						<div className="pgsr-ctrl">
 							<InputNumber
