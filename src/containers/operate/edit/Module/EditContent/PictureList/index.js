@@ -1,8 +1,15 @@
+/**
+ * @Author: Along
+ * @Date:   2018-05-02
+
+ */
+
+
 import React from 'react';
 import SkyLight from 'react-skylight';
-import Fetch from "../../../../../../../public/Fetch"
-import './index.less'; 
-
+import Fetch from "../../../../../../public/Fetch"
+import './index.less';  
+import { Input,Button,Upload, message } from 'antd'
 const commonCss = {
     dialogStyles: {
         height: 'auto',
@@ -37,7 +44,8 @@ export default class PictureList extends React.Component {
         this.addImgModal.show();
     }
    state = {
-    title_clicked:1
+    title_clicked:1,
+    choosed_img:''
    }; 
     cancelClick = () => {
         this.addImgModal.hide();
@@ -45,7 +53,22 @@ export default class PictureList extends React.Component {
     chooseType = type => {
         const number = type == 1 ? 1 : 2;
         this.setState({title_clicked:number});
-    };   
+    };
+    save = () => { 
+        let { data, actions } = this.props.data;
+        const index =  this.props.index;  
+        index != undefined ? data.content[index].img = this.state.choosed_img : data.content.img = this.state.choosed_img;
+        !this.state.choosed_img ? message.info(`你还未选择图片!`) : (
+                actions.updateComp(null, data), 
+                this.addImgModal.hide() 
+            );   
+    };  
+    close = () => {
+        this.addImgModal.hide();  
+    };
+    save_img = url => {
+       this.setState({choosed_img:url});
+    }; 
     render() {  
         return (
             <div>
@@ -57,6 +80,7 @@ export default class PictureList extends React.Component {
                     ref={com => { this.addImgModal = com; }}
                     title={'选择素材'} 
                 > 
+                <div className="outer">
                     <div className="add_title"> 
                         <ul> 
                             <li onClick={()=>this.chooseType(1)} className={this.state.title_clicked==1?'active':''}>图片</li>
@@ -64,11 +88,16 @@ export default class PictureList extends React.Component {
                         </ul>   
                         <div className="input_search"><input placeholder="搜索" /></div>
                         <div className="search">搜索</div> 
-                    </div>
+                    </div>  
                     { 
-                         this.state.title_clicked==1 ? <ImgModule /> : <AudioModule />
+                         this.state.title_clicked==1 ? <ImgModule save={this.save_img} /> : <AudioModule />
                     }
-                   
+                    <div className="bottom">
+                        <Button type="primary" onClick={this.save}>确定</Button>
+                        <Button onClick={this.close}>取消</Button>
+                    </div> 
+                </div>
+                    
                 </SkyLight>  
                
             </div>
@@ -101,7 +130,7 @@ class ImgModule extends React.Component {
                 imgList:img_list
             })
     };
-    chooseType = id => {
+    chooseType = id => { 
 
     };
     chooseImg = img => {  
@@ -113,9 +142,11 @@ class ImgModule extends React.Component {
          this.setState({
                 imgList:img_list
             })
+         let choosed_img = img_list.filter(item => item.isClicked == true);
+        this.props.save(choosed_img[0].url); 
     };
     upload_img = () => {
-        alert('上传本地图片');
+       // alert('上传本地图片');
     } 
     getTypes = () => {
          const UrlType = 'http://manage.preview.rongyi.com/easy-smart/ySourceGroupManage/query';
@@ -135,6 +166,23 @@ class ImgModule extends React.Component {
         })
     } ;
     render() { 
+        const Upload_props = {
+          name: 'file',
+          action: '//jsonplaceholder.typicode.com/posts/',
+          headers: {
+            authorization: 'authorization-text',
+          },
+          onChange(info) {
+            if (info.file.status !== 'uploading') {
+              console.log(info.file, info.fileList);
+            }
+            if (info.file.status === 'done') {
+              message.success(`${info.file.name} file uploaded successfully`);
+            } else if (info.file.status === 'error') {
+              message.error(`${info.file.name} file upload failed.`);
+            }
+          }, 
+        };
         return ( 
             <div className="content">
                 <div className="left"> 
@@ -143,12 +191,14 @@ class ImgModule extends React.Component {
                     } 
                 </div> 
                 <div className="right">
-                    <div className="add_img" onClick={this.upload_img}><div className="add_text">+</div><div>上传素材</div></div>
+                    <Upload {...Upload_props}>
+                        <div className="add_img"><div className="add_text">+</div><div>上传素材</div></div>
+                    </Upload>
                     {     
                         this.state.imgList.map((item,index) => <List key={index} item={item} choose_one={this.chooseImg}></List> )
                     } 
-                </div>   
-            </div>
+                </div>    
+            </div> 
         )
     }
 }

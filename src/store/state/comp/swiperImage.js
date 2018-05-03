@@ -5,9 +5,9 @@ var style = {
 		position: 'absolute',
 		top:      0,
 		left:     0,
-		width:    120,
-		height:   120,
-	},
+		width:    '100%', 
+		height:   200,  
+	}, 
 	box: {
 		transform: '',
 		animation: '0s 0s 1',			// 动画 (0: 开始时间, 1: 持续时间, 2: 循环次数)
@@ -28,13 +28,20 @@ module.exports = {
 	style: JSON.parse(JSON.stringify(style)),
 	// 内容管理
 	content: [
-		{
-			img: '',			// 图片url
+		{ 
+			img: 'http://oxwmr019d.bkt.clouddn.com/default.jpg',			// 图片url
 			text: '图片1',		// 图片标题
 			routerType: 0,		// 链接类型
 			router: '',			// 路由
-			routerOption: {},	// 链接设置
+			routerOption: '',	// 链接设置
 		},
+		{  
+			img: 'http://oxwmr019d.bkt.clouddn.com/default.jpg',			// 图片url
+			text: '图片2', 		// 图片标题
+			routerType: 0,		// 链接类型
+			router: '',			// 路由
+			routerOption: '',	// 链接设置
+		} 
 	],
 	// 动画设置
 	animation: {

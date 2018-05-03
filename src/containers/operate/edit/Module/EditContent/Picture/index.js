@@ -1,8 +1,7 @@
 /**
- * @Author: Liao Hui
- * @Date:   2018-04-21T17:21:39+08:00
- * @Last modified by:   Liao Hui
- * @Last modified time: 2018-04-24T13:47:49+08:00
+ * @Author: Along
+ * @Date:   2018-05-02
+ 
  */
 
 import React from 'react'
@@ -12,9 +11,9 @@ import { bindActionCreators } from 'redux'
 import { connect }  from 'react-redux'
 import * as actions from 'actions'
 import { Input } from 'antd'
-import PictureList from './PictureList/PictureList' 
+import PictureList from '../PictureList'  
 
-
+ 
 class Picture extends React.Component {
 	componentWillMount() {}
 
@@ -45,8 +44,8 @@ class Picture extends React.Component {
 					defaultValue={data.content.routerOption}
 					onBlur={this.handleFocusBlur.bind(this)} 
 				/>
-				 <PictureList ref={com => { this.addImgModal = com; }} />
-			</div> 
+				 <PictureList ref={com => { this.addImgModal = com; }} data={this.props} /> 
+			</div>   
 		)
 	}
 }

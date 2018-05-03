@@ -14,6 +14,7 @@ import * as actions from 'actions'
 import Picture from './Picture'
 import Web     from './Web'
 import Text    from './Text'
+import SwiperImage    from './SwiperImage'
 
 import './index.less'
 
@@ -32,7 +33,8 @@ class EditContent extends React.Component {
 		if (compName === 'picture')   compCon = (<Picture data={data}></Picture>)
 		else if (compName === 'web')  compCon = (<Web data={data}></Web>)
 		else if (compName === 'text') compCon = (<Text data={data}></Text>)
-		return (
+		else if (compName === 'swiper-image') compCon = (<SwiperImage data={data}></SwiperImage>)
+		return ( 
 			<section className="ry-roll-screen-config">
 				{ compCon }
 			</section>
