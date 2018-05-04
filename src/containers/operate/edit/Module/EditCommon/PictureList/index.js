@@ -169,7 +169,9 @@ class ImgModule extends React.Component {
 	render() { 
 		const Upload_props = {
 		  name: 'file',
-		  action: '//jsonplaceholder.typicode.com/posts/',
+		  action: '/chaoyue/uploadImage',
+		  data: {
+		  },
 		  headers: {
 			authorization: 'authorization-text',
 		  },

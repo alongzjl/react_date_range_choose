@@ -1,4 +1,5 @@
-var formatPxMap = {
+const Fetch = require('public/Fetch')
+const formatPxMap = {
 	fontSize: 1,
 	width: 1,
 	height: 1,
@@ -23,7 +24,7 @@ var formatPxMap = {
 	borderLeftWidth: 1,
 	lineHeight: 1
 }
-var formatColorMap = {
+const formatColorMap = {
 	color: 1,
 	backgroundColor: 1,
 }
@@ -52,6 +53,7 @@ String.prototype.colorRGB = function(){
 	return sColor
 }
 
+// 组件样式格式化
 window.cssColorFormat = function(props, key) {
 	let { data, actions } = props
 	let obj = JSON.parse(JSON.stringify(data.style[key]))
@@ -69,6 +71,7 @@ window.cssColorFormat = function(props, key) {
 		}
 	}
 	if (colorChange) {
+		// 判断如果当前组件的颜色所使用的主题类别被删除, 更新颜色类型为custom
 		data.style[key] = obj
 		return actions.updateComp(null, data)
 	}
@@ -76,6 +79,7 @@ window.cssColorFormat = function(props, key) {
 	return obj
 }
 
+// 组件图片格式化
 window.compImgFormat = function(props, content) {
 	let { data, actions } = props
 	let imgChange = 0
@@ -86,10 +90,13 @@ window.compImgFormat = function(props, content) {
 	}
 	if (!imgChange) content = type === 'custom'? content.img: window.curThemeColor[type].img
 	else {
+		// 判断如果当前组件的图片所使用的主题类别被删除, 更新图片类型为custom
 		return actions.updateComp(null, data)
 	}
 	return content
 }
+
+window.Ajax = Fetch.default
 
 
 }(window))

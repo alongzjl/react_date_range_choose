@@ -66,6 +66,11 @@ config.devServer = {
 				}
 			}
 		},
+		'/chaoyue': {
+			target: 'http://localhost:4080/api/store',
+			secure: false,
+			changeOrigin: 'true',
+		}
 	}
 }
 
