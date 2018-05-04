@@ -20,7 +20,9 @@ class Picture extends React.Component {
 		console.log(1, this.props);
 		return (
 			<div className="e-picture">
-				<img src={compImgFormat(this.props, data.content.img)} />
+				{
+					data.content.img&&data.content.img.img ? <img src={compImgFormat(this.props, data.content.img)} /> : '右侧添加图片！'
+				} 
 			</div> 
 		)
 	}

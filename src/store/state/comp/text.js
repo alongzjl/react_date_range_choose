@@ -9,7 +9,7 @@ var style = {
 		height:   30, 
 	},
 	text: { 
-		textAlign:      'left',
+		textAlign:      'center',  
 		fontSize:       12, 
 		fontStyle:      'normal', 
 		fontWeight:     'normal',

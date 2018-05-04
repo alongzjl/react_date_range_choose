@@ -26,22 +26,15 @@ module.exports = {
 	// 样式管理
 	style: JSON.parse(JSON.stringify(style)),
 	// 内容管理
-	content: [
+	content: [ 
 		{
-			img: '',			// 图片url
+			img: {
+				img:'',
+				type:'custom' 
+			}, 			// 图片url
 			title: '图片1',		// 图片标题
 			router: {},			// 路由
-		},
-		{
-			img: '',			// 图片url
-			title: '图片2',		// 图片标题
-			router: {},			// 路由
-		},
-		{
-			img: '',			// 图片url
-			title: '图片3',		// 图片标题
-			router: {},			// 路由
-		},
+		}
 	],
 	// 动画设置
 	animation: {
@@ -63,8 +56,8 @@ module.exports = {
 		style: {
 			layout: '0',	// 外观样式
 			title:  '0',	// 标题样式
-		},
-		switch: true,		// 播放开关
+		}, 
+		switch: false,		// 播放开关
 		autoPlayTime: 5000,	// 自动播放时间 (ms)
-	},
+	}, 
 }

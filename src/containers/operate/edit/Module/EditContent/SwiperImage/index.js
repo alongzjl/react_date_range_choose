@@ -10,7 +10,7 @@ import { bindActionCreators } from 'redux'
 import { connect }  from 'react-redux'
 import * as actions from 'actions'
 import { Input } from 'antd'
-import PictureList from '../PictureList'   
+import PictureList from '../../EditCommon/PictureList'    
 
  
 class SwiperImage extends React.Component {
@@ -25,8 +25,8 @@ class SwiperImage extends React.Component {
 	}; 
 	handleTextFocusBlur = (e,index) => {
 		let { data, actions } = this.props;
-		data.content[index].text = e.currentTarget.value;
-		actions.updateComp(null, data); 
+		data.content[index].title = e.currentTarget.value;
+		actions.updateComp(null, data);  
 	}; 
 	add_img = index => {
 		this.setState({index:index});

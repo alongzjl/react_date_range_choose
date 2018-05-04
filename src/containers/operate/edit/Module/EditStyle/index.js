@@ -209,7 +209,10 @@ class EditStyle extends React.Component {
 				<Collapse defaultActiveKey={activeKey} onChange={this.cb}>
 					{ childNode }
 				</Collapse>
-				<StyleManageSwiper feature={data} onChange={this.onChange.bind(this)} onChangeAuth={this.onChangeAuth.bind(this)} ></StyleManageSwiper>
+				{
+					data.name == 'swiper-image' ? <StyleManageSwiper feature={data} onChange={this.onChange.bind(this)} onChangeAuth={this.onChangeAuth.bind(this)} ></StyleManageSwiper> : null
+				}
+				
 			</section>
 		)
 	}

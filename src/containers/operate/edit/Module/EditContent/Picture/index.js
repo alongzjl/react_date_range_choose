@@ -11,7 +11,7 @@ import { bindActionCreators } from 'redux'
 import { connect }  from 'react-redux'
 import * as actions from 'actions'
 import { Input } from 'antd'
-import PictureList from '../PictureList'  
+import PictureList from '../../EditCommon/PictureList'  
 
  
 class Picture extends React.Component {

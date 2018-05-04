@@ -19,7 +19,7 @@ class Text extends React.Component {
 	renderStyle2(props, style) {
 		let { data } = props
 		return (
-			<div style={cssColorFormat(props, style)}>{data.content.text}哇哈哈😁</div>
+			<div style={cssColorFormat(props, style)}>{data.content.text}</div>
 		)
 	}
 	
@@ -29,7 +29,9 @@ class Text extends React.Component {
 		let dom = this[`render${type}`](this.props, 'text')
 		return (
 			<div className={`e-text ${type}`}>
-				{ dom }
+				{
+					data.content.text ?  dom : <div style={cssColorFormat(this.props, 'text')}>右侧输入文本内容</div>
+				}
 			</div>   
 		)
 	}

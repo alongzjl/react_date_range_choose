@@ -45,8 +45,8 @@ export default class PictureList extends React.Component {
 	}
 	state = {
 		title_clicked:1,
-		choosed_img:''
-	}
+		choosed_img:[]
+	}  
 	cancelClick = () => {
 		this.addImgModal.hide()
 	};
@@ -55,10 +55,10 @@ export default class PictureList extends React.Component {
 		this.setState({title_clicked:number});
 	}
 	save = () => {
-		let { data, actions } = this.props.data
+		let { data, actions } = this.props.data 
 		if (this.state.choosed_img) {
-			this.props.enter(this.state.choosed_img)
-			this.addImgModal.hide() 
+			this.props.enter(this.state.choosed_img,this.props.index)
+			this.addImgModal.hide()  
 		} else {
 			message.info(`你还未选择图片!`)
 		}
@@ -70,7 +70,7 @@ export default class PictureList extends React.Component {
 		this.setState({choosed_img:url});
 	}
 	render() {
-		let { show } = this.props
+		let { show,firstAdd } = this.props
 		return (
 			<div>
 				<SkyLight
@@ -91,7 +91,7 @@ export default class PictureList extends React.Component {
 						<div className="search">搜索</div> 
 					</div>  
 					{ 
-						 this.state.title_clicked==1 ? <ImgModule save={this.save_img} /> : <AudioModule />
+						 this.state.title_clicked==1 ? <ImgModule save={this.save_img} firstAdd={firstAdd} /> : <AudioModule />
 					}
 					<div className="bottom">
 						<Button type="primary" onClick={this.save}>确定</Button>
@@ -121,7 +121,8 @@ class ImgModule extends React.Component {
 },{id:124,url:"http://rongyi.b0.upaiyun.com/system/smartService/null/201801180034041097.png"
 }]  
 	}
-	componentDidMount(){
+	componentDidMount(){ 
+		//this.getList(); 
 	   let img_list = this.state.imgList;
 		img_list = img_list.map(item=>{
 			item.isClicked = false;
@@ -129,22 +130,30 @@ class ImgModule extends React.Component {
 		});
 		 this.setState({
 				imgList:img_list
-			})
+			}) 
 	};
 	chooseType = id => { 
 
 	};
-	chooseImg = img => {  
+	chooseImg = img => {
+		let firstAdd = this.props.firstAdd;  
 		let img_list = this.state.imgList;
-		img_list = img_list.map(item=>{
-			item.id == img ? item.isClicked = !item.isClicked : item.isClicked = false;
-		   return item
-		});
-		 this.setState({
+		if(firstAdd){
+			img_list = img_list.map(item=>{
+				item.id == img ? item.isClicked = !item.isClicked : null;
+			   return item
+			});
+		}else{
+			img_list = img_list.map(item=>{
+				item.id == img ? item.isClicked = !item.isClicked : item.isClicked = false;
+			   return item
+			});
+		}
+		this.setState({
 				imgList:img_list
 			})
 		 let choosed_img = img_list.filter(item => item.isClicked == true);
-		this.props.save(choosed_img[0].url); 
+		this.props.save(choosed_img);  
 	};
 	upload_img = () => {
 	   // alert('上传本地图片');
@@ -158,12 +167,12 @@ class ImgModule extends React.Component {
 		}) 
 	};
 	getList =() => {
-		const UrlList = "http://manage.preview.rongyi.com/easy-smart/ySourceManage/query";
-		const params = {currentPage:1,groupId:12,name:'',page:1,pageSize:14,page_size:14,type:1};
-		Fetch.postJSON(UrlList,params).then(data=>{ 
+		const UrlList = "/chaoyue/imagesList";
+		const params = {currentPage:1,groupId:12,name:'',page:1,page_size:14,type:1};
+		Fetch.postJSON(UrlList,params).then(data=>{  
 			this.setState({
 				imgList:data.result.data || []
-			})
+			})  
 		})
 	} ;
 	render() { 
