@@ -123,7 +123,7 @@ class EditContent extends React.Component {
 			// 根据样式类型渲染对应组件
 			let dom = this[`render${cm.type}`].bind(this, cm, data, val, p, content,index)()
 			return (
-				<div className="pgs-row" key={i}>
+				<div className="pgs-row" key={i+1}>
 					<div className="pgsr-name">{ cm.name }</div>
 					<div className="pgsr-ctrl">{ dom }</div>
 					<div className="pgsr-auth">
@@ -150,9 +150,10 @@ class EditContent extends React.Component {
 		// else if (compName === 'swiperImage')  compCon = (<SwiperImage data={data}></SwiperImage>)
 		if (content.length) {
 			activeKey = Array.from(new Array(content.length), (_, i) => `${i}`)
-			childNode = content.map((_, i) => {
+			activeKey = activeKey.concat([`${activeKey.length}`])  
+			childNode = content.map((_, i) => { 
 				return (
-					<Panel header={`内容${i + 1}`} key={i}>
+					<Panel header={`内容${i + 1}`} key={i+1}>
 						{ this.renObj(data, _, i) }
 					</Panel>
 				)
@@ -172,8 +173,8 @@ class EditContent extends React.Component {
 		}
 		return (
 			<section className="ry-roll-screen-config">
-				<Collapse defaultActiveKey={activeKey} onChange={this.cb}>
-					{
+				<Collapse activeKey={activeKey} onChange={this.cb}>
+					{ 
 						data.name == 'swiperImage' ? <Panel header={`内容`} key={0}>
 							<div className="pgs-row" key={0}>
 								<div className="pgsr-name">内容</div>
