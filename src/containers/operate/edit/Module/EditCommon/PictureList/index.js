@@ -121,8 +121,7 @@ class ImgModule extends React.Component {
 },{id:124,url:"http://rongyi.b0.upaiyun.com/system/smartService/null/201801180034041097.png"
 }]  
 	}
-	componentDidMount(){ 
-		//this.getList(); 
+	componentDidMount(){
 	   let img_list = this.state.imgList;
 		img_list = img_list.map(item=>{
 			item.isClicked = false;
@@ -130,7 +129,7 @@ class ImgModule extends React.Component {
 		});
 		 this.setState({
 				imgList:img_list
-			}) 
+			})
 	};
 	chooseType = id => { 
 

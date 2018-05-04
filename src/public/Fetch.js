@@ -28,6 +28,7 @@ export default class Fetch {
         fetch(url, newConfig).then(response => response.json()).then(result => {
             if (result.success) {
                 if (success) {
+                    debugger
                     success(result.data);
                 }
             } else {

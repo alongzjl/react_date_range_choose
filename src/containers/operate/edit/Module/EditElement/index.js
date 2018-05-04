@@ -12,10 +12,11 @@ import { connect }  from 'react-redux'
 
 import Rnd from 'react-rnd'
 
-import Picture from './Picture'
-import Web     from './Web'
-import Text    from './Text'
-import SwiperImage    from './SwiperImage'  
+import Picture      from 'compEdit/EditElement/Picture'
+import Web          from 'compEdit/EditElement/Web'
+import Text         from 'compEdit/EditElement/Text'
+import SwiperImage  from 'compEdit/EditElement/SwiperImage'
+import StoreList    from 'compEdit/EditElement/StoreList'
 
 import * as actions from 'actions'
 
@@ -33,6 +34,7 @@ class EditElement extends React.Component {
 	selectComp(data, idx) {
 		let { actions, editConfig } = this.props
 		editConfig.curData.compIdx = idx
+		editConfig.curData.parentComp = null
 		actions.updateCur(editConfig.curData)	// 更新 当前数据
 		actions.selectComp(data)
 	}
@@ -47,14 +49,13 @@ class EditElement extends React.Component {
 		lay.height = ref.offsetHeight
 		actions.updateComp(idx, item)
 		//针对轮播图的单独处理，每次更改大小时都要重新初始化swiper
-
 	}
 	
-	dragStop(e, item, idx) {
+	dragStop(d, item, idx) {
 		let { actions } = this.props
 		let lay  = item.style.layout
-		lay.left = e.x
-		lay.top  = e.y
+		lay.left = d.x
+		lay.top  = d.y
 		console.clear()
 		console.log(item.style.layout)
 
@@ -64,7 +65,7 @@ class EditElement extends React.Component {
 	removeComp(idx) {
 		let { actions } = this.props
 		actions.deleteComp(idx)
-	} 
+	}
 
 	render() {
 		let { data, actions, editConfig } = this.props
@@ -82,12 +83,14 @@ class EditElement extends React.Component {
 		let childNode = eles.map((_, i) => {
 			var compName = _.name,
 				compSty  = _.styleList,
+				csn      = `handle-drag-${Math.floor(Math.random()*1e9)}`,
 				compCon,
 				isEdit  = true
-			if (compName === 'picture')           compCon = (<Picture     data={_} actions={actions} type={`Style${i + 1}`} />)
-			else if (compName === 'web')          compCon = (<Web         data={_} actions={actions} type={`Style${i + 1}`} />)
-			else if (compName === 'text')         compCon = (<Text        data={_} actions={actions} type={`Style${i + 1}`} />)
-			else if (compName === 'swiper-image') compCon = (<SwiperImage data={_} actions={actions} type={`Style${i + 1}`} />) 
+			if (compName === 'picture')          compCon = (<Picture     data={_} actions={actions} type={`Style${i + 1}`} idx={i} csn={csn} />)
+			else if (compName === 'web')         compCon = (<Web         data={_} actions={actions} type={`Style${i + 1}`} idx={i} csn={csn} />)
+			else if (compName === 'text')        compCon = (<Text        data={_} actions={actions} type={`Style${i + 1}`} idx={i} csn={csn} />)
+			else if (compName === 'swiperImage') compCon = (<SwiperImage data={_} actions={actions} type={`Style${i + 1}`} idx={i} csn={csn} />)
+			else if (compName === 'storeList')   compCon = (<StoreList   data={_} actions={actions} type={`Style${i + 1}`} idx={i} csn={csn} />)
 			return (
 				<Rnd
 					key={i}

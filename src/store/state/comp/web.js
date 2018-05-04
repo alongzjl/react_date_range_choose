@@ -12,6 +12,7 @@ var style = {
 
 module.exports = {
 	name: 'web',
+	type: 'base',
 	// 样式管理
 	style: JSON.parse(JSON.stringify(style)),
 	// 内容管理

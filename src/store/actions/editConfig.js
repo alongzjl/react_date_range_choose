@@ -34,6 +34,11 @@ export const selectComp = (data) => ({
 	data
 })
 
+// export const selectCusComp = (data) => ({
+// 	type: types.SELECT_CUS_COMP,
+// 	data
+// })
+
 
 // 页面操作
 export const addPage = (groupIdx, name) => ({

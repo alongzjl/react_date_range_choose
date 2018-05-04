@@ -32,13 +32,15 @@ class ImageUploadComp extends React.Component {
 
 	showList() {
 		this.addImgModal.show()
-	} 
+	}
 
 	enter(imgUrl,index) { 
 		let { data, img, name, action, content, actions, editConfig } = this.props
+		let { curData, curComp } = editConfig
+		let { parentComp } = curData
 		let imgList = imgUrl;
 		const length = content.length;
-		if(data.name == 'swiper-image'){
+		if(data.name == 'swiperImage'){
 			if(name == 'first') {
 				imgList = imgList.map((item,index)=>{
 					var obj = {img:{img:item.url,type:'custom'},title:`图片${index+1}`,router: {}};
@@ -51,8 +53,7 @@ class ImageUploadComp extends React.Component {
 		}else{ 
 			data.content[name].img = imgUrl[0].url
 		}
-		  
-		actions[action](null, data)  
+		actions[action](null, parentComp? parentComp: data)
 	}
 
 	cb(key) {
@@ -61,8 +62,10 @@ class ImageUploadComp extends React.Component {
 
 	changeImgType(val) {
 		let { data, img, action, actions, editConfig }  = this.props
+		let { curData, curComp } = editConfig
+		let { parentComp } = curData
 		img.type  = val
-		if (action === 'updateComp') return actions[action](null, data)
+		if (action === 'updateComp') return actions[action](null, parentComp? parentComp: data)
 	}
 
 	render() {

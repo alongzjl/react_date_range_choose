@@ -22,16 +22,14 @@ var style = {
 }
 
 module.exports = {
-	name: 'swiper-image',
+	name: 'swiperImage',
+	type: 'base',
 	// 样式管理
 	style: JSON.parse(JSON.stringify(style)),
 	// 内容管理
-	content: [ 
+	content: [
 		{
-			img: {
-				img:'',
-				type:'custom' 
-			}, 			// 图片url
+			img: { type: 'custom', img: '' },			// 图片url
 			title: '图片1',		// 图片标题
 			router: {},			// 路由
 		}

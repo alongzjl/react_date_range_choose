@@ -35,6 +35,6 @@ module.exports = {
 	// 文本
 	text:        authInit(require('./text')),
 	// 自定义
-	custom:      authInit(require('./custom')),
 	web:         authInit(require('./web')),
+	storeList:   authInit(require('./storeList')),
 }

@@ -10,11 +10,12 @@ import './index.less'
 import { bindActionCreators } from 'redux'
 import { connect }  from 'react-redux'
 
+const comp     = require('state/comp')
 const compList = require('state/compList')
 
 import * as actions from 'actions'
 
-import { Icon } from 'antd'
+import { Icon, message } from 'antd'
  
 class Header extends React.Component {
 	componentWillMount() {
@@ -28,7 +29,18 @@ class Header extends React.Component {
 
 	addComp(item) {
 		let { actions, editConfig } = this.props
-		actions.addComp(editConfig.curData.router, item.key)
+		let { curData, curComp } = editConfig
+		if (curComp.type === 'advanced') {
+			var compData = JSON.parse(JSON.stringify(comp[item.key]))
+			if (compData.type === 'base') {
+				curComp.components.push(compData)
+				actions.updateComp(null, curComp)
+			} else {
+				message.info('高级组件内只能添加基础组件!')
+			}
+		} else {
+			actions.addComp(editConfig.curData.router, item.key)
+		}
 	}
 
 	selectTheme() {

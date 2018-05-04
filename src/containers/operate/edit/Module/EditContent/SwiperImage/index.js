@@ -10,7 +10,6 @@ import { bindActionCreators } from 'redux'
 import { connect }  from 'react-redux'
 import * as actions from 'actions'
 import { Input } from 'antd'
-import PictureList from '../../EditCommon/PictureList'    
 
  
 class SwiperImage extends React.Component {
@@ -40,7 +39,6 @@ class SwiperImage extends React.Component {
 				{
 					data.content.map((item,index) => <ContentEvery item={item} key={index} index={index} handleFocusBlur={this.handleFocusBlur} handleTextFocusBlur={this.handleTextFocusBlur} add_img={this.add_img}></ContentEvery>)
 				}
-				<PictureList ref={com => { this.addImgModal = com; }} data={this.props} index={this.state.index} /> 
 			</div>   
 		)
 	}
