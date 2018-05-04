@@ -11,7 +11,6 @@ import { bindActionCreators } from 'redux'
 import { connect }  from 'react-redux'
 import * as actions from 'actions'
 import { Input } from 'antd'
-import PictureList from '../../EditCommon/PictureList'  
 
  
 class Picture extends React.Component {
@@ -44,7 +43,6 @@ class Picture extends React.Component {
 					defaultValue={data.content.routerOption}
 					onBlur={this.handleFocusBlur.bind(this)} 
 				/>
-				 <PictureList ref={com => { this.addImgModal = com; }} data={this.props} /> 
 			</div>   
 		)
 	}

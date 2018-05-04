@@ -8,7 +8,9 @@
 import React from 'react'
 import './index.less'
 
-class Picture extends React.Component {
+import Custom from '../Custom'
+
+class StoreList extends React.Component {
 	componentWillMount() {}
 
 	componentDidMount() {}
@@ -16,14 +18,18 @@ class Picture extends React.Component {
 	componentWillUnmount() {}
 
 	render() {
-		let { data } = this.props
-		console.log(1, this.props);
+		let { data, actions, idx, csn } = this.props
+		console.log(1, this.props)
 		return (
-			<div className="e-picture">
-				<img src={compImgFormat(this.props, data.content.img)} />
-			</div> 
+			<Custom
+				data={data}
+				actions={actions}
+				idx={idx}
+				csn={csn}
+				comp={data.components}
+			/>
 		)
 	}
 }
 
-export default Picture
+export default StoreList

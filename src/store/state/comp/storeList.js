@@ -1,29 +1,26 @@
-// 图片
+// 自定义
 var style = {
 	// 组件样式
 	layout: {
 		position: 'absolute',
 		top:      0,
 		left:     0,
-		width:    120,
-		height:   120,
-	},
-	image: {
-		transform: '',
-		animation: '0s 0s 1',			// 动画 (0: 开始时间, 1: 持续时间, 2: 循环次数)
+		width:    432,
+		height:   500,
 	},
 }
 
 module.exports = {
-	name: 'picture',
-	type: 'base',
+	name: 'storeList',
+	type: 'advanced',
 	// 样式管理
 	style: JSON.parse(JSON.stringify(style)),
 	// 内容管理
 	content: {
-		img:    { type: 'custom', img: '' },	// 图片url
-		router: {},	// 路由
-	}, 
+	},
+	// 组件管理
+	components: [
+	],
 	// 动画设置
 	animation: {
 		className: '',	// 动画样式
@@ -31,16 +28,16 @@ module.exports = {
 		duration: 1,				// 持续时间
 		iterationCount: 'infinite',	// 循环次数
 	},
-	// 样式列表
 	styleList: {
 		idx:  0,
 		list: [{
 			name: '样式1',
 			img:  '',
-			data: JSON.parse(JSON.stringify(style))
+			data: JSON.parse(JSON.stringify(style)),
 		}],
 	},
 	// 功能特性
 	feature: {
+		api: '',		// 依赖API
 	},
 }

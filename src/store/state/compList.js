@@ -22,9 +22,15 @@ module.exports = [
 			key:  'web',
 		},
 		{
+
 			icon: 'date-control',
 			name: '天气日期',
 			key:  'date', 
-		},
+		}, 
+		{
+			icon: 'store-control',
+			name: '店铺列表',
+			key:  'storeList',
+		}
 	// ],
 ]

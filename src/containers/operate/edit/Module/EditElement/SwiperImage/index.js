@@ -49,11 +49,11 @@ class SwiperImage extends React.Component {
 						<div className="swiper-container outer_box">
 							<div className="swiper-wrapper">
 								{ 
-									data.content.map((item,index) => <div className="swiper-slide" key={index}><div className="text_show" style={cssColorFormat(this.props, 'text')}>{item.title}</div>{item.img&&item.img.img ? <img src={compImgFormat(this.props, item.img)} /> : '右侧添加图片！'}</div>)
+									data.content.map((item,index) => <div className="swiper-slide" key={index}><div className="text_show" style={cssColorFormat(this.props, 'text')}>{item.text}</div><img src={compImgFormat(this.props, item.img)} /></div>)
 								} 
-							</div>  
-						</div> : <div className="outer_box"><div className="text_show" style={cssColorFormat(this.props, 'text')}>{data.content[0].title}</div>{data.content[0].img&&data.content[0].img.img ? <img src={compImgFormat(this.props, data.content[0].img)} /> : '右侧添加图片！'}</div>
-				} 
+							</div> 
+						</div> : <div className="outer_box"><div className="text_show" style={cssColorFormat(this.props, 'text')}>{data.content[0].text}</div><img src={compImgFormat(this.props, data.content[0].img)} /></div>
+				}
 					 
 			</div> 
 		)

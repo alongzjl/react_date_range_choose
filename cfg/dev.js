@@ -42,12 +42,12 @@ config.devServer = {
 	publicPath: defaultSettings.publicPath,
 	noInfo: false,
 	proxy: {
-		'/easy-roa/v1/user/**': {
+		'/easy-roa/v1/user': {
 			target: target,
 			secure: false,
 			changeOrigin: 'true',
 		},
-		'/bsoms/**': {
+		'/bsoms': {
 			target: target,
 			secure: false,
 			changeOrigin: 'true',

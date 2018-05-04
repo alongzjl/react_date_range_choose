@@ -3,20 +3,20 @@ var style = {
 	// 组件样式
 	layout: {
 		position: 'absolute',
-		top:       0,
-		left:      0,
-		width:     120,
-		height:    120,
+		top:      0,
+		left:     0,
+		width:    120,
+		height:   120,
 	},
 }
 
 module.exports = {
 	name: 'custom',
+	type: 'advanced',
 	// 样式管理
 	style: JSON.parse(JSON.stringify(style)),
 	// 内容管理
 	content: {
-		api: '',		// 依赖API
 	},
 	// 组件管理
 	components: [{
@@ -39,5 +39,6 @@ module.exports = {
 	},
 	// 功能特性
 	feature: {
+		api: '',		// 依赖API
 	},
 }

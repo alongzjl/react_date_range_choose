@@ -46,7 +46,7 @@ export default function editConfig(state = initialState, action) {
 			delete sd.data.layout
 			pageC[curData.router].elements[curData.compIdx] = data
 			state.curPage   = pageC[curData.router]
-			state.curComp   = data
+			// state.curComp   = data
 			curData.compIdx = idx || curData.compIdx
 			return Object.assign({}, state)
 
@@ -56,6 +56,7 @@ export default function editConfig(state = initialState, action) {
 			state.curPage = pageC[curData.router]
 			state.curComp = {}
 			curData.compIdx     = -1
+			curData.cusCompIdx  = -1
 			curData.contentType = 'page'
 			return Object.assign({}, state)
 
@@ -74,6 +75,7 @@ export default function editConfig(state = initialState, action) {
 			pageData.title      = name
 			curData.router      = route
 			curData.compIdx     = -1
+			curData.cusCompIdx  = -1
 			curData.contentType = 'page'
 			pageC[route]        = pageData
 			state.curPage       = pageData
@@ -100,6 +102,7 @@ export default function editConfig(state = initialState, action) {
 			state.curComp       = {}
 			curData.router      = ''
 			curData.compIdx     = -1
+			curData.cusCompIdx  = -1
 			curData.contentType = ''
 			return Object.assign({}, state)
 
@@ -111,6 +114,7 @@ export default function editConfig(state = initialState, action) {
 			state.curComp       = {}
 			curData.router      = router
 			curData.compIdx     = -1
+			curData.cusCompIdx  = -1
 			curData.contentType = 'page'
 			return Object.assign({}, state)
 
