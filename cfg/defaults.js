@@ -21,6 +21,25 @@ const dfltPort = 8111;
  * Get the default modules object for webpack
  * @return {Object}
  */
+
+const modules = [
+    {
+        test: /\.css$/,
+        loader: 'style-loader!css-loader!postcss-loader'
+    },
+    {
+        test: /\.less/,
+        loader: 'style-loader!css-loader!postcss-loader!less-loader'
+    },
+    {
+        test: /\.(png|jpg|gif|woff|woff2)$/,
+        loader: 'url-loader?limit=10000&name=[path][name]_[hash:8].[ext]'
+    },
+    {
+        test: /\.(mp3|mp4|ogg|svg)$/,
+        loader: 'file-loader'
+    }
+]
 function getDefaultModules() {
     return {
         preLoaders: [
@@ -30,24 +49,12 @@ function getDefaultModules() {
                 loader: 'eslint-loader'
             }
         ],
-        loaders: [
-            {
-                test: /\.css$/,
-                loader: 'style-loader!css-loader!postcss-loader'
-            },
-            {
-                test: /\.less/,
-                loader: 'style-loader!css-loader!postcss-loader!less-loader'
-            },
-            {
-                test: /\.(png|jpg|gif|woff|woff2)$/,
-                loader: 'url-loader?limit=10000&name=[path][name]_[hash:8].[ext]'
-            },
-            {
-                test: /\.(mp3|mp4|ogg|svg)$/,
-                loader: 'file-loader'
-            }
-        ]
+        loaders: modules
+    };
+}
+function getDevModules() {
+    return {
+        loaders: modules
     };
 }
 
@@ -55,5 +62,6 @@ module.exports = {
     srcPath: srcPath,
     publicPath: '/assets/',
     port: dfltPort,
+    getDevModules: getDevModules,
     getDefaultModules: getDefaultModules
 };
