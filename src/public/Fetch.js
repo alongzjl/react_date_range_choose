@@ -21,7 +21,7 @@ common.getAccessToken = function () {
 export default class Fetch {
     static remote(url, config, success, failed) {
         const defaultConfig = {
-            method: 'GET',
+            method: 'GET'
         };
         const newConfig = Object.assign({}, defaultConfig, config);
 
@@ -50,7 +50,7 @@ export default class Fetch {
         return new Promise((resolve, reject) => {
             const newConfig = Object.assign({}, {
                 method: 'GET',
-                headers: { Authorization: `Bearer ${common.getAccessToken()}` },
+                headers: { Authorization: `Bearer ${common.getAccessToken()}` }
             }, config);
             Fetch.remote(url, newConfig, resolve, reject);
         });
@@ -60,7 +60,7 @@ export default class Fetch {
         return new Promise((resolve, reject) => {
             const newConfig = Object.assign({}, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded', Authorization: `Bearer ${common.getAccessToken()}` },
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded', Authorization: `Bearer ${common.getAccessToken()}` }
             }, { body: config });
             Fetch.remote(url, newConfig, resolve, reject);
         });
@@ -70,7 +70,7 @@ export default class Fetch {
         return new Promise((resolve, reject) => {
             const newConfig = Object.assign({}, {
                 method: 'POST',
-                headers: { Authorization: `Bearer ${common.getAccessToken()}` },
+                headers: { Authorization: `Bearer ${common.getAccessToken()}` }
             }, config);
             Fetch.remote(url, newConfig, resolve, reject);
         });
@@ -80,7 +80,7 @@ export default class Fetch {
         return new Promise((resolve, reject) => {
             const newConfig = Object.assign({}, {
                 method: 'DELETE',
-                headers: { Authorization: `Bearer ${common.getAccessToken()}` },
+                headers: { Authorization: `Bearer ${common.getAccessToken()}` }
             }, config);
             Fetch.remote(url, newConfig, resolve, reject);
         });
@@ -91,7 +91,7 @@ export default class Fetch {
             const newConfig = Object.assign({}, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${common.getAccessToken()}` },
-                body: JSON.stringify(data),
+                body: JSON.stringify(data)
             });
             Fetch.remote(url, newConfig, resolve, reject);
         });
@@ -102,7 +102,7 @@ export default class Fetch {
             const newConfig = Object.assign({}, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${common.getAccessToken()}` },
-                body: JSON.stringify(data),
+                body: JSON.stringify(data)
             });
             Fetch.remote(url, newConfig, resolve, reject);
         });

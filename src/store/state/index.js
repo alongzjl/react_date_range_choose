@@ -11,5 +11,5 @@ module.exports = {
 	// 页面管理
 	pageList:    require('./page/pageList'),
 	// 全局数据
-	globalData:  require('./globalData'),
+	globalData:  require('./globalData')
 }

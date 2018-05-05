@@ -8,8 +8,8 @@ module.exports = {
 				{
 					router: 'p_1000',
 					title: '首页'
-				},
+				}
 			]
 		}
-	],
+	]
 }

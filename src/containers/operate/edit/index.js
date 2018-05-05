@@ -33,6 +33,21 @@ const TabPane = Tabs.TabPane
 
 tools()
 
+const curMap = {
+	parentComp:   '父组件',
+	router:       '路由',
+	pageGroupIdx: '页面分组索引',
+	pageIdx:      '页面索引',
+	compIdx:      '组件索引',
+	cusCompIdx:   '子组件索引',
+	contentType:  '右侧面板类型',
+}
+const cTypeMap = {
+	page:  '页面',
+	comp:  '组件',
+	theme: '主题'
+}
+
 class EditComponent extends React.Component {
 	constructor(props) {
 		super(props)
@@ -41,8 +56,8 @@ class EditComponent extends React.Component {
 			ryRollScreenDataIndex: 1,
 			range: {
 				width: parseInt(resolution[0]),
-				height: parseInt(resolution[1]),
-			},
+				height: parseInt(resolution[1])
+			}
 		}
 	}
 
@@ -52,11 +67,17 @@ class EditComponent extends React.Component {
 	componentDidMount() {
 	}
 
+	selectPage() {
+		let { actions, editConfig } = this.props
+		actions.selectPage(editConfig.curData.router)
+	}
+
 	render() {
-		let { editConfig, scaleVal, actions } = this.props
+		let { editConfig } = this.props
 		let theme   = editConfig.globalData.theme
 		let colors  = theme.list[theme.idx].colors
-		let type = editConfig.curData.contentType
+		let { curData } = editConfig
+		let type = curData.contentType
 		let editTab
 		window.curThemeColor = colors
 		if (type === 'page') {
@@ -73,17 +94,30 @@ class EditComponent extends React.Component {
 			editTab = (<EditTheme data={editConfig.globalData.theme} />)
 		}
 		return (
-			<div className="pg-edit-box e-flex-fdc">
+			<div className="pg-edit-box">
 				<EditHeader/>
 				<div className="pg-body e-flex-box">
 					<div className="pg-left scrollbar">
 						<EditPageManage data={editConfig.pageList} />
 					</div>
-					<div className="pg-center e-flex e-flex-box scrollbar">
+					<div className="pg-center e-flex e-flex-box scrollbar" onClick={this.selectPage.bind(this)}>
 						<EditElement data={editConfig.curPage}></EditElement>
 					</div>
 					<div className="pg-right scrollbar">
 						{ editTab }
+					</div>
+
+
+					<div className="pg-float scrollbar">
+						{ Object.keys(curData).map((_, i) => {
+							var im = curData[_]
+							return (
+								<p key={i}>
+									<span>{curMap[_]}<br/>{_}</span>
+									{typeof im === 'object'? im? '{...}': 'null': _ === 'contentType'? cTypeMap[im]: im}
+								</p>
+							)
+						}) }
 					</div>
 				</div>
 			</div>

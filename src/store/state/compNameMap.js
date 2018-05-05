@@ -9,5 +9,5 @@ module.exports = {
 	'button': '按钮',
 	'division-line': '分割线',
 	'bottom-nav': '底部导航',
-	'user-center': '个人中心',
+	'user-center': '个人中心'
 }

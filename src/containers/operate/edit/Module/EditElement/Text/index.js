@@ -5,7 +5,6 @@
  */
 
 import React from 'react'
-import classnames from 'classnames'
 import './index.less'
 
 class Text extends React.Component {
@@ -13,26 +12,19 @@ class Text extends React.Component {
 	renderStyle1(props, style) {
 		let { data } = props
 		return (
-			<div style={cssColorFormat(props, style)}>{data.content.text}</div>
-		)
-	}
-	renderStyle2(props, style) {
-		let { data } = props
-		return (
-			<div style={cssColorFormat(props, style)}>{data.content.text}</div>
+			<div style={cssColorFormat(props, style)} dangerouslySetInnerHTML={{__html: textBreak(data.content.text)}}></div>
 		)
 	}
 	
 	render() {
-		let { data, type } = this.props
-		console.log(1, this.props)
+		let { type } = this.props
 		let dom = this[`render${type}`](this.props, 'text')
 		return (
 			<div className={`e-text ${type}`}>
 				{ dom }
-			</div>   
+			</div>
 		)
 	}
-} 
+}
 
-export default Text 
+export default Text

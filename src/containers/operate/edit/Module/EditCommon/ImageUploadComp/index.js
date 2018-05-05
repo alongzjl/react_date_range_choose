@@ -11,9 +11,8 @@ import { bindActionCreators } from 'redux'
 import { connect }  from 'react-redux'
 import * as actions from 'actions'
 
-import { Row, Col, Checkbox, Collapse, Icon, Input, Select } from 'antd'
-const { Option, OptGroup } = Select
-const Panel  = Collapse.Panel
+import { Row, Col, Icon, Select } from 'antd'
+const { Option } = Select
 
 import PictureList from '../PictureList'
 
@@ -34,9 +33,9 @@ class ImageUploadComp extends React.Component {
 		this.addImgModal.show()
 	}
 
-	enter(imgUrl,index) { 
-		let { data, img, name, action, content, actions, editConfig } = this.props
-		let { curData, curComp } = editConfig
+	enter(imgUrl,index) {
+		let { data, name, action, content, actions, editConfig } = this.props
+		let { curData } = editConfig
 		let { parentComp } = curData
 		let imgList = imgUrl;
 		const length = content.length;
@@ -44,32 +43,32 @@ class ImageUploadComp extends React.Component {
 			if(name == 'first') {
 				imgList = imgList.map((item,index)=>{
 					var obj = {img:{img:item.url,type:'custom'},title:`图片${index+1}`,router: {}};
-					return obj;   
-				}) 
+					return obj;
+				})
 				data.content = imgList;
-			}else{       
+			}else{
 				data.content[index][name].img = imgUrl[0].url;
-			}    
-		}else{ 
+			}
+		}else{
 			data.content[name].img = imgUrl[0].url
 		}
 		actions[action](null, parentComp? parentComp: data)
 	}
 
 	cb(key) {
-		console.log(key)
+		// console.log(key)
 	}
 
 	changeImgType(val) {
 		let { data, img, action, actions, editConfig }  = this.props
-		let { curData, curComp } = editConfig
+		let { curData } = editConfig
 		let { parentComp } = curData
 		img.type  = val
 		if (action === 'updateComp') return actions[action](null, parentComp? parentComp: data)
 	}
 
 	render() {
-		let { typeSelect = false, data, img, name, content, actions, editConfig,index } = this.props
+		let { img, name, actions, editConfig,index } = this.props
 		let btnNode
 		let imgVal = img&&img.img
 		let theme   = editConfig.globalData.theme
@@ -77,8 +76,8 @@ class ImageUploadComp extends React.Component {
 		let selectNode
 		colors.custom = {
 			name:  '自定义',
-			img: imgVal,
-		}  
+			img: imgVal
+		}
 		if(name == 'first'){
 			return (
 					<div className="pg-img-upload">
@@ -92,16 +91,16 @@ class ImageUploadComp extends React.Component {
 						<PictureList
 							ref={com => { this.addImgModal = com }}
 							props={this.props}
-							data={this.props} 
-							actions={actions} 
+							data={this.props}
+							actions={actions}
 							index={0}
-							firstAdd={true} 
-							enter={this.enter}     
+							firstAdd={true}
+							enter={this.enter}
 						/>
 					</div>
 				)
 		}
-		let options = Object.keys(colors).map((_, i) => {
+		let options = Object.keys(colors).map((_) => {
 			let col = colors[_]
 			if (col.img === undefined) return false
 			return (
@@ -151,12 +150,12 @@ class ImageUploadComp extends React.Component {
 				<PictureList
 					ref={com => { this.addImgModal = com }}
 					props={this.props}
-					data={this.props} 
-					actions={actions} 
+					data={this.props}
+					actions={actions}
 					index={0}
 					enter={this.enter}
-					index={index} 
-				/> 
+					index={index}
+				/>
 			</div>
 		)
 	}

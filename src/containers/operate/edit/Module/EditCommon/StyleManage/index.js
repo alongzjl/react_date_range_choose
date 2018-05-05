@@ -11,14 +11,13 @@ import { bindActionCreators } from 'redux'
 import { connect }  from 'react-redux'
 import * as actions from 'actions'
 
-import { Row, Col, Collapse, Icon, Input, Select } from 'antd'
-const Option = Select.Option
+import { Collapse, Icon, Input } from 'antd'
 const Panel  = Collapse.Panel
 
 import './index.less'
 
 var keyMap = {
-	name: { name: '名称', type: 'Input', minlength: 0, maxlength: 8, },
+	name: { name: '名称', type: 'Input', minlength: 0, maxlength: 8, }
 	// img:  { name: '图片', type: 'Input', minlength: 0, maxlength: 30, },
 }
 
@@ -30,17 +29,17 @@ class StyleManage extends React.Component {
 	componentWillUnmount() {}
 
 	onChange(val, key) {
-		console.clear()
-		console.log(val)
-		let { data, parentKey, list, action, idx, actions } = this.props
+		// console.clear()
+		// console.log(val)
+		let { data, list, action, idx, actions } = this.props
 		list[idx][key] = val
 		if (action === 'updateComp') return actions[action](null, data)
 		else if (action === 'updateGlobal') return actions[action](data)
 	}
 
 	onAdd(cur) {
-		console.clear()
-		let { data, parentKey, list, action, idx, name, actions } = this.props
+		// console.clear()
+		let { data, list, action, name, actions } = this.props
 		let newData = JSON.parse(JSON.stringify(cur))
 		newData.name = `${name}${list.length + 1}`
 		delete newData.layout
@@ -50,7 +49,7 @@ class StyleManage extends React.Component {
 	}
 
 	onRemove(idx) {
-		console.clear()
+		// console.clear()
 		let { data, parentKey, list, action, actions } = this.props
 		list.splice(idx, 1)
 		data[parentKey].idx = 0
@@ -62,7 +61,7 @@ class StyleManage extends React.Component {
 	}
 
 	onSelect(newIdx) {
-		console.clear()
+		// console.clear()
 		let { data, parentKey, list, action, idx, actions } = this.props
 		if (newIdx === idx) return
 		data[parentKey].idx = newIdx

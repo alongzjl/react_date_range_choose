@@ -11,9 +11,7 @@ import { bindActionCreators } from 'redux'
 import { connect }  from 'react-redux'
 import * as actions from 'actions'
 
-import { Row, Col, Checkbox, Collapse, Icon, Input, Select } from 'antd'
-const { Option, OptGroup } = Select
-const Panel  = Collapse.Panel
+import { Icon } from 'antd'
 
 import PictureList from '../PictureList'
 
@@ -35,7 +33,7 @@ class ImageUploadTheme extends React.Component {
 	}
 
 	enter(imgUrl) {
-		let { data, img, name, action, content, actions, editConfig } = this.props
+		let { name, action, content, actions, editConfig } = this.props
 		content[name] = imgUrl
 		actions[action](editConfig.globalData)
 	}
@@ -45,7 +43,7 @@ class ImageUploadTheme extends React.Component {
 	}
 
 	render() {
-		let { data, img, name, content, actions, editConfig } = this.props
+		let { img, actions } = this.props
 		let btnNode
 		if (img) {
 			btnNode = (
@@ -72,7 +70,7 @@ class ImageUploadTheme extends React.Component {
 					actions={actions}
 					enter={this.enter.bind(this)}
 					index={0}
-				/> 
+				/>
 			</div>
 		)
 	}

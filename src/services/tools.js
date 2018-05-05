@@ -26,7 +26,7 @@ const formatPxMap = {
 }
 const formatColorMap = {
 	color: 1,
-	backgroundColor: 1,
+	backgroundColor: 1
 }
 const tools = function() {
 (function (window) {
@@ -54,7 +54,7 @@ String.prototype.colorRGB = function(){
 }
 
 // 组件样式格式化
-window.cssColorFormat = function(props, key) {
+window.cssColorFormat = (props, key) => {
 	let { data, actions } = props
 	let obj = JSON.parse(JSON.stringify(data.style[key]))
 	let st  = Date.now()
@@ -75,15 +75,15 @@ window.cssColorFormat = function(props, key) {
 		data.style[key] = obj
 		return actions.updateComp(null, data)
 	}
-	console.log(`耗时${Date.now() - st}ms`)
+	// console.log(`耗时${Date.now() - st}ms`)
 	return obj
 }
 
 // 组件图片格式化
-window.compImgFormat = function(props, content) {
+window.compImgFormat = (props, content) => {
 	let { data, actions } = props
 	let imgChange = 0
-	let type = content.type 
+	let type = content.type
 	if (!window.curThemeColor[type] && type !== 'custom') {
 		content.type = 'custom'
 		imgChange = 1
@@ -96,9 +96,13 @@ window.compImgFormat = function(props, content) {
 	return content
 }
 
-  
+// 文本换行
+window.textBreak = (str = '') => {
+	return str.replace(/\n|\r\n/g, '<br/>').replace(/ /g, '&nbsp;')
+}
+
 window.Ajax = Fetch.default
-  
+
 
 }(window))
 }

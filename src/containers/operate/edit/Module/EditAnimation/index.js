@@ -13,7 +13,7 @@ import * as actions from 'actions'
 
 import Picture from './Picture'
 import Web     from './Web'
-import Text    from './Text' 
+import Text    from './Text'
  
 import './index.less'
 
@@ -25,7 +25,7 @@ class EditAnimation extends React.Component {
 	componentWillUnmount() {}
 
 	render() {
-		let { comp, data } = this.props
+		let { data } = this.props
 
 		var compName = data.name,
 			compCon

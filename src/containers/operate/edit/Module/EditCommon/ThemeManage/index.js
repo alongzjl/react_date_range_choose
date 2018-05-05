@@ -11,15 +11,14 @@ import { bindActionCreators } from 'redux'
 import { connect }  from 'react-redux'
 import * as actions from 'actions'
 
-import { Row, Col, Collapse, Icon, Input, Select } from 'antd'
-const Option = Select.Option
+import { Collapse, Icon, Input } from 'antd'
 const Panel  = Collapse.Panel
 
 import './index.less'
 
 var keyMap = {
-	name: { name: '名称', type: 'Input', minlength: 0, maxlength: 8, },
-	// img:  { name: '图片', type: 'Input', minlength: 0, maxlength: 30, },
+	name: { name: '名称', type: 'Input', minlength: 0, maxlength: 8 }
+	// img:  { name: '图片', type: 'Input', minlength: 0, maxlength: 30 },
 }
 
 class ThemeManage extends React.Component {
@@ -30,17 +29,17 @@ class ThemeManage extends React.Component {
 	componentWillUnmount() {}
 
 	onChange(val, key) {
-		console.clear()
-		console.log(val)
-		let { data, parentKey, list, action, idx, actions } = this.props
+		// console.clear()
+		// console.log(val)
+		let { data, list, action, idx, actions } = this.props
 		list[idx][key] = val
 		if (action === 'updateComp') return actions[action](null, data)
 		else if (action === 'updateGlobal') return actions[action](data)
 	}
 
 	onAdd(cur) {
-		console.clear()
-		let { data, parentKey, list, action, idx, name, actions } = this.props
+		// console.clear()
+		let { data, list, action, name, actions } = this.props
 		let newData = JSON.parse(JSON.stringify(cur))
 		newData.name = `${name}${list.length + 1}`
 		delete newData.layout
@@ -50,7 +49,7 @@ class ThemeManage extends React.Component {
 	}
 
 	onRemove(idx) {
-		console.clear()
+		// console.clear()
 		let { data, parentKey, list, action, actions } = this.props
 		list.splice(idx, 1)
 		data[parentKey].idx = 0
@@ -62,8 +61,8 @@ class ThemeManage extends React.Component {
 	}
 
 	onSelect(newIdx) {
-		console.clear()
-		let { data, parentKey, list, action, idx, actions } = this.props
+		// console.clear()
+		let { data, parentKey, action, idx, actions } = this.props
 		if (newIdx === idx) return
 		data[parentKey].idx = newIdx
 		if (action === 'updateComp') {
@@ -84,11 +83,11 @@ class ThemeManage extends React.Component {
 	}
 
 	cb(key) {
-		console.log(key)
+		// console.log(key)
 	}
 
 	render() {
-		let { data, list, idx, name, max, editConfig } = this.props
+		let { list, idx, name, max } = this.props
 		let activeKey = Array.from(new Array(2), (_, i) => `${i}`)
 		let curData   = list[idx]
 		let listNode  = list.map((_, k) => {
@@ -121,7 +120,7 @@ class ThemeManage extends React.Component {
 			let val = curData[p]
 			if (!km) return false
 			let dom = this[`render${km.type}`].bind(this, km, val, p)()
-			return ( 
+			return (
 				<div className="pgs-row" key={i}>
 					<div className="pgsr-name">{ keyMap[p].name }</div>
 					<div className="pgsr-ctrl">{ dom }</div>

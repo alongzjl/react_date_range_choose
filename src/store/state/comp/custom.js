@@ -6,7 +6,7 @@ var style = {
 		top:      0,
 		left:     0,
 		width:    120,
-		height:   120,
+		height:   120
 	},
 }
 
@@ -27,7 +27,7 @@ module.exports = {
 		className: '',	// 动画样式
 		delay: 1,					// 开始时间
 		duration: 1,				// 持续时间
-		iterationCount: 'infinite',	// 循环次数
+		iterationCount: 'infinite'	// 循环次数
 	},
 	styleList: {
 		idx:  0,
@@ -35,10 +35,9 @@ module.exports = {
 			name: '样式1',
 			img:  '',
 			data: JSON.parse(JSON.stringify(style))
-		}],
+		}]
 	},
 	// 功能特性
 	feature: {
-		api: '',		// 依赖API
-	},
+	}
 }

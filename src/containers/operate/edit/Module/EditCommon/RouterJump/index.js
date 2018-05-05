@@ -11,7 +11,7 @@ import { bindActionCreators } from 'redux'
 import { connect }  from 'react-redux'
 import * as actions from 'actions'
 
-import { Row, Col, Checkbox, Collapse, Icon, Input, Select } from 'antd'
+import { Checkbox, Collapse, Select } from 'antd'
 const { Option, OptGroup } = Select
 const Panel  = Collapse.Panel
 
@@ -25,8 +25,8 @@ class RouterJump extends React.Component {
 	componentWillUnmount() {}
 
 	onChange(val) {
-		console.clear()
-		console.log(val)
+		// console.clear()
+		// console.log(val)
 		let { data, content, idx, actions } = this.props
 		if (idx < 0) {
 			content.router = {
@@ -38,16 +38,16 @@ class RouterJump extends React.Component {
 	}
 
 	onChangeAuth(val, key) {
-		console.clear()
-		console.log(val)
+		// console.clear()
+		// console.log(val)
 		let { data, actions } = this.props
 		data.auth.content[key] = val
 		actions.updateComp(null, data)
 	}
 
 	onSelect(newIdx) {
-		console.clear()
-		let { data, parentKey, list, action, idx, actions } = this.props
+		// console.clear()
+		let { data, parentKey, action, idx, actions } = this.props
 		if (newIdx === idx) return
 		data[parentKey].idx = newIdx
 		if (action === 'updateComp') {
@@ -58,11 +58,11 @@ class RouterJump extends React.Component {
 	}
 
 	cb(key) {
-		console.log(key)
+		// console.log(key)
 	}
 
 	render() {
-		let { data, content, idx, actions, editConfig } = this.props
+		let { data, content, editConfig } = this.props
 		let { pageList } = editConfig
 		let pageGroup  = pageList.group
 		let selectNode = pageGroup.map((gp, i) => {

@@ -17,7 +17,7 @@ class Picture extends React.Component {
 
 	render() {
 		let { data } = this.props
-		console.log(1, this.props);
+		// console.log(1, this.props)
 		return (
 			<div className="e-picture">
 				<img src={compImgFormat(this.props, data.content.img)} />

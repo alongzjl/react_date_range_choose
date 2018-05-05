@@ -70,6 +70,11 @@ config.devServer = {
 			target: 'http://localhost:4080/api/store',
 			secure: false,
 			changeOrigin: 'true',
+		},
+		'/store': {
+			target: 'http://localhost:4080/api/store',
+			secure: false,
+			changeOrigin: 'true',
 		}
 	}
 }

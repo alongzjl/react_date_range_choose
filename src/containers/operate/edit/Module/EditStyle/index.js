@@ -17,9 +17,8 @@ import StyleManage from 'compEdit/EditCommon/StyleManage'
 
 import {
 	Row, Col,
-	Button, Card, Checkbox, Collapse, Input, InputNumber, Radio, Select, Slider, Switch
+	Checkbox, Collapse, InputNumber, Radio, Slider, Switch
 } from 'antd'
-const Option      = Select.Option
 const { Panel }   = Collapse
 const RadioButton = Radio.Button
 const RadioGroup  = Radio.Group
@@ -27,7 +26,7 @@ const RadioGroup  = Radio.Group
 var styleMap = {
 	layout: '组件样式',
 	image:  '图片样式',
-	text:   '文本样式',
+	text:   '文本样式'
 }
 // 定义样式名称 & 渲染类型 & 相关配置
 var cssMap = {
@@ -44,7 +43,7 @@ var cssMap = {
 	fontWeight:        { name: '粗细',    type: 'Switch', true: 'bold',      false: 'normal' },
 	fontStyle:         { name: '斜体',    type: 'Switch', true: 'italic',    false: 'normal' },
 	textDecoration:    { name: '下划线',  type: 'Switch', true: 'underline', false: 'none' },
-	opacity:           { name: '透明度',  type: 'Slider', min: 0, max: 1, step: 0.01 },
+	opacity:           { name: '透明度',  type: 'Slider', min: 0, max: 1, step: 0.01 }
 }
 
 import './index.less'
@@ -57,20 +56,20 @@ class EditStyle extends React.Component {
 	componentWillUnmount() {}
 
 	onChange(val, style, css) {
-		console.clear()
-		console.log(val)
+		// console.clear()
+		// console.log(val)
 		let { data, actions, editConfig } = this.props
-		let { curData, curComp } = editConfig
+		let { curData } = editConfig
 		let { parentComp } = curData
 		style == 'feature' ? data[style][css] = val : data.style[style][css] = val;
 		actions.updateComp(null, parentComp? parentComp: data)
 	}
 
 	onChangeAuth(val, style, css) {
-		console.clear()
-		console.log(val)
+		// console.clear()
+		// console.log(val)
 		let { data, actions, editConfig } = this.props
-		let { curData, curComp } = editConfig
+		let { curData } = editConfig
 		let { parentComp } = curData
 		data.auth[style][css] = val
 		actions.updateComp(null, parentComp? parentComp: data)
@@ -153,7 +152,7 @@ class EditStyle extends React.Component {
 	}
 
 	render() {
-		let { data, actions, editConfig } = this.props
+		let { data } = this.props
 		if (!data.style) return false
 		let styleList = data.styleList				// 样式列表
 		let styles    = Object.keys(data.style)		// 具体样式
@@ -182,7 +181,7 @@ class EditStyle extends React.Component {
 				)
 			})
 			if (ci === 0) return
-			return ( 
+			return (
 				<Panel header={styleMap[p]} key={i}>
 					{ cnode }
 				</Panel>
@@ -226,9 +225,9 @@ class StyleManageSwiper extends React.Component {
 	
 	render (){
 		let activeKey = Array.from(new Array(1), (_, i) => `${i}`)
-		const feature = this.props.feature.feature;  
-		return ( 
-			<Collapse defaultActiveKey={activeKey}>    
+		const feature = this.props.feature.feature;
+		return (
+			<Collapse defaultActiveKey={activeKey}>
 				<Panel header={`轮播设置`} key={0}>
 					<div className="pgs-row" key={2}>
 						<div className="pgsr-name">自动循环</div>
@@ -236,19 +235,19 @@ class StyleManageSwiper extends React.Component {
 							<Switch
 								size="small"
 								checked={feature.switch} onChange={v => this.props.onChange(v? true: false,'feature','switch')}
-							/> 
+							/>
 						</div>
 						
-					</div> 
+					</div>
 					<div className="pgs-row" key={4}>
-						<div className="pgsr-name">循环间隔</div> 
+						<div className="pgsr-name">循环间隔</div>
 						<div className="pgsr-ctrl">
 							<InputNumber
 								min={100} max={5000} step={100}
 								value={feature.autoPlayTime} onChange={v => this.props.onChange(v,'feature','autoPlayTime')}
 								style={{ width: '100%' }}
-							/> 
-						</div> 
+							/>
+						</div>
 						
 					</div>
 				</Panel>

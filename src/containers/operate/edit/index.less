@@ -44,6 +44,8 @@
 	display: flex;
 	width: 100%;
 	min-height: 820px;
+	height: ~"calc(100% - 48px)";
+	overflow: hidden;
 	// & > div {
 	// 	height: 100%;
 	// }
@@ -61,6 +63,7 @@
 	}
 	.pg-right {
 		width: 263px;
+		height: 100%;
 		border-left: 1px solid #c1c1c1;
 		.edit-img{
 			display: inline-block;
@@ -107,6 +110,13 @@
 			text-align: right;
 			width: 24px;
 			height: 100%;
+		}
+	}
+	.ant-tabs {
+		height: 100%;
+		.ant-tabs-content {
+			height: ~"calc(100% - 40px)";
+			overflow-y: auto;
 		}
 	}
 }
@@ -234,6 +244,21 @@
 		border-radius: 0;
 	}
 }
+
+.pg-float {
+	position: absolute;
+	top: 60px;
+	left: 220px;
+	height: 600px;
+	p {
+		display: flex;
+		align-items: center;
+		span {
+			width: 120px;
+		}
+	}
+}
+
 body .ant-select-dropdown {
 	font-size: 12px;
 	border-radius: 0;

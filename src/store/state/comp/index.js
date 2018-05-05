@@ -27,21 +27,26 @@ function authInit(data) {
 	}
 	return data
 }
-  
+
 // 组件元素数据
-module.exports = { 
+module.exports = {
+	/* 基础组件 */
 	// 图片
 	picture:     authInit(require('./picture')),
 	// 天气日期
 	date:   authInit(require('./date')),
-	// 轮播图 
+	// 轮播图
 	swiperImage: authInit(require('./swiperImage')),
 	// 文本
 	text:        authInit(require('./text')),
-	// 网页
+	// 自定义
 	web:         authInit(require('./web')),
 	// 导航
-	navigation:         authInit(require('./navigation')), 
-	// 自定义
-	storeList:   authInit(require('./storeList')),
+	navigation:         authInit(require('./navigation')),
+	// 字母
+	letter:      authInit(require('./letter')),
+
+	/* 业务组件 */
+	// 店铺列表
+	storeList:   authInit(require('./storeList'))
 }

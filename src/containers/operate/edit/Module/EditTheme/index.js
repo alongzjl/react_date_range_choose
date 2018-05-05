@@ -20,8 +20,8 @@ const Option = Select.Option
 import ImageUploadTheme from 'compEdit/EditCommon/ImageUploadTheme'
 
 const keyMap = {
-	color:   { color: '#000000', },
-	picture: { img: '', },
+	color:   { color: '#000000' },
+	picture: { img: '' }
 }
 
 import './index.less'
@@ -34,7 +34,7 @@ class EditTheme extends React.Component {
 			keyType: 'color',
 			keyValue: '',
 			editKey: '',
-			cache: {},
+			cache: {}
 		}
 	}
 
@@ -112,7 +112,7 @@ class EditTheme extends React.Component {
 		else if (col.img !== undefined) da.cache[key].keyType = 'picture'
 		this.setState(da)
 	}
-	cancelEditKey(key) {
+	cancelEditKey() {
 		this.setState({ editKey: '' })
 	}
 	renderEdit(key, col) {
@@ -204,7 +204,7 @@ class EditTheme extends React.Component {
 				</div>
 			)
 		}
-		let childNode = Object.keys(colors).map((_, i) => {
+		let childNode = Object.keys(colors).map((_) => {
 			let col = colors[_]
 			let dom = this[state.editKey === _? 'renderEdit': 'renderTheme'](_, col, data)
 			return (

@@ -12,7 +12,7 @@ import { connect }  from 'react-redux'
 import * as actions from 'actions'
 
 import ColorPicker from 'rc-color-picker'
-import { Row, Col, Input, Select } from 'antd'
+import { Row, Col, Select } from 'antd'
 const Option = Select.Option
 
 import './index.less'
@@ -28,7 +28,7 @@ class Color extends React.Component {
 		var col = c.color.colorRGB()
 		col.push(c.alpha/100)
 		col = `rgba(${col.join(',')})`
-		let { data, color, path, action, actions, editConfig }  = this.props
+		let { data, color, action, actions, editConfig }  = this.props
 		let curData = editConfig.curData
 		color.color = col
 		color.alpha = c.alpha
@@ -46,15 +46,15 @@ class Color extends React.Component {
 	}
 
 	render() {
-		let { data, color, placement, editConfig }  = this.props
+		let { color, placement, editConfig }  = this.props
 		let theme   = editConfig.globalData.theme
 		let colors  = JSON.parse(JSON.stringify(theme.list[theme.idx].colors))
 		let cp
 		colors.custom = {
 			name:  '自定义',
-			color: color.color,
+			color: color.color
 		}
-		let options = Object.keys(colors).map((_, i) => {
+		let options = Object.keys(colors).map((_) => {
 			let col = colors[_]
 			if (col.color === undefined) return false
 			return (

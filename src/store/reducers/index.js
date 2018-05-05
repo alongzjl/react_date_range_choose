@@ -14,7 +14,7 @@ const rootReducer = combineReducers({
     scaleVal,
     layers,
     focusData,
-    editConfig,
+    editConfig
 })
 
 export default rootReducer
