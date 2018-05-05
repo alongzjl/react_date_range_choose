@@ -83,7 +83,7 @@ window.cssColorFormat = function(props, key) {
 window.compImgFormat = function(props, content) {
 	let { data, actions } = props
 	let imgChange = 0
-	let type = content.type
+	let type = content.type 
 	if (!window.curThemeColor[type] && type !== 'custom') {
 		content.type = 'custom'
 		imgChange = 1
@@ -96,8 +96,9 @@ window.compImgFormat = function(props, content) {
 	return content
 }
 
+  
 window.Ajax = Fetch.default
-
+  
 
 }(window))
 }

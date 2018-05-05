@@ -16,11 +16,13 @@ import Picture      from 'compEdit/EditElement/Picture'
 import Web          from 'compEdit/EditElement/Web'
 import Text         from 'compEdit/EditElement/Text'
 import SwiperImage  from 'compEdit/EditElement/SwiperImage'
+import DateShow    from 'compEdit/EditElement/Date'  
 import StoreList    from 'compEdit/EditElement/StoreList'
+import Navigation    from 'compEdit/EditElement/Navigation'
 
 import * as actions from 'actions'
 
-import { Icon } from 'antd'
+import { Icon } from 'antd' 
 
 import './index.less'
 
@@ -91,6 +93,9 @@ class EditElement extends React.Component {
 			else if (compName === 'text')        compCon = (<Text        data={_} actions={actions} type={`Style${i + 1}`} idx={i} csn={csn} />)
 			else if (compName === 'swiperImage') compCon = (<SwiperImage data={_} actions={actions} type={`Style${i + 1}`} idx={i} csn={csn} />)
 			else if (compName === 'storeList')   compCon = (<StoreList   data={_} actions={actions} type={`Style${i + 1}`} idx={i} csn={csn} />)
+			else if (compName === 'date')   compCon = (<DateShow   data={_} actions={actions} type={`Style${i + 1}`} idx={i} csn={csn} />)
+ 			else if (compName === 'navigation')   compCon = (<Navigation   data={_} actions={actions} type={`Style${i + 1}`} idx={i} csn={csn} />)
+   
 			return (
 				<Rnd
 					key={i}

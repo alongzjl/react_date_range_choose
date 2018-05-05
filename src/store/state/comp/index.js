@@ -9,7 +9,8 @@ function handleObj(obj) {
 
 function authInit(data) {
 	var style   = JSON.parse(JSON.stringify(data.style)),
-		content = JSON.parse(JSON.stringify(data.content))
+		content = JSON.parse(JSON.stringify(data.content)),
+		feature = JSON.parse(JSON.stringify(data.feature))
 	for (var p in style) {
 		for (var q in style[p]) {
 			style[p][q] = false
@@ -17,24 +18,30 @@ function authInit(data) {
 	}
 	if (content.length) handleArray(content)
 	else handleObj(content)
+
+	handleObj(feature)
 	data.auth = {
 		style: style,
 		content: content,
+		feature:feature
 	}
 	return data
 }
-
+  
 // 组件元素数据
-module.exports = {
+module.exports = { 
 	// 图片
 	picture:     authInit(require('./picture')),
-	// 按钮
-	// button:       require('./button'),
-	// 轮播图
+	// 天气日期
+	date:   authInit(require('./date')),
+	// 轮播图 
 	swiperImage: authInit(require('./swiperImage')),
 	// 文本
 	text:        authInit(require('./text')),
-	// 自定义
+	// 网页
 	web:         authInit(require('./web')),
+	// 导航
+	navigation:         authInit(require('./navigation')), 
+	// 自定义
 	storeList:   authInit(require('./storeList')),
 }

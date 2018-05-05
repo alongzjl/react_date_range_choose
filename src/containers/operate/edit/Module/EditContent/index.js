@@ -25,7 +25,8 @@ import Picture     from './Picture'
 import Web         from './Web'
 import Text        from './Text'
 import SwiperImage from './SwiperImage'
-
+import Navigation from './Navigation'
+import Date from './Date'  
 var conMap = {
 	text:  { name: '文本内容', type: 'Textarea', max: 1000, autosize: { minRows: 1, maxRows: 6 }, },
 	title: { name: '标题',    type: 'Title',    max: 30, },
@@ -65,7 +66,17 @@ class EditContent extends React.Component {
 	cb(key) {
 		console.log(key)
 	}
-
+	deleteCom(index) { 
+		let {data,actions,editConfig} = this.props;
+		let { curData, curComp } = editConfig
+		let { parentComp } = curData
+		if(Object.prototype.toString.call(data.content)=='[object Array]'){
+			let content = data.content.filter((item,i) => i!=index);
+			data.content = content;
+			actions.updateComp(null, parentComp? parentComp: data)
+		}   
+		
+	}
 	/* 渲染组件开始 */
 	// 文本
 	renderTextarea(cfg, data, val, key) {
@@ -123,13 +134,16 @@ class EditContent extends React.Component {
 			// 根据样式类型渲染对应组件
 			let dom = this[`render${cm.type}`].bind(this, cm, data, val, p, content,index)()
 			return (
-				<div className="pgs-row" key={i+1}>
+		<div className="pgs-row" key={i+1}>
 					<div className="pgsr-name">{ cm.name }</div>
 					<div className="pgsr-ctrl">{ dom }</div>
 					<div className="pgsr-auth">
 						<Checkbox checked={data.auth.content[p]} onChange={_ => this.onChangeAuth(_.target.checked, p)} />
 					</div>
-				</div>
+					{  
+						cm.name=='图片'?<div className="delete" onClick={()=>{this.deleteCom(index)}}><Icon type="close-circle" style={{ fontSize: 18}} /></div>:null
+					} 
+				</div> 
 			)
 		})
 		return childNode
@@ -141,12 +155,13 @@ class EditContent extends React.Component {
 		let compName = data.name
 		let content  = data.content
 		let compCon
-		let childNode
+		let childNode 
 		let activeKey
 		let routerJump
-		// if (compName === 'picture')           compCon = (<Picture data={data}></Picture>)
-		// else if (compName === 'web')          compCon = (<Web data={data}></Web>)
-		// else if (compName === 'text')         compCon = (<Text data={data}></Text>)
+		 if (compName === 'navigation')            compCon = (<Navigation data={this.props}></Navigation>)
+		else if (compName === 'date')          compCon = (<Date data={this.props}></Date>) 
+		// else if (compName === 'web')          compCon = (<Web data={data}></Web>)     
+		// else if (compName === 'text')         compCon = (<Text data={data}></Text>)  
 		// else if (compName === 'swiperImage')  compCon = (<SwiperImage data={data}></SwiperImage>)
 		if (content.length) {
 			activeKey = Array.from(new Array(content.length), (_, i) => `${i}`)
@@ -157,7 +172,7 @@ class EditContent extends React.Component {
 						{ this.renObj(data, _, i) }
 					</Panel>
 				)
-			})
+			}) 
 		} else {
 			activeKey = ['0']
 			if (content.router !== undefined) {
@@ -173,6 +188,7 @@ class EditContent extends React.Component {
 		}
 		return (
 			<section className="ry-roll-screen-config">
+				{ compCon } 
 				<Collapse activeKey={activeKey} onChange={this.cb}>
 					{ 
 						data.name == 'swiperImage' ? <Panel header={`内容`} key={0}>
@@ -194,9 +210,8 @@ class EditContent extends React.Component {
 					{  
 						!(data.name == 'swiperImage'&& data.content.length==1&&data.content[0].img.img == '') ? childNode : null
 					 } 
-				</Collapse>
-				{ routerJump }
-				{ compCon }
+				</Collapse> 
+				{ routerJump } 
 			</section>
 		)
 	}
