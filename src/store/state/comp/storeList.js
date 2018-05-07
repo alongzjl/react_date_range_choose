@@ -1,26 +1,25 @@
 // 自定义
 var style = {
-	// 组件样式
+}
+
+module.exports = {
+	name: 'storeList',
+	type: 'advanced',
+	// 位置大小
 	layout: {
 		position: 'absolute',
 		top:      0,
 		left:     0,
 		width:    432,
 		height:   500
-	}
-}
-
-module.exports = {
-	name: 'storeList',
-	type: 'advanced',
+	},
 	// 样式管理
 	style: JSON.parse(JSON.stringify(style)),
 	// 内容管理
 	content: {
 	},
 	// 组件管理
-	components: [
-	],
+	components: [],
 	// 动画设置
 	animation: {
 		className: '',	// 动画样式
@@ -42,12 +41,14 @@ module.exports = {
 		api: {
 			url:  '/store/getStoreList',
 			type: 'get',
-			data: {
+			body: {
 				floor:  '',
 				letter: '',
 				catg:   ''
 			}
-		}
+		},
+		// 楼层数据
+		floors: []
 	}
 }
 // {

@@ -15,24 +15,47 @@ import * as actions from 'actions'
 import './index.less'
 
 class OperateComponent extends React.Component {
-    constructor(props) {
-        super(props)
-    }
+	constructor(props) {
+		super(props)
+		this.state = {
+			load: false
+		}
+	}
 
-    componentWillMount() {
-    }
+	componentWillMount() {
+		let { type, actions, editConfig } = this.props
+		let { globalData } = editConfig
+		Ajax.get('/store/getFloor').then(res => {
+			let floors = res.data.map(_ => {
+				_.checked = true
+				return _
+			})
+			globalData.floors = floors
+			actions.updateGlobal(globalData)
+			this.setState({ load: true })
+		}).catch(e => {
 
-    componentDidMount() {
-        hashHistory.push('/operate/edit/1080*1920/home')
-    }
+		})
+	}
 
-    render() {
-        return (
-            <div className="pg-edit">
-                { this.props.children }
-            </div>
-        )
-    }
+	componentDidMount() {
+		hashHistory.push('/operate/edit/1080*1920/home')
+	}
+
+	render() {
+		let { type, actions, editConfig } = this.props
+		return this.state.load
+		?
+		(
+			<div className="pg-edit">
+				{ this.props.children }
+			</div>
+		)
+		:
+		(
+			<div>loading</div>
+		)
+	}
 }
 
 OperateComponent.defaultProps = {
@@ -41,10 +64,10 @@ OperateComponent.defaultProps = {
 const mapStateToProps = state => state
 
 const mapDispatchToProps = dispatch => ({
-    actions: bindActionCreators(actions, dispatch)
+	actions: bindActionCreators(actions, dispatch)
 })
 
 export default connect(
-    mapStateToProps,
-    mapDispatchToProps
+	mapStateToProps,
+	mapDispatchToProps
 )(OperateComponent)

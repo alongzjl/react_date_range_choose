@@ -26,10 +26,9 @@ export default class Fetch {
         const newConfig = Object.assign({}, defaultConfig, config);
 
         fetch(url, newConfig).then(response => response.json()).then(result => {
-            if (result.success) {
+            if (result.meta.errno !== 0) {
                 if (success) {
-                    debugger
-                    success(result.data);
+                    success(result.result);
                 }
             } else {
                 if (result.msg === '登录已过期,请重新登录!' || result.msg === 'access_token不正确，请退出后重试') {

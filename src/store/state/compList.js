@@ -48,6 +48,11 @@ module.exports = [
 			key:  'letter'
 		},
 		{
+			icon: 'floor-control',
+			name: '楼层',
+			key:  'floor'
+		},
+		{
 			icon: 'store-control',
 			name: '店铺列表',
 			key:  'storeList'

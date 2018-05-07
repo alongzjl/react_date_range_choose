@@ -31,43 +31,50 @@ class StyleManage extends React.Component {
 	onChange(val, key) {
 		// console.clear()
 		// console.log(val)
-		let { data, list, action, idx, actions } = this.props
+		let { data, list, action, idx, actions, editConfig } = this.props
+		let { curData } = editConfig
+		let { parentComp } = curData
 		list[idx][key] = val
-		if (action === 'updateComp') return actions[action](null, data)
+		if (action === 'updateComp') return actions[action](null, parentComp? parentComp: data)
 		else if (action === 'updateGlobal') return actions[action](data)
 	}
 
 	onAdd(cur) {
 		// console.clear()
-		let { data, list, action, name, actions } = this.props
+		let { data, list, action, name, actions, editConfig } = this.props
+		let { curData } = editConfig
+		let { parentComp } = curData
 		let newData = JSON.parse(JSON.stringify(cur))
 		newData.name = `${name}${list.length + 1}`
-		delete newData.layout
 		list.push(newData)
-		if (action === 'updateComp') return actions[action](null, data)
+		if (action === 'updateComp') return actions[action](null, parentComp? parentComp: data)
 		else if (action === 'updateGlobal') return actions[action](data)
 	}
 
 	onRemove(idx) {
 		// console.clear()
-		let { data, parentKey, list, action, actions } = this.props
+		let { data, parentKey, list, action, actions, editConfig } = this.props
+		let { curData } = editConfig
+		let { parentComp } = curData
 		list.splice(idx, 1)
 		data[parentKey].idx = 0
 		if (action === 'updateComp') {
-			data.style = { layout: data.style.layout, ...data[parentKey].list[0].data }
-			return actions[action](null, data)
+			data.style = { ...data[parentKey].list[0].data }
+			return actions[action](null, parentComp? parentComp: data)
 		}
 		else if (action === 'updateGlobal') return actions[action](data)
 	}
 
 	onSelect(newIdx) {
 		// console.clear()
-		let { data, parentKey, list, action, idx, actions } = this.props
+		let { data, parentKey, list, action, idx, actions, editConfig } = this.props
+		let { curData } = editConfig
+		let { parentComp } = curData
 		if (newIdx === idx) return
 		data[parentKey].idx = newIdx
 		if (action === 'updateComp') {
-			data.style = { layout: data.style.layout, ...data[parentKey].list[newIdx].data }
-			return actions[action](null, data)
+			data.style = { ...data[parentKey].list[newIdx].data }
+			return actions[action](null, parentComp? parentComp: data)
 		}
 		else if (action === 'updateGlobal') return actions[action](data)
 	}
@@ -143,7 +150,7 @@ class StyleManage extends React.Component {
 						{ addNode }
 						{ listNode }
 					</ul>
-				</Panel> 
+				</Panel>
 				{ editNode }
 			</Collapse>
 		)

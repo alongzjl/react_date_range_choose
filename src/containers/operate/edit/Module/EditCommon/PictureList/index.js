@@ -138,7 +138,7 @@ class ImgModule extends React.Component {
 	chooseType(id) {
 
 	}
-	chooseImg = img => { 
+	chooseImg(img) {
 		let firstAdd = this.props.firstAdd
 		let img_list = this.state.imgList
 		if(firstAdd){
@@ -158,18 +158,18 @@ class ImgModule extends React.Component {
 		let choosed_img = img_list.filter(item => item.isClicked == true);
 		this.props.save(choosed_img)
 	}
-	upload_img = () => {
+	upload_img() {
 	   // alert('上传本地图片')
 	} 
-	getTypes = () => {
+	getTypes() {
 		const UrlType = 'http://manage.preview.rongyi.com/easy-smart/ySourceGroupManage/query';
 		Fetch.postJSON(UrlType,{type:1}).then(data=>{
 			this.setState({
 				typeList:data.result.data || []
 			})
-		}) 
-	};
-	getList =() => {
+		})
+	}
+	getList() {
 		const UrlList = "/chaoyue/imagesList";
 		const params = {currentPage:1,groupId:12,name:'',page:1,page_size:14,type:1};
 		Fetch.postJSON(UrlList,params).then(data=>{

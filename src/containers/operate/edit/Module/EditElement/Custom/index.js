@@ -18,7 +18,7 @@ import Web          from 'compEdit/EditElement/Web'
 import Text         from 'compEdit/EditElement/Text'
 import SwiperImage  from 'compEdit/EditElement/SwiperImage'
 import Letter       from 'compEdit/EditElement/Letter'
-import StoreList    from 'compEdit/EditElement/StoreList'
+import Floor        from 'compEdit/EditElement/Floor'
 
 import './index.less'
 
@@ -44,7 +44,7 @@ class Custom extends React.Component {
 	resizeFn(e, ref, delta, pos, item, idx, parent) {
 		e.stopPropagation()
 		let { actions, editConfig } = this.props
-		let lay = item.style.layout
+		let lay = item.layout
 		lay.left   = pos.x
 		lay.top    = pos.y
 		lay.width  = ref.offsetWidth
@@ -55,7 +55,7 @@ class Custom extends React.Component {
 	dragStop(e, d, item, idx, parent) {
 		e.stopPropagation()
 		let { actions, editConfig } = this.props
-		let lay = item.style.layout
+		let lay = item.layout
 		if (lay.left === d.x && lay.top  === d.y) return
 		lay.left = d.x
 		lay.top  = d.y
@@ -70,19 +70,18 @@ class Custom extends React.Component {
 	}
 
 	render() {
-		let { data, comp, actions, idx, csn, editConfig } = this.props
-		// console.log(1, this.props)
+		let { data, comp, actions, idx, csn, editConfig, ioInput, ioOuter } = this.props
 		let childNode = comp.map((_, i) => {
 			var compName = _.name,
 				styleIdx = _.styleList.idx,
 				isEdit   = true,
 				compCon
-			if (compName === 'picture')          compCon = (<Picture     data={_} parent={data} actions={actions} type={`Style${styleIdx + 1}`} />)
-			else if (compName === 'web')         compCon = (<Web         data={_} parent={data} actions={actions} type={`Style${styleIdx + 1}`} />)
-			else if (compName === 'text')        compCon = (<Text        data={_} parent={data} actions={actions} type={`Style${styleIdx + 1}`} />)
-			else if (compName === 'swiperImage') compCon = (<SwiperImage data={_} parent={data} actions={actions} type={`Style${styleIdx + 1}`} />)
-			else if (compName === 'letter')      compCon = (<Letter      data={_} parent={data} actions={actions} type={`Style${styleIdx + 1}`} />)
-			else if (compName === 'storeList')   compCon = (<StoreList   data={_} parent={data} actions={actions} type={`Style${styleIdx + 1}`} />)
+			if (compName === 'picture')          compCon = (<Picture     data={_} parent={data} editConfig={editConfig} actions={actions} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} />)
+			else if (compName === 'web')         compCon = (<Web         data={_} parent={data} editConfig={editConfig} actions={actions} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} />)
+			else if (compName === 'text')        compCon = (<Text        data={_} parent={data} editConfig={editConfig} actions={actions} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} />)
+			else if (compName === 'swiperImage') compCon = (<SwiperImage data={_} parent={data} editConfig={editConfig} actions={actions} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} />)
+			else if (compName === 'letter')      compCon = (<Letter      data={_} parent={data} editConfig={editConfig} actions={actions} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} />)
+			else if (compName === 'floor')       compCon = (<Floor       data={_} parent={data} editConfig={editConfig} actions={actions} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} />)
 			return (
 				<Rnd
 					key={i}
@@ -90,19 +89,19 @@ class Custom extends React.Component {
 					className={i === editConfig.curData.compIdx? 's-active': ''}
 					dragHandleClassName={'.handle-drag-custom'}
 					size={{
-						width:  _.style.layout.width || '100%',
-						height: _.style.layout.height
+						width:  _.layout.width || '100%',
+						height: _.layout.height
 					}}
 					position={{
-						x: _.style.layout.left,
-						y: _.style.layout.top
+						x: _.layout.left,
+						y: _.layout.top
 					}}
 					onDragStart={e => this.selectComp(e, _, i, idx, data)}
 					onDragStop={(e, d) => this.dragStop(e, d, _, i, data)}
 					onResizeStart={e => this.selectComp(e, _, i, idx, data)}
 					onResizeStop={(e, dir, ref, delta, pos) => this.resizeFn(e, ref, delta, pos, _, i, data)}
 				>
-					<div className="pge-layout" onClick={e => this.selectComp(e, _, i, idx, data)} style={!isEdit? _.style.layout: {}}>{ compCon }</div>
+					<div className="pge-layout" onClick={e => this.selectComp(e, _, i, idx, data)} style={!isEdit? _.layout: {}}>{ compCon }</div>
 					<a className="pge-remove" onClick={e => this.removeComp(e, i, data)}><Icon type="cross-circle" /></a>
 					<div className="handle-drag-custom" onClick={e => e.stopPropagation()}></div>
 				</Rnd>

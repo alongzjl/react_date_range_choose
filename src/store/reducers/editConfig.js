@@ -21,6 +21,14 @@ function saveData() {
 	console.log(`操作间隔: ${diffTime} ms`)
 }
 
+function getCompData(state, key) {
+	let compData = JSON.parse(JSON.stringify(comp[key]))
+	if (key === 'storeList') {
+		compData.feature.floors = JSON.parse(JSON.stringify(state.globalData.floors))
+	}
+	return compData
+}
+
 const initialState = state
 export default function editConfig(state = initialState, action) {
 	let curData    = state.curData,
@@ -30,13 +38,14 @@ export default function editConfig(state = initialState, action) {
 		groupIdx   = action.groupIdx,
 		idx        = action.idx,
 		data       = action.data,
+		key        = action.key,
 		name       = action.name
 
 	switch (action.type) {
 		
 		// 组件操作
 		case types.ADD_COMP:
-			var compData = JSON.parse(JSON.stringify(comp[action.key]))
+			var compData = getCompData(state, key)
 			pageC[router].elements.push(compData)
 			state.curPage       = pageC[router]
 			state.curComp       = compData
