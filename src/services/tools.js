@@ -61,6 +61,9 @@ window.cssColorFormat = (props, key) => {
 	let colorChange = 0
 	for (let p in obj) {
 		let v = obj[p]
+		if(p == 'boxShadow' || p == 'textShadow'){
+			v = obj[p].color;
+		}
 		if (formatColorMap[p]) {
 			let type = v.type
 			if (!window.curThemeColor[type] && type !== 'custom') {

@@ -13,9 +13,10 @@ var style = {
 		fontSize:       12, 
 		fontStyle:      'normal', 
 		fontWeight:     'normal',
-		textDecoration: 'none',
+		textDecoration: 'none', 
 		transform:      '',
 		opacity:        1,
+		textShadow:      {h_shadow:2,v_shadow:2,blur_dis:5,spread_dis:2,color:'#F58F8F'},
 		color:          { type: 'custom', color: '#333' },
 		animation:      '0s 0s 1'			// 动画 (0: 开始时间, 1: 持续时间, 2: 循环次数)
 	}

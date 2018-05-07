@@ -28,6 +28,7 @@ var styleMap = {
 	image:  '图片样式',
 	text:   '文本样式'
 }
+
 // 定义样式名称 & 渲染类型 & 相关配置
 var cssMap = {
 	top:               { name: '上',      type: 'Number' },
@@ -43,9 +44,16 @@ var cssMap = {
 	fontWeight:        { name: '粗细',    type: 'Switch', true: 'bold',      false: 'normal' },
 	fontStyle:         { name: '斜体',    type: 'Switch', true: 'italic',    false: 'normal' },
 	textDecoration:    { name: '下划线',  type: 'Switch', true: 'underline', false: 'none' },
-	opacity:           { name: '透明度',  type: 'Slider', min: 0, max: 1, step: 0.01 }
-}
-
+	opacity:           { name: '透明度',  type: 'Slider', min: 0, max: 1, step: 0.01 },
+	backgroundColor: 	{name: '背景颜色', type: 'Color'  },
+	boxShadow:      	{name:'元素阴影',type:'Shadow', min: 0, max: 20, step: 1 },
+	textShadow:     	{name:'文字阴影',type:'Shadow', min: 0, max: 20, step: 1 },
+	transformRotate:   		{name:'旋转角度',type:'Number', min: 0, max: 180, step: 1 },   
+	borderWidth:   		{name:'边框宽度',type:'Number'},
+	borderStyle:        {name:'边框样式',type:'Solid'},  
+	borderColor:        { name: '边框颜色', type: 'Color' }, 
+} 
+   
 import './index.less'
 
 class EditStyle extends React.Component {
@@ -55,13 +63,15 @@ class EditStyle extends React.Component {
 
 	componentWillUnmount() {}
 
-	onChange(val, style, css) {
-		// console.clear()
-		// console.log(val)
+	onChange(val, style, css,shadow) { 
 		let { data, actions, editConfig } = this.props
 		let { curData } = editConfig
 		let { parentComp } = curData
-		style == 'feature' ? data[style][css] = val : data.style[style][css] = val;
+		if(shadow){ 
+			data.style[style][css][shadow] = val;
+		}else{
+			style == 'feature' ? data[style][css] = val : data.style[style][css] = val;
+		} 
 		actions.updateComp(null, parentComp? parentComp: data)
 	}
 
@@ -86,8 +96,62 @@ class EditStyle extends React.Component {
 			<InputNumber
 				min={cfg.min || 0} max={cfg.max || 100} step={cfg.step || 1}
 				value={val} onChange={v => this.onChange(v, cls, key)}
-				style={{ width: '100%' }}
+				style={{ width: '100%' }} 
 			/>
+		)
+	}
+	//描边
+	renderShadow(cfg, data, val, cls, key) {
+		const h_shadow = val.h_shadow;
+		const v_shadow = val.v_shadow;
+		const blur_dis = val.blur_dis;
+		const spread_dis = val.spread_dis;
+		const color = val.color; 
+		return (
+			<div>
+				<div>
+					水平偏移:
+					<InputNumber
+						min={cfg.min || 0} max={cfg.max || 100} step={cfg.step || 1}
+						value={h_shadow} onChange={v => this.onChange(v, cls, key,'h_shadow')}
+						style={{  width: '50%' }}
+					/> 
+				</div>
+				<div>
+					垂直偏移: 
+					<InputNumber
+						min={cfg.min || 0} max={cfg.max || 100} step={cfg.step || 1}
+						value={v_shadow} onChange={v => this.onChange(v, cls, key,'v_shadow')}
+						style={{ width: '50%' }}
+					/>
+				</div> 
+				<div>
+					模糊距离: 
+					<InputNumber
+						min={cfg.min || 0} max={cfg.max || 100} step={cfg.step || 1}
+						value={blur_dis} onChange={v => this.onChange(v, cls, key,'blur_dis')}
+						style={{ width: '50%' }}
+					/>
+				</div>
+				<div>
+					阴影大小:
+					<InputNumber
+						min={cfg.min || 0} max={cfg.max || 100} step={cfg.step || 1}
+						value={spread_dis} onChange={v => this.onChange(v, cls, key,'spread_dis')}
+						style={{ width: '50%' }}
+					/>
+				</div> 
+				<div>
+					阴影颜色:  
+					<Color 
+						data={data}
+						color={color}
+						path={`style.${cls}.${key}`} 
+						action={'updateComp'}
+						placement="bottomLeft"
+					/>
+				</div>
+			</div>
 		)
 	}
 	// 偏移
@@ -98,6 +162,17 @@ class EditStyle extends React.Component {
 				<RadioButton value="center">中</RadioButton>
 				<RadioButton value="right">右</RadioButton>
 			</RadioGroup>
+		)
+	}
+	// 边框样式
+	renderSolid(cfg, data, val, cls, key) {
+		return (
+			<RadioGroup size="small" onChange={_ => this.onChange(_.target.value, cls, key)} value={val}>
+				<RadioButton value="solid">实线</RadioButton>
+				<RadioButton value="double">双线</RadioButton>
+				<RadioButton value="dashed">虚线</RadioButton>
+				<RadioButton value="dotted">点状</RadioButton> 
+			</RadioGroup> 
 		)
 	}
 	// 颜色
@@ -112,6 +187,7 @@ class EditStyle extends React.Component {
 			/>
 		)
 	}
+	 
 	// 开关
 	renderCheckbox(cfg, data, val, cls, key) {
 		return (

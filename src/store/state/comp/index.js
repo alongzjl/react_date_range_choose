@@ -39,6 +39,8 @@ module.exports = {
 	swiperImage: authInit(require('./swiperImage')),
 	// 文本
 	text:        authInit(require('./text')),
+	//按钮
+	button:        authInit(require('./button')), 
 	// 自定义
 	web:         authInit(require('./web')),
 	// 导航列表

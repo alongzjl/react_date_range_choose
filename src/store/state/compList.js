@@ -7,6 +7,11 @@ module.exports = [
 			key:  'text'
 		},
 		{
+			icon: 'button-control',
+			name: '按钮',
+			key:  'button'
+		}, 
+		{
 			icon: 'img-control',
 			name: '图片',
 			key:  'picture'

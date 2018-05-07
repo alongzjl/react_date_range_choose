@@ -202,7 +202,7 @@ class EditContent extends React.Component {
 			}
 			childNode = (
 				<Panel header={'内容编辑'} key={0}>
-					{ this.renObj(data, content) }
+					{ this.renObj(data,editConfig, content) }  
 				</Panel>
 			)
 		}
