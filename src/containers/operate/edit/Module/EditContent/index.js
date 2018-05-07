@@ -11,9 +11,10 @@ import { bindActionCreators } from 'redux'
 import { connect }  from 'react-redux'
 import * as actions from 'actions'
 
-import { Checkbox, Collapse, Icon, Input } from 'antd'
+import { Checkbox, Collapse, Icon, Input,Select } from 'antd'
 const  { TextArea } = Input
 const  { Panel }    = Collapse
+const Option = Select.Option;
 
 import RouterJump      from 'compEdit/EditCommon/RouterJump'
 import ImageUploadComp from 'compEdit/EditCommon/ImageUploadComp'
@@ -25,13 +26,15 @@ import ImageUploadComp from 'compEdit/EditCommon/ImageUploadComp'
 // import Letter      from './Letter'
 import StoreList   from './StoreList'
 import Navigation  from './Navigation'
+import NavigationFloat  from './NavigationFloat' 
 import Date        from './Date'
 
 var conMap = {
 	text:  { name: '文本内容', type: 'Textarea', max: 1000, autosize: { minRows: 1, maxRows: 6 } },
 	title: { name: '标题',    type: 'Title',    max: 30 },
 	img:   { name: '图片',    type: 'Image' },
-	url:   { name: '网址',    type: 'Url' }
+	url:   { name: '网址',    type: 'Url' },
+	router: {name:'页面跳转',type:'Router'} 
 }
 
 import './index.less'
@@ -43,21 +46,21 @@ class EditContent extends React.Component {
 
 	componentWillUnmount() {}
 
-	onChange(val, key) {
+	onChange(val, key,index) {
 		let { data, actions, editConfig } = this.props
 		let { curData } = editConfig
 		let { parentComp } = curData
-		data.content[key]  = val
+		data.content[index][key]  = val
 		actions.updateComp(null, parentComp? parentComp: data)
-	}
+	}  
 
-	onChangeAuth(val, key) {
+	onChangeAuth(val, key,index) {
 		let { data, actions, editConfig } = this.props
 		let { curData } = editConfig
 		let { parentComp } = curData
-		data.auth.content[key] = val
+		data.auth.content[index][key] = val
 		actions.updateComp(null, parentComp? parentComp: data)
-	}
+	} 
 
 	cb(key) {
 		// console.log(key)
@@ -73,26 +76,44 @@ class EditContent extends React.Component {
 		}   
 		
 	}
+	
 	/* 渲染组件开始 */
 	// 文本
-	renderTextarea(cfg, data, val, key) {
+	renderTextarea(cfg, data, val, key,content,index) {
 		return (
 			<TextArea
 				min={cfg.min || 0} max={cfg.max || 100}
 				autosize={cfg.autosize || false}
-				value={val} onChange={v => this.onChange(v.target.value, key)}
+				value={val} onChange={v => this.onChange(v.target.value, key,index)}
 				style={{ width: '100%' }}
 			/>
 		)
 	}
 	// 标题
-	renderTitle(cfg, data, val, key) {
+	renderTitle(cfg, data, val, key,content,index) {
 		return (
 			<Input
 				min={cfg.min || 0} max={cfg.max || 100}
-				value={val} onChange={v => this.onChange(v.target.value, key)}
+				value={val} onChange={v => this.onChange(v.target.value, key,index)}
 				style={{ width: '100%' }}
 			/>
+		)
+	} 
+	// 跳转路由
+	renderRouter(cfg, data, val, key,content,index,editConfig) {
+
+		let childNodeRoouters = Object.keys(editConfig.pageContent).map((item,i) => {
+			return (
+					<Option value={editConfig.pageContent[item].router} key={item}>{editConfig.pageContent[item].title}</Option> 
+				)  
+		})   
+		return ( 
+			
+			<Select defaultValue={editConfig.pageContent['p_1000'].router} style={{ width: '100%' }} onChange={value => this.onChange(value, key,index)}>
+				{       
+					childNodeRoouters 
+				} 
+			 </Select>
 		)
 	}
 	// 上传图片
@@ -107,20 +128,20 @@ class EditContent extends React.Component {
 				style={{ width: '100%' }}
 				index={index}
 			/>
-		)
+		) 
 	}
 	// 网址
-	renderUrl(cfg, data, val, key) {
+	renderUrl(cfg, data, val, key,index) {
 		return (
 			<Input
 				min={cfg.min || 0} max={cfg.max || 100}
-				defaultValue={val} onBlur={v => this.onChange(v.target.value, key)}
+				defaultValue={val} onBlur={v => this.onChange(v.target.value, key,index)}
 				style={{ width: '100%' }}
 			/>
 		)
 	}
 
-	renObj(data, content,index) {
+	renObj(data,editConfig, content,index) {
 		let childNode = Object.keys(content).map((p, i) => {
 			if (!conMap[p]) return false
 			let cm     = conMap[p]
@@ -128,7 +149,7 @@ class EditContent extends React.Component {
 			let render = this[`render${cm.type}`]
 			if (!render) return false
 			// 根据样式类型渲染对应组件
-			let dom = this[`render${cm.type}`].bind(this, cm, data, val, p, content,index)()
+			let dom = this[`render${cm.type}`].bind(this, cm, data, val, p, content,index,editConfig)()
 			return (
 				<div className="pgs-row" key={i+1}>
 					<div className="pgsr-name">{ cm.name }</div>
@@ -144,9 +165,9 @@ class EditContent extends React.Component {
 		}) 
 		return childNode
 	}
- 
+  
 	render() {
-		let { data, actions } = this.props
+		let { data, actions,editConfig } = this.props
 		let compName = data.name
 		let content  = data.content
 		let compCon
@@ -154,9 +175,10 @@ class EditContent extends React.Component {
 		let activeKey
 		let routerJump
 		if (compName === 'navigation')           compCon = (<Navigation data={this.props}/>)
+		else if (compName === 'navigationFloat')            compCon = (<NavigationFloat       data={this.props}/>)
 		else if (compName === 'date')            compCon = (<Date       data={this.props}/>)
 		else if (compName === 'storeList')       compCon = (<StoreList  data={data}/>)
-		// else if (compName === 'letter')       compCon = (<Letter data={data}/>)
+		// else if (compName === 'letter')       compCon = (<Letter data={data}/>) 
 		// if (compName === 'picture')           compCon = (<Picture data={data}/>)
 		// else if (compName === 'web')          compCon = (<Web data={data}/>)
 		// else if (compName === 'text')         compCon = (<Text data={data}/>)
@@ -167,7 +189,7 @@ class EditContent extends React.Component {
 			childNode = content.map((_, i) => {
 				return (
 					<Panel header={`内容${i + 1}`} key={i+1}>
-						{ this.renObj(data, _, i) }
+						{ this.renObj(data,editConfig, _, i) }
 					</Panel>
 				) 
 			}) 

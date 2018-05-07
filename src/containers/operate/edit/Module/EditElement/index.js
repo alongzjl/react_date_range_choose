@@ -19,6 +19,8 @@ import SwiperImage from 'compEdit/EditElement/SwiperImage'
 import DateShow    from 'compEdit/EditElement/Date'
 import StoreList   from 'compEdit/EditElement/StoreList'
 import Navigation  from 'compEdit/EditElement/Navigation'
+import NavigationFloat  from 'compEdit/EditElement/NavigationFloat'
+ 
 import Letter  from 'compEdit/EditElement/Letter' 
 // import Letter       from 'compEdit/EditElement/Letter'
 
@@ -100,9 +102,10 @@ class EditElement extends React.Component {
 			else if (compName === 'letter')      compCon = (<Letter      data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
 			else if (compName === 'date')        compCon = (<DateShow    data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
  			else if (compName === 'navigation')  compCon = (<Navigation  data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
+ 			else if (compName === 'navigationFloat')  compCon = (<NavigationFloat  data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
 			else if (compName === 'storeList')   compCon = (<StoreList   data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
 			return (
-				<Rnd
+				<Rnd 
 					key={i}
 					bounds={'.pg-center'}
 					className={i === editConfig.curData.compIdx? 's-active': ''}

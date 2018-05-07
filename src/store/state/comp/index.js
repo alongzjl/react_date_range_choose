@@ -41,8 +41,10 @@ module.exports = {
 	text:        authInit(require('./text')),
 	// 自定义
 	web:         authInit(require('./web')),
-	// 导航
+	// 导航列表
 	navigation:         authInit(require('./navigation')),
+	// 悬浮导航
+	navigationFloat:         authInit(require('./navigationFloat')), 
 	// 字母
 	letter:      authInit(require('./letter')),
 

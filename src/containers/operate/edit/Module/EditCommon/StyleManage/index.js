@@ -143,7 +143,7 @@ class StyleManage extends React.Component {
 						{ addNode }
 						{ listNode }
 					</ul>
-				</Panel>
+				</Panel> 
 				{ editNode }
 			</Collapse>
 		)

@@ -29,9 +29,14 @@ module.exports = [
 		},
 		{
 			icon: 'navigation-control',
-			name: '导航',
+			name: '导航列表',
 			key:  'navigation', 
 		},
+		{
+			icon: 'navigationFloat-control',
+			name: '悬浮导航', 
+			key:  'navigationFloat', 
+		}, 
 		{
 			icon: 'letter-control',
 			name: '字母',
