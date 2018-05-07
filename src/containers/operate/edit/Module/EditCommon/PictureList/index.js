@@ -138,7 +138,7 @@ class ImgModule extends React.Component {
 	chooseType(id) {
 
 	}
-	chooseImg(img) {
+	chooseImg = img => { 
 		let firstAdd = this.props.firstAdd
 		let img_list = this.state.imgList
 		if(firstAdd){
@@ -167,7 +167,7 @@ class ImgModule extends React.Component {
 			this.setState({
 				typeList:data.result.data || []
 			})
-		})
+		}) 
 	};
 	getList =() => {
 		const UrlList = "/chaoyue/imagesList";

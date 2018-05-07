@@ -130,21 +130,21 @@ class EditContent extends React.Component {
 			// 根据样式类型渲染对应组件
 			let dom = this[`render${cm.type}`].bind(this, cm, data, val, p, content,index)()
 			return (
-				<div className="pgs-row" key={i}>
+				<div className="pgs-row" key={i+1}>
 					<div className="pgsr-name">{ cm.name }</div>
 					<div className="pgsr-ctrl">{ dom }</div>
 					<div className="pgsr-auth">
 						<Checkbox checked={data.auth.content[p]} onChange={_ => this.onChangeAuth(_.target.checked, p)} />
 					</div>
-					{  
-						cm.name=='图片'?<div className="delete" onClick={()=>{this.deleteCom(index)}}><Icon type="close-circle" style={{ fontSize: 18}} /></div>:null
-					} 
+					{   
+						data.name !='picture'&&cm.name=='图片'?<div className="delete" onClick={()=>{this.deleteCom(index)}}><Icon type="close-circle" style={{ fontSize: 18}} /></div>:null
+					}  
 				</div> 
 			)
-		})
+		}) 
 		return childNode
 	}
-
+ 
 	render() {
 		let { data, actions } = this.props
 		let compName = data.name
@@ -163,13 +163,14 @@ class EditContent extends React.Component {
 		// else if (compName === 'swiperImage')  compCon = (<SwiperImage data={data}/>)
 		if (content.length) {
 			activeKey = Array.from(new Array(content.length), (_, i) => `${i}`)
+			activeKey = activeKey.concat([`${activeKey.length}`])  
 			childNode = content.map((_, i) => {
 				return (
-					<Panel header={`内容${i + 1}`} key={i}>
+					<Panel header={`内容${i + 1}`} key={i+1}>
 						{ this.renObj(data, _, i) }
 					</Panel>
-				)
-			})
+				) 
+			}) 
 		} else {
 			activeKey = ['0']
 			if (content.router !== undefined) {

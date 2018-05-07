@@ -8,15 +8,7 @@ import React from 'react'
 import classnames from 'classnames'
 import './index.less'
 
-const weatherInfo = {
-      temp: 24,
-      type: '阴转多云转雨',
-      iconName: 'w01',
-      direct: '西南风',
-      power: '3到4级',
-      aqiInfo: '177.0中度污染',
-      humidity: '41'
-    }
+
 const formatNum = num => {
 	num = num<10 ? '0'+num : num;
 	return num

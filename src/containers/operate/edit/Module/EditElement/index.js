@@ -19,6 +19,7 @@ import SwiperImage from 'compEdit/EditElement/SwiperImage'
 import DateShow    from 'compEdit/EditElement/Date'
 import StoreList   from 'compEdit/EditElement/StoreList'
 import Navigation  from 'compEdit/EditElement/Navigation'
+import Letter  from 'compEdit/EditElement/Letter' 
 // import Letter       from 'compEdit/EditElement/Letter'
 
 import * as actions from 'actions'
