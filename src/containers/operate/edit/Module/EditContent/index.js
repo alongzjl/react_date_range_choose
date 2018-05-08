@@ -99,8 +99,8 @@ class EditContent extends React.Component {
 		)
 	} 
 	// 跳转路由
-	renderRouter(cfg, data, val, key,content,index,editConfig) {
-
+	renderRouter(cfg, data, val, key, content, index) {
+		let { editConfig } = this.props
 		let childNodeRoouters = Object.keys(editConfig.pageContent).map((item,i) => {
 			return (
 					<Option value={editConfig.pageContent[item].router} key={item}>{editConfig.pageContent[item].title}</Option> 
@@ -116,13 +116,12 @@ class EditContent extends React.Component {
 		)
 	}
 	// 上传图片
-	renderImage(cfg, data, val, key, content,index) {
+	renderImage(cfg, data, val, key, index) {
 		return (
 			<ImageUploadComp
 				data={data}
 				img={val}
 				name={key}
-				content={content}
 				action={'updateComp'}
 				style={{ width: '100%' }}
 				index={index}
@@ -140,7 +139,7 @@ class EditContent extends React.Component {
 		)
 	}
 	// 楼层
-	renderCheckbox(cfg, data, val, key) {
+	renderCheckbox(cfg, data, val, key, index) {
 		return (
 			<div>
 				<span style={{ marginRight: 10 }}>{val.value}</span>
@@ -151,7 +150,7 @@ class EditContent extends React.Component {
 		)
 	}
 
-	renObj(data, content,index) {
+	renObj(data, content, index) {
 		let childNode = Object.keys(content).map((p, i) => {
 			if (!conMap[p]) return false
 			let cm     = conMap[p]
@@ -159,7 +158,7 @@ class EditContent extends React.Component {
 			let render = this[`render${cm.type}`]
 			if (!render) return false
 			// 根据样式类型渲染对应组件
-			let dom = this[`render${cm.type}`].bind(this, cm, data, val, p, index, editConfig)()
+			let dom = this[`render${cm.type}`].bind(this, cm, data, val, p, index)()
 			return (
 				<div className="pgs-row" key={i}>
 					<div className="pgsr-name">{ cm.name }</div>
@@ -184,20 +183,20 @@ class EditContent extends React.Component {
 		let childNode
 		let activeKey
 		let routerJump
-		if (compName === 'navigation')           compCon = (<Navigation  data={this.props}/>)
-		else if (compName === 'navigationFloat')            compCon = (<NavigationFloat       data={this.props}/>)
-		else if (compName === 'date')            compCon = (<Date        data={this.props}/>)
-		else if (compName === 'storeList')       compCon = (<StoreList   data={data}/>)
-		else if (compName === 'floor')           compCon = (<Floor       data={data}/>)
-		// if (compName === 'picture')           compCon = (<Picture     data={data}/>)
-		// else if (compName === 'web')          compCon = (<Web         data={data}/>)
-		// else if (compName === 'text')         compCon = (<Text        data={data}/>)
-		// else if (compName === 'swiperImage')  compCon = (<SwiperImage data={data}/>)
+		if (compName === 'navigation')           compCon = (<Navigation      data={this.props}/>)
+		else if (compName === 'navigationFloat') compCon = (<NavigationFloat data={this.props}/>)
+		else if (compName === 'date')            compCon = (<Date            data={this.props}/>)
+		else if (compName === 'storeList')       compCon = (<StoreList       data={data}/>)
+		else if (compName === 'floor')           compCon = (<Floor           data={data}/>)
+		// if (compName === 'picture')           compCon = (<Picture         data={data}/>)
+		// else if (compName === 'web')          compCon = (<Web             data={data}/>)
+		// else if (compName === 'text')         compCon = (<Text            data={data}/>)
+		// else if (compName === 'swiperImage')  compCon = (<SwiperImage     data={data}/>)
 		if (content.length) {
-			activeKey = Array.from(new Array(content.length), (_, i) => `${i}`)
+			activeKey = Array.from(new Array(content.length + 1), (_, i) => `${i}`)
 			childNode = content.map((_, i) => {
 				return (
-					<Panel header={`内容${i + 1}`} key={i}>
+					<Panel header={`内容${i + 1}`} key={i + 1}>
 						{ this.renObj(data, _, i) }
 					</Panel>
 				)

@@ -34,23 +34,28 @@ class ImageUploadComp extends React.Component {
 	}
 
 	enter(imgUrl,index) {
-		let { data, name, action, content, actions, editConfig } = this.props
-		let { curData } = editConfig
+		let { data, name, action, actions, editConfig } = this.props
+		let { content }    = data
+		let { curData }    = editConfig
 		let { parentComp } = curData
 		let imgList = imgUrl;
 		const length = content.length;
-		if(data.name == 'swiperImage'||data.name == 'navigation'||data.name == 'navigationFloat'){
-			if(name == 'first') { 
-				imgList = imgList.map((item,index)=>{
-					var obj = {img:{img:item.url,type:'custom'},title:`图片${index+1}`,router: {}};
-					return obj;
+		if (getAttr(content) === 'Array') {
+			if (name == 'first') { 
+				imgList = imgList.map((item, i) => {
+					var obj = {
+						img:    { img: item.url, type: 'custom' },
+						title:  `图片${i + 1}`,
+						router: content[i]? content[i].router: {}
+					}
+					return obj
 				})
-				data.content = imgList;
-			}else{
-				data.content[index][name].img = imgUrl[0].url;
+				data.content = imgList
+			} else {
+				content[i][name].img = imgUrl[0].url
 			}
-		}else{
-			data.content[name].img = imgUrl[0].url
+		} else {
+			content[name].img = imgUrl[0].url
 		}
 		actions[action](null, parentComp? parentComp: data)
 	}
@@ -68,7 +73,7 @@ class ImageUploadComp extends React.Component {
 	}
 
 	render() {
-		let { img, name, actions, editConfig,index } = this.props
+		let { img, name, actions, editConfig, index } = this.props
 		let btnNode
 		let imgVal = img&&img.img
 		let theme   = editConfig.globalData.theme

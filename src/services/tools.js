@@ -103,6 +103,10 @@ window.compImgFormat = (props, content) => {
 window.textBreak = (str = '') => {
 	return str.replace(/\n|\r\n/g, '<br/>').replace(/ /g, '&nbsp;')
 }
+// 获取真实数据类型
+window.getAttr = (element) => {
+	return Object.prototype.toString.call(element).match(/[A-Z][a-z]*/)[0]
+}
 
 window.Ajax = Fetch.default
 

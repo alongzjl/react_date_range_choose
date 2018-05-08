@@ -202,7 +202,7 @@ class ImgModule extends React.Component {
 			<div className="content">
 				<div className="left">
 					{
-						this.state.typeList.map((item,index) => <Type key={index} item={item} choose_one={this.chooseType}></Type>)
+						this.state.typeList.map((item,index) => <Type key={index} item={item} choose_one={this.chooseType.bind(this)}></Type>)
 					}
 				</div>
 				<div className="right">
@@ -210,7 +210,7 @@ class ImgModule extends React.Component {
 						<div className="add_img"><div className="add_text">+</div><div>上传素材</div></div>
 					</Upload>
 					{
-						this.state.imgList.map((item,index) => <List key={index} item={item} choose_one={this.chooseImg}></List> )
+						this.state.imgList.map((item,index) => <List key={index} item={item} choose_one={this.chooseImg.bind(this)}></List> )
 					}
 				</div>
 			</div>

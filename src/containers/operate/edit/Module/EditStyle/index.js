@@ -69,7 +69,7 @@ class EditStyle extends React.Component {
 		if(shadow) {
 			data.style[style][css][shadow] = val
 		} else {
-			style == 'feature'? data[style][css] = val: data.style[style][css] = val
+			style === 'feature'? data[style][css] = val: style === 'layout'? data.layout[css] = val: data.style[style][css]
 		}
 		actions.updateComp(null, parentComp? parentComp: data)
 	}
