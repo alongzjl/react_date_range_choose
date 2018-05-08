@@ -9,7 +9,7 @@ import React from 'react';
 import SkyLight from 'react-skylight';
 import Fetch from "../../../../../../public/Fetch"
 import './index.less'
-import { Button, Upload, message } from 'antd'
+import { Button, Upload, message,Modal } from 'antd'
 const commonCss = {
 	dialogStyles: {
 		height: 'auto',
@@ -44,15 +44,10 @@ export default class PictureList extends React.Component {
 		this.addImgModal.show()
 	}
 	state = {
-		title_clicked:1,
 		choosed_img:[]
 	}
 	cancelClick = () => {
 		this.addImgModal.hide()
-	}
-	chooseType = type => {
-		const number = type == 1 ? 1 : 2;
-		this.setState({title_clicked:number});
 	}
 	save = () => {
 		if (this.state.choosed_img) {
@@ -69,7 +64,7 @@ export default class PictureList extends React.Component {
 		this.setState({choosed_img:url});
 	}
 	render() {
-		let { firstAdd } = this.props
+		let { firstAdd,type } = this.props
 		return (
 			<div>
 				<SkyLight
@@ -83,14 +78,16 @@ export default class PictureList extends React.Component {
 				<div className="outer">
 					<div className="add_title">
 						<ul>
-							<li onClick={()=>this.chooseType(1)} className={this.state.title_clicked==1?'active':''}>图片</li>
-							<li onClick={()=>this.chooseType(2)} className={this.state.title_clicked==2?'active':''}>视频</li>
+							{
+								type == 'video' ? <li className='active'>视频</li> :
+								<li className='active'>图片</li>
+							}
 						</ul>
 						<div className="input_search"><input placeholder="搜索" /></div>
 						<div className="search">搜索</div>
 					</div>
 					{
-						this.state.title_clicked==1 ? <ImgModule save={this.save_img} firstAdd={firstAdd} /> : <AudioModule />
+						type != 'video' ? <ImgModule save={this.save_img} firstAdd={firstAdd} /> : <VideoModule save={this.save_img} />
 					}
 					<div className="bottom">
 						<Button type="primary" onClick={this.save}>确定</Button>
@@ -99,7 +96,7 @@ export default class PictureList extends React.Component {
 				</div>
 				</SkyLight>
 			</div>
-		)
+		) 
 	}
 }
 
@@ -196,7 +193,18 @@ class ImgModule extends React.Component {
 				} else if (info.file.status === 'error') {
 					message.error(`${info.file.name} file upload failed.`);
 				}
-			}
+			},
+			 beforeUpload(file) {
+				  const isJPG = file.type === 'image/jpeg'||file.type === 'image/png'; 
+				  if (!isJPG) {
+				    message.error('You can only upload JPG file!');
+				  } 
+				  const isLt2M = file.size / 1024 / 1024 < 2;
+				  if (!isLt2M) {
+				    message.error('Image must smaller than 2MB!');
+				  }
+				  return isJPG && isLt2M;
+				}
 		}
 		return (
 			<div className="content">
@@ -207,8 +215,8 @@ class ImgModule extends React.Component {
 				</div>
 				<div className="right">
 					<Upload {...Upload_props}>
-						<div className="add_img"><div className="add_text">+</div><div>上传素材</div></div>
-					</Upload>
+						<div className="add_img"><div className="add_text">+</div><div>上传图片</div></div>
+					</Upload> 
 					{
 						this.state.imgList.map((item,index) => <List key={index} item={item} choose_one={this.chooseImg}></List> )
 					}
@@ -218,11 +226,119 @@ class ImgModule extends React.Component {
 	}
 }
 
-class AudioModule extends React.Component {
+class VideoModule extends React.Component {
+	state = {
+		typeList:[
+			{id:1,name:'视频类型1',sourceNum:15},
+			{id:1,name:'视频类型2',sourceNum:153},
+			{id:1,name:'视频类型3',sourceNum:15},
+			{id:1,name:'视频类型4',sourceNum:151},
+			{id:1,name:'视频类型5',sourceNum:15}
+		],
+		videoList:[
+			{id:1,url:"http://rongyi.b0.upaiyun.com/system/smartService/null/201801180034041097.png"},
+			{id:2,url:"http://rongyi.b0.upaiyun.com/system/smartService/null/201801180034041097.png"},
+			{id:12,url:"http://rongyi.b0.upaiyun.com/system/smartService/null/201801180034041097.png"},
+			{id:109,url:"http://rongyi.b0.upaiyun.com/system/smartService/null/201801180034041097.png"},
+			{id:154,url:"http://rongyi.b0.upaiyun.com/system/smartService/null/201801180034041097.png"},
+			{id:122,url:"http://rongyi.b0.upaiyun.com/system/smartService/null/201801180034041097.png"},
+			{id:145,url:"http://rongyi.b0.upaiyun.com/system/smartService/null/201801180034041097.png"},
+			{id:178,url:"http://rongyi.b0.upaiyun.com/system/smartService/null/201801180034041097.png"},
+			{id:111,url:"http://rongyi.b0.upaiyun.com/system/smartService/null/201801180034041097.png"},
+			{id:124,url:"http://rongyi.b0.upaiyun.com/system/smartService/null/201801180034041097.png"}
+		]
+	}
+	componentDidMount(){
+		let videoList = this.state.videoList;
+		videoList = videoList.map(item=>{
+			item.isClicked = false;
+			return item
+		});
+		 this.setState({
+				videoList:videoList
+			})
+	}
+	chooseType(id) {
+
+	}
+	chooseImg = img => { 
+		let videoList = this.state.videoList
+		videoList = videoList.map(item=>{
+			item.id == img ? item.isClicked = !item.isClicked : item.isClicked = false;
+			return item
+		});
+		this.setState({
+				videoList:videoList
+			})
+		let choosed_video = videoList.filter(item => item.isClicked == true);
+		this.props.save(choosed_video)
+	}
+	upload_img = () => {
+	   // alert('上传本地图片')
+	} 
+	getTypes = () => {
+		const UrlType = 'http://manage.preview.rongyi.com/easy-smart/ySourceGroupManage/query';
+		Fetch.postJSON(UrlType,{type:1}).then(data=>{
+			this.setState({
+				typeList:data.result.data || []
+			})
+		}) 
+	};
+	getList =() => {
+		const UrlList = "/chaoyue/imagesList";
+		const params = {currentPage:1,groupId:12,name:'',page:1,page_size:14,type:1};
+		Fetch.postJSON(UrlList,params).then(data=>{
+			this.setState({
+				imgList:data.result.data || []
+			})
+		})
+	}
 	render() {
+		const Upload_props = {
+			name: 'file',
+			action: '/chaoyue/uploadImage',
+			data: {
+			},
+			headers: {
+				authorization: 'authorization-text',
+			},
+			onChange(info) {
+				if (info.file.status !== 'uploading') {
+					console.log(info.file, info.fileList);
+				}
+				if (info.file.status === 'done') {
+					message.success(`${info.file.name} file uploaded successfully`);
+				} else if (info.file.status === 'error') {
+					message.error(`${info.file.name} file upload failed.`);
+				}
+			},
+			 beforeUpload(file) {
+			  const isVIDEO = file.type === 'video/mp4'; 
+			  if (!isJPG) { 
+			    message.error('You can only upload MP4 file!');
+			  }  
+			  const isLt2M = file.size / 1024 / 1024 < 20;
+			  if (!isLt2M) {
+			    message.error('Image must smaller than 20MB!'); 
+			  }
+			  return isVIDEO && isLt20M;
+			} 
+		}  
 		return (
-			<div>
-				暂未开放，敬请期待！
+			<div className="content">
+				<div className="left">
+					{
+						this.state.typeList.map((item,index) => <Type key={index} item={item} choose_one={this.chooseType}></Type>)
+					}
+				</div> 
+				<div className="right">
+					<Upload {...Upload_props}>
+						<div className="add_img"><div className="add_text">+</div><div>上传视频</div></div>
+					</Upload>
+					{
+						this.state.videoList.map((item,index) => <List key={index} item={item} choose_one={this.chooseImg}></List> )
+					}
+				</div>
 			</div>
 		)
 	}

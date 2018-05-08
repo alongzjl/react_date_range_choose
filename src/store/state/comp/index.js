@@ -49,8 +49,9 @@ module.exports = {
 	navigationFloat:         authInit(require('./navigationFloat')), 
 	// 字母
 	letter:      authInit(require('./letter')),
-
-	/* 业务组件 */
+	// 视频
+	video:      authInit(require('./video')),
+	/* 业务组件 */ 
 	// 店铺列表
 	storeList:   authInit(require('./storeList'))
 }

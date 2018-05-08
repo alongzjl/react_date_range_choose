@@ -8,7 +8,7 @@
 import React from 'react'
 import {
 	Row, Col,
-	Button, Card, Checkbox, Collapse, Select,message } from 'antd'
+	Button, Card, Checkbox, Collapse, Select,message,Icon } from 'antd' 
 
 const { Panel }    = Collapse
 const Option = Select.Option;
@@ -33,14 +33,12 @@ class NavigationFoat extends React.Component {
 		let { parentComp } = curData
 		const num_add = value - data.content.length;
 		let add_default = [];
-		for(let i = 0;i<num_add;i++){
-			let obj = {   
+		let obj = {   
 					img: { type: 'custom', img: 'http://ryoms.v4.rongyi.com/ryoms/images/menu-icon/icon3_2.png' },			// 图片url
-					title: `导航${data.content.length+i+1}`,		// 图片标题
-					router: '',	 		// 路由 
-				}
-				add_default.push(obj);
-		}
+					title: `导航${data.content.length+1}`,		// 图片标题
+					router: '',  	 		// 路由 
+				} 
+		add_default.push(obj); 
 		add_default = data.content.concat(add_default);
 		data.content = add_default;
 		console.log(value);
@@ -108,14 +106,18 @@ class NavigationFoat extends React.Component {
 			<div className="e-navigation-content">
 				<Collapse activeKey={['0']} onChange={this.cb}>
 					<Panel header='导航设置' key={0}>
-						<div key={0} className="pgs-row">
-							<div className="pgsr-name">导航数量</div>  
-							<Select defaultValue={data.content.length} value={data.content.length} style={{ width: 120 }} onChange={this.handleChange}>
-     							{     
-     								options.map((item,index)=><Option value={item} key={index} disabled={item<data.content.length?true:false}>{item}</Option>)
-     							} 
-   							 </Select>
-						</div>
+						<div className="pgs-row" key={0}>
+							<div className="pgsr-name">添加导航</div>
+							<div className="pgsr-ctrl">
+								<Row type="flex" align="middle" style={{ width: '100%' }}>
+								<Col span={9}>
+									<div className="add_img" onClick={this.handleChange}>
+										<div className="add_text"><Icon type="plus" /></div>
+									</div>
+								</Col>
+							</Row>
+							</div>
+						</div> 
 						<div key={1} className="pgs-row">
 							<div className="pgsr-name">布局方式</div>  
 							<Select defaultValue={data.layout.type} style={{ width: 120 }} onChange={this.handleChangeStyle}>

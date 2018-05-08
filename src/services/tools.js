@@ -26,7 +26,10 @@ const formatPxMap = {
 }
 const formatColorMap = {
 	color: 1,
-	backgroundColor: 1
+	backgroundColor: 1,
+	textShadow:1,
+	boxShadow:1,
+	borderColor:1      
 }
 const tools = function() {
 (function (window) {
@@ -57,27 +60,33 @@ String.prototype.colorRGB = function(){
 window.cssColorFormat = (props, key) => {
 	let { data, actions } = props
 	let obj = JSON.parse(JSON.stringify(data.style[key]))
-	let st  = Date.now()
+	let st  = Date.now() 
 	let colorChange = 0
 	for (let p in obj) {
 		let v = obj[p]
 		if(p == 'boxShadow' || p == 'textShadow'){
-			v = obj[p].color;
-		}
+			v = obj[p].color; 
+		}    
 		if (formatColorMap[p]) {
 			let type = v.type
 			if (!window.curThemeColor[type] && type !== 'custom') {
 				v.type = 'custom'
 				colorChange = 1
+			}  
+			if (!colorChange){
+				if(p == 'boxShadow' || p == 'textShadow'){
+					obj[p].color = type === 'custom'? v.color: window.curThemeColor[type].color
+				}else{     
+					obj[p] = type === 'custom'? v.color: window.curThemeColor[type].color
+				} 
 			}
-			if (!colorChange) obj[p] = type === 'custom'? v.color: window.curThemeColor[type].color
 		}
 	}
 	if (colorChange) {
 		// 判断如果当前组件的颜色所使用的主题类别被删除, 更新颜色类型为custom
 		data.style[key] = obj
 		return actions.updateComp(null, data)
-	}
+	} 
 	// console.log(`耗时${Date.now() - st}ms`)
 	return obj
 }

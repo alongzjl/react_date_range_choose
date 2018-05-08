@@ -49,16 +49,16 @@ class EditContent extends React.Component {
 	onChange(val, key,index) {
 		let { data, actions, editConfig } = this.props
 		let { curData } = editConfig
-		let { parentComp } = curData
-		data.content[index][key]  = val
+		let { parentComp } = curData 
+		index ? data.content[index][key]  = val : data.content[key]  = val
 		actions.updateComp(null, parentComp? parentComp: data)
-	}  
+	}   
 
-	onChangeAuth(val, key,index) {
+	onChangeAuth(val, key,index) { 
 		let { data, actions, editConfig } = this.props
-		let { curData } = editConfig
-		let { parentComp } = curData
-		data.auth.content[index][key] = val
+		let { curData } = editConfig 
+		let { parentComp } = curData 
+		index ? data.auth.content[index][key] = val : data.auth.content[key] = val
 		actions.updateComp(null, parentComp? parentComp: data)
 	} 
 
@@ -194,35 +194,35 @@ class EditContent extends React.Component {
 				) 
 			}) 
 		} else {
-			activeKey = ['0']
+			activeKey = ['0']  
 			if (content.router !== undefined) {
 				routerJump = (
 					<RouterJump data={data} content={content} idx={-1} actions={actions} />
 				)
-			}
+			} 
 			childNode = (
-				<Panel header={'内容编辑'} key={0}>
-					{ this.renObj(data,editConfig, content) }  
-				</Panel>
-			)
-		}
+				<Panel header={'内容编辑'} key={data.name == 'video'?1:0}> 
+					{ this.renObj(data,editConfig, content) }   
+				</Panel>   
+			) 
+		}  
 		return (
 			<section className="ry-roll-screen-config">
 				{ compCon } 
 				<Collapse activeKey={activeKey} onChange={this.cb}>
 					{
-						data.name == 'swiperImage' ? <Panel header={`内容`} key={0}>
+						data.name == 'swiperImage'||data.name == 'video' ? <Panel header={`内容`} key={0}>
 							<div className="pgs-row" key={0}>
-								<div className="pgsr-name">内容</div>
+								<div className="pgsr-name">{data.name == 'swiperImage'?'添加图片':'添加视频'}</div>
 								<div className="pgsr-ctrl">
 									<ImageUploadComp
 										data={data}
-										img={{}}
-										name={`first`}
-										content={data.content}
+										img={{}}        
+										name={`${data.name=='video'?'src':'first'}`}
+										content={data.content}  
 										action={'updateComp'}
 										style={{ width: '100%' }}
-									/>
+									/> 
 								</div>
 							</div>
 					</Panel> : null

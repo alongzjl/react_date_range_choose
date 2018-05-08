@@ -17,6 +17,11 @@ module.exports = [
 			key:  'picture'
 		},
 		{
+			icon: 'video-control',
+			name: '视频', 
+			key:  'video'
+		},
+		{
 			icon: 'carouse-control',
 			name: '轮播',
 			key:  'swiperImage'
@@ -47,6 +52,7 @@ module.exports = [
 			name: '字母',
 			key:  'letter'
 		},
+		
 		{
 			icon: 'store-control',
 			name: '店铺列表',

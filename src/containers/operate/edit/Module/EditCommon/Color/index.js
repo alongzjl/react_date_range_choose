@@ -36,7 +36,7 @@ class Color extends React.Component {
 		if (action === 'updatePage') return actions[action](curData.pageGroupIdx, curData.pageIdx, data)
 		if (action === 'updateComp') return actions[action](null, data)
 	}
-
+ 
 	changeColorType(val) {
 		let { data, color, action, actions, editConfig }  = this.props
 		let curData = editConfig.curData

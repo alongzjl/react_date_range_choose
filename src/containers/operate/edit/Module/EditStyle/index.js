@@ -80,8 +80,8 @@ class EditStyle extends React.Component {
 		// console.log(val)
 		let { data, actions, editConfig } = this.props
 		let { curData } = editConfig
-		let { parentComp } = curData
-		data.auth[style][css] = val
+		let { parentComp } = curData  
+		data.auth['style'][style][css] = val
 		actions.updateComp(null, parentComp? parentComp: data)
 	}
 
@@ -105,10 +105,9 @@ class EditStyle extends React.Component {
 		const h_shadow = val.h_shadow;
 		const v_shadow = val.v_shadow;
 		const blur_dis = val.blur_dis;
-		const spread_dis = val.spread_dis;
 		const color = val.color; 
-		return (
-			<div>
+		return (  
+			<div> 
 				<div>
 					水平偏移:
 					<InputNumber
@@ -134,14 +133,6 @@ class EditStyle extends React.Component {
 					/>
 				</div>
 				<div>
-					阴影大小:
-					<InputNumber
-						min={cfg.min || 0} max={cfg.max || 100} step={cfg.step || 1}
-						value={spread_dis} onChange={v => this.onChange(v, cls, key,'spread_dis')}
-						style={{ width: '50%' }}
-					/>
-				</div> 
-				<div>
 					阴影颜色:  
 					<Color 
 						data={data}
@@ -149,7 +140,7 @@ class EditStyle extends React.Component {
 						path={`style.${cls}.${key}`} 
 						action={'updateComp'}
 						placement="bottomLeft"
-					/>
+					/> 
 				</div>
 			</div>
 		)
