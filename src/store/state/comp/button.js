@@ -23,12 +23,23 @@ var style = {
 		borderRadius:    5,
 		borderWidth:     1, 
 		borderStyle:     'solid',  
-		borderColor: 	 { type: 'custom', color: '#000' },  
-		boxShadow:      {h_shadow:0,v_shadow:0,blur_dis:0,color: { type: 'custom', color: '#333' }},
-		textShadow:      {h_shadow:0,v_shadow:0,blur_dis:0,color: { type: 'custom', color: '#333' }},
-		animation:      '0s 0s 1'			// 动画 (0: 开始时间, 1: 持续时间, 2: 循环次数)
-	}  
-}  
+		borderColor: 	 { type: 'custom', color: '#333' },
+		boxShadow:       {
+			h_shadow:    0,
+			v_shadow:    0,
+			blur_dis:    0,
+			spread_dis:  0,
+			color:       { type: 'custom', color: '#333' }
+		},
+		textShadow:      {
+			h_shadow:    0,
+			v_shadow:    0,
+			blur_dis:    0,
+			color:       { type: 'custom', color: '#333' }
+		},
+		animation:       '0s 0s 1'			// 动画 (0: 开始时间, 1: 持续时间, 2: 循环次数)
+	}
+} 
 
 module.exports = {
 	name: 'button',
@@ -45,7 +56,7 @@ module.exports = {
 	// 内容管理
 	content: {
 		text: '文字内容', 		 	// 文字内容
-		router: '' 		 	// 路由
+		router: {} 		 	// 路由
 	},
 	// 动画设置
 	animation: {

@@ -29,20 +29,22 @@ class Color extends React.Component {
 		col.push(c.alpha/100)
 		col = `rgba(${col.join(',')})`
 		let { data, color, action, actions, editConfig }  = this.props
-		let curData = editConfig.curData
+		let { curData } = editConfig
+		let { parentComp } = curData
 		color.color = col
 		color.alpha = c.alpha
 		color.rgb   = c.color
 		if (action === 'updatePage') return actions[action](curData.pageGroupIdx, curData.pageIdx, data)
-		if (action === 'updateComp') return actions[action](null, data)
+		if (action === 'updateComp') return actions[action](null, parentComp? parentComp: data)
 	}
- 
+
 	changeColorType(val) {
 		let { data, color, action, actions, editConfig }  = this.props
-		let curData = editConfig.curData
-		color.type  = val
+		let { curData } = editConfig
+		let { parentComp } = curData
+		color.type = val
 		if (action === 'updatePage') return actions[action](curData.pageGroupIdx, curData.pageIdx, data)
-		if (action === 'updateComp') return actions[action](null, data)
+		if (action === 'updateComp') return actions[action](null, parentComp? parentComp: data)
 	}
 
 	render() {

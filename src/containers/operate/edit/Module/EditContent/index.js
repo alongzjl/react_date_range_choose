@@ -30,11 +30,12 @@ import NavigationFloat from './NavigationFloat'
 import Date            from './Date'
 
 var conMap = {
-	text:   { name: '文本内容', type: 'Textarea', max: 1000, autosize: { minRows: 1, maxRows: 6 } },
-	title:  { name: '标题',    type: 'Title',    max: 30 },
-	img:    { name: '图片',    type: 'Image' },
-	url:    { name: '网址',    type: 'Url' },
-	router:  {name: '页面跳转', type: 'Router' } 
+	text:        { name: '文本内容', type: 'Textarea', max: 1000, autosize: { minRows: 1, maxRows: 6 } },
+	title:       { name: '标题',    type: 'Title',    max: 30 },
+	img:         { name: '图片',    type: 'Image' },
+	letterBGImg: { name: '字母图片', type: 'Image' },
+	url:         { name: '网址',    type: 'Url' },
+	router:      { name: '页面跳转', type: 'Router' } 
 }
 
 import './index.less'
@@ -49,29 +50,33 @@ class EditContent extends React.Component {
 	onChange(val, key, index) {
 		let { data, actions, editConfig } = this.props
 		let { curData } = editConfig
-		let { parentComp } = curData 
-		index ? data.content[index][key]  = val : data.content[key]  = val
+		let { parentComp } = curData
+		if (index === undefined) {
+			data.content[key] = val
+		} else {
+			data.content[index][key] = val
+		}
 		actions.updateComp(null, parentComp? parentComp: data)
-	}   
- 
-	onChangeAuth(val, key,index) { 
+	}
+
+	onChangeAuth(val, key) {
 		let { data, actions, editConfig } = this.props
-		let { curData } = editConfig 
-		let { parentComp } = curData 
-		index ? data.auth.content[index][key] = val : data.auth.content[key] = val
+		let { curData } = editConfig
+		let { parentComp } = curData
+		data.auth.content[key] = val
 		actions.updateComp(null, parentComp? parentComp: data)
-	} 
+	}
 
 	cb(key) {
 		// console.log(key)
 	}
 	deleteCom(index) { 
-		let {data,actions,editConfig} = this.props;
+		let { data, actions, editConfig } = this.props;
 		let { curData, curComp } = editConfig
 		let { parentComp } = curData
-		if(Object.prototype.toString.call(data.content)=='[object Array]'){
-			let content = data.content.filter((item,i) => i!=index);
-			data.content = content;
+		if(getAttr(data.content) === 'Array') {
+			let content  = data.content.filter((item,i) => i!=index)
+			data.content = content
 			actions.updateComp(null, parentComp? parentComp: data)
 		}   
 		
@@ -99,20 +104,10 @@ class EditContent extends React.Component {
 		)
 	} 
 	// 跳转路由
-	renderRouter(cfg, data, val, key, content, index) {
-		let { editConfig } = this.props
-		let childNodeRoouters = Object.keys(editConfig.pageContent).map((item,i) => {
-			return (
-					<Option value={editConfig.pageContent[item].router} key={item}>{editConfig.pageContent[item].title}</Option> 
-				)  
-		})   
-		return ( 
-			
-			<Select defaultValue={editConfig.pageContent['p_1000'].router} style={{ width: '100%' }} onChange={value => this.onChange(value, key,index)}>
-				{       
-					childNodeRoouters 
-				} 
-			 </Select>
+	renderRouter(cfg, data, val, key, index) {
+		let { actions } = this.props
+		return (
+			<RouterJump data={data} content={val} actions={actions} />
 		)
 	}
 	// 上传图片
@@ -182,7 +177,6 @@ class EditContent extends React.Component {
 		let compCon
 		let childNode
 		let activeKey
-		let routerJump
 		if (compName === 'navigation')           compCon = (<Navigation      data={this.props}/>)
 		else if (compName === 'navigationFloat') compCon = (<NavigationFloat data={this.props}/>)
 		else if (compName === 'date')            compCon = (<Date            data={this.props}/>)
@@ -202,13 +196,7 @@ class EditContent extends React.Component {
 				)
 			})
 		} else {
-			activeKey = ['0']  
-			if (content.router !== undefined) {
-				routerJump = (
-					<RouterJump data={data} content={content} idx={-1} actions={actions} />
-				)
-
-			} 
+			activeKey = ['0']
 			let con = this.renObj(data, content)
 			childNode = (
 				con.length
@@ -220,7 +208,6 @@ class EditContent extends React.Component {
 				false
 			)
 		}
-
 		return (
 			<section className="ry-roll-screen-config">
 				{ compCon }
@@ -237,7 +224,7 @@ class EditContent extends React.Component {
 										content={data.content}  
 										action={'updateComp'}
 										style={{ width: '100%' }}
-									/> 
+									/>
 								</div>
 							</div>
 						</Panel> : null
@@ -246,7 +233,6 @@ class EditContent extends React.Component {
 						!(data.name == 'swiperImage'&& data.content.length==1&&data.content[0].img.img == '') ? childNode : null
 					}
 				</Collapse>
-				{ routerJump }
 			</section>
 		)
 	}

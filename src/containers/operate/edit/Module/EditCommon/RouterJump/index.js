@@ -25,21 +25,15 @@ class RouterJump extends React.Component {
 	componentWillUnmount() {}
 
 	onChange(val) {
-		// console.clear()
-		// console.log(val)
-		let { data, content, idx, actions } = this.props
-		if (idx < 0) {
-			content.router = {
-				type: 'router',
-				url: val
-			}
-		}
-		actions.updateComp(null, data)
+		let { data, content, idx, actions, editConfig } = this.props
+		let { curData } = editConfig
+		let { parentComp } = curData
+		content.type = 'router'
+		content.url  = val
+		actions.updateComp(null, parentComp? parentComp: data)
 	}
 
 	onChangeAuth(val, key) {
-		// console.clear()
-		// console.log(val)
 		let { data, actions } = this.props
 		data.auth.content[key] = val
 		actions.updateComp(null, data)
@@ -80,26 +74,14 @@ class RouterJump extends React.Component {
 			)
 		})
 		return (
-			<Collapse defaultActiveKey={['100']} onChange={this.cb}>
-				<Panel header={`页面跳转`} key={100}>
-					<div className="pgs-row">
-						<div className="pgsr-name">跳转页面</div>
-						<div className="pgsr-ctrl">
-							<Select
-								value={content.router.url || ''}
-								style={{ width: '100%' }}
-								onChange={this.onChange.bind(this)}
-							>
-								<Option value={''}>无</Option>
-								{ selectNode }
-							</Select>
-						</div>
-						<div className="pgsr-auth">
-							<Checkbox checked={data.auth.content.router} onChange={_ => this.onChangeAuth(_.target.checked, 'router')} />
-						</div>
-					</div>
-				</Panel>
-			</Collapse>
+			<Select
+				value={content.url || ''}
+				style={{ width: '100%' }}
+				onChange={this.onChange.bind(this)}
+			>
+				<Option value={''}>无</Option>
+				{ selectNode }
+			</Select>
 		)
 	}
 }

@@ -33,12 +33,11 @@ class ImageUploadComp extends React.Component {
 		this.addImgModal.show()
 	}
 
-	enter(imgUrl,index) {
+	enter(imgList, index) {
 		let { data, name, action, actions, editConfig } = this.props
 		let { content }    = data
 		let { curData }    = editConfig
 		let { parentComp } = curData
-		let imgList = imgUrl;
 		const length = content.length;
 		if (getAttr(content) === 'Array') {
 			if (name == 'first') { 
@@ -52,13 +51,12 @@ class ImageUploadComp extends React.Component {
 				})
 				data.content = imgList
 			} else {
-				content[i][name].img = imgUrl[0].url
-			} 
-		}else if(data.name == 'video'){
-			data.content[name] = imgUrl[0].url
-		}else{
-			data.content[name].img = imgUrl[0].url
-
+				content[i][name].img = imgList[0].url
+			}
+		} else if (data.name == 'video'){
+			data.content[name] = imgList[0].url
+		} else {
+			content[name].img = imgList[0].url
 		}
 		actions[action](null, parentComp? parentComp: data)
 	}
@@ -68,18 +66,17 @@ class ImageUploadComp extends React.Component {
 	}
 
 	changeImgType(val) {
-		let { data, img, action, actions, editConfig}  = this.props
+		let { data, img, action, actions, editConfig }  = this.props
 		let { curData } = editConfig
-		let { parentComp } = curData 
+		let { parentComp } = curData
 		img.type  = val
 		if (action === 'updateComp') return actions[action](null, parentComp? parentComp: data)
 	}
 
 	render() {
-
-		let { img, name, actions, editConfig,index,data } = this.props
+		let { img, name, actions, editConfig, index, data } = this.props
 		let btnNode
-		let imgVal = img&&img.img 
+		let imgVal = img && img.img
 		let theme   = editConfig.globalData.theme
 		let colors  = JSON.parse(JSON.stringify(theme.list[theme.idx].colors))
 		let selectNode
@@ -94,9 +91,9 @@ class ImageUploadComp extends React.Component {
 							<Col span={9}>
 								<div className="add_img" onClick={this.showList.bind(this)}>
 									<div className="add_text"><Icon type="plus" /></div>
-								</div> 
+								</div>
 							</Col>
-						</Row>   
+						</Row>
 						<PictureList
 							ref={com => { this.addImgModal = com }}
 							props={this.props}
@@ -184,4 +181,3 @@ export default connect(
 	mapStateToProps,
 	mapDispatchToProps
 )(ImageUploadComp)
- 

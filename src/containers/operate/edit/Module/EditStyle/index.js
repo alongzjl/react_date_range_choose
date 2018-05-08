@@ -11,9 +11,8 @@ import { bindActionCreators } from 'redux'
 import { connect }  from 'react-redux'
 import * as actions from 'actions'
 
-import Color       from 'compEdit/EditCommon/Color'
-// import ThemeManage from 'compEdit/EditCommon/ThemeManage'
-import StyleManage from 'compEdit/EditCommon/StyleManage'
+import Color           from 'compEdit/EditCommon/Color'
+import StyleManage     from 'compEdit/EditCommon/StyleManage'
 
 import {
 	Row, Col,
@@ -24,9 +23,11 @@ const RadioButton = Radio.Button
 const RadioGroup  = Radio.Group
 
 var styleMap = {
-	layout: '组件样式',
-	image:  '图片样式',
-	text:   '文本样式'
+	image:        '图片样式',
+	text:         '文本样式',
+	letterBox:    '盒样式',
+	letter:       '元素样式',
+    letterActive: '激活样式',
 }
 // 定义样式名称 & 渲染类型 & 相关配置
 var cssMap = {
@@ -36,21 +37,54 @@ var cssMap = {
 	height:            { name: '高',      type: 'Number', min: 0, max: 768 },
 	borderRadius:      { name: '圆角',    type: 'Number' },
 	borderWidth:       { name: '边宽',    type: 'Number' },
-	lineHeight:        { name: '行高',    type: 'Number', min: 12, max: 200, step: 1  }, 
-	fontSize:          { name: '字号',    type: 'Number', min: 12, max: 90, step: 2 }, 
-	textAlign:         { name: '对齐方式', type: 'TextAlign' }, 
+	lineHeight:        { name: '行高',    type: 'Number' },
+	fontSize:          { name: '字号',    type: 'Number', min: 12, max: 90, step: 2 },
+	textAlign:         { name: '对齐方式', type: 'TextAlign', option: [
+		{ name: '左', value: 'left' },
+		{ name: '中', value: 'center' },
+		{ name: '右', value: 'right' },
+	] },
 	color:             { name: '字体颜色', type: 'Color' },
 	fontWeight:        { name: '粗细',    type: 'Switch', true: 'bold',      false: 'normal' },
 	fontStyle:         { name: '斜体',    type: 'Switch', true: 'italic',    false: 'normal' },
 	textDecoration:    { name: '下划线',  type: 'Switch', true: 'underline', false: 'none' },
 	opacity:           { name: '透明度',  type: 'Slider', min: 0, max: 1, step: 0.01 },
 	backgroundColor:   { name: '背景颜色', type: 'Color' },
-	boxShadow:         { name: '元素阴影', type: 'Shadow', min: 0, max: 20, step: 1 },
-	textShadow:        { name: '文字阴影', type: 'Shadow', min: 0, max: 20, step: 1 },
-	transformRotate:   { name: '旋转角度', type: 'Number', min: 0, max: 180, step: 1 },   
+	backgroundSize:    { name: '背景样式', type: 'BGSize' },
+	boxShadow:         { name: '元素阴影', type: 'Complex', child: {
+		h_shadow:   { name: '水平偏移', type: 'Number', max: 20 },
+		v_shadow:   { name: '垂直偏移', type: 'Number', max: 20 },
+		blur_dis:   { name: '模糊距离', type: 'Number', max: 20 },
+		spread_dis: { name: '阴影大小', type: 'Number', max: 20 },
+		color:      { name: '阴影颜色', type: 'Color' }
+	} },
+	textShadow:         { name: '文字阴影', type: 'Complex', child: {
+		h_shadow:   { name: '水平偏移', type: 'Number', max: 20 },
+		v_shadow:   { name: '垂直偏移', type: 'Number', max: 20 },
+		blur_dis:   { name: '模糊距离', type: 'Number', max: 20 },
+		color:      { name: '阴影颜色', type: 'Color' }
+	} },
+	borderRadius:       { name: '圆角', type: 'Complex', child: {
+		topLeft:     { name: '上左', type: 'Number', max: 20 },
+		topRight:    { name: '上右', type: 'Number', max: 20 },
+		bottomLeft:  { name: '下左', type: 'Number', max: 20 },
+		bottomRight: { name: '下右', type: 'Number', max: 20 }
+	} },
+	// boxShadow:         { name: '元素阴影', type: 'Shadow', min: 0, max: 20, step: 1 },
+	// textShadow:        { name: '文字阴影', type: 'Shadow', min: 0, max: 20,  step: 1 },
+	transformRotate:   { name: '旋转角度', type: 'Number', max: 180 },
 	borderWidth:       { name: '边框宽度', type: 'Number' },
-	borderStyle:       { name: '边框样式', type: 'Solid' },  
-	borderColor:       { name: '边框颜色', type: 'Color' }, 
+	borderStyle:       { name: '边框样式', type: 'Solid' },
+	borderColor:       { name: '边框颜色', type: 'Color' },
+	marginTop:         { name: '上边距',   type: 'Number', max: 20 },
+	marginRight:       { name: '右边距',   type: 'Number', max: 20 },
+	marginBottom:      { name: '下边距',   type: 'Number', max: 20 },
+	marginLeft:        { name: '左边距',   type: 'Number', max: 20 },
+	justifyContent:    { name: '对齐方式', type: 'TextAlign', option: [
+		{ name: '左', value: 'flex-start' },
+		{ name: '中', value: 'center' },
+		{ name: '右', value: 'flex-end' }
+	] }
 } 
    
 import './index.less'
@@ -62,25 +96,33 @@ class EditStyle extends React.Component {
 
 	componentWillUnmount() {}
 
-	onChange(val, style, css, shadow) {  
+	onChange(val, style, css, node) { 
 		let { data, actions, editConfig } = this.props
 		let { curData } = editConfig
 		let { parentComp } = curData
-		if(shadow) {
-			data.style[style][css][shadow] = val
+		if(node) {
+			data.style[style][css][node] = val
 		} else {
-			style === 'feature'? data[style][css] = val: style === 'layout'? data.layout[css] = val: data.style[style][css]=val;
+			style === 'feature'
+			?
+			data[style][css] = val
+			:
+			style === 'layout'
+			?
+			data.layout[css] = val
+			:
+			data.style[style][css] = val
 		}
 		actions.updateComp(null, parentComp? parentComp: data)
-	} 
+	}
 
 	onChangeAuth(val, style, css) {
 		// console.clear()
 		// console.log(val)
 		let { data, actions, editConfig } = this.props
-		let { curData } = editConfig
-		let { parentComp } = curData  
-		data.auth['style'][style][css] = val
+		let { curData }    = editConfig
+		let { parentComp } = curData
+		data.auth.style[style][css] = val
 		actions.updateComp(null, parentComp? parentComp: data)
 	}
 
@@ -90,74 +132,51 @@ class EditStyle extends React.Component {
 
 	/* 渲染组件开始 */
 	// 数字
-	renderNumber(cfg, data, val, cls, key) {
+	renderNumber(cfg, data, val, cls, key, node) {
 		return (
 			<InputNumber
 				min={cfg.min || 0} max={cfg.max || 100} step={cfg.step || 1}
-				value={val} onChange={v => this.onChange(v, cls, key)}
+				value={val} onChange={v => this.onChange(v, cls, key, node)}
 				style={{ width: '100%' }}
 			/>
 		)
 	}
-	//描边
-	renderShadow(cfg, data, val, cls, key) {
-		const h_shadow = val.h_shadow;
-		const v_shadow = val.v_shadow;
-		const blur_dis = val.blur_dis;
-		const color = val.color; 
-		return (  
-			<div> 
-				<div>
-					水平偏移:
-					<InputNumber
-						min={cfg.min || 0} max={cfg.max || 100} step={cfg.step || 1}
-						value={h_shadow} onChange={v => this.onChange(v, cls, key,'h_shadow')}
-						style={{  width: '50%' }}
-					/> 
+	// 复合样式
+	renderComplex(cfg, data, val, cls, key) {
+		const child     = cfg.child
+		const keys      = Object.keys(val)
+		const childNode = keys.map((_, i) => {
+			let cm  = child[_],
+				dom = this[`render${cm.type}`].bind(this, cm, data, val[_], cls, key, _)()
+			return (
+				<div className="pgs-row" key={i}>
+					<div className="pgsr-name" style={{ width: 52 }}>{ cm.name }</div>
+					<div className="pgsr-ctrl">{ dom }</div>
 				</div>
-				<div>
-					垂直偏移:
-					<InputNumber
-						min={cfg.min || 0} max={cfg.max || 100} step={cfg.step || 1}
-						value={v_shadow} onChange={v => this.onChange(v, cls, key,'v_shadow')}
-						style={{ width: '50%' }}
-					/>
-				</div> 
-				<div>
-					模糊距离:
-					<InputNumber
-						min={cfg.min || 0} max={cfg.max || 100} step={cfg.step || 1}
-						value={blur_dis} onChange={v => this.onChange(v, cls, key,'blur_dis')}
-						style={{ width: '50%' }}
-					/>
-				</div>
-				<div>
-					阴影颜色:  
-					<Color  
-						data={data}
-						color={color}
-						path={`style.${cls}.${key}`}
-						action={'updateComp'}
-						placement="bottomLeft"
-					/> 
-				</div>
-			</div>
+			)
+		})
+
+		return (
+			<div>{ childNode }</div>
 		)
 	}
 	// 偏移
-	renderTextAlign(cfg, data, val, cls, key) {
+	renderTextAlign(cfg, data, val, cls, key, node) {
+		let option = cfg.option || [
+			{ name: '左', value: 'left' },
+			{ name: '中', value: 'center' },
+			{ name: '右', value: 'right' }
+		]
 		return (
-			<RadioGroup size="small" onChange={_ => this.onChange(_.target.value, cls, key)} value={val}>
-				<RadioButton value="left">左</RadioButton>
-				<RadioButton value="center">中</RadioButton>
-				<RadioButton value="right">右</RadioButton>
+			<RadioGroup size="small" onChange={_ => this.onChange(_.target.value, cls, key, node)} value={val}>
+				{ option.map((_, i) => (<RadioButton key={i} value={_.value}>{_.name}</RadioButton>)) }
 			</RadioGroup>
 		)
 	}
 	// 边框样式
-	renderSolid(cfg, data, val, cls, key) {
+	renderSolid(cfg, data, val, cls, key, node) {
 		return (
-			<RadioGroup size="small" onChange={_ => this.onChange(_.target.value, cls, key)} value={val}>
+			<RadioGroup size="small" onChange={_ => this.onChange(_.target.value, cls, key, node)} value={val}>
 				<RadioButton value="solid">实线</RadioButton>
 				<RadioButton value="double">双线</RadioButton>
 				<RadioButton value="dashed">虚线</RadioButton>
@@ -165,8 +184,17 @@ class EditStyle extends React.Component {
 			</RadioGroup> 
 		)
 	}
+	// 边框样式
+	renderBGSize(cfg, data, val, cls, key, node) {
+		return (
+			<RadioGroup size="small" onChange={_ => this.onChange(_.target.value, cls, key, node)} value={val}>
+				<RadioButton value="contain">居中</RadioButton>
+				<RadioButton value="cover">充满</RadioButton>
+			</RadioGroup> 
+		)
+	}
 	// 颜色
-	renderColor(cfg, data, val, cls, key) {
+	renderColor(cfg, data, val, cls, key, node) {
 		return (
 			<Color
 				data={data}
@@ -178,37 +206,37 @@ class EditStyle extends React.Component {
 		)
 	}
 	// 开关
-	renderCheckbox(cfg, data, val, cls, key) {
+	renderCheckbox(cfg, data, val, cls, key, node) {
 		return (
 			<Checkbox
-				checked={val === cfg.true} onChange={v => this.onChange(v.target.checked? cfg.true: cfg.false, cls, key)}
+				checked={val === cfg.true} onChange={v => this.onChange(v.target.checked? cfg.true: cfg.false, cls, key, node)}
 			/>
 		)
 	}
 	// 滑动开关
-	renderSwitch(cfg, data, val, cls, key) {
+	renderSwitch(cfg, data, val, cls, key, node) {
 		return (
 			<Switch
 				size="small"
-				checked={val === cfg.true} onChange={v => this.onChange(v? cfg.true: cfg.false, cls, key)}
+				checked={val === cfg.true} onChange={v => this.onChange(v? cfg.true: cfg.false, cls, key, node)}
 			/>
 		)
 	}
 	// 滑块
-	renderSlider(cfg, data, val, cls, key) {
+	renderSlider(cfg, data, val, cls, key, node) {
 		return (
 			<Row>
 				<Col span={12}>
 					<Slider
 						min={cfg.min || 0} max={cfg.max || 100} step={cfg.step || 1}
-						value={val} onChange={v => this.onChange(v, cls, key)}
+						value={val} onChange={v => this.onChange(v, cls, key, node)}
 					/>
 				</Col>
 				<Col span={3}></Col>
 				<Col span={9}>
 					<InputNumber
 						min={cfg.min || 0} max={cfg.max || 100} step={cfg.step || 1}
-						value={val} onChange={v => this.onChange(v, cls, key)}
+						value={val} onChange={v => this.onChange(v, cls, key, node)}
 						style={{ width: '100%' }}
 					/>
 				</Col>
@@ -304,7 +332,7 @@ class StyleManageSwiper extends React.Component {
 		let activeKey = Array.from(new Array(1), (_, i) => `${i}`)
 		const feature = this.props.feature.feature;
 		return (
-			<Collapse defaultActiveKey={activeKey}>
+			<Collapse activeKey={activeKey}>
 				<Panel header={`轮播设置`} key={0}>
 					<div className="pgs-row" key={2}>
 						<div className="pgsr-name">自动循环</div>
@@ -346,4 +374,3 @@ export default connect(
 	mapStateToProps,
 	mapDispatchToProps
 )(EditStyle)
- 

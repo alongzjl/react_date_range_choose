@@ -12,20 +12,16 @@ import { connect }  from 'react-redux'
 
 import Rnd from 'react-rnd'
 
-
-import Picture     from 'compEdit/EditElement/Picture'
-import Web         from 'compEdit/EditElement/Web'
-import Text        from 'compEdit/EditElement/Text'
-import Button      from 'compEdit/EditElement/Button'
-import Video      from 'compEdit/EditElement/Video'  
-import SwiperImage from 'compEdit/EditElement/SwiperImage'
-import DateShow    from 'compEdit/EditElement/Date'
-import StoreList   from 'compEdit/EditElement/StoreList'
-import Navigation  from 'compEdit/EditElement/Navigation'
-import NavigationFloat  from 'compEdit/EditElement/NavigationFloat'
- 
-import Letter  from 'compEdit/EditElement/Letter' 
-
+import Picture         from 'compEdit/EditElement/Picture'
+import Web             from 'compEdit/EditElement/Web'
+import Text            from 'compEdit/EditElement/Text'
+import Button          from 'compEdit/EditElement/Button'
+import Video      from 'compEdit/EditElement/Video'
+import SwiperImage     from 'compEdit/EditElement/SwiperImage'
+import DateShow        from 'compEdit/EditElement/Date'
+import StoreList       from 'compEdit/EditElement/StoreList'
+import Navigation      from 'compEdit/EditElement/Navigation'
+import NavigationFloat from 'compEdit/EditElement/NavigationFloat'
 
 import * as actions from 'actions'
 
@@ -96,7 +92,6 @@ class EditElement extends React.Component {
 			var compName  = _.name,
 				styleIdx  = _.styleList.idx,
 				csn       = `handle-drag-${Math.floor(Math.random()*1e9)}`,
-
 				isEdit    = true,
 				compCon
 			if (compName === 'picture')              compCon = (<Picture         data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
@@ -111,7 +106,7 @@ class EditElement extends React.Component {
 			else if (compName === 'storeList')       compCon = (<StoreList       data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
 			if (!compCon) return false
 			return (
-				<Rnd 
+				<Rnd
 					key={i}
 					bounds={'.pg-center'}
 					className={i === editConfig.curData.compIdx? 's-active': ''}

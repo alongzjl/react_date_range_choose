@@ -57,10 +57,20 @@ export default function editConfig(state = initialState, action) {
 
 
 		case types.UPDATE_COMP:
+			var { parentComp, cusCompIdx } = curData
 			var sl = data.styleList,
 				sd = sl.list[sl.idx]
-			sd.data = JSON.parse(JSON.stringify(data.style))
-			delete sd.data.layout
+			if (!parentComp) {
+				sd.data = JSON.parse(JSON.stringify(data.style))
+			} else {
+				var da = data.components[cusCompIdx]
+				if (da) {
+					sl = da.styleList
+					sd = sl.list[sl.idx]
+					sd.data = JSON.parse(JSON.stringify(da.style))
+				}
+			}
+			// delete sd.data.layout
 			pageC[curData.router].elements[curData.compIdx] = data
 			state.curPage   = pageC[curData.router]
 			curData.compIdx = idx || curData.compIdx
@@ -83,7 +93,7 @@ export default function editConfig(state = initialState, action) {
 
 
 		case types.SELECT_COMP:
-			let { parentComp } = curData
+			var { parentComp } = curData
 			if (!parentComp) {
 				console.log('选择组件!')
 				curData.cusCompIdx  = -1

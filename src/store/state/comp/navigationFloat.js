@@ -41,26 +41,26 @@ module.exports = {
 		{
 			img: { type: 'custom', img: 'http://ryoms.v4.rongyi.com/ryoms/images/menu-icon/icon3_2.png' },			// 图片url
 			title: '导航1',		// 图片标题
-			router: '',			// 路由
+			router: {},			// 路由
 		},
 		{
 			img: { type: 'custom', img: 'http://ryoms.v4.rongyi.com/ryoms/images/menu-icon/icon11_2.png' },			// 图片url
 			title: '导航2',		// 图片标题
-			router: '',			// 路由
+			router: {},			// 路由
 		},
 		{
 			img: { type: 'custom', img: 'http://ryoms.v4.rongyi.com/ryoms/images/menu-icon/icon6_2.png' },			// 图片url
 			title: '导航3',		// 图片标题
-			router: '',			// 路由
+			router: {},			// 路由
 		},
 		{
 			img: { type: 'custom', img: 'http://ryoms.v4.rongyi.com/ryoms/images/menu-icon/icon15_2.png' },			// 图片url
 			title: '导航4',		// 图片标题
-			router: '',			// 路由
+			router: {},			// 路由
 		},{   
 			img: { type: 'custom', img: 'http://ryoms.v4.rongyi.com/ryoms/images/menu-icon/icon9_2.png' },			// 图片url
 			title: '导航5',		// 图片标题
-			router: '',			// 路由
+			router: {},			// 路由
 		}
 	],
 	// 动画设置

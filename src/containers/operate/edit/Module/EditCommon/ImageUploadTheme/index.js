@@ -32,9 +32,9 @@ class ImageUploadTheme extends React.Component {
 		this.addImgModal.show()
 	}
 
-	enter(imgUrl) {
+	enter(imgList) {
 		let { name, action, content, actions, editConfig } = this.props
-		content[name] = imgUrl
+		content[name] = imgList[0].url
 		actions[action](editConfig.globalData)
 	}
 

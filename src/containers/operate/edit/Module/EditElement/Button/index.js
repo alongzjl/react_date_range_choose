@@ -8,7 +8,9 @@ import React from 'react'
 import './index.less'
 
 class Button extends React.Component {
+	
 	 
+	
 	render() {
 		let { type,data } = this.props;
 		let style = cssColorFormat(this.props, 'text');

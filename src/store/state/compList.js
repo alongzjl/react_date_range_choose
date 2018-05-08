@@ -52,7 +52,6 @@ module.exports = [
 			name: '字母',
 			key:  'letter'
 		},
-		
 		{
 			icon: 'floor-control',
 			name: '楼层',

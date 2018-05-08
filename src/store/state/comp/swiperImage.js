@@ -55,7 +55,7 @@ module.exports = {
 		style: {
 			layout: '0',	// 外观样式
 			title:  '0'		// 标题样式
-		}, 
+		},
 		switch: false,		// 播放开关
 		autoPlayTime: 5000	// 自动播放时间 (ms)
 	},
