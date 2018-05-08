@@ -11,10 +11,10 @@ import { bindActionCreators } from 'redux'
 import { connect }  from 'react-redux'
 import * as actions from 'actions'
 
-import { Checkbox, Collapse, Icon, Input,Select } from 'antd'
+import { Checkbox, Collapse, Icon, Input, Select } from 'antd'
 const  { TextArea } = Input
 const  { Panel }    = Collapse
-const Option = Select.Option;
+const Option = Select.Option
 
 import RouterJump      from 'compEdit/EditCommon/RouterJump'
 import ImageUploadComp from 'compEdit/EditCommon/ImageUploadComp'
@@ -23,18 +23,18 @@ import ImageUploadComp from 'compEdit/EditCommon/ImageUploadComp'
 // import Web         from './Web'
 // import Text        from './Text'
 // import SwiperImage from './SwiperImage'
-// import Letter      from './Letter'
-import StoreList   from './StoreList'
-import Navigation  from './Navigation'
-import NavigationFloat  from './NavigationFloat' 
-import Date        from './Date'
+import Floor           from './Floor'
+import StoreList       from './StoreList'
+import Navigation      from './Navigation'
+import NavigationFloat from './NavigationFloat'
+import Date            from './Date'
 
 var conMap = {
-	text:  { name: '文本内容', type: 'Textarea', max: 1000, autosize: { minRows: 1, maxRows: 6 } },
-	title: { name: '标题',    type: 'Title',    max: 30 },
-	img:   { name: '图片',    type: 'Image' },
-	url:   { name: '网址',    type: 'Url' },
-	router: {name:'页面跳转',type:'Router'} 
+	text:   { name: '文本内容', type: 'Textarea', max: 1000, autosize: { minRows: 1, maxRows: 6 } },
+	title:  { name: '标题',    type: 'Title',    max: 30 },
+	img:    { name: '图片',    type: 'Image' },
+	url:    { name: '网址',    type: 'Url' },
+	router:  {name: '页面跳转', type: 'Router' } 
 }
 
 import './index.less'
@@ -46,14 +46,14 @@ class EditContent extends React.Component {
 
 	componentWillUnmount() {}
 
-	onChange(val, key,index) {
+	onChange(val, key, index) {
 		let { data, actions, editConfig } = this.props
 		let { curData } = editConfig
 		let { parentComp } = curData 
 		index ? data.content[index][key]  = val : data.content[key]  = val
 		actions.updateComp(null, parentComp? parentComp: data)
 	}   
-
+ 
 	onChangeAuth(val, key,index) { 
 		let { data, actions, editConfig } = this.props
 		let { curData } = editConfig 
@@ -76,32 +76,31 @@ class EditContent extends React.Component {
 		}   
 		
 	}
-	
 	/* 渲染组件开始 */
 	// 文本
-	renderTextarea(cfg, data, val, key,content,index) {
+	renderTextarea(cfg, data, val, key, index) {
 		return (
 			<TextArea
 				min={cfg.min || 0} max={cfg.max || 100}
 				autosize={cfg.autosize || false}
-				value={val} onChange={v => this.onChange(v.target.value, key,index)}
+				value={val} onChange={v => this.onChange(v.target.value, key, index)}
 				style={{ width: '100%' }}
 			/>
 		)
 	}
 	// 标题
-	renderTitle(cfg, data, val, key,content,index) {
+	renderTitle(cfg, data, val, key, index) {
 		return (
 			<Input
 				min={cfg.min || 0} max={cfg.max || 100}
-				value={val} onChange={v => this.onChange(v.target.value, key,index)}
+				value={val} onChange={v => this.onChange(v.target.value, key, index)}
 				style={{ width: '100%' }}
 			/>
 		)
 	} 
 	// 跳转路由
-	renderRouter(cfg, data, val, key,content,index,editConfig) {
-
+	renderRouter(cfg, data, val, key, content, index) {
+		let { editConfig } = this.props
 		let childNodeRoouters = Object.keys(editConfig.pageContent).map((item,i) => {
 			return (
 					<Option value={editConfig.pageContent[item].router} key={item}>{editConfig.pageContent[item].title}</Option> 
@@ -117,31 +116,41 @@ class EditContent extends React.Component {
 		)
 	}
 	// 上传图片
-	renderImage(cfg, data, val, key, content,index) {
+	renderImage(cfg, data, val, key, index) {
 		return (
 			<ImageUploadComp
 				data={data}
 				img={val}
 				name={key}
-				content={content}
 				action={'updateComp'}
 				style={{ width: '100%' }}
 				index={index}
 			/>
-		) 
+		)
 	}
 	// 网址
-	renderUrl(cfg, data, val, key,index) {
+	renderUrl(cfg, data, val, key, index) {
 		return (
 			<Input
 				min={cfg.min || 0} max={cfg.max || 100}
-				defaultValue={val} onBlur={v => this.onChange(v.target.value, key,index)}
+				defaultValue={val} onBlur={v => this.onChange(v.target.value, key, index)}
 				style={{ width: '100%' }}
 			/>
 		)
 	}
+	// 楼层
+	renderCheckbox(cfg, data, val, key, index) {
+		return (
+			<div>
+				<span style={{ marginRight: 10 }}>{val.value}</span>
+				<Checkbox
+					value={cfg.defaultValue} onChange={v => this.onChange({ value: val.value, checked: v.target.checked }, key)}
+				/>
+			</div>
+		)
+	}
 
-	renObj(data,editConfig, content,index) {
+	renObj(data, content, index) {
 		let childNode = Object.keys(content).map((p, i) => {
 			if (!conMap[p]) return false
 			let cm     = conMap[p]
@@ -149,66 +158,72 @@ class EditContent extends React.Component {
 			let render = this[`render${cm.type}`]
 			if (!render) return false
 			// 根据样式类型渲染对应组件
-			let dom = this[`render${cm.type}`].bind(this, cm, data, val, p, content,index,editConfig)()
+			let dom = this[`render${cm.type}`].bind(this, cm, data, val, p, index)()
 			return (
-				<div className="pgs-row" key={i+1}>
+				<div className="pgs-row" key={i}>
 					<div className="pgsr-name">{ cm.name }</div>
 					<div className="pgsr-ctrl">{ dom }</div>
 					<div className="pgsr-auth">
 						<Checkbox checked={data.auth.content[p]} onChange={_ => this.onChangeAuth(_.target.checked, p)} />
 					</div>
-					{   
+					{  
 						data.name !='picture'&&cm.name=='图片'?<div className="delete" onClick={()=>{this.deleteCom(index)}}><Icon type="close-circle" style={{ fontSize: 18}} /></div>:null
-					}  
+					} 
 				</div> 
 			)
-		}) 
+		})
 		return childNode
 	}
-  
+
 	render() {
-		let { data, actions,editConfig } = this.props
+		let { data, actions } = this.props
 		let compName = data.name
 		let content  = data.content
 		let compCon
 		let childNode
 		let activeKey
 		let routerJump
-		if (compName === 'navigation')           compCon = (<Navigation data={this.props}/>)
-		else if (compName === 'navigationFloat')            compCon = (<NavigationFloat       data={this.props}/>)
-		else if (compName === 'date')            compCon = (<Date       data={this.props}/>)
-		else if (compName === 'storeList')       compCon = (<StoreList  data={data}/>)
-		// else if (compName === 'letter')       compCon = (<Letter data={data}/>) 
-		// if (compName === 'picture')           compCon = (<Picture data={data}/>)
-		// else if (compName === 'web')          compCon = (<Web data={data}/>)
-		// else if (compName === 'text')         compCon = (<Text data={data}/>)
-		// else if (compName === 'swiperImage')  compCon = (<SwiperImage data={data}/>)
+		if (compName === 'navigation')           compCon = (<Navigation      data={this.props}/>)
+		else if (compName === 'navigationFloat') compCon = (<NavigationFloat data={this.props}/>)
+		else if (compName === 'date')            compCon = (<Date            data={this.props}/>)
+		else if (compName === 'storeList')       compCon = (<StoreList       data={data}/>)
+		else if (compName === 'floor')           compCon = (<Floor           data={data}/>)
+		// if (compName === 'picture')           compCon = (<Picture         data={data}/>)
+		// else if (compName === 'web')          compCon = (<Web             data={data}/>)
+		// else if (compName === 'text')         compCon = (<Text            data={data}/>)
+		// else if (compName === 'swiperImage')  compCon = (<SwiperImage     data={data}/>)
 		if (content.length) {
-			activeKey = Array.from(new Array(content.length), (_, i) => `${i}`)
-			activeKey = activeKey.concat([`${activeKey.length}`])  
+			activeKey = Array.from(new Array(content.length + 1), (_, i) => `${i}`)
 			childNode = content.map((_, i) => {
 				return (
-					<Panel header={`内容${i + 1}`} key={i+1}>
-						{ this.renObj(data,editConfig, _, i) }
+					<Panel header={`内容${i + 1}`} key={i + 1}>
+						{ this.renObj(data, _, i) }
 					</Panel>
-				) 
-			}) 
+				)
+			})
 		} else {
 			activeKey = ['0']  
 			if (content.router !== undefined) {
 				routerJump = (
 					<RouterJump data={data} content={content} idx={-1} actions={actions} />
 				)
+
 			} 
+			let con = this.renObj(data, content)
 			childNode = (
-				<Panel header={'内容编辑'} key={data.name == 'video'?1:0}> 
-					{ this.renObj(data,editConfig, content) }   
-				</Panel>   
-			) 
-		}  
+				con.length
+				? 
+				<Panel header={'内容编辑'} key={data.name == 'video'?1:0}>
+					{ con }
+				</Panel>
+				:
+				false
+			)
+		}
+
 		return (
 			<section className="ry-roll-screen-config">
-				{ compCon } 
+				{ compCon }
 				<Collapse activeKey={activeKey} onChange={this.cb}>
 					{
 						data.name == 'swiperImage'||data.name == 'video' ? <Panel header={`内容`} key={0}>
@@ -225,7 +240,7 @@ class EditContent extends React.Component {
 									/> 
 								</div>
 							</div>
-					</Panel> : null
+						</Panel> : null
 					}
 					{
 						!(data.name == 'swiperImage'&& data.content.length==1&&data.content[0].img.img == '') ? childNode : null

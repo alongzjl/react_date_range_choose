@@ -3,7 +3,7 @@ var style = {
 }
 
 module.exports = {
-	name: 'letter',
+	name: 'floor',
 	type: 'base',
 	// 位置大小
 	layout: {
@@ -30,14 +30,6 @@ module.exports = {
 		idx:  0,
 		list: [{
 			name: '样式1',
-			img:  '',
-			data: JSON.parse(JSON.stringify(style))
-		}, {
-			name: '样式2',
-			img:  '',
-			data: JSON.parse(JSON.stringify(style))
-		}, {
-			name: '样式3',
 			img:  '',
 			data: JSON.parse(JSON.stringify(style))
 		}]

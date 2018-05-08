@@ -7,13 +7,6 @@
 // 天气日期
 var style = {
 	// 组件样式
-	layout: {
-		position: 'absolute',
-		top:      0,
-		left:     0,
-		width:    '100%', 
-		height:   150,     
-	},
 	/*text: {
 		color:          { type: 'custom', color: '#fff' },
 		fontSize:       12,
@@ -27,6 +20,14 @@ var style = {
 module.exports = {
 	name: 'date',
 	type: 'base',
+	// 位置大小
+	layout: {
+		position: 'absolute',
+		top:      0,
+		left:     0,
+		width:    '100%',
+		height:   150
+	},
 	// 样式管理
 	style: JSON.parse(JSON.stringify(style)),
 	// 内容管理

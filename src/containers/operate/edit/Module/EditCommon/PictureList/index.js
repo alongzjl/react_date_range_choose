@@ -44,7 +44,43 @@ export default class PictureList extends React.Component {
 		this.addImgModal.show()
 	}
 	state = {
-		choosed_img:[]
+		choosed_img:[],
+		imgTypes:[],
+		videoTypes:[],
+		imgList:[],
+		videoList:[]
+	}
+	componentDidMount(){ 
+		const {type} = this.props;
+		if(type == 'video'){
+			Ajax.get('/store/videoListType').then(res => {
+				this.setState({
+					videoTypes:res.data
+				})
+			})
+			this.getVideoList();
+		}else{
+			Ajax.get('/store/imgListType').then(res => {
+				this.setState({
+					imgTypes:res.data
+				})
+			})
+			this.getImgList();
+		}
+	}
+	getImgList = () => {
+		Ajax.get('/store/imgList').then(res => {
+				this.setState({
+					imgList:res.data
+				})
+			})
+	};
+	getVideoList = () => {
+		Ajax.get('/store/videoList').then(res => {
+				this.setState({
+					videoList:res.data
+				}) 
+			})  
 	}
 	cancelClick = () => {
 		this.addImgModal.hide()
@@ -87,8 +123,9 @@ export default class PictureList extends React.Component {
 						<div className="search">搜索</div>
 					</div>
 					{
-						type != 'video' ? <ImgModule save={this.save_img} firstAdd={firstAdd} /> : <VideoModule save={this.save_img} />
-					}
+						type != 'video' ? <ImgModule save={this.save_img} getImgList={this.getImgList} firstAdd={firstAdd} imgTypes={this.state.imgTypes} imgList={this.state.imgList} /> : 
+						<VideoModule save={this.save_img} getVideoList={this.getVideoList} videoTypes={this.state.videoTypes} videoList={this.state.videoList} />
+					} 
 					<div className="bottom">
 						<Button type="primary" onClick={this.save}>确定</Button>
 						<Button onClick={this.close}>取消</Button>
@@ -102,51 +139,33 @@ export default class PictureList extends React.Component {
 
 class ImgModule extends React.Component {
 	state = {
-		typeList:[
-			{id:1,name:'along1',sourceNum:15},
-			{id:1,name:'along2',sourceNum:153},
-			{id:1,name:'along3',sourceNum:15},
-			{id:1,name:'along4',sourceNum:151},
-			{id:1,name:'along5',sourceNum:15}
-		],
-		imgList:[
-			{id:1,url:"http://rongyi.b0.upaiyun.com/system/smartService/null/201801180034041097.png"},
-			{id:2,url:"http://rongyi.b0.upaiyun.com/system/smartService/null/201801180034041097.png"},
-			{id:12,url:"http://rongyi.b0.upaiyun.com/system/smartService/null/201801180034041097.png"},
-			{id:109,url:"http://rongyi.b0.upaiyun.com/system/smartService/null/201801180034041097.png"},
-			{id:154,url:"http://rongyi.b0.upaiyun.com/system/smartService/null/201801180034041097.png"},
-			{id:122,url:"http://rongyi.b0.upaiyun.com/system/smartService/null/201801180034041097.png"},
-			{id:145,url:"http://rongyi.b0.upaiyun.com/system/smartService/null/201801180034041097.png"},
-			{id:178,url:"http://rongyi.b0.upaiyun.com/system/smartService/null/201801180034041097.png"},
-			{id:111,url:"http://rongyi.b0.upaiyun.com/system/smartService/null/201801180034041097.png"},
-			{id:124,url:"http://rongyi.b0.upaiyun.com/system/smartService/null/201801180034041097.png"}
-		]
+		imgTypes:[],
+		imgList:[]
 	}
-	componentDidMount(){
-		let img_list = this.state.imgList;
-		img_list = img_list.map(item=>{
-			item.isClicked = false;
-			return item
-		});
-		 this.setState({
-				imgList:img_list
-			})
+
+	componentWillReceiveProps(props){
+		let img_list = props.imgList;
+		let imgTypes = props.imgTypes;
+		this.setState({
+				imgList:img_list,
+				imgTypes:imgTypes
+			}) 
 	}
 	chooseType(id) {
-
+		this.props.getImgList();
 	}
-	chooseImg = img => { 
+	chooseImg(img) {
 		let firstAdd = this.props.firstAdd
 		let img_list = this.state.imgList
 		if(firstAdd){
 			img_list = img_list.map(item=>{
-				item.id == img ? item.isClicked = !item.isClicked : null;
+				item.id === img ? item.isClicked = !item.isClicked : null;
 				return item
-			});
+			}); 
 		}else{
 			img_list = img_list.map(item=>{
-				item.id == img ? item.isClicked = !item.isClicked : item.isClicked = false;
-				return item
+				item.id === img ? item.isClicked = !item.isClicked : item.isClicked = false;
+				return item  
 			});
 		}
 		this.setState({
@@ -155,26 +174,10 @@ class ImgModule extends React.Component {
 		let choosed_img = img_list.filter(item => item.isClicked == true);
 		this.props.save(choosed_img)
 	}
-	upload_img = () => {
+	upload_img() {
 	   // alert('上传本地图片')
 	} 
-	getTypes = () => {
-		const UrlType = 'http://manage.preview.rongyi.com/easy-smart/ySourceGroupManage/query';
-		Fetch.postJSON(UrlType,{type:1}).then(data=>{
-			this.setState({
-				typeList:data.result.data || []
-			})
-		}) 
-	};
-	getList =() => {
-		const UrlList = "/chaoyue/imagesList";
-		const params = {currentPage:1,groupId:12,name:'',page:1,page_size:14,type:1};
-		Fetch.postJSON(UrlList,params).then(data=>{
-			this.setState({
-				imgList:data.result.data || []
-			})
-		})
-	}
+	
 	render() {
 		const Upload_props = {
 			name: 'file',
@@ -210,7 +213,7 @@ class ImgModule extends React.Component {
 			<div className="content">
 				<div className="left">
 					{
-						this.state.typeList.map((item,index) => <Type key={index} item={item} choose_one={this.chooseType}></Type>)
+						this.state.imgTypes.map((item,index) => <Type key={index} item={item} choose_one={this.chooseType.bind(this)}></Type>)
 					}
 				</div>
 				<div className="right">
@@ -218,7 +221,7 @@ class ImgModule extends React.Component {
 						<div className="add_img"><div className="add_text">+</div><div>上传图片</div></div>
 					</Upload> 
 					{
-						this.state.imgList.map((item,index) => <List key={index} item={item} choose_one={this.chooseImg}></List> )
+						this.state.imgList.map((item,index) => <List key={index} item={item} choose_one={this.chooseImg.bind(this)}></List> )
 					}
 				</div>
 			</div>
@@ -228,43 +231,32 @@ class ImgModule extends React.Component {
 
 class VideoModule extends React.Component {
 	state = {
-		typeList:[
-			{id:1,name:'视频类型1',sourceNum:15},
-			{id:1,name:'视频类型2',sourceNum:153},
-			{id:1,name:'视频类型3',sourceNum:15},
-			{id:1,name:'视频类型4',sourceNum:151},
-			{id:1,name:'视频类型5',sourceNum:15}
+		videoTypes:[
+			
 		],
 		videoList:[
-			{id:1,url:"http://rongyi.b0.upaiyun.com/system/smartService/null/201801180034041097.png"},
-			{id:2,url:"http://rongyi.b0.upaiyun.com/system/smartService/null/201801180034041097.png"},
-			{id:12,url:"http://rongyi.b0.upaiyun.com/system/smartService/null/201801180034041097.png"},
-			{id:109,url:"http://rongyi.b0.upaiyun.com/system/smartService/null/201801180034041097.png"},
-			{id:154,url:"http://rongyi.b0.upaiyun.com/system/smartService/null/201801180034041097.png"},
-			{id:122,url:"http://rongyi.b0.upaiyun.com/system/smartService/null/201801180034041097.png"},
-			{id:145,url:"http://rongyi.b0.upaiyun.com/system/smartService/null/201801180034041097.png"},
-			{id:178,url:"http://rongyi.b0.upaiyun.com/system/smartService/null/201801180034041097.png"},
-			{id:111,url:"http://rongyi.b0.upaiyun.com/system/smartService/null/201801180034041097.png"},
-			{id:124,url:"http://rongyi.b0.upaiyun.com/system/smartService/null/201801180034041097.png"}
+			
 		]
 	}
+	
 	componentDidMount(){
-		let videoList = this.state.videoList;
+		let videoList = this.props.videoList;
 		videoList = videoList.map(item=>{
 			item.isClicked = false;
 			return item
 		});
 		 this.setState({
-				videoList:videoList
+				videoList:videoList,
+				videoTypes:videoTypes
 			})
 	}
 	chooseType(id) {
-
+		this.props.getVideoList();  
 	}
-	chooseImg = img => { 
+	chooseVideo = id => { 
 		let videoList = this.state.videoList
 		videoList = videoList.map(item=>{
-			item.id == img ? item.isClicked = !item.isClicked : item.isClicked = false;
+			item.id == id ? item.isClicked = !item.isClicked : item.isClicked = false;
 			return item
 		});
 		this.setState({
@@ -276,23 +268,6 @@ class VideoModule extends React.Component {
 	upload_img = () => {
 	   // alert('上传本地图片')
 	} 
-	getTypes = () => {
-		const UrlType = 'http://manage.preview.rongyi.com/easy-smart/ySourceGroupManage/query';
-		Fetch.postJSON(UrlType,{type:1}).then(data=>{
-			this.setState({
-				typeList:data.result.data || []
-			})
-		}) 
-	};
-	getList =() => {
-		const UrlList = "/chaoyue/imagesList";
-		const params = {currentPage:1,groupId:12,name:'',page:1,page_size:14,type:1};
-		Fetch.postJSON(UrlList,params).then(data=>{
-			this.setState({
-				imgList:data.result.data || []
-			})
-		})
-	}
 	render() {
 		const Upload_props = {
 			name: 'file',
@@ -328,7 +303,7 @@ class VideoModule extends React.Component {
 			<div className="content">
 				<div className="left">
 					{
-						this.state.typeList.map((item,index) => <Type key={index} item={item} choose_one={this.chooseType}></Type>)
+						this.state.videoTypes.map((item,index) => <Type key={index} item={item.name} choose_one={this.chooseType}></Type>)
 					}
 				</div> 
 				<div className="right">
@@ -336,7 +311,7 @@ class VideoModule extends React.Component {
 						<div className="add_img"><div className="add_text">+</div><div>上传视频</div></div>
 					</Upload>
 					{
-						this.state.videoList.map((item,index) => <List key={index} item={item} choose_one={this.chooseImg}></List> )
+						this.state.videoList.map((item,index) => <List key={index} item={item} choose_one={this.chooseVideo}></List> )
 					}
 				</div>
 			</div>
@@ -346,7 +321,7 @@ class VideoModule extends React.Component {
 
 function Type({item,choose_one}){
 	return (
-		<div onClick={()=>{choose_one(item.id)}}>{item.name}</div>
+		<div onClick={()=>{choose_one(item.id)}}>{item.name}</div> 
 	)
 }
 

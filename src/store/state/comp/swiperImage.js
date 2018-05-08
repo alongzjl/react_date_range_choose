@@ -1,12 +1,5 @@
 // 轮播图
 var style = {
-	// 组件样式
-	layout: {
-		position: 'absolute',
-		top:      0,
-		left:     0, 
-		height:   200
-	},    
 	box: {
 		transform: '',
 		animation: '0s 0s 1'			// 动画 (0: 开始时间, 1: 持续时间, 2: 循环次数)
@@ -24,6 +17,14 @@ var style = {
 module.exports = {
 	name: 'swiperImage',
 	type: 'base',
+	// 位置大小
+	layout: {
+		position: 'absolute',
+		top:      0,
+		left:     0,
+		width:    0,
+		height:   200
+	},
 	// 样式管理
 	style: JSON.parse(JSON.stringify(style)),
 	// 内容管理

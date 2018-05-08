@@ -1,6 +1,11 @@
 // 自定义
 var style = {
-	// 组件样式
+}
+
+module.exports = {
+	name: 'custom',
+	type: 'advanced',
+	// 位置大小
 	layout: {
 		position: 'absolute',
 		top:      0,
@@ -8,20 +13,13 @@ var style = {
 		width:    120,
 		height:   120
 	},
-}
-
-module.exports = {
-	name: 'custom',
-	type: 'advanced',
 	// 样式管理
 	style: JSON.parse(JSON.stringify(style)),
 	// 内容管理
 	content: {
 	},
 	// 组件管理
-	components: [{
-		
-	}],
+	components: [],
 	// 动画设置
 	animation: {
 		className: '',	// 动画样式

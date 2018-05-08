@@ -81,12 +81,16 @@ window.cssColorFormat = (props, key) => {
 				} 
 			}
 		}
-	}
+		if(typeof(obj[p]) == 'number'&&p!='opacity'&&p!='zIndex'){
+			obj[p] = obj[p] + 'px';
+		} 
+	}  
 	if (colorChange) {
 		// 判断如果当前组件的颜色所使用的主题类别被删除, 更新颜色类型为custom
 		data.style[key] = obj
 		return actions.updateComp(null, data)
 	} 
+
 	// console.log(`耗时${Date.now() - st}ms`)
 	return obj
 }
@@ -111,6 +115,10 @@ window.compImgFormat = (props, content) => {
 // 文本换行
 window.textBreak = (str = '') => {
 	return str.replace(/\n|\r\n/g, '<br/>').replace(/ /g, '&nbsp;')
+}
+// 获取真实数据类型
+window.getAttr = (element) => {
+	return Object.prototype.toString.call(element).match(/[A-Z][a-z]*/)[0]
 }
 
 window.Ajax = Fetch.default

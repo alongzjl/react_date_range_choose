@@ -28,7 +28,6 @@ var styleMap = {
 	image:  '图片样式',
 	text:   '文本样式'
 }
-
 // 定义样式名称 & 渲染类型 & 相关配置
 var cssMap = {
 	top:               { name: '上',      type: 'Number' },
@@ -37,21 +36,21 @@ var cssMap = {
 	height:            { name: '高',      type: 'Number', min: 0, max: 768 },
 	borderRadius:      { name: '圆角',    type: 'Number' },
 	borderWidth:       { name: '边宽',    type: 'Number' },
-	lineHeight:        { name: '行高',    type: 'Number' },
-	fontSize:          { name: '字号',    type: 'Number', min: 12, max: 90, step: 2 },
-	textAlign:         { name: '对齐方式', type: 'TextAlign' },
+	lineHeight:        { name: '行高',    type: 'Number', min: 12, max: 200, step: 1  }, 
+	fontSize:          { name: '字号',    type: 'Number', min: 12, max: 90, step: 2 }, 
+	textAlign:         { name: '对齐方式', type: 'TextAlign' }, 
 	color:             { name: '字体颜色', type: 'Color' },
 	fontWeight:        { name: '粗细',    type: 'Switch', true: 'bold',      false: 'normal' },
 	fontStyle:         { name: '斜体',    type: 'Switch', true: 'italic',    false: 'normal' },
 	textDecoration:    { name: '下划线',  type: 'Switch', true: 'underline', false: 'none' },
 	opacity:           { name: '透明度',  type: 'Slider', min: 0, max: 1, step: 0.01 },
-	backgroundColor: 	{name: '背景颜色', type: 'Color'  },
-	boxShadow:      	{name:'元素阴影',type:'Shadow', min: 0, max: 20, step: 1 },
-	textShadow:     	{name:'文字阴影',type:'Shadow', min: 0, max: 20, step: 1 },
-	transformRotate:   		{name:'旋转角度',type:'Number', min: 0, max: 180, step: 1 },   
-	borderWidth:   		{name:'边框宽度',type:'Number'},
-	borderStyle:        {name:'边框样式',type:'Solid'},  
-	borderColor:        { name: '边框颜色', type: 'Color' }, 
+	backgroundColor:   { name: '背景颜色', type: 'Color' },
+	boxShadow:         { name: '元素阴影', type: 'Shadow', min: 0, max: 20, step: 1 },
+	textShadow:        { name: '文字阴影', type: 'Shadow', min: 0, max: 20, step: 1 },
+	transformRotate:   { name: '旋转角度', type: 'Number', min: 0, max: 180, step: 1 },   
+	borderWidth:       { name: '边框宽度', type: 'Number' },
+	borderStyle:       { name: '边框样式', type: 'Solid' },  
+	borderColor:       { name: '边框颜色', type: 'Color' }, 
 } 
    
 import './index.less'
@@ -63,17 +62,17 @@ class EditStyle extends React.Component {
 
 	componentWillUnmount() {}
 
-	onChange(val, style, css,shadow) { 
+	onChange(val, style, css, shadow) {  
 		let { data, actions, editConfig } = this.props
 		let { curData } = editConfig
 		let { parentComp } = curData
-		if(shadow){ 
-			data.style[style][css][shadow] = val;
-		}else{
-			style == 'feature' ? data[style][css] = val : data.style[style][css] = val;
-		} 
+		if(shadow) {
+			data.style[style][css][shadow] = val
+		} else {
+			style === 'feature'? data[style][css] = val: style === 'layout'? data.layout[css] = val: data.style[style][css]=val;
+		}
 		actions.updateComp(null, parentComp? parentComp: data)
-	}
+	} 
 
 	onChangeAuth(val, style, css) {
 		// console.clear()
@@ -96,7 +95,7 @@ class EditStyle extends React.Component {
 			<InputNumber
 				min={cfg.min || 0} max={cfg.max || 100} step={cfg.step || 1}
 				value={val} onChange={v => this.onChange(v, cls, key)}
-				style={{ width: '100%' }} 
+				style={{ width: '100%' }}
 			/>
 		)
 	}
@@ -117,7 +116,7 @@ class EditStyle extends React.Component {
 					/> 
 				</div>
 				<div>
-					垂直偏移: 
+					垂直偏移:
 					<InputNumber
 						min={cfg.min || 0} max={cfg.max || 100} step={cfg.step || 1}
 						value={v_shadow} onChange={v => this.onChange(v, cls, key,'v_shadow')}
@@ -125,7 +124,7 @@ class EditStyle extends React.Component {
 					/>
 				</div> 
 				<div>
-					模糊距离: 
+					模糊距离:
 					<InputNumber
 						min={cfg.min || 0} max={cfg.max || 100} step={cfg.step || 1}
 						value={blur_dis} onChange={v => this.onChange(v, cls, key,'blur_dis')}
@@ -134,10 +133,10 @@ class EditStyle extends React.Component {
 				</div>
 				<div>
 					阴影颜色:  
-					<Color 
+					<Color  
 						data={data}
 						color={color}
-						path={`style.${cls}.${key}`} 
+						path={`style.${cls}.${key}`}
 						action={'updateComp'}
 						placement="bottomLeft"
 					/> 
@@ -178,7 +177,6 @@ class EditStyle extends React.Component {
 			/>
 		)
 	}
-	 
 	// 开关
 	renderCheckbox(cfg, data, val, cls, key) {
 		return (
@@ -221,9 +219,26 @@ class EditStyle extends React.Component {
 	render() {
 		let { data } = this.props
 		if (!data.style) return false
-		let styleList = data.styleList				// 样式列表
-		let styles    = Object.keys(data.style)		// 具体样式
-		let activeKey = Array.from(new Array(styles.length), (_, i) => `${i}`)
+		let styleList  = data.styleList				// 样式列表
+		let styles     = Object.keys(data.style)	// 具体样式
+		let activeKey  = Array.from(new Array(styles.length), (_, i) => `${i}`)
+		// 位置大小
+		let layoutNode = Object.keys(data.layout).map((q, j) => {
+				if (!cssMap[q]) return
+				let cm     = cssMap[q],
+					val    = data.layout[q],
+					render = this[`render${cm.type}`]
+				if (!render) return
+				// 根据样式类型渲染对应组件
+				let dom = this[`render${cm.type}`].bind(this, cm, data, val, 'layout', q)()
+				return (
+					<div className="pgs-row" key={j}>
+						<div className="pgsr-name">{ cm.name }</div>
+						<div className="pgsr-ctrl">{ dom }</div>
+						<div className="pgsr-auth"></div>
+					</div>
+				)
+			})
 		// 子组件循环渲染
 		let childNode = styles.map((p, i) => {
 			if (!styleMap[p]) return
@@ -254,18 +269,13 @@ class EditStyle extends React.Component {
 				</Panel>
 			)
 		})
-		// 样式管理 暂时不用
-		// <ThemeManage
-		// 	data={data}
-		// 	list={styleList.list}
-		// 	idx={styleList.idx}
-		// 	parentKey={'styleList'}
-		// 	action={'updateComp'}
-		// 	name={'样式'}
-		// 	max={10}
-		// />
 		return (
 			<section className="pg-style">
+				<Collapse defaultActiveKey={['0']} onChange={this.cb}>
+					<Panel header={'组件样式'} key={0}>
+						{ layoutNode }
+					</Panel>
+				</Collapse>
 				<StyleManage
 					data={data}
 					add={false}
@@ -304,7 +314,6 @@ class StyleManageSwiper extends React.Component {
 								checked={feature.switch} onChange={v => this.props.onChange(v? true: false,'feature','switch')}
 							/>
 						</div>
-						
 					</div>
 					<div className="pgs-row" key={4}>
 						<div className="pgsr-name">循环间隔</div>
@@ -315,7 +324,6 @@ class StyleManageSwiper extends React.Component {
 								style={{ width: '100%' }}
 							/>
 						</div>
-						
 					</div>
 				</Panel>
 			</Collapse>
@@ -338,3 +346,4 @@ export default connect(
 	mapStateToProps,
 	mapDispatchToProps
 )(EditStyle)
+ 
