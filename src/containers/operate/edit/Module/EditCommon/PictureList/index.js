@@ -239,20 +239,17 @@ class VideoModule extends React.Component {
 		]
 	}
 	
-	componentDidMount(){
-		let videoList = this.props.videoList;
-		videoList = videoList.map(item=>{
-			item.isClicked = false;
-			return item
-		});
+	componentWillReceiveProps(props){
+		let videoList = props.videoList;
+		let videoTypes = props.videoTypes;
 		 this.setState({
 				videoList:videoList,
 				videoTypes:videoTypes
-			})
+			}) 
 	}
 	chooseType(id) {
 		this.props.getVideoList();  
-	}
+	} 
 	chooseVideo = id => { 
 		let videoList = this.state.videoList
 		videoList = videoList.map(item=>{
@@ -303,7 +300,7 @@ class VideoModule extends React.Component {
 			<div className="content">
 				<div className="left">
 					{
-						this.state.videoTypes.map((item,index) => <Type key={index} item={item.name} choose_one={this.chooseType}></Type>)
+						this.state.videoTypes.map((item,index) => <Type key={index} item={item} choose_one={this.chooseType}></Type>)
 					}
 				</div> 
 				<div className="right">
@@ -330,8 +327,10 @@ function List({item,choose_one}){
 		<div onClick={()=>{choose_one(item.id)}} className={item.isClicked?'choosed':''}>
 			<div className={item.isClicked?'icon':''}>
 				<div className="right-symbol"></div>
-			</div>
-			<img src={item.url} />
+			</div>  
+			<video src={item.url} controls="controls">
+				您的浏览器不支持 video 标签。
+			</video>
 		</div>
 	)
 }
