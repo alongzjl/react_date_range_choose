@@ -14,35 +14,80 @@ import './index.less'
 class SwiperImage extends React.Component {
 	
 	componentWillReceiveProps(props) {
-		const switch_but = props.data.feature.switch;
-		const autoPlayTime = props.data.feature.autoPlayTime;
-		props.data.content.length >1 ? this.initSwiper(switch_but,autoPlayTime) : null;
+		this.init(props);
 	}
 	componentDidMount() {
-		const switch_but = this.props.data.feature.switch;
-		const autoPlayTime = this.props.data.feature.autoPlayTime;
-		this.props.data.content.length >1 ? this.initSwiper(switch_but,autoPlayTime) : null;
-	}
+		this.init(this.props);
+	} 
 
 	to = event => {
 		event.preventDefault()
-	}
-	 initSwiper = (autoplay,autoPlayTime) => {
-		this.swiper = new Swiper('.swiper-container', {
-			loop:            true,
-			autoplay:        autoplay,
-			speed:           autoPlayTime,
-			effect:          'slide', // 'slide' or 'fade' or 'cube' or 'coverflow' or 'flip'
-			resistanceRatio: 0.5,
-			mousewheel:      true,
-			watchSlidesProgress: true
-		 })
-	}
-	
+	};
+	init = props => {
+		let swiperOptions = props.data.feature.swiperOptions;
+		swiperOptions = this.formatObj(swiperOptions);
+		const type = props.data.feature.layout;
+		if(type == 2){ 
+			swiperOptions.on = this.swiperType();
+			swiperOptions.centeredSlides = true;
+			swiperOptions.loopedSlides = 3;
+		} 
+		console.log(swiperOptions); 
+		props.data.content.length >1 ? this.initSwiper(swiperOptions) : null;
+	}; 
+	 initSwiper = (swiperOptions) => {
+	 	new Swiper('.swiper-container', swiperOptions) 
+	};
+	formatObj = (obj) => {
+		let new_obj = {};
+		for(var key in obj){ 
+			if(key == 'pagination'&& obj[key]){
+				new_obj.pagination = obj['paginationOptions'];
+			}else if(key == 'autoplay'&& obj[key]){
+				new_obj.autoplay = obj['autoplayOptions']
+			}else{
+				if(key != 'autoplayOptions'&&key != 'paginationOptions'&&key != 'pagination'){
+					new_obj[key] = obj[key];
+				} 
+			} 
+		}
+		new_obj.watchSlidesProgress = true;
+
+		return new_obj
+	};
+	swiperType = () => {
+		return {
+        	
+			 progress: function(progress) {
+		    	for (var i = 0; i < this.slides.length; i++) {
+					var slide = this.slides.eq(i);
+					var slideProgress = this.slides[i].progress;
+					var modify = 1;
+					if (Math.abs(slideProgress) > 1) {
+						modify = (Math.abs(slideProgress) - 1) * 0.3;
+					}
+					const translate = slideProgress * modify * (-60) + 'px';  
+					const scale = 1 - Math.abs(slideProgress) / 3;
+					const zIndex = 999 - Math.abs(Math.round(10 * slideProgress));
+					slide.transform('translateX(' + translate + ') scale(' + scale + ')');
+					slide.css('zIndex', zIndex);
+					slide.css('opacity', 1);
+					if (Math.abs(slideProgress) > 3) {
+						slide.css('opacity', 0);
+					}  
+				}   
+			},  
+			setTransition: function(transition) {
+				for (var i = 0; i < this.slides.length; i++) {
+					var slide = this.slides.eq(i)
+					slide.transition(transition);
+				}
+			}
+		 }
+	};
 	render() {
-		let { data } = this.props
-		// console.log(data)
-		return (
+		let { data,feature } = this.props
+		return ( 
 			<div className="e-SwiperImage">
 				{
 					data.content.length > 1 ?
@@ -51,7 +96,8 @@ class SwiperImage extends React.Component {
 								{
 									data.content.map((item,index) => <div className="swiper-slide" key={index}><div className="text_show" style={cssColorFormat(this.props, 'text')}>{item.title}</div><img src={compImgFormat(this.props, item.img)} /></div>)
 								}
-							</div>
+							</div>  
+							<div className="swiper-pagination"></div>
 						</div> : <div className="outer_box"><div className="text_show" style={cssColorFormat(this.props, 'text')}>{data.content[0].title}</div><img src={compImgFormat(this.props, data.content[0].img)} /></div>
 				}
 			</div>

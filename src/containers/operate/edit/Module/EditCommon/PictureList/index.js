@@ -7,7 +7,7 @@
 
 import React from 'react';
 import SkyLight from 'react-skylight';
-import Fetch from "../../../../../../public/Fetch"
+//import Fetch from "../../../../../../public/Fetch"
 import './index.less'
 import { Button, Upload, message,Modal } from 'antd'
 const commonCss = {
@@ -123,8 +123,8 @@ export default class PictureList extends React.Component {
 						<div className="search">搜索</div>
 					</div>
 					{
-						type != 'video' ? <ImgModule save={this.save_img} getImgList={this.getImgList} firstAdd={firstAdd} imgTypes={this.state.imgTypes} imgList={this.state.imgList} /> : 
-						<VideoModule save={this.save_img} getVideoList={this.getVideoList} videoTypes={this.state.videoTypes} videoList={this.state.videoList} />
+						type == 'video' ? <VideoModule save={this.save_img} getVideoList={this.getVideoList} videoTypes={this.state.videoTypes} videoList={this.state.videoList} type={type} /> :
+						<ImgModule save={this.save_img} getImgList={this.getImgList} firstAdd={firstAdd} imgTypes={this.state.imgTypes} imgList={this.state.imgList} type={type} />
 					} 
 					<div className="bottom">
 						<Button type="primary" onClick={this.save}>确定</Button>
@@ -221,7 +221,7 @@ class ImgModule extends React.Component {
 						<div className="add_img"><div className="add_text">+</div><div>上传图片</div></div>
 					</Upload> 
 					{
-						this.state.imgList.map((item,index) => <List key={index} item={item} choose_one={this.chooseImg.bind(this)}></List> )
+						this.state.imgList.map((item,index) => <List key={index} item={item} type={this.props.type} choose_one={this.chooseImg.bind(this)}></List> )
 					}
 				</div>
 			</div>
@@ -308,7 +308,7 @@ class VideoModule extends React.Component {
 						<div className="add_img"><div className="add_text">+</div><div>上传视频</div></div>
 					</Upload>
 					{
-						this.state.videoList.map((item,index) => <List key={index} item={item} choose_one={this.chooseVideo}></List> )
+						this.state.videoList.map((item,index) => <List key={index} item={item} type={this.props.type} choose_one={this.chooseVideo}></List> )
 					}
 				</div>
 			</div>
@@ -322,15 +322,18 @@ function Type({item,choose_one}){
 	)
 }
 
-function List({item,choose_one}){
+function List({item,choose_one,type}){
 	return (
 		<div onClick={()=>{choose_one(item.id)}} className={item.isClicked?'choosed':''}>
 			<div className={item.isClicked?'icon':''}>
 				<div className="right-symbol"></div>
-			</div>  
-			<video src={item.url} controls="controls">
-				您的浏览器不支持 video 标签。
-			</video>
-		</div>
+			</div>
+			{
+				type == 'video' ? <video src={item.url} controls="controls">
+						您的浏览器不支持 video 标签。
+					</video> :
+					<img src={item.url} />
+			}  
+		</div> 
 	)
 }

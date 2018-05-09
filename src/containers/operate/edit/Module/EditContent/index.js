@@ -22,8 +22,8 @@ import ImageUploadComp from 'compEdit/EditCommon/ImageUploadComp'
 // import Picture     from './Picture'
 // import Web         from './Web'
 // import Text        from './Text'
-// import SwiperImage from './SwiperImage'
-import Floor           from './Floor'
+ import SwiperImage from './SwiperImage'
+import Floor           from './Floor' 
 import StoreList       from './StoreList'
 import Navigation      from './Navigation'
 import NavigationFloat from './NavigationFloat'
@@ -185,8 +185,8 @@ class EditContent extends React.Component {
 		// if (compName === 'picture')           compCon = (<Picture         data={data}/>)
 		// else if (compName === 'web')          compCon = (<Web             data={data}/>)
 		// else if (compName === 'text')         compCon = (<Text            data={data}/>)
-		// else if (compName === 'swiperImage')  compCon = (<SwiperImage     data={data}/>)
-		if (content.length) {
+		 else if (compName === 'swiperImage' && content.length > 1)  compCon = (<SwiperImage     data={this.props}/>)
+		if (content.length) {   
 			activeKey = Array.from(new Array(content.length + 1), (_, i) => `${i}`)
 			childNode = content.map((_, i) => {
 				return (
@@ -198,7 +198,7 @@ class EditContent extends React.Component {
 		} else {
 			activeKey = ['0']
 			let con = this.renObj(data, content)
-			childNode = (
+			childNode = ( 
 				con.length
 				? 
 				<Panel header={'内容编辑'} key={data.name == 'video'?1:0}>

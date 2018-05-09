@@ -85,7 +85,7 @@ var cssMap = {
 		{ name: '中', value: 'center' },
 		{ name: '右', value: 'flex-end' }
 	] }
-} 
+}  
    
 import './index.less'
 
@@ -317,15 +317,15 @@ class EditStyle extends React.Component {
 				<Collapse defaultActiveKey={activeKey} onChange={this.cb}>
 					{ childNode }
 				</Collapse>
-				{
-					data.name == 'swiperImage' ? <StyleManageSwiper feature={data} onChange={this.onChange.bind(this)} onChangeAuth={this.onChangeAuth.bind(this)} ></StyleManageSwiper> : null
-				}
+				
 				
 			</section>
 		)
 	}
 }
-
+/*{
+					data.name == 'swiperImage' ? <StyleManageSwiper feature={data} onChange={this.onChange.bind(this)} onChangeAuth={this.onChangeAuth.bind(this)} ></StyleManageSwiper> : null
+				}*/ 
 class StyleManageSwiper extends React.Component {
 	
 	render (){
