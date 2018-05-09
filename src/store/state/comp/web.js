@@ -10,8 +10,8 @@ module.exports = {
 		position: 'absolute',
 		top:      0,
 		left:     0,
-		width:    432,
-		height:   240
+		width:    540,
+		height:   260
 	},
 	// 样式管理
 	style: JSON.parse(JSON.stringify(style)),

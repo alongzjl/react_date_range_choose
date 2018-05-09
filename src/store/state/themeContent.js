@@ -4,11 +4,15 @@ module.exports = {
 	colors: {
 		main: {
 			name:  '主色',
-			color: '#0e1231'
+			color: '#cfad81'
 		},
 		auxiliary: {
 			name:  '辅助色',
-			color: '#00a79d'
+			color: '#e5c7a2'
+		},
+		high: {
+			name:  '高亮色',
+			color: '#f6efe5'
 		},
 		complementary: {
 			name:  '互补色',
@@ -24,7 +28,11 @@ module.exports = {
 		},
 		text: {
 			name:  '文本色',
-			color: '#999999'
+			color: '#4a4a4a'
+		},
+		textHigh: {
+			name:  '文本高亮色',
+			color: '#fff'
 		},
 		logo: {
 			name:  'LOGO',

@@ -74,7 +74,7 @@ class Color extends React.Component {
 			cp = (
 				<Col span={6}>
 					<ColorPicker
-						alpha={color.alpha || 100}
+						alpha={color.alpha === undefined? 100: color.alpha}
 						color={color.rgb || color.color}
 						onClose={this.changeCustomColor.bind(this)}
 						placement={ placement || 'bottomLeft' }

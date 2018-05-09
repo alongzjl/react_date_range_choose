@@ -11,7 +11,7 @@ import { bindActionCreators } from 'redux'
 import { connect }  from 'react-redux'
 import * as actions from 'actions'
 
-import { Checkbox, Collapse, Icon, Input, Select } from 'antd'
+import { Checkbox, Collapse, Icon, Input, InputNumber, Select } from 'antd'
 const  { TextArea } = Input
 const  { Panel }    = Collapse
 const Option = Select.Option
@@ -22,8 +22,7 @@ import ImageUploadComp from 'compEdit/EditCommon/ImageUploadComp'
 // import Picture     from './Picture'
 // import Web         from './Web'
 // import Text        from './Text'
- import SwiperImage from './SwiperImage'
-import Floor           from './Floor' 
+import SwiperImage from './SwiperImage'
 import StoreList       from './StoreList'
 import Navigation      from './Navigation'
 import NavigationFloat from './NavigationFloat'
@@ -33,9 +32,10 @@ var conMap = {
 	text:        { name: '文本内容', type: 'Textarea', max: 1000, autosize: { minRows: 1, maxRows: 6 } },
 	title:       { name: '标题',    type: 'Title',    max: 30 },
 	img:         { name: '图片',    type: 'Image' },
-	letterBGImg: { name: '字母图片', type: 'Image' },
+	filterBGImg: { name: '字母图片', type: 'Image' },
 	url:         { name: '网址',    type: 'Url' },
-	router:      { name: '页面跳转', type: 'Router' } 
+	router:      { name: '页面跳转', type: 'Router' },
+	size:        { name: '商品数量', type: 'Number', min: 1, max: 50 },
 }
 
 import './index.less'
@@ -89,6 +89,16 @@ class EditContent extends React.Component {
 				min={cfg.min || 0} max={cfg.max || 100}
 				autosize={cfg.autosize || false}
 				value={val} onChange={v => this.onChange(v.target.value, key, index)}
+				style={{ width: '100%' }}
+			/>
+		)
+	}
+	// 数字
+	renderNumber(cfg, data, val, key, index) {
+		return (
+			<InputNumber
+				min={cfg.min || 0} max={cfg.max || 100} step={cfg.step || 1}
+				value={val} onChange={v => this.onChange(v, key, index)}
 				style={{ width: '100%' }}
 			/>
 		)
@@ -181,12 +191,11 @@ class EditContent extends React.Component {
 		else if (compName === 'navigationFloat') compCon = (<NavigationFloat data={this.props}/>)
 		else if (compName === 'date')            compCon = (<Date            data={this.props}/>)
 		else if (compName === 'storeList')       compCon = (<StoreList       data={data}/>)
-		else if (compName === 'floor')           compCon = (<Floor           data={data}/>)
 		// if (compName === 'picture')           compCon = (<Picture         data={data}/>)
 		// else if (compName === 'web')          compCon = (<Web             data={data}/>)
 		// else if (compName === 'text')         compCon = (<Text            data={data}/>)
 		 else if (compName === 'swiperImage' && content.length > 1)  compCon = (<SwiperImage     data={this.props}/>)
-		if (content.length) {   
+		if (content.length) {
 			activeKey = Array.from(new Array(content.length + 1), (_, i) => `${i}`)
 			childNode = content.map((_, i) => {
 				return (
@@ -198,7 +207,7 @@ class EditContent extends React.Component {
 		} else {
 			activeKey = ['0']
 			let con = this.renObj(data, content)
-			childNode = ( 
+			childNode = (
 				con.length
 				? 
 				<Panel header={'内容编辑'} key={data.name == 'video'?1:0}>

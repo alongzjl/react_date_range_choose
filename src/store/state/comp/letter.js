@@ -1,48 +1,50 @@
 // 字母排序
 var style = {
-	letterBox: {
-		fontSize:       12, 
+	filterBox: {
+		fontSize:       8, 
 		fontStyle:      'normal',
 		fontWeight:     'normal',
 		textDecoration: 'none',
 	},
-	letter: {
-		width:  33,
-		height: 33,
+	filter: {
+		width:  20,
+		height: 20,
 		justifyContent: 'center',
-		marginTop:    0,
-		marginRight:  6,
-		marginBottom: 6,
-		marginLeft:   0,
-		borderWidth:  0,
+		margin: {
+			top:     0,
+			right:   8,
+			bottom:  10,
+			left:    0,
+		},
+		borderWidth:  1,
 		borderStyle: 'solid',
-		borderColor: { type: 'custom', color: '#fff' },
+		borderColor: { type: 'auxiliary', color: '#fff' },
 		color: { type: 'custom', color: '#666' },
 		background: 'center no-repeat',
 		backgroundSize: 'contain',
 		backgroundColor: { type: 'custom', color: '#fff' },
 		borderRadius:    {
-			topLeft:     6,
-			topRight:    6,
-			bottomLeft:  6,
-			bottomRight: 6
+			topLeft:     10,
+			topRight:    10,
+			bottomLeft:  10,
+			bottomRight: 10
 		},
 		boxShadow: {
-			h_shadow:   5,
-			v_shadow:   5,
-			blur_dis:   16,
+			h_shadow:   0,
+			v_shadow:   0,
+			blur_dis:   0,
 			spread_dis: 0,
-			color:      { type: 'custom', color: 'rgba(0, 0, 0, .2)' }
+			color:      { type: 'custom', color: '#000' }
 		}
 	},
-	letterActive: {
+	filterActive: {
 		justifyContent: 'center',
-		borderWidth: 0,
+		borderWidth: 2,
 		borderStyle: 'solid',
-		borderColor: { type: 'custom', color: '#a240ec' },
-		color: { type: 'custom', color: '#fff' },
+		borderColor: { type: 'auxiliary', color: '#a240ec' },
+		color: { type: 'textHigh', color: '#fff' },
 		background: 'center no-repeat',
-		backgroundColor: { type: 'custom', color: '#a240ec' }
+		backgroundColor: { type: 'main', color: '#a240ec' }
 	}
 }
 
@@ -54,14 +56,14 @@ module.exports = {
 		position: 'absolute',
 		top:      0,
 		left:     0,
-		width:    234,
-		height:   234
+		width:    364,
+		height:   60
 	},
 	// 样式管理
 	style: JSON.parse(JSON.stringify(style)),
 	// 内容管理
 	content: {
-		letterBGImg: { type: 'custom', img: '' },	// 图片url
+		filterBGImg: { type: 'custom', img: '' },	// 图片url
 	},
 	// 动画设置
 	animation: {

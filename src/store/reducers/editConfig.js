@@ -23,8 +23,15 @@ function saveData() {
 
 function getCompData(state, key) {
 	let compData = JSON.parse(JSON.stringify(comp[key]))
+	let { feature } = compData
 	if (key === 'storeList') {
-		compData.feature.floors = JSON.parse(JSON.stringify(state.globalData.floors))
+		let { body } = feature
+		feature.floors = JSON.parse(JSON.stringify(state.globalData.floors))
+		feature.catgs  = JSON.parse(JSON.stringify(state.globalData.catgs))
+		let storeList  = JSON.parse(JSON.stringify(state.globalData.storeList))
+		feature.list   = storeList.data
+		body.page      = storeList.page
+		body.total     = storeList.total
 	}
 	return compData
 }

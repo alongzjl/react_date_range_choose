@@ -40,19 +40,26 @@ module.exports = {
 	// 文本
 	text:            authInit(require('./text')),
 	//按钮
-	button:          authInit(require('./button')), 
+	button:          authInit(require('./button')),
 	// 自定义
 	web:             authInit(require('./web')),
 	// 导航列表
 	navigation:      authInit(require('./navigation')),
 	// 悬浮导航
-	navigationFloat: authInit(require('./navigationFloat')), 
+	navigationFloat: authInit(require('./navigationFloat')),
 	// 字母
 	letter:          authInit(require('./letter')),
 	// 楼层
 	floor:           authInit(require('./floor')),
+	// 分类
+	catg:            authInit(require('./catg')),
+	// 分页
+	page:            authInit(require('./page')),
+	// 列表 (店铺)
+	listByStore:     authInit(require('./listByStore')),
 	// 视频
-	video:      authInit(require('./video')),
+	video:           authInit(require('./video')),
+	
 	/* 业务组件 */
 	// 店铺列表
 	storeList:       authInit(require('./storeList'))

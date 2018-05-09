@@ -19,6 +19,9 @@ import Text         from 'compEdit/EditElement/Text'
 import SwiperImage  from 'compEdit/EditElement/SwiperImage'
 import Letter       from 'compEdit/EditElement/Letter'
 import Floor        from 'compEdit/EditElement/Floor'
+import Catg         from 'compEdit/EditElement/Catg'
+import Page         from 'compEdit/EditElement/Page'
+import ListByStore  from 'compEdit/EditElement/ListByStore'
 
 import './index.less'
 
@@ -82,6 +85,9 @@ class Custom extends React.Component {
 			else if (compName === 'swiperImage') compCon = (<SwiperImage data={_} parent={data} editConfig={editConfig} actions={actions} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} />)
 			else if (compName === 'letter')      compCon = (<Letter      data={_} parent={data} editConfig={editConfig} actions={actions} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} />)
 			else if (compName === 'floor')       compCon = (<Floor       data={_} parent={data} editConfig={editConfig} actions={actions} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} />)
+			else if (compName === 'catg')        compCon = (<Catg        data={_} parent={data} editConfig={editConfig} actions={actions} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} />)
+			else if (compName === 'page')        compCon = (<Page        data={_} parent={data} editConfig={editConfig} actions={actions} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} />)
+			else if (compName === 'listByStore') compCon = (<ListByStore data={_} parent={data} editConfig={editConfig} actions={actions} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} />)
 			return (
 				<Rnd
 					key={i}

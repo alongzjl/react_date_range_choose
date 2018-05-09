@@ -3,7 +3,7 @@
  * @Date:   2018-05-03
 
  */
-import React from 'react'
+ import React from 'react'
 import './index.less'
 
 import { bindActionCreators } from 'redux'

@@ -8,7 +8,7 @@
 import React from 'react'
 import './index.less'
 
-class Floor extends React.Component {
+class Catg extends React.Component {
 	componentWillMount() {}
 
 	componentDidMount() {}
@@ -17,8 +17,8 @@ class Floor extends React.Component {
 
 	selectVal(str) {
 		let { parent, actions, ioInput, ioOuter } = this.props
-		if (ioInput.body.floor === str || !parent) return
-		ioInput.body.floor = str
+		if (ioInput.body.catg === str || !parent) return
+		ioInput.body.catg = str
 		ioOuter(ioInput)
 	}
 
@@ -48,8 +48,8 @@ class Floor extends React.Component {
 	}
 
 	// 字母+数字
-	// renderStyle1(floors, nowVal) {
-	// 	let arr = [...floors]
+	// renderStyle1(catgs, nowVal) {
+	// 	let arr = [...catgs]
 	// 	return (
 	// 		<div className="el-6">
 	// 			{
@@ -69,15 +69,15 @@ class Floor extends React.Component {
 	// 	)
 	// }
 
-	renderStyle1(props, floors, nowVal) {
-		return this.renderDom.bind(this, props, floors, nowVal)()
+	renderStyle1(props, catgs, nowVal) {
+		return this.renderDom.bind(this, props, catgs, nowVal)()
 	}
 
 	
 	render() {
 		let { type, editConfig, ioInput } = this.props
-		let { floors } = ioInput
-		let dom = this[`render${type}`].bind(this, this.props, floors, ioInput.body.floor)()
+		let { catgs } = ioInput
+		let dom = this[`render${type}`].bind(this, this.props, catgs, ioInput.body.catg)()
 		return (
 			<section className={`e-floor ${type}`}>
 				{ dom }
@@ -86,4 +86,4 @@ class Floor extends React.Component {
 	}
 }
 
-export default Floor
+export default Catg

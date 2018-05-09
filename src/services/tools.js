@@ -3,7 +3,6 @@ const formatPxMap = {
 	fontSize: 1,
 	width: 1,
 	height: 1,
-	padding: 1,
 	paddingTop: 1,
 	paddingRight: 1,
 	paddingBottom: 1,
@@ -24,12 +23,15 @@ const formatPxMap = {
 	lineHeight: 1
 }
 const formatComplexMap = {
+	margin: 1,
+	padding: 1,
 	borderRadius: 1,
 	boxShadow: 1,
 	textShadow: 1
 }
 const formatColorMap = {
 	color: 1,
+	borderColor: 1,
 	backgroundColor: 1
 }
 const formatPxMap2 = {

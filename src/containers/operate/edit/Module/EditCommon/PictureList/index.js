@@ -7,7 +7,6 @@
 
 import React from 'react';
 import SkyLight from 'react-skylight';
-//import Fetch from "../../../../../../public/Fetch"
 import './index.less'
 import { Button, Upload, message,Modal } from 'antd'
 const commonCss = {
@@ -245,11 +244,11 @@ class VideoModule extends React.Component {
 		 this.setState({
 				videoList:videoList,
 				videoTypes:videoTypes
-			}) 
+			})
 	}
 	chooseType(id) {
 		this.props.getVideoList();  
-	} 
+	}
 	chooseVideo = id => { 
 		let videoList = this.state.videoList
 		videoList = videoList.map(item=>{

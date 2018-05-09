@@ -10,7 +10,7 @@ module.exports = [
 			icon: 'button-control',
 			name: '按钮',
 			key:  'button'
-		}, 
+		},
 		{
 			icon: 'img-control',
 			name: '图片',
@@ -46,7 +46,7 @@ module.exports = [
 			icon: 'navigationFloat-control',
 			name: '悬浮导航', 
 			key:  'navigationFloat', 
-		}, 
+		},
 		{
 			icon: 'letter-control',
 			name: '字母',
@@ -56,6 +56,21 @@ module.exports = [
 			icon: 'floor-control',
 			name: '楼层',
 			key:  'floor'
+		},
+		{
+			icon: 'catg-control',
+			name: '分类',
+			key:  'catg'
+		},
+		{
+			icon: 'page-control',
+			name: '分页',
+			key:  'page'
+		},
+		{
+			icon: 'list-control',
+			name: '列表',
+			key:  'listByStore'
 		},
 		{
 			icon: 'store-control',

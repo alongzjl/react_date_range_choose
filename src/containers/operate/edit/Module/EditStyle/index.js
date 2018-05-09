@@ -25,9 +25,9 @@ const RadioGroup  = Radio.Group
 var styleMap = {
 	image:        '图片样式',
 	text:         '文本样式',
-	letterBox:    '盒样式',
-	letter:       '元素样式',
-    letterActive: '激活样式',
+	filterBox:    '盒样式',
+	filter:       '元素样式',
+    filterActive: '激活样式',
 }
 // 定义样式名称 & 渲染类型 & 相关配置
 var cssMap = {
@@ -38,7 +38,7 @@ var cssMap = {
 	borderRadius:      { name: '圆角',    type: 'Number' },
 	borderWidth:       { name: '边宽',    type: 'Number' },
 	lineHeight:        { name: '行高',    type: 'Number' },
-	fontSize:          { name: '字号',    type: 'Number', min: 12, max: 90, step: 2 },
+	fontSize:          { name: '字号',    type: 'Number', min: 6, max: 90, step: 2 },
 	textAlign:         { name: '对齐方式', type: 'TextAlign', option: [
 		{ name: '左', value: 'left' },
 		{ name: '中', value: 'center' },
@@ -76,16 +76,32 @@ var cssMap = {
 	borderWidth:       { name: '边框宽度', type: 'Number' },
 	borderStyle:       { name: '边框样式', type: 'Solid' },
 	borderColor:       { name: '边框颜色', type: 'Color' },
-	marginTop:         { name: '上边距',   type: 'Number', max: 20 },
-	marginRight:       { name: '右边距',   type: 'Number', max: 20 },
-	marginBottom:      { name: '下边距',   type: 'Number', max: 20 },
-	marginLeft:        { name: '左边距',   type: 'Number', max: 20 },
+	margin:            { name: '外边距', type: 'Complex', child: {
+		top:     { name: '上', type: 'Number', max: 40 },
+		right:   { name: '右', type: 'Number', max: 40 },
+		bottom:  { name: '下', type: 'Number', max: 40 },
+		left:    { name: '左', type: 'Number', max: 40 }
+	} },
+	marginTop:         { name: '外边距上', type: 'Number', max: 20 },
+	marginRight:       { name: '外边距右', type: 'Number', max: 20 },
+	marginBottom:      { name: '外边距下', type: 'Number', max: 20 },
+	marginLeft:        { name: '外边距左', type: 'Number', max: 20 },
+	padding:           { name: '内边距', type: 'Complex', child: {
+		top:     { name: '上', type: 'Number', max: 40 },
+		right:   { name: '右', type: 'Number', max: 40 },
+		bottom:  { name: '下', type: 'Number', max: 40 },
+		left:    { name: '左', type: 'Number', max: 40 }
+	} },
+	paddingTop:        { name: '内边距上', type: 'Number', max: 20 },
+	paddingRight:      { name: '内边距右', type: 'Number', max: 20 },
+	paddingBottom:     { name: '内边距下', type: 'Number', max: 20 },
+	paddingLeft:       { name: '内边距左', type: 'Number', max: 20 },
 	justifyContent:    { name: '对齐方式', type: 'TextAlign', option: [
 		{ name: '左', value: 'flex-start' },
 		{ name: '中', value: 'center' },
 		{ name: '右', value: 'flex-end' }
 	] }
-}  
+} 
    
 import './index.less'
 
@@ -317,15 +333,15 @@ class EditStyle extends React.Component {
 				<Collapse defaultActiveKey={activeKey} onChange={this.cb}>
 					{ childNode }
 				</Collapse>
-				
+				{
+					data.name == 'swiperImage' ? <StyleManageSwiper feature={data} onChange={this.onChange.bind(this)} onChangeAuth={this.onChangeAuth.bind(this)} ></StyleManageSwiper> : null
+				}
 				
 			</section>
 		)
 	}
 }
-/*{
-					data.name == 'swiperImage' ? <StyleManageSwiper feature={data} onChange={this.onChange.bind(this)} onChangeAuth={this.onChangeAuth.bind(this)} ></StyleManageSwiper> : null
-				}*/ 
+
 class StyleManageSwiper extends React.Component {
 	
 	render (){

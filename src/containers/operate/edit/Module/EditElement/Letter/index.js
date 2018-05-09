@@ -17,22 +17,19 @@ class Letter extends React.Component {
 
 	selectVal(str) {
 		let { parent, actions, ioInput, ioOuter } = this.props
-		if (ioInput.api.body.letter === str || !parent) return
-		ioInput.api.body.letter = str
+		if (ioInput.body.letter === str || !parent) return
+		ioInput.body.letter = str
 		ioOuter(ioInput)
 	}
-
-	// 字母+数字
-	renderStyle1(props, letter, num, nowVal) {
-		let arr = [...letter, ...num],
-			img = props.data.content.letterBGImg,
-			css = cssColorFormat(props, 'letter')
+	renderDom(props, arr, nowVal) {
+		let img = props.data.content.filterBGImg,
+			css = cssColorFormat(props, 'filter')
 		css.backgroundImage = `url('${getImg(img)}')`
 		return (
-			<div className="el-6" style={cssColorFormat(props, 'letterBox')}>
+			<div style={cssColorFormat(props, 'filterBox')}>
 				{ arr.map((_, i) => {
 					let nCss = css
-					if (_ === nowVal) nCss = { ...css, ...cssColorFormat(props, 'letterActive') }
+					if (_ === nowVal) nCss = { ...css, ...cssColorFormat(props, 'filterActive') }
 					return (
 						<div
 							key={i}
@@ -47,32 +44,25 @@ class Letter extends React.Component {
 			</div>
 		)
 	}
+
 	// 字母
-	renderStyle2(props, letter, num, nowVal) {
-		let { data } = this.props
-		let arr = [...letter]
-		return (
-			<div className="el-6">
-				{ arr.map((_, i) => (<div className={`el-item${_ === nowVal? ' s-active': ''}`} key={i} onClick={this.selectVal.bind(this, _)}>{_}</div>)) }
-			</div>
-		)
+	renderStyle1(props, letter, num, nowVal) {
+		return this.renderDom.bind(this, props, letter, nowVal)()
 	}
 	// 数字
+	renderStyle2(props, letter, num, nowVal) {
+		return this.renderDom.bind(this, props, num, nowVal)()
+	}
+	// 字母+数字
 	renderStyle3(props, letter, num, nowVal) {
-		let { data } = this.props
-		let arr = [...num]
-		return (
-			<div className="el-6">
-				{ arr.map((_, i) => (<div className={`el-item${_ === nowVal? ' s-active': ''}`} key={i} onClick={this.selectVal.bind(this, _)}>{_}</div>)) }
-			</div>
-		)
+		return this.renderDom.bind(this, props, [...letter, ...num], nowVal)()
 	}
 	
 	render() {
 		let { type, ioInput } = this.props
 		let letter = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
 		let num    = Array.from(new Array(10), (_, i) => `${i}`)
-		let dom    = this[`render${type}`].bind(this, this.props, letter, num, ioInput.api.body.letter)()
+		let dom    = this[`render${type}`].bind(this, this.props, letter, num, ioInput.body.letter)()
 		return (
 			<section className={`e-letter ${type}`}>
 				{ dom }
