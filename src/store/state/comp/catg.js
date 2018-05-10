@@ -7,18 +7,24 @@ var style = {
 		textDecoration: 'none',
 	},
 	filter: {
-		width:  25,
-		height: 25,
+		height:     24,
+		lineHeight: 24,
 		justifyContent: 'center',
 		margin: {
 			top:     0,
-			right:   0,
-			bottom:  25,
+			right:   4,
+			bottom:  0,
 			left:    0,
 		},
-		borderWidth:  1,
-		borderStyle: 'solid',
-		borderColor: { type: 'auxiliary', color: '#fff' },
+		padding: {
+			top:     0,
+			right:   15,
+			bottom:  0,
+			left:    15,
+		},
+		borderWidth:   2,
+		borderStyle:  'solid',
+		borderColor:  { type: 'custom', color: 'rgba(0, 0, 0, 0)', rgb: '#000', alpha: 0 },
 		color: { type: 'custom', color: '#666' },
 		background: 'center no-repeat',
 		backgroundSize: 'contain',
@@ -49,15 +55,15 @@ var style = {
 }
 
 module.exports = {
-	name: 'floor',
+	name: 'catg',
 	type: 'base',
 	// 位置大小
 	layout: {
 		position: 'absolute',
 		top:      0,
 		left:     0,
-		width:    25,
-		height:   500
+		width:    440,
+		height:   24
 	},
 	// 样式管理
 	style: JSON.parse(JSON.stringify(style)),

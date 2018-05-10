@@ -13,8 +13,8 @@ module.exports = {
 		},
 		list: [JSON.parse(JSON.stringify(tc))]
 	},
-	// 楼层数据
-	floors: [],
+	floors: [],		// 楼层数据
+	catgs: [],	// 分类数据
 	// 全局特征 
 	feature: {
 	}

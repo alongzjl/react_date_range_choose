@@ -1,33 +1,35 @@
 // 字母排序
 var style = {
 	filterBox: {
-		fontSize:       8, 
+		width:  18,
+		height: 18,
+		margin: {
+			top:     0,
+			right:   0,
+			bottom:  0,
+			left:    0,
+		},
+		fontSize:       8,
 		fontStyle:      'normal',
 		fontWeight:     'normal',
 		textDecoration: 'none',
 	},
 	filter: {
-		width:  25,
-		height: 25,
+		width:  6,
+		height: 6,
 		justifyContent: 'center',
-		margin: {
-			top:     0,
-			right:   0,
-			bottom:  25,
-			left:    0,
-		},
-		borderWidth:  1,
+		borderWidth:  0,
 		borderStyle: 'solid',
-		borderColor: { type: 'auxiliary', color: '#fff' },
+		borderColor: { type: 'custom', color: '#fff' },
 		color: { type: 'custom', color: '#666' },
 		background: 'center no-repeat',
 		backgroundSize: 'contain',
-		backgroundColor: { type: 'custom', color: '#fff' },
+		backgroundColor: { type: 'high', color: '#fff' },
 		borderRadius:    {
-			topLeft:     20,
-			topRight:    20,
-			bottomLeft:  20,
-			bottomRight: 20
+			topLeft:     10,
+			topRight:    10,
+			bottomLeft:  10,
+			bottomRight: 10
 		},
 		boxShadow: {
 			h_shadow:   0,
@@ -39,9 +41,9 @@ var style = {
 	},
 	filterActive: {
 		justifyContent: 'center',
-		borderWidth: 2,
+		borderWidth: 0,
 		borderStyle: 'solid',
-		borderColor: { type: 'auxiliary', color: '#a240ec' },
+		borderColor: { type: 'custom', color: '#a240ec' },
 		color: { type: 'textHigh', color: '#fff' },
 		background: 'center no-repeat',
 		backgroundColor: { type: 'main', color: '#a240ec' }
@@ -49,15 +51,15 @@ var style = {
 }
 
 module.exports = {
-	name: 'floor',
+	name: 'page',
 	type: 'base',
 	// 位置大小
 	layout: {
 		position: 'absolute',
 		top:      0,
 		left:     0,
-		width:    25,
-		height:   500
+		width:    364,
+		height:   60
 	},
 	// 样式管理
 	style: JSON.parse(JSON.stringify(style)),
@@ -77,6 +79,14 @@ module.exports = {
 		idx:  0,
 		list: [{
 			name: '样式1',
+			img:  '',
+			data: JSON.parse(JSON.stringify(style))
+		}, {
+			name: '样式2',
+			img:  '',
+			data: JSON.parse(JSON.stringify(style))
+		}, {
+			name: '样式3',
 			img:  '',
 			data: JSON.parse(JSON.stringify(style))
 		}]

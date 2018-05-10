@@ -13,11 +13,6 @@ import Custom from '../Custom'
 class StoreList extends React.Component {
 	constructor(props) {
 		super(props)
-
-		// let ioInput = JSON.parse(JSON.stringify(props.data.feature))
-		// this.state = {
-		// 	ioInput: ioInput
-		// }
 	}
 	componentWillMount() {}
 
@@ -25,30 +20,31 @@ class StoreList extends React.Component {
 
 	componentWillUnmount() {}
 
-	state = {
-		ioInput: {}
-	}
-
 	ioOuter(ipt) {
-		this.setState({ ioInput: ipt })
 		let { data, actions, idx, csn } = this.props
-		let body = ipt.api.body
+		let body = ipt.body
 		let keys = []
-		for (var p in body) {
-			if (body[p]) {
-				let o = {}
-				o[p] = body[p]
-				keys.push(o)
-			}
-		}
+		// for (var p in body) {
+		// 	if (body[p]) {
+		// 		let o = {}
+		// 		o[p] = body[p]
+		// 		keys.push(o)
+		// 	}
+		// }
+		Ajax.get('/store/getStoreList').then(res => {
+			ipt.list = res.data
+			this.setState({ ioInput: ipt })
+		}).catch(e => console.log(e))
 		console.clear()
 		console.log(body)
 	}
 
 	init() {
 		let { data, actions } = this.props
+		let { content, feature } = data
+		feature.body.size = content.size
 		this.state = {
-			ioInput: data.feature
+			ioInput: feature
 		}
 	}
 

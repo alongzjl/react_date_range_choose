@@ -14,6 +14,7 @@ import { hashHistory } from 'react-router'
 import * as actions from 'actions'
 import './index.less'
 
+
 class OperateComponent extends React.Component {
 	constructor(props) {
 		super(props)
@@ -22,19 +23,40 @@ class OperateComponent extends React.Component {
 		}
 	}
 
+	getFloor(globalData) {
+		return function(resolve, reject) {
+			Ajax.get('/store/getFloor').then(res => {
+				globalData.floors = res.data || []
+				resolve('楼层')
+			}).catch(e => reject(e))
+		}
+	}
+	getCatg(globalData) {
+		return function(resolve, reject) {
+			Ajax.get('/store/getCatg').then(res => {
+				globalData.catgs = res.data || []
+				resolve('分类')
+			}).catch(e => reject(e))
+		}
+	}
+	getStoreList(globalData) {
+		return function(resolve, reject) {
+			Ajax.get('/store/getStoreList').then(res => {
+				globalData.storeList = res
+				resolve('店铺列表')
+			}).catch(e => reject(e))
+		}
+	}
 	componentWillMount() {
 		let { type, actions, editConfig } = this.props
 		let { globalData } = editConfig
-		Ajax.get('/store/getFloor').then(res => {
-			let floors = res.data.map(_ => {
-				_.checked = true
-				return _
-			})
-			globalData.floors = floors
+		let arr = ['getFloor', 'getCatg', 'getStoreList']
+		let promises = arr.map(key => new Promise(this[key](globalData)))
+		Promise.all(promises).then((o) => {
 			actions.updateGlobal(globalData)
 			this.setState({ load: true })
 		}).catch(e => {
-
+			console.log(e)
 		})
 	}
 
