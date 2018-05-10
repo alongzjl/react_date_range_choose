@@ -18,6 +18,7 @@ class Text extends React.Component {
 	
 	render() {
 		let { type } = this.props
+		console.log(this.props.data,JSON.stringify(this.props.data));
 		let dom = this[`render${type}`](this.props, 'text')
 		return (
 			<div className={`e-text ${type}`}>

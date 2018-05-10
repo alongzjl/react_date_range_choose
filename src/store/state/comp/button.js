@@ -20,7 +20,12 @@ var style = {
 		opacity:         1, 
 		color:           { type: 'custom', color: '#000' },
 		backgroundColor: { type: 'custom', color: '#F58F8F' },
-		borderRadius:    5,
+		borderRadius:    {
+			topLeft:     6,
+			topRight:    6,
+			bottomRight:  6,
+			bottomLeft: 6
+		},  
 		borderWidth:     1, 
 		borderStyle:     'solid',  
 		borderColor: 	 { type: 'custom', color: '#333' },

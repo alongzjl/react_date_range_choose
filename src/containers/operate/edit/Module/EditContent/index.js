@@ -28,6 +28,7 @@ import StoreList       from './StoreList'
 import Navigation      from './Navigation'
 import NavigationFloat from './NavigationFloat'
 import Date            from './Date'
+import WonderfulActivity from './WonderfulActivity'
 
 var conMap = {
 	text:        { name: '文本内容', type: 'Textarea', max: 1000, autosize: { minRows: 1, maxRows: 6 } },
@@ -180,13 +181,14 @@ class EditContent extends React.Component {
 		if (compName === 'navigation')           compCon = (<Navigation      data={this.props}/>)
 		else if (compName === 'navigationFloat') compCon = (<NavigationFloat data={this.props}/>)
 		else if (compName === 'date')            compCon = (<Date            data={this.props}/>)
-		else if (compName === 'storeList')       compCon = (<StoreList       data={data}/>)
+		else if (compName === 'storeList')       compCon = (<StoreList       data={data}/>) 
+		else if (compName === 'wonderfulActivity')       compCon = (<WonderfulActivity       data={this.props}/>) 
 		else if (compName === 'floor')           compCon = (<Floor           data={data}/>)
 		// if (compName === 'picture')           compCon = (<Picture         data={data}/>)
 		// else if (compName === 'web')          compCon = (<Web             data={data}/>)
 		// else if (compName === 'text')         compCon = (<Text            data={data}/>)
 		 else if (compName === 'swiperImage' && content.length > 1)  compCon = (<SwiperImage     data={this.props}/>)
-		if (content.length) {   
+		if (content.length) {    
 			activeKey = Array.from(new Array(content.length + 1), (_, i) => `${i}`)
 			childNode = content.map((_, i) => {
 				return (
@@ -194,7 +196,7 @@ class EditContent extends React.Component {
 						{ this.renObj(data, _, i) }
 					</Panel>
 				)
-			})
+			}) 
 		} else {
 			activeKey = ['0']
 			let con = this.renObj(data, content)

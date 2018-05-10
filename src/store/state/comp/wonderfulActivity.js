@@ -5,7 +5,7 @@
  */ 
 
 
-// 轮播图
+// 精彩活动
 var style = {
 	box: {
 		transform: '',
@@ -27,28 +27,24 @@ var style = {
 			bottomLeft: 6
 		},  
 	}  
-}
+}  
 
 module.exports = {
-	name: 'swiperImage',
+	name: 'wonderfulActivity',
 	type: 'base',
 	// 位置大小
 	layout: {
 		position: 'absolute',
 		top:      0,
 		left:     0,
-		width:    432, 
+		width:    432,   
 		height:   200
 	},
 	// 样式管理
 	style: JSON.parse(JSON.stringify(style)),
 	// 内容管理
 	content: [
-		{
-			img: { type: 'custom', img: '' },			// 图片url
-			title: '图片1',		// 图片标题
-			router: {}			// 路由
-		}
+		
 	],
 	// 动画设置
 	animation: {
@@ -87,7 +83,7 @@ module.exports = {
 			    stopOnLastSlide: false,//如果设置为true，当切换到最后一个slide时停止自动切换。（loop模式下无效）。
 			    disableOnInteraction: false,//用户操作swiper之后，是否禁止autoplay。默认为true：停止。
 		   		reverseDirection: false,//开启反向自动轮播。
-		    },      
+		    },   
 		    pagination:false, 
 			paginationOptions:{
 				el: '.swiper-pagination',//分页元素

@@ -28,15 +28,15 @@ class SwiperImage extends React.Component {
 		swiperOptions = this.formatObj(swiperOptions);
 		const type = props.data.feature.layout;
 		if(type == 2){ 
-			swiperOptions.on = this.swiperType();
-			swiperOptions.centeredSlides = true;
-			swiperOptions.loopedSlides = 3;
-		} 
+			swiperOptions.spaceBetween = 30;
+			swiperOptions.slidesPerView = 3;
+		}  
+		//this.mySwiper&&this.mySwiper.destroy(false);    
 		console.log(swiperOptions); 
 		props.data.content.length >1 ? this.initSwiper(swiperOptions) : null;
 	}; 
 	 initSwiper = (swiperOptions) => {
-	 	new Swiper('.swiper-container', swiperOptions) 
+	 	this.mySwiper = new Swiper('.swiper-container', swiperOptions) 
 	};
 	formatObj = (obj) => {
 		let new_obj = {};
@@ -52,41 +52,21 @@ class SwiperImage extends React.Component {
 			} 
 		}
 		new_obj.watchSlidesProgress = true;
-
+		new_obj.navigation = {
+	        nextEl: '.swiper-button-next',
+	        prevEl: '.swiper-button-prev',
+	      }; 
 		return new_obj
 	};
 	swiperType = () => {
 		return {
         	
-			 progress: function(progress) {
-		    	for (var i = 0; i < this.slides.length; i++) {
-					var slide = this.slides.eq(i);
-					var slideProgress = this.slides[i].progress;
-					var modify = 1;
-					if (Math.abs(slideProgress) > 1) {
-						modify = (Math.abs(slideProgress) - 1) * 0.3;
-					}
-					const translate = slideProgress * modify * (-60) + 'px';  
-					const scale = 1 - Math.abs(slideProgress) / 3;
-					const zIndex = 999 - Math.abs(Math.round(10 * slideProgress));
-					slide.transform('translateX(' + translate + ') scale(' + scale + ')');
-					slide.css('zIndex', zIndex);
-					slide.css('opacity', 1);
-					if (Math.abs(slideProgress) > 3) {
-						slide.css('opacity', 0);
-					}  
-				}   
-			},  
-			setTransition: function(transition) {
-				for (var i = 0; i < this.slides.length; i++) {
-					var slide = this.slides.eq(i)
-					slide.transition(transition);
-				}
-			}
+			
 		 }
 	};
 	render() {
-		let { data,feature } = this.props
+		let { data } = this.props;
+		const borderRadius = data.style.swiperImage.borderRadius;
 		return ( 
 			<div className="e-SwiperImage">
 				{
@@ -94,15 +74,20 @@ class SwiperImage extends React.Component {
 						<div className="swiper-container outer_box">
 							<div className="swiper-wrapper">
 								{
-									data.content.map((item,index) => <div className="swiper-slide" key={index}><div className="text_show" style={cssColorFormat(this.props, 'text')}>{item.title}</div><img src={compImgFormat(this.props, item.img)} /></div>)
+									data.content.map((item,index) => <div className="swiper-slide" key={index} style={cssColorFormat(this.props, 'swiperImage')}><div className="text_show" style={cssColorFormat(this.props, 'text')}>{item.title}</div><img src={compImgFormat(this.props, item.img)} /></div>)
 								}
-							</div>  
-							<div className="swiper-pagination"></div>
-						</div> : <div className="outer_box"><div className="text_show" style={cssColorFormat(this.props, 'text')}>{data.content[0].title}</div><img src={compImgFormat(this.props, data.content[0].img)} /></div>
+							</div> 
+							 
+    						<div className="swiper-pagination"></div>
+						</div> : <div className="outer_box" style={cssColorFormat(this.props, 'swiperImage')}><div className="text_show" style={cssColorFormat(this.props, 'text')}>{data.content[0].title}</div><img src={compImgFormat(this.props, data.content[0].img)} /></div>
 				}
 			</div>
-		)
+		) 
 	}
 }
 
 export default SwiperImage
+
+/*
+<div className="swiper-button-prev"></div>  
+<div className="swiper-button-next"></div>							*/

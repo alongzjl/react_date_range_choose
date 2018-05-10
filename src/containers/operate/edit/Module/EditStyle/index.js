@@ -28,6 +28,7 @@ var styleMap = {
 	letterBox:    '盒样式',
 	letter:       '元素样式',
     letterActive: '激活样式',
+    swiperImage:   '轮播样式',
 }
 // 定义样式名称 & 渲染类型 & 相关配置
 var cssMap = {
@@ -65,11 +66,11 @@ var cssMap = {
 		color:      { name: '阴影颜色', type: 'Color' }
 	} },
 	borderRadius:       { name: '圆角', type: 'Complex', child: {
-		topLeft:     { name: '上左', type: 'Number', max: 20 },
-		topRight:    { name: '上右', type: 'Number', max: 20 },
-		bottomLeft:  { name: '下左', type: 'Number', max: 20 },
-		bottomRight: { name: '下右', type: 'Number', max: 20 }
-	} },
+		topLeft:     { name: '上左', type: 'Number', max: 100 },
+		topRight:    { name: '上右', type: 'Number', max: 100 },
+		bottomLeft:  { name: '下左', type: 'Number', max: 100 },
+		bottomRight: { name: '下右', type: 'Number', max: 100 } 
+	} }, 
 	// boxShadow:         { name: '元素阴影', type: 'Shadow', min: 0, max: 20, step: 1 },
 	// textShadow:        { name: '文字阴影', type: 'Shadow', min: 0, max: 20,  step: 1 },
 	transformRotate:   { name: '旋转角度', type: 'Number', max: 180 },

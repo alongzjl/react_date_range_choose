@@ -13,22 +13,32 @@ import * as actions from 'actions'
 import Rnd from 'react-rnd'
 import { Icon } from 'antd'
 
-import Picture      from 'compEdit/EditElement/Picture'
-import Web          from 'compEdit/EditElement/Web'
-import Text         from 'compEdit/EditElement/Text'
-import SwiperImage  from 'compEdit/EditElement/SwiperImage'
-import Letter       from 'compEdit/EditElement/Letter'
-import Floor        from 'compEdit/EditElement/Floor'
+import Picture      			from 'compEdit/EditElement/Picture'
+import Web          			from 'compEdit/EditElement/Web'
+import Text         			from 'compEdit/EditElement/Text'
+import SwiperImage  			from 'compEdit/EditElement/SwiperImage'
+import Letter       			from 'compEdit/EditElement/Letter'
+import Floor        			from 'compEdit/EditElement/Floor'
+import WonderfulActivity        from 'compEdit/EditElement/WonderfulActivity'
 
 import './index.less'
 
 class Custom extends React.Component {
 	componentWillMount() {}
 
-	componentDidMount() {}
+	componentDidMount() {
+		if(this.props.name == 'storeDetails'){
+			Ajax.get('/store/storeDetails').then(res=>{
+				this.setState({
+					storeDetails:res.data
+				})
+			})
+		}
+	}
 
-	componentWillUnmount() {}
-
+	state = {
+		storeDetails:{}
+	}
 	selectComp(e, data, idx, parentIdx, parent) {
 		e.stopPropagation()
 		let { actions, editConfig } = this.props
@@ -70,19 +80,27 @@ class Custom extends React.Component {
 	}
 
 	render() {
-		let { data, comp, actions, idx, csn, editConfig, ioInput, ioOuter } = this.props
+		let { data, comp, actions, idx, csn, editConfig, ioInput, ioOuter,name } = this.props
 		let childNode = comp.map((_, i) => {
 			var compName = _.name,
 				styleIdx = _.styleList.idx,
 				isEdit   = true,
-				compCon
+				compCon;
+			if(this.state.storeDetails){ 
+				if(compName == 'text' && i != 0){
+					_.content.text = this.state.storeDetails.text;
+				}else if(compName == 'wonderfulActivity'){
+					_.content = this.state.storeDetails.images; 
+				}
+			} 
 			if (compName === 'picture')          compCon = (<Picture     data={_} parent={data} editConfig={editConfig} actions={actions} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} />)
 			else if (compName === 'web')         compCon = (<Web         data={_} parent={data} editConfig={editConfig} actions={actions} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} />)
 			else if (compName === 'text')        compCon = (<Text        data={_} parent={data} editConfig={editConfig} actions={actions} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} />)
 			else if (compName === 'swiperImage') compCon = (<SwiperImage data={_} parent={data} editConfig={editConfig} actions={actions} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} />)
 			else if (compName === 'letter')      compCon = (<Letter      data={_} parent={data} editConfig={editConfig} actions={actions} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} />)
 			else if (compName === 'floor')       compCon = (<Floor       data={_} parent={data} editConfig={editConfig} actions={actions} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} />)
-			return (
+			else if (compName === 'wonderfulActivity')       compCon = (<WonderfulActivity  data={_} parent={data} editConfig={editConfig} actions={actions} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} />)
+			return ( 
 				<Rnd
 					key={i}
 					bounds={`.${csn}`}
@@ -102,7 +120,9 @@ class Custom extends React.Component {
 					onResizeStop={(e, dir, ref, delta, pos) => this.resizeFn(e, ref, delta, pos, _, i, data)}
 				>
 					<div className="pge-layout" onClick={e => this.selectComp(e, _, i, idx, data)} style={!isEdit? _.layout: {}}>{ compCon }</div>
-					<a className="pge-remove" onClick={e => this.removeComp(e, i, data)}><Icon type="cross-circle" /></a>
+					{
+						name != 'storeDetails' ? <a className="pge-remove" onClick={e => this.removeComp(e, i, data)}><Icon type="cross-circle" /></a> : null
+					} 
 					<div className="handle-drag-custom" onClick={e => e.stopPropagation()}></div>
 				</Rnd>
 			)

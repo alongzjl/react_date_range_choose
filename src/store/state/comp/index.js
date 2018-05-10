@@ -26,7 +26,7 @@ function authInit(data) {
 		feature: feature
 	}
 	return data
-}
+} 
 
 // 组件元素数据
 module.exports = {
@@ -37,6 +37,8 @@ module.exports = {
 	date:            authInit(require('./date')),
 	// 轮播图
 	swiperImage:     authInit(require('./swiperImage')),
+	// 精彩活动 
+	wonderfulActivity:     authInit(require('./wonderfulActivity')),
 	// 文本
 	text:            authInit(require('./text')),
 	//按钮
@@ -54,6 +56,9 @@ module.exports = {
 	// 视频
 	video:      authInit(require('./video')),
 	/* 业务组件 */
+
 	// 店铺列表
-	storeList:       authInit(require('./storeList'))
+	storeList:       authInit(require('./storeList')),
+	// 店铺详情
+	storeDetails:       authInit(require('./storeDetails')) 
 }
