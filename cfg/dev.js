@@ -75,7 +75,12 @@ config.devServer = {
 			target: 'http://localhost:4080/api/store',
 			secure: false,
 			changeOrigin: 'true',
-		}
+		},
+		'/mcp-gateway': {
+			target: 'http://192.168.1.52:10078',
+			secure: false,
+			changeOrigin: 'true',
+		},
 	}
 }
 

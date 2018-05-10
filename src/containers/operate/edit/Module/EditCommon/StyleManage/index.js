@@ -59,7 +59,7 @@ class StyleManage extends React.Component {
 		list.splice(idx, 1)
 		data[parentKey].idx = 0
 		if (action === 'updateComp') {
-			data.style = { ...data[parentKey].list[0].data }
+			data.data = data[parentKey].list[0].data
 			return actions[action](null, parentComp? parentComp: data)
 		}
 		else if (action === 'updateGlobal') return actions[action](data)
@@ -73,7 +73,7 @@ class StyleManage extends React.Component {
 		if (newIdx === idx) return
 		data[parentKey].idx = newIdx
 		if (action === 'updateComp') {
-			data.style = { ...data[parentKey].list[newIdx].data }
+			data.data = data[parentKey].list[newIdx].data
 			return actions[action](null, parentComp? parentComp: data)
 		}
 		else if (action === 'updateGlobal') return actions[action](data)

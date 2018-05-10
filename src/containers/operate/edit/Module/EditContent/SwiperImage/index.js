@@ -3,9 +3,7 @@
  * @Date:   2018-05-03
 
  */
- 
-import React from 'react'
-
+ import React from 'react'
 import './index.less'
 
 import  SwiperSame  from '../SwiperSame'  
@@ -29,7 +27,7 @@ class SwiperImage extends React.Component {
 		return (  
 			<SwiperSame data={data} />  
 		)
-	} 
-}  
+	}
+}
  
 export default SwiperImage

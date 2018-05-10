@@ -23,7 +23,7 @@ class Floor extends React.Component {
 	}
 
 	renderDom(props, arr, nowVal) {
-		let img = props.data.content.filterBGImg,
+		let img = props.data.data.content.filterBGImg,
 			css = cssColorFormat(props, 'filter')
 		css.backgroundImage = `url('${getImg(img)}')`
 		return (
@@ -47,28 +47,6 @@ class Floor extends React.Component {
 		)
 	}
 
-	// 字母+数字
-	// renderStyle1(floors, nowVal) {
-	// 	let arr = [...floors]
-	// 	return (
-	// 		<div className="el-6">
-	// 			{
-	// 				arr.map((_, i) => {
-	// 					return _.checked? (
-	// 						<div
-	// 							key={i}
-	// 							className={`el-item${_.name === nowVal? ' s-active': ''}`}
-	// 							onClick={this.selectVal.bind(this, _.name)}
-	// 						>
-	// 							{_.name}
-	// 						</div>
-	// 					): false
-	// 				})
-	// 			}
-	// 		</div>
-	// 	)
-	// }
-
 	renderStyle1(props, floors, nowVal) {
 		return this.renderDom.bind(this, props, floors, nowVal)()
 	}
@@ -77,7 +55,8 @@ class Floor extends React.Component {
 	render() {
 		let { type, editConfig, ioInput } = this.props
 		let { floors } = ioInput
-		let dom = this[`render${type}`].bind(this, this.props, floors, ioInput.body.floor)()
+		let render = this[`render${type}`]? this[`render${type}`]: this.renderStyle1
+		let dom    = render.bind(this, this.props, floors, ioInput.body.floor)()
 		return (
 			<section className={`e-floor ${type}`}>
 				{ dom }

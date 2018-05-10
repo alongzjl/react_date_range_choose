@@ -6,59 +6,53 @@
 
 
 // 精彩活动
-var style = {
-	box: {
-		transform: '',
-		animation: '0s 0s 1'			// 动画 (0: 开始时间, 1: 持续时间, 2: 循环次数)
+const data = {
+	style:     {
+		text: {
+			color:          { type: 'custom', color: '#fff' },
+			fontSize:       12,
+			fontStyle:      'normal',
+			fontWeight:     'normal',
+			textAlign:      'center',
+			textDecoration: 'none',
+		},
+		swiperImage:{
+			borderRadius:    {
+				topLeft:     6,
+				topRight:    6,
+				bottomRight:  6,
+				bottomLeft: 6
+			},
+		}
 	},
-	text: {
-		color:          { type: 'custom', color: '#fff' },
-		fontSize:       12,
-		fontStyle:      'normal',
-		fontWeight:     'normal',
-		textAlign:      'center',
-		textDecoration: 'none',
-	},
-	swiperImage:{
-		borderRadius:    {
-			topLeft:     6,
-			topRight:    6,
-			bottomRight:  6,
-			bottomLeft: 6
-		},  
-	}  
-}  
-
-module.exports = {
-	name: 'wonderfulActivity',
-	type: 'base',
-	// 位置大小
-	layout: {
+	layout:    {
 		position: 'absolute',
 		top:      0,
 		left:     0,
-		width:    432,   
+		width:    432,
 		height:   200
 	},
-	// 样式管理
-	style: JSON.parse(JSON.stringify(style)),
-	// 内容管理
-	content: [
-		
-	],
-	// 动画设置
+	content:   [],
 	animation: {
 		className: '',	// 动画样式
 		delay: 1,					// 开始时间
 		duration: 1,				// 持续时间
 		iterationCount: 'infinite'	// 循环次数
 	},
+	components: []
+}
+
+module.exports = {
+	name: 'wonderfulActivity',
+	type: 'base',
+	// 样式管理
+	data: JSON.parse(JSON.stringify(data)),
 	styleList: {
 		idx:  0,
 		list: [{
 			name: '样式1',
 			img:  '',
-			data: JSON.parse(JSON.stringify(style))
+			data: JSON.parse(JSON.stringify(data))
 		}]
 	},
 	// 功能特性

@@ -97,18 +97,18 @@ class EditComponent extends React.Component {
 			<div className="pg-edit-box">
 				<EditHeader/>
 				<div className="pg-body e-flex-box">
-					<div className="pg-left scrollbar">
+					<div className="pg-left">
 						<EditPageManage data={editConfig.pageList} />
 					</div>
-					<div className="pg-center e-flex e-flex-box scrollbar" onClick={this.selectPage.bind(this)}>
+					<div className="pg-center e-flex-box" onClick={this.selectPage.bind(this)}>
 						<EditElement data={editConfig.curPage}></EditElement>
 					</div>
-					<div className="pg-right scrollbar">
+					<div className="pg-right">
 						{ editTab }
 					</div>
 
 
-					<div className="pg-float scrollbar">
+					<div className="pg-float e-flex-box">
 						{ Object.keys(curData).map((_, i) => {
 							var im = curData[_]
 							return (

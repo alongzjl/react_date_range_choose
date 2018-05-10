@@ -68,16 +68,16 @@ export default function editConfig(state = initialState, action) {
 			var sl = data.styleList,
 				sd = sl.list[sl.idx]
 			if (!parentComp) {
-				sd.data = JSON.parse(JSON.stringify(data.style))
+				sd.data = JSON.parse(JSON.stringify(data.data))
 			} else {
-				var da = data.components[cusCompIdx]
+				var da = data.data.components[cusCompIdx]
 				if (da) {
+					debugger
 					sl = da.styleList
 					sd = sl.list[sl.idx]
-					sd.data = JSON.parse(JSON.stringify(da.style))
+					sd.data = JSON.parse(JSON.stringify(da.data))
 				}
 			}
-			// delete sd.data.layout
 			pageC[curData.router].elements[curData.compIdx] = data
 			state.curPage   = pageC[curData.router]
 			curData.compIdx = idx || curData.compIdx

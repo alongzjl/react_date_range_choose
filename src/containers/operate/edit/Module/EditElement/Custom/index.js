@@ -13,7 +13,6 @@ import * as actions from 'actions'
 import Rnd from 'react-rnd'
 import { Icon } from 'antd'
 
- 
 import Picture      from 'compEdit/EditElement/Picture'
 import Web          from 'compEdit/EditElement/Web'
 import Text         from 'compEdit/EditElement/Text'
@@ -22,9 +21,9 @@ import Letter       from 'compEdit/EditElement/Letter'
 import Floor        from 'compEdit/EditElement/Floor'
 import Catg         from 'compEdit/EditElement/Catg'
 import Page         from 'compEdit/EditElement/Page'
+import Reset        from 'compEdit/EditElement/Reset'
 import ListByStore  from 'compEdit/EditElement/ListByStore'
 import WonderfulActivity        from 'compEdit/EditElement/WonderfulActivity'
-
 
 import './index.less'
 
@@ -59,7 +58,7 @@ class Custom extends React.Component {
 	resizeFn(e, ref, delta, pos, item, idx, parent) {
 		e.stopPropagation()
 		let { actions, editConfig } = this.props
-		let lay = item.layout
+		let lay = item.data.layout
 		lay.left   = pos.x
 		lay.top    = pos.y
 		lay.width  = ref.offsetWidth
@@ -70,7 +69,7 @@ class Custom extends React.Component {
 	dragStop(e, d, item, idx, parent) {
 		e.stopPropagation()
 		let { actions, editConfig } = this.props
-		let lay = item.layout
+		let lay = item.data.layout
 		if (lay.left === d.x && lay.top  === d.y) return
 		lay.left = d.x
 		lay.top  = d.y
@@ -79,18 +78,21 @@ class Custom extends React.Component {
 
 	removeComp(e, idx, parent) {
 		e.stopPropagation()
-		let { actions, comp, editConfig } = this.props
+		let { data, actions, editConfig } = this.props
+		let comp = data.data.components
 		comp.splice(idx, 1)
 		actions.updateComp(editConfig.curData.compIdx, parent)
 	}
 
 	render() {
-		let { data, comp, actions, idx, csn, editConfig, ioInput, ioOuter,name } = this.props
+		let { data, actions, idx, csn, editConfig, ioInput, ioOuter,name } = this.props
+		let comp = data.data.components
 		let childNode = comp.map((_, i) => {
-			var compName = _.name,
+			let compName = _.name,
+				layout   = _.data.layout,
 				styleIdx = _.styleList.idx,
 				isEdit   = true,
-				compCon;
+				compCon
 			if(this.state.storeDetails){ 
 				if(compName == 'text' && i != 0){
 					_.content.text = this.state.storeDetails.text;
@@ -104,25 +106,24 @@ class Custom extends React.Component {
 			else if (compName === 'swiperImage') compCon = (<SwiperImage data={_} parent={data} editConfig={editConfig} actions={actions} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} />)
 			else if (compName === 'letter')      compCon = (<Letter      data={_} parent={data} editConfig={editConfig} actions={actions} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} />)
 			else if (compName === 'floor')       compCon = (<Floor       data={_} parent={data} editConfig={editConfig} actions={actions} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} />)
-
 			else if (compName === 'wonderfulActivity')       compCon = (<WonderfulActivity  data={_} parent={data} editConfig={editConfig} actions={actions} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} />)
 			else if (compName === 'catg')        compCon = (<Catg        data={_} parent={data} editConfig={editConfig} actions={actions} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} />)
 			else if (compName === 'page')        compCon = (<Page        data={_} parent={data} editConfig={editConfig} actions={actions} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} />)
+			else if (compName === 'reset')       compCon = (<Reset       data={_} parent={data} editConfig={editConfig} actions={actions} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} />)
 			else if (compName === 'listByStore') compCon = (<ListByStore data={_} parent={data} editConfig={editConfig} actions={actions} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} />)
-			return ( 
-
+			return (
 				<Rnd
 					key={i}
 					bounds={`.${csn}`}
-					className={i === editConfig.curData.compIdx? 's-active': ''}
+					className={i === editConfig.curData.cusCompIdx? 's-active': ''}
 					dragHandleClassName={'.handle-drag-custom'}
 					size={{
-						width:  _.layout.width || '100%',
-						height: _.layout.height
+						width:  layout.width || '100%',
+						height: layout.height
 					}}
 					position={{
-						x: _.layout.left,
-						y: _.layout.top
+						x: layout.left,
+						y: layout.top
 					}}
 					onDragStart={e => this.selectComp(e, _, i, idx, data)}
 					onDragStop={(e, d) => this.dragStop(e, d, _, i, data)}

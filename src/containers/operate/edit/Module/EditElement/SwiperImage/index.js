@@ -74,7 +74,7 @@ class SwiperImage extends React.Component {
 						<div className="swiper-container outer_box">
 							<div className="swiper-wrapper">
 								{
-									data.content.map((item,index) => <div className="swiper-slide" key={index} style={cssColorFormat(this.props, 'swiperImage')}><div className="text_show" style={cssColorFormat(this.props, 'text')}>{item.title}</div><img src={compImgFormat(this.props, item.img)} /></div>)
+									data.data.content.map((item,index) => <div className="swiper-slide" key={index} style={cssColorFormat(this.props, 'swiperImage')}><div className="text_show" style={cssColorFormat(this.props, 'text')}>{item.title}</div><img src={compImgFormat(this.props, item.img)} /></div>)
 								}
 							</div> 
 							 
@@ -82,7 +82,7 @@ class SwiperImage extends React.Component {
 						</div> : <div className="outer_box" style={cssColorFormat(this.props, 'swiperImage')}><div className="text_show" style={cssColorFormat(this.props, 'text')}>{data.content[0].title}</div><img src={compImgFormat(this.props, data.content[0].img)} /></div>
 				}
 			</div>
-		) 
+		)
 	}
 }
 

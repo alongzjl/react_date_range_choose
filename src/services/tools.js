@@ -70,7 +70,12 @@ function colorVaild(v, obj, key, change) {
 // 组件样式格式化
 window.cssColorFormat = (props, key) => {
 	let { data, actions } = props
-	let obj = JSON.parse(JSON.stringify(data.style[key]))
+	let { style } = data.data
+	if (!style[key]) {
+		console.error(`名为 ${key} 的样式未定义!`)
+		return {}
+	}
+	let obj = JSON.parse(JSON.stringify(style[key]))
 	let st  = Date.now()
 	let colorChange = 0
 	for (let p in obj) {
@@ -91,7 +96,7 @@ window.cssColorFormat = (props, key) => {
 	}
 	if (colorChange) {
 		// 判断如果当前组件的颜色所使用的主题类别被删除, 更新颜色类型为custom
-		data.style[key] = obj
+		style[key] = obj
 		return actions.updateComp(null, data)
 	}
 	// console.log(`耗时${Date.now() - st}ms`)
@@ -130,6 +135,20 @@ window.textBreak = (str = '') => {
 // 获取真实数据类型
 window.getAttr = (element) => {
 	return Object.prototype.toString.call(element).match(/[A-Z][a-z]*/)[0]
+}
+
+window.getCookie = (name) => {
+	let arr, reg = new RegExp('(^| )' + name + '=([^;]*)(;|$)')
+	if (arr = document.cookie.match(reg)) {
+		return unescape(arr[2])
+	} else {
+		return ''
+	}
+}
+window.setCookie = (name, val, hour = 24) => {
+	var exp = new Date()
+	exp.setTime(exp.getTime() + hour * 60 * 60 * 1000)
+	document.cookie = `${name}=${escape(val)};expires=${exp.toGMTString()};path=/`
 }
 
 window.Ajax = Fetch.default

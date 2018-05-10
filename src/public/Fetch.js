@@ -26,7 +26,7 @@ export default class Fetch {
         const newConfig = Object.assign({}, defaultConfig, config);
 
         fetch(url, newConfig).then(response => response.json()).then(result => {
-            if (result.meta.errno !== 0) {
+            if (result.meta.errno === 0) {
                 if (success) {
                     success(result.result);
                 }
@@ -46,23 +46,41 @@ export default class Fetch {
     }
 
     static get(url, config) {
+        let id = window.uif.userInfo.id
+        if (id) url += ((/\?/.test(url)? '&': '?') + 'userId='+id)
         return new Promise((resolve, reject) => {
             const newConfig = Object.assign({}, {
-                method: 'GET',
-                headers: { Authorization: `Bearer ${common.getAccessToken()}` }
-            }, config);
+                method: 'GET'
+            }, config)
             Fetch.remote(url, newConfig, resolve, reject);
         });
     }
 
-    static post(url, config) {
+    static postLogin(url, config) {
+        let id = window.uif.userInfo.id
+        if (id) config.userId = id
         return new Promise((resolve, reject) => {
-            const newConfig = Object.assign({}, {
+            Fetch.remote(url, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded', Authorization: `Bearer ${common.getAccessToken()}` }
-            }, { body: config });
-            Fetch.remote(url, newConfig, resolve, reject);
-        });
+                body: JSON.stringify(config),
+                headers: {
+                    'Content-Type': 'application/json;charset=UTF-8'
+                }
+            }, resolve, reject)
+        })
+    }
+    static post(url, config) {
+        let id = window.uif.userInfo.id
+        if (id) config.userId = id
+        return new Promise((resolve, reject) => {
+            Fetch.remote(url, {
+                method: 'POST',
+                body: new URLSearchParams(config),
+                // headers: {
+                //     'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+                // }
+            }, resolve, reject)
+        })
     }
 
     static postFile(url, config) {

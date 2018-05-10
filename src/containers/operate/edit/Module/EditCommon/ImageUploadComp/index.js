@@ -35,7 +35,8 @@ class ImageUploadComp extends React.Component {
 
 	enter(imgList, index) {
 		let { data, name, action, actions, editConfig } = this.props
-		let { content }    = data
+		let da = data.data
+		let { content }    = da
 		let { curData }    = editConfig
 		let { parentComp } = curData
 		const length = content.length;
@@ -49,12 +50,12 @@ class ImageUploadComp extends React.Component {
 					}
 					return obj
 				})
-				data.content = imgList
+				da.content = imgList
 			} else {
 				content[i][name].img = imgList[0].url
 			}
 		} else if (data.name == 'video'){
-			data.content[name] = imgList[0].url
+			content[name] = imgList[0].url
 		} else {
 			content[name].img = imgList[0].url
 		}

@@ -1,11 +1,5 @@
-// 自定义
-var style = {
-}
-
-module.exports = {
-	name: 'storeList',
-	type: 'advanced',
-	// 位置大小
+// 店铺列表
+const data = {
 	layout: {
 		position: 'absolute',
 		top:      0,
@@ -13,27 +7,39 @@ module.exports = {
 		width:    540,
 		height:   500
 	},
-	// 样式管理
-	style: JSON.parse(JSON.stringify(style)),
-	// 内容管理
+	style: {
+	},
 	content: {
 		size: 12
 	},
-	// 组件管理
-	components: [],
-	// 动画设置
 	animation: {
 		className: '',	// 动画样式
 		delay: 1,					// 开始时间
 		duration: 1,				// 持续时间
 		iterationCount: 'infinite'	// 循环次数
 	},
+	components: []
+}
+
+module.exports = {
+	name: 'storeList',
+	type: 'advanced',
+	data: JSON.parse(JSON.stringify(data)),
+	// 动画设置
 	styleList: {
 		idx:  0,
 		list: [{
 			name: '样式1',
 			img:  '',
-			data: JSON.parse(JSON.stringify(style))
+			data: JSON.parse(JSON.stringify(data))
+		}, {
+			name: '样式2',
+			img:  '',
+			data: JSON.parse(JSON.stringify(data))
+		}, {
+			name: '样式3',
+			img:  '',
+			data: JSON.parse(JSON.stringify(data))
 		}]
 	},
 	// 功能特性

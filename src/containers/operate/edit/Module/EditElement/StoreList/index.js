@@ -41,7 +41,8 @@ class StoreList extends React.Component {
 
 	init() {
 		let { data, actions } = this.props
-		let { content, feature } = data
+		let { feature } = data
+		let { content } = data.data
 		feature.body.size = content.size
 		this.state = {
 			ioInput: feature
@@ -59,7 +60,6 @@ class StoreList extends React.Component {
 				csn={csn}
 				ioInput={this.state.ioInput}
 				ioOuter={this.ioOuter.bind(this)}
-				comp={data.components}
 			/>
 		)
 	}

@@ -31,7 +31,7 @@ module.exports = [
 			name: '精彩活动',
 			key:  'wonderfulActivity'
 		},
-		{ 
+		{
 			icon: 'web-control',
 			name: '网页',
 			key:  'web'
@@ -63,15 +63,19 @@ module.exports = [
 			key:  'floor'
 		},
 		{
-
 			icon: 'catg-control',
 			name: '分类',
 			key:  'catg'
 		},
-		{ 
+		{
 			icon: 'page-control',
 			name: '分页',
 			key:  'page'
+		},
+		{
+			icon: 'reset-control',
+			name: '重置',
+			key:  'reset'
 		},
 		{
 			icon: 'list-control',

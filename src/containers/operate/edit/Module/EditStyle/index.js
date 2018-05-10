@@ -24,20 +24,20 @@ const RadioGroup  = Radio.Group
 
 var styleMap = {
 	image:        '图片样式',
+	posIcon:      '图标样式',
 	text:         '文本样式',
-	letterBox:    '盒样式',
-	letter:       '元素样式',
-    letterActive: '激活样式',
-    swiperImage:   '轮播样式',
-
-
+	title:        '标题样式',
+	filterBox:    '盒样式',
+	filter:       '元素样式',
+	filterActive: '激活样式',
+	swiperImage:  '轮播样式'
 }
 // 定义样式名称 & 渲染类型 & 相关配置
 var cssMap = {
-	top:               { name: '上',      type: 'Number' },
-	left:              { name: '左',      type: 'Number' },
-	width:             { name: '宽',      type: 'Number', min: 0, max: 432 },
-	height:            { name: '高',      type: 'Number', min: 0, max: 768 },
+	top:               { name: '上',      type: 'Number', min: -300, max: 540 },
+	left:              { name: '左',      type: 'Number', min: -200, max: 960 },
+	width:             { name: '宽',      type: 'Number', min: 0, max: 540 },
+	height:            { name: '高',      type: 'Number', min: 0, max: 960 },
 	borderRadius:      { name: '圆角',    type: 'Number' },
 	borderWidth:       { name: '边宽',    type: 'Number' },
 	lineHeight:        { name: '行高',    type: 'Number' },
@@ -71,7 +71,7 @@ var cssMap = {
 		topLeft:     { name: '上左', type: 'Number', max: 100 },
 		topRight:    { name: '上右', type: 'Number', max: 100 },
 		bottomLeft:  { name: '下左', type: 'Number', max: 100 },
-		bottomRight: { name: '下右', type: 'Number', max: 100 } 
+		bottomRight: { name: '下右', type: 'Number', max: 100 }
 	} }, 
 	// boxShadow:         { name: '元素阴影', type: 'Shadow', min: 0, max: 20, step: 1 },
 	// textShadow:        { name: '文字阴影', type: 'Shadow', min: 0, max: 20,  step: 1 },
@@ -117,10 +117,11 @@ class EditStyle extends React.Component {
 
 	onChange(val, style, css, node) { 
 		let { data, actions, editConfig } = this.props
+		let da = data.data
 		let { curData } = editConfig
 		let { parentComp } = curData
 		if(node) {
-			data.style[style][css][node] = val
+			da.style[style][css][node] = val
 		} else {
 			style === 'feature'
 			?
@@ -128,9 +129,9 @@ class EditStyle extends React.Component {
 			:
 			style === 'layout'
 			?
-			data.layout[css] = val
+			da.layout[css] = val
 			:
-			data.style[style][css] = val
+			da.style[style][css] = val
 		}
 		actions.updateComp(null, parentComp? parentComp: data)
 	}
@@ -265,15 +266,17 @@ class EditStyle extends React.Component {
 
 	render() {
 		let { data } = this.props
-		if (!data.style) return false
+		let da       = data.data
+		let { style, layout } = da
+		if (!style) return false
 		let styleList  = data.styleList				// 样式列表
-		let styles     = Object.keys(data.style)	// 具体样式
+		let styles     = Object.keys(style)	// 具体样式
 		let activeKey  = Array.from(new Array(styles.length), (_, i) => `${i}`)
 		// 位置大小
-		let layoutNode = Object.keys(data.layout).map((q, j) => {
+		let layoutNode = Object.keys(layout).map((q, j) => {
 				if (!cssMap[q]) return
 				let cm     = cssMap[q],
-					val    = data.layout[q],
+					val    = layout[q],
 					render = this[`render${cm.type}`]
 				if (!render) return
 				// 根据样式类型渲染对应组件
@@ -290,11 +293,11 @@ class EditStyle extends React.Component {
 		let childNode = styles.map((p, i) => {
 			if (!styleMap[p]) return
 			let ci    = 0
-			let cnode = Object.keys(data.style[p]).map((q, j) => {
+			let cnode = Object.keys(style[p]).map((q, j) => {
 				if (!cssMap[q]) return
 				++ci
 				let cm     = cssMap[q],
-					val    = data.style[p][q],
+					val    = style[p][q],
 					render = this[`render${cm.type}`]
 				if (!render) return
 				// 根据样式类型渲染对应组件

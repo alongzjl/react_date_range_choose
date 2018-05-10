@@ -22,7 +22,7 @@ class Letter extends React.Component {
 		ioOuter(ioInput)
 	}
 	renderDom(props, arr, nowVal) {
-		let img = props.data.content.filterBGImg,
+		let img = props.data.data.content.filterBGImg,
 			css = cssColorFormat(props, 'filter')
 		css.backgroundImage = `url('${getImg(img)}')`
 		return (
@@ -62,7 +62,8 @@ class Letter extends React.Component {
 		let { type, ioInput } = this.props
 		let letter = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
 		let num    = Array.from(new Array(10), (_, i) => `${i}`)
-		let dom    = this[`render${type}`].bind(this, this.props, letter, num, ioInput.body.letter)()
+		let render = this[`render${type}`]? this[`render${type}`]: this.renderStyle1
+		let dom    = render.bind(this, this.props, letter, num, ioInput.body.letter)()
 		return (
 			<section className={`e-letter ${type}`}>
 				{ dom }

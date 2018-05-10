@@ -45,7 +45,7 @@ class RouterJump extends React.Component {
 		if (newIdx === idx) return
 		data[parentKey].idx = newIdx
 		if (action === 'updateComp') {
-			data.style = { layout: data.style.layout, ...data[parentKey].list[newIdx].data }
+			data.style = { ...data[parentKey].list[newIdx].data }
 			return actions[action](null, data)
 		}
 		else if (action === 'updateGlobal') return actions[action](data)

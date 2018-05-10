@@ -23,7 +23,7 @@ class Catg extends React.Component {
 	}
 
 	renderDom(props, arr, nowVal) {
-		let img = props.data.content.filterBGImg,
+		let img = props.data.data.content.filterBGImg,
 			css = cssColorFormat(props, 'filter')
 		css.backgroundImage = `url('${getImg(img)}')`
 		return (
@@ -77,7 +77,8 @@ class Catg extends React.Component {
 	render() {
 		let { type, editConfig, ioInput } = this.props
 		let { catgs } = ioInput
-		let dom = this[`render${type}`].bind(this, this.props, catgs, ioInput.body.catg)()
+		let render    = this[`render${type}`]? this[`render${type}`]: this.renderStyle1
+		let dom       = render.bind(this, this.props, catgs, ioInput.body.catg)()
 		return (
 			<section className={`e-floor ${type}`}>
 				{ dom }

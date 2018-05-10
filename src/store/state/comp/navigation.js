@@ -6,21 +6,17 @@
  
 
 // 导航
-var style = {
-	text: {
-		color:          { type: 'custom', color: '#000' }, 
-		fontSize:       12, 
-		fontStyle:      'normal',
-		fontWeight:     'normal',
-		textAlign:      'center',
-		textDecoration: 'none',
-	},  
-}  
-
-module.exports = {
-	name: 'navigation',
-	type: 'base',
-	// 位置大小
+const data = {
+	style:     {
+		text: {
+			color:          { type: 'custom', color: '#000' },
+			fontSize:       12,
+			fontStyle:      'normal',
+			fontWeight:     'normal',
+			textAlign:      'center',
+			textDecoration: 'none',
+		}
+	},
 	layout: {
 		position: 'absolute',
 		top:      0,
@@ -28,9 +24,6 @@ module.exports = {
 		width:    '100%',
 		height:   80
 	},
-	// 样式管理
-	style: JSON.parse(JSON.stringify(style)),
-	// 内容管理
 	content: [
 		{  
 			img: { type: 'custom', img: 'http://ryoms.v4.rongyi.com/ryoms/images/menu-icon/icon3_2.png' },			// 图片url
@@ -63,14 +56,23 @@ module.exports = {
 		delay: 1,					// 开始时间
 		duration: 1,				// 持续时间
 		iterationCount: 'infinite',	// 循环次数
-	},
+	}
+}
+
+module.exports = {
+	name: 'navigation',
+	type: 'base',
+	// 位置大小
+	// 样式管理
+	data: JSON.parse(JSON.stringify(data)),
+	// 内容管理
 	// 样式列表
 	styleList: {
 		idx:  0,
 		list: [{
 			name: '样式1',
 			img:  '',
-			data: JSON.parse(JSON.stringify(style))
+			data: JSON.parse(JSON.stringify(data))
 		}],
 	}, 
 	// 功能特性

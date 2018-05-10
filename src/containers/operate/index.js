@@ -47,16 +47,72 @@ class OperateComponent extends React.Component {
 			}).catch(e => reject(e))
 		}
 	}
+	initData(cb) {
+		let { actions } = this.props
+		let stores = {}
+		let promise = new Promise((resolve, reject) => {
+			let _res1 = ''
+			Ajax.postLogin('/easy-roa/v1/user/getBsTop', {
+				ryst: getCookie('RYST') || '123456',
+				bsst: getCookie('BSST') || '123456',
+				channel: '002'
+			}).then(res1 => {
+				console.log('res1')
+				_res1 = res1
+				return Ajax.postLogin('/easy-roa/v1/user/getBsUser', {
+					bsst: getCookie('BSST') || '123456',
+					channel: '002'
+				})
+			}).then((res2) => {
+				console.log('res2')
+				resolve([_res1.data, res2.data])
+			}).catch(e => {
+				reject(e)
+			})
+		})
+		promise.then(res => {
+			var da0 = res[0],
+				da1 = res[1]
+			stores.userInfo = da0.userInfo
+			stores.list     = da0.systemList
+			stores.auths    = da1.authorities
+			// stores.listObj  = {}
+			// stores.authObj  = {}
+			// for (var l of da0.systemList)  { stores.listObj[l] = 1 }
+			// for (var a of da1.authorities) { stores.authObj[a] = 1 }
+			stores.userInfo.mallMid = da1.userInfo.mallMid
+			stores.userInfo.mallId  = da1.userInfo.mallId
+			stores.userInfo.id      = da1.userInfo.id
+			actions.updateUser(stores)
+			window.uif = stores
+			cb && cb()
+		})
+	}
+	getUserInfo(cb) {
+		if (ENV === 'dev'){
+			Ajax.postLogin('/bsoms/user/ajaxLogin', {
+				password: 'RYxyz123',
+				userName: 'xcyh001',
+				verifyCode: ''
+			}).then(res => {
+				this.initData(cb)
+			})
+		} else {
+			this.initData(cb)
+		}
+	}
 	componentWillMount() {
-		let { type, actions, editConfig } = this.props
-		let { globalData } = editConfig
-		let arr = ['getFloor', 'getCatg', 'getStoreList']
-		let promises = arr.map(key => new Promise(this[key](globalData)))
-		Promise.all(promises).then((o) => {
-			actions.updateGlobal(globalData)
-			this.setState({ load: true })
-		}).catch(e => {
-			console.log(e)
+		this.getUserInfo(() => {
+			let { type, actions, editConfig } = this.props
+			let { globalData } = editConfig
+			let arr = ['getFloor', 'getCatg', 'getStoreList']
+			let promises = arr.map(key => new Promise(this[key](globalData)))
+			Promise.all(promises).then((o) => {
+				actions.updateGlobal(globalData)
+				this.setState({ load: true })
+			}).catch(e => {
+				console.log(e)
+			})
 		})
 	}
 

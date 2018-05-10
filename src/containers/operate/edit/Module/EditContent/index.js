@@ -20,7 +20,7 @@ import RouterJump      from 'compEdit/EditCommon/RouterJump'
 import ImageUploadComp from 'compEdit/EditCommon/ImageUploadComp'
 
 // import Picture     from './Picture'
-// import Web         from './Web' 
+// import Web         from './Web'
 // import Text        from './Text'
 import SwiperImage from './SwiperImage'
 import StoreList       from './StoreList'
@@ -34,6 +34,7 @@ var conMap = {
 	title:       { name: '标题',    type: 'Title',    max: 30 },
 	img:         { name: '图片',    type: 'Image' },
 	filterBGImg: { name: '字母图片', type: 'Image' },
+	posIcon:     { name: '坐标图标', type: 'Image' },
 	url:         { name: '网址',    type: 'Url' },
 	router:      { name: '页面跳转', type: 'Router' },
 	size:        { name: '商品数量', type: 'Number', min: 1, max: 50 },
@@ -51,11 +52,12 @@ class EditContent extends React.Component {
 	onChange(val, key, index) {
 		let { data, actions, editConfig } = this.props
 		let { curData } = editConfig
+		let { content } = data.data
 		let { parentComp } = curData
 		if (index === undefined) {
-			data.content[key] = val
+			content[key] = val
 		} else {
-			data.content[index][key] = val
+			content[index][key] = val
 		}
 		actions.updateComp(null, parentComp? parentComp: data)
 	}
@@ -74,10 +76,11 @@ class EditContent extends React.Component {
 	deleteCom(index) { 
 		let { data, actions, editConfig } = this.props;
 		let { curData, curComp } = editConfig
+		let { content } = data.data
 		let { parentComp } = curData
 		if(getAttr(data.content) === 'Array') {
-			let content  = data.content.filter((item,i) => i!=index)
-			data.content = content
+			content = content.filter((item,i) => i!=index)
+			data.data.content = content
 			actions.updateComp(null, parentComp? parentComp: data)
 		}   
 		
@@ -184,25 +187,21 @@ class EditContent extends React.Component {
 	render() {
 		let { data, actions } = this.props
 		let compName = data.name
-		let content  = data.content
+		let content  = data.data.content
 		let compCon
 		let childNode
 		let activeKey
 		if (compName === 'navigation')           compCon = (<Navigation      data={this.props}/>)
 		else if (compName === 'navigationFloat') compCon = (<NavigationFloat data={this.props}/>)
 		else if (compName === 'date')            compCon = (<Date            data={this.props}/>)
-
-		else if (compName === 'storeList')       compCon = (<StoreList       data={data}/>) 
+		else if (compName === 'storeList')       compCon = (<StoreList       data={data}/>)
 		else if (compName === 'wonderfulActivity')       compCon = (<WonderfulActivity       data={this.props}/>) 
 		else if (compName === 'floor')           compCon = (<Floor           data={data}/>)
-
 		// if (compName === 'picture')           compCon = (<Picture         data={data}/>)
 		// else if (compName === 'web')          compCon = (<Web             data={data}/>)
 		// else if (compName === 'text')         compCon = (<Text            data={data}/>)
 		 else if (compName === 'swiperImage' && content.length > 1)  compCon = (<SwiperImage     data={this.props}/>)
-
 		if (content.length) {
-
 			activeKey = Array.from(new Array(content.length + 1), (_, i) => `${i}`)
 			childNode = content.map((_, i) => {
 				return (
@@ -210,7 +209,7 @@ class EditContent extends React.Component {
 						{ this.renObj(data, _, i) }
 					</Panel>
 				)
-			}) 
+			})
 		} else {
 			activeKey = ['0']
 			let con = this.renObj(data, content)
@@ -237,7 +236,7 @@ class EditContent extends React.Component {
 										data={data}
 										img={{}}        
 										name={`${data.name=='video'?'src':'first'}`}
-										content={data.content}  
+										content={content}  
 										action={'updateComp'}
 										style={{ width: '100%' }}
 									/>
@@ -246,7 +245,7 @@ class EditContent extends React.Component {
 						</Panel> : null
 					}
 					{
-						!(data.name == 'swiperImage'&& data.content.length==1&&data.content[0].img.img == '') ? childNode : null
+						!(data.name == 'swiperImage'&& content.length==1 && content[0].img.img == '') ? childNode : null
 					}
 				</Collapse>
 			</section>

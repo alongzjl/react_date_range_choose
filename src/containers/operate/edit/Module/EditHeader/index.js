@@ -22,13 +22,12 @@ class Header extends React.Component {
 	}
 
 	componentDidMount() {
-
 	}
 
 	componentWillUnmount() {
 	}
 
-	addComp(item) { 
+	addComp(item) {
 		let { actions, editConfig } = this.props
 		let { curComp, curData } = editConfig
 		let { parentComp } = curData
@@ -36,12 +35,12 @@ class Header extends React.Component {
 			let compData = JSON.parse(JSON.stringify(comp[item.key]))
 			let Comp = parentComp || curComp
 			if (compData.type === 'base') {
-				Comp.components.push(compData)
+				Comp.data.components.push(compData)
 				actions.updateComp(null, Comp)
 			} else {
 				message.info('高级组件内只能添加基础组件!')
-			} 
-		}else {
+			}
+		} else {
 			actions.addComp(editConfig.curData.router, item.key)
 		} 
 
@@ -81,13 +80,19 @@ class Header extends React.Component {
 				pageContent: cfg.pageContent,
 				pageList:    cfg.pageList,
 				globalData:  cfg.globalData
-			},
-			configTerminal: {
-				pageContent: cfg.pageContent,
-				pageList:    cfg.pageList,
-				globalData:  cfg.globalData
 			}
+			// configTerminal: {
+			// 	pageContent: cfg.pageContent,
+			// 	pageList:    cfg.pageList,
+			// 	globalData:  cfg.globalData
+			// }
 		}
+		Ajax.post('/mcp-gateway/template/save', {
+			// composeType: '',
+			config: JSON.stringify(config),
+			coverImgUrl: 'http://rongyi.com',
+			name: '模板名称'
+		})
 		console.log(JSON.stringify(config))
 	}
 
@@ -113,7 +118,7 @@ class Header extends React.Component {
 							<Icon type="appstore" /> 主题
 						</div>
 						<div className="cl-item" onClick={this.createData.bind(this)}>
-							<Icon type="code" /> 数据
+							<Icon type="code" /> 数据保存
 						</div>
 					</section>
 				</div>

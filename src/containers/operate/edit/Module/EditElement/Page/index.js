@@ -34,7 +34,7 @@ class Page extends React.Component {
 	renderDom(props, body) {
 		let { page, size, total } = body
 		let totalPage = Math.ceil(total / size)
-		let img = props.data.content.filterBGImg
+		let img = props.data.data.content.filterBGImg
 		let css = cssColorFormat(props, 'filter')
 		let node = Array.from(new Array(totalPage)).map((_, i) => {
 			let cur = i + 1
@@ -61,7 +61,8 @@ class Page extends React.Component {
 	
 	render() {
 		let { type, ioInput } = this.props
-		let dom = this[`render${type}`].bind(this, this.props, ioInput.body)()
+		let render   = this[`render${type}`]? this[`render${type}`]: this.renderStyle1
+		let dom      = render.bind(this, this.props, ioInput.body)()
 		return (
 			<section className={`e-page ${type}`}>
 				{ dom }

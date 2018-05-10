@@ -26,16 +26,21 @@ class ListByStore extends React.Component {
 	}
 
 	renderDom(props, list) {
+		let img = props.data.data.content.posIcon,
+			src = getImg(img)
 		let node = list.map((_, i) => {
 			return (
 				<div
 					key={i}
 					style={cssColorFormat(props, 'filter')}
-					className={'ep-item$'}
+					className={'ep-item'}
 				>
-					<p><img style={cssColorFormat(props, 'image')} src={_.pic} /></p>
-					<p><span>{_.name}</span></p>
-					<p><span>{_.floor}</span></p>
+					<p><img  style={cssColorFormat(props, 'image')} src={_.pic} /></p>
+					<p><span style={cssColorFormat(props, 'title')}>{_.name}</span></p>
+					<p>
+						<img  style={cssColorFormat(props, 'posIcon')} src={src} />
+						<span style={cssColorFormat(props, 'text')}>{_.floor}</span>
+					</p>
 				</div>
 			)
 		})
@@ -50,7 +55,8 @@ class ListByStore extends React.Component {
 	render() {
 		let props = this.props
 		let { type, ioInput } = props
-		let dom = this[`render${type}`].bind(this, props, ioInput.list)()
+		let render = this[`render${type}`]? this[`render${type}`]: this.renderStyle1
+		let dom    = render.bind(this, props, ioInput.list)()
 		return (
 			<section className={`e-list-by-store ${type}`} style={cssColorFormat(props, 'filterBox')}>
 				{ dom }
