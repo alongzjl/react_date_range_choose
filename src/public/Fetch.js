@@ -4,124 +4,121 @@ import 'whatwg-fetch';
 const common = {};
 
 common.getAccessToken = function () {
-    function getQueryString(name) {
-        const reg = new RegExp(`(^|&)${name}=([^&]*)(&|$)`, 'i');
-        const r = window.location.search.substr(1).match(reg);
-        if (r != null) return unescape(r[2]); return null;
-    }
-    let accessToken = sessionStorage.getItem('access_token');
-    if (!accessToken) {
-        accessToken = getQueryString('access_token');
-    }
-    accessToken = 'along123456';
-    return accessToken;
+	function getQueryString(name) {
+		const reg = new RegExp(`(^|&)${name}=([^&]*)(&|$)`, 'i');
+		const r = window.location.search.substr(1).match(reg);
+		if (r != null) return unescape(r[2]); return null;
+	}
+	let accessToken = sessionStorage.getItem('access_token');
+	if (!accessToken) {
+		accessToken = getQueryString('access_token');
+	}
+	accessToken = 'along123456';
+	return accessToken;
 };
 
 
 export default class Fetch {
-    static remote(url, config, success, failed) {
-        const defaultConfig = {
-            method: 'GET'
-        };
-        const newConfig = Object.assign({}, defaultConfig, config);
+	static remote(url, config, success, failed) {
+		const defaultConfig = {
+			method: 'GET'
+		};
+		const newConfig = Object.assign({}, defaultConfig, config);
 
-        fetch(url, newConfig).then(response => response.json()).then(result => {
-            if (result.meta.errno === 0) {
-                if (success) {
-                    success(result.result);
-                }
-            } else {
-                if (result.msg === '登录已过期,请重新登录!' || result.msg === 'access_token不正确，请退出后重试') {
-                    // location.href = '#/login';
-                    console.log('登录已过期,请重新登录!');
-                }
-                throw new Error(result.msg);
-            }
-        }).catch(error => {
-            alert(error.message);
-            if (failed) {
-                failed(error);
-            }
-        });
-    }
+		fetch(url, newConfig).then(response => response.json()).then(result => {
+			if (result.meta.errno === 0) {
+				if (success) {
+					success(result.result);
+				}
+			} else {
+				if (result.msg === '登录已过期,请重新登录!' || result.msg === 'access_token不正确，请退出后重试') {
+					// location.href = '#/login';
+					console.log('登录已过期,请重新登录!');
+				}
+				throw new Error(result.msg);
+			}
+		}).catch(error => {
+			alert(error.message);
+			if (failed) {
+				failed(error);
+			}
+		});
+	}
 
-    static get(url, config) {
-        let id = window.uif.userInfo.id
-        if (id) url += ((/\?/.test(url)? '&': '?') + 'userId='+id)
-        return new Promise((resolve, reject) => {
-            const newConfig = Object.assign({}, {
-                method: 'GET'
-            }, config)
-            Fetch.remote(url, newConfig, resolve, reject);
-        });
-    }
+	static get(url, config) {
+		let id = window.uif.userInfo.id
+		if (id) url += ((/\?/.test(url)? '&': '?') + 'userId='+id)
+		return new Promise((resolve, reject) => {
+			const newConfig = Object.assign({}, {
+				method: 'GET'
+			}, config)
+			Fetch.remote(url, newConfig, resolve, reject);
+		});
+	}
 
-    static postLogin(url, config) {
-        let id = window.uif.userInfo.id
-        if (id) config.userId = id
-        return new Promise((resolve, reject) => {
-            Fetch.remote(url, {
-                method: 'POST',
-                body: JSON.stringify(config),
-                headers: {
-                    'Content-Type': 'application/json;charset=UTF-8'
-                }
-            }, resolve, reject)
-        })
-    }
-    static post(url, config) {
-        let id = window.uif.userInfo.id
-        if (id) config.userId = id
-        return new Promise((resolve, reject) => {
-            Fetch.remote(url, {
-                method: 'POST',
-                body: new URLSearchParams(config),
-                // headers: {
-                //     'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
-                // }
-            }, resolve, reject)
-        })
-    }
+	static postLogin(url, config) {
+		let id = window.uif.userInfo.id
+		if (id) config.userId = id
+		return new Promise((resolve, reject) => {
+			Fetch.remote(url, {
+				method: 'POST',
+				body: JSON.stringify(config),
+				headers: {
+					'Content-Type': 'application/json;charset=UTF-8'
+				}
+			}, resolve, reject)
+		})
+	}
+	static post(url, config) {
+		let id = window.uif.userInfo.id
+		if (id) config.userId = id
+		return new Promise((resolve, reject) => {
+			Fetch.remote(url, {
+				method: 'POST',
+				body: new URLSearchParams(config),
+			}, resolve, reject)
+		})
+	}
 
-    static postFile(url, config) {
-        return new Promise((resolve, reject) => {
-            const newConfig = Object.assign({}, {
-                method: 'POST',
-                headers: { Authorization: `Bearer ${common.getAccessToken()}` }
-            }, config);
-            Fetch.remote(url, newConfig, resolve, reject);
-        });
-    }
+	static postFile(url, config) {
+		return new Promise((resolve, reject) => {
+			const newConfig = Object.assign({}, {
+				method: 'POST',
+				headers: { Authorization: `Bearer ${common.getAccessToken()}` }
+			}, config);
+			Fetch.remote(url, newConfig, resolve, reject);
+		});
+	}
 
-    static del(url, config) {
-        return new Promise((resolve, reject) => {
-            const newConfig = Object.assign({}, {
-                method: 'DELETE',
-                headers: { Authorization: `Bearer ${common.getAccessToken()}` }
-            }, config);
-            Fetch.remote(url, newConfig, resolve, reject);
-        });
-    }
+	static del(url, config) {
+		return new Promise((resolve, reject) => {
+			const newConfig = Object.assign({}, {
+				method: 'DELETE',
+				headers: { Authorization: `Bearer ${common.getAccessToken()}` }
+			}, config);
+			Fetch.remote(url, newConfig, resolve, reject);
+		});
+	}
 
-    static postJSON(url, data) {
-        return new Promise((resolve, reject) => {
-            const newConfig = Object.assign({}, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${common.getAccessToken()}` },
-                body: JSON.stringify(data)
-            });
-            Fetch.remote(url, newConfig, resolve, reject);
-        });
-    }
+	static postJSON(url, data) {
+		return new Promise((resolve, reject) => {
+			const newConfig = Object.assign({}, {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${common.getAccessToken()}` },
+				body: JSON.stringify(data)
+			});
+			Fetch.remote(url, newConfig, resolve, reject);
+		});
+	}
 
-    static putJSON(url, data) {
-        return new Promise((resolve, reject) => {
-            const newConfig = Object.assign({}, {
-                method: 'PUT',
-                headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${common.getAccessToken()}` },
-                body: JSON.stringify(data)
-            });
-            Fetch.remote(url, newConfig, resolve, reject);
-        });
-    }
+	static putJSON(url, data) {
+		return new Promise((resolve, reject) => {
+			const newConfig = Object.assign({}, {
+				method: 'PUT',
+				headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${common.getAccessToken()}` },
+				body: JSON.stringify(data)
+			});
+			Fetch.remote(url, newConfig, resolve, reject);
+		});
+	}
 }

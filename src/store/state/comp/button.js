@@ -17,7 +17,7 @@ const data = {
 		text: {
 			textAlign:       'center',
 			fontSize:        16, 
-			lineHeight:      36, 
+			lineHeight:      36,
 			fontStyle:       'normal',
 			fontWeight:      'normal',
 			textDecoration:  'none',

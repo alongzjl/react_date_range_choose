@@ -22,22 +22,30 @@ import ImageUploadComp from 'compEdit/EditCommon/ImageUploadComp'
 // import Picture     from './Picture'
 // import Web         from './Web'
 // import Text        from './Text'
-import SwiperImage from './SwiperImage'
-import StoreList       from './StoreList'
-import Navigation      from './Navigation'
-import NavigationFloat from './NavigationFloat'
-import Date            from './Date'
+import SwiperImage       from './SwiperImage'
+import StoreList         from './StoreList'
+import Navigation        from './Navigation'
+import NavigationFloat   from './NavigationFloat'
+import Date              from './Date'
 import WonderfulActivity from './WonderfulActivity'
+import Page              from './Page'
 
 var conMap = {
-	text:        { name: '文本内容', type: 'Textarea', max: 1000, autosize: { minRows: 1, maxRows: 6 } },
-	title:       { name: '标题',    type: 'Title',    max: 30 },
-	img:         { name: '图片',    type: 'Image' },
-	filterBGImg: { name: '字母图片', type: 'Image' },
-	posIcon:     { name: '坐标图标', type: 'Image' },
-	url:         { name: '网址',    type: 'Url' },
-	router:      { name: '页面跳转', type: 'Router' },
-	size:        { name: '商品数量', type: 'Number', min: 1, max: 50 },
+	text:          { name: '文本内容', type: 'Textarea', max: 1000, autosize: { minRows: 1, maxRows: 6 } },
+	title:         { name: '标题',    type: 'Title',    max: 30 },
+	img:           { name: '图片',    type: 'Image' },
+	filterBGImg:   { name: '字母图片', type: 'Image' },
+	filterPageImg: { name: '分页图片', type: 'Image' },
+	filterPrevImg: { name: '上页图片', type: 'Image' },
+	filterNextImg: { name: '下页图片', type: 'Image' },
+	pageSwitch:    { name: '分页开关', type: 'Checkbox' },
+	prevSwitch:    { name: '上页开关', type: 'Checkbox' },
+	nextSwitch:    { name: '下页开关', type: 'Checkbox' },
+	numberSwitch:  { name: '数字开关', type: 'Checkbox' },
+	posIcon:       { name: '坐标图标', type: 'Image' },
+	url:           { name: '网址',    type: 'Url' },
+	router:        { name: '页面跳转', type: 'Router' },
+	size:          { name: '商品数量', type: 'Number', min: 1, max: 50 },
 }
 
 import './index.less'
@@ -78,13 +86,13 @@ class EditContent extends React.Component {
 		let { curData, curComp } = editConfig
 		let { content } = data.data
 		let { parentComp } = curData
-		if(getAttr(data.data.content) === 'Array') {
+		if(getAttr(content) === 'Array') {
 			content = content.filter((item,i) => i!=index)
 			data.data.content = content
 			actions.updateComp(null, parentComp? parentComp: data)
-		}    
+		}   
 		
-	} 
+	}
 	/* 渲染组件开始 */
 	// 文本
 	renderTextarea(cfg, data, val, key, index) {
@@ -147,15 +155,12 @@ class EditContent extends React.Component {
 			/>
 		)
 	}
-	// 楼层
+	// 开关
 	renderCheckbox(cfg, data, val, key, index) {
 		return (
-			<div>
-				<span style={{ marginRight: 10 }}>{val.value}</span>
-				<Checkbox
-					value={cfg.defaultValue} onChange={v => this.onChange({ value: val.value, checked: v.target.checked }, key)}
-				/>
-			</div>
+			<Checkbox
+				checked={val || cfg.defaultValue || false} onChange={v => this.onChange(v.target.checked, key)}
+			/>
 		)
 	}
 
@@ -190,21 +195,17 @@ class EditContent extends React.Component {
 		let content  = data.data.content
 		let compCon
 		let childNode
-		let activeKey 
-		if (compName === 'navigation')           compCon = (<Navigation      data={this.props}/>)
-		else if (compName === 'navigationFloat') compCon = (<NavigationFloat data={this.props}/>)
-		else if (compName === 'date')            compCon = (<Date            data={this.props}/>)
-		else if (compName === 'storeList')       compCon = (<StoreList       data={data}/>)
-		else if (compName === 'wonderfulActivity')       compCon = (<WonderfulActivity       data={this.props}/>) 
-		//else if (compName === 'floor')           compCon = (<Floor           data={data}/>)
-		// if (compName === 'picture')           compCon = (<Picture         data={data}/>)
-		// else if (compName === 'web')          compCon = (<Web             data={data}/>)
-		// else if (compName === 'text')         compCon = (<Text            data={data}/>)
-		 else if (compName === 'swiperImage' && content.length > 1)  compCon = (<SwiperImage     data={this.props}/>)
+		let activeKey
+		if (compName === 'navigation')             compCon = (<Navigation        data={this.props}/>)
+		else if (compName === 'navigationFloat')   compCon = (<NavigationFloat   data={this.props}/>)
+		else if (compName === 'date')              compCon = (<Date              data={this.props}/>)
+		else if (compName === 'storeList')         compCon = (<StoreList         data={data}/>)
+		else if (compName === 'wonderfulActivity') compCon = (<WonderfulActivity data={this.props}/>)
+		else if (compName === 'swiperImage' && content.length > 1) compCon = (<SwiperImage data={this.props}/>)
 		if (content.length && compName != 'wonderfulActivity') {
 			activeKey = Array.from(new Array(content.length + 1), (_, i) => `${i}`)
 			childNode = content.map((_, i) => {
-				return (  
+				return (
 					<Panel header={`内容${i + 1}`} key={i + 1}>
 						{ this.renObj(data, _, i) }
 					</Panel>

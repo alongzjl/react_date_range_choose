@@ -30,12 +30,12 @@ const store = createStore(
 )
 
 // Render the main component into the dom
+            // <Redirect from="/" to="operate" />
 ReactDOM.render((
     <Provider store={store}>
         <Router history={hashHistory}>
-            <Redirect from="/" to="operate" />
             <Route path="operate" component={Operate}>
-                <Route path="edit/:resolution/:pageName" component={OperateEdit} />
+                <Route path="edit" component={OperateEdit} />
             </Route>
             <Route path="*" component={NoMatch} />
         </Router>

@@ -12,6 +12,7 @@ const initMap = {
 	floor:  '',
 	letter: '',
 	catg:   '',
+	page:   1
 }
 
 class Reset extends React.Component {

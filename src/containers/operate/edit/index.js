@@ -18,7 +18,7 @@ import EditPageManage from 'compEdit/EditPageManage'
 import EditContent    from 'compEdit/EditContent'
 import EditElement    from 'compEdit/EditElement'
 import EditStyle      from 'compEdit/EditStyle'
-import EditAnimation  from 'compEdit/EditAnimation'
+// import EditAnimation  from 'compEdit/EditAnimation'
 import EditTheme      from 'compEdit/EditTheme'
 
 import tools from 'services/tools'
@@ -51,14 +51,6 @@ const cTypeMap = {
 class EditComponent extends React.Component {
 	constructor(props) {
 		super(props)
-		let resolution = props.routeParams.resolution.split('*')
-		this.state = {
-			ryRollScreenDataIndex: 1,
-			range: {
-				width: parseInt(resolution[0]),
-				height: parseInt(resolution[1])
-			}
-		}
 	}
 
 	componentWillMount() {
@@ -69,13 +61,14 @@ class EditComponent extends React.Component {
 
 	selectPage() {
 		let { actions, editConfig } = this.props
-		actions.selectPage(editConfig.curData.router)
+		let { curData } = editConfig
+		actions.selectPage(curData.router)
 	}
 
 	render() {
-		let { editConfig } = this.props
-		let theme   = editConfig.globalData.theme
-		let colors  = theme.list[theme.idx].colors
+		let { editConfig, location } = this.props
+		let theme  = editConfig.globalData.theme
+		let colors = theme.list[theme.idx].colors
 		let { curData } = editConfig
 		let type = curData.contentType
 		let editTab
@@ -87,9 +80,9 @@ class EditComponent extends React.Component {
 				<Tabs defaultActiveKey="1" type="card">
 					<TabPane tab="内容" key="1"><EditContent   data={editConfig.curComp} /></TabPane>
 					<TabPane tab="样式" key="2"><EditStyle     data={editConfig.curComp} /></TabPane>
-					<TabPane tab="动画" key="3"><EditAnimation data={editConfig.curComp} /></TabPane>
 				</Tabs>
 			)
+			// <TabPane tab="动画" key="3"><EditAnimation data={editConfig.curComp} /></TabPane>
 		} else if (type === 'theme') {
 			editTab = (<EditTheme data={editConfig.globalData.theme} />)
 		}
@@ -97,18 +90,17 @@ class EditComponent extends React.Component {
 			<div className="pg-edit-box">
 				<EditHeader/>
 				<div className="pg-body e-flex-box">
-					<div className="pg-left">
+					<div className="pg-left scrollbar">
 						<EditPageManage data={editConfig.pageList} />
 					</div>
-					<div className="pg-center e-flex-box" onClick={this.selectPage.bind(this)}>
-						<EditElement data={editConfig.curPage}></EditElement>
+					<div className="pg-center e-flex-box scrollbar" onClick={this.selectPage.bind(this)}>
+						<EditElement data={editConfig.curPage} location={location}></EditElement>
 					</div>
-					<div className="pg-right">
+					<div className="pg-right scrollbar">
 						{ editTab }
 					</div>
 
-
-					<div className="pg-float e-flex-box">
+					<div className="pg-float e-flex-box scrollbar">
 						{ Object.keys(curData).map((_, i) => {
 							var im = curData[_]
 							return (

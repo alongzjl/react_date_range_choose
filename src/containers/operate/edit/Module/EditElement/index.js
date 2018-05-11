@@ -12,18 +12,18 @@ import { connect }  from 'react-redux'
 
 import Rnd from 'react-rnd'
 
-import Picture         from 'compEdit/EditElement/Picture'
-import Web             from 'compEdit/EditElement/Web'
-import Text            from 'compEdit/EditElement/Text'
-import Button          from 'compEdit/EditElement/Button'
-import Video           from 'compEdit/EditElement/Video'
-import SwiperImage     from 'compEdit/EditElement/SwiperImage'
+import Picture           from 'compEdit/EditElement/Picture'
+import Web               from 'compEdit/EditElement/Web'
+import Text              from 'compEdit/EditElement/Text'
+import Button            from 'compEdit/EditElement/Button'
+import Video             from 'compEdit/EditElement/Video'
+import SwiperImage       from 'compEdit/EditElement/SwiperImage'
 import WonderfulActivity from 'compEdit/EditElement/WonderfulActivity'
-import DateShow        from 'compEdit/EditElement/Date'
-import StoreList       from 'compEdit/EditElement/StoreList'
-import StoreDetails    from 'compEdit/EditElement/StoreDetails'
-import Navigation      from 'compEdit/EditElement/Navigation'
-import NavigationFloat from 'compEdit/EditElement/NavigationFloat'
+import DateShow          from 'compEdit/EditElement/Date'
+import StoreList         from 'compEdit/EditElement/StoreList'
+import StoreDetails      from 'compEdit/EditElement/StoreDetails'
+import Navigation        from 'compEdit/EditElement/Navigation'
+import NavigationFloat   from 'compEdit/EditElement/NavigationFloat'
 
 import * as actions from 'actions'
 
@@ -42,7 +42,8 @@ class EditElement extends React.Component {
 		e.stopPropagation()
 		let { actions, editConfig } = this.props
 		let { curData } = editConfig
-		if (curData.compIdx === idx && curData.cusCompIdx < 0) return
+		let { compIdx, cusCompIdx, contentType } = curData
+		if (compIdx === idx && cusCompIdx < 0 && contentType === 'comp') return
 		curData.compIdx    = idx
 		curData.parentComp = null
 		actions.updateCur(curData)	// 更新 当前数据
@@ -53,10 +54,10 @@ class EditElement extends React.Component {
 		e.stopPropagation()
 		let { actions } = this.props
 		let lay = item.data.layout
-		lay.left   = pos.x
-		lay.top    = pos.y
-		lay.width  = ref.offsetWidth
-		lay.height = ref.offsetHeight
+		lay.left   = ~~pos.x
+		lay.top    = ~~pos.y
+		lay.width  = ~~ref.offsetWidth
+		lay.height = ~~ref.offsetHeight
 		actions.updateComp(idx, item)
 		//针对轮播图的单独处理，每次更改大小时都要重新初始化swiper
 	}
@@ -66,8 +67,8 @@ class EditElement extends React.Component {
 		let { actions } = this.props
 		let lay  = item.data.layout
 		if (lay.left === d.x && lay.top  === d.y) return
-		lay.left = d.x
-		lay.top  = d.y
+		lay.left = ~~d.x
+		lay.top  = ~~d.y
 		actions.updateComp(idx, item)
 	}
 
@@ -78,8 +79,9 @@ class EditElement extends React.Component {
 	}
 
 	render() {
-		let { data, actions, editConfig } = this.props
-		let eles   = data.elements || [],
+		let { data, actions, editConfig, location } = this.props
+		let ct     = location.query.ct - 0 || 2,
+			eles   = data.elements || [],
 			theme  = editConfig.globalData.theme,
 			colors = theme.list[theme.idx].colors,
 			color  = data.feature.backgroundColor,
@@ -136,7 +138,7 @@ class EditElement extends React.Component {
 			)
 		})
 		return (
-			<div className="pg-element-parent e-flex-box">
+			<div className={`pg-element-parent e-flex-box pg-element-${ct}`}>
 				<section className="pg-element" style={bgStyle}>
 					{ childNode }
 				</section>

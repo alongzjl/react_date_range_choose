@@ -7,10 +7,10 @@ const formatPxMap = {
 	paddingRight: 1,
 	paddingBottom: 1,
 	paddingLeft: 1,
-	top: 1,
-	right: 1,
+	top:    1,
+	right:  1,
 	bottom: 1,
-	left: 1,
+	left:   1,
 	marginTop: 1,
 	marginRight: 1,
 	marginBottom: 1,
@@ -85,7 +85,7 @@ window.cssColorFormat = (props, key) => {
 			obj[p] = Object.keys(v).map(_ => {
 				let w = v[_]
 				return getAttr(w) === 'Number'? w += 'px': w
-			}).join(' ') 
+			}).join(' ')
 		}
 		else if (formatColorMap[p]) {
 			colorChange = colorVaild(v, obj, p, colorChange)
@@ -94,7 +94,7 @@ window.cssColorFormat = (props, key) => {
 			obj[p] += 'px'
 		}else if(p == 'transformRotate'){
 			obj['transform'] = `rotate(${obj[p]}deg)`
-		}    
+		}
 	}
 	if (colorChange) {
 		// 判断如果当前组件的颜色所使用的主题类别被删除, 更新颜色类型为custom

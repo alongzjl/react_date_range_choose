@@ -30,7 +30,7 @@ var styleMap = {
 	filterBox:    '盒样式',
 	filter:       '元素样式',
 	filterActive: '激活样式',
-	swiperImage:  '轮播样式', 
+	swiperImage:  '轮播样式'
 }
 // 定义样式名称 & 渲染类型 & 相关配置
 var cssMap = {
@@ -46,7 +46,7 @@ var cssMap = {
 	textAlign:         { name: '对齐方式', type: 'TextAlign', option: [
 		{ name: '左', value: 'left' },
 		{ name: '中', value: 'center' },
-		{ name: '右', value: 'right' }, 
+		{ name: '右', value: 'right' },
 	] },
 	color:             { name: '字体颜色', type: 'Color' },
 	fontWeight:        { name: '粗细',    type: 'Switch', true: 'bold',      false: 'normal' },
@@ -71,9 +71,9 @@ var cssMap = {
 	borderRadius:       { name: '圆角', type: 'Complex', child: {
 		topLeft:     { name: '上左', type: 'Number', max: 100 },
 		topRight:    { name: '上右', type: 'Number', max: 100 },
-		bottomLeft:  { name: '下左', type: 'Number', max: 100 }, 
-		bottomRight: { name: '下右', type: 'Number', max: 100 }  
-	} },  
+		bottomLeft:  { name: '下左', type: 'Number', max: 100 },
+		bottomRight: { name: '下右', type: 'Number', max: 100 }
+	} }, 
 	// boxShadow:         { name: '元素阴影', type: 'Shadow', min: 0, max: 20, step: 1 },
 	// textShadow:        { name: '文字阴影', type: 'Shadow', min: 0, max: 20,  step: 1 },
 	transformRotate:   { name: '旋转角度', type: 'Number', max: 180 },

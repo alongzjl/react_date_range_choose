@@ -1,4 +1,3 @@
-
 const tc = require('./themeContent')
 
 const globalData = {
@@ -18,8 +17,8 @@ const globalData = {
 	floors: [],		// 楼层数据
 	catgs: [],	// 分类数据
 	storeList:[], //店铺数据  
-	// 全局特征  
-	feature: {  
+	// 全局特征 
+	feature: {
 	},
 	//日期显示
 	date:{
@@ -30,8 +29,8 @@ const globalData = {
 		show_week:'',
 		show_date:'',
 		show_time:'',
-	} 
-} ;
+	}
+}
  
  
 const getDateTime = (format_time,format_date) => { 

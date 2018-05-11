@@ -11,13 +11,18 @@ import { bindActionCreators } from 'redux'
 import { connect }  from 'react-redux'
 
 const comp     = require('state/comp')
+const compC    = require('state/compChild')
+const compP    = require('state/compParent')
 const compList = require('state/compList')
 
 import * as actions from 'actions'
 
-import { Icon, message } from 'antd'
+import { Icon, Input, message } from 'antd'
  
 class Header extends React.Component {
+	state = {
+		name: ''
+	}
 	componentWillMount() {
 	}
 
@@ -25,29 +30,36 @@ class Header extends React.Component {
 	}
 
 	componentWillUnmount() {
-	} 
+	}
 
-	addComp(item) { 
+	addComp(item) {
 		let { actions, editConfig } = this.props
 		let { curComp, curData } = editConfig
 		let { parentComp } = curData
+		let { key } = item
 		if (curComp.type === 'advanced' || parentComp) {
-			let compData = JSON.parse(JSON.stringify(comp[item.key]))
+			let compData = JSON.parse(JSON.stringify(comp[key]))
 			let Comp = parentComp || curComp
 			if (compData.type === 'base') {
-				Comp.data.components.push(compData)
-				actions.updateComp(null, Comp)
+				if (compC[key]) {
+					Comp.data.components.push(compData)
+					return actions.updateComp(null, Comp)
+				}
 			} else {
 				message.info('高级组件内只能添加基础组件!')
 			}
 		} else {
-			actions.addComp(editConfig.curData.router, item.key)
-		}   
-		if(item.key == 'storeDetails'){
-			let compData_title = JSON.parse(JSON.stringify({"name":"text","type":"base","data":{"style":{"text":{"textAlign":"center","fontSize":14,"lineHeight":27,"fontStyle":"normal","fontWeight":"normal","textDecoration":"none","transform":"","opacity":1,"textShadow":{"h_shadow":0,"v_shadow":0,"blur_dis":0,"color":{"type":"custom","color":"rgba(10,0,0,1)","alpha":100,"rgb":"#0a0000"}},"color":{"type":"custom","color":"rgba(10,0,0,1)","alpha":100,"rgb":"#0a0000"},"animation":"0s 0s 1"}},"layout":{"position":"absolute","top":2,"left":3,"width":120,"height":30},"content":{"text":"店铺介绍","router":{}},"animation":{"className":"","delay":1,"duration":1,"iterationCount":"infinite"}},"styleList":{"idx":0,"list":[{"name":"样式1","img":"","data":{"style":{"text":{"textAlign":"center","fontSize":14,"lineHeight":27,"fontStyle":"normal","fontWeight":"normal","textDecoration":"none","transform":"","opacity":1,"textShadow":{"h_shadow":0,"v_shadow":0,"blur_dis":0,"color":{"type":"custom","color":"rgba(10,0,0,1)","alpha":100,"rgb":"#0a0000"}},"color":{"type":"custom","color":"rgba(10,0,0,1)","alpha":100,"rgb":"#0a0000"},"animation":"0s 0s 1"}},"layout":{"position":"absolute","top":2,"left":3,"width":120,"height":30},"content":{"text":"店铺介绍","router":{}},"animation":{"className":"","delay":1,"duration":1,"iterationCount":"infinite"}}},{"name":"样式2","img":"","data":{"style":{"text":{"textAlign":"center","fontSize":12,"lineHeight":16,"fontStyle":"normal","fontWeight":"normal","textDecoration":"none","transform":"","opacity":1,"textShadow":{"h_shadow":0,"v_shadow":0,"blur_dis":0,"color":{"type":"custom","color":"#f58f8f"}},"color":{"type":"custom","color":"#333"},"animation":"0s 0s 1"}},"layout":{"position":"absolute","top":0,"left":0,"width":120,"height":30},"content":{"text":"右侧编辑文字","router":{}},"animation":{"className":"","delay":1,"duration":1,"iterationCount":"infinite"}}},{"name":"样式3","img":"","data":{"style":{"text":{"textAlign":"center","fontSize":12,"lineHeight":16,"fontStyle":"normal","fontWeight":"normal","textDecoration":"none","transform":"","opacity":1,"textShadow":{"h_shadow":0,"v_shadow":0,"blur_dis":0,"color":{"type":"custom","color":"#f58f8f"}},"color":{"type":"custom","color":"#333"},"animation":"0s 0s 1"}},"layout":{"position":"absolute","top":0,"left":0,"width":120,"height":30},"content":{"text":"右侧编辑文字","router":{}},"animation":{"className":"","delay":1,"duration":1,"iterationCount":"infinite"}}}]},"feature":{},"auth":{"style":{"text":{"textAlign":false,"fontSize":false,"lineHeight":false,"fontStyle":false,"fontWeight":false,"textDecoration":false,"transform":false,"opacity":false,"textShadow":false,"color":false,"animation":false}},"content":{"text":false,"router":false},"animation":{"className":false,"delay":false,"duration":false,"iterationCount":false},"feature":{}}}))
-			let compData_content = JSON.parse(JSON.stringify({"name":"text","type":"base","data":{"style":{"text":{"textAlign":"center","fontSize":12,"lineHeight":27,"fontStyle":"normal","fontWeight":"normal","textDecoration":"none","transform":"","opacity":1,"textShadow":{"h_shadow":0,"v_shadow":0,"blur_dis":0,"color":{"type":"custom","color":"rgba(10,0,0,1)","alpha":100,"rgb":"#0a0000"}},"color":{"type":"custom","color":"rgba(10,0,0,1)","alpha":100,"rgb":"#0a0000"},"animation":"0s 0s 1"}},"layout":{"position":"absolute","top":52,"left":0,"width":432,"height":81},"content":{"text":"店铺介绍","router":{}},"animation":{"className":"","delay":1,"duration":1,"iterationCount":"infinite"}},"styleList":{"idx":0,"list":[{"name":"样式1","img":"","data":{"style":{"text":{"textAlign":"center","fontSize":12,"lineHeight":27,"fontStyle":"normal","fontWeight":"normal","textDecoration":"none","transform":"","opacity":1,"textShadow":{"h_shadow":0,"v_shadow":0,"blur_dis":0,"color":{"type":"custom","color":"rgba(10,0,0,1)","alpha":100,"rgb":"#0a0000"}},"color":{"type":"custom","color":"rgba(10,0,0,1)","alpha":100,"rgb":"#0a0000"},"animation":"0s 0s 1"}},"layout":{"position":"absolute","top":52,"left":3,"width":482,"height":81},"content":{"text":"店铺介绍","router":{}},"animation":{"className":"","delay":1,"duration":1,"iterationCount":"infinite"}}},{"name":"样式2","img":"","data":{"style":{"text":{"textAlign":"center","fontSize":12,"lineHeight":16,"fontStyle":"normal","fontWeight":"normal","textDecoration":"none","transform":"","opacity":1,"textShadow":{"h_shadow":0,"v_shadow":0,"blur_dis":0,"color":{"type":"custom","color":"#f58f8f"}},"color":{"type":"custom","color":"#333"},"animation":"0s 0s 1"}},"layout":{"position":"absolute","top":0,"left":0,"width":120,"height":30},"content":{"text":"右侧编辑文字","router":{}},"animation":{"className":"","delay":1,"duration":1,"iterationCount":"infinite"}}},{"name":"样式3","img":"","data":{"style":{"text":{"textAlign":"center","fontSize":12,"lineHeight":16,"fontStyle":"normal","fontWeight":"normal","textDecoration":"none","transform":"","opacity":1,"textShadow":{"h_shadow":0,"v_shadow":0,"blur_dis":0,"color":{"type":"custom","color":"#f58f8f"}},"color":{"type":"custom","color":"#333"},"animation":"0s 0s 1"}},"layout":{"position":"absolute","top":0,"left":0,"width":120,"height":30},"content":{"text":"右侧编辑文字","router":{}},"animation":{"className":"","delay":1,"duration":1,"iterationCount":"infinite"}}}]},"feature":{},"auth":{"style":{"text":{"textAlign":false,"fontSize":false,"lineHeight":false,"fontStyle":false,"fontWeight":false,"textDecoration":false,"transform":false,"opacity":false,"textShadow":false,"color":false,"animation":false}},"content":{"text":false,"router":false},"animation":{"className":false,"delay":false,"duration":false,"iterationCount":false},"feature":{}}}))
-			let compData_images  = {"name":"wonderfulActivity","type":"base","data":{"style":{"text":{"color":{"type":"custom","color":"#fff"},"fontSize":12,"fontStyle":"normal","fontWeight":"normal","textAlign":"center","textDecoration":"none"},"swiperImage":{"borderRadius":{"topLeft":6,"topRight":6,"bottomRight":6,"bottomLeft":6}}},"layout":{"position":"absolute","top":165,"left":0,"width":540,"height":200},"content":[],"animation":{"className":"","delay":1,"duration":1,"iterationCount":"infinite"},"components":[]},"styleList":{"idx":0,"list":[{"name":"样式1","img":"","data":{"style":{"text":{"color":{"type":"custom","color":"#fff"},"fontSize":12,"fontStyle":"normal","fontWeight":"normal","textAlign":"center","textDecoration":"none"},"swiperImage":{"borderRadius":{"topLeft":6,"topRight":6,"bottomRight":6,"bottomLeft":6}}},"layout":{"position":"absolute","top":165,"left":41,"width":432,"height":200},"content":[],"animation":{"className":"","delay":1,"duration":1,"iterationCount":"infinite"},"components":[]}}]},"feature":{"style":{"layout":"0","title":"0"},"layout":1,"swiperOptions":{"direction":"horizontal","autoplay":false,"loop":true,"speed":1000,"spaceBetween":50,"slidesPerView":2,"centeredSlides":true,"effect":"slide","autoplayOptions":{"delay":1000,"stopOnLastSlide":false,"disableOnInteraction":false,"reverseDirection":false},"pagination":false,"paginationOptions":{"el":".swiper-pagination","type":"bullets","progressbarOpposite":true,"dynamicBullets":false,"dynamicMainBullets":2,"hideOnClick":true,"clickable":true}}},"auth":{"style":{"text":{"color":false,"fontSize":false,"fontStyle":false,"fontWeight":false,"textAlign":false,"textDecoration":false},"swiperImage":{"borderRadius":false}},"content":[],"animation":{"className":false,"delay":false,"duration":false,"iterationCount":false},"feature":{"style":false,"layout":false,"swiperOptions":false}}};
-			setTimeout(()=>{    
+			if (compP[key]) {
+				return actions.addComp(editConfig.curData.router, key)
+			}
+			message.info('该组件内只能添加在高级组件中!')
+		} 
+
+		if(key == 'storeDetails'){
+			let compData_title   = JSON.parse(JSON.stringify({"name":"text","type":"base","layout":{"position":"absolute","top":10,"left":10,"width":132,"height":34},"style":{"text":{"textAlign":"center","fontSize":14,"lineHeight":30,"fontStyle":"normal","fontWeight":"bold","textDecoration":"none","transform":"","opacity":1,"textShadow":{"h_shadow":0,"v_shadow":0,"blur_dis":0,"color":{"type":"custom","color":"#f58f8f"}},"color":{"type":"custom","color":"#333"},"animation":"0s 0s 1"}},"content":{"text":"店铺介绍","router":{}},"animation":{"className":"","delay":1,"duration":1,"iterationCount":"infinite"},"styleList":{"idx":0,"list":[{"name":"样式1","img":"","data":{"text":{"textAlign":"center","fontSize":14,"lineHeight":30,"fontStyle":"normal","fontWeight":"bold","textDecoration":"none","transform":"","opacity":1,"textShadow":{"h_shadow":0,"v_shadow":0,"blur_dis":0,"color":{"type":"custom","color":"#f58f8f"}},"color":{"type":"custom","color":"#333"},"animation":"0s 0s 1"}}}]},"feature":{},"auth":{"style":{"text":{"textAlign":false,"fontSize":false,"lineHeight":false,"fontStyle":false,"fontWeight":false,"textDecoration":false,"transform":false,"opacity":false,"textShadow":false,"color":false,"animation":false}},"content":{"text":false,"router":false},"feature":{}}}))
+			let compData_content = JSON.parse(JSON.stringify({"name":"text","type":"base","layout":{"position":"absolute","top":80,"left":10,"width":432,"height":120},"style":{"text":{"textAlign":"left","fontSize":14,"lineHeight":30,"fontStyle":"normal","fontWeight":"normal","textDecoration":"none","transform":"","opacity":1,"textShadow":{"h_shadow":0,"v_shadow":0,"blur_dis":0,"color":{"type":"custom","color":"#f58f8f"}},"color":{"type":"custom","color":"#333"},"animation":"0s 0s 1"}},"content":{"text":"店铺介绍","router":{}},"animation":{"className":"","delay":1,"duration":1,"iterationCount":"infinite"},"styleList":{"idx":0,"list":[{"name":"样式1","img":"","data":{"text":{"textAlign":"center","fontSize":14,"lineHeight":30,"fontStyle":"normal","fontWeight":"bold","textDecoration":"none","transform":"","opacity":1,"textShadow":{"h_shadow":0,"v_shadow":0,"blur_dis":0,"color":{"type":"custom","color":"#f58f8f"}},"color":{"type":"custom","color":"#333"},"animation":"0s 0s 1"}}}]},"feature":{},"auth":{"style":{"text":{"textAlign":false,"fontSize":false,"lineHeight":false,"fontStyle":false,"fontWeight":false,"textDecoration":false,"transform":false,"opacity":false,"textShadow":false,"color":false,"animation":false}},"content":{"text":false,"router":false},"feature":{}}}))
+			let compData_images  = {"name":"wonderfulActivity","type":"base","layout":{"position":"absolute","top":180,"left":1,"width":432,"height":200},"style":{"box":{"transform":"","animation":"0s 0s 1"},"text":{"color":{"type":"custom","color":"#fff"},"fontSize":12,"fontStyle":"normal","fontWeight":"normal","textAlign":"center","textDecoration":"none"},"swiperImage":{"borderRadius":{"topLeft":6,"topRight":6,"bottomRight":6,"bottomLeft":6}}},"content":[],"animation":{"className":"","delay":1,"duration":1,"iterationCount":"infinite"},"styleList":{"idx":0,"list":[{"name":"样式1","img":"","data":{"box":{"transform":"","animation":"0s 0s 1"},"text":{"color":{"type":"custom","color":"#fff"},"fontSize":12,"fontStyle":"normal","fontWeight":"normal","textAlign":"center","textDecoration":"none"},"swiperImage":{"borderRadius":{"topLeft":6,"topRight":6,"bottomRight":6,"bottomLeft":6}}}}]},"feature":{"style":{"layout":"0","title":"0"},"layout":1,"swiperOptions":{"direction":"horizontal","autoplay":false,"loop":true,"speed":1000,"spaceBetween":0,"slidesPerView":1,"centeredSlides":true,"effect":"slide","autoplayOptions":{"delay":1000,"stopOnLastSlide":false,"disableOnInteraction":false,"reverseDirection":false},"pagination":false,"paginationOptions":{"el":".swiper-pagination","type":"bullets","progressbarOpposite":true,"dynamicBullets":false,"dynamicMainBullets":2,"hideOnClick":true,"clickable":true}}},"auth":{"style":{"box":{"transform":false,"animation":false},"text":{"color":false,"fontSize":false,"fontStyle":false,"fontWeight":false,"textAlign":false,"textDecoration":false},"swiperImage":{"borderRadius":false}},"content":[],"feature":{"style":false,"layout":false,"swiperOptions":false}}};
+			setTimeout(()=>{   
 				let curComp = this.props.editConfig.curComp;
 				curComp.data.components.push(compData_title);
 				actions.updateComp(null, curComp);
@@ -94,16 +106,43 @@ class Header extends React.Component {
 		})
 		console.log(JSON.stringify(config))
 	}
+	tNameChange(name) {
+		this.setState({ name: name })
+	}
 
 	render() {
 		let compListNode = compList.map((_, i) => {
-			return (
-				<div key={i} className="cl-item" onClick={this.addComp.bind(this, _)}>{_.name}</div>
-			)
+			let { child, name } = _
+			if (_.child) {
+				return (
+					<dl key={i} className="cl-item">
+						<dt onClick={this.addComp.bind(this, _)}>{name}</dt>
+						<dd>
+							{
+								child.map((__, j) => {
+									return (
+										<div key={j} onClick={this.addComp.bind(this, __)}>{__.name}</div>
+									)
+								})
+							}
+						</dd>
+					</dl>
+				)
+			} else {
+				return (
+					<div key={i} className="cl-item" onClick={this.addComp.bind(this, _)}>{name}</div>
+				)
+			}
 		})
 		return (
 			<div className="pe-header e-flex">
-				<div className="peh-left"></div>
+				<div className="peh-left">
+					<Input
+						value={this.state.name}
+						placeholder={'模板名称'}
+						onChange={e => this.tNameChange(e.target.value)}
+					/>
+				</div>
 
 				<div className="peh-center">
 					<section className="comp-list">
@@ -114,10 +153,12 @@ class Header extends React.Component {
 				<div className="peh-right">
 					<section className="comp-list">
 						<div className="cl-item" onClick={this.selectTheme.bind(this)}>
-							<Icon type="appstore" /> 主题
+							<Icon type="appstore" />
+							主题
 						</div>
 						<div className="cl-item" onClick={this.createData.bind(this)}>
-							<Icon type="code" /> 数据保存
+							<Icon type="code" />
+							保存
 						</div>
 					</section>
 				</div>

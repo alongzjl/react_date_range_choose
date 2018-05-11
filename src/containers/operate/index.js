@@ -19,7 +19,7 @@ class OperateComponent extends React.Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			load: false  
+			load: false
 		}
 	}
 
@@ -102,7 +102,7 @@ class OperateComponent extends React.Component {
 		}
 	}
 	componentWillMount() {
-		//this.getUserInfo(() => {
+		// this.getUserInfo(() => {
 			let { type, actions, editConfig } = this.props
 			let { globalData } = editConfig
 			let arr = ['getFloor', 'getCatg', 'getStoreList']
@@ -113,11 +113,13 @@ class OperateComponent extends React.Component {
 			}).catch(e => {
 				console.log(e)
 			})
-		//})
+		// })
 	}
 
 	componentDidMount() {
-		hashHistory.push('/operate/edit/1080*1920/home')
+		// this.props
+		// debugger
+		// hashHistory.push('/operate/edit')
 	}
 
 	render() {

@@ -53,39 +53,41 @@ module.exports = [
 			key:  'navigationFloat', 
 		},
 		{
-			icon: 'letter-control',
-			name: '字母',
-			key:  'letter'
-		},
-		{
-			icon: 'floor-control',
-			name: '楼层',
-			key:  'floor'
-		},
-		{
-			icon: 'catg-control',
-			name: '分类',
-			key:  'catg'
-		},
-		{
-			icon: 'page-control',
-			name: '分页',
-			key:  'page'
-		},
-		{
-			icon: 'reset-control',
-			name: '重置',
-			key:  'reset'
-		},
-		{
-			icon: 'list-control',
-			name: '列表',
-			key:  'listByStore'
-		},
-		{
 			icon: 'store-control',
 			name: '店铺列表',
-			key:  'storeList'
+			key:  'storeList',
+			child: [
+				{
+					icon: 'letter-control',
+					name: '字母',
+					key:  'letter'
+				},
+				{
+					icon: 'floor-control',
+					name: '楼层',
+					key:  'floor'
+				},
+				{
+					icon: 'catg-control',
+					name: '分类',
+					key:  'catg'
+				},
+				{
+					icon: 'page-control',
+					name: '分页',
+					key:  'page'
+				},
+				{
+					icon: 'reset-control',
+					name: '重置',
+					key:  'reset'
+				},
+				{
+					icon: 'list-control',
+					name: '列表',
+					key:  'listByStore'
+				}
+			]
 		},
 		{
 			icon: 'storeDetails-control',

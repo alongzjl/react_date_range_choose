@@ -86,7 +86,7 @@ class Custom extends React.Component {
 
 	render() {
 		let { data, actions, idx, csn, editConfig, ioInput, ioOuter,name } = this.props
-		let comp = data.data.components  
+		let comp = data.data.components
 		let childNode = comp.map((_, i) => {
 			let compName = _.name,
 				layout   = _.data.layout,

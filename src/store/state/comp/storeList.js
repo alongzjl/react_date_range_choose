@@ -48,7 +48,7 @@ module.exports = {
 			floor:  '',
 			letter: '',
 			catg:   '',
-			page:   0,
+			page:   1,
 			size:   12,
 			total:  0
 		},

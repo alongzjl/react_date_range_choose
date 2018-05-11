@@ -303,13 +303,13 @@ class VideoModule extends React.Component {
 				<div className="left">
 					{
 						this.state.videoTypes.map((item,index) => <Type key={index} item={item} choose_one={this.chooseType}></Type>)
-					} 
+					}
 				</div> 
 				<div className="right">
 					
 					{ 
 						this.state.videoList.map((item,index) => <List key={index} item={item} type={this.props.type} choose_one={this.chooseVideo}></List> )
-					} 
+					}
 				</div>
 			</div>
 		)

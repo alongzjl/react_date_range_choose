@@ -42,7 +42,7 @@ const data = {
 		},
 		text: { 
 			display:         'block',
-			fontSize:       12, 
+			fontSize:       12,
 			fontStyle:      'normal',
 			fontWeight:     'normal',
 			textAlign:      'center',
@@ -53,9 +53,9 @@ const data = {
 				right:   0,
 				bottom:  5, 
 				left:    0,
-			}, 
-		} 
-	}, 
+			}
+		}
+	},
 	layout: {
 		position: 'absolute',
 		top:      220,
@@ -104,7 +104,7 @@ module.exports = {
 	// 样式管理  
 	data: JSON.parse(JSON.stringify(data)),
 	//布局方式的选择
-	layout:{ 
+	layout:{
 		type:1,
 		position:'left'
 	},

@@ -21,6 +21,7 @@ coverage
 
 # 打包发布目录
 build/Release
+dist
 
 # npm依赖包目录
 node_modules
