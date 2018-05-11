@@ -4,11 +4,11 @@ const data = {
 		text: { 
 			textAlign:      'center',
 			fontSize:       12, 
-			lineHeight:     16, 
+			lineHeight:     16,
+			transformRotate: 0, 
 			fontStyle:      'normal',
 			fontWeight:     'normal',
 			textDecoration: 'none',
-			transform:      '',
 			opacity:        1,
 			textShadow:     {
 				h_shadow:   0,
@@ -55,7 +55,7 @@ module.exports = {
 			name:  '样式1',
 			img:   '',
 			data:  JSON.parse(JSON.stringify(data))
-		}, {
+		}/*, {
 			name:  '样式2',
 			img:   '',
 			data:  JSON.parse(JSON.stringify(data))
@@ -63,7 +63,7 @@ module.exports = {
 			name:  '样式3',
 			img:   '',
 			data:  JSON.parse(JSON.stringify(data))
-		}]
+		}*/] 
 	},
 	// 功能特性
 	feature: {

@@ -31,22 +31,20 @@ class Navigation extends React.Component {
 		let {data,actions,editConfig} = this.props.data;
 		let { curData, curComp } = editConfig
 		let { parentComp } = curData
-		const num_add = value - data.content.length;
+		const num_add = value - data.data.content.length;
 		let add_default = [];
 		let obj = {   
 					img: { type: 'custom', img: 'http://ryoms.v4.rongyi.com/ryoms/images/menu-icon/icon3_2.png' },			// 图片url
-					title: `导航${data.content.length+1}`,		// 图片标题
+					title: `导航${data.data.content.length+1}`,		// 图片标题
 					router: '',  	 		// 路由 
 				}
 		add_default.push(obj); 
-		add_default = data.content.concat(add_default);
-		data.content = add_default;
-		console.log(value);
+		add_default = data.data.content.concat(add_default);
+		data.data.content = add_default;
+		console.log(value);  
 		actions['updateComp'](null, parentComp? parentComp: data)
 	};    
-	render() {  
-		let { data } = this.props.data      
-		const options = [2,3,4,5,6,7,8,9,10,11,12,13,14,15];
+	render() {   
 		return ( 
 			<div className="e-navigation-content">
 				<Collapse activeKey={['0']} onChange={this.cb}>

@@ -25,7 +25,7 @@ function getCompData(state, key) {
 	let compData = JSON.parse(JSON.stringify(comp[key]))
 	let { feature } = compData
 	if (key === 'storeList') {
-		let { body } = feature
+		let { body } = feature 
 		feature.floors = JSON.parse(JSON.stringify(state.globalData.floors))
 		feature.catgs  = JSON.parse(JSON.stringify(state.globalData.catgs))
 		let storeList  = JSON.parse(JSON.stringify(state.globalData.storeList))
@@ -71,9 +71,8 @@ export default function editConfig(state = initialState, action) {
 				sd.data = JSON.parse(JSON.stringify(data.data))
 			} else {
 				var da = data.data.components[cusCompIdx]
-				if (da) {
-					debugger
-					sl = da.styleList
+				if (da) { 
+					sl = da.styleList 
 					sd = sl.list[sl.idx]
 					sd.data = JSON.parse(JSON.stringify(da.data))
 				}

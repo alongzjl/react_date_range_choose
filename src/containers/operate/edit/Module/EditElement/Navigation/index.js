@@ -30,8 +30,8 @@ class Navigation extends React.Component {
 			<div className="e-navigation">
 				<div className="navigation_box">
 					{
-						data.content.map((item,index) => <OnlyNavigation props={this.props} data={item} key={index}></OnlyNavigation>)
-					} 
+						data.data.content.map((item,index) => <OnlyNavigation props={this.props} data={item} key={index}></OnlyNavigation>)
+					}  
 				</div>
 					
 			</div>  
@@ -41,9 +41,9 @@ class Navigation extends React.Component {
  
 function OnlyNavigation({data,props}) {
 
-	return (
-			<div className="only"> 
-				<img src={data.img.img} />   
+	return ( 
+			<div className="only" style={cssColorFormat(props, 'filter')} > 
+				<img src={data.img.img} />    
 				<p style={cssColorFormat(props, 'text')}>{data.title}</p>
 			</div>
 		)

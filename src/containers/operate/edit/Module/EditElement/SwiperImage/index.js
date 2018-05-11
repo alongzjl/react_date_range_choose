@@ -27,16 +27,11 @@ class SwiperImage extends React.Component {
 		let swiperOptions = props.data.feature.swiperOptions;
 		swiperOptions = this.formatObj(swiperOptions);
 		const type = props.data.feature.layout;
-		if(type == 2){ 
-			swiperOptions.spaceBetween = 30;
-			swiperOptions.slidesPerView = 3;
-		}  
-		//this.mySwiper&&this.mySwiper.destroy(false);    
-		console.log(swiperOptions); 
-		props.data.content.length >1 ? this.initSwiper(swiperOptions) : null;
-	}; 
+		this.mySwiperImage && this.mySwiperImage.destroy(false); 
+		this.initSwiper(swiperOptions);  
+	};     
 	 initSwiper = (swiperOptions) => {
-	 	this.mySwiper = new Swiper('.swiper-container', swiperOptions) 
+	 	this.mySwiperImage = new Swiper('.swiper-container-image', swiperOptions) 
 	};
 	formatObj = (obj) => {
 		let new_obj = {};
@@ -52,39 +47,36 @@ class SwiperImage extends React.Component {
 			} 
 		}
 		new_obj.watchSlidesProgress = true;
-		new_obj.navigation = {
-	        nextEl: '.swiper-button-next',
-	        prevEl: '.swiper-button-prev',
-	      }; 
-		return new_obj
-	};
+		new_obj.observer = true;//修改swiper自己或子元素时，自动初始化swiper 
+		new_obj.observeParents = true;//修改swiper的父元素时，自动初始化swiper 
+		return new_obj  
+	};  
 	swiperType = () => {
 		return {
         	
 			
-		 }
+		 }  
 	};
 	render() {
 		let { data } = this.props;
-		const borderRadius = data.style.swiperImage.borderRadius;
+		data = data.data;   
 		return ( 
 			<div className="e-SwiperImage">
 				{
-					data.content.length > 1 ?
-						<div className="swiper-container outer_box">
-							<div className="swiper-wrapper">
-								{
-									data.data.content.map((item,index) => <div className="swiper-slide" key={index} style={cssColorFormat(this.props, 'swiperImage')}><div className="text_show" style={cssColorFormat(this.props, 'text')}>{item.title}</div><img src={compImgFormat(this.props, item.img)} /></div>)
-								}
-							</div> 
-							 
-    						<div className="swiper-pagination"></div>
-						</div> : <div className="outer_box" style={cssColorFormat(this.props, 'swiperImage')}><div className="text_show" style={cssColorFormat(this.props, 'text')}>{data.content[0].title}</div><img src={compImgFormat(this.props, data.content[0].img)} /></div>
-				}
+					<div className="swiper-container-image outer_box">
+						<div className="swiper-wrapper">
+							{
+								data.content.map((item,index) => <div className="swiper-slide" key={index} style={cssColorFormat(this.props, 'swiperImage')}><div className="text_show" style={cssColorFormat(this.props, 'text')}>{item.title}</div><img src={compImgFormat(this.props, item.img)} /></div>)
+							} 
+						</div>   
+						 
+						<div className="swiper-pagination"></div>
+					</div>
+				}  
 			</div>
 		)
 	}
-}
+} 
 
 export default SwiperImage
 

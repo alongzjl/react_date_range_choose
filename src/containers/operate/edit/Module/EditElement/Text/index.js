@@ -16,10 +16,10 @@ class Text extends React.Component {
 		)
 	}
 	
-	render() {
+	render() { 
 		let { type } = this.props
-		let render   = this[`render${type}`]? this[`render${type}`]: this.renderStyle1
-		let dom      = render(this.props, 'text')
+		//console.log(this.props.data,JSON.stringify(this.props.data));
+		let dom = this[`render${type}`](this.props, 'text') 
 		return (
 			<div className={`e-text ${type}`}>
 				{ dom }

@@ -10,7 +10,7 @@ const data = {
 		position: 'absolute',
 		top:      0,
 		left:     0,
-		width:    432,
+		width:    540,
 		height:   400
 	},
 	content:   {},
@@ -20,6 +20,7 @@ const data = {
 		duration: 1,				// 持续时间
 		iterationCount: 'infinite'	// 循环次数
 	},
+	// 组件管理
 	components: []
 }
 
@@ -28,8 +29,6 @@ module.exports = {
 	type: 'Composite',
 	// 样式管理
 	data: JSON.parse(JSON.stringify(data)),
-	// 组件管理
-	components: [],
 	styleList: {
 		idx:  0,
 		list: [{

@@ -19,10 +19,10 @@ class Video extends React.Component {
 		// console.log(1, this.props)
 		return (
 			<div className="e-video">
-				<video src={data.content.src} controls="controls">
+				<video src={data.data.content.src} controls="controls">
 					您的浏览器不支持 video 标签。
 				</video>
-			</div>  
+			</div>    
 		) 
 	}
 } 

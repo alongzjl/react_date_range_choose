@@ -78,13 +78,13 @@ class EditContent extends React.Component {
 		let { curData, curComp } = editConfig
 		let { content } = data.data
 		let { parentComp } = curData
-		if(getAttr(data.content) === 'Array') {
+		if(getAttr(data.data.content) === 'Array') {
 			content = content.filter((item,i) => i!=index)
 			data.data.content = content
 			actions.updateComp(null, parentComp? parentComp: data)
-		}   
+		}    
 		
-	}
+	} 
 	/* 渲染组件开始 */
 	// 文本
 	renderTextarea(cfg, data, val, key, index) {
@@ -190,21 +190,21 @@ class EditContent extends React.Component {
 		let content  = data.data.content
 		let compCon
 		let childNode
-		let activeKey
+		let activeKey 
 		if (compName === 'navigation')           compCon = (<Navigation      data={this.props}/>)
 		else if (compName === 'navigationFloat') compCon = (<NavigationFloat data={this.props}/>)
 		else if (compName === 'date')            compCon = (<Date            data={this.props}/>)
 		else if (compName === 'storeList')       compCon = (<StoreList       data={data}/>)
 		else if (compName === 'wonderfulActivity')       compCon = (<WonderfulActivity       data={this.props}/>) 
-		else if (compName === 'floor')           compCon = (<Floor           data={data}/>)
+		//else if (compName === 'floor')           compCon = (<Floor           data={data}/>)
 		// if (compName === 'picture')           compCon = (<Picture         data={data}/>)
 		// else if (compName === 'web')          compCon = (<Web             data={data}/>)
 		// else if (compName === 'text')         compCon = (<Text            data={data}/>)
 		 else if (compName === 'swiperImage' && content.length > 1)  compCon = (<SwiperImage     data={this.props}/>)
-		if (content.length) {
+		if (content.length && compName != 'wonderfulActivity') {
 			activeKey = Array.from(new Array(content.length + 1), (_, i) => `${i}`)
 			childNode = content.map((_, i) => {
-				return (
+				return (  
 					<Panel header={`内容${i + 1}`} key={i + 1}>
 						{ this.renObj(data, _, i) }
 					</Panel>

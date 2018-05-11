@@ -51,8 +51,8 @@ class ImageUploadComp extends React.Component {
 					return obj
 				})
 				da.content = imgList
-			} else {
-				content[i][name].img = imgList[0].url
+			} else { 
+				content[index][name].img = imgList[0].url
 			}
 		} else if (data.name == 'video'){
 			content[name] = imgList[0].url

@@ -11,7 +11,7 @@ const data = {
 		position: 'absolute',
 		top:      0,
 		left:     0,
-		width:    '100%',
+		width:    540,
 		height:   150
 	}, 
 	// 内容管理

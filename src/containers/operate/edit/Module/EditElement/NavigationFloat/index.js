@@ -31,10 +31,10 @@ class NavigationFloat extends React.Component {
 			<div className="e-navigationFloat">
 				<div className='navigation_box'>
 					{
-						data.content.map((item,index) => <OnlyNavigation props={this.props} data={item} key={index} index={index}></OnlyNavigation>)
+						data.data.content.map((item,index) => <OnlyNavigation props={this.props} data={item} key={index} index={index}></OnlyNavigation>)
 					} 
-				</div> 
-					
+				</div>  
+					 
 			</div>   
 		)   
 	}
@@ -43,8 +43,8 @@ class NavigationFloat extends React.Component {
 function OnlyNavigation({data,props,index}) {
 	const layout_style = props.data.layout.type;
 	const layout_position = props.data.layout.position;
-	let length = props.data.content.length; 
-	length = length%2 == 0 ? length : length+1;
+	let length = props.data.data.content.length; 
+	length = length%2 == 0 ? length : length+1; 
 	let style_show = {};
 	index = index+1;
 	if(layout_style == 2){
@@ -65,11 +65,11 @@ function OnlyNavigation({data,props,index}) {
 					marginLeft:`${Math.abs(length/2-index)*50-80}px`  
 				}           
 	}  
-	return (
-			<div className="only" style={style_show}> 
+	return ( 
+			<div className="only" style={{...cssColorFormat(props, 'filter'),style_show}}> 
 				<img src={data.img.img} />   
-				
-			</div>
+				<p style={cssColorFormat(props, 'text')}>{data.title}</p>
+			</div> 
 		)
 }
 export default NavigationFloat

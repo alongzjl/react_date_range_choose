@@ -30,10 +30,11 @@ var styleMap = {
 	filterBox:    '盒样式',
 	filter:       '元素样式',
 	filterActive: '激活样式',
-	swiperImage:  '轮播样式'
+	swiperImage:  '轮播样式', 
 }
 // 定义样式名称 & 渲染类型 & 相关配置
 var cssMap = {
+	display:           {name:'显示文本',   type: 'Switch', true: 'block',      false: 'none'  },
 	top:               { name: '上',      type: 'Number', min: -300, max: 540 },
 	left:              { name: '左',      type: 'Number', min: -200, max: 960 },
 	width:             { name: '宽',      type: 'Number', min: 0, max: 540 },
@@ -45,7 +46,7 @@ var cssMap = {
 	textAlign:         { name: '对齐方式', type: 'TextAlign', option: [
 		{ name: '左', value: 'left' },
 		{ name: '中', value: 'center' },
-		{ name: '右', value: 'right' },
+		{ name: '右', value: 'right' }, 
 	] },
 	color:             { name: '字体颜色', type: 'Color' },
 	fontWeight:        { name: '粗细',    type: 'Switch', true: 'bold',      false: 'normal' },
@@ -70,9 +71,9 @@ var cssMap = {
 	borderRadius:       { name: '圆角', type: 'Complex', child: {
 		topLeft:     { name: '上左', type: 'Number', max: 100 },
 		topRight:    { name: '上右', type: 'Number', max: 100 },
-		bottomLeft:  { name: '下左', type: 'Number', max: 100 },
-		bottomRight: { name: '下右', type: 'Number', max: 100 }
-	} }, 
+		bottomLeft:  { name: '下左', type: 'Number', max: 100 }, 
+		bottomRight: { name: '下右', type: 'Number', max: 100 }  
+	} },  
 	// boxShadow:         { name: '元素阴影', type: 'Shadow', min: 0, max: 20, step: 1 },
 	// textShadow:        { name: '文字阴影', type: 'Shadow', min: 0, max: 20,  step: 1 },
 	transformRotate:   { name: '旋转角度', type: 'Number', max: 180 },
@@ -339,51 +340,12 @@ class EditStyle extends React.Component {
 				<Collapse defaultActiveKey={activeKey} onChange={this.cb}>
 					{ childNode }
 				</Collapse>
-				{
-					data.name == 'swiperImage' ? <StyleManageSwiper feature={data} onChange={this.onChange.bind(this)} onChangeAuth={this.onChangeAuth.bind(this)} ></StyleManageSwiper> : null
-				}
-				
 			</section>
 		)
 	}
 }
 
-class StyleManageSwiper extends React.Component {
-	
-	render (){
-		let activeKey = Array.from(new Array(1), (_, i) => `${i}`)
-		const feature = this.props.feature.feature;
-		return (
-			<Collapse activeKey={activeKey}>
-				<Panel header={`轮播设置`} key={0}>
-					<div className="pgs-row" key={2}>
-						<div className="pgsr-name">自动循环</div>
-						<div className="pgsr-ctrl">
-							<Switch
-								size="small"
-								checked={feature.switch} onChange={v => this.props.onChange(v? true: false,'feature','switch')}
-							/>
-						</div>
-					</div>
-					<div className="pgs-row" key={4}>
-						<div className="pgsr-name">循环间隔</div>
-						<div className="pgsr-ctrl">
-							<InputNumber
-								min={100} max={5000} step={100}
-								value={feature.autoPlayTime} onChange={v => this.props.onChange(v,'feature','autoPlayTime')}
-								style={{ width: '100%' }}
-							/>
-						</div>
-					</div>
-				</Panel>
-			</Collapse>
-		)
-	}
-}
-
 EditStyle.defaultProps = {
-}
-StyleManageSwiper.defaultProps = {
 }
 
 const mapStateToProps = state => state

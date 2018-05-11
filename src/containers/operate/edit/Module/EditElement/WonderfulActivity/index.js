@@ -13,20 +13,26 @@ import './index.less'
 
 class WonderfulActivity extends React.Component {
 	state = {
-		lists:[]
+		lists:[],
+		random:1
 	}
 	componentWillReceiveProps(props) {
 		this.init(props);
 	}
 	componentDidMount() {
-		const content = this.props.data.content;
-		if(content.length > 0){
+		const content = this.props.data.data.content;
+		const number = parseInt(Math.random()*100); 
+		this.setState({ 
+			random:number
+		}); 
+		if(content&&content.length > 0){
 			this.setState({
 				lists:content
-			})
+			});
+			this.init(this.props);  
 		}else{
 			this.getData(this.props,this.init);
-		}
+		} 
 	}    
 
 	to = event => {
@@ -36,11 +42,12 @@ class WonderfulActivity extends React.Component {
 		let swiperOptions = props.data.feature.swiperOptions;
 		swiperOptions = this.formatObj(swiperOptions);
 		const type = props.data.feature.layout;
-		console.log(JSON.stringify(swiperOptions)); 
+		//console.log(JSON.stringify(swiperOptions)); 
+		this.mySwiper && this.mySwiper.destroy(false);  
 		this.initSwiper(swiperOptions); 
-	};  
+	};      
 	 initSwiper = (swiperOptions) => {
-	 	this.mySwiper = new Swiper('.swiper-container', swiperOptions) 
+	 	this.mySwiper = new Swiper(`.swiper-container_${this.state.random}`, swiperOptions) 
 	};  
 	formatObj = (obj) => {
 		let new_obj = {};
@@ -65,14 +72,15 @@ class WonderfulActivity extends React.Component {
 			console.log(res);
 			this.setState({
 				lists:res.data
-			})
+			}) 
 			fn&&fn(data);
 		})
 	};
-	render() { 
+	render() {   
+		//console.log(this.props.data,JSON.stringify(this.props.data));
 		return ( 
-			<div className="e-WonderfulActivity">
-				<div className="swiper-container outer_box">
+			<div className="e-WonderfulActivity"> 
+				<div className={`swiper-container swiper-container_${this.state.random} outer_box`}>
 					<div className="swiper-wrapper">
 						{ 
 							this.state.lists.map((item,index) => <div className="swiper-slide" key={index} style={cssColorFormat(this.props, 'swiperImage')}><div className="text_show" style={cssColorFormat(this.props, 'text')}>{item.title}</div><img src={item.url} /></div>)

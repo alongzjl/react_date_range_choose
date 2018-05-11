@@ -1,7 +1,16 @@
 // 图片
 const data = {
 	style:     {
-	},
+		image:{
+			transformRotate: 0,
+			borderRadius:    {
+				topLeft:     6,
+				topRight:    6,
+				bottomRight:  6,
+				bottomLeft: 6
+			},  
+		}  
+	}, 
 	layout: {
 		position: 'absolute',
 		top:      0,

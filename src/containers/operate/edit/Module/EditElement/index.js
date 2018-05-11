@@ -104,7 +104,7 @@ class EditElement extends React.Component {
 			else if (compName === 'button')          compCon = (<Button          data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
 			else if (compName === 'swiperImage')     compCon = (<SwiperImage     data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
 			else if (compName === 'wonderfulActivity')     compCon = (<WonderfulActivity     data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
-			else if (compName === 'date')            compCon = (<DateShow        data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
+			else if (compName === 'date')            compCon = (<DateShow        date={editConfig.globalData.date} data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
  			else if (compName === 'navigation')      compCon = (<Navigation      data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
  			else if (compName === 'navigationFloat') compCon = (<NavigationFloat data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
 			else if (compName === 'storeList')       compCon = (<StoreList       data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)

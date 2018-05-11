@@ -21,14 +21,12 @@ const data = {
 		position: 'absolute',
 		top:      0,
 		left:     0,
-		width:    '100%',
+		width:    540,
 		height:   150
 	},
 	content: { 
-		type:1,
-		format_time:':',
-		format_date:'.' 
-	},  
+		type:1
+	},   
 	animation: {
 		className: '',	// 动画样式
 		delay: 1,					// 开始时间

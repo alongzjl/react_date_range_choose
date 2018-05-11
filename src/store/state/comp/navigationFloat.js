@@ -8,15 +8,54 @@
 // 导航
 const data = {
 	style:     {
-		text: {
-			color:          { type: 'custom', color: '#000' },
+		filter:{ 
+			width:  60, 
+			height: 60, 
+			borderWidth:  1,
+			borderStyle: 'solid',
+			borderColor: { type: 'auxiliary', color: '#fff' },
+			borderRadius:    {
+				topLeft:     20,
+				topRight:    20,
+				bottomLeft:  20,
+				bottomRight: 20
+			}, 
+			margin: {
+				top:     0,
+				right:   0,
+				bottom:  5, 
+				left:    0,
+			},
+			padding: {
+				top:     0,
+				right:   0,
+				bottom:  0,
+				left:    0,
+			},
+			boxShadow: {
+				h_shadow:   0,
+				v_shadow:   0,
+				blur_dis:   0,
+				spread_dis: 0,
+				color:      { type: 'custom', color: '#000' }
+			} 
+		},
+		text: { 
+			display:         'block',
 			fontSize:       12, 
 			fontStyle:      'normal',
 			fontWeight:     'normal',
 			textAlign:      'center',
 			textDecoration: 'none',
-		}
-	},
+			color:          { type: 'custom', color: '#000' },
+			margin: {
+				top:     0,
+				right:   0,
+				bottom:  5, 
+				left:    0,
+			}, 
+		} 
+	}, 
 	layout: {
 		position: 'absolute',
 		top:      220,
@@ -65,7 +104,7 @@ module.exports = {
 	// 样式管理  
 	data: JSON.parse(JSON.stringify(data)),
 	//布局方式的选择
-	layout:{
+	layout:{ 
 		type:1,
 		position:'left'
 	},

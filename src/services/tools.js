@@ -85,14 +85,16 @@ window.cssColorFormat = (props, key) => {
 			obj[p] = Object.keys(v).map(_ => {
 				let w = v[_]
 				return getAttr(w) === 'Number'? w += 'px': w
-			}).join(' ')
+			}).join(' ') 
 		}
 		else if (formatColorMap[p]) {
 			colorChange = colorVaild(v, obj, p, colorChange)
 		}
 		else if (formatPxMap2[p]) {
 			obj[p] += 'px'
-		}
+		}else if(p == 'transformRotate'){
+			obj['transform'] = `rotate(${obj[p]}deg)`
+		}    
 	}
 	if (colorChange) {
 		// 判断如果当前组件的颜色所使用的主题类别被删除, 更新颜色类型为custom

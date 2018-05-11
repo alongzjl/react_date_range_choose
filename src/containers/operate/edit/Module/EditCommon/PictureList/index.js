@@ -33,7 +33,7 @@ const commonCss = {
 		fontSize: '40px',
 		color: '#92969C',
 		right: '20px',
-		top: '0'
+		top: '20px' 
 	}
 }
 
@@ -265,7 +265,7 @@ class VideoModule extends React.Component {
 	   // alert('上传本地图片')
 	} 
 	render() {
-		const Upload_props = {
+		/*const Upload_props = {
 			name: 'file',
 			action: '/chaoyue/uploadImage',
 			data: {
@@ -294,21 +294,22 @@ class VideoModule extends React.Component {
 			  }
 			  return isVIDEO && isLt20M;
 			} 
-		}  
+		} */
+		/*<Upload {...Upload_props}>
+						<div className="add_img"><div className="add_text">+</div><div>上传视频</div></div>
+					</Upload>*/ 
 		return (
 			<div className="content">
 				<div className="left">
 					{
 						this.state.videoTypes.map((item,index) => <Type key={index} item={item} choose_one={this.chooseType}></Type>)
-					}
+					} 
 				</div> 
 				<div className="right">
-					<Upload {...Upload_props}>
-						<div className="add_img"><div className="add_text">+</div><div>上传视频</div></div>
-					</Upload>
-					{
+					
+					{ 
 						this.state.videoList.map((item,index) => <List key={index} item={item} type={this.props.type} choose_one={this.chooseVideo}></List> )
-					}
+					} 
 				</div>
 			</div>
 		)

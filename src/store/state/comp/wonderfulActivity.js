@@ -29,7 +29,7 @@ const data = {
 		position: 'absolute',
 		top:      0,
 		left:     0,
-		width:    432,
+		width:    540,
 		height:   200
 	},
 	content:   [],

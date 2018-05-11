@@ -22,8 +22,15 @@ class Date extends React.Component {
 		
 	}; 
 	componentDidMount() {
-		
-	};
+		let {actions,editConfig} = this.props.data; 
+		let { globalData } = editConfig;
+		this.timer = setInterval(()=>{
+			actions['updateGlobal'](globalData); 
+		},1000) 
+	}; 
+	componentWillUnmount(){
+		clearInterval(this.timer);
+	}; 
 	cb = key => {
 		console.log(key)
 	};
@@ -31,30 +38,27 @@ class Date extends React.Component {
 		let {data,actions,editConfig} = this.props.data; 
 		let { curData, curComp } = editConfig 
 		let { parentComp } = curData
-		data.content.type = value;
-		data.style.layout.width = value != 2 ? '100%' : 250; 
-		data.style.layout.height = value == 3 ? 100 : 150;    
+		data.data.content.type = value;
+		data.data.layout.width = value != 2 ? 540 : 250; 
+		data.data.layout.height = value == 3 ? 100 : 150;     
 		console.log(value);    
 		actions['updateComp'](null, parentComp? parentComp: data)
 	};
 	handleChangeDate = value => {
-		let {data,actions,editConfig} = this.props.data; 
-		let { curData, curComp } = editConfig 
-		let { parentComp } = curData
-		data.content.format_date = value;
-		console.log(value);    
-		actions['updateComp'](null, parentComp? parentComp: data)
+		let {actions,editConfig} = this.props.data; 
+		let { globalData } = editConfig 
+		globalData.date.format_date = value;
+		console.log(globalData);    
+		actions['updateGlobal'](globalData)
 	};
 	handleChangeTime = value => {
-		let {data,actions,editConfig} = this.props.data; 
-		let { curData, curComp } = editConfig 
-		let { parentComp } = curData
-		data.content.format_time = value;
-		console.log(value);    
-		actions['updateComp'](null, parentComp? parentComp: data)
+		let {actions,editConfig} = this.props.data; 
+		let { globalData } = editConfig 
+		globalData.date.format_time = value;
+		console.log(globalData);     
+		actions['updateGlobal'](globalData) 
 	};      
-	render() {  
-		let { data } = this.props.data       
+	render() {   
 		const options = [{type:1,show:'天气+日期常规'},{type:2,show:'日期迷你'},{type:3,show:'日期常规'}];
 		const options_date = [{value:'-',show:'YYYY-MM-DD',type:1},{value:'/',show:'YYYY/MM/DD',type:1},{value:'rongyi',show:'YYYY年M月D日',type:2}];
 		const options_time = [{value:':',show:'HH:mm:ss',type:1},{value:'rongyi',show:'HH:mm',type:2}];

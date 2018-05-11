@@ -9,17 +9,11 @@ import classnames from 'classnames'
 import './index.less'
 
 
-const formatNum = num => {
-	num = num<10 ? '0'+num : num;
-	return num
-}; 
+
 class DateShow extends React.Component {
 	state = {
 		time:'',
 		date:'',
-		week:'',
-		format_time:':',
-		format_date:'.', 
 		weatherInfo:{
 		      temp: 24,
 		      type: '阴转多云转雨',
@@ -34,46 +28,29 @@ class DateShow extends React.Component {
 		
 	}
 	componentDidMount() {
-		this.getTime(); 
-	} 
-	componentWiiReceiveProps(props) { 
+		 let { date } = this.props;
 		 
 	}  
-	
-	getTime = () => {
-		const format_time =  this.props.data.content.format_time;
-		const format_date =  this.props.data.content.format_date;
-		const days=new  Array ("日", "一", "二", "三", "四", "五", "六"); 
-	  	const currentDT = new Date();    
-		  let y,m,date,day,hs,ms,ss,timeStr,dateStr,weekStr; 
-		   y = currentDT.getFullYear(); //四位整数表示的年份  
-		  m = currentDT.getMonth(); //月   
-		  date = currentDT.getDate(); //日  
-		  day = currentDT.getDay(); //星期   
-		  hs = currentDT.getHours(); //时  
-		  ms = currentDT.getMinutes(); //分  
-		  ss = currentDT.getSeconds(); //秒 
-		   timeStr =formatNum(hs)+format_time+formatNum(ms)+format_time+formatNum(ss);
-		  dateStr = y+format_date+  formatNum(m) +format_date+formatNum(date);
-		  weekStr = '星期'+ days[day];
-		  if(format_time == 'rongyi'){
-		  		timeStr =formatNum(hs)+":"+formatNum(ms);
-		  }  
-		  if(format_date == 'rongyi'){ 
-		  		dateStr = y+'年'+  formatNum(m) +'月'+formatNum(date) + '日';
-		  }  
-		  this.setState({ 
-		  	time:timeStr,
-		  	date:dateStr,
-		  	week:weekStr
-		  });
-		  window.setTimeout(this.getTime,1000);  
-	}; 
+	componentWiiReceiveProps(props) { 
+		 
+	}
+
+	upDate = value => {
+		 setInterval(()=>{
+		 	this.setState({
+		 		time:value.show_time,
+		 		date:value.show_date
+			})
+		 },1000) 
+		
+	}
+	 
 	render() {   
-		let { data, type } = this.props;
+		let { data, type,date } = this.props;
+		data = data.data; 
 		return ( 
-			<div className={`e-date ${type}`}>
-				<DateAndTimeShow time={this.state.time} date={this.state.date} week={this.state.week} type={data.content.type}></DateAndTimeShow>
+			<div className={`e-date ${type}`}> 
+				<DateAndTimeShow time={date.show_time} date={date.show_date} week={date.show_week} type={data.content.type}></DateAndTimeShow>
 				{
 					data.content.type == 1 ? <TemShowFirst weatherInfo={this.state.weatherInfo}></TemShowFirst> : null
 				} 

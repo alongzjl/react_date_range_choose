@@ -31,17 +31,17 @@ class NavigationFoat extends React.Component {
 		let {data,actions,editConfig} = this.props.data;
 		let { curData, curComp } = editConfig
 		let { parentComp } = curData
-		const num_add = value - data.content.length;
+		const num_add = value - data.data.content.length;
 		let add_default = [];
 		let obj = {   
 					img: { type: 'custom', img: 'http://ryoms.v4.rongyi.com/ryoms/images/menu-icon/icon3_2.png' },			// 图片url
-					title: `导航${data.content.length+1}`,		// 图片标题
+					title: `导航${data.data.content.length+1}`,		// 图片标题
 					router: '',  	 		// 路由 
 				} 
 		add_default.push(obj); 
-		add_default = data.content.concat(add_default);
-		data.content = add_default;
-		console.log(value);
+		add_default = data.data.content.concat(add_default);
+		data.data.content = add_default;
+		console.log(value); 
 		actions['updateComp'](null, parentComp? parentComp: data)
 	};
 	handleChangeStyle = value => {
@@ -50,22 +50,22 @@ class NavigationFoat extends React.Component {
 		let { parentComp } = curData
 		data.layout.type = value;
 		switch (value) {
-			case 1 : data.style.layout.width = 80;data.style.layout.height = 330;
+			case 1 : data.data.layout.width = 80;
 			break;
-			case 2 : data.style.layout.width = 120;data.style.layout.height = 330; 
+			case 2 : data.data.layout.width = 120; 
 			break;
-			case 3 : data.style.layout.width = 300;data.style.layout.height = 300;
+			case 3 : data.data.layout.width = 300;
 			break;
 			default:;
 			break
 		}
 		if(data.layout.position == 'right'){
 			if(data.layout.type == 1){
-				data.style.layout.left = 352;
+				data.data.layout.left = 460;
 			}else if(data.layout.type == 2){
-				data.style.layout.left = 312; 
-			} 
-		} 
+				data.data.layout.left = 420; 
+			}  
+		}  
 		console.log(value); 
 		actions['updateComp'](null, parentComp? parentComp: data)
 	};
@@ -75,15 +75,15 @@ class NavigationFoat extends React.Component {
 		let { parentComp } = curData
 		data.layout.position = value;
 		switch (value) { 
-			case 'left' : data.style.layout.left = 0;data.style.layout.top = 220;
+			case 'left' : data.data.layout.left = 0;data.data.layout.top = 220;
 			break;
 			case 'right' : 
 					if(data.layout.type == 1){
-						data.style.layout.left = 352;
+						data.data.layout.left = 460;
 					}else if(data.layout.type == 2){
-						data.style.layout.left = 312; 
+						data.data.layout.left = 420; 
 					} 
-					data.style.layout.top = 220;
+					data.data.layout.top = 220;
 			break;   
 			default:;   
 			break
