@@ -38,6 +38,7 @@ config.devServer = {
 	historyApiFallback: true,
 	stats: 'errors-only',
 	hot: true,
+	disableHostCheck:true,
 	port: defaultSettings.port,
 	publicPath: defaultSettings.publicPath,
 	noInfo: false,
@@ -47,7 +48,7 @@ config.devServer = {
 			secure: false,
 			changeOrigin: 'true',
 		},
-		'/bsoms': {
+		'^/(bsoms)/user/**': {
 			target: target,
 			secure: false,
 			changeOrigin: 'true',
@@ -56,14 +57,14 @@ config.devServer = {
 				let cookies  =  proxyRes.headers['set-cookie']
 				var newCookies = []
 				console.log('========== 登录成功 ==========')
-				if(cookies){
-					cookies.forEach(function(cookie,index){
-						newCookies.push(cookie.replace(/\.rongyi\.com/,'localhost'))
-					})
-					proxyRes.headers['set-cookie']=newCookies
-				}else{
-					console.log('========== 登录失败 ==========')
-				}
+				// if(cookies){
+				// 	cookies.forEach(function(cookie,index){
+				// 		newCookies.push(cookie.replace(/\.rongyi\.com/,'localhost'))
+				// 	})
+				// 	proxyRes.headers['set-cookie']=newCookies
+				// }else{
+				// 	console.log('========== 登录失败 ==========')
+				// }
 			}
 		},
 		'/chaoyue': {
@@ -81,6 +82,11 @@ config.devServer = {
 			secure: false,
 			changeOrigin: 'true',
 		},
+		'/easy-smart':{
+			target: 'http://192.168.1.206',
+			secure: false,
+			changeOrigin: 'true',
+		} 
 	}
 }
 

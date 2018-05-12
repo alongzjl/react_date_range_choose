@@ -14,6 +14,16 @@ import { hashHistory } from 'react-router'
 import * as actions from 'actions'
 import './index.less'
 
+function getCookie(name){
+	console.log(name,document.cookie);
+        let arr, reg = new RegExp("(^| )"+name+"=([^;]*)(;|$)");
+        if(arr = document.cookie.match(reg)){
+            return unescape(arr[2]);
+        }else{
+            return null;
+        }
+      }
+
 
 class OperateComponent extends React.Component {
 	constructor(props) {
@@ -102,7 +112,7 @@ class OperateComponent extends React.Component {
 		}
 	}
 	componentWillMount() {
-		// this.getUserInfo(() => {
+		this.getUserInfo(() => {
 			let { type, actions, editConfig } = this.props
 			let { globalData } = editConfig
 			let arr = ['getFloor', 'getCatg', 'getStoreList']
@@ -113,7 +123,7 @@ class OperateComponent extends React.Component {
 			}).catch(e => {
 				console.log(e)
 			})
-		// })
+		})
 	}
 
 	componentDidMount() {

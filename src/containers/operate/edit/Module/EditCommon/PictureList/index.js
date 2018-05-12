@@ -8,7 +8,7 @@
 import React from 'react';
 import SkyLight from 'react-skylight';
 import './index.less'
-import { Button, Upload, message,Modal } from 'antd'
+import { Button, Upload, message,Modal,Pagination } from 'antd'
 const commonCss = {
 	dialogStyles: {
 		height: 'auto',
@@ -47,35 +47,48 @@ export default class PictureList extends React.Component {
 		imgTypes:[],
 		videoTypes:[],
 		imgList:[],
-		videoList:[]
+		videoList:[],
+		type:1,
+		currentPage:1,
+		page:1,
+		page_size:10,
+		pageSize:10,
+		name:''
 	}
 	componentDidMount(){ 
 		const {type} = this.props;
 		if(type == 'video'){
-			Ajax.get('/store/videoListType').then(res => {
-				this.setState({
-					videoTypes:res.data
-				})
-			})
+			Ajax.postJSON('/easy-smart/ySourceGroupManage/query',{type:2}).then(res => {
+				if(res.success){
+					this.setState({ 
+						videoTypes:res.result.data,
+						type:2 
+					}) 
+				}
+			}) 
 			this.getVideoList();
 		}else{
-			Ajax.get('/store/imgListType').then(res => {
-				this.setState({
-					imgTypes:res.data
-				})
+			Ajax.postJSON('/easy-smart/ySourceGroupManage/query',{type:1}).then(res => {
+				if(res.success){
+					this.setState({ 
+						imgTypes:res.result.data,
+						type:1
+					}) 
+				}
 			})
 			this.getImgList();
 		}
-	}
-	getImgList = () => {
-		Ajax.get('/store/imgList').then(res => {
+	};
+	
+	getImgList = data => {
+		Ajax.postJSON('/easy-smart/ySourceManage/query',data).then(res => {
 				this.setState({
 					imgList:res.data
 				})
 			})
 	};
-	getVideoList = () => {
-		Ajax.get('/store/videoList').then(res => {
+	getVideoList = data => {
+		Ajax.postJSON('/easy-smart/ySourceManage/query',data).then(res => {
 				this.setState({
 					videoList:res.data
 				}) 
@@ -222,8 +235,9 @@ class ImgModule extends React.Component {
 					{
 						this.state.imgList.map((item,index) => <List key={index} item={item} type={this.props.type} choose_one={this.chooseImg.bind(this)}></List> )
 					}
+					<Pagination className="Pagination" onChange={page=>{this.chooseType(page)}} defaultCurrent={1} total={50} />
 				</div>
-			</div>
+			</div> 
 		)
 	}
 }
@@ -265,39 +279,7 @@ class VideoModule extends React.Component {
 	   // alert('上传本地图片')
 	} 
 	render() {
-		/*const Upload_props = {
-			name: 'file',
-			action: '/chaoyue/uploadImage',
-			data: {
-			},
-			headers: {
-				authorization: 'authorization-text',
-			},
-			onChange(info) {
-				if (info.file.status !== 'uploading') {
-					console.log(info.file, info.fileList);
-				}
-				if (info.file.status === 'done') {
-					message.success(`${info.file.name} file uploaded successfully`);
-				} else if (info.file.status === 'error') {
-					message.error(`${info.file.name} file upload failed.`);
-				}
-			},
-			 beforeUpload(file) {
-			  const isVIDEO = file.type === 'video/mp4'; 
-			  if (!isJPG) { 
-			    message.error('You can only upload MP4 file!');
-			  }  
-			  const isLt2M = file.size / 1024 / 1024 < 20;
-			  if (!isLt2M) {
-			    message.error('Image must smaller than 20MB!'); 
-			  }
-			  return isVIDEO && isLt20M;
-			} 
-		} */
-		/*<Upload {...Upload_props}>
-						<div className="add_img"><div className="add_text">+</div><div>上传视频</div></div>
-					</Upload>*/ 
+		
 		return (
 			<div className="content">
 				<div className="left">
@@ -306,10 +288,10 @@ class VideoModule extends React.Component {
 					}
 				</div> 
 				<div className="right">
-					
 					{ 
 						this.state.videoList.map((item,index) => <List key={index} item={item} type={this.props.type} choose_one={this.chooseVideo}></List> )
 					}
+					<Pagination className="Pagination" onChange={page=>{this.chooseType(page)}} defaultCurrent={1} total={50} />
 				</div>
 			</div>
 		)
