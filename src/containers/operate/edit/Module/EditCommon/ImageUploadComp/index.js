@@ -15,6 +15,7 @@ import { Row, Col, Icon, Select } from 'antd'
 const { Option } = Select
 
 import PictureList from '../PictureList'
+import VideoList from '../VideoList' 
 
 import './index.less'
 
@@ -85,7 +86,7 @@ class ImageUploadComp extends React.Component {
 			name:  '自定义',
 			img: imgVal
 		}
-		if(name == 'first'||name == 'src'){ 
+		if(name == 'first'){ 
 			return (
 					<div className="pg-img-upload">
 						<Row type="flex" align="middle" style={{ width: '100%' }}>
@@ -102,9 +103,31 @@ class ImageUploadComp extends React.Component {
 							actions={actions}
 							index={0}
 							type={data.name}
-							firstAdd={true}
+							firstAdd={true} 
 							enter={this.enter}
 						/>
+					</div>
+				)
+		}else if(name == 'src'){
+			return (
+					<div className="pg-img-upload">
+						<Row type="flex" align="middle" style={{ width: '100%' }}>
+							<Col span={9}>
+								<div className="add_img" onClick={this.showList.bind(this)}>
+									<div className="add_text"><Icon type="plus" /></div>
+								</div>
+							</Col>
+						</Row> 
+						<VideoList
+							ref={com => { this.addImgModal = com }}
+							props={this.props}
+							data={this.props}
+							actions={actions}
+							index={0}
+							type={data.name}
+							firstAdd={true}
+							enter={this.enter}
+						/> 
 					</div>
 				)
 		}
