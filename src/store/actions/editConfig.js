@@ -77,3 +77,9 @@ export const updateGlobal = (data) => ({
 	type: types.UPDATE_GLOBAL,
 	data
 })
+
+// 整合Config
+export const updateConfig = (config) => ({
+	type: types.UPDATE_CONFIG,
+	config
+})

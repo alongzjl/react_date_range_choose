@@ -23,26 +23,18 @@ import Catg         from 'compEdit/EditElement/Catg'
 import Page         from 'compEdit/EditElement/Page'
 import Reset        from 'compEdit/EditElement/Reset'
 import ListByStore  from 'compEdit/EditElement/ListByStore'
-import WonderfulActivity        from 'compEdit/EditElement/WonderfulActivity'
+import WonderfulActivity from 'compEdit/EditElement/WonderfulActivity'
 
 import './index.less'
 
 class Custom extends React.Component {
 	componentWillMount() {}
 
-	componentDidMount() {
-		if(this.props.name == 'storeDetails'){
-			Ajax.get('/store/storeDetails').then(res=>{
-				this.setState({
-					storeDetails:res.data
-				})
-			})
-		}
-	}
+	componentDidMount() {}
 
-	state = {
-		storeDetails:{}
-	}
+	// state = {
+	// 	storeDetails:{}
+	// }
 	selectComp(e, data, idx, parentIdx, parent) {
 		e.stopPropagation()
 		let { actions, editConfig } = this.props
@@ -86,20 +78,28 @@ class Custom extends React.Component {
 
 	render() {
 		let { data, actions, idx, csn, editConfig, ioInput, ioOuter,name } = this.props
-		let comp = data.data.components
+		let icomp = ioInput.comp
+		let comp  = data.data.components
 		let childNode = comp.map((_, i) => {
 			let compName = _.name,
 				layout   = _.data.layout,
 				styleIdx = _.styleList.idx,
 				isEdit   = true,
 				compCon
-			if(this.state.storeDetails){ 
-				if(compName == 'text' && i != 0){
-					_.data.content.text = this.state.storeDetails.text;
-				}else if(compName == 'wonderfulActivity'){
-					_.data.content = this.state.storeDetails.images; 
-				}  
-			} 
+
+			if (icomp && icomp[compName]) {
+				let v   = icomp[compName],
+					k   = v.key.split('.'),
+					len = k.length,
+					ob  = _
+
+				k.map((__, l) => {
+					if (l !== len - 1) ob = ob[__]
+					else ob[__] = v.value
+				})
+			}
+
+
 			if (compName === 'picture')          compCon = (<Picture     data={_} parent={data} editConfig={editConfig} actions={actions} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} />)
 			else if (compName === 'web')         compCon = (<Web         data={_} parent={data} editConfig={editConfig} actions={actions} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} />)
 			else if (compName === 'text')        compCon = (<Text        data={_} parent={data} editConfig={editConfig} actions={actions} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} />)

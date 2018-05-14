@@ -25,7 +25,7 @@ const data = {
 		height:   150
 	},
 	content: { 
-		type:1
+		type: 1
 	},   
 	animation: {
 		className: '',	// 动画样式
@@ -53,5 +53,7 @@ module.exports = {
 	}, 
 	// 功能特性
 	feature: {
+		format_date: '-',	// 日期分隔符
+		format_time: ':'	// 时间分隔符
 	},
 }

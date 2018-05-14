@@ -19,3 +19,5 @@ export const SELECE_PAGE     = 'SELECE_PAGE'		// 删除 页面
 export const UPDATE_CUR      = 'UPDATE_CUR'
 
 export const UPDATE_GLOBAL   = 'UPDATE_GLOBAL'
+
+export const UPDATE_CONFIG   = 'UPDATE_CONFIG'

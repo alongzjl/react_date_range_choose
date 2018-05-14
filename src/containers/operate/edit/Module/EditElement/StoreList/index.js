@@ -40,7 +40,7 @@ class StoreList extends React.Component {
 	}
 
 	init() {
-		let { data, actions } = this.props
+		let { data } = this.props
 		let { feature } = data
 		let { content } = data.data
 		feature.body.size = content.size

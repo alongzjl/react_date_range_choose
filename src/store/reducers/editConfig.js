@@ -11,31 +11,6 @@ import state from 'state'
 const comp  = require('state/comp')
 const pagec = require('state/page/content')
 
-let startTime = Date.now()
-function saveData() {
-	var diffTime = Date.now() - startTime
-	// if (diffTime > 1000) {
-		// 保存步骤
-	// }
-	startTime = Date.now()
-	console.log(`操作间隔: ${diffTime} ms`)
-}
-
-function getCompData(state, key) {
-	let compData = JSON.parse(JSON.stringify(comp[key]))
-	let { feature } = compData
-	if (key === 'storeList') {
-		let { body } = feature
-		feature.floors = JSON.parse(JSON.stringify(state.globalData.floors))
-		feature.catgs  = JSON.parse(JSON.stringify(state.globalData.catgs))
-		let storeList  = JSON.parse(JSON.stringify(state.globalData.storeList))
-		feature.list   = storeList.data
-		body.page      = storeList.page
-		body.total     = storeList.total
-	}
-	return compData
-}
-
 const initialState = state
 export default function editConfig(state = initialState, action) {
 	let curData    = state.curData,
@@ -166,6 +141,7 @@ export default function editConfig(state = initialState, action) {
 			curData.compIdx     = -1
 			curData.cusCompIdx  = -1
 			curData.contentType = 'page'
+			curData.parentComp  = null
 			console.log('选择页面!')
 			saveData()
 			return Object.assign({}, state)
@@ -182,7 +158,64 @@ export default function editConfig(state = initialState, action) {
 			saveData()
 			return Object.assign({}, state)
 
+		case types.UPDATE_CONFIG:
+			console.log('更新整个config!')
+			saveData()
+			return Object.assign({}, action.config)
+
 		default:
 			return state
+	}
+}
+
+
+let startTime = Date.now()
+function saveData() {
+	var diffTime = Date.now() - startTime
+	// if (diffTime > 1000) {
+		// 保存步骤
+	// }
+	startTime = Date.now()
+	console.log(`操作间隔: ${diffTime} ms`)
+}
+
+// 获取组件数据
+function getCompData(state, key) {
+	let compData = JSON.parse(JSON.stringify(comp[key]))
+	let init = initFn[key]
+	if (init) init(state, compData.feature)
+	return compData
+}
+
+const initFn = {
+	storeList(state, feature) {
+		let { body } = feature
+		let { floors, catgs, storeList } = state.globalData
+		let sl         = deepCopy(storeList)
+		feature.floors = deepCopy(floors)
+		feature.catgs  = deepCopy(catgs)
+		feature.list   = sl.data
+		body.page      = sl.page
+		body.total     = sl.total
+	},
+	storeDetails(state, feature) {
+		let { images, text } = deepCopy(state.globalData.storeDetails)
+		feature.comp = {
+			text: {
+				key: 'data.content.text',
+				value: text
+			},
+			wonderfulActivity: {
+				key: 'feature.list',
+				value: images
+			}
+		}
+	},
+	wonderfulActivity(state, feature) {
+		let { images } = deepCopy(state.globalData.storeDetails)
+		feature.list = images
+	},
+	date(state, feature) {
+		feature.time = getTime()
 	}
 }

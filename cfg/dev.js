@@ -7,7 +7,7 @@ let defaultSettings = require('./defaults');
 
 // Add needed plugins here
 let BowerWebpackPlugin = require('bower-webpack-plugin');
-let HtmlWebpackPlugin = require('html-webpack-plugin');
+let HtmlWebpackPlugin  = require('html-webpack-plugin');
 var HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin');
 
 let config = Object.assign({}, baseConfig, {

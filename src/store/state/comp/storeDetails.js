@@ -1,8 +1,8 @@
 /**
  * @Author: Along
  * @Date:   2018-05-10
- 
- */ 
+ */
+
 
 const data = {
 	style:     {},
@@ -26,7 +26,7 @@ const data = {
 
 module.exports = {  
 	name: 'storeDetails',
-	type: 'Composite',
+	type: 'advanced',
 	// 样式管理
 	data: JSON.parse(JSON.stringify(data)),
 	styleList: {

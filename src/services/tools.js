@@ -138,7 +138,15 @@ window.textBreak = (str = '') => {
 window.getAttr = (element) => {
 	return Object.prototype.toString.call(element).match(/[A-Z][a-z]*/)[0]
 }
-
+// 深拷贝
+window.deepCopy = (obj) => {
+	try {
+		return JSON.parse(JSON.stringify(obj))
+	} catch(e) {
+		console.error(e)
+		return obj
+	}
+}
 window.getCookie = (name) => {
 	let arr, reg = new RegExp('(^| )' + name + '=([^;]*)(;|$)')
 	if (arr = document.cookie.match(reg)) {
@@ -151,6 +159,54 @@ window.setCookie = (name, val, hour = 24) => {
 	var exp = new Date()
 	exp.setTime(exp.getTime() + hour * 60 * 60 * 1000)
 	document.cookie = `${name}=${escape(val)};expires=${exp.toGMTString()};path=/`
+}
+
+window.timeFormat = (format) => {
+	let now = new Date()
+	let o = {
+		'm+': now.getMonth() + 1,					// 月
+		'd+': now.getDate(),						// 日
+		'h+': now.getHours(),						// 时
+		'n+': now.getMinutes(),						// 分
+		's+': now.getSeconds(),						// 秒
+		'S':  now.getMilliseconds(),				// 毫秒
+		'W': '日一二三四五六'[now.getDay()],			// 周
+		'q+': Math.floor((now.getMonth() + 3) / 3)	// 季
+	}
+	if (format.indexOf('am/pm') >= 0) {
+		format = format.replace('am/pm', (o['h+'] >= 12) ? '下午': '上午')
+		if (o['h+'] >= 12) o['h+'] -= 12
+	}
+	if (/(y+)/.test(format)) {
+		format = format.replace(RegExp.$1, (now.getFullYear() + '').substr(4 - RegExp.$1.length))
+	}
+	for (let k in o) {
+		if (new RegExp('('+ k +')').test(format)) {
+			format = format.replace(RegExp.$1, RegExp.$1.length == 1 ? o[k] : ('00' + o[k]).substr(('' + o[k]).length))
+		}
+	}
+	return format
+}
+window.getTime = () => {
+	let now = new Date()
+	let o = {
+		year:    now.getFullYear() + '',		// 年
+		month:   now.getMonth() + 1,			// 月
+		date:    now.getDate(),					// 日
+		hour:    now.getHours(),				// 时
+		minutes: now.getMinutes(),				// 分
+		seconds: now.getSeconds(),				// 秒
+		ms:      now.getMilliseconds() + '',	// 毫秒
+		week:    '日一二三四五六'[now.getDay()]	// 周
+	}
+	o.q   = Math.floor((o.month + 2) / 3) + ''	// 季
+	o.apm = o.hour > 11? '下午': '上午'			// AM / PM
+	o.month   = (o.month < 10? '0': '') + o.month
+	o.date    = (o.date < 10? '0': '') + o.date
+	o.minutes = (o.minutes < 10? '0': '') + o.minutes
+	o.hour    = (o.hour < 10? '0': '') + o.hour
+	o.seconds = (o.seconds < 10? '0': '') + o.seconds
+	return o
 }
 
 window.Ajax = Fetch.default
