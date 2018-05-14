@@ -6,7 +6,8 @@ class NoMatchComponent extends React.Component {
 		super(props)
 		this.state = {
 			operate:  '/operate/edit',
-			business: '/business/edit'
+			business: '/business/edit',
+			view:     '/view'
 		}
 	}
 

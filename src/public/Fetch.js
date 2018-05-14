@@ -1,5 +1,5 @@
 import 'whatwg-fetch';
-
+import { message } from 'antd'
 
 const common = {};
 
@@ -33,20 +33,20 @@ export default class Fetch {
 			} else {
 				if (result.msg === '登录已过期,请重新登录!' || result.msg === 'access_token不正确，请退出后重试') {
 					// location.href = '#/login';
-					console.log('登录已过期,请重新登录!');
-				} 
-				//throw new Error(result.msg);
+					console.log('登录已过期,请重新登录!')
+				}
+				throw new Error(result.meta.msg);
 			}
 		}).catch(error => {
-			alert(error.message);
+			message.error(error.message)
 			if (failed) {
-				failed(error);
+				failed(error)
 			}
-		});
+		})
 	}
 
 	static get(url, config) {
-		let id = window.uif.userInfo.id
+		let id = window.uif.userInfo.id || '1'
 		if (id) url += ((/\?/.test(url)? '&': '?') + 'userId='+id)
 		return new Promise((resolve, reject) => {
 			const newConfig = Object.assign({}, {
@@ -57,21 +57,19 @@ export default class Fetch {
 	}
 
 	static postLogin(url, config) {
-		let id = window.uif.userInfo.id
-		if (id) config.userId = id
 		return new Promise((resolve, reject) => {
 			Fetch.remote(url, {
 				method: 'POST',
 				body: JSON.stringify(config),
 				headers: {
 					'Content-Type': 'application/json;charset=UTF-8'
-				}, 
+				},
 				credentials: 'include'
 			}, resolve, reject)
 		})
 	}
 	static post(url, config) {
-		let id = window.uif.userInfo.id
+		let id = window.uif.userInfo.id || '1'
 		if (id) config.userId = id
 		return new Promise((resolve, reject) => {
 			Fetch.remote(url, {
@@ -105,10 +103,10 @@ export default class Fetch {
 		return new Promise((resolve, reject) => {
 			const newConfig = Object.assign({}, {
 				method: 'POST',
-				headers: { 'Content-Type': 'application/json' }, 
+				headers: { 'Content-Type': 'application/json' },
 				body: JSON.stringify(data),
 				credentials: 'include'
-			});
+			})
 			Fetch.remote(url, newConfig, resolve, reject);
 		});
 	}

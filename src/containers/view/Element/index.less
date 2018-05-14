@@ -1,0 +1,135 @@
+/*
+* @Author: weijie
+* @Date:   2017-09-28 10:49:49
+ * @Last Modified by: lishengpeng
+ * @Last Modified time: 2018-03-26 12:37:34
+*/
+
+.pg-element-parent {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.pg-element-1 {
+	min-width:  960px;
+	min-height: 540px;
+	margin: 0 auto;
+	.pg-element {
+		width:  960px;
+		height: 540px;
+	}
+}
+.pg-element-2 {
+	min-width:   540px;
+	min-height:  960px;
+	.pg-element {
+		width:  540px;
+		height: 960px;
+	}
+}
+.pg-element {
+	height:  100%;
+	width:   100%;
+	position: relative;
+	background-color: #fff;
+	box-shadow: 0 2px 10px rgba(0, 0, 0, .5);
+	.pge-layout {
+		width:  100%;
+		height: 100%;
+		& > div {
+			pointer-events: none;
+		}
+	}
+	.pge-remove,
+	.handle-drag,
+	.handle-drag-custom {
+		position: absolute;
+		display: none;
+		height: 16px;
+		z-index: 1;
+	}
+	.pge-remove {
+		top:   4px;
+		right: 4px;
+		width: 16px;
+		line-height: 16px;
+		text-align: center;
+		color: #f00;
+	}
+	.handle-drag,
+	.handle-drag-custom {
+		top: 0;
+		left: 50%;
+		width: 60px;
+		margin-left: -30px;
+		border: 1px solid #000;
+		border-radius: 0 0 4px 4px;
+		cursor: move;
+		background-color: rgba(200, 200, 255, .8);
+		// background-color: rgba(0, 255, 255, 1);
+	}
+	.handle-drag-custom {
+		left: 0;
+		width:  24px;
+		height: 24px;
+		margin-left: 0;
+		border-radius: 0 0 8px 0;
+		// background-color: rgba(255, 0, 0, 1);
+	}
+}
+
+// 
+.react-draggable {
+	&:after {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		display: block;
+		width:  100%;
+		height: 100%;
+		border: 1px solid rgba(0, 0, 0, 0);
+		pointer-events: none;
+		z-index: 1;
+	}
+	& > span {
+		& > div {
+			display: none;
+			&:nth-child(6) {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				&:after {
+					content: '';
+					display: none;
+					width: 6px;
+					height: 6px;
+					background-color: #000;
+				}
+			}
+		}
+	}
+	&.s-active {
+		&:after {
+			border: 1px solid #000;
+		}
+		& > span {
+			& > div:nth-child(n+5) {
+				&:after {
+					display: block;
+				}
+			}
+		}
+	}
+	&:hover {
+		.handle-drag,
+		.pge-remove {
+			display: block;
+		}
+	}
+	.react-draggable:hover {
+		.handle-drag-custom {
+			display: block;
+		}
+	}
+}

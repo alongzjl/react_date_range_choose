@@ -12,11 +12,6 @@ import Custom from '../Custom'
 class StoreDetails extends React.Component {
 	constructor(props) {
 		super(props)
-
-		// let ioInput = JSON.parse(JSON.stringify(props.data.feature))
-		// this.state = {
-		// 	ioInput: ioInput
-		// }
 	}
 	componentWillMount() {}
 
@@ -24,24 +19,19 @@ class StoreDetails extends React.Component {
 
 	componentWillUnmount() {}
 
-	state = {
-		ioInput: {}
-	}
-
 	ioOuter(ipt) {
 		
 	}
 	
 	init() {
-		let { data, actions } = this.props
 		this.state = {
-			ioInput: data.feature
+			ioInput: this.props.data.feature
 		}
 	}
 
 	render() {
 		let { data, actions, idx, csn } = this.props
-		
+		this.init.bind(this)()
 		return (
 			<Custom
 				data={data}
@@ -50,8 +40,6 @@ class StoreDetails extends React.Component {
 				csn={csn}
 				ioInput={this.state.ioInput}
 				ioOuter={this.ioOuter.bind(this)}
-				comp={data.components}
-				name={data.name}
 			/> 
 		)
 	}

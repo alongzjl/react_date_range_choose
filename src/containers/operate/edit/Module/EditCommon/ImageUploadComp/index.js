@@ -127,7 +127,7 @@ class ImageUploadComp extends React.Component {
 							type={data.name}
 							firstAdd={true}
 							enter={this.enter}
-						/> 
+						/>
 					</div>
 				)
 		}

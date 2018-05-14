@@ -12,17 +12,8 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { hashHistory } from 'react-router'
 import * as actions from 'actions'
+import curData from 'state/cur/curData'
 import './index.less'
-
-function getCookie(name){
-	console.log(name,document.cookie);
-        let arr, reg = new RegExp("(^| )"+name+"=([^;]*)(;|$)");
-        if(arr = document.cookie.match(reg)){
-            return unescape(arr[2]);
-        }else{
-            return null;
-        }
-      }
 
 
 class OperateComponent extends React.Component {
@@ -33,6 +24,31 @@ class OperateComponent extends React.Component {
 		}
 	}
 
+	timeInit() {
+		let { actions } = this.props
+		setInterval(() => actions.updateTime(), 1000)
+	}
+	getConfig() {
+		let { location, actions, editConfig } = this.props
+		let id = location.query.id
+		return function(resolve, reject) {
+			if (!id) return resolve('模板数据')
+			Ajax.get(`/mcp-gateway/template/get?templateId=${id}`).then(res => {
+				let cfg = JSON.parse(res.data.config).configPC
+				delete res.data.config
+				let cur = cfg.pageList.group[0].pages[0]
+				let newCfg = {
+					curComp: {},
+					curData: { ...curData, ...cur },
+					curPage: cfg.pageContent[cur.router],
+					java: res.data
+				}
+				actions.updateConfig({ ...newCfg, ...cfg })
+				resolve('模板数据')
+			}).catch(e => reject(e))
+		}
+	}
+	/* Mock 数据 */
 	getFloor(globalData) {
 		return function(resolve, reject) {
 			Ajax.get('/store/getFloor').then(res => {
@@ -55,6 +71,14 @@ class OperateComponent extends React.Component {
 				globalData.storeList = res
 				resolve('店铺列表')
 			}).catch(e => reject(e))
+		}
+	}
+	getStoreDetails(globalData) {
+		return function(resolve, reject) {
+			Ajax.get('/store/storeDetails').then(res => {
+				globalData.storeDetails = res.data
+				resolve('店铺详情')
+			})
 		}
 	}
 	initData(cb) {
@@ -86,10 +110,6 @@ class OperateComponent extends React.Component {
 			stores.userInfo = da0.userInfo
 			stores.list     = da0.systemList
 			stores.auths    = da1.authorities
-			// stores.listObj  = {}
-			// stores.authObj  = {}
-			// for (var l of da0.systemList)  { stores.listObj[l] = 1 }
-			// for (var a of da1.authorities) { stores.authObj[a] = 1 }
 			stores.userInfo.mallMid = da1.userInfo.mallMid
 			stores.userInfo.mallId  = da1.userInfo.mallId
 			stores.userInfo.id      = da1.userInfo.id
@@ -113,9 +133,9 @@ class OperateComponent extends React.Component {
 	}
 	componentWillMount() {
 		this.getUserInfo(() => {
-			let { type, actions, editConfig } = this.props
+			let { actions, editConfig } = this.props
 			let { globalData } = editConfig
-			let arr = ['getFloor', 'getCatg', 'getStoreList']
+			let arr = ['getConfig', 'getFloor', 'getCatg', 'getStoreList', 'getStoreDetails']
 			let promises = arr.map(key => new Promise(this[key](globalData)))
 			Promise.all(promises).then((o) => {
 				actions.updateGlobal(globalData)
@@ -127,13 +147,11 @@ class OperateComponent extends React.Component {
 	}
 
 	componentDidMount() {
-		// this.props
-		// debugger
+		this.timeInit()
 		// hashHistory.push('/operate/edit')
 	}
 
 	render() {
-		let { type, actions, editConfig } = this.props
 		return this.state.load
 		?
 		(

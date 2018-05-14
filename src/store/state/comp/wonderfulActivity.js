@@ -16,7 +16,7 @@ const data = {
 			textAlign:      'center',
 			textDecoration: 'none',
 		},
-		swiperImage:{
+		swiperImage: {
 			borderRadius:    {
 				topLeft:     6,
 				topRight:    6,

@@ -88,7 +88,7 @@ class EditComponent extends React.Component {
 		}
 		return (
 			<div className="pg-edit-box">
-				<EditHeader/>
+				<EditHeader location={location}/>
 				<div className="pg-body e-flex-box">
 					<div className="pg-left scrollbar">
 						<EditPageManage data={editConfig.pageList} />
