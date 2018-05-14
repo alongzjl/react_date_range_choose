@@ -28,8 +28,8 @@ export default class Fetch {
 		fetch(url, newConfig).then(response => response.json()).then(result => {
 			if (result.meta.errno === 0) {
 				if (success) {
-					success(result.result);
-				}
+					success(result.result);  
+				}  
 			} else {
 				if (result.msg === '登录已过期,请重新登录!' || result.msg === 'access_token不正确，请退出后重试') {
 					// location.href = '#/login';
@@ -105,6 +105,18 @@ export default class Fetch {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
 				body: JSON.stringify(data),
+				credentials: 'include'
+			})
+			Fetch.remote(url, newConfig, resolve, reject);
+		});
+	} 
+	//图片上传 
+	static postJSONIMG(url, data) {
+		return new Promise((resolve, reject) => {
+			const newConfig = Object.assign({}, {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8' },
+				body: new URLSearchParams(data), 
 				credentials: 'include'
 			})
 			Fetch.remote(url, newConfig, resolve, reject);

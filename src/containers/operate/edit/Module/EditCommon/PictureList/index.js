@@ -9,6 +9,7 @@ import React from 'react';
 import SkyLight from 'react-skylight';
 import './index.less'
 import { Button, Upload, message,Modal,Pagination } from 'antd'
+import Url from 'public/Url'
 const commonCss = {
 	dialogStyles: {
 		height: 'auto',
@@ -176,22 +177,36 @@ class ImgModule extends React.Component {
 			})
 		let choosed_img = img_list.filter(item => item.isClicked == true);
 		this.props.save(choosed_img)
-	}
-	upload_img() {
-	   // alert('上传本地图片')
-	} 
+	};
 	
 	render() {
+		let id = window.uif.userInfo.id || '1';
+		const that = this;
 		const Upload_props = {
 			name: 'file',
-			action: '/mcp-gateway/utility/uploadImage ',
+			action: '/mcp-gateway/utility/uploadImage',
 			data: {
-				mallId:123,
-				name:'along' 
-			},
-			headers: {
-				authorization: 'authorization-text',
-			},
+				userId:id,
+				mallId:'', 
+				imageName:'along',
+				imageSourceType:'OPERATION'  
+			}, 
+			customRequest:function(info){
+				var reader = new FileReader(); 
+				 reader.onload = (function (file) {
+			        return function (e) {
+			           console.info(this.result); //这个就是base64的数据了
+			            const img = this.result; 
+			            const postData = {...info.data,imageBase64:img};
+			            Ajax.postJSONIMG('/mcp-gateway/utility/uploadImage',postData).then(res=>{
+			            	  message.info('上传成功!');
+			            	  that.props.getImgList();  
+			            })          
+		  
+			        };
+			    })(info.file);
+				 reader.readAsDataURL(info.file);
+			}, 
 			onChange(info) {
 				if (info.file.status !== 'uploading') {
 					console.log(info.file, info.fileList);
@@ -203,8 +218,7 @@ class ImgModule extends React.Component {
 				}
 			},
 			 beforeUpload(file) {
-			 	debugger; 
-				  const isJPG = file.type === 'image/jpeg'||file.type === 'image/png'; 
+			 	 const isJPG = file.type === 'image/jpeg'||file.type === 'image/png'; 
 				  if (!isJPG) {
 				    message.error('You can only upload JPG file!');
 				  } 
@@ -222,12 +236,12 @@ class ImgModule extends React.Component {
 					{
 						this.state.imgTypes.map((item,index) => <Type key={index} item={item} choose_one={this.chooseType.bind(this)}></Type>)
 					}
-				</div>
+				</div> 
 				<div className="right">
 					<Upload {...Upload_props}>
 						<div className="add_img"><div className="add_text">+</div><div>上传图片</div></div>
-					</Upload> 
-					{
+					</Upload>  
+					{ 
 						this.state.imgList.map((item,index) => <List key={index} item={item} type={this.props.type} choose_one={this.chooseImg.bind(this)}></List> )
 					}
 					<Pagination className="Pagination" onChange={page=>{this.chooseType('page',page)}} defaultCurrent={page_img.currentPage} total={page_img.totalPage} pageSize={page_img.pageSize} />
