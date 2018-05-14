@@ -14,7 +14,7 @@
     "publish-rd": "npm run rd && gulp sftp-rd",
     "copy-qa": "copyfiles -f ./src/*.html ./src/favicon.ico ./qa",
     "qa": "cnpm i && npm run copy-qa && webpack --env=qa",
-    "publsh-qa": "npm run qa & gulp sftp-qa",
+    "publsh-qa": "npm run qa && gulp sftp-qa",
     "lint": "eslint ./src",
     "posttest": "npm run lint",
     "release:major": "npm version major && npm publish && git push --follow-tags",
