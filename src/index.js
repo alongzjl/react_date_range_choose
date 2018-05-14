@@ -16,6 +16,7 @@ import { Router, Route, hashHistory, Redirect } from 'react-router'
 
 import Operate     from 'operate'
 import OperateEdit from 'operate/edit'
+import View from 'view'
 
 import NoMatch     from './containers/NoMatch'
 
@@ -37,6 +38,7 @@ ReactDOM.render((
             <Route path="operate" component={Operate}>
                 <Route path="edit" component={OperateEdit} />
             </Route>
+            <Route path="view" component={View} />
             <Route path="*" component={NoMatch} />
         </Router>
     </Provider>

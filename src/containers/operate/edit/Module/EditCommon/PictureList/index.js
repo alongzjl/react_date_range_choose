@@ -41,6 +41,12 @@ const commonCss = {
 export default class PictureList extends React.Component {
 	show() {
 		this.addImgModal.show()
+		Ajax.postJSON('/easy-smart/ySourceGroupManage/query',{type:1}).then(res => {
+			this.setState({ 
+				imgTypes:res.data
+			})
+		})
+		this.getImgList()
 	}
 	state = {
 		choosed_img:[],
@@ -54,14 +60,7 @@ export default class PictureList extends React.Component {
 		name:'',
 		groupId:39
 	} 
-	componentDidMount(){ 
-		Ajax.postJSON('/easy-smart/ySourceGroupManage/query',{type:1}).then(res => {
-			this.setState({ 
-				imgTypes:res.data
-			}) 
-		})
-		this.getImgList();  
-	};
+	componentDidMount(){}
 	 
 	getImgList = (str,id) => {
 		if(str == 'page'){

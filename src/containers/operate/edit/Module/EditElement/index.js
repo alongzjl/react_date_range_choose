@@ -131,7 +131,7 @@ class EditElement extends React.Component {
 					onResizeStart={e => this.selectComp(e, _, i)}
 					onResizeStop={(e, dir, ref, delta, pos) => this.resizeFn(e, ref, delta, pos, _, i)}
 				>
-					<div className="pge-layout" onClick={e => this.selectComp(e, _, i)} style={!isEdit? _.layout: {}}>{ compCon }</div>
+					<div className="pge-layout" onClick={e => this.selectComp(e, _, i)}>{ compCon }</div>
 					<a className="pge-remove" onClick={e => this.removeComp(e, i)}><Icon type="cross-circle" /></a>
 					<div className="handle-drag" onClick={e => e.stopPropagation()}></div>
 				</Rnd>
