@@ -57,25 +57,15 @@ config.devServer = {
 				let cookies  =  proxyRes.headers['set-cookie']
 				var newCookies = []
 				console.log('========== 登录成功 ==========')
-				// if(cookies){
-				// 	cookies.forEach(function(cookie,index){
-				// 		newCookies.push(cookie.replace(/\.rongyi\.com/,'localhost'))
-				// 	})
-				// 	proxyRes.headers['set-cookie']=newCookies
-				// }else{
-				// 	console.log('========== 登录失败 ==========')
-				// }
+				if(cookies){
+					cookies.forEach(function(cookie,index){
+						newCookies.push(cookie.replace(/\.rongyi\.com/,'localhost'))
+					})
+					proxyRes.headers['set-cookie']=newCookies
+				}else{
+					console.log('========== 登录失败 ==========')
+				}
 			}
-		},
-		'/chaoyue': {
-			target: 'http://localhost:4080/api/store',
-			secure: false,
-			changeOrigin: 'true',
-		},
-		'/store': {
-			target: 'http://localhost:4080/api/store',
-			secure: false,
-			changeOrigin: 'true',
 		},
 		'/mcp-gateway': {
 			target: 'http://192.168.1.52:10078',
@@ -85,7 +75,7 @@ config.devServer = {
 		'/easy-smart':{
 			target: 'http://192.168.1.206',
 			secure: false,
-			changeOrigin: 'true',
+			changeOrigin: 'true'
 		} 
 	}
 }

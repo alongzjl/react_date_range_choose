@@ -13,10 +13,10 @@ let HtmlWebpackPlugin = require('html-webpack-plugin');
 let config = Object.assign({}, baseConfig, {
 	entry: path.join(__dirname, '../src/index'),
 	output: {
-		path: path.join(__dirname, '/../rd'),
+		path: path.join(__dirname, '/../dist'),
         filename: '[name]_[hash:8].js',
         chunkFilename: '[name]_[hash:8].js',
-        publicPath: ''
+        publicPath: '/ry_create_store_static/',
         // publicPath: 'http://rongyi.b0.upaiyun.com/fe/screen/v23/assets/'
 	},
 	cache: false,

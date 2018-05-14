@@ -75,7 +75,7 @@ class Element extends React.Component {
 			else if (compName === 'storeDetails')    compCon = (<StoreDetails    data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
 			if (!compCon) return false
 			return (
-				<div key={i} className="pge-layout">{ compCon }</div>
+				<div key={i} className="pge-layout" style={layout}>{ compCon }</div>
 			)
 		})
 		return (
