@@ -1,7 +1,7 @@
-import 'whatwg-fetch';
+import 'whatwg-fetch'
 import { message } from 'antd'
 
-const common = {};
+const common = {}
 
 common.getAccessToken = function () {
 	function getQueryString(name) {

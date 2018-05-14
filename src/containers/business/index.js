@@ -12,11 +12,12 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { hashHistory } from 'react-router'
 import * as actions from 'actions'
+import { message }  from 'antd'
 import curData from 'state/cur/curData'
 import './index.less'
 
 
-class OperateComponent extends React.Component {
+class BusinessComponent extends React.Component {
 	constructor(props) {
 		super(props)
 		this.state = {
@@ -26,15 +27,21 @@ class OperateComponent extends React.Component {
 
 	timeInit() {
 		let { actions } = this.props
-		// setInterval(() => actions.updateTime(), 1000)
 		actions.updateTime()
 	}
 	getConfig() {
 		let { location, actions, editConfig } = this.props
-		let id = location.query.id
+		let tid  = location.query.tid,
+			cid  = location.query.cid,
+			type = cid? 'case': 'template',
+			id   = cid? cid:tid
+		if (!cid && !tid) {
+			message.error(`未选择模板!`)
+			return resolve('模板数据')
+		}
+
 		return function(resolve, reject) {
-			if (!id) return resolve('模板数据')
-			Ajax.get(`/mcp-gateway/template/get?templateId=${id}`).then(res => {
+			Ajax.get(`/mcp-gateway/${type}/get?${type}Id=${id}`).then(res => {
 				let cfg = JSON.parse(res.data.config).configPC
 				delete res.data.config
 				let cur = cfg.pageList.group[0].pages[0]
@@ -190,7 +197,7 @@ class OperateComponent extends React.Component {
 	}
 
 	render() {
-		window.envType = 'operate'
+		window.envType = 'business'
 		return this.state.load
 		?
 		(
@@ -205,7 +212,7 @@ class OperateComponent extends React.Component {
 	}
 }
 
-OperateComponent.defaultProps = {
+BusinessComponent.defaultProps = {
 }
 
 const mapStateToProps = state => state
@@ -217,4 +224,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(OperateComponent)
+)(BusinessComponent)

@@ -57,16 +57,6 @@ class EditStyle extends React.Component {
 		actions.updateComp(null, parentComp? parentComp: data)
 	}
 
-	onChangeAuth(val, style, css) {
-		// console.clear()
-		// console.log(val)
-		let { data, actions, editConfig } = this.props
-		let { curData }    = editConfig
-		let { parentComp } = curData
-		data.auth.style[style][css] = val
-		actions.updateComp(null, parentComp? parentComp: data)
-	}
-
 	cb(key) {
 		console.log(key)
 	}
@@ -91,7 +81,7 @@ class EditStyle extends React.Component {
 				dom = this[`render${cm.type}`].bind(this, cm, data, val[_], cls, key, _)()
 			return (
 				<div className="pgs-row" key={i}>
-					<div className="pgsr-name" style={{ width: 52 }}>{ cm.name }</div>
+					<div className="pgsr-name" style={{ width: 64 }}>{ cm.name }</div>
 					<div className="pgsr-ctrl">{ dom }</div>
 				</div>
 			)
@@ -185,68 +175,56 @@ class EditStyle extends React.Component {
 		)
 	}
 
+	styleObj(data, style) {
+		let styles = Object.keys(style),
+			comps  = data.data.components
+		if (comps) {
+			
+		} else {
+			return styles.map((p, i) => {
+				if (!styleMap[p]) return
+				let ci    = 0
+				let cnode = Object.keys(style[p]).map((q, j) => {
+					if (!cssMap[q]) return
+					++ci
+					let cm     = cssMap[q],
+						val    = style[p][q],
+						auth   = data.auth.style[p][q],
+						render = this[`render${cm.type}`]
+					if (!auth || !render) return
+					// 根据样式类型渲染对应组件
+					let dom = this[`render${cm.type}`].bind(this, cm, data, val, p, q)()
+					return (
+						<div className="pgs-row" key={j}>
+							<div className="pgsr-name">{ cm.name }</div>
+							<div className="pgsr-ctrl">{ dom }</div>
+						</div>
+					)
+				})
+				if (ci === 0) return
+				return (
+					<Panel header={styleMap[p]} key={i}>
+						{ cnode }
+					</Panel>
+				)
+			})
+		}
+	}
+
 	render() {
 		let { data } = this.props
 		let da       = data.data
 		let { style, layout } = da
 		if (!style) return false
-		let styleList  = data.styleList				// 样式列表
-		let styles     = Object.keys(style)	// 具体样式
+		let styleList  = data.styleList			// 样式列表
+		let styles     = Object.keys(style)		// 具体样式
 		let activeKey  = Array.from(new Array(styles.length), (_, i) => `${i}`)
-		// 位置大小
-		let layoutNode = Object.keys(layout).map((q, j) => {
-				if (!cssMap[q]) return
-				let cm     = cssMap[q],
-					val    = layout[q],
-					render = this[`render${cm.type}`]
-				if (!render) return
-				// 根据样式类型渲染对应组件
-				let dom = this[`render${cm.type}`].bind(this, cm, data, val, 'layout', q)()
-				return (
-					<div className="pgs-row" key={j}>
-						<div className="pgsr-name">{ cm.name }</div>
-						<div className="pgsr-ctrl">{ dom }</div>
-						<div className="pgsr-auth"></div>
-					</div>
-				)
-			})
 		// 子组件循环渲染
-		let childNode = styles.map((p, i) => {
-			if (!styleMap[p]) return
-			let ci    = 0
-			let cnode = Object.keys(style[p]).map((q, j) => {
-				if (!cssMap[q]) return
-				++ci
-				let cm     = cssMap[q],
-					val    = style[p][q],
-					render = this[`render${cm.type}`]
-				if (!render) return
-				// 根据样式类型渲染对应组件
-				let dom = this[`render${cm.type}`].bind(this, cm, data, val, p, q)()
-				return (
-					<div className="pgs-row" key={j}>
-						<div className="pgsr-name">{ cm.name }</div>
-						<div className="pgsr-ctrl">{ dom }</div>
-						<div className="pgsr-auth">
-							<Checkbox checked={data.auth.style[p][q]} onChange={_ => this.onChangeAuth(_.target.checked, p, q)}></Checkbox>
-						</div>
-					</div>
-				)
-			})
-			if (ci === 0) return
-			return (
-				<Panel header={styleMap[p]} key={i}>
-					{ cnode }
-				</Panel>
-			)
-		})
+
+		let childNode = this.styleObj.bind(this, data, style)()
+		debugger
 		return (
 			<section className="pg-style">
-				<Collapse defaultActiveKey={['0']} onChange={this.cb}>
-					<Panel header={'组件样式'} key={0}>
-						{ layoutNode }
-					</Panel>
-				</Collapse>
 				<StyleManage
 					data={data}
 					add={false}

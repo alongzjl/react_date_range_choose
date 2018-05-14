@@ -26,7 +26,6 @@ class SwiperImage extends React.Component {
 	init = props => {
 		let swiperOptions = props.data.feature.swiperOptions;
 		swiperOptions = this.formatObj(swiperOptions);
-		console.log(swiperOptions)
 		const type = props.data.feature.layout;
 		this.mySwiperImage && this.mySwiperImage.destroy(false); 
 		this.initSwiper(swiperOptions);  

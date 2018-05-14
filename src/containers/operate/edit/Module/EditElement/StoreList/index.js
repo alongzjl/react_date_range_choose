@@ -8,7 +8,11 @@
 import React from 'react'
 import './index.less'
 
-import Custom from '../Custom'
+import CustomO from 'compEdit/EditElement/Custom'
+import CustomB from 'compEditB/EditElement/Custom'
+import CustomV from 'view/Element/Custom'
+
+let Custom
 
 class StoreList extends React.Component {
 	constructor(props) {
@@ -32,7 +36,18 @@ class StoreList extends React.Component {
 		// 	}
 		// }
 		Ajax.get('/store/getStoreList').then(res => {
-			ipt.list = res.data
+			var m = Math.floor(Math.random() * 1e3)
+			ipt.list = [
+				{
+					id: 1,
+					name:  `法拉利${m}`,
+					price: `${m}.99`,
+					floor: 'L1',
+					no:    '101',
+					mall_id: '54f403eae4b002000cf63762',
+					pic: 'http://img.weiye.me/zcimgdir/headimg/32d7529d24439f8c4a22f753c918326e_o.jpg'
+				}
+			]
 			this.setState({ ioInput: ipt })
 		}).catch(e => console.log(e))
 		console.clear()
@@ -51,7 +66,11 @@ class StoreList extends React.Component {
 
 	render() {
 		let { data, actions, idx, csn } = this.props
+		if (envType === 'operate')       Custom = CustomO
+		else if (envType === 'business') Custom = CustomB
+		else                             Custom = CustomV
 		this.init.bind(this)()
+
 		return (
 			<Custom
 				data={data}

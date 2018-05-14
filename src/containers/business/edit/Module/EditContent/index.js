@@ -19,16 +19,13 @@ const Option = Select.Option
 import RouterJump      from 'compEdit/EditCommon/RouterJump'
 import ImageUploadComp from 'compEdit/EditCommon/ImageUploadComp'
 
-// import Picture     from './Picture'
-// import Web         from './Web'
-// import Text        from './Text'
-import SwiperImage       from './SwiperImage'
-import StoreList         from './StoreList'
-import Navigation        from './Navigation'
-import NavigationFloat   from './NavigationFloat'
-import Date              from './Date'
-import WonderfulActivity from './WonderfulActivity'
-import Page              from './Page'
+import SwiperImage       from 'compEdit/EditContent/SwiperImage'
+import StoreList         from 'compEdit/EditContent/StoreList'
+import Navigation        from 'compEdit/EditContent/Navigation'
+import NavigationFloat   from 'compEdit/EditContent/NavigationFloat'
+import Date              from 'compEdit/EditContent/Date'
+import WonderfulActivity from 'compEdit/EditContent/WonderfulActivity'
+import Page              from 'compEdit/EditContent/Page'
 
 import * as variable from 'var'
 
@@ -155,21 +152,19 @@ class EditContent extends React.Component {
 			if (!conMap[p]) return false
 			let cm     = conMap[p]
 			let val    = content[p]
+			let auth   = data.auth.content[p]
 			let render = this[`render${cm.type}`]
-			if (!render) return false
+			if (!auth || !render) return false
 			// 根据样式类型渲染对应组件
 			let dom = this[`render${cm.type}`].bind(this, cm, data, val, p, index)()
 			return (
 				<div className="pgs-row" key={i}>
 					<div className="pgsr-name">{ cm.name }</div>
 					<div className="pgsr-ctrl">{ dom }</div>
-					<div className="pgsr-auth">
-						<Checkbox checked={data.auth.content[p]} onChange={_ => this.onChangeAuth(_.target.checked, p)} />
-					</div>
 					{  
 						data.name !='picture'&&cm.name=='图片'?<div className="delete" onClick={()=>{this.deleteCom(index)}}><Icon type="close-circle" style={{ fontSize: 18}} /></div>:null
 					} 
-				</div> 
+				</div>
 			)
 		})
 		return childNode
