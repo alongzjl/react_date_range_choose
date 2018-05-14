@@ -13,7 +13,7 @@ let HtmlWebpackPlugin = require('html-webpack-plugin');
 let config = Object.assign({}, baseConfig, {
 	entry: path.join(__dirname, '../src/index'),
 	output: {
-        path: path.join(__dirname, '/../qa'),
+        path: path.join(__dirname, '/../dist'),
         filename: '[name]_[hash:8].js',
         chunkFilename: '[name]_[hash:8].js',
         publicPath: ''
