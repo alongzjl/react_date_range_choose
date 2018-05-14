@@ -20,7 +20,7 @@ class Web extends React.Component {
 		let { data } = this.props
 		return (
 			<div className="e-web">
-				<iframe className="ew-iframe" src={data.content.url} scrolling={'no'} />
+				<iframe className="ew-iframe" src={data.data.content.url} scrolling={'no'} />
 			</div>
 		)
 	}

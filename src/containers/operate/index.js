@@ -20,7 +20,7 @@ class OperateComponent extends React.Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			load: true
+			load: false
 		}
 	}
 
@@ -61,13 +61,13 @@ class OperateComponent extends React.Component {
 						sort:    1
 					}
 				]
-				//resolve('楼层')
+				resolve('楼层')
 			// }).catch(e => reject(e))
 		}
 	}
 	getCatg(globalData) {
 		return function(resolve, reject) {
-		// 	Ajax.get('/store/getCatg').then(res => {
+			// Ajax.get('/store/getCatg').then(res => {
 				globalData.catgs = [
 					{
 						id:      '5a532b82130b38000b1884a7',
@@ -76,7 +76,7 @@ class OperateComponent extends React.Component {
 						sort:    1
 					}
 				]
-				//resolve('分类')
+				resolve('分类')
 			// }).catch(e => reject(e))
 		}
 	}
@@ -99,7 +99,7 @@ class OperateComponent extends React.Component {
 					total: 0,
 					total_page: 1
 				}
-				//resolve('店铺列表')
+				resolve('店铺列表')
 			// }).catch(e => reject(e))
 		}
 	}
@@ -114,7 +114,7 @@ class OperateComponent extends React.Component {
 					}],
 					text: '发斯蒂芬斯蒂芬斯蒂芬和法国恢复'
 				}
-				//resolve('店铺详情')
+				resolve('店铺详情')
 			// })
 		}
 	}

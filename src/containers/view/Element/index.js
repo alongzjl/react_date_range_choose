@@ -79,7 +79,7 @@ class Element extends React.Component {
 			)
 		})
 		return (
-			<div className={`pg-element-parent e-flex-box pg-element-${ct}`}>
+			<div className={`pg-element-view e-flex-box pg-element-${ct}`}>
 				<section className="pg-element" style={bgStyle}>
 					{ childNode }
 				</section>
