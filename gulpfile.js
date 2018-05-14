@@ -20,10 +20,10 @@ var sftp = require('gulp-sftp');
 function runPublish(hj) {
     return gulp.src(hj + '/**')
         .pipe(sftp({
-            host: '101.69.176.99',
-            user: 'jfuser',
-            pass: 'GAmPckKIit6JDHqOafMA',
+            host: '192.168.1.222',
+            user: 'rongyi',
+            pass: 'rongyi',
             // remotePath: '/home/jfuser/tt',
-            remotePath: '/var/www/html/ChangFengManual/' + hj
+            remotePath: '/home/rongyi/cmsfrontend/webrootrd52/ry_create_store_static'
         }));
 }
