@@ -24,6 +24,6 @@ function runPublish(hj) {
             user: 'rongyi',
             pass: 'rongyi',
             // remotePath: '/home/jfuser/tt',
-            remotePath: '/home/rongyi/cmsfrontend/webrootrd52/ry_create_store_static'
+            remotePath: '/home/rongyi/cmsfrontend/webroot/store_static'
         }));
 }
