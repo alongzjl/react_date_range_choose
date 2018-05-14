@@ -30,10 +30,11 @@ class ViewComponent extends React.Component {
 		setInterval(() => actions.updateTime(), 1000)
 	}
 	getConfig() {
+		debugger; 
 		let { location, actions, editConfig } = this.props
 		let id = location.query.id
 		return function(resolve, reject) {
-			if (!id) return resolve('模板数据')
+			//if (!id) return resolve('模板数据')
 			Ajax.get(`/mcp-gateway/template/get?templateId=${id}`).then(res => {
 				let cfg = JSON.parse(res.data.config).configPC
 				delete res.data.config

@@ -27,7 +27,7 @@ class OperateComponent extends React.Component {
 	timeInit() {
 		let { actions } = this.props
 		setInterval(() => actions.updateTime(), 1000)
-	}
+	} 
 	getConfig() {
 		let { location, actions, editConfig } = this.props
 		let id = location.query.id

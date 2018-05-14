@@ -16,14 +16,14 @@ import { Router, Route, hashHistory, Redirect } from 'react-router'
 
 import Operate     from 'operate'
 import OperateEdit from 'operate/edit'
-import View from 'view'
+import View from './containers/view' 
 
 import NoMatch     from './containers/NoMatch'
 
 import 'styles/common.less'
 import 'styles/animate.less'
 import 'antd/dist/antd.less'
-
+ 
 const store = createStore(
 	reducer,
 	applyMiddleware(thunk),
@@ -43,3 +43,4 @@ ReactDOM.render((
         </Router>
     </Provider>
 ), document.getElementById('app'))
+ 

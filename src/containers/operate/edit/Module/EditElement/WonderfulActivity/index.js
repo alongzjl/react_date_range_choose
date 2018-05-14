@@ -19,6 +19,7 @@ class WonderfulActivity extends React.Component {
 		random: 1
 	}
 	componentWillReceiveProps(props) {
+		debugger; 
 		this.init(props)
 	}
 	componentDidMount() {

@@ -26,7 +26,9 @@ class DateShow extends React.Component {
 	}
 	componentWillMount() {}
 	componentDidMount() {}
-	componentWiiReceiveProps(props) {}
+	componentWiiReceiveProps(props) {
+
+	} 
 
 	render() {
 		let { data, type, time } = this.props
