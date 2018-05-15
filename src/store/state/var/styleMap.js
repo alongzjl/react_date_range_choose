@@ -1,14 +1,17 @@
 // 高级组件对应添加子组件
 module.exports = {
 	name: {
-		image:        '图片样式',
-		posIcon:      '图标样式',
-		text:         '文本样式',
-		title:        '标题样式',
-		filterBox:    '盒样式',
-		filter:       '元素样式',
-		filterActive: '激活样式',
-		swiperImage:  '轮播样式'
+		image:        '图片',
+		posIcon:      '图标',
+		text:         '文本',
+		title:        '标题',
+		filterBox:    '盒',
+		filter:       '元素',
+		filterActive: '激活',
+		filterPage:   '上&下一页',
+		PagePrev:     '上一页',
+		PageNext:     '下一页',
+		swiperImage:  '轮播'
 	},
 	// 定义样式名称 & 渲染类型 & 相关配置
 	style: {
@@ -31,6 +34,7 @@ module.exports = {
 		fontStyle:         { name: '斜体',    type: 'Switch', true: 'italic',    false: 'normal' },
 		textDecoration:    { name: '下划线',  type: 'Switch', true: 'underline', false: 'none' },
 		opacity:           { name: '透明度',  type: 'Slider', min: 0, max: 1, step: 0.01 },
+		backgroundImage:   { name: '背景图',  type: 'BGImage' },
 		backgroundColor:   { name: '背景颜色', type: 'Color' },
 		backgroundSize:    { name: '背景样式', type: 'BGSize' },
 		boxShadow:         { name: '元素阴影', type: 'Complex', child: {

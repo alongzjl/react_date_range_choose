@@ -31,10 +31,12 @@ class BusinessComponent extends React.Component {
 	}
 	getConfig() {
 		let { location, actions, editConfig } = this.props
-		let tid  = location.query.tid,
-			cid  = location.query.cid,
+		let { query } = location
+		let { name, templateId, templateThemeId, caseType, composeType } = query
+		let tid  = templateId,
+			cid  = query.id,
 			type = cid? 'case': 'template',
-			id   = cid? cid:tid
+			id   = cid? cid: tid
 		if (!cid && !tid) {
 			message.error(`未选择模板!`)
 			return resolve('模板数据')
@@ -48,10 +50,18 @@ class BusinessComponent extends React.Component {
 				let newCfg = {
 					curComp: {},
 					curData: { ...curData, ...cur },
-					curPage: cfg.pageContent[cur.router],
-					java: res.data
+					curPage: cfg.pageContent[cur.router]
 				}
+				window.tempCfg = res.data
+				tempCfg.name = name
+				tempCfg.caseType        = caseType || 'MALL'
+				tempCfg.templateId      = templateId
+				tempCfg.templateThemeId = templateThemeId || 0
+
+				cfg.globalData.theme.idx = templateThemeId - 0
+
 				actions.updateConfig({ ...newCfg, ...cfg })
+				let { globalData } = editConfig
 				resolve('模板数据')
 			}).catch(e => reject(e))
 		}
@@ -183,7 +193,6 @@ class BusinessComponent extends React.Component {
 			let arr = ['getConfig', 'getFloor', 'getCatg', 'getStoreList', 'getStoreDetails']
 			let promises = arr.map(key => new Promise(this[key](globalData)))
 			Promise.all(promises).then((o) => {
-				actions.updateGlobal(globalData)
 				this.setState({ load: true })
 			}).catch(e => {
 				console.log(e)

@@ -82,6 +82,7 @@ class Color extends React.Component {
 				</Col>
 			)
 		}
+
 		return (
 			<div>
 			<Row>

@@ -161,7 +161,7 @@ export default function editConfig(state = initialState, action) {
 		case types.UPDATE_CONFIG:
 			console.log('更新整个config!')
 			saveData()
-			return Object.assign({}, action.config)
+			return Object.assign(state, action.config)
 
 		default:
 			return state

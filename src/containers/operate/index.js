@@ -31,9 +31,19 @@ class OperateComponent extends React.Component {
 	}
 	getConfig() {
 		let { location, actions, editConfig } = this.props
-		let id = location.query.id
+		let { query } = location
+		let { templateType, composeType, adsFlag, name } = query
+		let id = query.id
 		return function(resolve, reject) {
-			if (!id) return resolve('模板数据')
+			if (!id) {
+				window.tempCfg = {
+					name: name || '',
+					templateType: templateType || 'MALL',
+					composeType:  composeType  || 'PORTRAIT',
+					adsFlag:      adsFlag      || 0,
+				}
+				return resolve('模板数据')
+			}
 			Ajax.get(`/mcp-gateway/template/get?templateId=${id}`).then(res => {
 				let cfg = JSON.parse(res.data.config).configPC
 				delete res.data.config
@@ -41,9 +51,9 @@ class OperateComponent extends React.Component {
 				let newCfg = {
 					curComp: {},
 					curData: { ...curData, ...cur },
-					curPage: cfg.pageContent[cur.router],
-					java: res.data
+					curPage: cfg.pageContent[cur.router]
 				}
+				window.tempCfg = res.data
 				actions.updateConfig({ ...newCfg, ...cfg })
 				resolve('模板数据')
 			}).catch(e => reject(e))
@@ -156,7 +166,7 @@ class OperateComponent extends React.Component {
 			let arr = ['getConfig', 'getFloor', 'getCatg', 'getStoreList', 'getStoreDetails']
 			let promises = arr.map(key => new Promise(this[key](globalData)))
 			Promise.all(promises).then((o) => {
-				actions.updateGlobal(globalData)
+				// actions.updateGlobal(globalData)
 				this.setState({ load: true })
 			}).catch(e => {
 				console.log(e)

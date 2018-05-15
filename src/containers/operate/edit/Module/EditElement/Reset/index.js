@@ -35,7 +35,6 @@ class Reset extends React.Component {
 		let con = props.data.data.content
 		let { filterBGImg, text } = con
 		let css = cssColorFormat(props, 'filter')
-		css.backgroundImage = `url('${getImg(filterBGImg)}')`
 		return (
 			<div style={css} onClick={this.selectVal.bind(this, body)}>{ text }</div>
 		)

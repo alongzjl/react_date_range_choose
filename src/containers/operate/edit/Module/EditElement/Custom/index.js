@@ -71,6 +71,9 @@ class Custom extends React.Component {
 	removeComp(e, idx, parent) {
 		e.stopPropagation()
 		let { data, actions, editConfig } = this.props
+		let { curData } = editConfig
+		editConfig.curComp = {}
+		curData.cusCompIdx = -1
 		let comp = data.data.components
 		comp.splice(idx, 1)
 		actions.updateComp(editConfig.curData.compIdx, parent)

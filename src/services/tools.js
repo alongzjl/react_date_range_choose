@@ -34,6 +34,9 @@ const formatColorMap = {
 	borderColor: 1,
 	backgroundColor: 1
 }
+const formatImage = {
+	backgroundImage: 1
+}
 const formatPxMap2 = {
 	lineHeight: 1
 }
@@ -92,8 +95,10 @@ window.cssColorFormat = (props, key) => {
 		}
 		else if (formatPxMap2[p]) {
 			obj[p] += 'px'
-		}else if(p == 'transformRotate'){
+		} else if (p == 'transformRotate'){
 			obj['transform'] = `rotate(${obj[p]}deg)`
+		} else if (formatImage[p]) {
+			obj[p] = `url('${getImg(v)}')`
 		}
 	}
 	if (colorChange) {

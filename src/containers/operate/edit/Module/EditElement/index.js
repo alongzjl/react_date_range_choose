@@ -31,6 +31,10 @@ import { Icon } from 'antd'
 
 import './index.less'
 
+import * as variable from 'var'
+
+const ctMap = variable.composeTypeMap
+
 class EditElement extends React.Component {
 	componentWillMount() {}
 
@@ -59,7 +63,6 @@ class EditElement extends React.Component {
 		lay.width  = ~~ref.offsetWidth
 		lay.height = ~~ref.offsetHeight
 		actions.updateComp(idx, item)
-		//针对轮播图的单独处理，每次更改大小时都要重新初始化swiper
 	}
 	
 	dragStop(e, d, item, idx) {
@@ -80,12 +83,13 @@ class EditElement extends React.Component {
 
 	render() {
 		let { data, actions, editConfig, time, location } = this.props
-		let ct     = location.query.ct - 0 || 2,
+		let ct     = tempCfg.composeType || 'PORTRAIT',
 			eles   = data.elements || [],
 			theme  = editConfig.globalData.theme,
 			colors = theme.list[theme.idx].colors,
 			color  = data.feature.backgroundColor,
 			type   = color.type
+		ct = ctMap[ct]? ct: 'PORTRAIT'
 		if (!colors[type] && type !== 'custom') {
 			let curData = editConfig.curData
 			color.type = 'custom'

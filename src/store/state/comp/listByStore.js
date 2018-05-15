@@ -1,5 +1,12 @@
 // 字母排序
 const data = {
+	layout: {
+		position: 'absolute',
+		top:      0,
+		left:     0,
+		width:    440,
+		height:   300
+	},
 	style:     {
 		image: {
 			width:  40,
@@ -8,7 +15,11 @@ const data = {
 		posIcon: {
 			width:  8,
 			height: 8,
-			marginRight: 2
+			marginRight: 2,
+			background: 'center no-repeat',
+			backgroundSize: 'contain',
+			backgroundImage: { type: 'custom', img: '' },
+			backgroundColor: { type: 'custom', color: 'rgba(0, 0, 0, 0)', rgb: '#000' },
 		},
 		title: {
 			color: { type: 'title', color: '#333' },
@@ -54,15 +65,7 @@ const data = {
 			}
 		}
 	},
-	layout: {
-		position: 'absolute',
-		top:      0,
-		left:     0,
-		width:    440,
-		height:   300
-	},
 	content: {
-		posIcon: { type: 'custom', img: '' },	// 图片url
 	},
 	animation: {
 		className: '',	// 动画样式

@@ -24,19 +24,13 @@ class Header extends React.Component {
 	constructor(props) {
 		super(props)
 
-		let java = props.editConfig.java
 		this.state = {
-			name: java? java.name || '': ''
+			name: tempCfg.name || ''
 		}
 	}
-	componentWillMount() {
-	}
-
-	componentDidMount() {
-	}
-
-	componentWillUnmount() {
-	}
+	componentWillMount() {}
+	componentDidMount() {}
+	componentWillUnmount() {}
 
 	addComp(item) {
 		let { actions, editConfig } = this.props
@@ -70,29 +64,30 @@ class Header extends React.Component {
 	saveData() {
 		let { editConfig, location } = this.props
 		let { query } = location
+		let { templateType, id, composeType, adsFlag } = tempCfg
 		let cfg = JSON.parse(JSON.stringify(editConfig))
+
 		let config = {
 			configPC: {
 				pageContent: cfg.pageContent,
 				pageList:    cfg.pageList,
 				globalData:  cfg.globalData
 			}
-			// configTerminal: {
-			// 	pageContent: cfg.pageContent,
-			// 	pageList:    cfg.pageList,
-			// 	globalData:  cfg.globalData
-			// }
 		}
 		let da = {
+			adsFlag: adsFlag || 0,
 			config: JSON.stringify(config),
-			coverImgUrl: 'http://rongyi.com',
-			name: this.state.name
+			coverImgUrl:  'http://rongyi.com',
+			templateType: templateType,
+			composeType:  composeType,
+			name:         this.state.name
 		}
-		if (query.id) da.id = query.id
-		Ajax.post(`/mcp-gateway/template/${query.id? 'update': 'save'}`, da).then(res => {
+		if (id) da.id = id
+		Ajax.post(`/mcp-gateway/template/${query.id? 'update': 'save'}?`, da).then(res => {
 			message.success(`${query.id? '更新': '保存'}成功!`)
 			if (!query.id) {
-				hashHistory.push(`/operate/edit?ct=${query.ct || 2}&id=${res.data}`)
+				tempCfg.id = res.data
+				hashHistory.push(`/operate/edit?id=${res.data}`)
 			}
 		})
 		console.log(JSON.stringify(config))
@@ -100,6 +95,7 @@ class Header extends React.Component {
 
 	tNameChange(name) {
 		this.setState({ name: name })
+		tempCfg.name = name
 	}
 
 	render() {

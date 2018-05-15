@@ -26,8 +26,6 @@ class ListByStore extends React.Component {
 	}
 
 	renderDom(props, list) {
-		let img = props.data.data.content.posIcon,
-			src = getImg(img)
 		let node = list.map((_, i) => {
 			return (
 				<div
@@ -38,7 +36,7 @@ class ListByStore extends React.Component {
 					<p><img  style={cssColorFormat(props, 'image')} src={_.pic} /></p>
 					<p><span style={cssColorFormat(props, 'title')}>{_.name}</span></p>
 					<p>
-						<img  style={cssColorFormat(props, 'posIcon')} src={src} />
+						<div  style={cssColorFormat(props, 'posIcon')}></div>
 						<span style={cssColorFormat(props, 'text')}>{_.floor}</span>
 					</p>
 				</div>

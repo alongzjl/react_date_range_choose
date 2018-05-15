@@ -36,6 +36,7 @@ const data = {
 			color: { type: 'custom', color: '#666' },
 			background: 'center no-repeat',
 			backgroundSize: 'contain',
+			backgroundImage: { type: 'custom', img: '' },
 			backgroundColor: { type: 'custom', color: '#fff' },
 			borderRadius:    {
 				topLeft:     20,
@@ -55,6 +56,7 @@ const data = {
 			justifyContent: 'center',
 			borderWidth: 2,
 			borderStyle: 'solid',
+			backgroundImage: { type: 'custom', img: '' },
 			borderColor: { type: 'auxiliary', color: '#a240ec' },
 			color: { type: 'textHigh', color: '#fff' },
 			background: 'center no-repeat',
@@ -62,7 +64,6 @@ const data = {
 		}
 	},
 	content: {
-		filterBGImg: { type: 'custom', img: '' },	// 图片url
 	},
 	animation: {
 		className: '',	// 动画样式
