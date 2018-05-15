@@ -128,15 +128,11 @@ class OperateComponent extends React.Component {
 				bsst: getCookie('BSST') || '123456',
 				channel: '002'
 		}).then(res=>{
-			var da0 = res.data,
-			stores.userInfo = da0.userInfo
-			// stores.list     = da0.systemList
+			var da0 = res.data;
+			stores.userInfo = da0.userInfo;
 			stores.auths    = da0.authorities
-			// stores.userInfo.mallMid = da1.userInfo.mallMid
-			// stores.userInfo.mallId  = da1.userInfo.mallId
-			// stores.userInfo.id      = da1.userInfo.id
-			actions.updateUser(stores)
-			window.uif = stores
+			actions.updateUser(stores);
+			window.uif = stores;
 			cb && cb()
 		})
 			
