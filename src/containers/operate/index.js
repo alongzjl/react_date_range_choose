@@ -124,23 +124,24 @@ class OperateComponent extends React.Component {
 		let stores = {}
 		let promise = new Promise((resolve, reject) => {
 			let _res1 = ''
-			Ajax.postLogin('/easy-roa/v1/user/getBsTop', {
-				ryst: getCookie('RYST') || '123456',
-				bsst: getCookie('BSST') || '123456',
-				channel: '002'
-			}).then(res1 => {
+			// Ajax.postLogin('/easy-roa/v1/user/getBsTop', {
+			// 	ryst: getCookie('RYST') || '123456',
+			// 	bsst: getCookie('BSST') || '123456',
+			// 	channel: '002'
+			// }).then(res1 => {
 				console.log('res1')
 				_res1 = res1
-				return Ajax.postLogin('/easy-roa/v1/user/getBsUser', {
-					bsst: getCookie('BSST') || '123456',
-					channel: '002'
+				return Ajax.postLogin('/easy-roa/v1/user/getRyUser', {
+						ryst: getCookie('RYST') || '123456',
+						bsst: getCookie('BSST') || '123456',
+						channel: '002'
 				})
-			}).then((res2) => {
-				console.log('res2')
-				resolve([_res1.data, res2.data])
-			}).catch(e => {
-				reject(e)
-			})
+			// }).then((res2) => {
+			// 	console.log('res2')
+			// 	resolve([_res1.data, res2.data])
+			// }).catch(e => {
+			// 	reject(e)
+			// })
 		})
 		promise.then(res => {
 			var da0 = res[0],
