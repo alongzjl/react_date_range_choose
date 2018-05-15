@@ -122,39 +122,27 @@ class OperateComponent extends React.Component {
 	initData(cb) {
 		let { actions } = this.props
 		let stores = {}
-		let promise = new Promise((resolve, reject) => {
-			let _res1 = ''
-			// Ajax.postLogin('/easy-roa/v1/user/getBsTop', {
-			// 	ryst: getCookie('RYST') || '123456',
-			// 	bsst: getCookie('BSST') || '123456',
-			// 	channel: '002'
-			// }).then(res1 => {
-				console.log('res1')
-				_res1 = res1
-				return Ajax.postLogin('/easy-roa/v1/user/getRyUser', {
-						ryst: getCookie('RYST') || '123456',
-						bsst: getCookie('BSST') || '123456',
-						channel: '002'
-				})
-			// }).then((res2) => {
-			// 	console.log('res2')
-			// 	resolve([_res1.data, res2.data])
-			// }).catch(e => {
-			// 	reject(e)
-			// })
-		})
-		promise.then(res => {
-			var da0 = res[0],
-				da1 = res[1]
+		
+		return Ajax.postLogin('/easy-roa/v1/user/getRyUser', {
+				ryst: getCookie('RYST') || '123456',
+				bsst: getCookie('BSST') || '123456',
+				channel: '002'
+		}).then(res=>{
+			var da0 = res.data,
 			stores.userInfo = da0.userInfo
-			stores.list     = da0.systemList
-			stores.auths    = da1.authorities
-			stores.userInfo.mallMid = da1.userInfo.mallMid
-			stores.userInfo.mallId  = da1.userInfo.mallId
-			stores.userInfo.id      = da1.userInfo.id
+			// stores.list     = da0.systemList
+			stores.auths    = da0.authorities
+			// stores.userInfo.mallMid = da1.userInfo.mallMid
+			// stores.userInfo.mallId  = da1.userInfo.mallId
+			// stores.userInfo.id      = da1.userInfo.id
 			actions.updateUser(stores)
 			window.uif = stores
 			cb && cb()
+		})
+			
+		})
+		promise.then(res => {
+			
 		})
 	}
 	getUserInfo(cb) {
