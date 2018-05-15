@@ -123,7 +123,7 @@ class OperateComponent extends React.Component {
 		let { actions } = this.props
 		let stores = {}
 		
-		return Ajax.postLogin('/easy-roa/v1/user/getRyUser', {
+		Ajax.postLogin('/easy-roa/v1/user/getRyUser', {
 				ryst: getCookie('RYST') || '123456',
 				bsst: getCookie('BSST') || '123456',
 				channel: '002'
@@ -134,11 +134,6 @@ class OperateComponent extends React.Component {
 			actions.updateUser(stores);
 			window.uif = stores;
 			cb && cb()
-		})
-			
-		})
-		promise.then(res => {
-			
 		})
 	}
 	getUserInfo(cb) {
