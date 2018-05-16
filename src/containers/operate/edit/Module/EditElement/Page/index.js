@@ -49,11 +49,9 @@ class Page extends React.Component {
 			prevNode,
 			nextNode,
 			node
-		css.backgroundImage  = `url('${getImg(img)}')`
-		cssp.backgroundImage = `url('${getImg(imgp)}')`
-		cssn.backgroundImage = `url('${getImg(imgn)}')`
-		if (swhp) prevNode = (<div className={page < 2? 's-disabled': ''}         style={cssp} onClick={this.selectVal.bind(this, page - 1)}></div>)
-		if (swhn) nextNode = (<div className={page >= totalPage? 's-disabled': ''} style={cssn} onClick={this.selectVal.bind(this, page + 1)}></div>)
+
+		if (swhp) prevNode = (<div className={page < 2? 's-disabled': ''}          style={{ ...cssp, ...cssColorFormat(props, 'PagePrev') }} onClick={this.selectVal.bind(this, page - 1)}></div>)
+		if (swhn) nextNode = (<div className={page >= totalPage? 's-disabled': ''} style={{ ...cssn, ...cssColorFormat(props, 'PageNext') }} onClick={this.selectVal.bind(this, page + 1)}></div>)
 		if (swh) {
 			node = Array.from(new Array(totalPage)).map((_, i) => {
 				let cur = i + 1

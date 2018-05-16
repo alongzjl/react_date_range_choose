@@ -31,9 +31,19 @@ class OperateComponent extends React.Component {
 	}
 	getConfig() {
 		let { location, actions, editConfig } = this.props
-		let id = location.query.id
+		let { query } = location
+		let { templateType, composeType, adsFlag, name } = query
+		let id = query.id
 		return function(resolve, reject) {
-			if (!id) return resolve('模板数据')
+			if (!id) {
+				window.tempCfg = {
+					name: name || '',
+					templateType: templateType || 'MALL',
+					composeType:  composeType  || 'PORTRAIT',
+					adsFlag:      adsFlag      || 0,
+				}
+				return resolve('模板数据')
+			}
 			Ajax.get(`/mcp-gateway/template/get?templateId=${id}`).then(res => {
 				let cfg = JSON.parse(res.data.config).configPC
 				delete res.data.config
@@ -41,9 +51,9 @@ class OperateComponent extends React.Component {
 				let newCfg = {
 					curComp: {},
 					curData: { ...curData, ...cur },
-					curPage: cfg.pageContent[cur.router],
-					java: res.data
+					curPage: cfg.pageContent[cur.router]
 				}
+				window.tempCfg = res.data
 				actions.updateConfig({ ...newCfg, ...cfg })
 				resolve('模板数据')
 			}).catch(e => reject(e))
@@ -122,37 +132,17 @@ class OperateComponent extends React.Component {
 	initData(cb) {
 		let { actions } = this.props
 		let stores = {}
-		let promise = new Promise((resolve, reject) => {
-			let _res1 = ''
-			Ajax.postLogin('/easy-roa/v1/user/getBsTop', {
+		
+		Ajax.postLogin('/easy-roa/v1/user/getRyUser', {
 				ryst: getCookie('RYST') || '123456',
 				bsst: getCookie('BSST') || '123456',
 				channel: '002'
-			}).then(res1 => {
-				console.log('res1')
-				_res1 = res1
-				return Ajax.postLogin('/easy-roa/v1/user/getBsUser', {
-					bsst: getCookie('BSST') || '123456',
-					channel: '002'
-				})
-			}).then((res2) => {
-				console.log('res2')
-				resolve([_res1.data, res2.data])
-			}).catch(e => {
-				reject(e)
-			})
-		})
-		promise.then(res => {
-			var da0 = res[0],
-				da1 = res[1]
-			stores.userInfo = da0.userInfo
-			stores.list     = da0.systemList
-			stores.auths    = da1.authorities
-			stores.userInfo.mallMid = da1.userInfo.mallMid
-			stores.userInfo.mallId  = da1.userInfo.mallId
-			stores.userInfo.id      = da1.userInfo.id
-			actions.updateUser(stores)
-			window.uif = stores
+		}).then(res=>{
+			var da0 = res.data;
+			stores.userInfo = da0.userInfo;
+			stores.auths    = da0.authorities
+			actions.updateUser(stores);
+			window.uif = stores;
 			cb && cb()
 		})
 	}
@@ -176,7 +166,7 @@ class OperateComponent extends React.Component {
 			let arr = ['getConfig', 'getFloor', 'getCatg', 'getStoreList', 'getStoreDetails']
 			let promises = arr.map(key => new Promise(this[key](globalData)))
 			Promise.all(promises).then((o) => {
-				actions.updateGlobal(globalData)
+				// actions.updateGlobal(globalData)
 				this.setState({ load: true })
 			}).catch(e => {
 				console.log(e)

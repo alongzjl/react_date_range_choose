@@ -24,7 +24,6 @@ class Letter extends React.Component {
 	renderDom(props, arr, nowVal) {
 		let img = props.data.data.content.filterBGImg,
 			css = cssColorFormat(props, 'filter')
-		css.backgroundImage = `url('${getImg(img)}')`
 		return (
 			<div style={cssColorFormat(props, 'filterBox')}>
 				{ arr.map((_, i) => {

@@ -20,7 +20,7 @@ import RouterJump      from 'compEdit/EditCommon/RouterJump'
 import ImageUploadComp from 'compEdit/EditCommon/ImageUploadComp'
 
 import SwiperImage       from 'compEdit/EditContent/SwiperImage'
-import StoreList         from 'compEdit/EditContent/StoreList'
+// import StoreList         from 'compEdit/EditContent/StoreList'
 import Navigation        from 'compEdit/EditContent/Navigation'
 import NavigationFloat   from 'compEdit/EditContent/NavigationFloat'
 import Date              from 'compEdit/EditContent/Date'
@@ -148,6 +148,7 @@ class EditContent extends React.Component {
 	}
 
 	renObj(data, content, index) {
+		let ci = 0
 		let childNode = Object.keys(content).map((p, i) => {
 			if (!conMap[p]) return false
 			let cm     = conMap[p]
@@ -157,6 +158,7 @@ class EditContent extends React.Component {
 			if (!auth || !render) return false
 			// 根据样式类型渲染对应组件
 			let dom = this[`render${cm.type}`].bind(this, cm, data, val, p, index)()
+			ci++
 			return (
 				<div className="pgs-row" key={i}>
 					<div className="pgsr-name">{ cm.name }</div>
@@ -167,6 +169,7 @@ class EditContent extends React.Component {
 				</div>
 			)
 		})
+		if (!ci) return false
 		return childNode
 	}
 
@@ -180,7 +183,7 @@ class EditContent extends React.Component {
 		if (compName === 'navigation')             compCon = (<Navigation        data={this.props}/>)
 		else if (compName === 'navigationFloat')   compCon = (<NavigationFloat   data={this.props}/>)
 		else if (compName === 'date')              compCon = (<Date              data={this.props}/>)
-		else if (compName === 'storeList')         compCon = (<StoreList         data={data}/>)
+		// else if (compName === 'storeList')         compCon = (<StoreList         data={data}/>)
 		else if (compName === 'wonderfulActivity') compCon = (<WonderfulActivity data={this.props}/>)
 		else if (compName === 'swiperImage' && content.length > 1) compCon = (<SwiperImage data={this.props}/>)
 		if (content.length && compName != 'wonderfulActivity') {

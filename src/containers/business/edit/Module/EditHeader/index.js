@@ -24,42 +24,13 @@ class Header extends React.Component {
 	constructor(props) {
 		super(props)
 
-		let java = props.editConfig.java
 		this.state = {
-			name: java? java.name || '': ''
+			name: tempCfg.name || ''
 		}
 	}
-	componentWillMount() {
-	}
-
-	componentDidMount() {
-	}
-
-	componentWillUnmount() {
-	}
-
-	addComp(item) {
-		let { actions, editConfig } = this.props
-		let { curComp, curData } = editConfig
-		let { parentComp } = curData
-		let { key } = item
-		if (curComp.type === 'advanced' || parentComp) {
-			let compData = JSON.parse(JSON.stringify(comp[key])),
-				Comp     = parentComp || curComp,
-				auth     = compC[Comp.name]
-			if (compData.type === 'base' && auth[key]) {
-				Comp.data.components.push(compData)
-				return actions.updateComp(null, Comp)
-			} else {
-				message.info('该高级组件内不能添加该基础组件!')
-			}
-		} else {
-			if (compP[key]) {
-				return actions.addComp(editConfig.curData.router, key)
-			}
-			message.info('该组件内只能添加在高级组件中!')
-		} 
-	}
+	componentWillMount() {}
+	componentDidMount() {}
+	componentWillUnmount() {}
 
 	selectTheme() {
 		let { actions, editConfig } = this.props
@@ -70,7 +41,9 @@ class Header extends React.Component {
 	saveData() {
 		let { editConfig, location } = this.props
 		let { query } = location
+		let { caseType, id, composeType, templateId, templateThemeId } = tempCfg
 		let cfg = JSON.parse(JSON.stringify(editConfig))
+
 		let config = {
 			configPC: {
 				pageContent: cfg.pageContent,
@@ -83,16 +56,23 @@ class Header extends React.Component {
 			// 	globalData:  cfg.globalData
 			// }
 		}
+		editConfig.globalData.theme.idx
 		let da = {
 			config: JSON.stringify(config),
-			coverImgUrl: 'http://rongyi.com',
-			name: this.state.name
+			coverImgUrl:  'http://rongyi.com',
+			caseType: caseType,
+			composeType:  composeType,
+			name:         this.state.name,
+			templateId:   templateId,
+			templateThemeId: editConfig.globalData.theme.idx || 0,
+			mallId: uif.userInfo.mallId
 		}
-		if (query.id) da.id = query.id
-		Ajax.post(`/mcp-gateway/template/${query.id? 'update': 'save'}`, da).then(res => {
+		if (id) da.id = id
+		Ajax.post(`/mcp-gateway/case/${query.id? 'update': 'save'}?`, da).then(res => {
 			message.success(`${query.id? '更新': '保存'}成功!`)
 			if (!query.id) {
-				hashHistory.push(`/operate/edit?ct=${query.ct || 2}&id=${res.data}`)
+				tempCfg.id = res.data
+				hashHistory.push(`/business/edit?id=${res.data}`)
 			}
 		})
 		console.log(JSON.stringify(config))
@@ -100,6 +80,7 @@ class Header extends React.Component {
 
 	tNameChange(name) {
 		this.setState({ name: name })
+		tempCfg.name = name
 	}
 
 	render() {

@@ -35,7 +35,7 @@ class StoreList extends React.Component {
 		// 		keys.push(o)
 		// 	}
 		// }
-		Ajax.get('/store/getStoreList').then(res => {
+		// Ajax.get('/store/getStoreList').then(res => {
 			var m = Math.floor(Math.random() * 1e3)
 			ipt.list = [
 				{
@@ -49,7 +49,7 @@ class StoreList extends React.Component {
 				}
 			]
 			this.setState({ ioInput: ipt })
-		}).catch(e => console.log(e))
+		// }).catch(e => console.log(e))
 		console.clear()
 		console.log(body)
 	}

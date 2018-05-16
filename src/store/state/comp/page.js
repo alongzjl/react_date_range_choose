@@ -1,5 +1,12 @@
 // 字母排序
 const data = {
+	layout: {
+		position: 'absolute',
+		top:      0,
+		left:     0,
+		width:    364,
+		height:   60
+	},
 	style:     {
 		filterBox: {
 			width:  18,
@@ -25,6 +32,7 @@ const data = {
 			color: { type: 'custom', color: '#666' },
 			background: 'center no-repeat',
 			backgroundSize: 'contain',
+			backgroundImage: { type: 'custom', img: '' },
 			backgroundColor: { type: 'high', color: '#fff' },
 			borderRadius:    {
 				topLeft:     10,
@@ -47,6 +55,7 @@ const data = {
 			borderColor: { type: 'custom', color: '#a240ec' },
 			color: { type: 'textHigh', color: '#fff' },
 			background: 'center no-repeat',
+			backgroundImage: { type: 'custom', img: '' },
 			backgroundColor: { type: 'main', color: '#a240ec' }
 		},
 		filterPage: {
@@ -73,19 +82,15 @@ const data = {
 				spread_dis: 0,
 				color:      { type: 'custom', color: '#000' }
 			}
+		},
+		PagePrev: {
+			backgroundImage: { type: 'custom', img: '' }
+		},
+		PageNext: {
+			backgroundImage: { type: 'custom', img: '' }
 		}
 	},
-	layout: {
-		position: 'absolute',
-		top:      0,
-		left:     0,
-		width:    364,
-		height:   60
-	},
 	content: {
-		filterPageImg: { type: 'custom', img: '' },
-		filterPrevImg: { type: 'custom', img: '' },
-		filterNextImg: { type: 'custom', img: '' },
 		pageSwitch:   true,
 		prevSwitch:   true,
 		nextSwitch:   true,
