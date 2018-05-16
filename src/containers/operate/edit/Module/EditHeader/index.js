@@ -36,9 +36,9 @@ class Header extends React.Component {
 	}
 
 	componentWillUnmount() {
-	}
+	} 
 
-	addComp(item) {
+	addComp(item) { 
 		let { actions, editConfig } = this.props
 		let { curComp, curData } = editConfig
 		let { parentComp } = curData
@@ -55,9 +55,21 @@ class Header extends React.Component {
 			}
 		} else {
 			if (compP[key]) {
-				return actions.addComp(editConfig.curData.router, key)
+				if(key == 'storeInstro'){
+					actions.addComp(editConfig.curData.router, key);
+					setTimeout(()=>{
+						const curComp = this.props.editConfig.curComp;
+						compC[key].map(item=>{
+							curComp.data.components.push(item);
+						}) 
+						actions.updateComp(null, curComp);
+					},10)
+				}else{
+					actions.addComp(editConfig.curData.router, key)	
+				}
+			}else{
+				message.info('该组件内只能添加在高级组件中!')
 			}
-			message.info('该组件内只能添加在高级组件中!')
 		} 
 	}
 
@@ -95,7 +107,7 @@ class Header extends React.Component {
 				hashHistory.push(`/operate/edit?ct=${query.ct || 2}&id=${res.data}`)
 			}
 		})
-		console.log(JSON.stringify(config))
+		console.log(JSON.stringify(config.configPC))
 	}
 
 	tNameChange(name) {

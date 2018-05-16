@@ -22,6 +22,7 @@ import WonderfulActivity from 'compEdit/EditElement/WonderfulActivity'
 import DateShow          from 'compEdit/EditElement/Date'
 import StoreList         from 'compEdit/EditElement/StoreList'
 import StoreDetails      from 'compEdit/EditElement/StoreDetails'
+import StoreInstro      from 'compEdit/EditElement/StoreInstro'
 import Navigation        from 'compEdit/EditElement/Navigation'
 import NavigationFloat   from 'compEdit/EditElement/NavigationFloat'
 
@@ -76,7 +77,7 @@ class EditElement extends React.Component {
 		e.stopPropagation()
 		let { actions } = this.props
 		actions.deleteComp(idx)
-	}
+	} 
 
 	render() {
 		let { data, actions, editConfig, time, location } = this.props
@@ -111,7 +112,8 @@ class EditElement extends React.Component {
  			else if (compName === 'navigationFloat') compCon = (<NavigationFloat data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
 			else if (compName === 'storeList')       compCon = (<StoreList       data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
 			else if (compName === 'storeDetails')    compCon = (<StoreDetails    data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
-			if (!compCon) return false
+			else if (compName === 'storeInstro')    compCon = (<StoreInstro    data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
+			if (!compCon) return false 
 			return (
 				<Rnd
 					key={i}

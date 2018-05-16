@@ -11,5 +11,6 @@ module.exports = {
 	navigation:        1,
 	navigationFloat:   1,
 	storeList:         1,
-	storeDetails:      1
-}
+	storeDetails:      1,
+	storeInstro:       1
+}   

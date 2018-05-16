@@ -71,5 +71,7 @@ module.exports = {
 	// 店铺列表
 	storeList:         authInit(require('./storeList')),
 	// 店铺详情
-	storeDetails:      authInit(require('./storeDetails'))
+	storeDetails:      authInit(require('./storeDetails')),
+	// 店铺简介
+	storeInstro:      authInit(require('./storeInstro'))
 }

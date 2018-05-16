@@ -25,8 +25,8 @@ const data = {
 }
 
 module.exports = {  
-	name: 'storeDetails',
-	type: 'advanced',  
+	name: 'storeInstro', 
+	type: 'advanced',
 	// 样式管理
 	data: JSON.parse(JSON.stringify(data)),
 	styleList: {

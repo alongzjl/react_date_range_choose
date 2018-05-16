@@ -127,9 +127,15 @@
 			display: block;
 		}
 	}
-	.react-draggable:hover {
-		.handle-drag-custom {
-			display: block;
+	.react-draggable {
+		.pge-remove {
+			display: none;
+		}
+		&:hover {
+			.handle-drag-custom,
+			.pge-remove-custom {
+				display: block;
+			}  
 		}
 	}
-}
+}  
