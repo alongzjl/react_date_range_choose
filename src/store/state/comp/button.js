@@ -24,9 +24,9 @@ const data = {
 			transform:       { rotate: 0 },
 			opacity:         1, 
 			color:           { type: 'custom', color: '#000' },
-			backgroundColor: { type: 'custom', color: '#F58F8F' },
-			background: 'center no-repeat', 
-			backgroundSize: 'contain', 
+			background: 'center no-repeat',
+			backgroundSize: 'contain',
+			backgroundColor: { type: 'custom', color: '#F58F8F' }, 
 			backgroundImage: { type: 'custom', img: '' },
 			borderRadius:    {
 				topLeft:     6,
@@ -34,7 +34,7 @@ const data = {
 				bottomRight:  6,
 				bottomLeft: 6
 			},
-			borderWidth:     1, 
+			borderWidth:     1,
 			borderStyle:     'solid',  
 			borderColor: 	 { type: 'custom', color: '#333' },
 			boxShadow:       {

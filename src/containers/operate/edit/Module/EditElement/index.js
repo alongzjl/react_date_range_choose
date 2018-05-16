@@ -22,9 +22,10 @@ import WonderfulActivity from 'compEdit/EditElement/WonderfulActivity'
 import DateShow          from 'compEdit/EditElement/Date'
 import StoreList         from 'compEdit/EditElement/StoreList'
 import StoreDetails      from 'compEdit/EditElement/StoreDetails'
-import StoreInstro      from 'compEdit/EditElement/StoreInstro'
+import StoreInstro       from 'compEdit/EditElement/StoreInstro'
 import Navigation        from 'compEdit/EditElement/Navigation'
 import NavigationFloat   from 'compEdit/EditElement/NavigationFloat'
+import SplitLine         from 'compEdit/EditElement/SplitLine'
 
 import * as actions from 'actions'
 
@@ -116,7 +117,8 @@ class EditElement extends React.Component {
  			else if (compName === 'navigationFloat') compCon = (<NavigationFloat data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
 			else if (compName === 'storeList')       compCon = (<StoreList       data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
 			else if (compName === 'storeDetails')    compCon = (<StoreDetails    data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
-			else if (compName === 'storeInstro')    compCon = (<StoreInstro    data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
+			else if (compName === 'storeInstro')     compCon = (<StoreInstro     data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
+			else if (compName === 'splitLine')       compCon = (<SplitLine       data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
 			if (!compCon) return false
 			return (
 				<Rnd
