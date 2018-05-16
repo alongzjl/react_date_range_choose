@@ -38,7 +38,7 @@ class Header extends React.Component {
 	componentWillUnmount() {
 	} 
 
-
+	
 	addComp(item) { 
 		let { actions, editConfig } = this.props
 		let { curComp, curData } = editConfig
@@ -56,22 +56,10 @@ class Header extends React.Component {
 			}
 		} else {
 			if (compP[key]) {
-				if(key == 'storeInstro'){
-					actions.addComp(editConfig.curData.router, key);
-					setTimeout(()=>{
-						const curComp = this.props.editConfig.curComp;
-						compC[key].map(item=>{
-							curComp.data.components.push(item);
-						}) 
-						actions.updateComp(null, curComp);
-					},10)
-				}else{
-					actions.addComp(editConfig.curData.router, key)	
-				}
-			}else{
-				message.info('该组件内只能添加在高级组件中!')
-			}
-		} 
+				return actions.addComp(editConfig.curData.router, key)	
+			} 
+		}   
+		message.info('该组件内只能添加在高级组件中!')
 	}
 
 	selectTheme() {
