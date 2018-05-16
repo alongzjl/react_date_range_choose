@@ -13,4 +13,4 @@ module.exports = {
 	storeList:         1,
 	storeDetails:      1,
 	storeInstro:       1
-}   
+}

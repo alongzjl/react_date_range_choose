@@ -80,7 +80,7 @@ class EditElement extends React.Component {
 		e.stopPropagation()
 		let { actions } = this.props
 		actions.deleteComp(idx)
-	} 
+	}
 
 	render() {
 		let { data, actions, editConfig, time, location } = this.props
@@ -117,7 +117,7 @@ class EditElement extends React.Component {
 			else if (compName === 'storeList')       compCon = (<StoreList       data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
 			else if (compName === 'storeDetails')    compCon = (<StoreDetails    data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
 			else if (compName === 'storeInstro')    compCon = (<StoreInstro    data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
-			if (!compCon) return false 
+			if (!compCon) return false
 			return (
 				<Rnd
 					key={i}

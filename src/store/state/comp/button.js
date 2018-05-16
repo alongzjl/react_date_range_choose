@@ -21,7 +21,7 @@ const data = {
 			fontStyle:       'normal',
 			fontWeight:      'normal',
 			textDecoration:  'none',
-			transformRotate: 0,
+			transform:       { rotate: 0 },
 			opacity:         1, 
 			color:           { type: 'custom', color: '#000' },
 			backgroundColor: { type: 'custom', color: '#F58F8F' },

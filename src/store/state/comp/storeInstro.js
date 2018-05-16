@@ -21,8 +21,7 @@ const data = {
 		iterationCount: 'infinite'	// 循环次数
 	},
 	// 组件管理
-	components: [ 
-		] 
+	components: []
 }
 /*
 {"name":"text","type":"base","data":{"style":{"text":{"textAlign":"center","fontSize":16,"lineHeight":26,"transformRotate":0,"fontStyle":"normal","fontWeight":"normal","textDecoration":"none","opacity":1,"textShadow":{"h_shadow":0,"v_shadow":0,"blur_dis":0,"color":{"type":"custom","color":"rgba(8,0,0,1)","alpha":100,"rgb":"#080000"}},"color":{"type":"custom","color":"#333"},"animation":"0s 0s 1"}},"layout":{"position":"absolute","top":0,"left":0,"width":120,"height":30},"content":{"text":"店铺简介","router":{}},"animation":{"className":"","delay":1,"duration":1,"iterationCount":"infinite"}},"styleList":{"idx":0,"list":[{"name":"样式1","img":"","data":{"style":{"text":{"textAlign":"center","fontSize":16,"lineHeight":26,"transformRotate":0,"fontStyle":"normal","fontWeight":"normal","textDecoration":"none","opacity":1,"textShadow":{"h_shadow":0,"v_shadow":0,"blur_dis":0,"color":{"type":"custom","color":"rgba(8,0,0,1)","alpha":100,"rgb":"#080000"}},"color":{"type":"custom","color":"#333"},"animation":"0s 0s 1"}},"layout":{"position":"absolute","top":0,"left":0,"width":120,"height":30},"content":{"text":"店铺简介","router":{}},"animation":{"className":"","delay":1,"duration":1,"iterationCount":"infinite"}}}]},"feature":{},"auth":{"style":{"text":{"textAlign":false,"fontSize":false,"lineHeight":false,"transformRotate":false,"fontStyle":false,"fontWeight":false,"textDecoration":false,"opacity":false,"textShadow":false,"color":false,"animation":false}},"content":{"text":false,"router":false},"animation":{"className":false,"delay":false,"duration":false,"iterationCount":false},"feature":{}}},

@@ -55,8 +55,19 @@ module.exports = {
 			topRight:    { name: '上右', type: 'Number', max: 100 },
 			bottomLeft:  { name: '下左', type: 'Number', max: 100 },
 			bottomRight: { name: '下右', type: 'Number', max: 100 }
-		} }, 
-		transformRotate:   { name: '旋转角度', type: 'Number', max: 180 },
+		} },
+		transform:          { name: '变换', type: 'Complex', child: {
+			translateX:   { name: 'X偏移', type: 'Number', max: 20 },
+			translateY:   { name: 'Y偏移', type: 'Number', max: 20 },
+			scale:        { name: '缩放',  type: 'Number', max: 10, step: 0.1 },
+			scaleX:       { name: 'X缩放', type: 'Number', max: 10, step: 0.1 },
+			scaleY:       { name: 'Y缩放', type: 'Number', max: 10, step: 0.1 },
+			rotate:       { name: '旋转',  type: 'Number', max: 360 },
+			rotateX:      { name: 'X旋转', type: 'Number', max: 360 },
+			rotateY:      { name: 'Y旋转', type: 'Number', max: 360 },
+			skewX:        { name: 'X倾斜', type: 'Number', max: 20 },
+			skewY:        { name: 'Y倾斜', type: 'Number', max: 20 }
+		} },
 		borderWidth:       { name: '边框宽度', type: 'Number' },
 		borderStyle:       { name: '边框样式', type: 'Solid' },
 		borderColor:       { name: '边框颜色', type: 'Color' },

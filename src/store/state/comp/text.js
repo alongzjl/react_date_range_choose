@@ -5,7 +5,7 @@ const data = {
 			textAlign:      'center',
 			fontSize:       12, 
 			lineHeight:     16,
-			transformRotate: 0, 
+			transform:       { rotate: 0 },
 			fontStyle:      'normal',
 			fontWeight:     'normal',
 			textDecoration: 'none',

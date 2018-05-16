@@ -38,23 +38,48 @@ class Header extends React.Component {
 		actions.updateCur(editConfig.curData)
 	}
 
+	formatStyle(data) {
+		Object.keys(data.style).map(_ => style[_] = cssFormatByTerm(style[_]))
+		debugger
+		data.layout = cssFormatByTerm(data.layout)
+		console.log(style)
+	}
+	formatEle(obj) {
+		let { type, data, styleList } = obj
+		if (type === 'base') {
+			this.formatStyle(data)
+			// delete obj.styleList.list
+			delete obj.auth
+			// styleList.list.map(_ => this.formatStyle(_.data.style))
+		} else if (type === 'advanced') {
+			data.components.map(_ => this.formatEle(_))
+		}
+	}
+	formatPage(obj) {
+		obj.elements.map(_ => this.formatEle(_))
+	}
+
 	saveData() {
 		let { editConfig, location } = this.props
 		let { query } = location
 		let { caseType, id, composeType, templateId, templateThemeId } = tempCfg
 		let cfg = JSON.parse(JSON.stringify(editConfig))
 
+		let newCon = deepCopy(cfg.pageContent)
+		Object.keys(newCon).map(_ => this.formatPage(newCon[_]))
+
+		console.log(newCon)
 		let config = {
 			configPC: {
 				pageContent: cfg.pageContent,
 				pageList:    cfg.pageList,
 				globalData:  cfg.globalData
+			},
+			configTerminal: {
+				pageContent: newCon,
+				pageList:    cfg.pageList,
+				globalData:  cfg.globalData
 			}
-			// configTerminal: {
-			// 	pageContent: cfg.pageContent,
-			// 	pageList:    cfg.pageList,
-			// 	globalData:  cfg.globalData
-			// }
 		}
 		editConfig.globalData.theme.idx
 		let da = {
@@ -68,7 +93,7 @@ class Header extends React.Component {
 			mallId: uif.userInfo.mallId
 		}
 		if (id) da.id = id
-		Ajax.post(`/mcp-gateway/case/${query.id? 'update': 'save'}?`, da).then(res => {
+		Ajax.post(`/mcp-gateway/case/${query.id? 'update': 'save'}`, da).then(res => {
 			message.success(`${query.id? '更新': '保存'}成功!`)
 			if (!query.id) {
 				tempCfg.id = res.data

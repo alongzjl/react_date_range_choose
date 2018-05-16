@@ -89,7 +89,7 @@ module.exports = [
 				}
 			]
 		},
-		{ 
+		{
 			icon: 'storeInstro-control',
 			name: '店铺简介',
 			key:  'storeInstro',
@@ -114,6 +114,6 @@ module.exports = [
 			icon: 'storeDetails-control',
 			name: '店铺详情',
 			key:  'storeDetails'
-		} 
+		}
 	// ],
 ]

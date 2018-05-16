@@ -101,6 +101,8 @@ class Custom extends React.Component {
 					else ob[__] = v.value
 				})
 			}
+
+
 			if (compName === 'picture')          compCon = (<Picture     data={_} parent={data} editConfig={editConfig} actions={actions} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} />)
 			else if (compName === 'web')         compCon = (<Web         data={_} parent={data} editConfig={editConfig} actions={actions} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} />)
 			else if (compName === 'text')        compCon = (<Text        data={_} parent={data} editConfig={editConfig} actions={actions} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} />)
@@ -137,8 +139,8 @@ class Custom extends React.Component {
 					} 
 					<div className="handle-drag-custom" onClick={e => e.stopPropagation()}></div>
 				</Rnd>
-			)  
-		}) 
+			)
+		})
 		return (
 			<section className={`pg-custom ${csn}`}>
 				{ childNode }

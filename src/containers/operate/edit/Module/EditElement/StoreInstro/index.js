@@ -28,7 +28,7 @@ class StoreInstro extends React.Component {
 			ioInput: this.props.data.feature
 		}
 	}
- 
+
 	render() {
 		let { data, actions, idx, csn } = this.props;
 		this.init.bind(this)();

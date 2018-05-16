@@ -78,7 +78,7 @@ window.cssColorFormat = (props, key) => {
 		console.error(`名为 ${key} 的样式未定义!`)
 		return {}
 	}
-	let obj = JSON.parse(JSON.stringify(style[key]))
+	let obj = deepCopy(style[key])
 	let st  = Date.now()
 	let colorChange = 0
 	for (let p in obj) {
@@ -108,6 +108,34 @@ window.cssColorFormat = (props, key) => {
 	}
 	// console.log(`耗时${Date.now() - st}ms`)
 	return obj
+}
+
+window.cssFormatByTerm = (obj) => {
+	let colorChange = 0
+	let styleArr    = []
+	Object.keys(obj).map(p => {
+		let v = obj[p]
+		if (formatPxMap[p]) {
+			obj[p] = v * 2 + 'px'
+		}
+		else if (formatComplexMap[p]) {
+			colorChange = colorVaild(v.color, v, 'color', colorChange)
+			obj[p] = Object.keys(v).map(_ => {
+				let w = v[_]
+				return getAttr(w) === 'Number'? w * 2 + 'px': w
+			}).join(' ')
+		}
+		else if (formatColorMap[p]) {
+			colorChange = colorVaild(v, obj, p, colorChange)
+		} else if (p == 'transformRotate') {
+			obj['transform'] = `rotate(${obj[p]}deg)`
+		} else if (formatImage[p]) {
+			obj[p] = `url('${getImg(v)}')`
+		}
+		styleArr.push(`${p.replace(/[A-Z]/g, _ => '-'+_.toLowerCase())}:${obj[p]};`)
+	})
+	if (colorChange) style[key] = obj
+	return styleArr.join('')
 }
 
 // 获取图片
