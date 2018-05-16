@@ -113,7 +113,34 @@ module.exports = [
 		{
 			icon: 'storeDetails-control',
 			name: '店铺详情',
-			key:  'storeDetails'
+			key:  'storeDetails',
+			child: [
+				{
+					icon: 'text-control',
+					name: '店铺LOGO',
+					key:  'picture'
+				}, 
+				{
+					icon: 'text-control',
+					name: '店铺名称',
+					key:  'text'
+				}, 
+				{
+					icon: 'address-control',
+					name: '楼层显示',
+					key:  'address'
+				}, 
+				{
+					icon: 'address-control',
+					name: '电话显示',
+					key:  'address'
+				}, 
+				{
+					icon: 'button-control',
+					name: '前往按钮',
+					key:  'button'
+				}
+			]  
 		}
 	// ],
 ]

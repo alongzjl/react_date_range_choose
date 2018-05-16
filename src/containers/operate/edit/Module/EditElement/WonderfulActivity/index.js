@@ -67,20 +67,20 @@ class WonderfulActivity extends React.Component {
 		return new_obj
 	}
 	render() {
-		let { data } = this.props
-		let list  = data.feature.list || []
-		return (
+		let { data } = this.props 
+		const content = data.data.content
+		return ( 
 			<div className="e-WonderfulActivity">
 				<div className={`swiper-container swiper-container_${this.state.random} outer_box`}>
 					<div className="swiper-wrapper">
 						{
-							list.map((item, i) => <div className="swiper-slide" key={i} style={cssColorFormat(this.props, 'swiperImage')}><div className="text_show" style={cssColorFormat(this.props, 'text')}>{item.title}</div><img src={item.url} /></div>)
-						}
+							content.map((item, i) => <div className="swiper-slide" key={i} style={cssColorFormat(this.props, 'swiperImage')}><div className="text_show" style={cssColorFormat(this.props, 'text')}>{item.title}</div><img src={item.img.img} /></div>)
+						}  
 					</div>
 					<div className="swiper-pagination"></div>
 				</div> 
 			</div>
-		) 
+		)  
 	}
 }
 

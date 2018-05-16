@@ -25,6 +25,9 @@ const data = {
 			opacity:         1, 
 			color:           { type: 'custom', color: '#000' },
 			backgroundColor: { type: 'custom', color: '#F58F8F' },
+			background: 'center no-repeat', 
+			backgroundSize: 'contain', 
+			backgroundImage: { type: 'custom', img: '' },
 			borderRadius:    {
 				topLeft:     6,
 				topRight:    6,
@@ -51,7 +54,7 @@ const data = {
 		}
 	},
 	content: {
-		text:   '文字内容',	// 文字内容
+		text:   '按钮',	// 文字内容
 		router: {} 			// 路由
 	},	
 	animation: {

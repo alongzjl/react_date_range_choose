@@ -27,10 +27,20 @@ const data = {
 	},
 	content: [
 		{
-			img: { type: 'custom', img: '' },			// 图片url
+			img: { type: 'custom', img: require('compEdit/EditElement/images/Index_Banner.jpg') },			// 图片url
 			title: '图片1',		// 图片标题
 			router: {}			// 路由
-		}
+		},
+		{
+			img: { type: 'custom', img: require('compEdit/EditElement/images/Index_Banner_02.jpg') },			// 图片url
+			title: '图片2',		// 图片标题
+			router: {}			// 路由
+		},
+		{   
+			img: { type: 'custom', img: require('compEdit/EditElement/images/Index_Banner_03.jpg') },			// 图片url
+			title: '图片3',		// 图片标题
+			router: {}			// 路由
+		} 
 	],
 	animation: {
 		className: '',	// 动画样式
@@ -64,7 +74,7 @@ module.exports = {
 		layout:1, 
 		swiperOptions:{ 
 			direction: 'horizontal',//轮播方向  vertical
-			autoplay: false,// 播放开关
+			autoplay: true,// 播放开关
 			loop : true,//循环
 			speed: 1000,	// 切换速度
 			spaceBetween:0,

@@ -29,10 +29,26 @@ const data = {
 		position: 'absolute',
 		top:      0,
 		left:     0,
-		width:    540,
-		height:   200
+		width:    540,  
+		height:   200    
 	},
-	content:   [],
+	content:   [
+		{
+			img: { type: 'custom', img: require('compEdit/EditElement/images/won_2.png') },			// 图片url
+			title: '图片1',		// 图片标题
+			router: {}			// 路由
+		},
+		{
+			img: { type: 'custom', img: require('compEdit/EditElement/images/won_3.png') },			// 图片url
+			title: '图片2',		// 图片标题
+			router: {}			// 路由
+		},
+		{   
+			img: { type: 'custom', img: require('compEdit/EditElement/images/won_4.png') },			// 图片url
+			title: '图片3',		// 图片标题
+			router: {}			// 路由 
+		}  
+	],
 	animation: {
 		className: '',	// 动画样式
 		delay: 1,					// 开始时间
@@ -64,11 +80,11 @@ module.exports = {
 		layout:1, 
 		swiperOptions:{ 
 			direction: 'horizontal',//轮播方向  vertical
-			autoplay: false,// 播放开关
+			autoplay: true,// 播放开关
 			loop : true,//循环
 			speed: 1000,	// 切换速度
-			spaceBetween:0,
-			slidesPerView:1,
+			spaceBetween:20,
+			slidesPerView:2,
 			centeredSlides:true,
 			effect:'slide',// 'slide' or 'fade' or 'cube' or 'coverflow' or 'flip'
 			autoplay: false,

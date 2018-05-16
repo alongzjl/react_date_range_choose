@@ -37,7 +37,7 @@ class StoreList extends React.Component {
 		// }
 		// Ajax.get('/store/getStoreList').then(res => {
 			var m = Math.floor(Math.random() * 1e3)
-			ipt.list = [
+			ipt.list = [ 
 				{
 					id: 1,
 					name:  `法拉利${m}`,
@@ -54,14 +54,14 @@ class StoreList extends React.Component {
 		console.log(body)
 	}
 
-	init() {
+	init() { 
 		let { data } = this.props
 		let { feature } = data
 		let { content } = data.data
 		feature.body.size = content.size
 		this.state = {
 			ioInput: feature
-		}
+		} 
 	}
 
 	render() {

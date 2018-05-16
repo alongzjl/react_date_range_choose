@@ -15,6 +15,9 @@ module.exports = {
 		wonderfulActivity: 1    
 	},   
 	storeDetails: {
-		 
-	}
-}
+		text:        	   1,  
+		address:           1, 
+		button:            1, 
+		picture:     	   1
+	} 
+} 
