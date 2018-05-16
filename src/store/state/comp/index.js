@@ -66,6 +66,8 @@ module.exports = {
 	listByStore:       authInit(require('./listByStore')),
 	// 视频
 	video:             authInit(require('./video')),
+	// 分割线
+	splitLine:         authInit(require('./splitLine')),
 	
 	/* 业务组件 */
 	// 店铺列表

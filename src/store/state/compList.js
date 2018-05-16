@@ -17,6 +17,11 @@ module.exports = [
 			key:  'picture'
 		},
 		{
+			icon: 'splitLine-control',
+			name: '分割线',
+			key:  'splitLine'
+		},
+		{
 			icon: 'video-control',
 			name: '视频', 
 			key:  'video'

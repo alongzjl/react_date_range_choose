@@ -20,7 +20,7 @@ const data = {
 			borderRadius:    {
 				topLeft:     6,
 				topRight:    6,
-				bottomRight:  6,
+				bottomRight: 6,
 				bottomLeft: 6
 			},
 		}

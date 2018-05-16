@@ -4,6 +4,7 @@ module.exports = {
 	web:               1,
 	video:             1,
 	text:              1,
+	splitLine:         1,
 	button:            1,
 	swiperImage:       1,
 	wonderfulActivity: 1,

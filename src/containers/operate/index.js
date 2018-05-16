@@ -119,10 +119,24 @@ class OperateComponent extends React.Component {
 			// Ajax.get('/store/storeDetails').then(res => {
 				// globalData.storeDetails = res.data
 				globalData.storeDetails = {
-					images: [{
-						title: '促销图文',
-						url:   'http://rongyi.b0.upaiyun.com/system/smartService/null/201801180034041097.png'
-					}],
+					images: [
+						{
+							title: '促销图文',
+							url:   'http://rongyi.b0.upaiyun.com/system/smartService/null/201801180034041097.png'
+						},
+						{
+							title: '促销图文',
+							url:   'http://rongyi.b0.upaiyun.com/system/smartService/null/201801180034041097.png'
+						},
+						{
+							title: '促销图文',
+							url:   'http://rongyi.b0.upaiyun.com/system/smartService/null/201801180034041097.png'
+						},
+						{
+							title: '促销图文',
+							url:   'http://rongyi.b0.upaiyun.com/system/smartService/null/201801180034041097.png'
+						}
+					],
 					text: '发斯蒂芬斯蒂芬斯蒂芬和法国恢复'
 				}
 				resolve('店铺详情')
