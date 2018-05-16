@@ -31,20 +31,25 @@ class ViewComponent extends React.Component {
 	}
 	getConfig() {
 		let { location, actions, editConfig } = this.props
-		let id = location.query.id
+		let { query } = location
+		let id  = query.id
+		if (!id) {
+			message.error(`作品ID不存在!`)
+			return resolve('模板数据')
+		}
+
 		return function(resolve, reject) {
 			if (!id) return resolve('模板数据')
-			Ajax.get(`/mcp-gateway/template/get?templateId=${id}`).then(res => {
-				let cfg = JSON.parse(res.data.config).configPC
+			Ajax.get(`/mcp-gateway/case/get?caseId=${id}`).then(res => {
+				let cfg = JSON.parse(res.data.config).configTerminal
 				delete res.data.config
 				let cur = cfg.pageList.group[0].pages[0]
 				let newCfg = {
 					curComp: {},
 					curData: { ...curData, ...cur },
-					curPage: cfg.pageContent[cur.router],
-					java: res.data,
-					isView: true
+					curPage: cfg.pageContent[cur.router]
 				}
+				window.tempCfg = res.data
 				actions.updateConfig({ ...newCfg, ...cfg })
 				resolve('模板数据')
 			}).catch(e => reject(e))
@@ -57,7 +62,6 @@ class ViewComponent extends React.Component {
 		let arr = ['getConfig']
 		let promises = arr.map(key => new Promise(this[key](globalData)))
 		Promise.all(promises).then((o) => {
-			actions.updateGlobal(globalData)
 			this.setState({ load: true })
 		// }).catch(e => {
 		// 	console.log(e)

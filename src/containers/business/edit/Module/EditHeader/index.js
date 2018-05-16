@@ -88,7 +88,7 @@ class Header extends React.Component {
 			name:         this.state.name,
 			templateId:   templateId,
 			templateThemeId: editConfig.globalData.theme.idx || 0,
-			mallId: uif.userInfo.mallId
+			mallId: uif.userInfo.mallMid
 		}
 		if (id) da.id = id
 		Ajax.post(`/mcp-gateway/case/${query.id? 'update': 'save'}`, da).then(res => {
