@@ -2,60 +2,72 @@
 module.exports = [
 	// [
 		{
-			icon: 'text-control',
-			name: '文本',
-			key:  'text'
-		},
-		{
-			icon: 'button-control',
-			name: '按钮',
-			key:  'button'
-		},
-		{
-			icon: 'img-control',
-			name: '图片',
-			key:  'picture'
-		},
-		{
-			icon: 'splitLine-control',
-			name: '分割线',
-			key:  'splitLine'
-		},
-		{
-			icon: 'video-control',
-			name: '视频', 
-			key:  'video'
-		},
-		{
-			icon: 'carouse-control',
-			name: '轮播',
-			key:  'swiperImage'
-		},
-		{
-			icon: 'wonderfulActivity-control',
-			name: '精彩活动',
-			key:  'wonderfulActivity'
-		},
-		{
-			icon: 'web-control',
-			name: '网页',
-			key:  'web'
-		},
-		{
+			icon: 'base-control',
+			name: '基础组件',
+			child: [
+				{
+					icon: 'text-control',
+					name: '文本',
+					key:  'text'
+				},
+				{
+					icon: 'button-control',
+					name: '按钮',
+					key:  'button'
+				},
+				{
+					icon: 'img-control',
+					name: '图片',
+					key:  'picture'
+				},
+				{
+					icon: 'splitLine-control',
+					name: '分割线',
+					key:  'splitLine'
+				},
+				{
+					icon: 'video-control',
+					name: '视频', 
+					key:  'video'
+				},
+				{
+					icon: 'carouse-control',
+					name: '轮播',
+					key:  'swiperImage'
+				},
+				{
+					icon: 'wonderfulActivity-control',
+					name: '精彩活动',
+					key:  'wonderfulActivity'
+				},
+				{
+					icon: 'web-control',
+					name: '网页',
+					key:  'web'
+				},
+				{
 
-			icon: 'date-control',
-			name: '天气日期',
-			key:  'date'
-		},
-		{
-			icon: 'navigation-control',
-			name: '导航列表',
-			key:  'navigation', 
-		},
-		{
-			icon: 'navigationFloat-control',
-			name: '悬浮导航', 
-			key:  'navigationFloat', 
+					icon: 'time-control',
+					name: '时间日期',
+					key:  'time'
+				},
+				{
+
+					icon: 'weather-control',
+					name: '天气',
+					key:  'weather'
+				},
+				{
+					icon: 'navigation-control',
+					name: '导航列表',
+					key:  'navigation', 
+				},
+				{
+					icon: 'navigationFloat-control',
+					name: '悬浮导航', 
+					key:  'navigationFloat', 
+				},
+			]
 		},
 		{
 			icon: 'store-control',
@@ -151,6 +163,6 @@ module.exports = [
 			icon: 'map2D-control',
 			name: '2D地图',
 			key:  'map2D'
-		} 
+		}
 	// ],
 ]

@@ -186,6 +186,48 @@ window.getTime = () => {
 	o.seconds = (o.seconds < 10? '0': '') + o.seconds
 	return o
 }
+window.timeFormat = (format) => {
+	let now   = new Date()
+	let split = []
+	let RPN = /(\{[^{}]+\})|([^{}]+)/g
+	let RPC = /\{([^{}]+)\}/
+	let o = {
+		'y+': now.getFullYear() + '',
+		'm+': now.getMonth() + 1,					// 月
+		'd+': now.getDate(),						// 日
+		'h+': now.getHours(),						// 时
+		'n+': now.getMinutes(),						// 分
+		's+': now.getSeconds(),						// 秒
+		'W': '日一二三四五六'[now.getDay()],			// 周
+		'q+': Math.floor((now.getMonth() + 3) / 3),	// 季
+		'ap': 1
+	}
+	format.replace(RPN, m => {
+		m = m.replace(RPC, (n, $1) => {
+			for (let k in o) {
+				if (new RegExp('('+ k +')').test($1)) {
+					return '{' + $1.replace(RegExp.$1,
+						k === 'y+'
+						?
+						o[k].substr(4 - RegExp.$1.length)
+						:
+						k === 'ap'
+						?
+						((o['h+'] >= 12) ? '下午': '上午')
+						:
+						RegExp.$1.length == 1
+						?
+						o[k]
+						:
+						('00' + o[k]).substr(('' + o[k]).length)
+					) + '}'
+				}
+			}
+		})
+		split.push(m)
+	})
+	return split
+}
 
 window.Ajax = Fetch.default
 

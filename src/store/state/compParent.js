@@ -8,11 +8,13 @@ module.exports = {
 	button:            1,
 	swiperImage:       1,
 	wonderfulActivity: 1,
-	date:              1,
+	time:              1,
+	data:              1,
 	navigation:        1,
 	navigationFloat:   1,
 	storeList:         1,
 	storeDetails:      1,
 	storeInstro:       1,
-	map2D:       1
+	weather:           1,
+	map2D:             1
 }

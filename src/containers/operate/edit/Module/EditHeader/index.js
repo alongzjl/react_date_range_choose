@@ -37,6 +37,7 @@ class Header extends React.Component {
 		let { curComp, curData } = editConfig
 		let { parentComp } = curData
 		let { key } = item
+		if (!key) return
 		if (curComp.type === 'advanced' || parentComp) {
 			let compData = JSON.parse(JSON.stringify(comp[key])),
 				Comp     = parentComp || curComp,

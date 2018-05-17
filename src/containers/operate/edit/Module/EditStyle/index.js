@@ -229,6 +229,13 @@ class EditStyle extends React.Component {
 				if (!render) return
 				// 根据样式类型渲染对应组件
 				let dom = this[`render${cm.type}`].bind(this, cm, data, style[p], val, q)()
+				try { data.auth.style[p][q] } catch(e) {
+					data.auth.style[p] = {}
+					let s = style[p]
+					for (let kk in s) {
+						data.auth.style[p][kk] = false
+					}
+				}
 				return (
 					<div className="pgs-row" key={j}>
 						<div className="pgsr-name">{ cm.name }</div>

@@ -8,23 +8,31 @@
 // 导航
 const data = {
 	style:     {
+		filterBox: {
+			padding: {
+				top:     0,
+				right:   26,
+				bottom:  0,
+				left:    26,
+			}
+		},
 		filter:{
-			width:  60,
-			height: 60,
-			borderWidth:  1,
+			width:  110,
+			height: 140,
+			borderWidth:  0,
 			borderStyle: 'solid',
 			borderColor: { type: 'auxiliary', color: '#fff' },
 			borderRadius:    {
-				topLeft:     20,
-				topRight:    20,
-				bottomLeft:  20,
-				bottomRight: 20
+				topLeft:     0,
+				topRight:    0,
+				bottomLeft:  0,
+				bottomRight: 0
 			},
 			margin: {
 				top:     0,
-				right:   10,
-				bottom:  0,
-				left:    0,
+				right:   26,
+				bottom:  40,
+				left:    26,
 			},
 			padding: {
 				top:     0,
@@ -61,7 +69,7 @@ const data = {
 		top:      0,
 		left:     0,
 		width:    540,
-		height:   80
+		height:   330
 	},
 	content: [
 		{

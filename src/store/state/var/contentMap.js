@@ -8,11 +8,16 @@ module.exports = {
 	filterPrevImg: { name: '上页图片', type: 'Image' },
 	filterNextImg: { name: '下页图片', type: 'Image' },
 	pageSwitch:    { name: '分页开关', type: 'Checkbox' },
+	highSwitch:    { name: '高亮开关', type: 'Checkbox' },
 	prevSwitch:    { name: '上页开关', type: 'Checkbox' },
 	nextSwitch:    { name: '下页开关', type: 'Checkbox' },
 	numberSwitch:  { name: '数字开关', type: 'Checkbox' },
 	posIcon:       { name: '坐标图标', type: 'Image' },
 	url:           { name: '网址',    type: 'Url' },
+	split:         { name: '分隔符',  type: 'Input', min: 0, max: 5 },
+	prefix:        { name: '前缀',    type: 'Input', min: 0, max: 5 },
+	suffix:        { name: '后缀',    type: 'Input', min: 0, max: 5 },
+	template:      { name: '模板',    type: 'Textarea', min: 0, max: 200, autosize: { minRows: 1, maxRows: 6 } },
 	router:        { name: '页面跳转', type: 'Router' },
 	size:          { name: '商品数量', type: 'Number', min: 1, max: 50 }
 }

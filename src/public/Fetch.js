@@ -56,7 +56,7 @@ export default class Fetch {
 		});
 	}
 
-	static postLogin(url, config) {
+	static postLogin(url, config = {}) {
 		return new Promise((resolve, reject) => {
 			Fetch.remote(url, {
 				method: 'POST',
@@ -68,7 +68,7 @@ export default class Fetch {
 			}, resolve, reject)
 		})
 	}
-	static post(url, config) {
+	static post(url, config = {}) {
 		let id = window.uif.userInfo.id || '1'
 		if (id) config.userId = id
 		return new Promise((resolve, reject) => {
@@ -99,15 +99,14 @@ export default class Fetch {
 		});
 	}
 
-	static postJSON(url, data) {
+	static postJSON(url, config = {}) {
 		return new Promise((resolve, reject) => {
-			const newConfig = Object.assign({}, {
+			Fetch.remote(url, {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify(data),
+				body: JSON.stringify(config),
 				credentials: 'include'
-			})
-			Fetch.remote(url, newConfig, resolve, reject);
+			}, resolve, reject);
 		});
 	} 
 	//图片上传 

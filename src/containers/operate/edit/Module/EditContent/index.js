@@ -43,16 +43,16 @@ class EditContent extends React.Component {
 
 	componentWillUnmount() {}
 
-	onChange(val, key, index) {
+	onChange(val, con, key, index) {
 		let { data, actions, editConfig } = this.props
 		let { curData } = editConfig
 		let { content } = data.data
 		let { parentComp } = curData
-		if (index === undefined) {
-			content[key] = val
-		} else {
-			content[index][key] = val
-		}
+		// if (index === undefined) {
+		// 	con[key] = val
+		// } else {
+			con[key] = val
+		// }
 		actions.updateComp(null, parentComp? parentComp: data)
 	}
 
@@ -81,45 +81,46 @@ class EditContent extends React.Component {
 	}
 	/* 渲染组件开始 */
 	// 文本
-	renderTextarea(cfg, data, val, key, index) {
+	renderTextarea(cfg, con, val, key, index) {
 		return (
 			<TextArea
 				min={cfg.min || 0} max={cfg.max || 100}
 				autosize={cfg.autosize || false}
-				value={val} onChange={v => this.onChange(v.target.value, key, index)}
+				value={val} onChange={v => this.onChange(v.target.value, con, key, index)}
 				style={{ width: '100%' }}
 			/>
 		)
 	}
 	// 数字
-	renderNumber(cfg, data, val, key, index) {
+	renderNumber(cfg, con, val, key, index) {
 		return (
 			<InputNumber
 				min={cfg.min || 0} max={cfg.max || 100} step={cfg.step || 1}
-				value={val} onChange={v => this.onChange(v, key, index)}
+				value={val} onChange={v => this.onChange(v, con, key, index)}
 				style={{ width: '100%' }}
 			/>
 		)
 	}
 	// 标题
-	renderTitle(cfg, data, val, key, index) {
+	renderTitle(cfg, con, val, key, index) {
 		return (
 			<Input
 				min={cfg.min || 0} max={cfg.max || 100}
-				value={val} onChange={v => this.onChange(v.target.value, key, index)}
+				value={val} onChange={v => this.onChange(v.target.value, con, key, index)}
 				style={{ width: '100%' }}
 			/>
 		)
 	} 
 	// 跳转路由
-	renderRouter(cfg, data, val, key, index) {
-		let { actions } = this.props
+	renderRouter(cfg, con, val, key, index) {
+		let { data, actions } = this.props
 		return (
 			<RouterJump data={data} content={val} actions={actions} />
 		)
 	}
 	// 上传图片
-	renderImage(cfg, data, val, key, index) {
+	renderImage(cfg, con, val, key, index) {
+		let { data } = this.props
 		return (
 			<ImageUploadComp
 				data={data}
@@ -132,20 +133,30 @@ class EditContent extends React.Component {
 		)
 	}
 	// 网址
-	renderUrl(cfg, data, val, key, index) {
+	renderUrl(cfg, con, val, key, index) {
 		return (
 			<Input
-				min={cfg.min || 0} max={cfg.max || 100}
-				defaultValue={val} onBlur={v => this.onChange(v.target.value, key, index)}
+				minLength={cfg.min || 0} maxLength={cfg.max || 100}
+				defaultValue={val} onBlur={v => this.onChange(v.target.value, con, key, index)}
+				style={{ width: '100%' }}
+			/>
+		)
+	}
+	// 文本
+	renderInput(cfg, con, val, key, index) {
+		return (
+			<Input
+				minLength={cfg.min || 0} maxLength={cfg.max || 100}
+				defaultValue={val} onChange={v => this.onChange(v.target.value, con, key, index)}
 				style={{ width: '100%' }}
 			/>
 		)
 	}
 	// 开关
-	renderCheckbox(cfg, data, val, key, index) {
+	renderCheckbox(cfg, con, val, key, index) {
 		return (
 			<Checkbox
-				checked={val || cfg.defaultValue || false} onChange={v => this.onChange(v.target.checked, key)}
+				checked={val || cfg.defaultValue || false} onChange={v => this.onChange(v.target.checked, con, key, index)}
 			/>
 		)
 	}
@@ -159,7 +170,8 @@ class EditContent extends React.Component {
 			let render = this[`render${cm.type}`]
 			if (!render) return false
 			// 根据样式类型渲染对应组件
-			let dom = this[`render${cm.type}`].bind(this, cm, data, val, p, index)()
+			// debugger
+			let dom = this[`render${cm.type}`].bind(this, cm, content, val, p, index)()
 			ci++
 			return (
 				<div className="pgs-row" key={i}>
@@ -206,7 +218,7 @@ class EditContent extends React.Component {
 			childNode = (
 				con.length
 				? 
-				<Panel header={'内容编辑'} key={data.name == 'video'?1:0}>
+				<Panel header={'内容编辑'} key={data.name == 'video'? 1: 0}>
 					{ con }
 				</Panel>
 				:

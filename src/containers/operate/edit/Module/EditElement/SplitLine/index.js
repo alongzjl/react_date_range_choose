@@ -17,7 +17,6 @@ class SplitLine extends React.Component {
 
 	render() {
 		let { data, type } = this.props
-		// console.log(1, this.props)
 		return (
 			<div className={`e-splitline ${type}`} style={cssColorFormat(this.props, 'line')}></div> 
 		)

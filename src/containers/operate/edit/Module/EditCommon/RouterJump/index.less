@@ -12,8 +12,8 @@
 	margin-top: 8px;
 	.pgs-sl-item {
 		position: relative;
-		width:  42px;
-		height: 42px;
+		width:  45px;
+		height: 45px;
 		margin-right:  8px;
 		margin-bottom: 8px;
 		font-size: 12px;
@@ -58,6 +58,19 @@
 			.pgs-sl-remove {
 				display: block;
 			}
+		}
+	}
+}
+
+
+.pg-style .pgs-sl {
+	.pgs-sl-item {
+		width:  120px;
+		&:nth-child(2n) {
+			margin-right: 0;
+		}
+		&:nth-child(5n) {
+			margin-right: 8px;
 		}
 	}
 }

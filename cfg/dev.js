@@ -57,26 +57,33 @@ config.devServer = {
 				let cookies  =  proxyRes.headers['set-cookie']
 				var newCookies = []
 				console.log('========== 登录成功 ==========')
-				if(cookies){
+				if (cookies) {
 					cookies.forEach(function(cookie,index){
 						newCookies.push(cookie.replace(/\.rongyi\.com/,'localhost'))
 					})
 					proxyRes.headers['set-cookie']=newCookies
-				}else{
+				} else {
 					console.log('========== 登录失败 ==========')
 				}
 			}
 		},
+		// 保存&编辑
 		'/mcp-gateway': {
 			target: 'http://192.168.1.52:10078',
 			secure: false,
 			changeOrigin: 'true',
 		},
+		// 素材库&天气
 		'/easy-smart':{
 			target: 'http://192.168.1.206',
 			secure: false,
 			changeOrigin: 'true'
-		} 
+		},
+		'/easy-smart-service':{
+			target: 'http://192.168.1.206',
+			secure: false,
+			changeOrigin: 'true'
+		}
 	}
 }
 

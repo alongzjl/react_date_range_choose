@@ -28,7 +28,7 @@ class Navigation extends React.Component {
 		
 		return (
 			<div className="e-navigation">
-				<div className="navigation_box">
+				<div className="navigation_box" style={cssColorFormat(this.props, 'filterBox')}>
 					{
 						data.data.content.map((item,index) => <OnlyNavigation props={this.props} data={item} key={index}></OnlyNavigation>)
 					}  

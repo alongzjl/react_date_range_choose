@@ -8,17 +8,17 @@
 // 导航
 const data = {
 	style:     {
-		filter:{
-			width:  60,
-			height: 60,
-			borderWidth:  1,
+		filter: {
+			width:  35,
+			height: 35,
+			borderWidth:  0,
 			borderStyle: 'solid',
 			borderColor: { type: 'auxiliary', color: '#fff' },
 			borderRadius:    {
-				topLeft:     20,
-				topRight:    20,
-				bottomLeft:  20,
-				bottomRight: 20
+				topLeft:     0,
+				topRight:    0,
+				bottomLeft:  0,
+				bottomRight: 0
 			},
 			margin: {
 				top:     0,
@@ -40,6 +40,19 @@ const data = {
 				color:      { type: 'custom', color: '#000' }
 			}
 		},
+		filterActive: {
+			borderWidth:  0,
+			borderStyle: 'solid',
+			borderColor: { type: 'auxiliary', color: '#fff' },
+			boxShadow: {
+				h_shadow:   0,
+				v_shadow:   0,
+				blur_dis:   0,
+				spread_dis: 0,
+				color:      { type: 'custom', color: '#000' }
+			},
+			transform:      { scale: 1.1 }
+		},
 		text: {
 			display:        'none',
 			fontSize:       12,
@@ -60,37 +73,43 @@ const data = {
 		position: 'absolute',
 		top:      220,
 		left:     0,
-		width:    80,
+		width:    60,
 		height:   400
 	},
 	content: [
 		{
 			img: { type: 'custom', img: require('compEdit/EditElement/images/navigationFloat_1.png') },
 			title: '导航1',		// 图片标题
+			highSwitch: false,
 			router: {},			// 路由
 		},
 		{
 			img: { type: 'custom', img: require('compEdit/EditElement/images/navigationFloat_2.png') },
 			title: '导航2',		// 图片标题
+			highSwitch: false,
 			router: {},			// 路由
 		},
 		{
 			img: { type: 'custom', img: require('compEdit/EditElement/images/navigationFloat_3.png') },
 			title: '导航3',		// 图片标题
+			highSwitch: false,
 			router: {},			// 路由
 		}, 
 		{
 			img: { type: 'custom', img: require('compEdit/EditElement/images/navigationFloat_4.png') },
 			title: '导航4',		// 图片标题
+			highSwitch: false,
 			router: {},			// 路由
 		},{
 			img: { type: 'custom', img: require('compEdit/EditElement/images/navigationFloat_5.png') },
 			title: '导航5',		// 图片标题
+			highSwitch: false,
 			router: {},			// 路由
 		},
 		{
 			img: { type: 'custom', img: require('compEdit/EditElement/images/navigationFloat_6.png') },
 			title: '导航6',		// 图片标题
+			highSwitch: false,
 			router: {},			// 路由
 		}
 	],

@@ -16,8 +16,7 @@ const data = {
 				blur_dis:   0,
 				color:      { type: 'custom', color: '#f58f8f' }
 			},
-			color:          { type: 'custom', color: '#333' },
-			animation:      '0s 0s 1'			// 动画 (0: 开始时间, 1: 持续时间, 2: 循环次数)
+			color:          { type: 'custom', color: '#333' }
 		}
 	},
 	layout: {
