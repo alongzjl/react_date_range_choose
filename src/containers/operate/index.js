@@ -218,8 +218,8 @@ class OperateComponent extends React.Component {
 						}
 					],
 
-					text: '发斯蒂芬斯蒂芬斯蒂芬和法国恢复'
-				}
+					text: '优衣库/UNIQLO'
+				}   
 				resolve('店铺详情')
 			// })
 		}
@@ -254,7 +254,7 @@ class OperateComponent extends React.Component {
 			this.initData(cb)
 		}
 	}
-	componentWillMount() {
+	componentWillMount() { 
 		//this.getUserInfo(() => {
 			let { actions, editConfig } = this.props
 			let { globalData } = editConfig
