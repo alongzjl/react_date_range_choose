@@ -8,7 +8,7 @@
 // 导航
 const data = {
 	style:     {
-		filter:{ 
+		filter:{
 			width:  60,
 			height: 60,
 			borderWidth:  1,
@@ -23,7 +23,7 @@ const data = {
 			margin: {
 				top:     0,
 				right:   10,
-				bottom:  0,  
+				bottom:  0,
 				left:    0,
 			},
 			padding: {
@@ -40,8 +40,8 @@ const data = {
 				color:      { type: 'custom', color: '#000' }
 			} 
 		},
-		text: { 
-			display:         'none', 
+		text: {
+			display:        'none',
 			fontSize:       12,
 			fontStyle:      'normal',
 			fontWeight:     'normal',
@@ -51,7 +51,7 @@ const data = {
 			margin: {
 				top:     0,
 				right:   0,
-				bottom:  5, 
+				bottom:  5,
 				left:    0,
 			}, 
 		}
@@ -64,36 +64,36 @@ const data = {
 		height:   80
 	},
 	content: [
-		{  
-			img: { type: 'custom', img: require('compEdit/EditElement/images/@1x_01.png') },			// 图片url
+		{
+			img: { type: 'custom', img: require('compEdit/EditElement/images/@1x_01.png') },
 			title: '导航1',		// 图片标题
-			router: {},	 		// 路由
+			router: {},			// 路由
 		},
-		{  
-			img: { type: 'custom', img: require('compEdit/EditElement/images/@1x_02.png') },			// 图片url
+		{
+			img: { type: 'custom', img: require('compEdit/EditElement/images/@1x_02.png') },
 			title: '导航2',		// 图片标题
-			router: {},	 		// 路由
+			router: {},			// 路由
 		},
-		{  
-			img: { type: 'custom', img: require('compEdit/EditElement/images/@1x_03.png') },			// 图片url
+		{
+			img: { type: 'custom', img: require('compEdit/EditElement/images/@1x_03.png') },
 			title: '导航3',		// 图片标题
-			router: {},	 		// 路由
+			router: {},			// 路由
 		},
-		{  
-			img: { type: 'custom', img: require('compEdit/EditElement/images/@1x_04.png') },			// 图片url
+		{
+			img: { type: 'custom', img: require('compEdit/EditElement/images/@1x_04.png') },
 			title: '导航4',		// 图片标题
-			router: {},	 		// 路由
-		},{   
-			img: { type: 'custom', img: require('compEdit/EditElement/images/@1x_05.png') },			// 图片url
+			router: {},			// 路由
+		},{
+			img: { type: 'custom', img: require('compEdit/EditElement/images/@1x_05.png') },
 			title: '导航5',		// 图片标题
-			router: {},	 		// 路由
-		}, 
-		{   
-			img: { type: 'custom', img: require('compEdit/EditElement/images/@1x_06.png') },			// 图片url
+			router: {},			// 路由
+		},
+		{
+			img: { type: 'custom', img: require('compEdit/EditElement/images/@1x_06.png') },
 			title: '导航6',		// 图片标题
-			router: {},	 		// 路由
-		}   
-	], 
+			router: {},			// 路由
+		}
+	],
 	// 动画设置
 	animation: {
 		className: '',	// 动画样式
@@ -118,7 +118,7 @@ module.exports = {
 			img:  '',
 			data: JSON.parse(JSON.stringify(data))
 		}],
-	}, 
+	},
 	// 功能特性
 	feature: {
 	},
