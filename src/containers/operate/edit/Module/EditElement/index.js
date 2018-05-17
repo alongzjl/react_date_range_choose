@@ -16,6 +16,7 @@ import Picture           from 'compEdit/EditElement/Picture'
 import Web               from 'compEdit/EditElement/Web'
 import Text              from 'compEdit/EditElement/Text'
 import Button            from 'compEdit/EditElement/Button'
+import Map2D            from 'compEdit/EditElement/Map2D'
 import Video             from 'compEdit/EditElement/Video'
 import SwiperImage       from 'compEdit/EditElement/SwiperImage'
 import WonderfulActivity from 'compEdit/EditElement/WonderfulActivity'
@@ -117,6 +118,7 @@ class EditElement extends React.Component {
 			else if (compName === 'storeList')       compCon = (<StoreList       data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
 			else if (compName === 'storeDetails')    compCon = (<StoreDetails    data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
 			else if (compName === 'storeInstro')    compCon = (<StoreInstro    data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
+			else if (compName === 'map2D')    compCon = (<Map2D    data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
 			if (!compCon) return false 
 			return (
 				<Rnd

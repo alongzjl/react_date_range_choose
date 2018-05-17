@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="475" height="300" tilewidth="2" tileheight="2" nextobjectid="150">
+ <layer name="块层 1" width="475" height="300">
+  <data encoding="base64" compression="zlib">
+   eJztwTEBAAAAwqD1T20JT6AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB4GrMIAAE=
+  </data>
+ </layer>
+ <imagelayer name="bg">
+  <image source="原png/map_L2.png" width="950" height="600"/>
+ </imagelayer>
+ <objectgroup color="#00ff00" name="nav">
+  <object id="50" x="162" y="232">
+   <polyline points="40,0 86,0 102,0 140,0 202,0 212,0 284,0 296,0 302,-4 314,-6 332,-6 342,-4 354,2 370,2 378,2 422,2 446,2 476,2 512,2 534,2 556,2 572,2 580,48 582,84 584,96"/>
+  </object>
+  <object id="51" x="156" y="262">
+   <polyline points="40,0 94,0 108,0 144,0 210,0 230,0 260,0 290,0 298,0 308,8 316,12 324,14 330,14 336,14 346,12 350,10 356,4 366,4 376,4 406,4 444,4 456,4 492,4 512,18 520,54 588,54"/>
+  </object>
+  <object id="57" x="242" y="310">
+   <polyline points="146,42 46,42 -6,42 -2,22 2,4 8,-48"/>
+  </object>
+  <object id="58" x="304" y="298">
+   <polyline points="-6,-14 -4,-36"/>
+  </object>
+  <object id="59" x="396" y="280">
+   <polyline points="-10,0 -10,-18"/>
+  </object>
+  <object id="60" x="428" y="276">
+   <polyline points="-12,-2 -12,-14"/>
+  </object>
+  <object id="61" x="454" y="278">
+   <polyline points="-8,6 -8,-16"/>
+  </object>
+  <object id="65" x="674" y="216">
+   <polyline points="0,0 0,18"/>
+  </object>
+  <object id="66" x="626" y="218">
+   <polyline points="10,-14 12,16"/>
+  </object>
+  <object id="68" x="548" y="216">
+   <polyline points="-8,-10 -8,18"/>
+  </object>
+  <object id="69" x="446" y="214">
+   <polyline points="0,18 0,32 0,48"/>
+  </object>
+  <object id="70" x="382" y="232">
+   <polyline points="-8,0 -16,30"/>
+  </object>
+  <object id="71" x="532" y="234">
+   <polyline points="0,0 0,12 0,32"/>
+  </object>
+  <object id="72" x="602" y="234">
+   <polyline points="6,0 -2,32"/>
+  </object>
+  <object id="73" x="248" y="210">
+   <polyline points="0,0 0,22"/>
+  </object>
+  <object id="75" x="304" y="210">
+   <polyline points="0,0 -2,22"/>
+  </object>
+  <object id="76" x="264" y="232">
+   <polyline points="0,0 0,14 0,30"/>
+  </object>
+  <object id="77" x="366" y="210">
+   <polyline points="-2,-2 -2,22"/>
+  </object>
+  <object id="82" x="486" y="254">
+   <polyline points="0,2 0,22 0,36"/>
+  </object>
+  <object id="83" x="192" y="280">
+   <polyline points="0,0 4,-18 8,-34 8,-38 10,-48"/>
+  </object>
+  <object id="84" x="142" y="242">
+   <polyline points="0,0 58,0"/>
+  </object>
+  <object id="85" x="462" y="204">
+   <polyline points="0,0 2,24"/>
+  </object>
+  <object id="86" x="494" y="202">
+   <polyline points="0,0 0,24"/>
+  </object>
+  <object id="87" x="584" y="214">
+   <polyline points="0,0 0,20"/>
+  </object>
+  <object id="88" x="608" y="204">
+   <polyline points="0,0 0,30"/>
+  </object>
+  <object id="89" x="692" y="196">
+   <polyline points="0,0 4,38"/>
+  </object>
+  <object id="90" x="716" y="218">
+   <polyline points="0,0 2,16"/>
+  </object>
+  <object id="91" x="798" y="220">
+   <polyline points="0,0 -52,0 -64,14"/>
+  </object>
+  <object id="93" x="636" y="316">
+   <polyline points="0,0 40,0"/>
+  </object>
+  <object id="94" x="640" y="276">
+   <polyline points="0,0 8,-10"/>
+  </object>
+  <object id="95" x="612" y="284">
+   <polyline points="0,0 0,-18"/>
+  </object>
+  <object id="96" x="562" y="274">
+   <polyline points="0,0 0,-8"/>
+  </object>
+  <object id="97" x="522" y="276">
+   <polyline points="0,0 0,-10"/>
+  </object>
+  <object id="98" x="282" y="388">
+   <polyline points="0,0 6,-36"/>
+  </object>
+  <object id="99" x="192" y="332">
+   <polyline points="0,0 48,0"/>
+  </object>
+  <object id="100" x="290" y="314">
+   <polyline points="0,0 -46,0"/>
+  </object>
+  <object id="119" x="720" y="196">
+   <polyline points="0,0 -28,0"/>
+  </object>
+ </objectgroup>
+ <objectgroup color="#0055ff" name="lift">
+  <object id="102" name="E1" x="264" y="246"/>
+  <object id="103" name="E2" x="446" y="246"/>
+  <object id="104" name="F1" x="486" y="256"/>
+  <object id="105" name="E3" x="532" y="246"/>
+  <object id="106" name="E4" x="742" y="280"/>
+  <object id="109" name="E5" x="200" y="246"/>
+ </objectgroup>
+ <objectgroup color="#0055ff" name="pubs">
+  <object id="115" name="Toliet" x="692" y="196"/>
+  <object id="117" name="Nursely Room" x="720" y="196"/>
+ </objectgroup>
+ <objectgroup color="#ff00ff" name="shop">
+  <object id="120" name="F2-01" x="142" y="242"/>
+  <object id="121" name="F2-44" x="192" y="280"/>
+  <object id="123" name="F2-46-48" x="290" y="314"/>
+  <object id="124" name="F2-40-41" x="298" y="284"/>
+  <object id="125" name="F2-02-03" x="248" y="210"/>
+  <object id="126" name="F2-04" x="304" y="210"/>
+  <object id="127" name="F2-06-08" x="364" y="208"/>
+  <object id="128" name="F2-39" x="386" y="280"/>
+  <object id="129" name="F2-38" x="416" y="274"/>
+  <object id="130" name="F2-37" x="446" y="284"/>
+  <object id="131" name="F2-35-36" x="486" y="290"/>
+  <object id="132" x="522" y="276"/>
+  <object id="133" name="F2-33" x="562" y="274"/>
+  <object id="134" name="F2-31-32" x="612" y="284"/>
+  <object id="137" name="F2-28-29" x="636" y="316"/>
+  <object id="138" name="F2-50-53、F2-58-60" x="282" y="388"/>
+  <object id="140" name="F2-19-24" x="798" y="220"/>
+  <object id="141" name="F2-18" x="716" y="218"/>
+  <object id="142" name="F2-16b-17" x="674" y="216"/>
+  <object id="143" name="F2-16a" x="636" y="204"/>
+  <object id="144" name="F2-15" x="608" y="204"/>
+  <object id="146" name="F2-12-14" x="540" y="206"/>
+  <object id="147" name="F2-11" x="494" y="202"/>
+  <object id="148" name="F2-10" x="462" y="204"/>
+  <object id="149" name="F2-27" x="746" y="328"/>
+ </objectgroup>
+</map>

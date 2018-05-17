@@ -73,5 +73,7 @@ module.exports = {
 	// 店铺详情
 	storeDetails:      authInit(require('./storeDetails')),
 	// 店铺简介
-	storeInstro:      authInit(require('./storeInstro'))
+	storeInstro:      authInit(require('./storeInstro')),
+	// 2d地图组件
+	map2D:      authInit(require('./map2D'))
 }

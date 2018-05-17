@@ -98,6 +98,11 @@ module.exports = [
 			icon: 'storeDetails-control',
 			name: '店铺详情',
 			key:  'storeDetails'
+		},
+		{
+			icon: 'map2D-control',
+			name: '2D地图',
+			key:  'map2D'
 		} 
 	// ],
 ]
