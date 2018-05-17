@@ -46,13 +46,11 @@ module.exports = [
 					key:  'web'
 				},
 				{
-
 					icon: 'time-control',
 					name: '时间日期',
 					key:  'time'
 				},
 				{
-
 					icon: 'weather-control',
 					name: '天气',
 					key:  'weather'
@@ -156,6 +154,28 @@ module.exports = [
 					icon: 'button-control',
 					name: '前往按钮',
 					key:  'button'
+				}
+			]
+		},
+		{
+			icon: 'dateWeather-control',
+			name: '日期天气',
+			key:  'dateWeather',
+			child: [
+				{
+					icon: 'time-control',
+					name: '时间日期',
+					key:  'time'
+				},
+				{
+					icon: 'weather-control',
+					name: '天气',
+					key:  'weather'
+				},
+				{
+					icon: 'img-control',
+					name: '图片',
+					key:  'picture'
 				}
 			]
 		},

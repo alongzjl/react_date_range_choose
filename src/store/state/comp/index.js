@@ -1,35 +1,5 @@
-// function handleArray(arr) {
-// 	arr.map(obj => handleObj(obj))
-// }
-function handleObj(obj) {
-	for (var p in obj) {
-		obj[p] = false
-	}
-}
-
-function authInit(da) {
-	let { data, feature } = da
-	let style     = JSON.parse(JSON.stringify(data.style)),
-		content   = JSON.parse(JSON.stringify(data.content)),
-		animation = JSON.parse(JSON.stringify(data.animation)),
-		fture     = JSON.parse(JSON.stringify(feature))
-
-	for (var p in style) {
-		handleObj(style[p])
-	}
-	if (content.length) content = content[0]
-	handleObj(content)
-
-	handleObj(fture)
-	handleObj(animation)
-	da.auth = {
-		style:     style,
-		content:   content,
-		animation: animation,
-		feature:   fture
-	}
-	return da
-}
+const common = require('state/common')
+let { authInit } = common
 
 // 组件元素数据
 module.exports = {
@@ -79,7 +49,9 @@ module.exports = {
 	// 店铺详情
 	storeDetails:      authInit(require('./storeDetails')),
 	// 店铺简介
-	storeInstro:      authInit(require('./storeInstro')),
+	storeInstro:       authInit(require('./storeInstro')),
+	// 日期天气
+	dateWeather:       authInit(require('./dateWeather')),
 	// 2d地图组件
-	map2D:      authInit(require('./map2D'))
+	map2D:             authInit(require('./map2D'))
 }

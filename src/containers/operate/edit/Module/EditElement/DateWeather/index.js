@@ -1,8 +1,9 @@
 /**
- * @Author: Along
- * @Date:   2018-05-10
- 
- */ 
+ * @Author: Liao Hui
+ * @Date:   2018-04-21T17:21:39+08:00
+ * @Last modified by:   Liao Hui
+ * @Last modified time: 2018-04-24T13:47:49+08:00
+ */
 
 import React from 'react'
 import './index.less'
@@ -13,7 +14,7 @@ import CustomV from 'view/Element/Custom'
 
 let Custom
 
-class StoreDetails extends React.Component {
+class DateWeather extends React.Component {
 	constructor(props) {
 		super(props)
 	}
@@ -24,12 +25,14 @@ class StoreDetails extends React.Component {
 	componentWillUnmount() {}
 
 	ioOuter(ipt) {
-		
+		// let { data, actions, idx, csn } = this.props
 	}
-	
+
 	init() {
+		let { data } = this.props
+		let { feature } = data
 		this.state = {
-			ioInput: this.props.data.feature
+			ioInput: feature
 		}
 	}
 
@@ -39,18 +42,7 @@ class StoreDetails extends React.Component {
 		else if (envType === 'business') Custom = CustomB
 		else                             Custom = CustomV
 		this.init.bind(this)()
-		let comp  = data.data.components
-		comp = comp.map(item => {
-			if (item.name == 'text') {
-				item.data.content.text = '优衣库/UNIQLO'
-			} else if(item.name == 'button') {
-				item.data.content.text = '立即前往'
-			} else if(item.name == 'picture') {
-				item.data.content.img.img = require('compEdit/EditElement/images/Index_Logo.png')  
-			}
-			return item
-		}) 
-		data.data.components = comp;
+
 		return (
 			<Custom
 				data={data}
@@ -59,9 +51,9 @@ class StoreDetails extends React.Component {
 				csn={csn}
 				ioInput={this.state.ioInput}
 				ioOuter={this.ioOuter.bind(this)}
-			/> 
+			/>
 		)
 	}
 }
- 
-export default StoreDetails
+
+export default DateWeather

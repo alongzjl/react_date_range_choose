@@ -15,9 +15,14 @@ module.exports = {
 		wonderfulActivity: 1    
 	},   
 	storeDetails: {
-		text:        	   1,
-		address:           1,
-		button:            1,
-		picture:     	   1
+		text:    1,
+		address: 1,
+		button:  1,
+		picture: 1
+	},
+	dateWeather: {
+		picture: 1,
+		time:    1,
+		weather: 1
 	}
 }

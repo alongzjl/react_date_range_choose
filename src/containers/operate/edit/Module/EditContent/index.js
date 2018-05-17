@@ -23,7 +23,6 @@ import ImageUploadComp from 'compEdit/EditCommon/ImageUploadComp'
 // import Web         from './Web'
 // import Text        from './Text'
 import SwiperImage       from './SwiperImage'
-// import StoreList         from './StoreList'
 import Navigation        from './Navigation'
 import NavigationFloat   from './NavigationFloat'
 import Date              from './Date'
@@ -200,7 +199,6 @@ class EditContent extends React.Component {
 		if (compName === 'navigation')             compCon = (<Navigation        data={this.props}/>)
 		else if (compName === 'navigationFloat')   compCon = (<NavigationFloat   data={this.props}/>)
 		else if (compName === 'date')              compCon = (<Date              data={this.props}/>)
-		// else if (compName === 'storeList')         compCon = (<StoreList         data={data}/>)
 		else if (compName === 'wonderfulActivity') compCon = (<WonderfulActivity data={this.props}/>)
 		else if (compName === 'swiperImage' && content.length > 1) compCon = (<SwiperImage data={this.props}/>)
 		if (content.length && compName != 'wonderfulActivity') {

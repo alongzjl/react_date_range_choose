@@ -63,8 +63,9 @@ class Text extends React.Component {
 	}
 	
 	render() {
-		let { data, type, time } = this.props
-		let { apm, date, hour, minutes, month, ms, q, seconds, week, year } = time
+		let { data, type } = this.props
+		let time = getTime()
+		// let { apm, date, hour, minutes, month, ms, q, seconds, week, year } = time
 		let render = this[`render${type}`]? this[`render${type}`]: this.renderStyle1
 		let dom    = render(this.props, data.data.content, 'text', time)
 		return (
