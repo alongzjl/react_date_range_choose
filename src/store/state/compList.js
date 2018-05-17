@@ -118,15 +118,6 @@ module.exports = [
 		{
 			icon: 'storeDetails-control',
 			name: '店铺详情',
-<<<<<<< HEAD
-			key:  'storeDetails'
-		},
-		{
-			icon: 'map2D-control',
-			name: '2D地图',
-			key:  'map2D'
-		} 
-=======
 			key:  'storeDetails',
 			child: [
 				{
@@ -155,7 +146,11 @@ module.exports = [
 					key:  'button'
 				}
 			]
-		}
->>>>>>> d599954e0fe21e38bb22a6074ead9835f812620d
+		},
+		{
+			icon: 'map2D-control',
+			name: '2D地图',
+			key:  'map2D'
+		} 
 	// ],
 ]
