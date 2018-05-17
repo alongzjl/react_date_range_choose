@@ -1,6 +1,6 @@
 // 轮播图
 const data = {
-	style:     {
+	style:    {
 		text: {
 			color:          { type: 'custom', color: '#fff' },
 			fontSize:       12,
@@ -15,32 +15,32 @@ const data = {
 				topRight:    6,
 				bottomRight:  6,
 				bottomLeft: 6
-			},  
+			},
 		}
 	},
 	layout: {
 		position: 'absolute',
 		top:      0,
 		left:     0,
-		width:    540, 
+		width:    540,
 		height:   200
 	},
 	content: [
 		{
-			img: { type: 'custom', img: require('compEdit/EditElement/images/Index_Banner.jpg') },			// 图片url
+			img: { type: 'custom', img: require('compEdit/EditElement/images/Index_Banner.jpg') },
 			title: '图片1',		// 图片标题
 			router: {}			// 路由
 		},
 		{
-			img: { type: 'custom', img: require('compEdit/EditElement/images/Index_Banner_02.jpg') },			// 图片url
+			img: { type: 'custom', img: require('compEdit/EditElement/images/Index_Banner_02.jpg') },
 			title: '图片2',		// 图片标题
 			router: {}			// 路由
 		},
 		{   
-			img: { type: 'custom', img: require('compEdit/EditElement/images/Index_Banner_03.jpg') },			// 图片url
+			img: { type: 'custom', img: require('compEdit/EditElement/images/Index_Banner_03.jpg') },
 			title: '图片3',		// 图片标题
 			router: {}			// 路由
-		} 
+		}
 	],
 	animation: {
 		className: '',	// 动画样式
@@ -70,10 +70,10 @@ module.exports = {
 		style: {
 			layout: '0',	// 外观样式
 			title:  '0'		// 标题样式
-		},  
-		layout:1, 
-		swiperOptions:{ 
-			direction: 'horizontal',//轮播方向  vertical
+		},
+		layout: 1,
+		swiperOptions: {
+			direction: 'horizontal',//轮播方向 vertical
 			autoplay: true,// 播放开关
 			loop : true,//循环
 			speed: 1000,	// 切换速度
@@ -83,12 +83,12 @@ module.exports = {
 			effect:'slide',// 'slide' or 'fade' or 'cube' or 'coverflow' or 'flip'
 			autoplay: false,
 			autoplayOptions: {
-			    delay: 1000,//1秒切换一次
-			    stopOnLastSlide: false,//如果设置为true，当切换到最后一个slide时停止自动切换。（loop模式下无效）。
-			    disableOnInteraction: false,//用户操作swiper之后，是否禁止autoplay。默认为true：停止。
-		   		reverseDirection: false,//开启反向自动轮播。
-		    },      
-		    pagination:false, 
+			delay: 1000,//1秒切换一次
+			stopOnLastSlide: false,//如果设置为true，当切换到最后一个slide时停止自动切换。（loop模式下无效）。
+			disableOnInteraction: false,//用户操作swiper之后，是否禁止autoplay。默认为true：停止。
+			reverseDirection: false,//开启反向自动轮播。
+			},
+			pagination:false, 
 			paginationOptions:{
 				el: '.swiper-pagination',//分页元素
 				type: 'bullets',          //类型 ‘fraction’  分式 ‘progressbar’  进度条
@@ -100,5 +100,5 @@ module.exports = {
 
 			}
 		}
-	},
+	}
 }

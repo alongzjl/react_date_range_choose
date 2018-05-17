@@ -26,7 +26,7 @@ const data = {
 			color:           { type: 'custom', color: '#000' },
 			background: 'center no-repeat',
 			backgroundSize: 'contain',
-			backgroundColor: { type: 'custom', color: '#F58F8F' }, 
+			backgroundColor: { type: 'custom', color: '#F58F8F' },
 			backgroundImage: { type: 'custom', img: '' },
 			borderRadius:    {
 				topLeft:     6,
