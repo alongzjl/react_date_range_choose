@@ -1,49 +1,15 @@
-const Fetch = require('public/Fetch')
-const formatPxMap = {
-	fontSize: 1,
-	width: 1,
-	height: 1,
-	paddingTop: 1,
-	paddingRight: 1,
-	paddingBottom: 1,
-	paddingLeft: 1,
-	top:    1,
-	right:  1,
-	bottom: 1,
-	left:   1,
-	marginTop: 1,
-	marginRight: 1,
-	marginBottom: 1,
-	marginLeft: 1,
-	borderWidth: 1,
-	borderTopWidth: 1,
-	borderRightWidth: 1,
-	borderBottomWidth: 1,
-	borderLeftWidth: 1,
-	lineHeight: 1
-}
-const formatComplexMap = {
-	margin: 1,
-	padding: 1,
-	borderRadius: 1,
-	boxShadow: 1,
-	textShadow: 1
-}
-const formatColorMap = {
-	color: 1,
-	borderColor: 1,
-	backgroundColor: 1
-}
-const formatImage = {
-	backgroundImage: 1
-}
-const formatPxMap2 = {
-	lineHeight: 1
-}
+const Fetch     = require('public/Fetch')
+const formatMap = require('./formatMap')
+const formatPxMap      = formatMap.px
+const formatComplexMap = formatMap.complex
+const formatColorMap   = formatMap.color
+const formatImage      = formatMap.image
+const formatPxMap2     = formatMap.px2
+const NT = formatMap.numberTemplate
 const tools = function() {
 (function (window) {
 
-String.prototype.colorRGB = function(){
+String.prototype.colorRGB = () => {
 	var sColor = this.toLowerCase(),
 		reg   = /^#([0-9a-f]{3}|[0-9a-f]{6})$/,
 		reg8  = /^#(\S)(\S)(\S)$/
@@ -59,8 +25,14 @@ String.prototype.colorRGB = function(){
 	}
 	return sColor
 }
+String.prototype.substitute = function(data) {
+	return data && typeof(data) == 'object'? this.replace(/\{\{([^{}]+)\}\}/g, (m, k) => {
+		return data[k] || 0
+	}): this.toString()
+}
 
 function colorVaild(v, obj, key, change) {
+	if (typeof v === 'string') return v
 	if (!v || change) return change
 	let type   = v.type
 	if (!window.curThemeColor[type] && type !== 'custom') {
@@ -73,12 +45,13 @@ function colorVaild(v, obj, key, change) {
 // 组件样式格式化
 window.cssColorFormat = (props, key) => {
 	let { data, actions } = props
-	let { style } = data.data
-	if (!style[key]) {
+	let { style, layout } = data.data
+	let sk = key === 'layout'? layout: style[key]
+	if (!sk) {
 		console.error(`名为 ${key} 的样式未定义!`)
 		return {}
 	}
-	let obj = JSON.parse(JSON.stringify(style[key]))
+	let obj = deepCopy(sk)
 	let st  = Date.now()
 	let colorChange = 0
 	for (let p in obj) {
@@ -86,8 +59,8 @@ window.cssColorFormat = (props, key) => {
 		if (formatComplexMap[p]) {
 			colorChange = colorVaild(v.color, v, 'color', colorChange)
 			obj[p] = Object.keys(v).map(_ => {
-				let w = v[_]
-				return getAttr(w) === 'Number'? w += 'px': w
+				let w  = v[_], nt = NT[_]
+				return nt? nt.substitute({ val: w }): getAttr(w) === 'Number'? w += 'px': w
 			}).join(' ')
 		}
 		else if (formatColorMap[p]) {
@@ -95,9 +68,8 @@ window.cssColorFormat = (props, key) => {
 		}
 		else if (formatPxMap2[p]) {
 			obj[p] += 'px'
-		} else if (p == 'transformRotate'){
-			obj['transform'] = `rotate(${obj[p]}deg)`
-		} else if (formatImage[p]) {
+		}
+		else if (formatImage[p]) {
 			obj[p] = `url('${getImg(v)}')`
 		}
 	}
@@ -107,6 +79,33 @@ window.cssColorFormat = (props, key) => {
 		return actions.updateComp(null, data)
 	}
 	// console.log(`耗时${Date.now() - st}ms`)
+	return obj
+}
+
+window.cssFormatByTerm = (obj) => {
+	// let colorChange = 0
+	// let styleArr    = []
+	Object.keys(obj).map(p => {
+		let v = obj[p]
+		if (formatPxMap[p]) {
+			obj[p] = v * 2 + 'px'
+		}
+		// else if (formatComplexMap[p]) {
+		// 	colorChange = colorVaild(v.color, v, 'color', colorChange)
+		// 	obj[p] = Object.keys(v).map(_ => {
+		// 		let w  = v[_], nt = NT[_]
+		// 		return nt? nt.substitute({ val: w }): getAttr(w) === 'Number'? w += 'px': w
+		// 	}).join(' ')
+		// }
+		// else if (formatColorMap[p]) {
+		// 	colorChange = colorVaild(v, obj, p, colorChange)
+		// }
+		// else if (formatImage[p]) {
+		// 	obj[p] = `url('${getImg(v)}')`
+		// }
+		// styleArr.push(`${p.replace(/[A-Z]/g, _ => '-'+_.toLowerCase())}:${obj[p]};`)
+	})
+	// if (colorChange) style[key] = obj
 	return obj
 }
 
@@ -166,32 +165,6 @@ window.setCookie = (name, val, hour = 24) => {
 	document.cookie = `${name}=${escape(val)};expires=${exp.toGMTString()};path=/`
 }
 
-window.timeFormat = (format) => {
-	let now = new Date()
-	let o = {
-		'm+': now.getMonth() + 1,					// 月
-		'd+': now.getDate(),						// 日
-		'h+': now.getHours(),						// 时
-		'n+': now.getMinutes(),						// 分
-		's+': now.getSeconds(),						// 秒
-		'S':  now.getMilliseconds(),				// 毫秒
-		'W': '日一二三四五六'[now.getDay()],			// 周
-		'q+': Math.floor((now.getMonth() + 3) / 3)	// 季
-	}
-	if (format.indexOf('am/pm') >= 0) {
-		format = format.replace('am/pm', (o['h+'] >= 12) ? '下午': '上午')
-		if (o['h+'] >= 12) o['h+'] -= 12
-	}
-	if (/(y+)/.test(format)) {
-		format = format.replace(RegExp.$1, (now.getFullYear() + '').substr(4 - RegExp.$1.length))
-	}
-	for (let k in o) {
-		if (new RegExp('('+ k +')').test(format)) {
-			format = format.replace(RegExp.$1, RegExp.$1.length == 1 ? o[k] : ('00' + o[k]).substr(('' + o[k]).length))
-		}
-	}
-	return format
-}
 window.getTime = () => {
 	let now = new Date()
 	let o = {

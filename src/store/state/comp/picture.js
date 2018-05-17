@@ -2,7 +2,7 @@
 const data = {
 	style:     {
 		image:{
-			transformRotate: 0,
+			transform:       { rotate: 0 },
 			borderRadius:    {
 				topLeft:     6,
 				topRight:    6,

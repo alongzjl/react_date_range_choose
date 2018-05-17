@@ -11,7 +11,7 @@ const data = {
 		top:      0,
 		left:     0,
 		width:    540,
-		height:   400
+		height:   120
 	},
 	content:   {},
 	animation: {
@@ -26,7 +26,7 @@ const data = {
 
 module.exports = {  
 	name: 'storeDetails',
-	type: 'advanced',  
+	type: 'advanced',
 	// 样式管理
 	data: JSON.parse(JSON.stringify(data)),
 	styleList: {

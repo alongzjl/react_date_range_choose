@@ -16,16 +16,17 @@ import Picture           from 'compEdit/EditElement/Picture'
 import Web               from 'compEdit/EditElement/Web'
 import Text              from 'compEdit/EditElement/Text'
 import Button            from 'compEdit/EditElement/Button'
-import Map2D            from 'compEdit/EditElement/Map2D'
 import Video             from 'compEdit/EditElement/Video'
 import SwiperImage       from 'compEdit/EditElement/SwiperImage'
 import WonderfulActivity from 'compEdit/EditElement/WonderfulActivity'
 import DateShow          from 'compEdit/EditElement/Date'
 import StoreList         from 'compEdit/EditElement/StoreList'
 import StoreDetails      from 'compEdit/EditElement/StoreDetails'
-import StoreInstro      from 'compEdit/EditElement/StoreInstro'
+import StoreInstro       from 'compEdit/EditElement/StoreInstro'
 import Navigation        from 'compEdit/EditElement/Navigation'
 import NavigationFloat   from 'compEdit/EditElement/NavigationFloat'
+import SplitLine         from 'compEdit/EditElement/SplitLine'
+import Map2D         from 'compEdit/EditElement/Map2D'
 
 import * as actions from 'actions'
 
@@ -81,7 +82,7 @@ class EditElement extends React.Component {
 		e.stopPropagation()
 		let { actions } = this.props
 		actions.deleteComp(idx)
-	} 
+	}
 
 	render() {
 		let { data, actions, editConfig, time, location } = this.props
@@ -117,9 +118,10 @@ class EditElement extends React.Component {
  			else if (compName === 'navigationFloat') compCon = (<NavigationFloat data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
 			else if (compName === 'storeList')       compCon = (<StoreList       data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
 			else if (compName === 'storeDetails')    compCon = (<StoreDetails    data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
-			else if (compName === 'storeInstro')    compCon = (<StoreInstro    data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
+			else if (compName === 'storeInstro')     compCon = (<StoreInstro     data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
+			else if (compName === 'splitLine')       compCon = (<SplitLine       data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
 			else if (compName === 'map2D')    compCon = (<Map2D    data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
-			if (!compCon) return false 
+			if (!compCon) return false
 			return (
 				<Rnd
 					key={i}

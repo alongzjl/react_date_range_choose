@@ -52,88 +52,19 @@ class BusinessComponent extends React.Component {
 					curData: { ...curData, ...cur },
 					curPage: cfg.pageContent[cur.router]
 				}
-				window.tempCfg = res.data
-				tempCfg.name = name
-				tempCfg.caseType        = caseType || 'MALL'
-				tempCfg.templateId      = templateId
-				tempCfg.templateThemeId = templateThemeId || 0
-
-				cfg.globalData.theme.idx = templateThemeId - 0
-
+				window.tempCfg          = res.data
+				if (type === 'template') {
+					delete tempCfg.id
+					tempCfg.caseType        = caseType        || ''
+					tempCfg.templateThemeId = templateThemeId || ''
+					tempCfg.templateId      = templateId      || ''
+					tempCfg.composeType     = composeType     || ''
+					tempCfg.name            = name            || ''
+				}
 				actions.updateConfig({ ...newCfg, ...cfg })
 				let { globalData } = editConfig
 				resolve('模板数据')
 			}).catch(e => reject(e))
-		}
-	}
-	/* Mock 数据 */
-	getFloor(globalData) {
-		return function(resolve, reject) {
-			// Ajax.get('/store/getFloor').then(res => {
-				// globalData.floors = res.data
-				globalData.floors = [
-					{
-						id:      '5a532b82130b38000b1884a7',
-						name:    'L1',
-						picture: 'http://rongyi.b0.upaiyun.com/system/mall_area/picture/5a532b82130b38000b1884a7/201801181835551443.jpg',
-						sort:    1
-					}
-				]
-				resolve('楼层')
-			// }).catch(e => reject(e))
-		}
-	}
-	getCatg(globalData) {
-		return function(resolve, reject) {
-			// Ajax.get('/store/getCatg').then(res => {
-				globalData.catgs = [
-					{
-						id:      '5a532b82130b38000b1884a7',
-						name:    '服饰',
-						picture: 'http://rongyi.b0.upaiyun.com/system/mall_area/picture/5a532b82130b38000b1884a7/201801181835551443.jpg',
-						sort:    1
-					}
-				]
-				resolve('分类')
-			// }).catch(e => reject(e))
-		}
-	}
-	getStoreList(globalData) {
-		return function(resolve, reject) {
-			// Ajax.get('/store/getStoreList').then(res => {
-				// globalData.storeList = res
-				globalData.storeList = {
-					data: [{
-						id: 1,
-						name:  '法拉利',
-						price: '698.99',
-						floor: 'L1',
-						no:    '101',
-						mall_id: '54f403eae4b002000cf63762',
-						pic: 'http://img.weiye.me/zcimgdir/headimg/32d7529d24439f8c4a22f753c918326e_o.jpg'
-					}],
-					page: 1,
-					page_size: 12,
-					total: 0,
-					total_page: 1
-				}
-				resolve('店铺列表')
-			// }).catch(e => reject(e))
-		}
-	}
-	getStoreDetails(globalData) {
-		return function(resolve, reject) {
-			// Ajax.get('/store/storeDetails').then(res => {
-				// globalData.storeDetails = res.data
-				globalData.storeDetails = {
-					images: [{
-						title: '促销图文',
-						url:   'http://rongyi.b0.upaiyun.com/system/smartService/null/201801180034041097.png'
-					}],
-					text: '发斯蒂芬斯蒂芬斯蒂芬和法国恢复'
-				}
-				resolve('店铺详情')
-			// })
 		}
 	}
 	initData(cb) {
@@ -190,13 +121,13 @@ class BusinessComponent extends React.Component {
 		this.getUserInfo(() => {
 			let { actions, editConfig } = this.props
 			let { globalData } = editConfig
-			let arr = ['getConfig', 'getFloor', 'getCatg', 'getStoreList', 'getStoreDetails']
+			let arr = ['getConfig']
 			let promises = arr.map(key => new Promise(this[key](globalData)))
 			Promise.all(promises).then((o) => {
 				this.setState({ load: true })
-			}).catch(e => {
-				console.log(e)
-			})
+			})//.catch(e => {
+			// 	console.log(e)
+			// })
 		})
 	}
 

@@ -80,6 +80,9 @@ class RouterJump extends React.Component {
 				onChange={this.onChange.bind(this)}
 			>
 				<Option value={''}>无</Option>
+				{ 
+					data.name == 'button' ? <Option value={'back'}>返回上一级</Option> : null
+				}     
 				{ selectNode }
 			</Select>
 		)

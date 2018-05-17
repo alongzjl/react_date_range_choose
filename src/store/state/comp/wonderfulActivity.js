@@ -2,7 +2,7 @@
  * @Author: Along
  * @Date:   2018-05-08
  
- */ 
+ */
 
 
 // 精彩活动
@@ -20,19 +20,35 @@ const data = {
 			borderRadius:    {
 				topLeft:     6,
 				topRight:    6,
-				bottomRight:  6,
+				bottomRight: 6,
 				bottomLeft: 6
-			},
+			}
 		}
 	},
-	layout:    {
+	layout: {
 		position: 'absolute',
 		top:      0,
 		left:     0,
 		width:    540,
 		height:   200
 	},
-	content:   [],
+	content: [
+		{
+			img: { type: 'custom', img: require('compEdit/EditElement/images/won_2.png') },
+			title: '图片1',		// 图片标题
+			router: {}			// 路由
+		},
+		{
+			img: { type: 'custom', img: require('compEdit/EditElement/images/won_3.png') },
+			title: '图片2',		// 图片标题
+			router: {}			// 路由
+		},
+		{
+			img: { type: 'custom', img: require('compEdit/EditElement/images/won_4.png') },
+			title: '图片3',		// 图片标题
+			router: {}			// 路由
+		}
+	],
 	animation: {
 		className: '',	// 动画样式
 		delay: 1,					// 开始时间
@@ -60,26 +76,26 @@ module.exports = {
 		style: {
 			layout: '0',	// 外观样式
 			title:  '0'		// 标题样式
-		},   
-		layout:1, 
-		swiperOptions:{ 
+		},
+		layout: 1,
+		swiperOptions: {
 			direction: 'horizontal',//轮播方向  vertical
-			autoplay: false,// 播放开关
+			autoplay: true,// 播放开关
 			loop : true,//循环
 			speed: 1000,	// 切换速度
-			spaceBetween:0,
-			slidesPerView:1,
+			spaceBetween:20,
+			slidesPerView:2,
 			centeredSlides:true,
 			effect:'slide',// 'slide' or 'fade' or 'cube' or 'coverflow' or 'flip'
 			autoplay: false,
 			autoplayOptions: {
-			    delay: 1000,//1秒切换一次
-			    stopOnLastSlide: false,//如果设置为true，当切换到最后一个slide时停止自动切换。（loop模式下无效）。
-			    disableOnInteraction: false,//用户操作swiper之后，是否禁止autoplay。默认为true：停止。
-		   		reverseDirection: false,//开启反向自动轮播。
-		    },   
-		    pagination:false, 
-			paginationOptions:{
+				delay: 1000,//1秒切换一次
+				stopOnLastSlide: false,//如果设置为true，当切换到最后一个slide时停止自动切换。（loop模式下无效）。
+				disableOnInteraction: false,//用户操作swiper之后，是否禁止autoplay。默认为true：停止。
+				reverseDirection: false,//开启反向自动轮播。
+			},
+			pagination: false,
+			paginationOptions: {
 				el: '.swiper-pagination',//分页元素
 				type: 'bullets',          //类型 ‘fraction’  分式 ‘progressbar’  进度条
 				progressbarOpposite: true,//使进度条分页器与Swiper的direction参数相反，
@@ -90,5 +106,5 @@ module.exports = {
 
 			}
 		}
-	},
+	}
 }

@@ -11,7 +11,8 @@ module.exports = {
 		filterPage:   '上&下一页',
 		PagePrev:     '上一页',
 		PageNext:     '下一页',
-		swiperImage:  '轮播'
+		swiperImage:  '轮播',
+		line:         '线'
 	},
 	// 定义样式名称 & 渲染类型 & 相关配置
 	style: {
@@ -20,8 +21,6 @@ module.exports = {
 		left:              { name: '左',      type: 'Number', min: -200, max: 960 },
 		width:             { name: '宽',      type: 'Number', min: 0, max: 540 },
 		height:            { name: '高',      type: 'Number', min: 0, max: 960 },
-		borderRadius:      { name: '圆角',    type: 'Number' },
-		borderWidth:       { name: '边宽',    type: 'Number' },
 		lineHeight:        { name: '行高',    type: 'Number' },
 		fontSize:          { name: '字号',    type: 'Number', min: 6, max: 90, step: 2 },
 		textAlign:         { name: '对齐方式', type: 'TextAlign', option: [
@@ -55,8 +54,29 @@ module.exports = {
 			topRight:    { name: '上右', type: 'Number', max: 100 },
 			bottomLeft:  { name: '下左', type: 'Number', max: 100 },
 			bottomRight: { name: '下右', type: 'Number', max: 100 }
-		} }, 
-		transformRotate:   { name: '旋转角度', type: 'Number', max: 180 },
+		} },
+		transform:          { name: '变换', type: 'Complex', child: {
+			translateX:   { name: 'X偏移', type: 'Number', max: 20 },
+			translateY:   { name: 'Y偏移', type: 'Number', max: 20 },
+			scale:        { name: '缩放',  type: 'Number', max: 10, step: 0.1 },
+			scaleX:       { name: 'X缩放', type: 'Number', max: 10, step: 0.1 },
+			scaleY:       { name: 'Y缩放', type: 'Number', max: 10, step: 0.1 },
+			rotate:       { name: '旋转',  type: 'Number', max: 360 },
+			rotateX:      { name: 'X旋转', type: 'Number', max: 360 },
+			rotateY:      { name: 'Y旋转', type: 'Number', max: 360 },
+			skewX:        { name: 'X倾斜', type: 'Number', max: 20 },
+			skewY:        { name: 'Y倾斜', type: 'Number', max: 20 }
+		} },
+		borderTop:         { name: '上边框', type: 'Complex', child: {
+			width:   { name: '宽度', type: 'Number', max: 40 },
+			style:   { name: '样式', type: 'Solid' },
+			color:   { name: '颜色', type: 'Color' },
+		} },
+		borderLeft:         { name: '左边框', type: 'Complex', child: {
+			width:   { name: '宽度', type: 'Number', max: 40 },
+			style:   { name: '样式', type: 'Solid' },
+			color:   { name: '颜色', type: 'Color' },
+		} },
 		borderWidth:       { name: '边框宽度', type: 'Number' },
 		borderStyle:       { name: '边框样式', type: 'Solid' },
 		borderColor:       { name: '边框颜色', type: 'Color' },

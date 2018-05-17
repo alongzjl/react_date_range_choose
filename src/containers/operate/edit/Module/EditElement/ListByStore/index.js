@@ -36,7 +36,7 @@ class ListByStore extends React.Component {
 					<p><img  style={cssColorFormat(props, 'image')} src={_.pic} /></p>
 					<p><span style={cssColorFormat(props, 'title')}>{_.name}</span></p>
 					<p>
-						<div  style={cssColorFormat(props, 'posIcon')}></div>
+						<i    style={cssColorFormat(props, 'posIcon')}></i>
 						<span style={cssColorFormat(props, 'text')}>{_.floor}</span>
 					</p>
 				</div>

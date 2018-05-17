@@ -4,6 +4,7 @@ module.exports = {
 	web:               1,
 	video:             1,
 	text:              1,
+	splitLine:         1,
 	button:            1,
 	swiperImage:       1,
 	wonderfulActivity: 1,
@@ -12,6 +13,11 @@ module.exports = {
 	navigationFloat:   1,
 	storeList:         1,
 	storeDetails:      1,
+<<<<<<< HEAD
 	storeInstro:       1,
 	map2D:       1
 }   
+=======
+	storeInstro:       1
+}
+>>>>>>> d599954e0fe21e38bb22a6074ead9835f812620d

@@ -44,6 +44,8 @@ module.exports = {
 	wonderfulActivity: authInit(require('./wonderfulActivity')),
 	// 文本
 	text:              authInit(require('./text')),
+	// 地址和电话
+	address:           authInit(require('./address')),
 	//按钮
 	button:            authInit(require('./button')),
 	// 自定义
@@ -66,6 +68,8 @@ module.exports = {
 	listByStore:       authInit(require('./listByStore')),
 	// 视频
 	video:             authInit(require('./video')),
+	// 分割线
+	splitLine:         authInit(require('./splitLine')),
 	
 	/* 业务组件 */
 	// 店铺列表

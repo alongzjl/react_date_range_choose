@@ -17,6 +17,11 @@ module.exports = [
 			key:  'picture'
 		},
 		{
+			icon: 'splitLine-control',
+			name: '分割线',
+			key:  'splitLine'
+		},
+		{
 			icon: 'video-control',
 			name: '视频', 
 			key:  'video'
@@ -92,11 +97,28 @@ module.exports = [
 		{
 			icon: 'storeInstro-control',
 			name: '店铺简介',
-			key:  'storeInstro'
+			key:  'storeInstro',
+			child: [
+				{
+					icon: 'text-control',
+					name: '店铺简介',
+					key:  'text'
+				},
+				{
+					icon: 'text-control',
+					name: '店铺详情',
+					key:  'text'
+				},{
+					icon: 'wonderfulActivity-control',
+					name: '轮播图片',
+					key:  'wonderfulActivity'
+				}
+			]
 		},
 		{
 			icon: 'storeDetails-control',
 			name: '店铺详情',
+<<<<<<< HEAD
 			key:  'storeDetails'
 		},
 		{
@@ -104,5 +126,36 @@ module.exports = [
 			name: '2D地图',
 			key:  'map2D'
 		} 
+=======
+			key:  'storeDetails',
+			child: [
+				{
+					icon: 'text-control',
+					name: '店铺LOGO',
+					key:  'picture'
+				},
+				{
+					icon: 'text-control',
+					name: '店铺名称',
+					key:  'text'
+				},
+				{
+					icon: 'address-control',
+					name: '楼层显示',
+					key:  'address'
+				},
+				{
+					icon: 'address-control',
+					name: '电话显示',
+					key:  'address'
+				},
+				{
+					icon: 'button-control',
+					name: '前往按钮',
+					key:  'button'
+				}
+			]
+		}
+>>>>>>> d599954e0fe21e38bb22a6074ead9835f812620d
 	// ],
 ]

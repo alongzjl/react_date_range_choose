@@ -10,6 +10,10 @@ import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect }  from 'react-redux'
 
+import * as variable from 'var'
+
+const ctMap = variable.composeTypeMap
+
 import Picture           from 'compEdit/EditElement/Picture'
 import Web               from 'compEdit/EditElement/Web'
 import Text              from 'compEdit/EditElement/Text'
@@ -41,12 +45,13 @@ class Element extends React.Component {
 
 	render() {
 		let { data, actions, editConfig, time, location } = this.props
-		let ct     = location.query.ct || 2,
+		let ct     = tempCfg.composeType || 'PORTRAIT',
 			eles   = data.elements || [],
 			theme  = editConfig.globalData.theme,
 			colors = theme.list[theme.idx].colors,
 			color  = data.feature.backgroundColor,
 			type   = color.type
+		ct = ctMap[ct]? ct: 'PORTRAIT'
 		window.curThemeColor = colors
 		if (!colors[type] && type !== 'custom') {
 			let curData = editConfig.curData
@@ -75,7 +80,7 @@ class Element extends React.Component {
 			else if (compName === 'storeDetails')    compCon = (<StoreDetails    data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
 			if (!compCon) return false
 			return (
-				<div key={i} className="pge-layout" style={layout}>{ compCon }</div>
+				<div key={i} className="pge-layout" style={cssColorFormat({ data: _ }, 'layout')}>{ compCon }</div>
 			)
 		})
 		return (

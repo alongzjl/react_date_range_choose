@@ -8,9 +8,9 @@
 // 导航
 const data = {
 	style:     {
-		filter:{ 
-			width:  60, 
-			height: 60, 
+		filter:{
+			width:  60,
+			height: 60,
 			borderWidth:  1,
 			borderStyle: 'solid',
 			borderColor: { type: 'auxiliary', color: '#fff' },
@@ -19,11 +19,11 @@ const data = {
 				topRight:    20,
 				bottomLeft:  20,
 				bottomRight: 20
-			}, 
+			},
 			margin: {
 				top:     0,
 				right:   0,
-				bottom:  5, 
+				bottom:  5,
 				left:    0,
 			},
 			padding: {
@@ -38,10 +38,10 @@ const data = {
 				blur_dis:   0,
 				spread_dis: 0,
 				color:      { type: 'custom', color: '#000' }
-			} 
+			}
 		},
-		text: { 
-			display:         'block',
+		text: {
+			display:        'none',
 			fontSize:       12,
 			fontStyle:      'normal',
 			fontWeight:     'normal',
@@ -51,7 +51,7 @@ const data = {
 			margin: {
 				top:     0,
 				right:   0,
-				bottom:  5, 
+				bottom:  5,
 				left:    0,
 			}
 		}
@@ -61,31 +61,36 @@ const data = {
 		top:      220,
 		left:     0,
 		width:    80,
-		height:   330
+		height:   400
 	},
 	content: [
 		{
-			img: { type: 'custom', img: 'http://ryoms.v4.rongyi.com/ryoms/images/menu-icon/icon3_2.png' },			// 图片url
+			img: { type: 'custom', img: require('compEdit/EditElement/images/navigationFloat_1.png') },
 			title: '导航1',		// 图片标题
 			router: {},			// 路由
 		},
 		{
-			img: { type: 'custom', img: 'http://ryoms.v4.rongyi.com/ryoms/images/menu-icon/icon11_2.png' },			// 图片url
+			img: { type: 'custom', img: require('compEdit/EditElement/images/navigationFloat_2.png') },
 			title: '导航2',		// 图片标题
 			router: {},			// 路由
 		},
 		{
-			img: { type: 'custom', img: 'http://ryoms.v4.rongyi.com/ryoms/images/menu-icon/icon6_2.png' },			// 图片url
+			img: { type: 'custom', img: require('compEdit/EditElement/images/navigationFloat_3.png') },
 			title: '导航3',		// 图片标题
+			router: {},			// 路由
+		}, 
+		{
+			img: { type: 'custom', img: require('compEdit/EditElement/images/navigationFloat_4.png') },
+			title: '导航4',		// 图片标题
+			router: {},			// 路由
+		},{
+			img: { type: 'custom', img: require('compEdit/EditElement/images/navigationFloat_5.png') },
+			title: '导航5',		// 图片标题
 			router: {},			// 路由
 		},
 		{
-			img: { type: 'custom', img: 'http://ryoms.v4.rongyi.com/ryoms/images/menu-icon/icon15_2.png' },			// 图片url
-			title: '导航4',		// 图片标题
-			router: {},			// 路由
-		},{   
-			img: { type: 'custom', img: 'http://ryoms.v4.rongyi.com/ryoms/images/menu-icon/icon9_2.png' },			// 图片url
-			title: '导航5',		// 图片标题
+			img: { type: 'custom', img: require('compEdit/EditElement/images/navigationFloat_6.png') },
+			title: '导航6',		// 图片标题
 			router: {},			// 路由
 		}
 	],
@@ -101,7 +106,7 @@ module.exports = {
 	name: 'navigationFloat',
 	type: 'base',
 	// 位置大小
-	// 样式管理  
+	// 样式管理
 	data: JSON.parse(JSON.stringify(data)),
 	//布局方式的选择
 	layout:{

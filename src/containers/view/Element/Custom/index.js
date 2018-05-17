@@ -112,30 +112,7 @@ class Custom extends React.Component {
 			else if (compName === 'reset')       compCon = (<Reset       data={_} parent={data} editConfig={editConfig} actions={actions} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} />)
 			else if (compName === 'listByStore') compCon = (<ListByStore data={_} parent={data} editConfig={editConfig} actions={actions} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} />)
 			return (
-				<Rnd
-					key={i}
-					bounds={`.${csn}`}
-					className={i === editConfig.curData.cusCompIdx? 's-active': ''}
-					dragHandleClassName={'.handle-drag-custom'}
-					size={{
-						width:  layout.width || '100%',
-						height: layout.height
-					}}
-					position={{
-						x: layout.left,
-						y: layout.top
-					}}
-					onDragStart={e => this.selectComp(e, _, i, idx, data)}
-					onDragStop={(e, d) => this.dragStop(e, d, _, i, data)}
-					onResizeStart={e => this.selectComp(e, _, i, idx, data)}
-					onResizeStop={(e, dir, ref, delta, pos) => this.resizeFn(e, ref, delta, pos, _, i, data)}
-				>
-					<div className="pge-layout" onClick={e => this.selectComp(e, _, i, idx, data)} style={!isEdit? _.layout: {}}>{ compCon }</div>
-					{
-						name != 'storeDetails' ? <a className="pge-remove" onClick={e => this.removeComp(e, i, data)}><Icon type="cross-circle" /></a> : null
-					} 
-					<div className="handle-drag-custom" onClick={e => e.stopPropagation()}></div>
-				</Rnd>
+				<div key={i} className="pge-layout" style={cssColorFormat({ data: _ }, 'layout')}>{ compCon }</div>
 			)
 		})
 		return (
