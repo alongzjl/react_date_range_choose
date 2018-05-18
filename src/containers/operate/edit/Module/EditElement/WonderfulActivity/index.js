@@ -53,12 +53,16 @@ class WonderfulActivity extends React.Component {
 		for(var key in obj){ 
 			if(key == 'autoplay'&& obj[key]){
 				new_obj.autoplay = obj['autoplayOptions']
+			}else if(key == 'slideOptions'){
+				for(var i in obj['slideOptions']){
+					new_obj[i] = obj['slideOptions'][i]
+				}  
 			}else{
-				if(key != 'autoplayOptions'&&key != 'paginationOptions'&&key != 'pagination'){
+				if(key != 'autoplayOptions'){ 
 					new_obj[key] = obj[key];
 				} 
-			} 
-		}
+			}  
+		}  
 		new_obj.pagination = {
 				el: '.swiper-pagination',//分页元素
 				type: 'bullets',          //类型 ‘fraction’  分式 ‘progressbar’  进度条
@@ -67,6 +71,7 @@ class WonderfulActivity extends React.Component {
 		new_obj.watchSlidesProgress = true;
 		new_obj.observer = true;//修改swiper自己或子元素时，自动初始化swiper 
 		new_obj.observeParents = true;//修改swiper的父元素时，自动初始化swiper 
+		console.log(new_obj);
 		return new_obj  
 	}
 	render() {

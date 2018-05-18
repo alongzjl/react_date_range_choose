@@ -76,8 +76,7 @@ module.exports = {
 		style: {
 			layout: '0',	// 外观样式
 			title:  '0'		// 标题样式
-		},
-		layout: 1,
+		}, 
 		swiperOptions: {
 			direction: 'horizontal',//轮播方向 vertical
 			effect:'slide',// 'slide' or 'fade' or 'cube' or 'coverflow' or 'flip'
@@ -85,7 +84,7 @@ module.exports = {
 			loop : true,//循环
 			speed: 1000,	// 切换速度
 			slideOptions:{
-				spaceBetween:0,
+				spaceBetween:0, 
 				slidesPerView:1,
 				centeredSlides:true,
 			},      

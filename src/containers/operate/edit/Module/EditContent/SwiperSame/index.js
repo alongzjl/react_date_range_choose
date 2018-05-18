@@ -42,7 +42,7 @@ const setOptions = {
 	]},
 
  
-	pagination:{name:'分页显示',type:'Switch',true:true,false:false},
+	/*pagination:{name:'分页显示',type:'Switch',true:true,false:false},
 	type :{name:'显示类型',type:'Select',option: [
 		{ name: '圆点', value: 'bullets' },
 		{ name: '分布式', value: 'fraction' },
@@ -54,8 +54,8 @@ const setOptions = {
 	]}, 
 	dynamicBullets:{name:'动态隐藏',type:'Switch',true:true,false:false},
 	clickable:{name:'点击切隐藏分页器',type:'Switch',true:true,false:false},
-	hideOnClick:{name:'点击切换轮播',type:'Switch',true:true,false:false},
-
+	hideOnClick:{name:'点击切换轮播',type:'Switch',true:true,false:false},*/
+ 
 	layout :{name:'布局选择',type:'Select',option: [
 		{ name: '方式一', value: 1 },
 		{ name: '方式二', value: 2 },
@@ -71,15 +71,11 @@ class SwiperSame extends React.Component {
 		let { parentComp } = curData 
 		if(key == 'delay'||key=='reverseDirection'){
 			data.feature['swiperOptions']['autoplayOptions'][key] = val
-		}else if(key == 'type'||key=='progressbarOpposite'||key=='dynamicBullets'||key=='clickable'||key=='hideOnClick'){
-			data.feature['swiperOptions']['paginationOptions'][key] = val
-		}else if(key != 'layout'){
-			 data.feature['swiperOptions'][key] = val
-		}   
-		if(key == 'progressbarOpposite'){
-			data.feature['swiperOptions']['paginationOptions'][key] = Boolean(val); 
-		} 
-		    
+		}else if(key == 'spaceBetween'||key=='slidesPerView'||key=='centeredSlides'){
+			data.feature['swiperOptions']['slideOptions'][key] = val
+		}else{ 
+			data.feature['swiperOptions'][key] = val 
+		}
 		actions.updateComp(null, parentComp? parentComp: data)
 	}; 
 	onChangeAuth(val, key) {

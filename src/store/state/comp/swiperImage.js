@@ -70,7 +70,7 @@ module.exports = {
 		style: {
 			layout: '0',	// 外观样式
 			title:  '0'		// 标题样式
-		},
+		},  
 		layout: 1,
 		swiperOptions: {
 			direction: 'horizontal',//轮播方向 vertical
@@ -82,7 +82,7 @@ module.exports = {
 				spaceBetween:0,
 				slidesPerView:1,
 				centeredSlides:true,
-			},    
+			},      
 			autoplayOptions: {
 			delay: 1000,//1秒切换一次
 			//stopOnLastSlide: false,//如果设置为true，当切换到最后一个slide时停止自动切换。（loop模式下无效）。
