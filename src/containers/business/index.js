@@ -6,7 +6,7 @@
 */
 
 'use strict';
-
+document.title='作品编辑器';  
 import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -15,7 +15,7 @@ import * as actions from 'actions'
 import { message }  from 'antd'
 import curData from 'state/cur/curData'
 import './index.less'
-
+ 
 
 class BusinessComponent extends React.Component {
 	constructor(props) {
