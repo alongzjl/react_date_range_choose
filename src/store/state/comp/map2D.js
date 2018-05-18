@@ -11,7 +11,7 @@ const data = {
 		top:      0,
 		left:     0,
 		width:    540,
-		height:   960
+		height:   360
 	},
 	style: {
 		text: {

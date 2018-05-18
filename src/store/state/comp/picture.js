@@ -8,9 +8,9 @@ const data = {
 				topRight:    6,
 				bottomRight:  6,
 				bottomLeft: 6
-			},  
-		}  
-	}, 
+			}
+		}
+	},
 	layout: {
 		position: 'absolute',
 		top:      0,

@@ -9,6 +9,7 @@
 const data = {
 	style:     {
 		filterBox: {
+			backgroundColor: { type: 'custom', color: '#fff' },
 			padding: {
 				top:     0,
 				right:   26,
@@ -18,7 +19,7 @@ const data = {
 		},
 		filter:{
 			width:  110,
-			height: 140,
+			height: 136,
 			borderWidth:  0,
 			borderStyle: 'solid',
 			borderColor: { type: 'auxiliary', color: '#fff' },

@@ -7,6 +7,31 @@
 import React from 'react'
 import './index.less'
 
+const wMap = {
+	'晴':   1,
+	'阴':   1,
+	'小雨': 1,
+	'中雨': 1,
+	'阵雨': 1,
+	'大雨': 1,
+	'暴雨': 1,
+	'小雪': 1,
+	'雷雨': 1,
+	'冰雹': 1,
+	'中雪': 1,
+	'大雪': 1,
+	'暴雪': 1
+}
+const wMap2 = [
+	'晴_多云_阴',
+	'晴_雨_雷',
+	'晴_雨',
+	'阴_多云_雨',
+	'阴_多云_雪',
+	'阴_多云',
+	'雨_雪'
+]
+
 class Weather extends React.Component {
 
 
@@ -46,8 +71,35 @@ class Weather extends React.Component {
 			<div style={cssColorFormat(props, type)}>{weather.power}</div>
 		)
 	}
-	// 自定义
+	// 图标
 	renderStyle7(props, con, type) {
+		let wt  = weather.type
+		let wn  = ''
+		let len = wMap2.length
+		if (wMap[wt]) wn = wt
+		else {
+			for (var i = 0; i < len; i++) {
+				var name = wMap2[i],
+					arr  = name.split('_'),
+					isOK = true
+				arr.map((_) => {
+					if (isOK && wt.indexOf(_) === -1) isOK = false
+				})
+				if (isOK) {
+					wn = name
+					console.log(isOK, name)
+					break
+				}
+			}
+		}
+		return (
+			<div style={cssColorFormat(props, 'image')}>
+				<img src={getImg(con.weatherIcon[wn])} />
+			</div>
+		)
+	}
+	自定义
+	renderStyle8(props, con, type) {
 		let { template } = con
 		// let { aqi, aqiInfo, direct, iconName, power } = weather
 		if (!template) return false

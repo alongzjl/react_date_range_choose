@@ -12,7 +12,7 @@ class Map2D extends React.Component {
 	 * 组件挂载完成
 	*/
 	componentDidMount(){
-		window.domReady("e_map2D");
+		window.domReady('e_map2D')
 	    window.AndroidCallJsRyWayfinding({
 	        maps: [{
 	            name: 'B1',
@@ -45,12 +45,12 @@ class Map2D extends React.Component {
 	}
 
 	render() {
-		let { type,data } = this.props;
-		let style = cssColorFormat(this.props, 'text');
+		let { type,data } = this.props
+		let style = cssColorFormat(this.props, 'text')
 		return (   
-			<div id="e_map2D" className='e_map2D' style={style}> 
-				  
-			</div>     
+			<div className="e-map2d" style={style}>
+				<div id="e_map2D" className="e_map2D"></div>
+			</div>
 		)  
 	}  
 } 

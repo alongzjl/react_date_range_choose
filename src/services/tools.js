@@ -9,7 +9,7 @@ const NT = formatMap.numberTemplate
 const tools = function() {
 (function (window) {
 
-String.prototype.colorRGB = () => {
+String.prototype.colorRGB = function() {
 	var sColor = this.toLowerCase(),
 		reg   = /^#([0-9a-f]{3}|[0-9a-f]{6})$/,
 		reg8  = /^#(\S)(\S)(\S)$/
@@ -227,6 +227,13 @@ window.timeFormat = (format) => {
 		split.push(m)
 	})
 	return split
+}
+
+window.encodeUnicode = (str, res = []) => {
+	str.split('').map((_, i) => {
+		res.push(('00' + str.charCodeAt(i).toString(16)).slice(-4))
+	})
+	return '\\u' + res.join('\\u')
 }
 
 window.Ajax = Fetch.default

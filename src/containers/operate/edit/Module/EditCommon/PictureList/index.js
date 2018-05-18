@@ -125,7 +125,7 @@ export default class PictureList extends React.Component {
 					<div className="bottom">
 						<Button type="primary" onClick={this.save}>确定</Button>
 						<Button onClick={this.close}>取消</Button>
-					</div> 
+					</div>
 				</div>
 				</SkyLight>
 			</div>
@@ -152,7 +152,7 @@ class ImgModule extends React.Component {
 	chooseType(str,id) {
 		 this.setState({
 	      current: id,
-	    });  
+	    })
 		this.props.getImgList(str,id);
 	}
 	chooseImg(img) { 
@@ -204,7 +204,7 @@ class ImgModule extends React.Component {
 	render() {
 		let id = window.uif.userInfo.id || '1';
 		const { page_img } = this.props;
-		return ( 
+		return (
 			<div className="content">
 				<div className="left">
 					{
@@ -240,8 +240,8 @@ class ImgModule extends React.Component {
 				</div> 
 			</div>  
 		)
-	} 
-} 
+	}
+}
 
 function Type({item,choose_one}){
 	return (

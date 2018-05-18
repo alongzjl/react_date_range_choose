@@ -1,4 +1,7 @@
-// 文本
+const common = require('state/common')
+let { authInit, deepCopy, extend } = common
+
+// 时间日期
 const data = {
 	style:     {
 		text: {
@@ -48,16 +51,24 @@ const data = {
 		iterationCount: 'infinite'	// 循环次数
 	}
 }
-const data2 = JSON.parse(JSON.stringify(data))
-data2.content.split = '-'
-const data3 = JSON.parse(JSON.stringify(data))
+
+const data2 = extend(deepCopy(data), {
+	content: { split: '-' }
+})
+
+// 年月日
+const data3 = deepCopy(data)
 delete data3.content.split
-const data4 = JSON.parse(JSON.stringify(data))
+
+// 星期
+const data4 = deepCopy(data)
+data4.content.prefix = '星期'
 delete data4.content.split
 delete data4.style.split
 
-const data5 = JSON.parse(JSON.stringify(data))
-delete data4.content.split
+// 自定义
+const data5 = deepCopy(data)
+delete data5.content.split
 data5.content.template = '今天是 {yyyy}年{mm}月{dd}日 {hh}点{nn}分{ss}秒'
 
 module.exports = {
@@ -65,7 +76,7 @@ module.exports = {
 	type: 'base',
 	// 位置大小
 	// 样式管理
-	data: JSON.parse(JSON.stringify(data)),
+	data: deepCopy(data),
 	// 内容管理
 	// 样式列表
 	styleList: {
@@ -73,27 +84,27 @@ module.exports = {
 		list: [{
 			name:  'HH:MM:SS',
 			img:   '',
-			data:  JSON.parse(JSON.stringify(data))
+			data:  deepCopy(data)
 		}, {
 			name:  'HH:MM',
 			img:   '',
-			data:  JSON.parse(JSON.stringify(data))
+			data:  deepCopy(data)
 		}, {
 			name:  'YYYY-MM-DD',
 			img:   '',
-			data:  JSON.parse(JSON.stringify(data2))
+			data:  deepCopy(data2)
 		}, {
 			name:  'YYYY年MM月DD日',
 			img:   '',
-			data:  JSON.parse(JSON.stringify(data3))
+			data:  deepCopy(data3)
 		}, {
 			name:  '星期',
 			img:   '',
-			data:  JSON.parse(JSON.stringify(data4))
+			data:  deepCopy(data4)
 		}, {
 			name:  '自定义',
 			img:   '',
-			data:  JSON.parse(JSON.stringify(data5))
+			data:  deepCopy(data5)
 		}] 
 	},
 	// 功能特性

@@ -1,8 +1,132 @@
 const common = require('state/common')
-let { authInit, deepCopy } = common
-const picture = authInit(require('./picture'))
-const time    = authInit(require('./time'))
-const weather = authInit(require('./weather'))
+let { authInit, deepCopy, extend, styleIdxChange } = common
+const p = authInit(require('./picture'))
+const t = authInit(require('./time'))
+const w = authInit(require('./weather'))
+
+const time     = extend(styleIdxChange(1, deepCopy(t)), {
+	data: {
+		layout: {
+			top:  18,
+			left: 26,
+			width:  110,
+			height: 42
+		},
+		style: {
+			text: {
+				fontSize:   40, 
+				lineHeight: 42,
+			}
+		}
+	}
+})
+const time2    = extend(styleIdxChange(2, deepCopy(t)), {
+	data: {
+		layout: {
+			top:    60,
+			left:   20,
+			width:  76,
+			height: 24
+		},
+		style: {
+			text: {
+				fontSize:   14, 
+				lineHeight: 24,
+			},
+			split: {
+				fontSize:   14, 
+				lineHeight: 14,
+			}
+		},
+		content: {
+			split: '.'
+		}
+	}
+})
+const time3    = extend(styleIdxChange(4, deepCopy(t)), {
+	data: {
+		layout: {
+			top:    60,
+			left:   95,
+			width:  50,
+			height: 24
+		},
+		style: {
+			text: {
+				fontSize:     14, 
+				lineHeight:   24,
+			}
+		}
+	}
+})
+const weather  = extend(deepCopy(w), {
+	data: {
+		layout: {
+			top:    30,
+			left:   200,
+			width:  60,
+			height: 28
+		},
+		style: {
+			text: {
+				textAlign:  'right',
+				fontSize:   24, 
+				lineHeight: 28
+			}
+		}
+	}
+})
+const weather2 = extend(styleIdxChange(3, deepCopy(w)), {
+	data: {
+		layout: {
+			top:    56,
+			left:   200,
+			width:  60,
+			height: 24
+		},
+		style: {
+			text: {
+				textAlign:  'right',
+				fontSize:   14, 
+				lineHeight: 24
+			}
+		}
+	}
+})
+const weather3 = extend(styleIdxChange(6, deepCopy(w)), {
+	data: {
+		layout: {
+			top:    30,
+			left:   260,
+			width:  74,
+			height: 45
+		}
+	}
+})
+const picture  = extend(deepCopy(p), {
+	data: {
+		layout: {
+			top:    20,
+			left:   390,
+			width:  130,
+			height: 60
+		},
+		style: {
+			image:{
+				borderRadius: {
+					topLeft:     0,
+					topRight:    0,
+					bottomRight: 0,
+					bottomLeft:  0
+				}
+			}
+		},
+		content: {
+			img: { type: 'logo', img: '' }
+		}
+	}
+})
+
 // 店铺列表
 const data = {
 	layout: {
@@ -24,7 +148,12 @@ const data = {
 	},
 	components: [
 		time,
-		weather
+		time2,
+		time3,
+		weather,
+		weather2,
+		weather3,
+		picture
 	]
 }
 

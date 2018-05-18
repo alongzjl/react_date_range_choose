@@ -12,7 +12,7 @@ const data = {
 			color:          { type: 'custom', color: '#000' },
 			fontSize:       12,
 			fontStyle:      'normal',
-			fontWeight:     'normal', 
+			fontWeight:     'normal',
 			textAlign:      'center',
 			textDecoration: 'none',
 		},
@@ -32,7 +32,7 @@ const data = {
 		width:    540,
 		height:   200
 	},
-	content: [ 
+	content: [
 		{
 			img: { type: 'custom', img: require('compEdit/EditElement/images/won_2.png') },
 			title: '图片1',		// 图片标题
@@ -76,25 +76,25 @@ module.exports = {
 		style: {
 			layout: '0',	// 外观样式
 			title:  '0'		// 标题样式
-		}, 
+		},
 		swiperOptions: {
 			direction: 'horizontal',//轮播方向 vertical
 			effect:'slide',// 'slide' or 'fade' or 'cube' or 'coverflow' or 'flip'
-			autoplay: true,// 播放开关 
+			autoplay: true,// 播放开关
 			loop : true,//循环
 			speed: 1000,	// 切换速度
 			slideOptions:{
-				spaceBetween:0, 
+				spaceBetween:0,
 				slidesPerView:1,
 				centeredSlides:true,
-			},      
+			},
 			autoplayOptions: {
 			delay: 1000,//1秒切换一次
 			//stopOnLastSlide: false,//如果设置为true，当切换到最后一个slide时停止自动切换。（loop模式下无效）。
 			disableOnInteraction: false,//用户操作swiper之后，是否禁止autoplay。默认为true：停止。
 			//reverseDirection: false,//开启反向自动轮播。
-			},   
-			//pagination:false, 
+			},
+			//pagination:false,
 			//paginationOptions:{
 				//el: '.swiper-pagination',//分页元素
 				//type: 'bullets',          //类型 ‘fraction’  分式 ‘progressbar’  进度条

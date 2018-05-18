@@ -19,13 +19,10 @@ const Option = Select.Option
 import RouterJump      from 'compEdit/EditCommon/RouterJump'
 import ImageUploadComp from 'compEdit/EditCommon/ImageUploadComp'
 
-// import Picture     from './Picture'
-// import Web         from './Web'
-// import Text        from './Text'
 import SwiperImage       from './SwiperImage'
 import Navigation        from './Navigation'
 import NavigationFloat   from './NavigationFloat'
-import Date              from './Date'
+import Weather           from './Weather'
 import WonderfulActivity from './WonderfulActivity'
 import Page              from './Page'
 
@@ -192,13 +189,14 @@ class EditContent extends React.Component {
 	render() {
 		let { data, actions } = this.props
 		let compName = data.name
+		if (!compName) return false
 		let content  = data.data.content
 		let compCon
 		let childNode
 		let activeKey
 		if (compName === 'navigation')             compCon = (<Navigation        data={this.props}/>)
 		else if (compName === 'navigationFloat')   compCon = (<NavigationFloat   data={this.props}/>)
-		else if (compName === 'date')              compCon = (<Date              data={this.props}/>)
+		else if (compName === 'weather')           compCon = (<Weather           data={this.props}/>)
 		else if (compName === 'wonderfulActivity') compCon = (<WonderfulActivity data={this.props}/>)
 		else if (compName === 'swiperImage' && content.length > 1) compCon = (<SwiperImage data={this.props}/>)
 		if (content.length && compName != 'wonderfulActivity') {

@@ -34,7 +34,7 @@ const setOptions = {
 
 	speed: {name:'切换速度', type: 'Number', min: 100, max: 3000, step: 100 },
 	effect :{name:'切换方式',type:'Select',option: [
-		{ name: '普通切换', value: 'slide'},
+		{ name: '普通切换', value: 'slide' },
 		{ name: '淡入', value: 'fade' },
 		{ name: '方块', value: 'cube' },
 		{ name: '3d流', value: 'coverflow' },
@@ -151,25 +151,25 @@ class SwiperSame extends React.Component {
 		return childNode
 	} 
 	
-	render() {  
-		let { data } = this.props.data;
+	render() {
+		let { data } = this.props.data;   
 		const swiperOptions = data.feature.swiperOptions;
 		const dom_show_1 = this.renObj(data,swiperOptions);
 		let dom_show_2 = null,dom_show_3 = null;
 		if(swiperOptions['autoplay']){
 			dom_show_2 = this.renObj(data,swiperOptions['autoplayOptions'])
-		}    
+		}
 		if(swiperOptions['effect'] == 'slide'){ 
 			dom_show_3 = this.renObj(data,swiperOptions['slideOptions'])
-		}    
-		return (  
+		}
+		return (
 			<Collapse activeKey={['0']} onChange={this.cb}>
 				<Panel header='轮播设置' key={0}>
 					{ dom_show_1 }{ dom_show_2 }{ dom_show_3 }
-				</Panel>   
-			</Collapse>	 
+				</Panel>
+			</Collapse>
 		)
 	}
-} 
+}
 
 export default SwiperSame

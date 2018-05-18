@@ -7,6 +7,8 @@ module.exports = {
 		catg:        '分类',
 		page:        '分页',
 		reset:       '重置',
+		time:        '日期时间',
+		weather:     '天气',
 		listByStore: '列表',
 		wonderfulActivity: '精彩活动'
 	},
@@ -18,6 +20,8 @@ module.exports = {
 		catg:        0,
 		page:        0,
 		reset:       0,
+		time:        0,
+		weather:     0,
 		listByStore: 0,
 		wonderfulActivity: 0
 	}

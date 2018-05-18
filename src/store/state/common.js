@@ -32,6 +32,31 @@ const Fn = {
 		} catch(e) {
 			return obj
 		}
+	},
+	extend: (org, obj) => {
+		for (var v in obj) {
+			if (!org[v]) {
+				org[v] = obj[v]
+			} else {
+				var typeO = Fn.getClass(org[v]),
+					typeN = Fn.getClass(obj[v])
+				if (typeO === typeN && typeO === 'Object') {
+					Fn.extend(org[v], obj[v])
+				} else {
+					org[v] = obj[v]
+				}
+			}
+		}
+		return org
+	},
+	getClass: (obj) => {
+		return Object.prototype.toString.call(obj).match(/^\[object\s(.*)\]$/)[1]
+	},
+	styleIdxChange: (idx, obj) => {
+		let sl = obj.styleList
+		sl.idx = idx
+		obj.data = sl.list[idx].data
+		return obj
 	}
 }
 module.exports = Fn
