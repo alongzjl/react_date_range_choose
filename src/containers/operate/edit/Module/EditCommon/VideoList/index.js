@@ -8,11 +8,11 @@
 import React from 'react';
 import SkyLight from 'react-skylight';
 import './index.less'
-import { Button, Upload, message,Modal,Pagination } from 'antd'
+import { Button, message,Modal,Pagination } from 'antd'
 const commonCss = {
 	dialogStyles: {
 		height: 'auto',
-		minHeight: '635px',
+		minHeight: '535px',
 		width: '750px',
 		left: 0,
 		right: 0,
@@ -36,7 +36,7 @@ const commonCss = {
 		top: '20px' 
 	}
 }
-
+ 
 
 export default class VideoList extends React.Component {
 	show() {
@@ -49,9 +49,9 @@ export default class VideoList extends React.Component {
 		page_video:{},
 		currentPage:1,
 		page:1,
-		page_size:10,
-		pageSize:10,
-		name:'',
+		page_size:14,
+		pageSize:14, 
+		name:'', 
 		groupId:42
 	} 
 	componentDidMount(){ 
@@ -66,8 +66,8 @@ export default class VideoList extends React.Component {
 	getVideoList = (str,id) => { 
 		if(str == 'page'){
 			this.setState({
-				page:id
-			}) 
+				currentPage:id
+			})  
 		}else if(str == 'groupId'){
 			this.setState({
 				groupId:id
@@ -118,16 +118,9 @@ export default class VideoList extends React.Component {
 					closeButtonStyle={commonCss.closeButtonStyle}
 					hideOnOverlayClicked
 					ref={com => { this.addImgModal = com }}
-					title={'选择素材'}
+					title={'视频素材'}
 				>
 				<div className="outer">
-					<div className="add_title">
-						<ul>
-							<li className='active'>视频</li>
-						</ul>
-						<div className="input_search"><input placeholder="搜索" /></div>
-						<div className="search" onClick={this.getList}>搜索</div>
-					</div>
 					<VideoModule page_video={this.state.page_video} save={this.save_img} getVideoList={this.getVideoList} videoTypes={this.state.videoTypes} videoList={this.state.videoList} type={type} />
 					<div className="bottom">
 						<Button type="primary" onClick={this.save}>确定</Button>
@@ -142,12 +135,9 @@ export default class VideoList extends React.Component {
 
 class VideoModule extends React.Component {
 	state = {
-		videoTypes:[
-			
-		],
-		videoList:[
-			
-		]
+		videoTypes:[],
+		videoList:[],
+		current:1
 	}
 	
 	componentWillReceiveProps(props){
@@ -159,6 +149,9 @@ class VideoModule extends React.Component {
 			})
 	}
 	chooseType(str,id) {
+		 this.setState({
+	      current: id,
+	    });
 		this.props.getVideoList(str,id);  
 	}  
 	chooseVideo = id => { 
@@ -187,8 +180,15 @@ class VideoModule extends React.Component {
 					{ 
 						this.state.videoList.map((item,index) => <List key={index} item={item} choose_one={this.chooseVideo}></List> )
 					}
-					<Pagination className="Pagination" onChange={page=>{this.chooseType('page',page)}} defaultCurrent={page_video.currentPage} total={page_video.totalPage} pageSize={page_video.pageSize} />
-				</div>
+					<Pagination 
+						className="Pagination" 
+						defaultCurrent={1}
+						current={this.state.current} 
+						total={page_video.totalCount} 
+						pageSize={page_video.pageSize}
+						onChange={page=>{this.chooseType('page',page)}}  
+						/> 
+				</div>  
 			</div>
 		)
 	}
@@ -203,7 +203,7 @@ function Type({item,choose_one}){
 function List({item,choose_one}){
 	return (
 		<div onClick={()=>{choose_one(item.id)}} className={item.isClicked?'choosed':''}>
-			<div className={item.isClicked?'icon':''}>
+			<div className={item.isClicked?'icon_img':''}>
 				<div className="right-symbol"></div>
 			</div>
 			<video src={item.url} controls="controls">

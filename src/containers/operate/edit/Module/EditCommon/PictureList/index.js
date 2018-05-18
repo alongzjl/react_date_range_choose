@@ -8,12 +8,12 @@
 import React from 'react';
 import SkyLight from 'react-skylight';
 import './index.less'
-import { Button, Upload, message,Modal,Pagination } from 'antd'
+import { Button, Upload, message,Modal,Pagination,Icon } from 'antd'
 import Url from 'public/Url'
 const commonCss = {
 	dialogStyles: {
 		height: 'auto',
-		minHeight: '635px',
+		minHeight: '55px',
 		width: '750px',
 		left: 0,
 		right: 0,
@@ -56,9 +56,9 @@ export default class PictureList extends React.Component {
 		page_img:{},
 		currentPage:1,
 		page:1,
-		page_size:10,
-		pageSize:10,
-		name:'',
+		page_size:14,
+		pageSize:14,
+		name:'', 
 		groupId:39
 	} 
 	componentDidMount(){}
@@ -66,8 +66,8 @@ export default class PictureList extends React.Component {
 	getImgList = (str,id) => {
 		if(str == 'page'){
 			this.setState({
-				page:id
-			}) 
+				currentPage:id
+			})  
 		}else if(str == 'groupId'){
 			this.setState({
 				groupId: id
@@ -118,21 +118,14 @@ export default class PictureList extends React.Component {
 					closeButtonStyle={commonCss.closeButtonStyle}
 					hideOnOverlayClicked
 					ref={com => { this.addImgModal = com }}
-					title={'选择素材'}
+					title={'图片素材'}
 				>
 				<div className="outer">
-					<div className="add_title">
-						<ul>
-							<li className='active'>图片</li>
-						</ul>
-						<div className="input_search"><input placeholder="搜索" /></div>
-						<div className="search" onClick={this.getList}>搜索</div>
-					</div>
 					<ImgModule save={this.save_img} page_img={this.state.page_img} getImgList={this.getImgList} firstAdd={firstAdd} imgTypes={this.state.imgTypes} imgList={this.state.imgList} />
 					<div className="bottom">
 						<Button type="primary" onClick={this.save}>确定</Button>
 						<Button onClick={this.close}>取消</Button>
-					</div>
+					</div> 
 				</div>
 				</SkyLight>
 			</div>
@@ -143,7 +136,9 @@ export default class PictureList extends React.Component {
 class ImgModule extends React.Component {
 	state = {
 		imgTypes:[],
-		imgList:[]
+		imgList:[],
+		loading:false,
+		current:1
 	}
 
 	componentWillReceiveProps(props){
@@ -155,6 +150,9 @@ class ImgModule extends React.Component {
 			}) 
 	}
 	chooseType(str,id) {
+		 this.setState({
+	      current: id,
+	    });  
 		this.props.getImgList(str,id);
 	}
 	chooseImg(img) { 
@@ -177,59 +175,36 @@ class ImgModule extends React.Component {
 		let choosed_img = img_list.filter(item => item.isClicked == true);
 		this.props.save(choosed_img)
 	};
+	customRequest = info => {
+		const that = this;
+		this.setState({loading:true});
+		let id = window.uif.userInfo.id || '1';
+		const paramsData = {
+			userId:id,
+			mallId:'', 
+			imageName:'along',
+			imageSourceType:'OPERATION'  
+		};
+		var reader = new FileReader(); 
+			 reader.onload = (function (file) {
+		        return function (e) {
+		           console.info(this.result); //这个就是base64的数据了
+		            const img = this.result; 
+		            const postData = {...paramsData,imageBase64:img};
+		            Ajax.postJSONIMG('/mcp-gateway/utility/uploadImage',postData).then(res=>{
+		            	  message.info('上传成功!');
+						  that.setState({loading:false}); 
+		            	  that.props.getImgList();  
+		            })            
+	   			};  
+		    })(info.file);
+			reader.readAsDataURL(info.file);
+	}  
 	
 	render() {
 		let id = window.uif.userInfo.id || '1';
-		const that = this;
-		const Upload_props = {
-			name: 'file',
-			action: '/mcp-gateway/utility/uploadImage',
-			data: {
-				userId:id,
-				mallId:'', 
-				imageName:'along',
-				imageSourceType:'OPERATION'  
-			}, 
-			customRequest:function(info){
-				var reader = new FileReader(); 
-				 reader.onload = (function (file) {
-			        return function (e) {
-			           console.info(this.result); //这个就是base64的数据了
-			            const img = this.result; 
-			            const postData = {...info.data,imageBase64:img};
-			            Ajax.postJSONIMG('/mcp-gateway/utility/uploadImage',postData).then(res=>{
-			            	  message.info('上传成功!');
-			            	  that.props.getImgList();  
-			            })          
-		  
-			        };
-			    })(info.file);
-				 reader.readAsDataURL(info.file);
-			},
-			onChange(info) {
-				if (info.file.status !== 'uploading') {
-					console.log(info.file, info.fileList);
-				}
-				if (info.file.status === 'done') {
-					message.success(`${info.file.name} file uploaded successfully`);
-				} else if (info.file.status === 'error') {
-					message.error(`${info.file.name} file upload failed.`);
-				}
-			},
-			beforeUpload(file) {
-				const isJPG = file.type === 'image/jpeg'||file.type === 'image/png';
-				if (!isJPG) {
-					message.error('You can only upload JPG file!');
-				}
-				const isLt2M = file.size / 1024 / 1024 < 2;
-				if (!isLt2M) {
-					message.error('Image must smaller than 2MB!');
-				}
-					return isJPG && isLt2M;
-				}
-		}
 		const { page_img } = this.props;
-		return (
+		return ( 
 			<div className="content">
 				<div className="left">
 					{
@@ -237,18 +212,36 @@ class ImgModule extends React.Component {
 					}
 				</div> 
 				<div className="right">
-					<Upload {...Upload_props}>
-						<div className="add_img"><div className="add_text">+</div><div>上传图片</div></div>
-					</Upload>  
+					<div>
+						<Upload 
+							name= 'avatar'
+							className="avatar-uploader" 
+							listType="picture-card"
+							showUploadList={false}
+							customRequest={this.customRequest} 
+						> 
+						<div>
+					        <Icon type={this.state.loading ? 'loading' : 'plus'} />
+					        <div className="ant-upload-text">上传图片</div>
+					      </div>
+						</Upload>
+					</div>  
 					{ 
 						this.state.imgList.map((item,index) => <List key={index} item={item} type={this.props.type} choose_one={this.chooseImg.bind(this)}></List> )
 					}
-					<Pagination className="Pagination" onChange={page=>{this.chooseType('page',page)}} defaultCurrent={page_img.currentPage} total={page_img.totalPage} pageSize={page_img.pageSize} />
-				</div>
-			</div> 
+					<Pagination 
+						className="Pagination" 
+						defaultCurrent={1}
+						current={this.state.current} 
+						total={page_img.totalCount} 
+						pageSize={page_img.pageSize}
+						onChange={page=>{this.chooseType('page',page)}}  
+						/> 
+				</div> 
+			</div>  
 		)
-	}
-}
+	} 
+} 
 
 function Type({item,choose_one}){
 	return (
@@ -259,7 +252,7 @@ function Type({item,choose_one}){
 function List({item,choose_one}){
 	return ( 
 		<div onClick={()=>{choose_one(item.id)}} className={item.isClicked?'choosed':''}>
-			<div className={item.isClicked?'icon':''}>
+			<div className={item.isClicked?'icon_img':''}>
 				<div className="right-symbol"></div>
 			</div>
 			<img src={item.url} />
