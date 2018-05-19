@@ -6,7 +6,7 @@
 */
 
 'use strict';
-document.title='模板编辑器'; 
+
 import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -14,7 +14,6 @@ import { hashHistory } from 'react-router'
 import * as actions from 'actions'
 import curData from 'state/cur/curData'
 import './index.less'
-
 
 
 class OperateComponent extends React.Component {
@@ -48,6 +47,7 @@ class OperateComponent extends React.Component {
 	}
 	getConfig() {
 		let { location, actions, editConfig } = this.props
+		let { globalData } = editConfig
 		let { query } = location
 		let { templateType, composeType, adsFlag, name } = query
 		let id = query.id
@@ -71,6 +71,12 @@ class OperateComponent extends React.Component {
 					curPage: cfg.pageContent[cur.router]
 				}
 				window.tempCfg = res.data
+				cfg.globalData = { ...cfg.globalData, ...{
+					storeList:    globalData.storeList,
+					catgs:        globalData.catgs,
+					floors:       globalData.floors,
+					storeDetails: globalData.storeDetails
+				} }
 				actions.updateConfig({ ...newCfg, ...cfg })
 				resolve('模板数据')
 			}).catch(e => reject(e))
@@ -111,6 +117,7 @@ class OperateComponent extends React.Component {
 					sort:    1
 				}
 			]
+			actions.updateGlobal(globalData)
 			resolve('楼层')
 		}
 	}
@@ -119,88 +126,59 @@ class OperateComponent extends React.Component {
 			globalData.catgs = [
 				{
 					id:      '5a532b82130b38000b1884a7',
-					name:    '全部',
+					name:    '餐 饮',
 					picture: 'http://rongyi.b0.upaiyun.com/system/mall_area/picture/5a532b82130b38000b1884a7/201801181835551443.jpg',
 					sort:    1
 				},
 				{
 					id:      '5a532b82130b38000b1884a7',
-					name:    '服饰',
+					name:    '服 饰',
 					picture: 'http://rongyi.b0.upaiyun.com/system/mall_area/picture/5a532b82130b38000b1884a7/201801181835551443.jpg',
 					sort:    1
 				},
 				{
 					id:      '5a532b82130b38000b1884a7',
-					name:    '美食',
+					name:    '亲 子',
 					picture: 'http://rongyi.b0.upaiyun.com/system/mall_area/picture/5a532b82130b38000b1884a7/201801181835551443.jpg',
 					sort:    1
-				},{
+				},
+				{
 					id:      '5a532b82130b38000b1884a7',
-					name:    '娱乐',
+					name:    '娱 乐',
+					picture: 'http://rongyi.b0.upaiyun.com/system/mall_area/picture/5a532b82130b38000b1884a7/201801181835551443.jpg',
+					sort:    1
+				},
+				{
+					id:      '5a532b82130b38000b1884a7',
+					name:    '其他',
 					picture: 'http://rongyi.b0.upaiyun.com/system/mall_area/picture/5a532b82130b38000b1884a7/201801181835551443.jpg',
 					sort:    1
 				}
 			]
+			actions.updateGlobal(globalData)
 			resolve('分类')
 		}
 	}
 	getStoreList(globalData) {
 		return (resolve, reject) => {
 			globalData.storeList = {
-				data: [{
-					id: 1,
-					name:  '法拉利',
-					price: '698.99',
-					floor: 'L1',
-					no:    '101',
-					mall_id: '54f403eae4b002000cf63762',
-					pic: 'http://img.weiye.me/zcimgdir/headimg/32d7529d24439f8c4a22f753c918326e_o.jpg'
-				},{
-					id: 1,
-					name:  '法拉利',
-					price: '698.99',
-					floor: 'L1',
-					no:    '101',
-					mall_id: '54f403eae4b002000cf63762',
-					pic: 'http://img.weiye.me/zcimgdir/headimg/32d7529d24439f8c4a22f753c918326e_o.jpg'
-				},{
-					id: 1,
-					name:  '法拉利',
-					price: '698.99',
-					floor: 'L1',
-					no:    '101',
-					mall_id: '54f403eae4b002000cf63762',
-					pic: 'http://img.weiye.me/zcimgdir/headimg/32d7529d24439f8c4a22f753c918326e_o.jpg'
-				},{
-					id: 1,
-					name:  '法拉利',
-					price: '698.99',
-					floor: 'L1',
-					no:    '101',
-					mall_id: '54f403eae4b002000cf63762',
-					pic: 'http://img.weiye.me/zcimgdir/headimg/32d7529d24439f8c4a22f753c918326e_o.jpg'
-				},{
-					id: 1,
-					name:  '法拉利',
-					price: '698.99',
-					floor: 'L1',
-					no:    '101',
-					mall_id: '54f403eae4b002000cf63762',
-					pic: 'http://img.weiye.me/zcimgdir/headimg/32d7529d24439f8c4a22f753c918326e_o.jpg'
-				},{
-					id: 1,
-					name:  '法拉利',
-					price: '698.99',
-					floor: 'L1',
-					no:    '101',
-					mall_id: '54f403eae4b002000cf63762',
-					pic: 'http://img.weiye.me/zcimgdir/headimg/32d7529d24439f8c4a22f753c918326e_o.jpg'
-				}],
+				data: new Array(12).fill().map((_, i) => {
+					return {
+						id: i + 1,
+						name:  '康帅傅',
+						price: '698.99',
+						floor: `L1=1${('00' + (i+1)).substr(-2)}`,
+						no:    `1${('00' + (i+1)).substr(-2)}`,
+						mall_id: '54f403eae4b002000cf63762',
+						pic: 'http://rongyi.b0.upaiyun.com/commodity/text/201805191209037272.png'
+					}
+				}),
 				page: 1,
 				page_size: 12,
-				total: 0,
+				total: 64,
 				total_page: 1
 			}
+			actions.updateGlobal(globalData)
 			resolve('店铺列表')
 		}
 	}
@@ -225,8 +203,9 @@ class OperateComponent extends React.Component {
 						url:   'http://rongyi.b0.upaiyun.com/system/smartService/null/201801180034041097.png'
 					}
 				],
-					text: '优衣库/UNIQLO'
-				}
+				text: '优衣库/UNIQLO'
+			}
+			actions.updateGlobal(globalData)
 			resolve('店铺详情')
 		}
 	}
@@ -278,6 +257,7 @@ class OperateComponent extends React.Component {
 
 	render() {
 		window.envType = 'operate'
+		document.title = '模板编辑器'
 		return this.state.load
 		?
 		(

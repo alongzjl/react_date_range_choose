@@ -87,7 +87,7 @@ class ThemeManage extends React.Component {
 	}
 
 	render() {
-		let { list, idx, name, max } = this.props
+		let { list, idx, name, max, isBusiness } = this.props
 		let activeKey = Array.from(new Array(2), (_, i) => `${i}`)
 		let curData   = list[idx]
 		let listNode  = list.map((_, k) => {
@@ -104,7 +104,7 @@ class ThemeManage extends React.Component {
 			)
 		})
 		let addNode
-		if (list.length < (max || 10)) {
+		if (isBusiness === false && list.length < (max || 10)) {
 			addNode = (
 				<li
 					key={-1}
@@ -115,7 +115,7 @@ class ThemeManage extends React.Component {
 				</li>
 			)
 		}
-		let keyNode = Object.keys(curData).map((p, i) => {
+		let keyNode = isBusiness === false? Object.keys(curData).map((p, i) => {
 			let km  = keyMap[p]
 			let val = curData[p]
 			if (!km) return false
@@ -127,7 +127,7 @@ class ThemeManage extends React.Component {
 					<div className="pgsr-auth"></div>
 				</div>
 			)
-		})
+		}): false
 		return (
 			<Collapse defaultActiveKey={activeKey} onChange={this.cb}>
 				<Panel header={`${name}管理`} key={0}>

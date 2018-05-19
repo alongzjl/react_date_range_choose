@@ -100,20 +100,9 @@ class EditComponent extends React.Component {
 						{ editTab }
 					</div>
 
-					<div className="pg-float e-flex-box scrollbar">
-						{ Object.keys(curData).map((_, i) => {
-							var im = curData[_]
-							return (
-								<p key={i}>
-									<span>{curMap[_]}<br/>{_}</span>
-									{typeof im === 'object'? im? '{...}': 'null': _ === 'contentType'? cTypeMap[im]: im}
-								</p>
-							)
-						}) }
-					</div>
 				</div>
 			</div>
-		);
+		)
 	}
 }
 

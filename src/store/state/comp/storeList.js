@@ -1,8 +1,77 @@
+const common = require('state/common')
+let { authInit, deepCopy, extend, styleIdxChange } = common
+const c  = authInit(require('./catg'))
+const f  = authInit(require('./floor'))
+const l  = authInit(require('./letter'))
+const r  = authInit(require('./reset'))
+const p  = authInit(require('./page'))
+const ls = authInit(require('./listByStore'))
+
+const reset = extend(deepCopy(r), {
+	data: {
+		layout: {
+			top:  36,
+			left: 40
+		},
+		content: {
+			text: '全部店铺'
+		}
+	}
+})
+const catg = extend(deepCopy(c), {
+	data: {
+		layout: {
+			top:  36,
+			left: 104,
+			width: 360
+		}
+	}
+})
+const list = extend(deepCopy(ls), {
+	data: {
+		layout: {
+			top:  75,
+			left: 40
+		}
+	}
+})
+const floor = extend(deepCopy(f), {
+	data: {
+		layout: {
+			top:  110,
+			left: 490
+		}
+	}
+})
+const page = extend(deepCopy(p), {
+	data: {
+		layout: {
+			top:  374,
+			left: 40,
+			width:  430,
+			height: 20
+		},
+		content: {
+			pageSwitch:   true,
+			prevSwitch:   false,
+			nextSwitch:   false,
+			numberSwitch: false
+		}
+	}
+})
+const letter = extend(deepCopy(l), {
+	data: {
+		layout: {
+			top:  410,
+			left: 88
+		}
+	}
+})
 // 店铺列表
 const data = {
 	layout: {
 		position: 'absolute',
-		top:      0,
+		top:      100,
 		left:     0,
 		width:    540,
 		height:   500
@@ -18,7 +87,14 @@ const data = {
 		duration: 1,				// 持续时间
 		iterationCount: 'infinite'	// 循环次数
 	},
-	components: []
+	components: [
+		reset,
+		catg,
+		list,
+		floor,
+		page,
+		letter
+	]
 }
 
 module.exports = {

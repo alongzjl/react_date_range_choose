@@ -66,7 +66,7 @@ class Header extends React.Component {
 		let newCon = deepCopy(cfg.pageContent)
 		Object.keys(newCon).map(_ => this.formatPage(newCon[_]))
 
-		console.log(newCon)
+		// console.log(newCon)
 		let config = {
 			configPC: {
 				pageContent: cfg.pageContent,
@@ -98,7 +98,7 @@ class Header extends React.Component {
 				hashHistory.push(`/business/edit?id=${res.data}`)
 			}
 		})
-		console.log(JSON.stringify(config))
+		// console.log(JSON.stringify(config))
 	}
 
 	tNameChange(name) {

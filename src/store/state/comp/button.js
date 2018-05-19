@@ -16,7 +16,7 @@ const data = {
 	style: {
 		text: {
 			textAlign:       'center',
-			fontSize:        16, 
+			fontSize:        16,
 			lineHeight:      36,
 			fontStyle:       'normal',
 			fontWeight:      'normal',

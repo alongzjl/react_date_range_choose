@@ -37,7 +37,7 @@ const data = {
 			background: 'center no-repeat',
 			backgroundSize: 'contain',
 			backgroundImage: { type: 'custom', img: '' },
-			backgroundColor: { type: 'custom', color: '#fff' },
+			backgroundColor: { type: 'custom', color: 'rgba(0, 0, 0, 0)', rgb: '#000', alpha: 0 },
 			borderRadius:    {
 				topLeft:     20,
 				topRight:    20,

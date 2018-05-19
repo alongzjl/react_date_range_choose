@@ -10,7 +10,6 @@ module.exports = {
 	wonderfulActivity: 1,
 	time:              1,
 	weather:           1,
-	data:              1,
 	navigation:        1,
 	navigationFloat:   1,
 	storeList:         1,

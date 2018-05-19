@@ -6,7 +6,7 @@
 */
 
 'use strict';
-document.title='作品编辑器';  
+
 import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -15,7 +15,7 @@ import * as actions from 'actions'
 import { message }  from 'antd'
 import curData from 'state/cur/curData'
 import './index.less'
- 
+
 
 class BusinessComponent extends React.Component {
 	constructor(props) {
@@ -28,6 +28,23 @@ class BusinessComponent extends React.Component {
 	timeInit() {
 		let { actions } = this.props
 		actions.updateTime()
+	}
+	getWeather() {
+		return (resolve, reject) => {
+			// Ajax.post(`/easy-smart-service/member/pm25`, { area: '021' }).then(res => {
+				window.weather = {
+					temp: '33℃',
+					type: '小雨',
+					iconName: '07.png',
+					humidity: null,
+					direct: '西南风',
+					power: '<3级',
+					aqi: '108',
+					aqiInfo: '轻度污染'
+				}
+				resolve('天气数据')
+			// }).catch(e => reject(e))
+		}
 	}
 	getConfig() {
 		let { location, actions, editConfig } = this.props
@@ -121,7 +138,7 @@ class BusinessComponent extends React.Component {
 		this.getUserInfo(() => {
 			let { actions, editConfig } = this.props
 			let { globalData } = editConfig
-			let arr = ['getConfig']
+			let arr = ['getConfig', 'getWeather']
 			let promises = arr.map(key => new Promise(this[key](globalData)))
 			Promise.all(promises).then((o) => {
 				this.setState({ load: true })
@@ -138,6 +155,7 @@ class BusinessComponent extends React.Component {
 
 	render() {
 		window.envType = 'business'
+		document.title = '作品编辑器'
 		return this.state.load
 		?
 		(

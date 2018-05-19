@@ -28,7 +28,7 @@ import DateWeather       from 'compEdit/EditElement/DateWeather'
 import Navigation        from 'compEdit/EditElement/Navigation'
 import NavigationFloat   from 'compEdit/EditElement/NavigationFloat'
 import SplitLine         from 'compEdit/EditElement/SplitLine'
-import Map2D         from 'compEdit/EditElement/Map2D'
+import Map2D             from 'compEdit/EditElement/Map2D'
 
 import * as actions from 'actions'
 

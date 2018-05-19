@@ -190,11 +190,16 @@ class EditStyle extends React.Component {
 			return comps.map((p, i) => {
 				let da   = p.data
 				let name = p.name
+				let OK   = false
 				let { style, layout } = da
 				let cn = compMap[name]
 				let map = deepCopy(compNum)
 				if (!style) return false
 				let cnode = this.styleObj.bind(this, p, style, 1)()
+				cnode.map(_ => {
+					if (_) OK = true
+				})
+				if (!OK) return false
 				++map[name]
 				return (
 					<Panel header={`${cn}${map[name]}`} key={i}>
@@ -204,26 +209,19 @@ class EditStyle extends React.Component {
 			})
 		} else {
 			return styles.map((p, i) => {
-				if (!styleMap[p]) return
+				if (!data.auth.style[p] || !styleMap[p]) return
 				let ci    = 0
 				let cnode = Object.keys(style[p]).map((q, j) => {
-					if (!cssMap[q]) return
-					++ci
-					let cm     = cssMap[q],
-						val    = style[p][q],
+					if (!cssMap[q]) return false
+					let cm  = cssMap[q],
+						val = style[p][q],
 						auth   = data.auth.style[p][q],
 						render = this[`render${cm.type}`]
 					console.log(val, auth)
 					if (!auth || !render) return
+					++ci
 					// 根据样式类型渲染对应组件
 					let dom = this[`render${cm.type}`].bind(this, cm, data, style[p], val, q)()
-					try { data.auth.style[p][q] } catch(e) {
-						data.auth.style[p] = {}
-						let s = style[p]
-						for (let kk in s) {
-							data.auth.style[p][kk] = false
-						}
-					}
 					return (
 						<div className="pgs-row" key={j}>
 							<div className="pgsr-name">{ cm.name }</div>
@@ -231,7 +229,7 @@ class EditStyle extends React.Component {
 						</div>
 					)
 				})
-				if (ci === 0) return
+				if (ci === 0) return false
 				if (type === 1) {
 					return (
 						<Card title={styleMap[p]} bordered={false} key={i}>

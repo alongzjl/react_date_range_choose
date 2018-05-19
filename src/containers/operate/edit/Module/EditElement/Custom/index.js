@@ -36,9 +36,6 @@ class Custom extends React.Component {
 
 	componentDidMount() {}
 
-	// state = {
-	// 	storeDetails:{}
-	// }
 	selectComp(e, data, idx, parentIdx, parent) {
 		e.stopPropagation()
 		let { actions, editConfig } = this.props
@@ -81,6 +78,8 @@ class Custom extends React.Component {
 		let comp = data.data.components
 		comp.splice(idx, 1)
 		actions.updateComp(editConfig.curData.compIdx, parent)
+		actions.updateCur(curData)
+		actions.selectComp(parent)
 	}
 
 	render() {

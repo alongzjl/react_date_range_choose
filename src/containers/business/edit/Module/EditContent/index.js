@@ -20,10 +20,8 @@ import RouterJump      from 'compEdit/EditCommon/RouterJump'
 import ImageUploadComp from 'compEdit/EditCommon/ImageUploadComp'
 
 import SwiperImage       from 'compEdit/EditContent/SwiperImage'
-// import StoreList         from 'compEdit/EditContent/StoreList'
 import Navigation        from 'compEdit/EditContent/Navigation'
 import NavigationFloat   from 'compEdit/EditContent/NavigationFloat'
-import Date              from 'compEdit/EditContent/Date'
 import WonderfulActivity from 'compEdit/EditContent/WonderfulActivity'
 import Page              from 'compEdit/EditContent/Page'
 
@@ -182,8 +180,6 @@ class EditContent extends React.Component {
 		let activeKey
 		if (compName === 'navigation')             compCon = (<Navigation        data={this.props}/>)
 		else if (compName === 'navigationFloat')   compCon = (<NavigationFloat   data={this.props}/>)
-		else if (compName === 'date')              compCon = (<Date              data={this.props}/>)
-		// else if (compName === 'storeList')         compCon = (<StoreList         data={data}/>)
 		else if (compName === 'wonderfulActivity') compCon = (<WonderfulActivity data={this.props}/>)
 		else if (compName === 'swiperImage' && content.length > 1) compCon = (<SwiperImage data={this.props}/>)
 		if (content.length && compName != 'wonderfulActivity') {

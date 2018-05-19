@@ -165,15 +165,9 @@ class EditTheme extends React.Component {
 			)
 		}
 		return (
-			<div className="pgs-row" key={_}>
+			<div className={`pgs-row${col.color !== undefined? ' theme-color': ''}`} key={_}>
 				<div className="pgsr-name">{ col.name }</div>
 				<div className="pgsr-ctrl">{ dom }</div>
-				<div className="pgsr-auth" style={{ width: 40 }}>
-					<div className="pgt-edit">
-						<div className onClick={this.editKey.bind(this, _, col)}><Icon type="edit"/></div>
-						<div className onClick={this.removeKey.bind(this, _)}><Icon type="close"/></div>
-					</div>
-				</div>
 			</div>
 		)
 	}
@@ -183,27 +177,6 @@ class EditTheme extends React.Component {
 		let activeKey = ['0', '1']
 		let state     = this.state
 		let colors    = data.list[data.idx].colors
-		let addNode
-		if (Object.keys(colors).length < 50) {
-			addNode = (
-				<div className="pgs-row">
-					<div className="pgsr-name">
-						<Select value={state.keyType} onChange={_ => this.onChangeType(_)} style={{ width: '90%' }}>
-							<Option value="color">颜色</Option>
-							<Option value="picture">图片</Option>
-						</Select>
-					</div>
-					<div className="pgsr-ctrl">
-						<Input value={state.keyValue} onChange={_ => this.onChangeValue(_.target.value)} placeholder="字段名" />
-					</div>
-					<div className="pgsr-auth" style={{ width: 20 }}>
-						<div className="pgt-edit">
-							<div className onClick={this.addKey.bind(this)}><Icon type="plus"/></div>
-						</div>
-					</div>
-				</div>
-			)
-		}
 		let childNode = Object.keys(colors).map((_) => {
 			let col = colors[_]
 			let dom = this[state.editKey === _? 'renderEdit': 'renderTheme'](_, col, data)
@@ -221,10 +194,10 @@ class EditTheme extends React.Component {
 					action={'updateGlobal'}
 					name={'主题'}
 					max={10}
+					isBusiness={true}
 				/>
 				<Collapse defaultActiveKey={activeKey}>
 					<Panel header={'主题编辑'}>
-						{ addNode }
 						{ childNode }
 					</Panel>
 				</Collapse>

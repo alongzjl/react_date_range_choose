@@ -21,7 +21,6 @@ import Button            from 'compEdit/EditElement/Button'
 import Video             from 'compEdit/EditElement/Video'
 import SwiperImage       from 'compEdit/EditElement/SwiperImage'
 import WonderfulActivity from 'compEdit/EditElement/WonderfulActivity'
-import DateShow          from 'compEdit/EditElement/Date'
 import StoreList         from 'compEdit/EditElement/StoreList'
 import StoreDetails      from 'compEdit/EditElement/StoreDetails'
 import Navigation        from 'compEdit/EditElement/Navigation'
@@ -73,8 +72,7 @@ class Element extends React.Component {
 			else if (compName === 'button')          compCon = (<Button          data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
 			else if (compName === 'swiperImage')     compCon = (<SwiperImage     data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
 			else if (compName === 'wonderfulActivity')     compCon = (<WonderfulActivity     data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
-			else if (compName === 'date')            compCon = (<DateShow        data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} time={time} />)
- 			else if (compName === 'navigation')      compCon = (<Navigation      data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
+			else if (compName === 'navigation')      compCon = (<Navigation      data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
  			else if (compName === 'navigationFloat') compCon = (<NavigationFloat data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
 			else if (compName === 'storeList')       compCon = (<StoreList       data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
 			else if (compName === 'storeDetails')    compCon = (<StoreDetails    data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)

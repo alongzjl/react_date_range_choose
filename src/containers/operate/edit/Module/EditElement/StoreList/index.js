@@ -36,18 +36,18 @@ class StoreList extends React.Component {
 		// 	}
 		// }
 		// Ajax.get('/store/getStoreList').then(res => {
-			var m = Math.floor(Math.random() * 1e3)
-			ipt.list = [
-				{
-					id: 1,
-					name:  `法拉利${m}`,
+			ipt.list = new Array(12).fill().map((_, i) => {
+				var m = Math.floor(Math.random() * 1e2)
+				return {
+					id: i + 1,
+					name:  '康帅傅',
 					price: `${m}.99`,
-					floor: 'L1',
-					no:    '101',
+					floor: `L1=1${('00' + m).substr(-2)}`,
+					no:    `1${('00' + m).substr(-2)}`,
 					mall_id: '54f403eae4b002000cf63762',
-					pic: 'http://img.weiye.me/zcimgdir/headimg/32d7529d24439f8c4a22f753c918326e_o.jpg'
+					pic: 'http://rongyi.b0.upaiyun.com/commodity/text/201805191209037272.png'
 				}
-			]
+			})
 			this.setState({ ioInput: ipt })
 		// }).catch(e => console.log(e))
 		console.clear()

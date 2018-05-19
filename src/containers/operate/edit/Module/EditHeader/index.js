@@ -91,7 +91,7 @@ class Header extends React.Component {
 				hashHistory.push(`/operate/edit?id=${res.data}`)
 			}
 		})
-		console.log(JSON.stringify(config))
+		// console.log(JSON.stringify(config))
 	}
 
 	tNameChange(name) {

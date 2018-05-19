@@ -4,8 +4,8 @@ const data = {
 		position: 'absolute',
 		top:      0,
 		left:     0,
-		width:    25,
-		height:   500
+		width:    40,
+		height:   300
 	},
 	style:     {
 		filterBox: {
