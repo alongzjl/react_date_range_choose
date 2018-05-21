@@ -9,13 +9,13 @@
 const data = {
 	style:     {
 		text: {
+			display:        'none',
 			color:          { type: 'custom', color: '#000' },
 			fontSize:       12,
 			fontStyle:      'normal',
 			fontWeight:     'normal',
 			textAlign:      'center',
 			textDecoration: 'none',
-			display:'none' 
 		},
 		swiperImage: {
 			borderRadius:    {
@@ -33,23 +33,25 @@ const data = {
 		width:    540,
 		height:   200
 	},
-	content: [
-		{
-			img: { type: 'custom', img: require('compEdit/EditElement/images/won_2.png') },
-			title: '图片1',		// 图片标题
-			router: {}			// 路由
-		},
-		{
-			img: { type: 'custom', img: require('compEdit/EditElement/images/won_3.png') },
-			title: '图片2',		// 图片标题
-			router: {}			// 路由
-		},
-		{
-			img: { type: 'custom', img: require('compEdit/EditElement/images/won_4.png') },
-			title: '图片3',		// 图片标题
-			router: {}			// 路由
-		}
-	],
+	content: {
+		list: [
+			{
+				img: { type: 'custom', img: require('compEdit/EditElement/images/won_2.png') },
+				title: '图片1',		// 图片标题
+				router: {}			// 路由
+			},
+			{
+				img: { type: 'custom', img: require('compEdit/EditElement/images/won_3.png') },
+				title: '图片2',		// 图片标题
+				router: {}			// 路由
+			},
+			{
+				img: { type: 'custom', img: require('compEdit/EditElement/images/won_4.png') },
+				title: '图片3',		// 图片标题
+				router: {}			// 路由
+			}
+		]
+	},
 	animation: {
 		className: '',	// 动画样式
 		delay: 1,					// 开始时间

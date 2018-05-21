@@ -110,7 +110,6 @@ export default class PictureList extends React.Component {
 		this.setState({choosed_img:url});
 	}
 	render() {
-		let { firstAdd } = this.props
 		return (
 			<div>
 				<SkyLight
@@ -122,7 +121,7 @@ export default class PictureList extends React.Component {
 					title={'图片素材'}
 				>
 				<div className="outer">
-					<ImgModule save={this.save_img} page_img={this.state.page_img} getImgList={this.getImgList} firstAdd={firstAdd} imgTypes={this.state.imgTypes} imgList={this.state.imgList} />
+					<ImgModule save={this.save_img} page_img={this.state.page_img} getImgList={this.getImgList} imgTypes={this.state.imgTypes} imgList={this.state.imgList} />
 					<div className="bottom">
 						<Button type="primary" onClick={this.save}>确定</Button>
 						<Button onClick={this.close}>取消</Button>
@@ -151,28 +150,20 @@ class ImgModule extends React.Component {
 			}) 
 	}
 	chooseType(str,id) {
-		 this.setState({
-	      current: id,
+		this.setState({
+	      current: id
 	    })
 		this.props.getImgList(str,id);
 	}
 	chooseImg(img) { 
-		let firstAdd = this.props.firstAdd
 		let img_list = this.state.imgList
-		if(firstAdd){
-			img_list = img_list.map(item=>{
-				item.id === img ? item.isClicked = !item.isClicked : null;
-				return item
-			}); 
-		}else{
-			img_list = img_list.map(item=>{
-				item.id === img ? item.isClicked = !item.isClicked : item.isClicked = false;
-				return item  
-			});
-		}
+		img_list = img_list.map(item=>{
+			item.id === img ? item.isClicked = !item.isClicked : item.isClicked = false;
+			return item  
+		})
 		this.setState({
-				imgList:img_list
-			})
+			imgList:img_list
+		})
 		let choosed_img = img_list.filter(item => item.isClicked == true);
 		this.props.save(choosed_img)
 	};

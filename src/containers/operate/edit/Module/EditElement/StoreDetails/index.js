@@ -24,7 +24,7 @@ class StoreDetails extends React.Component {
 	componentWillUnmount() {}
 
 	ioOuter(ipt) {
-		 
+		
 	}
 	
 	init() {
@@ -39,7 +39,7 @@ class StoreDetails extends React.Component {
 		else if (envType === 'business') Custom = CustomB
 		else                             Custom = CustomV
 		this.init.bind(this)()
-		return (  
+		return (
 			<Custom
 				data={data}
 				actions={actions}

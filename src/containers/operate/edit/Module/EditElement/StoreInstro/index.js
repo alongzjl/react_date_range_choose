@@ -19,7 +19,7 @@ class StoreInstro extends React.Component {
 
 	componentWillUnmount() {}
 
-	ioOuter(ipt) { 
+	ioOuter(ipt) {
 		
 	} 
 	
@@ -32,7 +32,6 @@ class StoreInstro extends React.Component {
 	render() {
 		let { data, actions, idx, csn } = this.props;
 		this.init.bind(this)();
-		 
 		return (
 			<Custom
 				data={data}

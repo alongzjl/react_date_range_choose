@@ -75,8 +75,9 @@ class WonderfulActivity extends React.Component {
 		return new_obj  
 	}
 	render() {
-		let { data } = this.props 
-		const content = data.data.content
+		let { data } = this.props
+		let type = getAttr(data.data.content)
+		const content = type === 'Array'? data.data.content: data.data.content.list
 		return ( 
 			<div className="e-WonderfulActivity">
 				<div className={`swiper-container swiper-container_${this.state.random} outer_box`}>
@@ -85,8 +86,8 @@ class WonderfulActivity extends React.Component {
 							content.map((item, i) => <div className="swiper-slide" key={i}><div className="text_show" style={cssColorFormat(this.props, 'text')}>{item.title}</div><img src={item.img.img} style={cssColorFormat(this.props, 'swiperImage')} /></div>)
 						}   
 					</div>
-				</div>  
-				<div className="swiper-pagination"></div> 
+					<div className="swiper-pagination"></div>
+				</div> 
 			</div>
 		)  
 	}

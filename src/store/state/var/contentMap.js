@@ -3,6 +3,7 @@ module.exports = {
 	text:          { name: '文本内容', type: 'Textarea', max: 1000, placeholder: '右侧编辑内容', autosize: { minRows: 1, maxRows: 6 } },
 	title:         { name: '标题',    type: 'Title',    max: 30 },
 	img:           { name: '图片',    type: 'Image' },
+	video:         { name: '视频',    type: 'Video' },
 	filterBGImg:   { name: '字母图片', type: 'Image' },
 	filterPageImg: { name: '分页图片', type: 'Image' },
 	filterPrevImg: { name: '上页图片', type: 'Image' },

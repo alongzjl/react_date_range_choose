@@ -11,7 +11,7 @@ import { bindActionCreators } from 'redux'
 import { connect }  from 'react-redux'
 import * as actions from 'actions'
 
-import { Checkbox, Collapse, Icon, Input, InputNumber, Select } from 'antd'
+import { Card, Checkbox, Collapse, Icon, Input, InputNumber, Select } from 'antd'
 const  { TextArea } = Input
 const  { Panel }    = Collapse
 const Option = Select.Option
@@ -27,7 +27,9 @@ import Page              from 'compEdit/EditContent/Page'
 
 import * as variable from 'var'
 
-var conMap = variable.contentMap
+var conMap  = variable.contentMap,
+	compMap = variable.compMap.name,
+	compNum = variable.compMap.num
 
 import './index.less'
 
@@ -38,16 +40,12 @@ class EditContent extends React.Component {
 
 	componentWillUnmount() {}
 
-	onChange(val, key, index) {
+	onChange(val, key, obj, index) {
 		let { data, actions, editConfig } = this.props
 		let { curData } = editConfig
 		let { content } = data.data
 		let { parentComp } = curData
-		if (index === undefined) {
-			content[key] = val
-		} else {
-			content[index][key] = val
-		}
+		obj[key] = val
 		actions.updateComp(null, parentComp? parentComp: data)
 	}
 
@@ -63,7 +61,7 @@ class EditContent extends React.Component {
 		// console.log(key)
 	}
 	deleteCom(index) { 
-		let { data, actions, editConfig } = this.props;
+		let { data, actions, editConfig } = this.props
 		let { curData, curComp } = editConfig
 		let { content } = data.data
 		let { parentComp } = curData
@@ -71,12 +69,12 @@ class EditContent extends React.Component {
 			content = content.filter((item,i) => i!=index)
 			data.data.content = content
 			actions.updateComp(null, parentComp? parentComp: data)
-		}   
-		
+		}
 	}
+
 	/* 渲染组件开始 */
 	// 文本
-	renderTextarea(cfg, data, val, key, index) {
+	renderTextarea(cfg, data, obj, val, key, index) {
 		return (
 			<TextArea
 				min={cfg.min || 0} max={cfg.max || 100}
@@ -88,34 +86,34 @@ class EditContent extends React.Component {
 		)
 	}
 	// 数字
-	renderNumber(cfg, data, val, key, index) {
+	renderNumber(cfg, data, obj, val, key, index) {
 		return (
 			<InputNumber
 				min={cfg.min || 0} max={cfg.max || 100} step={cfg.step || 1}
-				value={val} onChange={v => this.onChange(v, key, index)}
+				value={val} onChange={v => this.onChange(v, key, obj, index)}
 				style={{ width: '100%' }}
 			/>
 		)
 	}
 	// 标题
-	renderTitle(cfg, data, val, key, index) {
+	renderTitle(cfg, data, obj, val, key, index) {
 		return (
 			<Input
 				min={cfg.min || 0} max={cfg.max || 100}
-				value={val} onChange={v => this.onChange(v.target.value, key, index)}
+				value={val} onChange={v => this.onChange(v.target.value, key, obj, index)}
 				style={{ width: '100%' }}
 			/>
 		)
 	} 
 	// 跳转路由
-	renderRouter(cfg, data, val, key, index) {
+	renderRouter(cfg, data, obj, val, key, index) {
 		let { actions } = this.props
 		return (
 			<RouterJump data={data} content={val} actions={actions} />
 		)
 	}
 	// 上传图片
-	renderImage(cfg, data, val, key, index) {
+	renderImage(cfg, data, obj, val, key, index) {
 		return (
 			<ImageUploadComp
 				data={data}
@@ -127,108 +125,159 @@ class EditContent extends React.Component {
 			/>
 		)
 	}
+	// 上传视频
+	renderVideo(cfg, data, obj, val, key, index) {
+		return (
+			<ImageUploadComp
+				data={data}
+				img={{}}
+				name={`video`}
+				action={'updateComp'}
+				style={{ width: '100%' }}
+			/>
+		)
+	}
 	// 网址
-	renderUrl(cfg, data, val, key, index) {
+	renderUrl(cfg, data, obj, val, key, index) {
 		return (
 			<Input
 				min={cfg.min || 0} max={cfg.max || 100}
-				defaultValue={val} onBlur={v => this.onChange(v.target.value, key, index)}
+				defaultValue={val} onBlur={v => this.onChange(v.target.value, key, obj, index)}
+				style={{ width: '100%' }}
+			/>
+		)
+	}
+	// 文本
+	renderInput(cfg, data, obj, val, key, index) {
+		return (
+			<Input
+				minLength={cfg.min || 0} maxLength={cfg.max || 100}
+				defaultValue={val} onChange={v => this.onChange(v.target.value, key, obj, index)}
 				style={{ width: '100%' }}
 			/>
 		)
 	}
 	// 开关
-	renderCheckbox(cfg, data, val, key, index) {
+	renderCheckbox(cfg, data, obj, val, key, index) {
 		return (
 			<Checkbox
-				checked={val || cfg.defaultValue || false} onChange={v => this.onChange(v.target.checked, key)}
+				checked={val || cfg.defaultValue || false} onChange={v => this.onChange(v.target.checked, key, obj)}
 			/>
 		)
 	}
 
-	renObj(data, content, index) {
+	renObj(parent, data, content, index) {
+		let me = this
 		let ci = 0
 		let childNode = Object.keys(content).map((p, i) => {
 			if (!conMap[p]) return false
 			let cm     = conMap[p]
 			let val    = content[p]
 			let auth   = data.auth.content[p]
-			let render = this[`render${cm.type}`]
+			let render = me[`render${cm.type}`]
 			if (!auth || !render) return false
 			// 根据样式类型渲染对应组件
-			let dom = this[`render${cm.type}`].bind(this, cm, data, val, p, index)()
+			let dom = this[`render${cm.type}`].bind(this, cm, parent, content, val, p, index)()
 			ci++
 			return (
 				<div className="pgs-row" key={i}>
 					<div className="pgsr-name">{ cm.name }</div>
 					<div className="pgsr-ctrl">{ dom }</div>
-					{  
+					{
 						data.name !='picture'&&cm.name=='图片'?<div className="delete" onClick={()=>{this.deleteCom(index)}}><Icon type="close-circle" style={{ fontSize: 18}} /></div>:null
-					} 
+					}
 				</div>
 			)
 		})
 		if (!ci) return false
 		return childNode
 	}
+	chiObj(data, init) {
+		let comps = data.data.components
+		if (!comps) return false
+		return comps.map((_, i) => {
+			let con  = _.data.content
+			let name = _.name
+			let cn   = compMap[name]
+			let OK   = false
+			let map  = deepCopy(compNum)
+			let childNode
+			if (con.length) {
+				childNode = con.map((_, j) => {
+					return (
+						<Card title={`内容${j + 1}`} bordered={false} key={j}>
+							{ this.renObj.bind(this, data, _, con, j)() }
+						</Card>
+					)
+				})
+				childNode.map(_ => {
+					if (_) OK = true
+				})
+				if (!OK) return false
+			} else {
+				let cont = this.renObj.bind(this, data, _, con)()
+				childNode = (
+					cont.length
+					?
+					<Card title={`内容编辑`} bordered={false} key={0}>
+						{ cont }
+					</Card>
+					:
+					false
+				)
+				if (!childNode) return false
+			}
+			++map[name]
+			return (
+				<Panel header={`${cn}${map[name]}`} key={init + i}>
+					{ childNode }
+				</Panel>
+			)
+		})
+	}
 
 	render() {
-		let { data, actions } = this.props
+		let { data, actions, editConfig } = this.props
 		let compName = data.name
 		let content  = data.data.content
 		let compCon
 		let childNode
 		let activeKey
+		let chiObj
 		if (compName === 'navigation')             compCon = (<Navigation        data={this.props}/>)
 		else if (compName === 'navigationFloat')   compCon = (<NavigationFloat   data={this.props}/>)
 		else if (compName === 'wonderfulActivity') compCon = (<WonderfulActivity data={this.props}/>)
-		else if (compName === 'swiperImage' && content.length > 1) compCon = (<SwiperImage data={this.props}/>)
-		if (content.length && compName != 'wonderfulActivity') {
-			activeKey = Array.from(new Array(content.length + 1), (_, i) => `${i}`)
+		else if (compName === 'swiperImage')       compCon = (<SwiperImage       data={this.props}/>)
+		if (content.length) {
 			childNode = content.map((_, i) => {
 				return (
 					<Panel header={`内容${i + 1}`} key={i + 1}>
-						{ this.renObj(data, _, i) }
+						{ this.renObj(data, data, _) }
 					</Panel>
 				)
 			})
+			chiObj = this.chiObj(data, content.length + 1)
+			activeKey = Array.from(new Array(content.length + (chiObj? chiObj.length: 0) + 1), (_, i) => `${i}`)
 		} else {
-			activeKey = ['0']
-			let con = this.renObj(data, content)
+			let con = this.renObj(data, data, content)
 			childNode = (
 				con.length
 				? 
-				<Panel header={'内容编辑'} key={data.name == 'video'?1:0}>
+				<Panel header={'内容编辑'} key={0}>
 					{ con }
 				</Panel>
 				:
 				false
 			)
+			chiObj = this.chiObj(data, 1)
+			activeKey = Array.from(new Array((chiObj? chiObj.length: 0) + 1), (_, i) => `${i}`)
 		}
 		return (
-			<section className="ry-roll-screen-config">
+			<section className="pg-content-business">
 				{ compCon }
 				<Collapse activeKey={activeKey} onChange={this.cb}>
-					{
-						data.name == 'swiperImage'||data.name == 'video' ? <Panel header={`内容`} key={0}>
-							<div className="pgs-row" key={0}>
-								<div className="pgsr-name">{data.name == 'swiperImage'?'添加图片':'添加视频'}</div>
-								<div className="pgsr-ctrl">
-									<ImageUploadComp
-										data={data}
-										img={{}}        
-										name={`${data.name=='video'?'src':'first'}`}
-										content={content}  
-										action={'updateComp'}
-										style={{ width: '100%' }}
-									/>
-								</div>
-							</div>
-						</Panel> : null
-					}
-					{
-						!(data.name == 'swiperImage'&& content.length==1 && content[0].img.img == '') ? childNode : null
-					}
+					{ childNode }
+					{ chiObj }
 				</Collapse>
 			</section>
 		)

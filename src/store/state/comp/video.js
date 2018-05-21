@@ -16,7 +16,7 @@ const data = {
 	}, 
 	// 内容管理
 	content: {
-		src:''
+		video: ''
 	},
 	// 动画设置
 	animation: {

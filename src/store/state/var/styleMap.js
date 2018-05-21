@@ -17,7 +17,7 @@ module.exports = {
 	},
 	// 定义样式名称 & 渲染类型 & 相关配置
 	style: {
-		display:           { name:'显示文本',   type: 'Switch', true: 'block', false: 'none' },
+		display:           { name: '显示',    type: 'Switch', true: 'block', false: 'none' },
 		top:               { name: '上',      type: 'Number', min: -300, max: 540 },
 		left:              { name: '左',      type: 'Number', min: -200, max: 960 },
 		width:             { name: '宽',      type: 'Number', min: 0, max: 540 },

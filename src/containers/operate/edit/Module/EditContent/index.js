@@ -129,6 +129,18 @@ class EditContent extends React.Component {
 			/>
 		)
 	}
+	// 上传视频
+	renderVideo(cfg, data, val, key, index) {
+		return (
+			<ImageUploadComp
+				data={data}
+				img={{}}
+				name={`video`}
+				action={'updateComp'}
+				style={{ width: '100%' }}
+			/>
+		)
+	}
 	// 网址
 	renderUrl(cfg, con, val, key, index) {
 		return (
@@ -199,8 +211,8 @@ class EditContent extends React.Component {
 		else if (compName === 'navigationFloat')   compCon = (<NavigationFloat   data={this.props}/>)
 		else if (compName === 'weather')           compCon = (<Weather           data={this.props}/>)
 		else if (compName === 'wonderfulActivity') compCon = (<WonderfulActivity data={this.props}/>)
-		else if (compName === 'swiperImage' && content.length > 1) compCon = (<SwiperImage data={this.props}/>)
-		if (content.length && compName != 'wonderfulActivity') {
+		else if (compName === 'swiperImage')       compCon = (<SwiperImage       data={this.props}/>)
+		if (content.length) {
 			activeKey = Array.from(new Array(content.length + 1), (_, i) => `${i}`)
 			childNode = content.map((_, i) => {
 				return (
@@ -215,7 +227,7 @@ class EditContent extends React.Component {
 			childNode = (
 				con.length
 				? 
-				<Panel header={'内容编辑'} key={data.name == 'video'? 1: 0}>
+				<Panel header={'内容编辑'} key={0}>
 					{ con }
 				</Panel>
 				:
@@ -226,26 +238,7 @@ class EditContent extends React.Component {
 			<section className="ry-roll-screen-config">
 				{ compCon }
 				<Collapse activeKey={activeKey} onChange={this.cb}>
-					{
-						data.name == 'swiperImage'||data.name == 'video' ? <Panel header={`内容`} key={0}>
-							<div className="pgs-row" key={0}>
-								<div className="pgsr-name">{data.name == 'swiperImage'?'添加图片':'添加视频'}</div>
-								<div className="pgsr-ctrl">
-									<ImageUploadComp
-										data={data}
-										img={{}}        
-										name={`${data.name=='video'?'src':'first'}`}
-										content={content}  
-										action={'updateComp'}
-										style={{ width: '100%' }}
-									/>
-								</div>
-							</div>
-						</Panel> : null
-					}
-					{
-						!(data.name == 'swiperImage'&& content.length==1 && content[0].img.img == '') ? childNode : null
-					}
+					{ childNode }
 				</Collapse>
 			</section>
 		)

@@ -124,7 +124,7 @@ const data = {
 		width:    540,
 		height:   120
 	},
-	content:   {}, 
+	content:   {},
 	animation: {
 		className: '',	// 动画样式
 		delay: 1,					// 开始时间

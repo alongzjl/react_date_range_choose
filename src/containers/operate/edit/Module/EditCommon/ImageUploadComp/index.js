@@ -35,31 +35,13 @@ class ImageUploadComp extends React.Component {
 	}
 
 	enter(imgList, index) {
-		let { data, name, action, actions, editConfig } = this.props
+		let { data, img, name, action, actions, editConfig } = this.props
 		let da = data.data
 		let { content }    = da
 		let { curData }    = editConfig
 		let { parentComp } = curData
-		const length = content.length;
-		if (getAttr(content) === 'Array') {
-			if (name == 'first') { 
-				imgList = imgList.map((item, i) => {
-					var obj = {
-						img:    { img: item.url, type: 'custom' },
-						title:  `图片${da.content.length + i}`,  
-						router: content[i]? content[i].router: {}
-					} 
-					return obj
-				})
-				da.content = da.content.concat(imgList); 
-			} else { 
-				content[index][name].img = imgList[0].url
-			}
-		} else if (data.name == 'video'){
-			content[name] = imgList[0].url
-		} else {
-			content[name].img = imgList[0].url
-		}
+		const length = content.length
+		img[name] = imgList[0].url
 		actions[action](null, parentComp? parentComp: data)
 	}
 
@@ -86,50 +68,27 @@ class ImageUploadComp extends React.Component {
 			name:  '自定义',
 			img: imgVal
 		}
-		if(name == 'first'){ 
+		if (name === 'video') {
 			return (
-					<div className="pg-img-upload">
-						<Row type="flex" align="middle" style={{ width: '100%' }}>
-							<Col span={9}>
-								<div className="add_img" onClick={this.showList.bind(this)}>
-									<div className="add_text"><Icon type="plus" /></div>
-								</div>
-							</Col>
-						</Row>
-						<PictureList
-							ref={com => { this.addImgModal = com }}
-							props={this.props}
-							data={this.props}
-							actions={actions}
-							index={0}
-							type={data.name}
-							firstAdd={true} 
-							enter={this.enter}
-						/>
-					</div>
-				)
-		}else if(name == 'src'){
-			return (
-					<div className="pg-img-upload">
-						<Row type="flex" align="middle" style={{ width: '100%' }}>
-							<Col span={9}>
-								<div className="add_img" onClick={this.showList.bind(this)}>
-									<div className="add_text"><Icon type="plus" /></div>
-								</div>
-							</Col>
-						</Row> 
-						<VideoList
-							ref={com => { this.addImgModal = com }}
-							props={this.props}
-							data={this.props}
-							actions={actions}
-							index={0}
-							type={data.name}
-							firstAdd={true}
-							enter={this.enter}
-						/>
-					</div>
-				)
+				<div className="pg-img-upload">
+					<Row type="flex" align="middle" style={{ width: '100%' }}>
+						<Col span={9}>
+							<div className="add_img" onClick={this.showList.bind(this)}>
+								<div className="add_text"><Icon type="plus" /></div>
+							</div>
+						</Col>
+					</Row> 
+					<VideoList
+						ref={com => { this.addImgModal = com }}
+						props={this.props}
+						data={this.props}
+						actions={actions}
+						index={0}
+						type={data.name}
+						enter={this.enter}
+					/>
+				</div>
+			)
 		}
 		let options = Object.keys(colors).map((_) => {
 			let col = colors[_]
