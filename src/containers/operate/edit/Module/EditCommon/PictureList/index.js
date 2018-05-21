@@ -44,11 +44,13 @@ export default class PictureList extends React.Component {
 		this.addImgModal.show()
 		Ajax.postJSON('/easy-smart/ySourceGroupManage/query',{type:1}).then(res => {
 			this.setState({ 
-				imgTypes:res.data
+				imgTypes: res.data
 			})
+
 		})  
 		this.setState({groupId:39})
 		this.getImgList()
+
 	}
 	state = {
 		choosed_img:[],
@@ -60,7 +62,7 @@ export default class PictureList extends React.Component {
 		page_size:14,
 		pageSize:14,
 		name:'', 
-		groupId:39
+		groupId: 39
 	} 
 	componentDidMount(){}
 	 
@@ -209,7 +211,7 @@ class ImgModule extends React.Component {
 			<div className="content">
 				<div className="left">
 					{
-						this.state.imgTypes.map((item,index) => <Type key={index} item={item} choose_one={this.chooseType.bind(this)}></Type>)
+						this.state.imgTypes.map((item,index) => <Type groupId={this.state.groupId} key={index} item={item} choose_one={this.chooseType.bind(this)}></Type>)
 					}
 				</div> 
 				<div className="right">
@@ -244,9 +246,9 @@ class ImgModule extends React.Component {
 	}
 }
 
-function Type({item,choose_one}){
+function Type({item, choose_one}){
 	return (
-		<div onClick={()=>{choose_one('groupId',item.id)}}>{item.name}</div> 
+		<div className={this.groupId === item.id? 's-active': ''} onClick={()=>{choose_one('groupId', item.id)}}>{item.name}</div> 
 	)
 }
 

@@ -12,7 +12,7 @@ class Text extends React.Component {
 	renderStyle1(props, style) {
 		let { data } = props
 		return (
-			<div style={cssColorFormat(props, style)} dangerouslySetInnerHTML={{__html: textBreak(data.data.content.text)}}></div>
+			<div style={cssColorFormat(props, style)} dangerouslySetInnerHTML={{__html: textBreak(data.data.content.text || '右侧编辑内容')}}></div>
 		)
 	}
 	

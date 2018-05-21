@@ -24,13 +24,6 @@ class Page extends React.Component {
 		ioInput.body.page = str
 		ioOuter(ioInput)
 	}
-	itemRender(cur, type, ele) {
-		let { props } = this
-		let { ioInput } = props
-		let { body }    = ioInput
-		if (type === 'page') return <div style={cssColorFormat(props, 'filterBox')} className={`ep-item${body.page === cur? ' s-active': ''}`}><i style={nCss}></i></div>
-		return false
-	}
 	renderDom(props, body) {
 		let { page, size, total } = body
 		let content = props.data.data.content
@@ -50,8 +43,8 @@ class Page extends React.Component {
 			nextNode,
 			node
 
-		if (swhp) prevNode = (<div className={page < 2? 's-disabled': ''}          style={{ ...cssp, ...cssColorFormat(props, 'PagePrev') }} onClick={this.selectVal.bind(this, page - 1)}></div>)
-		if (swhn) nextNode = (<div className={page >= totalPage? 's-disabled': ''} style={{ ...cssn, ...cssColorFormat(props, 'PageNext') }} onClick={this.selectVal.bind(this, page + 1)}></div>)
+		if (swhp) prevNode = (<div key={0} className={page < 2? 's-disabled': ''}          style={{ ...cssp, ...cssColorFormat(props, 'PagePrev') }} onClick={this.selectVal.bind(this, page - 1)}></div>)
+		if (swhn) nextNode = (<div key={2} className={page >= totalPage? 's-disabled': ''} style={{ ...cssn, ...cssColorFormat(props, 'PageNext') }} onClick={this.selectVal.bind(this, page + 1)}></div>)
 		if (swh) {
 			node = Array.from(new Array(totalPage)).map((_, i) => {
 				let cur = i + 1
@@ -69,7 +62,7 @@ class Page extends React.Component {
 				)
 			})
 			node = (
-				<div className="ep-page">{node}</div>
+				<div key={1} className="ep-page">{node}</div>
 			)
 		}
 		return [prevNode, node, nextNode]

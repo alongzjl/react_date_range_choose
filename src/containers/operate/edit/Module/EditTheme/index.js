@@ -221,6 +221,7 @@ class EditTheme extends React.Component {
 					action={'updateGlobal'}
 					name={'主题'}
 					max={10}
+					isBusiness={false}
 				/>
 				<Collapse defaultActiveKey={activeKey}>
 					<Panel header={'主题编辑'}>

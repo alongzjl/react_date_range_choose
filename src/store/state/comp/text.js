@@ -27,7 +27,7 @@ const data = {
 		height:   30
 	},
 	content: {
-		text:   '右侧编辑文字', 			// 文字内容
+		text:   '', 			// 文字内容
 		router: {}				// 路由
 	},
 	animation: {
