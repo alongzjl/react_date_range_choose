@@ -7,7 +7,7 @@ const data = {
 		text: { 
 			textAlign:      'center',
 			fontSize:       12, 
-			lineHeight:     36, 
+			lineHeight:     16,   
 			transform:       { rotate: 0 },
 			fontStyle:      'normal',
 			fontWeight:     'normal',
@@ -29,8 +29,8 @@ const data = {
 			animation:      '0s 0s 1'			// 动画 (0: 开始时间, 1: 持续时间, 2: 循环次数)
 		}, 
 		image:{
-			height:30,
-			width:30,
+			height:17, 
+			width:17,
 			borderRadius:    {
 				topLeft:     6,
 				topRight:    6,
@@ -50,7 +50,7 @@ const data = {
 		top:      0,
 		left:     0,
 		width:    120,
-		height:   50 
+		height:   30 
 	}, 
 	content: {
 		img:    { type: 'custom', img: require('compEdit/EditElement/images/phone.png') },	// 图片url

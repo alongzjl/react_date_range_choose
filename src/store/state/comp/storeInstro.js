@@ -2,8 +2,81 @@
  * @Author: Along
  * @Date:   2018-05-10
  */
+const common = require('state/common')
+let { authInit, deepCopy, extend, styleIdxChange } = common
+const t  = authInit(require('./text'))
+const w  = authInit(require('./wonderfulActivity'))
+const s  = authInit(require('./splitLine'))
 
+const splitLine = extend(deepCopy(s), {
+	data: {
+		layout: {
+			top:  5,
+			left: 30
+		}, 
+		 style:{
+		 	line:{
+		 		height: 12,  
+			 	width:0,  
+				borderLeft: {
+					width: 2,  
+					style: 'solid',
+					color: { type: 'custom', color: '#CFAD81' }
+				}  
+		 	} 
+		 }
+	} 
+})
 
+const title = extend(deepCopy(t), {
+	data: {
+		layout: {
+			top:  12, 
+			left: 40  
+		}, 
+		style:{
+			text:{
+				textAlign:'left'
+			}
+		},   
+		content: {
+			text: '店铺介绍'
+		} 
+	}
+})
+const instroduce = extend(deepCopy(t), {
+	data: {
+		layout: {
+			top:  60,
+			left: 30,
+			width: 480,
+			height:111
+		},
+		content:{
+			text:'    UNIQLO（日文假名发音：ユニクロ），日本服装品牌，由日本迅销公司建立于1963年，当年是一家销售西服的小服装店，现已成为国际知名服装品牌。优衣库现任董事长兼总经理柳井正在日本首次引进了大卖场式的服装销售方式，通过独特的商品策划、开发和销售体系来实现店铺运作的低成本化，由此引发了优衣库的'
+		}
+	}
+})    
+const imagList = extend(deepCopy(w), {
+	data: {
+		layout: {
+			top:  170,
+			left: 30,  
+			width: 480, 
+			height:286 
+		} 
+	},
+	feature:{
+		swiperOptions:{
+			slideOptions:{
+				spaceBetween:25, 
+				slidesPerView:2,  
+				centeredSlides:true,
+			},
+		}
+	}
+})
+ 
 const data = {
 	style:     {},
 	layout:    {
@@ -11,8 +84,8 @@ const data = {
 		top:      0,
 		left:     0,
 		width:    540,
-		height:   400
-	},
+		height:   500 
+	},  
 	content:   {},
 	animation: {
 		className: '',	// 动画样式
@@ -20,14 +93,10 @@ const data = {
 		duration: 1,				// 持续时间
 		iterationCount: 'infinite'	// 循环次数
 	},
-	// 组件管理
-	components: []
+	// 组件管理  
+	components: [title,instroduce,imagList,splitLine]
 }
-/*
-{"name":"text","type":"base","data":{"style":{"text":{"textAlign":"center","fontSize":16,"lineHeight":26,"transformRotate":0,"fontStyle":"normal","fontWeight":"normal","textDecoration":"none","opacity":1,"textShadow":{"h_shadow":0,"v_shadow":0,"blur_dis":0,"color":{"type":"custom","color":"rgba(8,0,0,1)","alpha":100,"rgb":"#080000"}},"color":{"type":"custom","color":"#333"},"animation":"0s 0s 1"}},"layout":{"position":"absolute","top":0,"left":0,"width":120,"height":30},"content":{"text":"店铺简介","router":{}},"animation":{"className":"","delay":1,"duration":1,"iterationCount":"infinite"}},"styleList":{"idx":0,"list":[{"name":"样式1","img":"","data":{"style":{"text":{"textAlign":"center","fontSize":16,"lineHeight":26,"transformRotate":0,"fontStyle":"normal","fontWeight":"normal","textDecoration":"none","opacity":1,"textShadow":{"h_shadow":0,"v_shadow":0,"blur_dis":0,"color":{"type":"custom","color":"rgba(8,0,0,1)","alpha":100,"rgb":"#080000"}},"color":{"type":"custom","color":"#333"},"animation":"0s 0s 1"}},"layout":{"position":"absolute","top":0,"left":0,"width":120,"height":30},"content":{"text":"店铺简介","router":{}},"animation":{"className":"","delay":1,"duration":1,"iterationCount":"infinite"}}}]},"feature":{},"auth":{"style":{"text":{"textAlign":false,"fontSize":false,"lineHeight":false,"transformRotate":false,"fontStyle":false,"fontWeight":false,"textDecoration":false,"opacity":false,"textShadow":false,"color":false,"animation":false}},"content":{"text":false,"router":false},"animation":{"className":false,"delay":false,"duration":false,"iterationCount":false},"feature":{}}},
-{"name":"text","type":"base","data":{"style":{"text":{"textAlign":"center","fontSize":12,"lineHeight":16,"transformRotate":0,"fontStyle":"normal","fontWeight":"normal","textDecoration":"none","opacity":1,"textShadow":{"h_shadow":0,"v_shadow":0,"blur_dis":0,"color":{"type":"custom","color":"rgba(15,1,1,1)","alpha":100,"rgb":"#0f0101"}},"color":{"type":"custom","color":"#333"},"animation":"0s 0s 1"}},"layout":{"position":"absolute","top":42,"left":11,"width":497,"height":103},"content":{"text":"店铺简介内容显示...","router":{}},"animation":{"className":"","delay":1,"duration":1,"iterationCount":"infinite"}},"styleList":{"idx":0,"list":[{"name":"样式1","img":"","data":{"style":{"text":{"textAlign":"center","fontSize":12,"lineHeight":16,"transformRotate":0,"fontStyle":"normal","fontWeight":"normal","textDecoration":"none","opacity":1,"textShadow":{"h_shadow":0,"v_shadow":0,"blur_dis":0,"color":{"type":"custom","color":"rgba(15,1,1,1)","alpha":100,"rgb":"#0f0101"}},"color":{"type":"custom","color":"#333"},"animation":"0s 0s 1"}},"layout":{"position":"absolute","top":42,"left":11,"width":497,"height":103},"content":{"text":"","router":{}},"animation":{"className":"","delay":1,"duration":1,"iterationCount":"infinite"}}}]},"feature":{},"auth":{"style":{"text":{"textAlign":false,"fontSize":false,"lineHeight":false,"transformRotate":false,"fontStyle":false,"fontWeight":false,"textDecoration":false,"opacity":false,"textShadow":false,"color":false,"animation":false}},"content":{"text":false,"router":false},"animation":{"className":false,"delay":false,"duration":false,"iterationCount":false},"feature":{}}},
-{"name":"wonderfulActivity","type":"base","data":{"style":{"text":{"color":{"type":"custom","color":"#fff"},"fontSize":12,"fontStyle":"normal","fontWeight":"normal","textAlign":"center","textDecoration":"none"},"swiperImage":{"borderRadius":{"topLeft":16,"topRight":16,"bottomRight":16,"bottomLeft":16}}},"layout":{"position":"absolute","top":132,"left":-2,"width":540,"height":200},"content":[],"animation":{"className":"","delay":1,"duration":1,"iterationCount":"infinite"},"components":[]},"styleList":{"idx":0,"list":[{"name":"样式1","img":"","data":{"style":{"text":{"color":{"type":"custom","color":"#fff"},"fontSize":12,"fontStyle":"normal","fontWeight":"normal","textAlign":"center","textDecoration":"none"},"swiperImage":{"borderRadius":{"topLeft":16,"topRight":16,"bottomRight":16,"bottomLeft":16}}},"layout":{"position":"absolute","top":132,"left":-2,"width":540,"height":200},"content":[],"animation":{"className":"","delay":1,"duration":1,"iterationCount":"infinite"},"components":[]}}]},"feature":{"style":{"layout":"0","title":"0"},"layout":1,"swiperOptions":{"direction":"horizontal","autoplay":true,"loop":true,"speed":1000,"spaceBetween":70,"slidesPerView":2,"centeredSlides":true,"effect":"slide","autoplayOptions":{"delay":1000,"stopOnLastSlide":false,"disableOnInteraction":false,"reverseDirection":false},"pagination":true,"paginationOptions":{"el":".swiper-pagination","type":"bullets","progressbarOpposite":true,"dynamicBullets":false,"dynamicMainBullets":2,"hideOnClick":false,"clickable":false}},"list":[{"title":"促销图文","url":"http://rongyi.b0.upaiyun.com/system/smartService/null/201801180034041097.png"}]},"auth":{"style":{"text":{"color":false,"fontSize":false,"fontStyle":false,"fontWeight":false,"textAlign":false,"textDecoration":false},"swiperImage":{"borderRadius":false}},"content":[],"animation":{"className":false,"delay":false,"duration":false,"iterationCount":false},"feature":{"style":false,"layout":false,"swiperOptions":false}}}
-*/
+
 module.exports = {  
 	name: 'storeInstro', 
 	type: 'advanced',

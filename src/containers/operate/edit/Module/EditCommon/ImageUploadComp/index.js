@@ -46,12 +46,12 @@ class ImageUploadComp extends React.Component {
 				imgList = imgList.map((item, i) => {
 					var obj = {
 						img:    { img: item.url, type: 'custom' },
-						title:  `图片${i + 1}`,
+						title:  `图片${da.content.length + i}`,  
 						router: content[i]? content[i].router: {}
-					}
+					} 
 					return obj
 				})
-				da.content = imgList
+				da.content = da.content.concat(imgList); 
 			} else { 
 				content[index][name].img = imgList[0].url
 			}

@@ -72,20 +72,18 @@ class SwiperImage extends React.Component {
 	}; 
 	render() { 
 		let { data } = this.props;
-		data = data.data; 
+		data = data.data;  
 		const a = cssColorFormat(this.props, 'swiperImage');
 		return (  
 			<div className="e-SwiperImage">
-				{   
-					<div className={`swiper-container swiper-container_${this.state.random} outer_box`}> 
-						<div className="swiper-wrapper">
-							{
-								data.content.map((item,index) => <div className="swiper-slide" key={index}><div className="text_show" style={cssColorFormat(this.props, 'text')}>{item.title}</div><img src={compImgFormat(this.props, item.img)} style={cssColorFormat(this.props, 'swiperImage')} /></div>)
-							}  
-						</div>     
-						<div className="swiper-pagination"></div>
-					</div>
-				}  
+				<div className={`swiper-container swiper-container_${this.state.random} outer_box`}> 
+					<div className="swiper-wrapper">
+						{
+							data.content.map((item,index) => <div className="swiper-slide" key={index}><div className="text_show" style={cssColorFormat(this.props, 'text')}>{item.title}</div><img src={compImgFormat(this.props, item.img)} style={cssColorFormat(this.props, 'swiperImage')} /></div>)
+						}  
+					</div>     
+				</div>   
+				<div className="swiper-pagination"></div>
 			</div>
 		)
 	}

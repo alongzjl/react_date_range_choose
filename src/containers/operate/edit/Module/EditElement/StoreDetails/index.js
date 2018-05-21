@@ -24,7 +24,7 @@ class StoreDetails extends React.Component {
 	componentWillUnmount() {}
 
 	ioOuter(ipt) {
-		
+		 
 	}
 	
 	init() {
@@ -39,19 +39,7 @@ class StoreDetails extends React.Component {
 		else if (envType === 'business') Custom = CustomB
 		else                             Custom = CustomV
 		this.init.bind(this)()
-		let comp  = data.data.components
-		comp = comp.map(item => {
-			if (item.name == 'text') {
-				item.data.content.text = '优衣库/UNIQLO'
-			} else if(item.name == 'button') {
-				item.data.content.text = '立即前往'
-			} else if(item.name == 'picture') {
-				item.data.content.img.img = require('compEdit/EditElement/images/Index_Logo.png')  
-			}
-			return item
-		}) 
-		data.data.components = comp;
-		return (
+		return (  
 			<Custom
 				data={data}
 				actions={actions}

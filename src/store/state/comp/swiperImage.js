@@ -7,7 +7,8 @@ const data = {
 			fontStyle:      'normal',
 			fontWeight:     'normal',
 			textAlign:      'center',
-			textDecoration: 'none'
+			textDecoration: 'none',
+			display:'none'
 		},
 		swiperImage:{
 			borderRadius:    {

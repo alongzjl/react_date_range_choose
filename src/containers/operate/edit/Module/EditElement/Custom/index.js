@@ -16,6 +16,7 @@ import { Icon } from 'antd'
 import Picture      from 'compEdit/EditElement/Picture'
 import Web          from 'compEdit/EditElement/Web'
 import Button       from 'compEdit/EditElement/Button'
+import SplitLine    from 'compEdit/EditElement/SplitLine'
 import Text         from 'compEdit/EditElement/Text'
 import Time         from 'compEdit/EditElement/Time'
 import Weather      from 'compEdit/EditElement/Weather'
@@ -104,10 +105,11 @@ class Custom extends React.Component {
 					else ob[__] = v.value
 				})
 			}
-
-
+ 
+ 
 			if (compName === 'picture')                compCon = (<Picture           data={_} parent={data} editConfig={editConfig} actions={actions} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} />)
 			else if (compName === 'web')               compCon = (<Web               data={_} parent={data} editConfig={editConfig} actions={actions} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} />)
+			else if (compName === 'splitLine')         compCon = (<SplitLine         data={_} parent={data} editConfig={editConfig} actions={actions} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} />)
 			else if (compName === 'button')            compCon = (<Button            data={_} parent={data} editConfig={editConfig} actions={actions} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} />)
 			else if (compName === 'text')              compCon = (<Text              data={_} parent={data} editConfig={editConfig} actions={actions} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} />)
 			else if (compName === 'time')              compCon = (<Time              data={_} parent={data} editConfig={editConfig} actions={actions} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} />)

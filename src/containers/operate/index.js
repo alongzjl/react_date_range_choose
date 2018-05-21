@@ -181,7 +181,7 @@ class OperateComponent extends React.Component {
 			actions.updateGlobal(globalData)
 			resolve('店铺列表')
 		}
-	}
+	} 
 	getStoreDetails(globalData) {
 		return (resolve, reject) => {
 			globalData.storeDetails = {
@@ -204,8 +204,8 @@ class OperateComponent extends React.Component {
 					}
 				],
 				text: '优衣库/UNIQLO'
-			}
-			actions.updateGlobal(globalData)
+			}  
+			//actions.updateGlobal(globalData)
 			resolve('店铺详情')
 		}
 	}

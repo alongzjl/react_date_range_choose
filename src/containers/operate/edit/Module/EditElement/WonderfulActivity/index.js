@@ -85,8 +85,8 @@ class WonderfulActivity extends React.Component {
 							content.map((item, i) => <div className="swiper-slide" key={i}><div className="text_show" style={cssColorFormat(this.props, 'text')}>{item.title}</div><img src={item.img.img} style={cssColorFormat(this.props, 'swiperImage')} /></div>)
 						}   
 					</div>
-					<div className="swiper-pagination"></div>
-				</div> 
+				</div>  
+				<div className="swiper-pagination"></div> 
 			</div>
 		)  
 	}
