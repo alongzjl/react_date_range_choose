@@ -45,8 +45,7 @@ export default class PictureList extends React.Component {
 		Ajax.postJSON('/easy-smart/ySourceGroupManage/query',{type:1}).then(res => {
 			this.setState({ 
 				imgTypes: res.data
-			})
-			this.setState({ groupId: res.data[0].id })
+			}) 
 			this.getImgList('groupId', res.data[0].id)
 		})
 	}

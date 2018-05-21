@@ -59,9 +59,8 @@ export default class VideoList extends React.Component {
 			this.setState({ 
 				videoTypes:res.data
 			})  
-		}) 
-		this.setState({groupId:42})    
-		this.getVideoList();
+		})  
+		this.getVideoList('groupId', res.data[0].id);
 	};
 	
 	getVideoList = (str,id) => { 
