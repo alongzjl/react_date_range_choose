@@ -47,6 +47,7 @@ export default class PictureList extends React.Component {
 				imgTypes: res.data
 			})
 
+
 		})  
 		this.setState({groupId:39})
 		this.getImgList()
