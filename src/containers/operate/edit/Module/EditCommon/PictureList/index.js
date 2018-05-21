@@ -46,25 +46,22 @@ export default class PictureList extends React.Component {
 			this.setState({ 
 				imgTypes: res.data
 			})
-
-
-		})  
-		this.setState({groupId:39})
-		this.getImgList()
-
+			this.setState({ groupId: res.data[0].id })
+			this.getImgList('groupId', res.data[0].id)
+		})
 	}
 	state = {
 		choosed_img:[],
-		imgTypes:[],
-		imgList:[],
-		page_img:{},
-		currentPage:1,
+		imgTypes: [],
+		imgList:  [],
+		page_img: {},
+		currentPage: 1,
 		page:1,
 		page_size:14,
 		pageSize:14,
 		name:'', 
 		groupId: 39
-	} 
+	}
 	componentDidMount(){}
 	 
 	getImgList = (str,id) => {
@@ -241,7 +238,7 @@ class ImgModule extends React.Component {
 						pageSize={page_img.pageSize}
 						onChange={page=>{this.chooseType('page',page)}}  
 						/> 
-				</div> 
+				</div>
 			</div>  
 		)
 	}
@@ -249,7 +246,7 @@ class ImgModule extends React.Component {
 
 function Type({item, choose_one}){
 	return (
-		<div className={this.groupId === item.id? 's-active': ''} onClick={()=>{choose_one('groupId', item.id)}}>{item.name}</div> 
+		<div onClick={()=>{choose_one('groupId', item.id)}}>{item.name}</div> 
 	)
 }
 
