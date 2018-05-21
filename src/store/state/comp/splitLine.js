@@ -2,7 +2,6 @@
 const data = {
 	style:     {
 		line: {
-			width: 540,
 			borderTop: {
 				width: 1,
 				style: 'solid',
@@ -27,7 +26,6 @@ const data = {
 }
 const data2 = JSON.parse(JSON.stringify(data))
 data2.style.line = {
-	height: 100,
 	borderLeft: {
 		width: 1,
 		style: 'solid',
