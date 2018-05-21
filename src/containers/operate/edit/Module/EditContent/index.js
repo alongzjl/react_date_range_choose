@@ -81,6 +81,7 @@ class EditContent extends React.Component {
 		return (
 			<TextArea
 				min={cfg.min || 0} max={cfg.max || 100}
+				placeholder={cfg.placeholder || '右侧编辑内容'}
 				autosize={cfg.autosize || false}
 				value={val} onChange={v => this.onChange(v.target.value, con, key, index)}
 				style={{ width: '100%' }}
