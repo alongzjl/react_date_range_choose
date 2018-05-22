@@ -19,10 +19,10 @@ class Video extends React.Component {
 		const content = data.data.content
 		return (
 			<div className="e-video">
-				<video src={content.video.video || content.src} controls={false} autoPlay>  
+				<video src={content.src || content.video.video} controls={false} autoPlay loop>  
 					您的浏览器不支持 video 标签。  
 				</video> 
-			</div>     
+			</div>      
 		)  
 	}
 } 
