@@ -42,7 +42,13 @@ const commonCss = {
 export default class PictureList extends React.Component {
 	show() {
 		this.addImgModal.show()
-		Ajax.postJSON('/easy-smart/ySourceGroupManage/query',{type:1}).then(res => {
+		var getData = {
+			type: 1
+		}
+		if (getEnv() === 'business') {
+			getData.mallId = uif.userInfo.mallMid
+		}
+		Ajax.postJSON('/easy-smart/ySourceGroupManage/query', getData).then(res => {
 			this.setState({ 
 				imgTypes: res.data
 			}) 
@@ -62,12 +68,12 @@ export default class PictureList extends React.Component {
 		groupId: 39
 	}
 	componentDidMount(){}
-	 
+
 	getImgList = (str,id) => {
 		if(str == 'page'){
 			this.setState({
 				currentPage:id
-			})  
+			})
 		}else if(str == 'groupId'){
 			this.setState({
 				groupId: id
@@ -82,8 +88,11 @@ export default class PictureList extends React.Component {
 				page_size:this.state.page_size,
 				groupId:this.state.groupId,
 				type:1
-			};
-			Ajax.postJSON('/easy-smart/ySourceManage/query',postData).then(res => {
+			}
+			if (getEnv() === 'business') {
+				postData.mallId = uif.userInfo.mallMid
+			}
+			// Ajax.postJSON('/easy-smart/ySourceManage/query',postData).then(res => {
 				this.setState({
 					imgList:res.data,
 					page_img:res.page 
@@ -128,7 +137,7 @@ export default class PictureList extends React.Component {
 				</div>
 				</SkyLight>
 			</div>
-		) 
+		)
 	}
 }
 
@@ -146,19 +155,19 @@ class ImgModule extends React.Component {
 		this.setState({
 				imgList:img_list,
 				imgTypes:imgTypes
-			}) 
+			})
 	}
 	chooseType(str,id) {
 		this.setState({
-	      current: id
-	    })
+			current: id
+		})
 		this.props.getImgList(str,id);
 	}
-	chooseImg(img) { 
+	chooseImg(img) {
 		let img_list = this.state.imgList
 		img_list = img_list.map(item=>{
-			item.id === img ? item.isClicked = !item.isClicked : item.isClicked = false;
-			return item  
+			item.id === img ? item.isClicked = !item.isClicked : item.isClicked = false
+			return item
 		})
 		this.setState({
 			imgList:img_list
@@ -167,33 +176,37 @@ class ImgModule extends React.Component {
 		this.props.save(choosed_img)
 	};
 	customRequest = info => {
-		const that = this;
-		this.setState({loading:true});
-		let id = window.uif.userInfo.id || '1';
+		const that = this
+		this.setState({loading:true})
+		let id = window.uif.userInfo.id || '1'
 		const paramsData = {
 			userId:id,
-			mallId:'', 
+			mallId:'',
 			imageName:'along',
-			imageSourceType:'OPERATION'  
-		};
-		var reader = new FileReader(); 
-			 reader.onload = (function (file) {
-		        return function (e) {
-		           console.info(this.result); //这个就是base64的数据了
-		            const img = this.result; 
-		            const postData = {...paramsData,imageBase64:img};
-		            Ajax.postJSONIMG('/mcp-gateway/utility/uploadImage',postData).then(res=>{
-		            	  message.info('上传成功!');
-						  that.setState({loading:false}); 
-		            	  that.props.getImgList();  
-		            })            
-	   			};  
-		    })(info.file);
-			reader.readAsDataURL(info.file);
-	}  
+			imageSourceType:'OPERATION'
+		}
+		if (getEnv() === 'business') {
+			paramsData.imageSourceType = 'BUSINESS'
+			paramsData.mallId = uif.userInfo.mallMid
+		}
+		var reader = new FileReader()
+			reader.onload = (function (file) {
+				return function (e) {
+					console.info(this.result) //这个就是base64的数据了
+					const img = this.result
+					const postData = {...paramsData,imageBase64:img}
+					Ajax.postJSONIMG('/mcp-gateway/utility/uploadImage',postData).then(res=>{
+						message.info('上传成功!')
+						that.setState({loading:false})
+						that.props.getImgList()
+					})
+				}
+			})(info.file)
+			reader.readAsDataURL(info.file)
+	}
 	
 	render() {
-		let id = window.uif.userInfo.id || '1';
+		let id = window.uif.userInfo.id || '1'
 		const { page_img } = this.props;
 		return (
 			<div className="content">
@@ -201,52 +214,52 @@ class ImgModule extends React.Component {
 					{
 						this.state.imgTypes.map((item,index) => <Type groupId={this.state.groupId} key={index} item={item} choose_one={this.chooseType.bind(this)}></Type>)
 					}
-				</div> 
+				</div>
 				<div className="right">
 					<div>
-						<Upload 
+						<Upload
 							name= 'avatar'
-							className="avatar-uploader" 
+							className="avatar-uploader"
 							listType="picture-card"
 							showUploadList={false}
-							customRequest={this.customRequest} 
-						> 
+							customRequest={this.customRequest}
+						>
 						<div>
-					        <Icon type={this.state.loading ? 'loading' : 'plus'} />
-					        <div className="ant-upload-text">上传图片</div>
-					      </div>
+							<Icon type={this.state.loading ? 'loading' : 'plus'} />
+							<div className="ant-upload-text">上传图片</div>
+						</div>
 						</Upload>
-					</div>  
-					{ 
+					</div>
+					{
 						this.state.imgList.map((item,index) => <List key={index} item={item} type={this.props.type} choose_one={this.chooseImg.bind(this)}></List> )
 					}
-					<Pagination 
-						className="Pagination" 
+					<Pagination
+						className="Pagination"
 						defaultCurrent={1}
-						current={this.state.current} 
-						total={page_img.totalCount} 
+						current={this.state.current}
+						total={page_img.totalCount}
 						pageSize={page_img.pageSize}
-						onChange={page=>{this.chooseType('page',page)}}  
-						/> 
+						onChange={page=>{this.chooseType('page',page)}}
+						/>
 				</div>
-			</div>  
+			</div>
 		)
 	}
 }
 
 function Type({item, choose_one}){
 	return (
-		<div onClick={()=>{choose_one('groupId', item.id)}}>{item.name}</div> 
+		<div onClick={()=>{choose_one('groupId', item.id)}}>{item.name}</div>
 	)
 }
 
 function List({item,choose_one}){
-	return ( 
+	return (
 		<div onClick={()=>{choose_one(item.id)}} className={item.isClicked?'choosed':''}>
 			<div className={item.isClicked?'icon_img':''}>
 				<div className="right-symbol"></div>
 			</div>
 			<img src={item.url} />
-		</div>  
+		</div>
 	)
 }

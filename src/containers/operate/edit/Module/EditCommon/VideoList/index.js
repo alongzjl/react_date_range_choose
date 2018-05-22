@@ -55,7 +55,13 @@ export default class VideoList extends React.Component {
 		groupId:42
 	} 
 	componentDidMount(){
-		Ajax.postJSON('/easy-smart/ySourceGroupManage/query',{type:2}).then(res => {
+		var getData = {
+			type: 2
+		}
+		if (getEnv() === 'business') {
+			getData.mallId = uif.userInfo.mallMid
+		}
+		Ajax.postJSON('/easy-smart/ySourceGroupManage/query', getData).then(res => {
 			this.setState({
 				videoTypes:res.data
 			})
@@ -82,14 +88,17 @@ export default class VideoList extends React.Component {
 				page_size:this.state.page_size,
 				groupId:this.state.groupId,
 				type:2
-			}    
-			Ajax.postJSON('/easy-smart/ySourceManage/query',postData).then(res => {
+			}
+			if (getEnv() === 'business') {
+				postData.mallId = uif.userInfo.mallMid
+			}
+			Ajax.postJSON('/easy-smart/ySourceManage/query', postData).then(res => {
 				this.setState({ 
 					videoList:res.data,
-					page_video:res.page  
-				}) 
-			})  
-		},10) 
+					page_video:res.page
+				})
+			})
+		},10)
 	}
 	cancelClick = () => {
 		this.addImgModal.hide()

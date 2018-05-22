@@ -229,11 +229,9 @@ window.timeFormat = (format) => {
 	return split
 }
 
-window.encodeUnicode = (str, res = []) => {
-	str.split('').map((_, i) => {
-		res.push(('00' + str.charCodeAt(i).toString(16)).slice(-4))
-	})
-	return '\\u' + res.join('\\u')
+window.getEnv = () => {
+	var m = window.location.hash.match(/#\/([^\/]+)/)
+	return m? m[1]: ''
 }
 
 window.Ajax = Fetch.default
