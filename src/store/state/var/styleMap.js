@@ -23,7 +23,7 @@ module.exports = {
 		width:             { name: '宽',      type: 'Number', min: 0, max: 540 },
 		height:            { name: '高',      type: 'Number', min: 0, max: 960 },
 		lineHeight:        { name: '行高',    type: 'Number' },
-		fontSize:          { name: '字号',    type: 'Number', min: 6, max: 90, step: 2 },
+		fontSize:          { name: '字号',    type: 'Number', min: 6, max: 90, step: 1 },
 		textAlign:         { name: '对齐方式', type: 'TextAlign', option: [
 			{ name: '左', value: 'left' },
 			{ name: '中', value: 'center' },

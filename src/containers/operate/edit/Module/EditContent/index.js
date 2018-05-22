@@ -134,8 +134,8 @@ class EditContent extends React.Component {
 		let { data } = this.props
 		return (
 			<ImageUploadComp
-				data={data} 
-				img={val} 
+				data={data}
+				img={val}
 				name={`video`}
 				action={'updateComp'}
 				style={{ width: '100%' }}

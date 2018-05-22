@@ -82,7 +82,7 @@ class Header extends React.Component {
 		editConfig.globalData.theme.idx
 		let da = {
 			config: JSON.stringify(config),
-			coverImgUrl:  'http://rongyi.com',
+			coverImgUrl:  '',
 			caseType: caseType,
 			composeType:  composeType,
 			name:         this.state.name,
@@ -105,7 +105,10 @@ class Header extends React.Component {
 		this.setState({ name: name })
 		tempCfg.name = name
 	}
-
+	closeWin() {
+		window.location.href = 'about:blank'
+		window.close()
+	}
 	render() {
 		return (
 			<div className="pe-header e-flex">
@@ -121,14 +124,9 @@ class Header extends React.Component {
 
 				<div className="peh-right">
 					<section className="comp-list">
-						<div className="cl-item" onClick={this.selectTheme.bind(this)}>
-							<Icon type="appstore" />
-							主题
-						</div>
-						<div className="cl-item" onClick={this.saveData.bind(this)}>
-							<Icon type="code" />
-							保存
-						</div>
+						<div className="cl-item" onClick={this.selectTheme.bind(this)}>主题</div>
+						<div className="cl-item" onClick={this.saveData.bind(this)}>保存</div>
+						<div className="cl-item" onClick={this.closeWin}>离开</div>
 					</section>
 				</div>
 			</div>

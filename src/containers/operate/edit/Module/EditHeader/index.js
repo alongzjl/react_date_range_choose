@@ -78,7 +78,7 @@ class Header extends React.Component {
 		let da = {
 			adsFlag: adsFlag || 0,
 			config: JSON.stringify(config),
-			coverImgUrl:  'http://rongyi.com',
+			coverImgUrl:  '',
 			templateType: templateType,
 			composeType:  composeType,
 			name:         this.state.name
@@ -98,7 +98,10 @@ class Header extends React.Component {
 		this.setState({ name: name })
 		tempCfg.name = name
 	}
-
+	closeWin() {
+		window.location.href = 'about:blank'
+		window.close()
+	}
 	render() {
 		let compListNode = compList.map((_, i) => {
 			let { child, name } = _
@@ -141,14 +144,9 @@ class Header extends React.Component {
 
 				<div className="peh-right">
 					<section className="comp-list">
-						<div className="cl-item" onClick={this.selectTheme.bind(this)}>
-							<Icon type="appstore" />
-							主题
-						</div>
-						<div className="cl-item" onClick={this.saveData.bind(this)}>
-							<Icon type="code" />
-							保存
-						</div>
+						<div className="cl-item" onClick={this.selectTheme.bind(this)}>主题</div>
+						<div className="cl-item" onClick={this.saveData.bind(this)}>保存</div>
+						<div className="cl-item" onClick={this.closeWin}>离开</div>
 					</section>
 				</div>
 			</div>
