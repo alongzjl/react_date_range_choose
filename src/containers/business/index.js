@@ -14,6 +14,7 @@ import { hashHistory } from 'react-router'
 import * as actions from 'actions'
 import { message }  from 'antd'
 import curData from 'state/cur/curData'
+import { Spin } from 'antd'
 import './index.less'
 
 
@@ -173,7 +174,7 @@ class BusinessComponent extends React.Component {
 		)
 		:
 		(
-			<div>loading</div>
+			<Spin />
 		)
 	}
 }

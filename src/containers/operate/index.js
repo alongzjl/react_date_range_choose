@@ -13,6 +13,7 @@ import { connect } from 'react-redux'
 import { hashHistory } from 'react-router'
 import * as actions from 'actions'
 import curData from 'state/cur/curData'
+import { Spin } from 'antd'
 import './index.less'
 
 
@@ -270,7 +271,7 @@ class OperateComponent extends React.Component {
 		)
 		:
 		(
-			<div>loading</div>
+			<Spin />
 		)
 	}
 }
