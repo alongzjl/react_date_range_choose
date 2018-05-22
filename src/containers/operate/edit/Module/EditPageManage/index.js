@@ -15,14 +15,11 @@ import * as actions from 'actions'
 import { Icon } from 'antd'
  
 class EditPageManage extends React.Component {
-	componentWillMount() {
-	}
+	componentWillMount() {}
 
-	componentDidMount() {
-	}
+	componentDidMount() {}
 
-	componentWillUnmount() {
-	}
+	componentWillUnmount() {}
 
 	addPage(groupIdx) {
 		let { actions, editConfig } = this.props
@@ -42,6 +39,19 @@ class EditPageManage extends React.Component {
 		actions.selectPage(router)
 	}
 
+	setIndex(router, idx) {
+		let { data, actions, editConfig } = this.props
+		let { globalData } = editConfig
+		let da    = globalData.data
+		let group = data.group[0]
+		let li    = group.pages[idx]
+		da.homepage = router
+		group.pages.splice(idx, 1)
+		group.pages.unshift(li)
+		actions.updateGlobal(globalData)
+		actions.updatePageList(data)
+	}
+
 	render() {
 		let { data, editConfig } = this.props
 		let childNode = data.group[0].pages.map((_, i) => {
@@ -52,6 +62,10 @@ class EditPageManage extends React.Component {
 				>
 					<div className="pl-name" onClick={this.selectPage.bind(this, _.router, 0, i)}>{ _.title }</div>
 					<div className="pl-ctrl">
+						<a
+							style={{ display: i? 'block': 'none' }}
+							onClick={this.setIndex.bind(this, _.router, i)}
+						><Icon type="home" /></a>
 						<a
 							style={{ display: data.group[0].pages.length > 1? 'block': 'none' }}
 							onClick={this.deletePage.bind(this, _.router, 0, i)}

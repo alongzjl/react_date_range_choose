@@ -21,3 +21,5 @@ export const UPDATE_CUR      = 'UPDATE_CUR'
 export const UPDATE_GLOBAL   = 'UPDATE_GLOBAL'
 
 export const UPDATE_CONFIG   = 'UPDATE_CONFIG'
+
+export const UPDATE_PAGELIST = 'UPDATE_PAGELIST'

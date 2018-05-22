@@ -83,3 +83,9 @@ export const updateConfig = (config) => ({
 	type: types.UPDATE_CONFIG,
 	config
 })
+
+// pageList
+export const updatePageList = (data) => ({
+	type: types.UPDATE_PAGELIST,
+	data
+})
