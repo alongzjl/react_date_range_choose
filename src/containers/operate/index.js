@@ -61,7 +61,7 @@ class OperateComponent extends React.Component {
 				}
 				return resolve('模板数据')
 			}
-			Ajax.get(`/mcp-gateway/template/get?templateId=${id}`).then(res => {
+			Ajax.get(`/mcp-gateway/template/get?templateId=${id}&phase=DEV`).then(res => {
 				let cfg = JSON.parse(res.data.config).configPC
 				delete res.data.config
 				let cur = cfg.pageList.group[0].pages[0]

@@ -58,9 +58,11 @@ class BusinessComponent extends React.Component {
 			message.error(`未选择模板!`)
 			return resolve('模板数据')
 		}
+		let api = `/mcp-gateway/${type}/get?${type}Id=${id}`
+		if (type === 'template') api += '&phase=RELEASE'
 
 		return function(resolve, reject) {
-			Ajax.get(`/mcp-gateway/${type}/get?${type}Id=${id}`).then(res => {
+			Ajax.get(api).then(res => {
 				let cfg = JSON.parse(res.data.config).configPC
 				delete res.data.config
 				let cur = cfg.pageList.group[0].pages[0]
