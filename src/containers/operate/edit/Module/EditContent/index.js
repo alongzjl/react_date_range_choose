@@ -130,11 +130,12 @@ class EditContent extends React.Component {
 		)
 	}
 	// 上传视频
-	renderVideo(cfg, data, val, key, index) {
+	renderVideo(cfg, con, val, key, index) {
+		let { data } = this.props
 		return (
 			<ImageUploadComp
-				data={data}
-				img={{}}
+				data={data} 
+				img={val} 
 				name={`video`}
 				action={'updateComp'}
 				style={{ width: '100%' }}

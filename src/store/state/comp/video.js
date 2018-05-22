@@ -15,10 +15,10 @@ const data = {
 		height:   150
 	}, 
 	// 内容管理
-	content: {
-		video: ''
-	},
-	// 动画设置
+	content: { 
+		video:    { type: 'custom', video: '' },
+	},  
+	// 动画设置 
 	animation: {
 		className: '',	// 动画样式
 		delay: 1,					// 开始时间
