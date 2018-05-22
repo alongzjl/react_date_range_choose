@@ -159,7 +159,7 @@ export default function editConfig(state = initialState, action) {
 			return Object.assign({}, state)
 
 		case types.UPDATE_PAGELIST:
-			state.globalData = data
+			state.pageList = data
 			console.log('更新全局数据!')
 			saveData()
 			return Object.assign({}, state)
