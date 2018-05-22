@@ -70,11 +70,11 @@ export default class VideoList extends React.Component {
 	}
 	
 	getVideoList = (str,id) => { 
-		if(str == 'page'){
+		if (str == 'page') {
 			this.setState({
 				currentPage:id
 			})  
-		}else if(str == 'groupId'){
+		} else if (str == 'groupId') {
 			this.setState({
 				groupId:id
 			}) 

@@ -142,9 +142,9 @@ class SwiperSame extends React.Component {
 				<div className="pgs-row" key={i}>
 					<div className="pgsr-name">{ cm.name }</div>
 					<div className="pgsr-ctrl">{ dom }</div>
-					<div className="pgsr-auth"> 
-						<Checkbox checked={data.auth.feature[p]} onChange={_ => this.onChangeAuth(_.target.checked, p)} />
-					</div>
+					// <div className="pgsr-auth"> 
+					// 	<Checkbox checked={data.auth.feature[p]} onChange={_ => this.onChangeAuth(_.target.checked, p)} />
+					// </div>
 				</div> 
 			)
 		})
