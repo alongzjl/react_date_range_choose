@@ -54,14 +54,14 @@ export default class VideoList extends React.Component {
 		name:'', 
 		groupId:42
 	} 
-	componentDidMount(){ 
+	componentDidMount(){
 		Ajax.postJSON('/easy-smart/ySourceGroupManage/query',{type:2}).then(res => {
-			this.setState({ 
+			this.setState({
 				videoTypes:res.data
-			})  
-		})  
-		this.getVideoList('groupId', res.data[0].id);
-	};
+			})
+			this.getVideoList('groupId', res.data[0].id)
+		})
+	}
 	
 	getVideoList = (str,id) => { 
 		if(str == 'page'){
