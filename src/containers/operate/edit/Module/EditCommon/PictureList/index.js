@@ -92,13 +92,13 @@ export default class PictureList extends React.Component {
 			if (getEnv() === 'business') {
 				postData.mallId = uif.userInfo.mallMid
 			}
-			// Ajax.postJSON('/easy-smart/ySourceManage/query',postData).then(res => {
+			Ajax.postJSON('/easy-smart/ySourceManage/query', postData).then(res => {
 				this.setState({
 					imgList:res.data,
 					page_img:res.page 
 				})
 			})
-		},10)
+		}, 10)
 	}
 	cancelClick = () => {
 		this.addImgModal.hide()
