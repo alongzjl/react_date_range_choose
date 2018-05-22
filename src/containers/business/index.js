@@ -71,7 +71,7 @@ class BusinessComponent extends React.Component {
 					curData: { ...curData, ...cur },
 					curPage: cfg.pageContent[cur.router]
 				}
-				window.tempCfg          = res.data
+				window.tempCfg = res.data
 				if (type === 'template') {
 					delete tempCfg.id
 					tempCfg.caseType        = caseType        || ''
@@ -80,8 +80,12 @@ class BusinessComponent extends React.Component {
 					tempCfg.composeType     = composeType     || ''
 					tempCfg.name            = name            || ''
 				}
+				if (type === 'template') {
+					let theme = cfg.globalData.theme
+					if (theme.list[templateThemeId]) theme.idx = templateThemeId * 1
+					else theme.idx = 0
+				}
 				actions.updateConfig({ ...newCfg, ...cfg })
-				let { globalData } = editConfig
 				resolve('模板数据')
 			}).catch(e => reject(e))
 		}
