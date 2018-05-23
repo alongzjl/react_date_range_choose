@@ -58,6 +58,7 @@ class ViewComponent extends React.Component {
 		let key  = 'PC'
 		let api  = `/mcp-gateway/${type}/get?${type}Id=${id}`
 		if (s === 'business') api += '&phase=RELEASE'
+		else api += '&phase=DEV'
 		return function(resolve, reject) {
 			if (!id) return resolve('模板数据')
 			Ajax.get(api).then(res => {
