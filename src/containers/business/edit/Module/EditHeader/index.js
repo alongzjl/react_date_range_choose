@@ -99,7 +99,7 @@ class Header extends React.Component {
 				hashHistory.push(`/business/edit?id=${res.data}`)
 			}
 			Ajax.createCrop({
-				url: `${window.location.origin}/#/view?id=${tempCfg.id}`,
+				url: `${window.location.origin}${window.location.pathname}#/view?id=${tempCfg.id}`,
 				w: 540,
 				h: 960
 			}).then(cover => {

@@ -92,7 +92,7 @@ class Header extends React.Component {
 				hashHistory.push(`/operate/edit?id=${res.data}`)
 			}
 			Ajax.createCrop({
-				url: `${window.location.origin}/#/view?id=${tempCfg.id}&s=template`,
+				url: `${window.location.origin}${window.location.pathname}#/view?id=${tempCfg.id}&s=template`,
 				w: 540,
 				h: 960
 			}).then(cover => {
