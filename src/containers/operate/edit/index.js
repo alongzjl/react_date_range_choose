@@ -40,7 +40,7 @@ const curMap = {
 	pageIdx:      '页面索引',
 	compIdx:      '组件索引',
 	cusCompIdx:   '子组件索引',
-	contentType:  '右侧面板类型',
+	contentType:  '右侧面板类型'
 }
 const cTypeMap = {
 	page:  '页面',

@@ -10,10 +10,6 @@ import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect }  from 'react-redux'
 
-import * as variable from 'var'
-
-const ctMap = variable.composeTypeMap
-
 import Picture           from 'compEdit/EditElement/Picture'
 import Web               from 'compEdit/EditElement/Web'
 import Text              from 'compEdit/EditElement/Text'
@@ -21,16 +17,26 @@ import Button            from 'compEdit/EditElement/Button'
 import Video             from 'compEdit/EditElement/Video'
 import SwiperImage       from 'compEdit/EditElement/SwiperImage'
 import WonderfulActivity from 'compEdit/EditElement/WonderfulActivity'
+import Time              from 'compEdit/EditElement/Time'
+import Weather           from 'compEdit/EditElement/Weather'
 import StoreList         from 'compEdit/EditElement/StoreList'
 import StoreDetails      from 'compEdit/EditElement/StoreDetails'
+import StoreInstro       from 'compEdit/EditElement/StoreInstro'
+import DateWeather       from 'compEdit/EditElement/DateWeather'
 import Navigation        from 'compEdit/EditElement/Navigation'
 import NavigationFloat   from 'compEdit/EditElement/NavigationFloat'
+import SplitLine         from 'compEdit/EditElement/SplitLine'
+import Map2D             from 'compEdit/EditElement/Map2D'
 
 import * as actions from 'actions'
 
 import { Icon } from 'antd'
 
 import './index.less'
+
+import * as variable from 'var'
+
+const ctMap = variable.composeTypeMap
 
 class Element extends React.Component {
 	constructor(props) {
@@ -65,17 +71,23 @@ class Element extends React.Component {
 				csn       = `handle-drag-${Math.floor(Math.random()*1e9)}`,
 				isEdit    = true,
 				compCon
-			if (compName === 'picture')              compCon = (<Picture         data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
-			else if (compName === 'web')             compCon = (<Web             data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
-			else if (compName === 'video')           compCon = (<Video           data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
-			else if (compName === 'text')            compCon = (<Text            data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
-			else if (compName === 'button')          compCon = (<Button          data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
-			else if (compName === 'swiperImage')     compCon = (<SwiperImage     data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
-			else if (compName === 'wonderfulActivity')     compCon = (<WonderfulActivity     data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
-			else if (compName === 'navigation')      compCon = (<Navigation      data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
- 			else if (compName === 'navigationFloat') compCon = (<NavigationFloat data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
-			else if (compName === 'storeList')       compCon = (<StoreList       data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
-			else if (compName === 'storeDetails')    compCon = (<StoreDetails    data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
+			if (compName === 'picture')                compCon = (<Picture           data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
+			else if (compName === 'web')               compCon = (<Web               data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
+			else if (compName === 'video')             compCon = (<Video             data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
+			else if (compName === 'text')              compCon = (<Text              data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
+			else if (compName === 'button')            compCon = (<Button            data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
+			else if (compName === 'swiperImage')       compCon = (<SwiperImage       data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
+			else if (compName === 'wonderfulActivity') compCon = (<WonderfulActivity data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
+			else if (compName === 'time')              compCon = (<Time              data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
+			else if (compName === 'weather')           compCon = (<Weather           data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
+			else if (compName === 'navigation')        compCon = (<Navigation        data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
+			else if (compName === 'navigationFloat')   compCon = (<NavigationFloat   data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
+			else if (compName === 'storeList')         compCon = (<StoreList         data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
+			else if (compName === 'storeDetails')      compCon = (<StoreDetails      data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
+			else if (compName === 'storeInstro')       compCon = (<StoreInstro       data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
+			else if (compName === 'splitLine')         compCon = (<SplitLine         data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
+			else if (compName === 'dateWeather')       compCon = (<DateWeather       data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
+			else if (compName === 'map2D')             compCon = (<Map2D             data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
 			if (!compCon) return false
 			return (
 				<div key={i} className="pge-layout" style={cssColorFormat({ data: _ }, 'layout')}>{ compCon }</div>

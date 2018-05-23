@@ -26,7 +26,7 @@ import DateWeather       from 'compEdit/EditElement/DateWeather'
 import Navigation        from 'compEdit/EditElement/Navigation'
 import NavigationFloat   from 'compEdit/EditElement/NavigationFloat'
 import SplitLine         from 'compEdit/EditElement/SplitLine'
-import Map2D         from 'compEdit/EditElement/Map2D'
+import Map2D             from 'compEdit/EditElement/Map2D'
 
 import * as actions from 'actions'
 
@@ -84,9 +84,9 @@ class EditElement extends React.Component {
 			else if (compName === 'swiperImage')       compCon = (<SwiperImage       data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
 			else if (compName === 'wonderfulActivity') compCon = (<WonderfulActivity data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
 			else if (compName === 'time')              compCon = (<Time              data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
- 			else if (compName === 'weather')           compCon = (<Weather           data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
- 			else if (compName === 'navigation')        compCon = (<Navigation        data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
- 			else if (compName === 'navigationFloat')   compCon = (<NavigationFloat   data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
+			else if (compName === 'weather')           compCon = (<Weather           data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
+			else if (compName === 'navigation')        compCon = (<Navigation        data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
+			else if (compName === 'navigationFloat')   compCon = (<NavigationFloat   data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
 			else if (compName === 'storeList')         compCon = (<StoreList         data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
 			else if (compName === 'storeDetails')      compCon = (<StoreDetails      data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
 			else if (compName === 'storeInstro')       compCon = (<StoreInstro       data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)

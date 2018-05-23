@@ -31,24 +31,22 @@ class BusinessComponent extends React.Component {
 		actions.updateTime()
 	}
 	getWeather() {
-		return (resolve, reject) => {
-			// Ajax.post(`/easy-smart-service/member/pm25`, { area: '021' }).then(res => {
-				window.weather = {
-					temp: '33℃',
-					type: '小雨',
-					iconName: '07.png',
-					humidity: null,
-					direct: '西南风',
-					power: '<3级',
-					aqi: '108',
-					aqiInfo: '轻度污染'
-				}
-				resolve('天气数据')
-			// }).catch(e => reject(e))
+		return (resolve) => {
+			window.weather = {
+				temp: '33℃',
+				type: '小雨',
+				iconName: '07.png',
+				humidity: null,
+				direct: '西南风',
+				power: '<3级',
+				aqi: '108',
+				aqiInfo: '轻度污染'
+			}
+			resolve('天气数据')
 		}
 	}
 	getConfig() {
-		let { location, actions, editConfig } = this.props
+		let { location, actions } = this.props
 		let { query } = location
 		let { name, templateId, templateThemeId, caseType, composeType } = query
 		let tid  = templateId,
@@ -101,14 +99,12 @@ class BusinessComponent extends React.Component {
 				bsst: getCookie('BSST') || '123456',
 				channel: '002'
 			}).then(res1 => {
-				console.log('res1')
 				_res1 = res1
 				return Ajax.postLogin('/easy-roa/v1/user/getBsUser', {
 					bsst: getCookie('BSST') || '123456',
 					channel: '002'
 				})
 			}).then((res2) => {
-				console.log('res2')
 				resolve([_res1.data, res2.data])
 			}).catch(e => {
 				reject(e)
@@ -134,7 +130,7 @@ class BusinessComponent extends React.Component {
 				password: 'RYxyz123',
 				userName: 'xcyh001',
 				verifyCode: ''
-			}).then(res => {
+			}).then(() => {
 				this.initData(cb)
 			})
 		} else {
@@ -143,11 +139,11 @@ class BusinessComponent extends React.Component {
 	}
 	componentWillMount() {
 		this.getUserInfo(() => {
-			let { actions, editConfig } = this.props
+			let { editConfig } = this.props
 			let { globalData } = editConfig
 			let arr = ['getConfig', 'getWeather']
 			let promises = arr.map(key => new Promise(this[key](globalData)))
-			Promise.all(promises).then((o) => {
+			Promise.all(promises).then(() => {
 				this.setState({ load: true })
 			})//.catch(e => {
 			// 	console.log(e)

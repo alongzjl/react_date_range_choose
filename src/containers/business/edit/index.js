@@ -33,21 +33,6 @@ const TabPane = Tabs.TabPane
 
 tools()
 
-const curMap = {
-	parentComp:   '父组件',
-	router:       '路由',
-	pageGroupIdx: '页面分组索引',
-	pageIdx:      '页面索引',
-	compIdx:      '组件索引',
-	cusCompIdx:   '子组件索引',
-	contentType:  '右侧面板类型',
-}
-const cTypeMap = {
-	page:  '页面',
-	comp:  '组件',
-	theme: '主题'
-}
-
 class EditComponent extends React.Component {
 	constructor(props) {
 		super(props)

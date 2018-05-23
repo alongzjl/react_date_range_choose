@@ -29,19 +29,39 @@ class ViewComponent extends React.Component {
 		let { actions } = this.props
 		setInterval(() => actions.updateTime(), 1000)
 	}
+	getWeather() {
+		return (resolve) => {
+			window.weather = {
+				temp: '33℃',
+				type: '小雨',
+				iconName: '07.png',
+				humidity: null,
+				direct: '西南风',
+				power: '<3级',
+				aqi: '108',
+				aqiInfo: '轻度污染'
+			}
+			resolve('天气数据')
+		}
+	}
 	getConfig() {
 		let { location, actions, editConfig } = this.props
 		let { query } = location
-		let id  = query.id
+		let { id, s } = query
 		if (!id) {
 			message.error(`作品ID不存在!`)
 			return resolve('模板数据')
 		}
-
+		s = s || 'business'
+		let type = s === 'business'? 'case': 'template'
+		// let key  = s === 'business'? 'Terminal': 'PC'
+		let key  = 'PC'
+		let api  = `/mcp-gateway/${type}/get?${type}Id=${id}`
+		if (s === 'business') api += '&phase=RELEASE'
 		return function(resolve, reject) {
 			if (!id) return resolve('模板数据')
-			Ajax.get(`/mcp-gateway/case/get?caseId=${id}`).then(res => {
-				let cfg = JSON.parse(res.data.config).configTerminal
+			Ajax.get(api).then(res => {
+				let cfg = JSON.parse(res.data.config)[`config${key}`]
 				delete res.data.config
 				let cur = cfg.pageList.group[0].pages[0]
 				let newCfg = {
@@ -59,7 +79,7 @@ class ViewComponent extends React.Component {
 	componentWillMount() {
 		let { actions, editConfig } = this.props
 		let { globalData } = editConfig
-		let arr = ['getConfig']
+		let arr = ['getConfig', 'getWeather']
 		let promises = arr.map(key => new Promise(this[key](globalData)))
 		Promise.all(promises).then((o) => {
 			this.setState({ load: true })

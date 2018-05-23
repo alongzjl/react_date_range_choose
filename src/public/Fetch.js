@@ -108,7 +108,32 @@ export default class Fetch {
 				credentials: 'include'
 			}, resolve, reject);
 		});
-	} 
+	}
+
+	static createCrop(config = {}) {
+		var host = ENV === 'qa'
+			?
+			'186.rongyi.com'
+			:
+			ENV === 'dev'
+			?
+			'localhost:4090'
+			:
+			ENV === 'rd'
+			?
+			'manage.preview.rongyi.com'
+			:
+			'manage.w.rongyi.com'
+
+		var API = `http://${host}/api/screen/create`
+		return new Promise((resolve, reject) => {
+			Fetch.remote(API, {
+				method: 'POST',
+				body: new URLSearchParams(config),
+			}, resolve, reject)
+		})
+	}
+
 	//图片上传 
 	static postJSONIMG(url, data) {
 		return new Promise((resolve, reject) => {

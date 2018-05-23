@@ -18,14 +18,15 @@ const compList = require('state/compList')
 
 import * as actions from 'actions'
 
-import { Icon, Input, message } from 'antd'
+import { Icon, Input, message, Spin } from 'antd'
  
 class Header extends React.Component {
 	constructor(props) {
 		super(props)
 
 		this.state = {
-			name: tempCfg.name || ''
+			name: tempCfg.name || '',
+			loading: false
 		}
 	}
 	componentWillMount() {}
@@ -90,14 +91,27 @@ class Header extends React.Component {
 			templateThemeId: editConfig.globalData.theme.idx || 0,
 			mallId: uif.userInfo.mallMid
 		}
+		this.setState({ loading: true })
 		if (id) da.id = id
 		Ajax.post(`/mcp-gateway/case/${query.id? 'update': 'save'}`, da).then(res => {
-			message.success(`${query.id? '更新': '保存'}成功!`)
 			if (!query.id) {
 				tempCfg.id = res.data
 				hashHistory.push(`/business/edit?id=${res.data}`)
 			}
-		})
+			Ajax.createCrop({
+				url: `${window.location.origin}/#/view?id=${tempCfg.id}`,
+				w: 540,
+				h: 960
+			}).then(cover => {
+				Ajax.post(`/mcp-gateway/case/updateCoverImgUrl`, {
+					caseId: tempCfg.id,
+					coverImgUrl: cover.data
+				}).then(() => {
+					this.setState({ loading: false })
+					message.success(`${query.id? '更新': '保存'}成功!`)
+				}).catch(e => { this.setState({ loading: false }) })
+			}).catch(e => { this.setState({ loading: false }) })
+		}).catch(e => { this.setState({ loading: false }) })
 		// console.log(JSON.stringify(config))
 	}
 
@@ -110,8 +124,10 @@ class Header extends React.Component {
 		window.close()
 	}
 	render() {
+		let loading = this.state.loading? (<div className="spin-mask"><Spin /></div>): false
 		return (
 			<div className="pe-header e-flex">
+				{ loading }
 				<div className="peh-left">
 					<Input
 						value={this.state.name}

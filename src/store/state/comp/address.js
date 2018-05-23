@@ -53,7 +53,7 @@ const data = {
 		height:   30 
 	}, 
 	content: {
-		img:    { type: 'custom', img: require('compEdit/EditElement/images/phone.png') },	// 图片url
+		img:    { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201805231504236503.png' },	// 图片url
 		text:   'L2  2489',  
 		router: {},	// 路由 
 	},

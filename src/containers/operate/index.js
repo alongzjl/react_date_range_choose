@@ -10,7 +10,6 @@
 import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { hashHistory } from 'react-router'
 import * as actions from 'actions'
 import curData from 'state/cur/curData'
 import { Spin } from 'antd'
@@ -30,20 +29,18 @@ class OperateComponent extends React.Component {
 		actions.updateTime()
 	}
 	getWeather() {
-		return (resolve, reject) => {
-			// Ajax.post(`/easy-smart-service/member/pm25`, { area: '021' }).then(res => {
-				window.weather = {
-					temp: '33℃',
-					type: '小雨',
-					iconName: '07.png',
-					humidity: null,
-					direct: '西南风',
-					power: '<3级',
-					aqi: '108',
-					aqiInfo: '轻度污染'
-				}
-				resolve('天气数据')
-			// }).catch(e => reject(e))
+		return (resolve) => {
+			window.weather = {
+				temp: '33℃',
+				type: '小雨',
+				iconName: '07.png',
+				humidity: null,
+				direct: '西南风',
+				power: '<3级',
+				aqi: '108',
+				aqiInfo: '轻度污染'
+			}
+			resolve('天气数据')
 		}
 	}
 	getConfig() {
@@ -58,7 +55,7 @@ class OperateComponent extends React.Component {
 					name: name || '',
 					templateType: templateType || 'MALL',
 					composeType:  composeType  || 'PORTRAIT',
-					adsFlag:      adsFlag      || 0,
+					adsFlag:      adsFlag      || 0
 				}
 				return resolve('模板数据')
 			}
@@ -85,7 +82,7 @@ class OperateComponent extends React.Component {
 	}
 	/* Mock 数据 */
 	getFloor(globalData) {
-		return (resolve, reject) => {
+		return (resolve) => {
 			globalData.floors = [
 				{
 					id:      '5a532b82130b38000b1884a7',
@@ -123,7 +120,7 @@ class OperateComponent extends React.Component {
 		}
 	}
 	getCatg(globalData) {
-		return (resolve, reject) => {
+		return (resolve) => {
 			globalData.catgs = [
 				{
 					id:      '5a532b82130b38000b1884a7',
@@ -161,7 +158,7 @@ class OperateComponent extends React.Component {
 		}
 	}
 	getStoreList(globalData) {
-		return (resolve, reject) => {
+		return (resolve) => {
 			globalData.storeList = {
 				data: new Array(12).fill().map((_, i) => {
 					return {
@@ -184,7 +181,7 @@ class OperateComponent extends React.Component {
 		}
 	}
 	getStoreDetails(globalData) {
-		return (resolve, reject) => {
+		return (resolve) => {
 			globalData.storeDetails = {
 				images: [
 					{
@@ -210,46 +207,14 @@ class OperateComponent extends React.Component {
 			resolve('店铺详情')
 		}
 	}
-	initData(cb) {
-		let { actions } = this.props
-		let stores = {}
-		
-		Ajax.postLogin('/easy-roa/v1/user/getRyUser', {
-			ryst: getCookie('RYST') || '123456',
-			bsst: getCookie('BSST') || '123456',
-			channel: '002'
-		}).then(res=>{
-			var da0 = res.data;
-			stores.userInfo = da0.userInfo;
-			stores.auths    = da0.authorities
-			actions.updateUser(stores);
-			window.uif = stores;
-			cb && cb()
-		})
-	}
-	getUserInfo(cb) {
-		if (ENV === 'dev'){
-			Ajax.postLogin('/bsoms/user/ajaxLogin', {
-				password: 'RYxyz123',
-				userName: 'xcyh001',
-				verifyCode: ''
-			}).then(res => {
-				this.initData(cb)
-			})
-		} else {
-			this.initData(cb)
-		}
-	}
 	componentWillMount() {
-		//this.getUserInfo(() => {
-			let { actions, editConfig } = this.props
-			let { globalData } = editConfig
-			let arr = ['getConfig', 'getWeather', 'getFloor', 'getCatg', 'getStoreList', 'getStoreDetails']
-			let promises = arr.map(key => new Promise(this[key](globalData)))
-			Promise.all(promises).then((o) => {
-				this.setState({ load: true })
-			})
-		//})
+		let { editConfig } = this.props
+		let { globalData } = editConfig
+		let arr = ['getConfig', 'getWeather', 'getFloor', 'getCatg', 'getStoreList', 'getStoreDetails']
+		let promises = arr.map(key => new Promise(this[key](globalData)))
+		Promise.all(promises).then(() => {
+			this.setState({ load: true })
+		})
 		window.onbeforeunload = (e) => {
 			e.returnValue = '确定离开当前页面吗, 离开的话会丢失未保存的数据哦?'
 		}

@@ -12,7 +12,7 @@ import { Provider } from 'react-redux'
 import thunk        from 'redux-thunk'
 import reducer      from 'store/reducers'
 import { createStore, applyMiddleware }         from 'redux'
-import { Router, Route, hashHistory, Redirect } from 'react-router'
+import { Router, Route, hashHistory } from 'react-router'
 
 import Operate      from 'operate'
 import OperateEdit  from 'operate/edit'
@@ -32,8 +32,6 @@ const store = createStore(
 	window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 )
 
-// Render the main component into the dom
-			// <Redirect from="/" to="operate" />
 ReactDOM.render((
 	<Provider store={store}>
 		<Router history={hashHistory}>

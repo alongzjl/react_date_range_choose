@@ -78,36 +78,36 @@ const data = {
 	},
 	content: [
 		{
-			img: { type: 'custom', img: require('compEdit/EditElement/images/navigationFloat_1.png') },
+			img: { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201805231505013287.png' },
 			title: '导航1',		// 图片标题
 			highSwitch: false,
 			router: {},			// 路由
 		},
 		{
-			img: { type: 'custom', img: require('compEdit/EditElement/images/navigationFloat_2.png') },
+			img: { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201805231505049273.png' },
 			title: '导航2',		// 图片标题
 			highSwitch: false,
 			router: {},			// 路由
 		},
 		{
-			img: { type: 'custom', img: require('compEdit/EditElement/images/navigationFloat_3.png') },
+			img: { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201805231505123352.png' },
 			title: '导航3',		// 图片标题
 			highSwitch: false,
 			router: {},			// 路由
 		}, 
 		{
-			img: { type: 'custom', img: require('compEdit/EditElement/images/navigationFloat_4.png') },
+			img: { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201805231505124540.png' },
 			title: '导航4',		// 图片标题
 			highSwitch: false,
 			router: {},			// 路由
 		},{
-			img: { type: 'custom', img: require('compEdit/EditElement/images/navigationFloat_5.png') },
+			img: { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201805231505125551.png' },
 			title: '导航5',		// 图片标题
 			highSwitch: false,
 			router: {},			// 路由
 		},
 		{
-			img: { type: 'custom', img: require('compEdit/EditElement/images/navigationFloat_6.png') },
+			img: { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201805231505126509.png' },
 			title: '导航6',		// 图片标题
 			highSwitch: false,
 			router: {},			// 路由

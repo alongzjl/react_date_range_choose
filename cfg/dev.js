@@ -28,7 +28,8 @@ let config = Object.assign({}, baseConfig, {
 			searchResolveModulesDirectories: false
 		})
 	],
-	module: defaultSettings.getDevModules(),
+	module: defaultSettings.getDevModules()
+	// module: defaultSettings.getDefaultModules()
 });
 
 let target = 'http://java1.rongyi.com'
@@ -74,12 +75,12 @@ config.devServer = {
 			changeOrigin: 'true',
 		},
 		// 素材库&天气
-		'/easy-smart':{
+		'/easy-smart': {
 			target: 'http://192.168.1.206',
 			secure: false,
 			changeOrigin: 'true'
 		},
-		'/easy-smart-service':{
+		'/easy-smart-service': {
 			target: 'http://192.168.1.206',
 			secure: false,
 			changeOrigin: 'true'
