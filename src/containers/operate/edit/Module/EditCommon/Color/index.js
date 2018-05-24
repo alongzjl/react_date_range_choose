@@ -49,12 +49,17 @@ class Color extends React.Component {
 
 	render() {
 		let { color, placement, editConfig }  = this.props
-		let theme   = editConfig.globalData.theme
-		let colors  = JSON.parse(JSON.stringify(theme.list[theme.idx].colors))
+		let type   = color.type
+		let theme  = editConfig.globalData.theme
+		let colors = JSON.parse(JSON.stringify(theme.list[theme.idx].colors))
 		let cp
 		colors.custom = {
 			name:  '自定义',
 			color: color.color
+		}
+		if (!colors[type]) {
+			this.changeColorType.bind(this, 'custom')()
+			return false
 		}
 		let options = Object.keys(colors).map((_) => {
 			let col = colors[_]
@@ -70,7 +75,7 @@ class Color extends React.Component {
 				</Option>
 			)
 		})
-		if (color.type === 'custom') {
+		if (type === 'custom') {
 			cp = (
 				<Col span={6}>
 					<ColorPicker
@@ -82,7 +87,6 @@ class Color extends React.Component {
 				</Col>
 			)
 		}
-
 		return (
 			<div>
 			<Row>
@@ -90,8 +94,8 @@ class Color extends React.Component {
 				<Col span={18}>
 					<Select
 						style={{ width: '100%' }}
-						value={color.type}
-						defaultValue={color.type}
+						value={type}
+						defaultValue={type}
 						onChange={this.changeColorType.bind(this)}
 					>
 						{ options }
