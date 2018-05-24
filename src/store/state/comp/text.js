@@ -29,7 +29,8 @@ const data = {
 	content: {
 		text:   '', 			// 文字内容
 		router: {}				// 路由
-	},
+	}, 
+	type:'normal',
 	animation: {
 		className: '',	// 动画样式
 		delay: 1,					// 开始时间

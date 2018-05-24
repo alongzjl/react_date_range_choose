@@ -1,7 +1,7 @@
 
 
 
-// 地址或电话
+// 地址
 const data = {
 	style:     {
 		text: { 
@@ -47,7 +47,7 @@ const data = {
 	},  
 	layout: {
 		position: 'absolute',
-		top:      0,
+		top:      0, 
 		left:     0,
 		width:    120,
 		height:   30 
@@ -57,6 +57,7 @@ const data = {
 		text:   'L2  2489',  
 		router: {},	// 路由 
 	},
+	type:'address',
 	animation: {
 		className: '',	// 动画样式
 		delay: 1,					// 开始时间

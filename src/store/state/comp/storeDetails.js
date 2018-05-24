@@ -45,7 +45,8 @@ const address = extend(deepCopy(a), {
 	data: {
 		layout: {
 			top:  54,  
-			left: 87.5  
+			left: 87.5, 
+			width:80  
 		}, 
 		style:{
 			text:{
@@ -59,12 +60,13 @@ const address = extend(deepCopy(a), {
 					left:    0,
 				} 
 			} 
-		},  
-		content: {
+		},
+		type:'address',  
+		content: { 
 			text: 'L2  2817',
 			img:{type:'custom',img:'http://rongyi.b0.upaiyun.com/commodity/text/201805191128322385.png'}
 		}  
-	}  
+	}
 }) 
 const phone = extend(deepCopy(a), {
 	data: {
@@ -84,12 +86,13 @@ const phone = extend(deepCopy(a), {
 					left:    0,
 				} 
 			} 
-		},
+		},  
+		type:'phone',
 		content: {
 			text: '023-64538476',
 			img:    { type: 'custom', img: "http://rongyi.b0.upaiyun.com/system/mcp/DEV/app/upload/e49fe7db-78c7-4dc6-9abd-d2198b8b4ffb.png" }
 		}  
-	}  
+	}
 })   
 const button = extend(deepCopy(b), {
 	data: {

@@ -10,15 +10,18 @@ module.exports = {
 		reset:       1,
 		listByStore: 1
 	},
-	storeInstro: {
-		text:        	   1, 
-		wonderfulActivity: 1    
+	storeInstro: { 
+		storeSplitLine:         1, 
+		storeInstroInstroduce: 1, 
+		storeInstroTitle:      1,
+		storeWonderful:     1    
 	},   
-	storeDetails: {
-		text:    1,
+	storeDetails: { 
+		instroTitle:    1,
 		address: 1,
-		button:  1,
-		picture: 1
+		phone:1, 
+		instroButton:  1, 
+		instroPicture: 1
 	},
 	dateWeather: {
 		picture: 1,

@@ -100,7 +100,7 @@ class EditComponent extends React.Component {
 						{ editTab }
 					</div>
 
-					<div className="pg-float e-flex-box scrollbar">
+					{/*<div className="pg-float e-flex-box scrollbar">
 						{ Object.keys(curData).map((_, i) => {
 							var im = curData[_]
 							return (
@@ -110,7 +110,7 @@ class EditComponent extends React.Component {
 								</p>
 							)
 						}) }
-					</div>
+					</div>*/} 
 				</div>
 			</div>
 		);

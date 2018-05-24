@@ -112,17 +112,22 @@ module.exports = [
 				{
 					icon: 'text-control',
 					name: '店铺简介',
-					key:  'text'
+					key:  'storeInstroTitle'
 				},
 				{
 					icon: 'text-control',
 					name: '店铺详情',
-					key:  'text'
+					key:  'storeInstroInstroduce'
 				},{
 					icon: 'wonderfulActivity-control',
 					name: '轮播图片',
-					key:  'wonderfulActivity'
-				}
+					key:  'storeWonderful'
+				}, 
+				{
+					icon: 'storeSplitLine-control',
+					name: '图案装饰',
+					key:  'storeSplitLine'
+				} 
 			]
 		},
 		{
@@ -133,12 +138,12 @@ module.exports = [
 				{
 					icon: 'text-control',
 					name: '店铺LOGO',
-					key:  'picture'
+					key:  'instroPicture'
 				},
 				{
 					icon: 'text-control',
 					name: '店铺名称',
-					key:  'text'
+					key:  'instroTitle'
 				},
 				{
 					icon: 'address-control',
@@ -148,12 +153,12 @@ module.exports = [
 				{
 					icon: 'address-control',
 					name: '电话显示',
-					key:  'address'
-				},
+					key:  'phone' 
+				}, 
 				{
 					icon: 'button-control',
 					name: '前往按钮',
-					key:  'button'
+					key:  'instroButton'
 				}
 			]
 		},
