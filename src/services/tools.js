@@ -36,8 +36,8 @@ function colorVaild(v, obj, key, change) {
 	if (!v || change) return change
 	let type   = v.type
 	if (!window.curThemeColor[type] && type !== 'custom') {
-		v.type = 'custom'
-		change = 1
+		v.type = type = 'custom'
+		// change = 1
 	}
 	if (!change) obj[key] = type === 'custom'? v.color: window.curThemeColor[type].color
 	return change
@@ -73,11 +73,12 @@ window.cssColorFormat = (props, key) => {
 			obj[p] = `url('${getImg(v)}')`
 		}
 	}
-	if (colorChange) {
-		// 判断如果当前组件的颜色所使用的主题类别被删除, 更新颜色类型为custom
-		style[key] = obj
-		return actions.updateComp(null, data)
-	}
+	// if (colorChange) {
+	// 	// 判断如果当前组件的颜色所使用的主题类别被删除, 更新颜色类型为custom
+	// 	style[key] = obj
+	// 	debugger
+	// 	return actions.updateComp(null, data)
+	// }
 	// console.log(`耗时${Date.now() - st}ms`)
 	return obj
 }
