@@ -24,11 +24,6 @@ class EditPageManage extends React.Component {
 	componentWillUnmount() {
 	}
 
-	deletePage(router, groupIdx, idx) {
-		let { actions } = this.props
-		actions.deletePage(router, groupIdx, idx)
-	}
-
 	selectPage(router, groupIdx, idx) {
 		let { actions, editConfig } = this.props
 		editConfig.curData.pageGroupIdx = groupIdx
@@ -46,12 +41,6 @@ class EditPageManage extends React.Component {
 					className={`page-li${_.router === editConfig.curData.router? ' s-active': ''}`}
 				>
 					<div className="pl-name" onClick={this.selectPage.bind(this, _.router, 0, i)}>{ _.title }</div>
-					<div className="pl-ctrl">
-						<a
-							style={{ display: data.group[0].pages.length > 1? 'block': 'none' }}
-							onClick={this.deletePage.bind(this, _.router, 0, i)}
-						><Icon type="delete" /></a>
-					</div>
 				</li>
 			)
 		})

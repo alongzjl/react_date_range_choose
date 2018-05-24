@@ -3,5 +3,6 @@ module.exports = {
 	styleMap:       require('./styleMap'),
 	contentMap:     require('./contentMap'),
 	compMap:        require('./compMap'),
-	composeTypeMap: require('./composeTypeMap')
+	composeTypeMap: require('./composeTypeMap'),
+	styleMAuth:     require('./styleManageAuth')
 }

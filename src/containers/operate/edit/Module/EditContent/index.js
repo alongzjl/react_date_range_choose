@@ -180,7 +180,6 @@ class EditContent extends React.Component {
 			let render = this[`render${cm.type}`]
 			if (!render) return false
 			// 根据样式类型渲染对应组件
-			// debugger
 			let dom = this[`render${cm.type}`].bind(this, cm, content, val, p, index)()
 			ci++
 			return (

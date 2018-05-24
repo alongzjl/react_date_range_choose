@@ -28,7 +28,8 @@ import * as variable from 'var'
 var styleMap = variable.styleMap.name,
 	cssMap   = variable.styleMap.style,
 	compMap  = variable.compMap.name,
-	compNum  = variable.compMap.num
+	compNum  = variable.compMap.num,
+	smAuth   = variable.styleMAuth
    
 import './index.less'
 
@@ -259,8 +260,9 @@ class EditStyle extends React.Component {
 		if (comps) activeKey = comps.map((_, i) => `${i}`)
 		// 子组件循环渲染
 		let childNode = this.styleObj.bind(this, data, style)()
-		return (
-			<section className="pg-style-business">
+		let smChild   = smAuth[data.name]
+			?
+			(
 				<StyleManage
 					data={data}
 					add={false}
@@ -271,6 +273,12 @@ class EditStyle extends React.Component {
 					action={'updateComp'}
 					name={'样式'}
 				/>
+			)
+			:
+			false
+		return (
+			<section className="pg-style-business">
+				{ smChild }
 				<Collapse defaultActiveKey={activeKey} onChange={this.cb}>
 					{ childNode }
 				</Collapse>

@@ -36,7 +36,6 @@ class EditPage extends React.Component {
 		var col = c.color.replace(/#((\S{2})(\S{2})(\S{2})|(\S)(\S)(\S))$/, ($0, $1, $2, $3, $4) => {
 			return `rgba(${parseInt($2, 16)}, ${parseInt($3, 16)}, ${parseInt($4, 16)}, ${c.alpha/100})`
 		})
-		debugger
 		let { data, actions, editConfig } = this.props
 		let curData = editConfig.curData
 		data.feature.backgroundColor = col
