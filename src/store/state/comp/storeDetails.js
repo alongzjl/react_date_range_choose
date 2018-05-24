@@ -45,8 +45,8 @@ const address = extend(deepCopy(a), {
 	data: {
 		layout: {
 			top:  54,  
-			left: 87.5, 
-			width:80  
+			left: 87.5,
+			width:80
 		}, 
 		style:{
 			text:{
@@ -61,8 +61,8 @@ const address = extend(deepCopy(a), {
 				} 
 			} 
 		},
-		type:'address',  
-		content: { 
+		type:'address',
+		content: {
 			text: 'L2  2817',
 			img:{type:'custom',img:'http://rongyi.b0.upaiyun.com/commodity/text/201805191128322385.png'}
 		}  
@@ -86,7 +86,7 @@ const phone = extend(deepCopy(a), {
 					left:    0,
 				} 
 			} 
-		},  
+		},
 		type:'phone',
 		content: {
 			text: '023-64538476',

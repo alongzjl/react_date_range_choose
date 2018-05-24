@@ -56,7 +56,6 @@ const data2 = extend(deepCopy(data), {
 		template: '今天天气: {type} 气温: {temp} 空气质量: {aqi} {aqiInfo} 风向: {direct} {power}'
 	}
 })
-
 const data3 = extend(deepCopy(data), {
 	style: {
 		image:{

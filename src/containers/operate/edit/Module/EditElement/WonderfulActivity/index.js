@@ -16,17 +16,13 @@ class WonderfulActivity extends React.Component {
 		super(props)
 	}
 	state = {
-		random: 1
+		random: parseInt(Math.random()*1000)
 	}
 	componentWillReceiveProps(props) {
 		this.init(props)
 	}
 	componentDidMount() {
 		const content = this.props.data.data.content
-		const number = parseInt(Math.random()*100)
-		this.setState({
-			random: number
-		})
 		if (content && content.length > 0) {
 			this.setState({
 				lists: content

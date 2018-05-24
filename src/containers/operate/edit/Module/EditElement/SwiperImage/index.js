@@ -17,14 +17,10 @@ class SwiperImage extends React.Component {
 		this.init(props);
 	}
 	componentDidMount() {
-		const number = parseInt(Math.random()*100)
-		this.setState({
-			random: number
-		})
-		this.init(this.props);
+		this.init(this.props)
 	} 
 	state = {
-		random: 1
+		random: parseInt(Math.random()*1000)
 	}
 	to = event => {
 		event.preventDefault()

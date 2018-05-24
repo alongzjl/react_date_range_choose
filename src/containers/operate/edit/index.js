@@ -110,7 +110,7 @@ class EditComponent extends React.Component {
 								</p>
 							)
 						}) }
-					</div>*/} 
+					</div>*/}
 				</div>
 			</div>
 		);
