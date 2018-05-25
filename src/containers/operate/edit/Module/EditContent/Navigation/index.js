@@ -34,10 +34,10 @@ class Navigation extends React.Component {
 		const num_add = value - data.data.content.length;
 		let add_default = [];
 		let obj = {   
-					img: { type: 'custom', img: 'http://ryoms.v4.rongyi.com/ryoms/images/menu-icon/icon3_2.png' },			// 图片url
-					title: `导航${data.data.content.length+1}`,		// 图片标题
-					router: '',  	 		// 路由 
-				}
+			img: { type: 'custom', img: '' },			// 图片url
+			title: `导航${data.data.content.length+1}`,		// 图片标题
+			router: ''  	 		// 路由 
+		}
 		add_default.push(obj); 
 		add_default = data.data.content.concat(add_default);
 		data.data.content = add_default;

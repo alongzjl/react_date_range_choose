@@ -252,7 +252,7 @@ class EditContent extends React.Component {
 			childNode = content.map((_, i) => {
 				return (
 					<Panel header={`内容${i + 1}`} key={i + 1}>
-						{ this.renObj(data, data, _) }
+						{ this.renObj(data, data, _, i) }
 					</Panel>
 				)
 			})
