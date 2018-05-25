@@ -29,6 +29,15 @@ class EditPageManage extends React.Component {
 	deletePage(router, groupIdx, idx) {
 		let { actions } = this.props
 		actions.deletePage(router, groupIdx, idx)
+		if (idx === 0) {
+			let { data, editConfig } = this.props
+			let { globalData } = editConfig
+			let da    = globalData.data
+			let group = data.group[0]
+			let li    = group.pages[0]
+			da.homepage = li.router
+			actions.updateGlobal(globalData)
+		}
 	}
 
 	selectPage(router, groupIdx, idx) {

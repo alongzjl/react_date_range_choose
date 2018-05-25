@@ -69,6 +69,12 @@ class Header extends React.Component {
 		let { templateType, id, composeType, adsFlag } = tempCfg
 		let cfg = JSON.parse(JSON.stringify(editConfig))
 
+		let gd = cfg.globalData
+		cfg.globalData = {
+			data:    gd.data,
+			theme:   gd.theme,
+			feature: gd.feature
+		}
 		let config = {
 			configPC: {
 				pageContent: cfg.pageContent,

@@ -68,6 +68,12 @@ class Header extends React.Component {
 		Object.keys(newCon).map(_ => this.formatPage(newCon[_]))
 
 		// console.log(newCon)
+		let gd = cfg.globalData
+		cfg.globalData = {
+			data:    gd.data,
+			theme:   gd.theme,
+			feature: gd.feature
+		}
 		let config = {
 			configPC: {
 				pageContent: cfg.pageContent,
