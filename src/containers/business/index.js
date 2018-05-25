@@ -34,7 +34,7 @@ class BusinessComponent extends React.Component {
 		return (resolve) => {
 			window.weather = {
 				temp: '33℃',
-				type: '小雨',
+				type: '晴',
 				iconName: '07.png',
 				humidity: null,
 				direct: '西南风',
