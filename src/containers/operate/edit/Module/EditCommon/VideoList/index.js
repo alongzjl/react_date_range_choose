@@ -91,10 +91,12 @@ export default class VideoList extends React.Component {
 				groupId:this.state.groupId,
 				type:2
 			}
+			var ty = 'ySourceGroupManage'
 			if (getEnv() === 'business') {
 				postData.mallId = uif.userInfo.mallMid
+				ty = 'sourceGroupManage'
 			}
-			Ajax.postJSON('/easy-smart/ySourceManage/query', postData).then(res => {
+			Ajax.postJSON(`/easy-smart/${ty}/query`, postData).then(res => {
 				this.setState({ 
 					videoList:res.data,
 					page_video:res.page

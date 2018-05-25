@@ -23,8 +23,7 @@ class Catg extends React.Component {
 	}
 
 	renderDom(props, arr, nowVal) {
-		let img = props.data.data.content.filterBGImg,
-			css = cssColorFormat(props, 'filter')
+		let css = cssColorFormat(props, 'filter')
 		return (
 			<div style={cssColorFormat(props, 'filterBox')}>
 				{ arr.map((_, i) => {

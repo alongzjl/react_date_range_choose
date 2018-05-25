@@ -91,10 +91,12 @@ export default class PictureList extends React.Component {
 				groupId:this.state.groupId,
 				type:1
 			}
+			var ty = 'ySourceGroupManage'
 			if (getEnv() === 'business') {
 				postData.mallId = uif.userInfo.mallMid
+				ty = 'sourceGroupManage'
 			}
-			Ajax.postJSON('/easy-smart/ySourceManage/query', postData).then(res => {
+			Ajax.postJSON(`/easy-smart/${ty}/query`,postData).then(res => {
 				this.setState({
 					imgList:res.data,
 					page_img:res.page 
