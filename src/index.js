@@ -14,7 +14,7 @@ import reducer      from 'store/reducers'
 import { createStore, applyMiddleware }         from 'redux'
 import { Router, Route, hashHistory } from 'react-router'
 
-require('public/RyWayFinding-1.2.3.min')
+// require('public/RyWayFinding-1.2.3.min')
 
 import Operate      from 'operate'
 import OperateEdit  from 'operate/edit'
