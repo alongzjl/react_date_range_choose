@@ -76,4 +76,4 @@ class Time extends React.Component {
 	}
 }
 
-export default Text
+export default Time
