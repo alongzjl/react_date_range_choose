@@ -7,7 +7,7 @@
 import React from 'react'
 import './index.less'
 
-class Text extends React.Component {
+class Time extends React.Component {
 
 
 	// 时间1 HH:MM:SS
