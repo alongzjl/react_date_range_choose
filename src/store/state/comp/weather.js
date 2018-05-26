@@ -83,6 +83,7 @@ const data3 = extend(deepCopy(data), {
 			'小雪':      { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201805181527247914.png' },
 			'雨_雪':     { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201805181529020582.png' },
 			'雷雨':      { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201805181526113192.png' },
+			'雷阵雨':    { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201805181526113192.png' },
 			'晴_雨_雷':  { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201805181526573514.png' },
 			'冰雹':      { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201805181525537484.png' },
 			'阴_多云_雪': { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201805181528243395.png' },
