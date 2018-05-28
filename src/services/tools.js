@@ -91,7 +91,15 @@ window.cssColorFormat = (props, key) => {
 window.cssFormatByTerm = (obj) => {
 	Object.keys(obj).map(p => {
 		let v = obj[p]
-		if (formatPxMap[p]) {
+		if (formatComplexMap[p]) {
+			Object.keys(v).map(_ => {
+				let w  = v[_], nt = NT[_]
+				if (nt && getAttr(w) === 'Number') {
+					v[_] = w * 2
+				}
+			})
+		}
+		else if (formatPxMap[p]) {
 			obj[p] = v * 2 + 'px'
 		}
 	})
