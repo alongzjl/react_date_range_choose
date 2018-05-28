@@ -80,34 +80,27 @@ window.cssColorFormat = (props, key) => {
 	// 	return actions.updateComp(null, data)
 	// }
 	// console.log(`耗时${Date.now() - st}ms`)
-	return obj
+	var newO = {}
+	var newObj = Object.keys(obj).sort()
+	newObj.map(_ => {
+		newO[_] = obj[_]
+	})
+	return newO
 }
 
 window.cssFormatByTerm = (obj) => {
-	// let colorChange = 0
-	// let styleArr    = []
 	Object.keys(obj).map(p => {
 		let v = obj[p]
 		if (formatPxMap[p]) {
 			obj[p] = v * 2 + 'px'
 		}
-		// else if (formatComplexMap[p]) {
-		// 	colorChange = colorVaild(v.color, v, 'color', colorChange)
-		// 	obj[p] = Object.keys(v).map(_ => {
-		// 		let w  = v[_], nt = NT[_]
-		// 		return nt? nt.substitute({ val: w }): getAttr(w) === 'Number'? w += 'px': w
-		// 	}).join(' ')
-		// }
-		// else if (formatColorMap[p]) {
-		// 	colorChange = colorVaild(v, obj, p, colorChange)
-		// }
-		// else if (formatImage[p]) {
-		// 	obj[p] = `url('${getImg(v)}')`
-		// }
-		// styleArr.push(`${p.replace(/[A-Z]/g, _ => '-'+_.toLowerCase())}:${obj[p]};`)
 	})
-	// if (colorChange) style[key] = obj
-	return obj
+	var newO = {}
+	var newObj = Object.keys(obj).sort()
+	newObj.map(_ => {
+		newO[_] = obj[_]
+	})
+	return newO
 }
 
 // 获取图片
