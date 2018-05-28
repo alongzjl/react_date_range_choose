@@ -71,25 +71,24 @@ export default class VideoList extends React.Component {
 		})
 	}
 	
-	getVideoList = (str,id) => { 
+	getVideoList = (str, id) => {
+		let currentPage = this.state.currentPage
 		if (str == 'page') {
-			this.setState({
-				currentPage:id
-			})  
+			currentPage = id
+			this.setState({ currentPage: id })
 		} else if (str == 'groupId') {
-			this.setState({
-				groupId:id
-			}) 
-		}  
-		setTimeout(()=>{
+			currentPage = 1
+			this.setState({ groupId: id, currentPage: 1 })
+		}
+		setTimeout(() => {
 			let postData = { 
-				page:this.state.page,
-				name:this.state.name,
-				currentPage:this.state.currentPage,
-				pageSize:this.state.pageSize,
-				page_size:this.state.page_size,
-				groupId:this.state.groupId,
-				type:2
+				page:        this.state.page,
+				name:        this.state.name,
+				currentPage: currentPage,
+				pageSize:    this.state.pageSize,
+				page_size:   this.state.page_size,
+				groupId:     this.state.groupId,
+				type:        2
 			}
 			var ty = 'ySourceManage'
 			if (getEnv() === 'business') {
@@ -102,7 +101,7 @@ export default class VideoList extends React.Component {
 					page_video:res.page
 				})
 			})
-		},10)
+		}, 10)
 	}
 	cancelClick = () => {
 		this.addImgModal.hide()
@@ -134,7 +133,7 @@ export default class VideoList extends React.Component {
 					title={'视频素材'}
 				>
 				<div className="outer">
-					<VideoModule page_video={this.state.page_video} save={this.save_img} getVideoList={this.getVideoList} videoTypes={this.state.videoTypes} videoList={this.state.videoList} type={type} />
+					<VideoModule page_video={this.state.page_video} save={this.save_img} groupId={this.state.groupId} getVideoList={this.getVideoList} videoTypes={this.state.videoTypes} videoList={this.state.videoList} type={type} />
 					<div className="bottom">
 						<Button type="primary" onClick={this.save}>确定</Button>
 						<Button onClick={this.close}>取消</Button>
@@ -148,25 +147,29 @@ export default class VideoList extends React.Component {
 
 class VideoModule extends React.Component {
 	state = {
-		videoTypes:[],
-		videoList:[],
-		current:1
+		videoTypes: [],
+		videoList:  [],
+		current:    1,
+		groupId:    this.props.groupId
 	}
 	
 	componentWillReceiveProps(props){
 		let videoList = props.videoList;
 		let videoTypes = props.videoTypes;
 		 this.setState({
-				videoList:videoList,
-				videoTypes:videoTypes
-			})
+			videoList:videoList,
+			videoTypes:videoTypes
+		})
 	}
-	chooseType(str,id) {
-		 this.setState({
-	      current: id,
-	    });
-		this.props.getVideoList(str,id);  
-	}  
+	chooseType(str, id) {
+		let current = 1
+		if (str === 'groupId') {
+			this.setState({ current: 1, groupId: id })
+		} else if (str === 'page') {
+			this.setState({ current: id })
+		}
+		this.props.getVideoList(str, id)
+	}
 	chooseVideo = id => { 
 		let videoList = this.state.videoList
 		videoList = videoList.map(item=>{
@@ -186,7 +189,7 @@ class VideoModule extends React.Component {
 			<div className="content">
 				<div className="left">
 					{
-						this.state.videoTypes.map((item,index) => <Type key={index} item={item} choose_one={this.chooseType.bind(this)}></Type>)
+						this.state.videoTypes.map((item,index) => <Type groupId={this.state.groupId} key={index} item={item} choose_one={this.chooseType.bind(this)}></Type>)
 					} 
 				</div> 
 				<div className="right">
@@ -207,9 +210,9 @@ class VideoModule extends React.Component {
 	}
 }
 
-function Type({item,choose_one}){
+function Type({item, choose_one, groupId}) {
 	return (
-		<div onClick={()=>{choose_one('groupId',item.id)}}>{item.name}</div> 
+		<div className={item.id === groupId? 's-active': ''} onClick={()=>{choose_one('groupId', item.id)}}>{item.name}</div> 
 	)
 }
 

@@ -76,6 +76,7 @@ export default class PictureList extends React.Component {
 	getImgList = (str, id) => {
 		let currentPage = this.state.currentPage
 		if (str == 'page') {
+			currentPage = id
 			this.setState({ currentPage: id })
 		} else if (str == 'groupId') {
 			currentPage = 1
@@ -96,7 +97,7 @@ export default class PictureList extends React.Component {
 				postData.mallId = uif.userInfo.mallMid
 				ty = 'sourceManage'
 			}
-			Ajax.postJSON(`/easy-smart/${ty}/query`,postData).then(res => {
+			Ajax.postJSON(`/easy-smart/${ty}/query`, postData).then(res => {
 				this.setState({
 					imgList:res.data,
 					page_img:res.page
@@ -166,11 +167,11 @@ export default class PictureList extends React.Component {
 
 class ImgModule extends React.Component {
 	state = {
-		imgTypes:[],
-		imgList:[],
-		loading:false,
-		current:1,
-		groupId: this.props.groupId
+		imgTypes: [],
+		imgList:  [],
+		loading:  false,
+		current:  1,
+		groupId:  this.props.groupId
 	}
 
 	componentWillReceiveProps(props){
