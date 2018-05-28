@@ -46,6 +46,9 @@ class ImageUpload extends React.Component {
 		img.type  = val
 		return actions['updateComp'](null, parentComp? parentComp: data)
 	}
+	removeImg() {
+		this.enter([{ url: '' }])
+	}
 
 	cb(key) {
 		console.log(key)
@@ -65,9 +68,10 @@ class ImageUpload extends React.Component {
 			if (imgVal) {
 				btnNode = (
 					<Col span={9}>
-						<div className="add_img" style={{ backgroundImage: `url('${imgVal}')` }} onClick={this.showList.bind(this)}>
+						<div className="add_img" style={{ backgroundImage: `url('${imgVal}')` }}>
 							<div className="shadow">
-								<div className="add_text_change"><Icon type="reload" /></div>
+								<div className="add_text_change" onClick={this.showList.bind(this)}><Icon type="reload" /></div>
+								<div className="add_text_remove" onClick={this.removeImg.bind(this)}><Icon type="close" /></div>
 							</div>
 						</div>
 					</Col>

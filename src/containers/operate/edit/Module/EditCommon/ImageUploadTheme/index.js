@@ -37,6 +37,9 @@ class ImageUploadTheme extends React.Component {
 		content[name] = imgList[0].url
 		actions[action](editConfig.globalData)
 	}
+	removeImg() {
+		this.enter([{ url: '' }])
+	}
 
 	cb(key) {
 		console.log(key)
@@ -47,9 +50,10 @@ class ImageUploadTheme extends React.Component {
 		let btnNode
 		if (img) {
 			btnNode = (
-				<div className="add_img" style={{ backgroundImage: `url('${img}')` }} onClick={this.showList.bind(this)}>
+				<div className="add_img" style={{ backgroundImage: `url('${img}')` }}>
 					<div className="shadow">
-						<div className="add_text_change"><Icon type="reload" /></div>
+						<div className="add_text_change" onClick={this.showList.bind(this)}><Icon type="reload" /></div>
+						<div className="add_text_remove" onClick={this.removeImg.bind(this)}><Icon type="close" /></div>
 					</div>
 				</div>
 			)
