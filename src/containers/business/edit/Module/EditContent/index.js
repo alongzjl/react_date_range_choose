@@ -80,7 +80,7 @@ class EditContent extends React.Component {
 				min={cfg.min || 0} max={cfg.max || 100}
 				placeholder={cfg.placeholder || '右侧编辑内容'}
 				autosize={cfg.autosize || false}
-				value={val} onChange={v => this.onChange(v.target.value, key, index)}
+				value={val} onChange={v => this.onChange(v.target.value, key, obj, index)}
 				style={{ width: '100%' }}
 			/>
 		)
