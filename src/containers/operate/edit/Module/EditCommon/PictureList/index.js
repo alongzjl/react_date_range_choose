@@ -53,9 +53,11 @@ export default class PictureList extends React.Component {
 		Ajax.postJSON(`/easy-smart/${ty}/query`, getData).then(res => {
 			this.setState({ 
 				imgTypes: res.data
-			}) 
+			})
+			this.setState({ groupId: res.data[0].id })
 			this.getImgList('groupId', res.data[0].id)
 		})
+		// this.getImgList()
 	}
 	state = {
 		choosed_img:[],
@@ -79,27 +81,47 @@ export default class PictureList extends React.Component {
 			currentPage = 1
 			this.setState({ groupId: id, currentPage: 1 })
 		}
-		let postData = {
-			page:        this.state.page,
-			name:        this.state.name,
-			currentPage: currentPage,
-			pageSize:    this.state.pageSize,
-			page_size:   this.state.page_size,
-			groupId:     this.state.groupId,
-			type:        1
-		}
-		debugger
-		var ty = 'ySourceManage'
-		if (getEnv() === 'business') {
-			postData.mallId = uif.userInfo.mallMid
-			ty = 'sourceManage'
-		}
-		Ajax.postJSON(`/easy-smart/${ty}/query`,postData).then(res => {
-			this.setState({
-				imgList:res.data,
-				page_img:res.page 
+		setTimeout(() => {
+			let postData = {
+				page:        this.state.page,
+				name:        this.state.name,
+				currentPage: currentPage,
+				pageSize:    this.state.pageSize,
+				page_size:   this.state.page_size,
+				groupId:     this.state.groupId,
+				type:        1
+			}
+			var ty = 'ySourceManage'
+			if (getEnv() === 'business') {
+				postData.mallId = uif.userInfo.mallMid
+				ty = 'sourceManage'
+			}
+			Ajax.postJSON(`/easy-smart/${ty}/query`,postData).then(res => {
+				this.setState({
+					imgList:res.data,
+					page_img:res.page
+					// imgList: [
+					// 	{
+					// 		id: 1,
+					// 		url: 'http://rongyi.b0.upaiyun.com/system/smartService/null/201801180034041097.png'
+					// 	},
+					// 	{
+					// 		id: 2,
+					// 		url: 'http://rongyi.b0.upaiyun.com/system/smartService/null/201801180034041093.png'
+					// 	},
+					// 	{
+					// 		id: 3,
+					// 		url: 'http://rongyi.b0.upaiyun.com/commodity/text/201805191205157047.png'
+					// 	}
+					// ],
+					// page_img: {
+					// 	currentPage: 1,
+					// 	totalPage: 2,
+					// 	pageSize: 10
+					// }
+				})
 			})
-		})
+		}, 10)
 	}
 	cancelClick = () => {
 		this.addImgModal.hide()
@@ -130,7 +152,7 @@ export default class PictureList extends React.Component {
 					title={'图片素材'}
 				>
 				<div className="outer">
-					<ImgModule save={this.save_img} page_img={this.state.page_img} getImgList={this.getImgList} imgTypes={this.state.imgTypes} imgList={this.state.imgList} />
+					<ImgModule save={this.save_img} groupId={this.state.groupId} page_img={this.state.page_img} getImgList={this.getImgList} imgTypes={this.state.imgTypes} imgList={this.state.imgList} />
 					<div className="bottom">
 						<Button type="primary" onClick={this.save}>确定</Button>
 						<Button onClick={this.close}>取消</Button>
@@ -147,22 +169,25 @@ class ImgModule extends React.Component {
 		imgTypes:[],
 		imgList:[],
 		loading:false,
-		current:1
+		current:1,
+		groupId: this.props.groupId
 	}
 
 	componentWillReceiveProps(props){
 		let img_list = props.imgList;
 		let imgTypes = props.imgTypes;
 		this.setState({
-				imgList:img_list,
-				imgTypes:imgTypes
-			})
+			imgList:img_list,
+			imgTypes:imgTypes
+		})
 	}
 	chooseType(str, id) {
-		debugger
-		this.setState({
-			current: id
-		})
+		let current = 1
+		if (str === 'groupId') {
+			this.setState({ current: 1, groupId: id })
+		} else if (str === 'page') {
+			this.setState({ current: id })
+		}
 		this.props.getImgList(str, id)
 	}
 	chooseImg(img) {
@@ -209,7 +234,7 @@ class ImgModule extends React.Component {
 	
 	render() {
 		let id = window.uif.userInfo.id || '1'
-		const { page_img } = this.props;
+		const { page_img } = this.props
 		return (
 			<div className="content">
 				<div className="left">
@@ -249,9 +274,9 @@ class ImgModule extends React.Component {
 	}
 }
 
-function Type({item, choose_one}){
+function Type({item, choose_one, groupId}) {
 	return (
-		<div onClick={()=>{choose_one('groupId', item.id)}}>{item.name}</div>
+		<div className={item.id === groupId? 's-active': ''} onClick={()=>{choose_one('groupId', item.id)}}>{item.name}</div>
 	)
 }
 
