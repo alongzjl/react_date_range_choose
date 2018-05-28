@@ -71,20 +71,22 @@ export default class PictureList extends React.Component {
 	}
 	componentDidMount(){}
 
-	getImgList = (str, id, currentPage = this.state.currentPage) => {
+	getImgList = (str, id) => {
+		let currentPage = this.state.currentPage
 		if (str == 'page') {
 			this.setState({ currentPage: id })
 		} else if (str == 'groupId') {
-			this.setState({ groupId: id })
+			currentPage = 1
+			this.setState({ groupId: id, currentPage: 1 })
 		}
 		let postData = {
-			page:this.state.page,
-			name:this.state.name,
+			page:        this.state.page,
+			name:        this.state.name,
 			currentPage: currentPage,
-			pageSize:this.state.pageSize,
-			page_size:this.state.page_size,
-			groupId:this.state.groupId,
-			type:1
+			pageSize:    this.state.pageSize,
+			page_size:   this.state.page_size,
+			groupId:     this.state.groupId,
+			type:        1
 		}
 		var ty = 'ySourceManage'
 		if (getEnv() === 'business') {
@@ -155,11 +157,11 @@ class ImgModule extends React.Component {
 				imgTypes:imgTypes
 			})
 	}
-	chooseType(str,id) {
+	chooseType(str, id) {
 		this.setState({
-			current: 1
+			current: id
 		})
-		this.props.getImgList(str, id, 1)
+		this.props.getImgList(str, id)
 	}
 	chooseImg(img) {
 		let img_list = this.state.imgList
