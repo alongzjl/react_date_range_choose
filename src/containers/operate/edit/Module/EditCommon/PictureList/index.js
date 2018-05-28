@@ -88,6 +88,7 @@ export default class PictureList extends React.Component {
 			groupId:     this.state.groupId,
 			type:        1
 		}
+		debugger
 		var ty = 'ySourceManage'
 		if (getEnv() === 'business') {
 			postData.mallId = uif.userInfo.mallMid
@@ -158,6 +159,7 @@ class ImgModule extends React.Component {
 			})
 	}
 	chooseType(str, id) {
+		debugger
 		this.setState({
 			current: id
 		})
