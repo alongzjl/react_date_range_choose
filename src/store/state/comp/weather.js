@@ -69,31 +69,38 @@ const data3 = extend(deepCopy(data), {
 	},
 	content: {
 		weatherIcon: {
-			'晴':        { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201805181526323397.png' },
-			'晴_多云_阴': { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201805181526423755.png' },
-			'晴_雨':     { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201805181527123210.png' },
-			'阴_多云':    { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201805181528502221.png' },
-			'阴_多云_雨': { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201805181528372528.png' },
-			'阴':        { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201805181528030006.png' },
-			'小雨':      { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201805181527490142.png' },
-			'中雨':      { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201805181529464726.png' },
-			'阵雨':      { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201805181529185081.png' },
-			'大雨':      { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201805181529185081.png' },
-			'暴雨':      { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201805181529185081.png' },
-			'小雪':      { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201805181527247914.png' },
-			'雨_雪':     { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201805181529020582.png' },
-			'雷雨':      { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201805181526113192.png' },
-			'雷阵雨':    { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201805181526113192.png' },
-			'晴_雨_雷':  { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201805181526573514.png' },
-			'冰雹':      { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201805181525537484.png' },
-			'阴_多云_雪': { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201805181528243395.png' },
-			'中雪':      { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201805181529360709.png' },
-			'大雪':      { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201805181525168338.png' },
-			'暴雪':      { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201805181525168338.png' }
+			'晴':        { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201805291034408591.png' },
+			'晴_多云_阴': { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201805291034409695.png' },
+			'晴_雨':     { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201805291034411456.png' },
+			'阴_多云':    { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201805291034411645.png' },
+			'阴_多云_雨': { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201805291034412926.png' },
+			'阴':        { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201805291034413712.png' },
+			'小雨':      { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201805291034414739.png' },
+			'中雨':      { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201805291034415789.png' },
+			'阵雨':      { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201805291034416835.png' },
+			'大雨':      { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201805291034416835.png' },
+			'暴雨':      { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201805291034416835.png' },
+			'小雪':      { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201805291034417831.png' },
+			'雨_雪':     { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201805291038563386.png' },
+			'雷雨':      { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201805291038564457.png' },
+			'雷阵雨':    { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201805291038564457.png' },
+			'晴_雨_雷':  { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201805291038565568.png' },
+			'冰雹':      { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201805291038566438.png' },
+			'阴_多云_雪': { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201805291038567480.png' },
+			'中雪':      { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201805291038568511.png' },
+			'大雪':      { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201805291038569553.png' },
+			'暴雪':      { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201805291038569553.png' }
 		}
 	}
 })
 delete data3.style.text
+const data4 = extend(deepCopy(data3), {
+	style: {
+		image: {
+			backgroundColor: { type: 'main', color: '#000' }
+		}
+	}
+})
 
 module.exports = {
 	name: 'weather',
@@ -133,6 +140,10 @@ module.exports = {
 			name:  '图标',
 			img:   '',
 			data:  JSON.parse(JSON.stringify(data3))
+		}, {
+			name:  '纯色图标',
+			img:   '',
+			data:  JSON.parse(JSON.stringify(data4))
 		}, {
 			name:  '自定义',
 			img:   '',

@@ -72,7 +72,7 @@ class Weather extends React.Component {
 			<div style={cssColorFormat(props, type)}>{weather.power}</div>
 		)
 	}
-	// 图标
+	// 实体图标
 	renderStyle7(props, con, type) {
 		let wt  = weather.type
 		let wn  = ''
@@ -99,8 +99,35 @@ class Weather extends React.Component {
 			</div>
 		)
 	}
-	自定义
+	// 纯色图标
 	renderStyle8(props, con, type) {
+		let wt  = weather.type
+		let wn  = ''
+		let len = wMap2.length
+		let css = cssColorFormat(props, 'image')
+		if (wMap[wt]) wn = wt
+		else {
+			for (var i = 0; i < len; i++) {
+				var name = wMap2[i],
+					arr  = name.split('_'),
+					isOK = true
+				arr.map((_) => {
+					if (isOK && wt.indexOf(_) === -1) isOK = false
+				})
+				if (isOK) {
+					wn = name
+					console.log(isOK, name)
+					break
+				}
+			}
+		}
+		css['webkitMaskImage'] = `url('${getImg(con.weatherIcon[wn])}')`
+		return (
+			<div style={css}></div>
+		)
+	}
+	自定义
+	renderStyle9(props, con, type) {
 		let { template } = con
 		// let { aqi, aqiInfo, direct, iconName, power } = weather
 		if (!template) return false
@@ -127,7 +154,7 @@ class Weather extends React.Component {
 		let render = this[`render${type}`]? this[`render${type}`]: this.renderStyle1
 		let dom    = render(this.props, data.data.content, 'text')
 		return (
-			<div className={`e-text ${type}`}>
+			<div className={`e-weather ${type}`}>
 				{ dom }
 			</div>
 		)

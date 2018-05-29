@@ -93,23 +93,23 @@ const weather2 = extend(styleIdxChange(3, deepCopy(w)), {
 		}
 	}
 })
-const weather3 = extend(styleIdxChange(6, deepCopy(w)), {
+const weather3 = extend(styleIdxChange(7, deepCopy(w)), {
 	data: {
 		layout: {
 			top:    30,
 			left:   260,
-			width:  74,
-			height: 45
+			width:  52,
+			height: 52
 		}
 	}
 })
 const picture  = extend(deepCopy(p), {
 	data: {
 		layout: {
-			top:    20,
+			top:    35,
 			left:   390,
 			width:  130,
-			height: 60
+			height: 32
 		},
 		style: {
 			image:{
