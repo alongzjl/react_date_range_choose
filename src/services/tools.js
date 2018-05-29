@@ -39,7 +39,8 @@ function colorVaild(v, obj, key, change) {
 		v.type = type = 'custom'
 		// change = 1
 	}
-	if (!change) obj[key] = type === 'custom'? v.color: window.curThemeColor[type].color
+	// if (!change)
+	obj[key] = type === 'custom'? v.color: window.curThemeColor[type].color
 	return change
 }
 // 组件样式格式化
@@ -125,14 +126,15 @@ window.compImgFormat = (props, content) => {
 	let imgChange = 0
 	let type = content.type
 	if (!window.curThemeColor[type] && type !== 'custom') {
-		content.type = 'custom'
-		imgChange = 1
+		content.type = type = 'custom'
+		// imgChange = 1
 	}
-	if (!imgChange) content = type === 'custom'? content.img: window.curThemeColor[type].img
-	else {
+	// if (!imgChange) 
+	content = type === 'custom'? content.img: window.curThemeColor[type].img
+	// else {
 		// 判断如果当前组件的图片所使用的主题类别被删除, 更新图片类型为custom
-		return actions.updateComp(null, data)
-	}
+		// return actions.updateComp(null, data)
+	// }
 	return content
 }
 

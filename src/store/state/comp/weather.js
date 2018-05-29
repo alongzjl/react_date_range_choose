@@ -57,6 +57,10 @@ const data2 = extend(deepCopy(data), {
 	}
 })
 const data3 = extend(deepCopy(data), {
+	layout: {
+		width: 52,
+		height: 52
+	},
 	style: {
 		image:{
 			borderRadius: {
