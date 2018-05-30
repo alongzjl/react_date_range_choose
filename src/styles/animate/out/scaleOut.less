@@ -1,0 +1,37 @@
+/* 缩放 */
+.scaleOutZoomOut {
+	animation-name:scaleOutZoomOut !important;
+	transform-origin:center center !important;
+}
+@keyframes scaleOutZoomOut {
+	0%{opacity:1;transform:scale(1);}
+	99%{opacity:0;transform:scale(5);}
+	100%{opacity:0;transform:scale(1);}
+}
+.scaleOutZoomIn {
+	animation-name:scaleOutZoomIn !important;
+	transform-origin:center center !important;
+}
+@keyframes scaleOutZoomIn {
+	0%{opacity:1;transform:scale(1);}
+	99%{opacity:0;transform:scale(0);}
+	100%{opacity:0;transform:scale(1);}
+}
+.scaleOutX{	
+	animation-name:scaleOutX !important;
+	transform-origin:center center !important;
+}
+@keyframes scaleOutX {
+	0%{opacity:1;transform:scaleX(1);}
+	99%{opacity:0;transform:scaleX(0);}
+	100%{opacity:0;transform:scaleX(1);}
+}
+.scaleOutY{	
+	animation-name:scaleOutY !important;
+	transform-origin:center center !important;
+}
+@keyframes scaleOutY {
+	0%{opacity:1;transform:scaleY(1);}
+	99%{opacity:0;transform:scaleY(0);}
+	100%{opacity:0;transform:scaleY(1);}
+}

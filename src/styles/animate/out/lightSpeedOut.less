@@ -1,0 +1,65 @@
+/* 光速消失 */
+@keyframes lightSpeedOut-Right {
+	0%   { opacity: 1}
+	99%  {
+		transform: translate3d(100%,0,0) skewX(30deg);
+		opacity: 0
+	}
+	100% {
+		opacity:0;
+		transform: translate3d(0,0,0) skewX(0);
+	}
+}
+
+.lightSpeedOutRight {
+	animation-name: lightSpeedOut-Right !important;
+	animation-timing-function: ease-in
+}
+@keyframes lightSpeedOut-Left {
+	0%   { opacity: 1}
+	99%  {
+		transform: translate3d(-100%,0,0) skewX(30deg);
+		opacity: 0
+	}
+	100% {
+		opacity:0;
+		transform: translate3d(0,0,0) skewX(0);
+	}
+}
+
+.lightSpeedOutLeft {
+	animation-name: lightSpeedOut-Left !important;
+	animation-timing-function: ease-in
+}
+@keyframes lightSpeedOut-Bottom {
+	0%   { opacity: 1}
+	99%  {
+		transform: translate3d(0,100%,0) skewX(30deg);
+		opacity: 0
+	}
+	100% {
+		opacity:0;
+		transform: translate3d(0,0,0) skewX(0);
+	}
+}
+
+.lightSpeedOutBottom {
+	animation-name: lightSpeedOut-Bottom !important;
+	animation-timing-function: ease-in
+}
+@keyframes lightSpeedOut-Top {
+	0%   { opacity: 1}
+	99%  {
+		transform: translate3d(0,-100%,0) skewX(30deg);
+		opacity: 0
+	}
+	100% {
+		opacity:0;
+		transform: translate3d(0,0,0) skewX(0);
+	}
+}
+
+.lightSpeedOutTop {
+	animation-name: lightSpeedOut-Top !important;
+	animation-timing-function: ease-in
+}

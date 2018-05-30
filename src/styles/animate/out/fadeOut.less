@@ -1,0 +1,40 @@
+/* 淡出 */
+.fadeOutCenter{
+	animation-name:fadeOutCenter !important;
+}
+@keyframes fadeOutCenter {
+	0%   { opacity: 1 }
+	100% { opacity: 0 }
+}
+.fadeOutTop{
+	animation-name: fadeOutTop !important;
+}
+@keyframes fadeOutTop {
+	0%   { opacity: 1; transform: translateY(0) }
+	99%  { opacity: 0; transform: translateY(-80px) }
+	100% { opacity: 0; transform: translateY(0) }
+}
+.fadeOutBottom{
+	animation-name: fadeOutBottom !important;
+}
+@keyframes fadeOutBottom {
+	0%   { opacity: 1; transform: translateY(0) }
+	99%  { opacity: 0; transform: translateY(80px) }
+	100% { opacity: 0; transform: translateY(0) }
+}
+.fadeOutLeft{
+	animation-name: fadeOutLeft !important;
+}
+@keyframes fadeOutLeft {
+	0%   { opacity: 1; transform: translateX(0) }
+	99%  { opacity: 0; transform: translateX(-80px) }
+	100% { opacity: 0; transform: translateX(0) }
+}
+.fadeOutRight{
+	animation-name: fadeOutRight !important;
+}
+@keyframes fadeOutRight {
+	0%   { opacity: 1; transform: translateX(0) }
+	99%  { opacity: 0; transform: translateX(80px) }
+	100% { opacity: 0; transform: translateX(0) }
+}

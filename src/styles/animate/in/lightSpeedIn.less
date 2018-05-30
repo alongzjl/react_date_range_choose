@@ -1,0 +1,37 @@
+/* 光速进入 */
+.lightSpeedInRight {
+	animation-name: lightSpeedInLeft !important;
+}
+@keyframes lightSpeedIn{
+	0% {transform: translate3d(100%,0,0) skewX(-30deg);opacity: 0;}
+	60% {transform: skewX(20deg);opacity: 1}
+	80% {transform: skewX(-5deg);opacity: 1}
+	100% {transform: none;opacity: 1}
+}
+.lightSpeedInLeft{
+	animation-name: lightSpeedIn !important;
+}
+@keyframes lightSpeedInLeft{
+	0% {transform: translate3d(-100%,0,0) skewX(30deg);opacity: 0;}
+	60% {transform: skewX(-20deg);opacity: 1}
+	80% {transform: skewX(5deg);opacity: 1}
+	100% {transform: none;opacity: 1}
+}
+.lightSpeedInBottom{
+	animation-name: lightSpeedInBottom !important;
+}
+@keyframes lightSpeedInBottom{
+	0% {transform: translate3d(0,-100%,0) skewX(30deg);opacity: 0;}
+	60% {transform: skewX(-20deg);opacity: 1}
+	80% {transform: skewX(5deg);opacity: 1}
+	100% {transform: none;opacity: 1}
+}
+.lightSpeedInTop{
+	animation-name: lightSpeedInTop !important;
+}
+@keyframes lightSpeedInTop{
+	0% {transform: translate3d(0,100%,0) skewX(30deg);opacity: 0;}
+	60% {transform: skewX(-20deg);opacity: 1}
+	80% {transform: skewX(5deg);opacity: 1}
+	100% {transform: none;opacity: 1}
+}

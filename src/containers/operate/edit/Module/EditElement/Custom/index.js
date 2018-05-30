@@ -30,6 +30,10 @@ import Reset        from 'compEdit/EditElement/Reset'
 import ListByStore  from 'compEdit/EditElement/ListByStore'
 import WonderfulActivity from 'compEdit/EditElement/WonderfulActivity'
 
+import * as variable from 'var'
+var animeMap = variable.animeMap,
+	aStyle   = animeMap.style
+
 import './index.less'
 
 class Custom extends React.Component {
@@ -91,7 +95,9 @@ class Custom extends React.Component {
 			let compName = _.name,
 				layout   = _.data.layout,
 				styleIdx = _.styleList.idx,
-				isEdit   = true,
+				ani      = _.data.animation,
+				aniCls   = '',
+				aniSty   = {},
 				compCon
 
 			if (icomp && icomp[compName]) {
@@ -122,6 +128,18 @@ class Custom extends React.Component {
 			else if (compName === 'page')              compCon = (<Page              data={_} parent={data} editConfig={editConfig} actions={actions} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} />)
 			else if (compName === 'reset')             compCon = (<Reset             data={_} parent={data} editConfig={editConfig} actions={actions} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} />)
 			else if (compName === 'listByStore')       compCon = (<ListByStore       data={_} parent={data} editConfig={editConfig} actions={actions} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} />)
+			if (!compCon) return false
+			if (ani.className) {
+				let item = aStyle[ani.className]
+				let { direction, delay, iterationCount } = ani
+				if (!direction || !item.list) ani.direction = item.list? item.list[0] || '': ''
+				aniCls = `animate ${ani.className}${ani.direction}`
+				aniSty = {
+					animationDuration: `${ani.duration}s`,
+					animationDelay:    `${delay}s`,
+					animationIterationCount: iterationCount
+				}
+			}
 			return (
 				<Rnd
 					key={i}
@@ -141,7 +159,7 @@ class Custom extends React.Component {
 					onResizeStart={e => this.selectComp(e, _, i, idx, data)}
 					onResizeStop={(e, dir, ref, delta, pos) => this.resizeFn(e, ref, delta, pos, _, i, data)}
 				>
-					<div className="pge-layout" onClick={e => this.selectComp(e, _, i, idx, data)} style={!isEdit? _.layout: {}}>{ compCon }</div>
+					<div className={`pge-layout ${aniCls? aniCls: ''}`} style={aniSty} onClick={e => this.selectComp(e, _, i, idx, data)}>{ compCon }</div>
 					{
 						name != 'storeInstro' ? <a className="pge-remove pge-remove-custom" onClick={e => this.removeComp(e, i, data)}><Icon type="cross-circle" /></a> : null
 					} 

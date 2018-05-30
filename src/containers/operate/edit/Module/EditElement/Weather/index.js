@@ -101,6 +101,7 @@ class Weather extends React.Component {
 	}
 	// 纯色图标
 	renderStyle8(props, con, type) {
+		if (con.template !== undefined) return false
 		let wt  = weather.type
 		let wn  = ''
 		let len = wMap2.length
@@ -126,7 +127,7 @@ class Weather extends React.Component {
 			<div style={css}></div>
 		)
 	}
-	自定义
+	// 自定义
 	renderStyle9(props, con, type) {
 		let { template } = con
 		// let { aqi, aqiInfo, direct, iconName, power } = weather
