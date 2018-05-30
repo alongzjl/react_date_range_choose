@@ -5,42 +5,30 @@
  * @Last Modified time: 2018-03-26 12:37:34
 */
 
-.ry-roll-screen-config {
-    .ui-layer-list {
-        overflow: auto;
-    }
-    .ui-radio {
-        font-family: MicrosoftYaHei;
-        font-size: 12px;
-        color: #333333;
-        letter-spacing: 0;
-    }
-    .ui-form-ul {
-        margin-top: 10px;
-    }
-    .ui-form-li {
-        margin-bottom: 5px;
-        position: relative;
-        .help {
-            position: absolute;
-            top: 4px;
-            margin-left: 10px;
-            width: 18px;
-            height: 18px;
-            display: inline-block;
-            cursor: help;
-            // background-image: url('./images/help.png');
-        }
-        &.is-half {
-            float: left;
-            width: 50%;
-        }
-        input[type=number] {
-            width: 53px;
-        }
-        .input-wid {
-            width: 132px !important;
-            padding: 4px 3px;
-        }
-    }
+.pg-anime {
+	.pga-style {
+		display: flex;
+		flex-wrap: wrap;
+		margin-bottom: 0;
+		margin-top: 8px;
+		li {
+			position: relative;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width:  45px;
+			height: 45px;
+			margin-right: 8px;
+			margin-bottom: 8px;
+			font-size: 12px;
+			&:nth-child(5n) {
+				margin-right: 0;
+			}
+			&.s-active,
+			&:hover {
+				color: #40a9ff;
+				background-color: #fff;
+			}
+		}
+	}
 }

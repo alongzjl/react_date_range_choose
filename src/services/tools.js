@@ -37,14 +37,13 @@ function colorVaild(v, obj, key, change) {
 	let type   = v.type
 	if (!window.curThemeColor[type] && type !== 'custom') {
 		v.type = type = 'custom'
-		// change = 1
 	}
-	// if (!change)
 	obj[key] = type === 'custom'? v.color: window.curThemeColor[type].color
 	return change
 }
 // 组件样式格式化
 window.cssColorFormat = (props, key) => {
+	// let st  = Date.now()
 	let { data, actions } = props
 	let { style, layout } = data.data
 	let sk = key === 'layout'? layout: style[key]
@@ -53,7 +52,6 @@ window.cssColorFormat = (props, key) => {
 		return {}
 	}
 	let obj = deepCopy(sk)
-	let st  = Date.now()
 	let colorChange = 0
 	for (let p in obj) {
 		let v = obj[p]
@@ -74,18 +72,12 @@ window.cssColorFormat = (props, key) => {
 			obj[p] = `url('${getImg(v)}')`
 		}
 	}
-	// if (colorChange) {
-	// 	// 判断如果当前组件的颜色所使用的主题类别被删除, 更新颜色类型为custom
-	// 	style[key] = obj
-	// 	debugger
-	// 	return actions.updateComp(null, data)
-	// }
-	// console.log(`耗时${Date.now() - st}ms`)
 	var newO = {}
 	var newObj = Object.keys(obj).sort()
 	newObj.map(_ => {
 		newO[_] = obj[_]
 	})
+	// console.log(`耗时${Date.now() - st}ms`)
 	return newO
 }
 
@@ -127,14 +119,8 @@ window.compImgFormat = (props, content) => {
 	let type = content.type
 	if (!window.curThemeColor[type] && type !== 'custom') {
 		content.type = type = 'custom'
-		// imgChange = 1
 	}
-	// if (!imgChange) 
 	content = type === 'custom'? content.img: window.curThemeColor[type].img
-	// else {
-		// 判断如果当前组件的图片所使用的主题类别被删除, 更新图片类型为custom
-		// return actions.updateComp(null, data)
-	// }
 	return content
 }
 

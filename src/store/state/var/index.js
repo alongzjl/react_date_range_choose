@@ -4,5 +4,6 @@ module.exports = {
 	contentMap:     require('./contentMap'),
 	compMap:        require('./compMap'),
 	composeTypeMap: require('./composeTypeMap'),
-	styleMAuth:     require('./styleManageAuth')
+	styleMAuth:     require('./styleManageAuth'),
+	animeMap:       require('./animeMap')
 }

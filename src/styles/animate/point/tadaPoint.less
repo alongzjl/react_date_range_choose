@@ -1,0 +1,22 @@
+/* 乱抖动 */
+.tadaPoint {
+	animation-name: tadaPoint !important;
+	transform-origin:center center !important;
+}
+@keyframes tadaPoint {
+	0% {
+		transform: scale3d(1, 1, 1);
+	}
+	10%, 20% {
+		transform: scale3d(.85, .85, .85) rotate3d(0, 0, 1, -10deg);
+	}
+	30%, 50%, 70%, 90% {
+		transform: scale3d(1.25, 1.25, 1.25) rotate3d(0, 0, 1, 10deg);
+	}
+	40%, 60%, 80% {
+		transform: scale3d(1.25, 1.25, 1.25) rotate3d(0, 0, 1, -10deg);
+	}
+	100% {
+		transform: scale3d(1, 1, 1);
+	}
+}

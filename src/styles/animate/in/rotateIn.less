@@ -1,0 +1,40 @@
+/* 旋转 */
+.rotateInCenter{
+	animation-name:rotateIn !important;
+}
+@keyframes rotateIn{
+	0%{transform-origin:center center;transform:rotate(-360deg);opacity:0;}
+	100%{transform-origin:center center;transform:rotate(0);opacity:1;}
+}
+.rotateInRight{
+	animation-name:rotateInRight !important;
+}
+@keyframes rotateInRight{
+	0%{transform-origin:left bottom;transform:rotate(-90deg);opacity:0;}
+	100%{transform-origin:left bottom;transform:rotate(0);opacity:1;}
+}
+.rotateInLeft{
+	animation-name:rotateInLeft !important;
+}
+@keyframes rotateInLeft{
+	0%{transform-origin:right bottom;transform:rotate(90deg);opacity:0;}
+	100%{transform-origin:right bottom;transform:rotate(0);opacity:1;}
+}
+.rotateInRightTop {
+	animation-name:rotateInRightTop !important;
+}
+@keyframes rotateInRightTop {
+	0%{transform-origin:left bottom;transform:rotate(90deg);opacity:0}
+	100%{transform-origin:left bottom;transform:rotate(0);opacity:1}
+}
+.rotateInLeftTop {
+	animation-name:rotateInLeftTop !important;
+}
+@keyframes rotateInLeftTop {
+	0%{transform-origin:right bottom;
+	transform:rotate(-90deg);
+	opacity:0}
+	100%{transform-origin:right bottom;
+	transform:rotate(0);
+	opacity:1}
+}
