@@ -15,7 +15,7 @@
     "copy-qa": "copyfiles -f ./src/*.html ./src/favicon.ico ./qa",
     "qa": "cnpm i && npm run copy-qa && webpack --env=qa",
     "pre_online": "cnpm i && npm run copy && webpack --env=dist",
-    "online": "cnpm i && npm run publish-dist",
+    "online": "cnpm i && npm run copy && webpack --env=dist",
     "publsh-qa": "npm run qa && gulp sftp-qa",
     "lint": "eslint ./src",
     "posttest": "npm run lint",

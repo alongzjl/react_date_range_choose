@@ -21,7 +21,7 @@ let config = Object.assign({}, baseConfig, {
         path: path.join(__dirname, '/../dist'),
         filename: '[name]_[hash:8].js',
         chunkFilename: '[name]_[hash:8].js',
-        publicPath: ''
+        publicPath: '/store_static/'
         // publicPath: 'http://rongyi.b0.upaiyun.com/fe/screen/v23/assets/'
     },
     cache: false,
