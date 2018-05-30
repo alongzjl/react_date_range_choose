@@ -1,72 +1,12 @@
 const common = require('state/common')
 let { authInit, deepCopy, extend, styleIdxChange } = common
-const c  = authInit(require('./catg'))
-const f  = authInit(require('./floor'))
-const l  = authInit(require('./letter'))
-const r  = authInit(require('./reset'))
-const p  = authInit(require('./page'))
-const ls = authInit(require('./listByStore'))
+const c  = authInit(require('./content/catg'))
+const f  = authInit(require('./content/floor'))
+const l  = authInit(require('./content/letter'))
+const r  = authInit(require('./content/reset'))
+const p  = authInit(require('./content/page'))
+const ls = authInit(require('./content/listByStore'))
 
-const reset = extend(deepCopy(r), {
-	data: {
-		layout: {
-			top:  36,
-			left: 40
-		},
-		content: {
-			text: '全部店铺'
-		}
-	}
-})
-const catg = extend(deepCopy(c), {
-	data: {
-		layout: {
-			top:  36,
-			left: 104,
-			width: 360
-		}
-	}
-})
-const list = extend(deepCopy(ls), {
-	data: {
-		layout: {
-			top:  75,
-			left: 40
-		}
-	}
-})
-const floor = extend(deepCopy(f), {
-	data: {
-		layout: {
-			top:  110,
-			left: 490
-		}
-	}
-})
-const page = extend(deepCopy(p), {
-	data: {
-		layout: {
-			top:  374,
-			left: 40,
-			width:  430,
-			height: 20
-		},
-		content: {
-			pageSwitch:   true,
-			prevSwitch:   false,
-			nextSwitch:   false,
-			numberSwitch: false
-		}
-	}
-})
-const letter = extend(deepCopy(l), {
-	data: {
-		layout: {
-			top:  410,
-			left: 88
-		}
-	}
-})
 // 店铺列表
 const data = {
 	layout: {
@@ -87,14 +27,7 @@ const data = {
 		duration: 1,				// 持续时间
 		iterationCount: 'infinite'	// 循环次数
 	},
-	components: [
-		reset,
-		catg,
-		list,
-		floor,
-		page,
-		letter
-	]
+	components: [c,f,l,r,p,ls] 
 }
 
 module.exports = {

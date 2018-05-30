@@ -25,6 +25,7 @@ import NavigationFloat   from './NavigationFloat'
 import Weather           from './Weather'
 import WonderfulActivity from './WonderfulActivity'
 import Page              from './Page'
+import filterContent     from './filter'
 
 import * as variable from 'var'
 
@@ -172,6 +173,7 @@ class EditContent extends React.Component {
 	}
 
 	renObj(data, content, index) {
+		content = filterContent(data)
 		let ci = 0
 		let childNode = Object.keys(content).map((p, i) => {
 			if (!conMap[p]) return false

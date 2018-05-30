@@ -1,39 +1,30 @@
 // 字母排序
 const data = {
-	layout: {
-		position: 'absolute',
-		top:      0,
-		left:     0,
-		width:    364,
-		height:   60
-	},
 	style:     {
 		filterBox: {
-			width:  18,
-			height: 18,
-			margin: {
-				top:     0,
-				right:   0,
-				bottom:  0,
-				left:    0,
-			},
-			fontSize:       8,
+			fontSize:       8, 
 			fontStyle:      'normal',
 			fontWeight:     'normal',
 			textDecoration: 'none',
 		},
 		filter: {
-			width:  6,
-			height: 6,
+			width:  20,
+			height: 20,
 			justifyContent: 'center',
-			borderWidth:  0,
+			margin: {
+				top:     0,
+				right:   8,
+				bottom:  10,
+				left:    0,
+			},
+			borderWidth:  1,
 			borderStyle: 'solid',
-			borderColor: { type: 'custom', color: '#fff' },
+			borderColor: { type: 'auxiliary', color: '#fff' },
 			color: { type: 'custom', color: '#666' },
 			background: 'center no-repeat',
 			backgroundSize: 'contain',
 			backgroundImage: { type: 'custom', img: '' },
-			backgroundColor: { type: 'high', color: '#fff' },
+			backgroundColor: { type: 'custom', color: '#fff' },
 			borderRadius:    {
 				topLeft:     10,
 				topRight:    10,
@@ -50,51 +41,23 @@ const data = {
 		},
 		filterActive: {
 			justifyContent: 'center',
-			borderWidth: 0,
+			borderWidth: 2,
 			borderStyle: 'solid',
-			borderColor: { type: 'custom', color: '#a240ec' },
+			backgroundImage: { type: 'custom', img: '' },
+			borderColor: { type: 'auxiliary', color: '#a240ec' },
 			color: { type: 'textHigh', color: '#fff' },
 			background: 'center no-repeat',
-			backgroundImage: { type: 'custom', img: '' },
 			backgroundColor: { type: 'main', color: '#a240ec' }
-		},
-		filterPage: {
-			width:  32,
-			height: 32,
-			justifyContent: 'center',
-			borderWidth:  0,
-			borderStyle: 'solid',
-			borderColor: { type: 'custom', color: '#fff' },
-			color: { type: 'custom', color: '#666' },
-			background: 'center no-repeat',
-			backgroundSize: 'contain',
-			backgroundColor: { type: 'main', color: '#fff' },
-			borderRadius:    {
-				topLeft:     10,
-				topRight:    10,
-				bottomLeft:  10,
-				bottomRight: 10
-			},
-			boxShadow: {
-				h_shadow:   0,
-				v_shadow:   0,
-				blur_dis:   0,
-				spread_dis: 0,
-				color:      { type: 'custom', color: '#000' }
-			}
-		},
-		PagePrev: {
-			backgroundImage: { type: 'custom', img: '' }
-		},
-		PageNext: {
-			backgroundImage: { type: 'custom', img: '' }
 		}
 	},
+	layout:    {
+		position: 'absolute',
+		top:  410,
+		left: 88,
+		width:    364,
+		height:   60
+	},
 	content: {
-		pageSwitch:   true,
-		prevSwitch:   true,
-		nextSwitch:   true,
-		numberSwitch: false,
 	},
 	animation: {
 		className: '',	// 动画样式
@@ -105,12 +68,9 @@ const data = {
 }
 
 module.exports = {
-	name: 'page',
+	name: 'letter',
 	type: 'base',
-	// 位置大小
-	// 样式管理
 	data: JSON.parse(JSON.stringify(data)),
-	// 内容管理
 	// 样式列表
 	styleList: {
 		idx:  0,

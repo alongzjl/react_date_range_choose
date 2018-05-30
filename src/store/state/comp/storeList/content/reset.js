@@ -2,8 +2,8 @@
 const data = {
 	layout: {
 		position: 'absolute',
-		top:      0,
-		left:     0,
+		top:  36,
+		left: 40,
 		width:    60,
 		height:   24
 	},
@@ -47,7 +47,7 @@ const data = {
 		}
 	},
 	content: {
-		text: '重置'
+		text: '全部店铺'
 	},
 	animation: {
 		className: '',				// 动画样式

@@ -1,8 +1,8 @@
 const common = require('state/common')
-let { authInit, deepCopy, extend, styleIdxChange } = common
-const p = authInit(require('./picture'))
-const t = authInit(require('./time'))
-const w = authInit(require('./weather'))
+let { authInit, deepCopy, extend,styleIdxChange } = common
+const p = authInit(require('./content/weatherLogo'))
+const t = authInit(require('./content/time'))
+const w = authInit(require('./content/weather'))
 
 const time     = extend(styleIdxChange(1, deepCopy(t)), {
 	data: {
@@ -103,29 +103,6 @@ const weather3 = extend(styleIdxChange(6, deepCopy(w)), {
 		}
 	}
 })
-const picture  = extend(deepCopy(p), {
-	data: {
-		layout: {
-			top:    20,
-			left:   390,
-			width:  130,
-			height: 60
-		},
-		style: {
-			image:{
-				borderRadius: {
-					topLeft:     0,
-					topRight:    0,
-					bottomRight: 0,
-					bottomLeft:  0
-				}
-			}
-		},
-		content: {
-			img: { type: 'logo', img: '' }
-		}
-	}
-})
 
 // 店铺列表
 const data = {
@@ -153,7 +130,7 @@ const data = {
 		weather,
 		weather2,
 		weather3,
-		picture
+		p
 	]
 }
 

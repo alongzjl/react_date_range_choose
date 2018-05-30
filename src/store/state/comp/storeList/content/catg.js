@@ -2,12 +2,12 @@
 const data = {
 	layout: {
 		position: 'absolute',
-		top:      0,
-		left:     0,
-		width:    40,
-		height:   300
+		top:  36,
+		left: 104,
+		width: 360,
+		height:   24
 	},
-	style:     {
+	style: {
 		filterBox: {
 			fontSize:       8, 
 			fontStyle:      'normal',
@@ -15,23 +15,29 @@ const data = {
 			textDecoration: 'none',
 		},
 		filter: {
-			width:  25,
-			height: 25,
+			height:     24,
+			lineHeight: 24,
 			justifyContent: 'center',
 			margin: {
 				top:     0,
-				right:   0,
-				bottom:  25,
+				right:   4,
+				bottom:  0,
 				left:    0,
 			},
-			borderWidth:  1,
-			borderStyle: 'solid',
-			borderColor: { type: 'auxiliary', color: '#fff' },
+			padding: {
+				top:     0,
+				right:   15,
+				bottom:  0,
+				left:    15,
+			},
+			borderWidth:   2,
+			borderStyle:  'solid',
+			borderColor:  { type: 'custom', color: 'rgba(0, 0, 0, 0)', rgb: '#000', alpha: 0 },
 			color: { type: 'custom', color: '#666' },
 			background: 'center no-repeat',
 			backgroundSize: 'contain',
 			backgroundImage: { type: 'custom', img: '' },
-			backgroundColor: { type: 'custom', color: '#fff' },
+			backgroundColor: { type: 'custom', color: 'rgba(0, 0, 0, 0)', rgb: '#000', alpha: 0 },
 			borderRadius:    {
 				topLeft:     20,
 				topRight:    20,
@@ -66,14 +72,10 @@ const data = {
 		iterationCount: 'infinite'	// 循环次数
 	}
 }
-
 module.exports = {
-	name: 'floor',
+	name: 'catg',
 	type: 'base',
-	// 位置大小
-	// 样式管理
 	data: JSON.parse(JSON.stringify(data)),
-	// 内容管理
 	// 样式列表
 	styleList: {
 		idx:  0,

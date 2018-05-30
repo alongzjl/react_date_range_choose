@@ -24,7 +24,7 @@ module.exports = {
 		instroPicture: 1
 	},
 	dateWeather: {
-		picture: 1,
+		weatherLogo: 1,
 		time:    1,
 		weather: 1
 	}

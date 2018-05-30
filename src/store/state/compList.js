@@ -180,7 +180,7 @@ module.exports = [
 				{
 					icon: 'img-control',
 					name: '图片',
-					key:  'picture'
+					key:  'weatherLogo'
 				}
 			]
 		},

@@ -2,8 +2,8 @@
 const data = {
 	layout: {
 		position: 'absolute',
-		top:      0,
-		left:     0,
+		top:  75,
+		left: 40,
 		width:    440,
 		height:   300
 	},
