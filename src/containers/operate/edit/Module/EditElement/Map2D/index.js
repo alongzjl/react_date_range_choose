@@ -72,7 +72,7 @@ class Map2D extends React.Component {
 		return (
 			<div className="e-map2d">
 				<div id="e_map2D" className="e_map2D">
-					<img src="http://rongyi.b0.upaiyun.com/commodity/text/201805251653337024.png"/>
+					<img src="http://rongyi.b0.upaiyun.com/commodity/text/201805311127327227.png"/>
 				</div>
 			</div>
 		)
