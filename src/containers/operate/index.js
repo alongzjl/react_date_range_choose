@@ -163,12 +163,12 @@ class OperateComponent extends React.Component {
 				data: new Array(12).fill().map((_, i) => {
 					return {
 						id: i + 1,
-						name:  '康帅傅',
+						name:  'UNIQLO',
 						price: '698.99',
 						floor: `L1=1${('00' + (i+1)).substr(-2)}`,
 						no:    `1${('00' + (i+1)).substr(-2)}`,
 						mall_id: '54f403eae4b002000cf63762',
-						pic: 'http://rongyi.b0.upaiyun.com/commodity/text/201805191209037272.png'
+						pic: 'http://rongyi.b0.upaiyun.com/commodity/text/201805311433385479.png'
 					}
 				}),
 				page: 1,
