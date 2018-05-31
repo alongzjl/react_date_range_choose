@@ -122,7 +122,7 @@ class Weather extends React.Component {
 				}
 			}
 		}
-		css['webkitMaskImage'] = `url('${getImg(con.weatherIcon[wn])}')`
+		css['WebkitMaskImage'] = `url('${getImg(con.weatherIcon[wn])}')`
 		return (
 			<div style={css}></div>
 		)

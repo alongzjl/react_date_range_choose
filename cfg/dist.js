@@ -1,4 +1,5 @@
 /**
+ * v4环境
  * @Date:   2017-03-31 10:33:16
  * @Last modified time: 2017-09-11T16:26:06+08:00
  */
@@ -21,7 +22,7 @@ let config = Object.assign({}, baseConfig, {
         path: path.join(__dirname, '/../dist'),
         filename: '[name]_[hash:8].js',
         chunkFilename: '[name]_[hash:8].js',
-        publicPath: ''
+        publicPath: '/store_static/'
         // publicPath: 'http://rongyi.b0.upaiyun.com/fe/screen/v23/assets/'
     },
     cache: false,

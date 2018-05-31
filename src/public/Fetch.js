@@ -119,7 +119,7 @@ export default class Fetch {
 			?
 			'localhost:4090'
 			:
-			ENV === 'rd'
+			ENV === 'dist'
 			?
 			'manage.preview.rongyi.com'
 			:

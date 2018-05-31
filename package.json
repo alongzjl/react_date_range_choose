@@ -7,6 +7,7 @@
   "scripts": {
     "clean": "rimraf dist/*",
     "copy": "copyfiles -f ./src/*.html ./src/favicon.ico ./dist",
+    "copy-online": "copyfiles -f ./src/*.html ./src/favicon.ico ./online",
     "dist": "npm run copy & webpack --env=dist",
     "publish-dist": "npm run dist & gulp sftp-dist",
     "copy-rd": "copyfiles -f ./src/*.html ./src/favicon.ico ./rd",
@@ -14,8 +15,8 @@
     "publish-rd": "npm run rd && gulp sftp-rd",
     "copy-qa": "copyfiles -f ./src/*.html ./src/favicon.ico ./qa",
     "qa": "cnpm i && npm run copy-qa && webpack --env=qa",
-    "preview_online": "cnpm i && npm run publish-dist",
-    "online": "cnpm i && npm run publish-dist",
+    "pre_online": "cnpm i && npm run copy && webpack --env=dist",
+    "online": "cnpm i && npm run copy-online && webpack --env=online",
     "publsh-qa": "npm run qa && gulp sftp-qa",
     "lint": "eslint ./src",
     "posttest": "npm run lint",
