@@ -18,9 +18,9 @@ module.exports = {
 	// 定义样式名称 & 渲染类型 & 相关配置
 	style: {
 		display:           { name: '显示',    type: 'Switch', true: 'block', false: 'none' },
-		top:               { name: '上',      type: 'Number', min: -300, max: 540 },
-		left:              { name: '左',      type: 'Number', min: -200, max: 960 },
-		width:             { name: '宽',      type: 'Number', min: 0, max: 540 },
+		top:               { name: '上',      type: 'Number', min: -1000, max: 960 },
+		left:              { name: '左',      type: 'Number', min: -1000, max: 960 },
+		width:             { name: '宽',      type: 'Number', min: 0, max: 960 },
 		height:            { name: '高',      type: 'Number', min: 0, max: 960 },
 		lineHeight:        { name: '行高',    type: 'Number' },
 		fontSize:          { name: '字号',    type: 'Number', min: 6, max: 90, step: 1 },
