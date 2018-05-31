@@ -173,7 +173,7 @@ class EditContent extends React.Component {
 	}
 
 	renObj(data, content, index) {
-		content = filterContent(data)
+		content = filterContent(data,content)
 		let ci = 0
 		let childNode = Object.keys(content).map((p, i) => {
 			if (!conMap[p]) return false

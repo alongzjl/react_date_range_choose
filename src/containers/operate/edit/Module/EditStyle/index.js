@@ -51,8 +51,6 @@ class EditStyle extends React.Component {
 	}
 
 	onChangeAuth(val, style, css) {
-		// console.clear()
-		// console.log(val)
 		let { data, actions, editConfig } = this.props
 		let { curData }    = editConfig
 		let { parentComp } = curData

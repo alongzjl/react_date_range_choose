@@ -82,7 +82,7 @@ class EditComponent extends React.Component {
 					<TabPane tab="样式" key="2"><EditStyle     data={editConfig.curComp} /></TabPane>
 				</Tabs>
 			)
-			// <TabPane tab="动画" key="3"><EditAnimation data={editConfig.curComp} /></TabPane>
+					// <TabPane tab="动画" key="3"><EditAnimation data={editConfig.curComp} /></TabPane>
 		} else if (type === 'theme') {
 			editTab = (<EditTheme data={editConfig.globalData.theme} />)
 		}

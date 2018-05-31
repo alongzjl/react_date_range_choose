@@ -1,0 +1,58 @@
+/* 掉落 */
+.hingeOutRight {
+	animation-name: hingeRight !important;
+}
+@keyframes hingeRight {
+	0% {
+		transform-origin: top right;
+		animation-timing-function: ease-in-out
+	}
+	20%,60% {
+		transform: rotateZ(-80deg);
+		transform-origin: top right;
+		animation-timing-function: ease-in-out
+	}
+	40%,80% {
+		transform: rotateZ(-60deg);
+		transform-origin: top right;
+		animation-timing-function: ease-in-out;
+		opacity: 1
+	}
+	99% {
+		transform: translate3d(0,700px,0);
+		opacity: 0;
+	}
+	100%{
+		transfrom: translate3d(0,0,0);
+		opacity: 0;
+	}
+}
+
+.hingeOutLeft {
+	animation-name: hingeLeft !important;
+}
+@keyframes hingeLeft {
+	0% {
+		transform-origin: top left;
+		animation-timing-function: ease-in-out
+	}
+	20%,60% {
+		transform: rotateZ(80deg);
+		transform-origin: top left;
+		animation-timing-function: ease-in-out
+	}
+	40%,80% {
+		transform: rotateZ(60deg);
+		transform-origin: top left;
+		animation-timing-function: ease-in-out;
+		opacity: 1
+	}
+	99% {
+		transform: translate3d(0,700px,0);
+		opacity: 0;
+	}
+	100%{
+		transfrom: translate3d(0,0,0);
+		opacity: 0;
+	}
+}

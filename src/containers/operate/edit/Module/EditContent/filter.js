@@ -5,7 +5,7 @@
  */
  
 
-const filterContent = data => {
+const filterContent = (data,con) => {
 	let content = data.data.content;
 	const t = data.data.type;
 	if( t == "storeInstroInstroduce"||t == "storeInstroTitle"||t == "instroPicture"||t == "instroTitle"){
@@ -14,7 +14,9 @@ const filterContent = data => {
 		content = {img:content.img}
 	}else if(t == "instroButton"){
 		content = {text:content.text}
-	}
+	}else{
+		content = con
+	} 
 	return content
 } 
 

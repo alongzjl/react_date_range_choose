@@ -93,13 +93,13 @@ const weather2 = extend(styleIdxChange(3, deepCopy(w)), {
 		}
 	}
 })
-const weather3 = extend(styleIdxChange(6, deepCopy(w)), {
+const weather3 = extend(styleIdxChange(7, deepCopy(w)), {
 	data: {
 		layout: {
 			top:    30,
 			left:   260,
-			width:  74,
-			height: 45
+			width:  52,
+			height: 52
 		}
 	}
 })
@@ -119,9 +119,10 @@ const data = {
 	},
 	animation: {
 		className: '',	// 动画样式
-		delay: 1,					// 开始时间
+		direction: '',				// 方向
+		delay: 0,					// 开始时间
 		duration: 1,				// 持续时间
-		iterationCount: 'infinite'	// 循环次数
+		iterationCount: 1			// 循环次数
 	},
 	components: [
 		time,

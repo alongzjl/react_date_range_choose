@@ -17,7 +17,6 @@ class Picture extends React.Component {
 
 	render() {
 		let { data } = this.props
-		// console.log(1, this.props)
 		return (
 			<div className="e-picture" style={cssColorFormat(this.props, 'image')}>
 				<img src={compImgFormat(this.props, data.data.content.img)} />

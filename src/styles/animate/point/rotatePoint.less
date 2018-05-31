@@ -1,0 +1,17 @@
+/* 旋转 */
+.rotatePointCW {	
+	animation-name:rotatePointCW !important;
+	animation-timing-function: linear !important;
+}
+@keyframes rotatePointCW {
+	0%   { transform: rotateZ(0); opacity: 1 }
+	100% { transform: rotateZ(360deg); opacity: 1 }
+}
+.rotatePointAW {
+	animation-name:rotatePointCW !important;
+	animation-timing-function: linear !important;
+}
+@keyframes rotatePointCW {
+	0%   { transform: rotateZ(0); opacity: 1 }
+	100% { transform: rotateZ(-360deg); opacity: 1 }
+}

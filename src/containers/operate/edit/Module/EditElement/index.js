@@ -38,7 +38,9 @@ import './index.less'
 
 import * as variable from 'var'
 
-const ctMap = variable.composeTypeMap
+const ctMap  = variable.composeTypeMap
+var animeMap = variable.animeMap,
+	aStyle   = animeMap.style
 
 class EditElement extends React.Component {
 	componentWillMount() {}
@@ -106,7 +108,9 @@ class EditElement extends React.Component {
 				layout    = _.data.layout,
 				styleIdx  = _.styleList.idx,
 				csn       = `handle-drag-${Math.floor(Math.random()*1e9)}`,
-				isEdit    = true,
+				ani       = _.data.animation,
+				aniCls    = '',
+				aniSty    = {},
 				compCon
 			if (compName === 'picture')                compCon = (<Picture           data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
 			else if (compName === 'web')               compCon = (<Web               data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
@@ -126,6 +130,17 @@ class EditElement extends React.Component {
 			else if (compName === 'dateWeather')       compCon = (<DateWeather       data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
 			else if (compName === 'map2D')             compCon = (<Map2D             data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
 			if (!compCon) return false
+			if (ani.className) {
+				let item = aStyle[ani.className]
+				let { direction, delay, iterationCount } = ani
+				if (!direction || !item.list) ani.direction = item.list? item.list[0] || '': ''
+				aniCls = `animate ${ani.className}${ani.direction}`
+				aniSty = {
+					animationDuration: `${ani.duration}s`,
+					animationDelay:    `${delay}s`,
+					animationIterationCount: iterationCount
+				}
+			}
 			return (
 				<Rnd
 					key={i}
@@ -145,7 +160,7 @@ class EditElement extends React.Component {
 					onResizeStart={e => this.selectComp(e, _, i)}
 					onResizeStop={(e, dir, ref, delta, pos) => this.resizeFn(e, ref, delta, pos, _, i)}
 				>
-					<div className="pge-layout" onClick={e => this.selectComp(e, _, i)}>{ compCon }</div>
+					<div className={`pge-layout ${aniCls? aniCls: ''}`} style={aniSty} onClick={e => this.selectComp(e, _, i)}>{ compCon }</div>
 					<a className="pge-remove" onClick={e => this.removeComp(e, i)}><Icon type="cross-circle" /></a>
 					<div className="handle-drag" onClick={e => e.stopPropagation()}></div>
 				</Rnd>
