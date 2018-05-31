@@ -12,11 +12,11 @@ const data = {
 		},
 		swiperImage:{
 			borderRadius:    {
-				topLeft:     6,
-				topRight:    6,
-				bottomRight: 6,
-				bottomLeft:  6
-			},
+				topLeft:     0,
+				topRight:    0,
+				bottomRight: 0,
+				bottomLeft:  0
+			}
 		}
 	},
 	layout: {
