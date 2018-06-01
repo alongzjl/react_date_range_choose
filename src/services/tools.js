@@ -87,11 +87,9 @@ window.cssFormatByTerm = (obj) => {
 		if (formatComplexMap[p]) {
 			Object.keys(v).map(_ => {
 				let w  = v[_], nt = NT[_]
-				if (nt && getAttr(w) === 'Number') {
-					v[_] = w * 2
-				}
+				return nt? nt.substitute({ val: w }): getAttr(w) === 'Number'? w * 2 + 'px': w
 			})
-		}
+		} 
 		else if (formatPxMap[p]) {
 			obj[p] = v * 2 + 'px'
 		}
