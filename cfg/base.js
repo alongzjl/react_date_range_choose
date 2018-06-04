@@ -1,5 +1,6 @@
 'use strict';
 let path = require('path');
+const projectRoot = process.cwd();
 let defaultSettings = require('./defaults');
 
 // Additional npm or bower modules to include in builds
@@ -11,7 +12,7 @@ let additionalPaths = [];
 
 let REACT_WEBPACK_ENV = process.env.REACT_WEBPACK_ENV;
 let envMap = {
-    qa: 'test',
+    qa: 'qa',
     rd: 'dev'
 };
 
@@ -29,28 +30,33 @@ module.exports = {
         filename: 'app.js',
         publicPath: defaultSettings.publicPath
     },
-    devServer: {
-        contentBase: './src/',
-        historyApiFallback: true,
-        hot: true,
-        port: defaultSettings.port,
-        publicPath: defaultSettings.publicPath,
-        noInfo: false
-    },
+    // devServer: {
+    //     contentBase: './src/',
+    //     historyApiFallback: true,
+    //     hot: true,
+    //     port: defaultSettings.port,
+    //     publicPath: defaultSettings.publicPath,
+    //     noInfo: false
+    // },
     resolve: {
         extensions: ['', '.js', '.jsx'],
         alias: {
-            actions: `${defaultSettings.srcPath}/actions/`,
-            components: `${defaultSettings.srcPath}/components/`,
-            public: `${defaultSettings.srcPath}/public/`,
-            business: `${defaultSettings.srcPath}/business/`,
-            sources: `${defaultSettings.srcPath}/sources/`,
-            stores: `${defaultSettings.srcPath}/stores/`,
-            styles: `${defaultSettings.srcPath}/styles/`,
-            images: `${defaultSettings.srcPath}/images/`,
-            services: `${defaultSettings.srcPath}/services/`,
-            config: `${defaultSettings.srcPath}/config/` + REACT_WEBPACK_ENV
+            store:      `${defaultSettings.srcPath}/store`,
+            state:      `${defaultSettings.srcPath}/store/state`,
+            var:        `${defaultSettings.srcPath}/store/state/var`,
+            business:   `${defaultSettings.srcPath}/containers/business`,
+            operate:    `${defaultSettings.srcPath}/containers/operate`,
+            view:       `${defaultSettings.srcPath}/containers/view`,
+            actions:    `${defaultSettings.srcPath}/store/actions`,
+            components: `${defaultSettings.srcPath}/components`,
+            compEdit:   `${defaultSettings.srcPath}/containers/operate/edit/Module`,
+            compEditB:  `${defaultSettings.srcPath}/containers/business/edit/Module`,
+            public:     `${defaultSettings.srcPath}/public`,
+            styles:     `${defaultSettings.srcPath}/styles`,
+            images:     `${defaultSettings.srcPath}/images`,
+            services:   `${defaultSettings.srcPath}/services`,
+            config:     `${defaultSettings.srcPath}/config/` + (REACT_WEBPACK_ENV || 'dev')
         }
     },
-    module: {}
+    module: {},
 };
