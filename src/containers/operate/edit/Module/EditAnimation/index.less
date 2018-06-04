@@ -1,0 +1,34 @@
+/*
+* @Author: weijie
+* @Date:   2017-09-28 10:49:49
+ * @Last Modified by: lishengpeng
+ * @Last Modified time: 2018-03-26 12:37:34
+*/
+
+.pg-anime {
+	.pga-style {
+		display: flex;
+		flex-wrap: wrap;
+		margin-bottom: 0;
+		margin-top: 8px;
+		li {
+			position: relative;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width:  45px;
+			height: 45px;
+			margin-right: 8px;
+			margin-bottom: 8px;
+			font-size: 12px;
+			&:nth-child(5n) {
+				margin-right: 0;
+			}
+			&.s-active,
+			&:hover {
+				color: #40a9ff;
+				background-color: #fff;
+			}
+		}
+	}
+}

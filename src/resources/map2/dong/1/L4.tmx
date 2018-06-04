@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="475" height="300" tilewidth="2" tileheight="2" nextobjectid="165">
+ <layer name="块层 1" width="475" height="300">
+  <data encoding="base64" compression="zlib">
+   eJztwTEBAAAAwqD1T20JT6AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB4GrMIAAE=
+  </data>
+ </layer>
+ <imagelayer name="bg">
+  <image source="原png/map_L4.png" width="950" height="600"/>
+ </imagelayer>
+ <objectgroup color="#00ff00" name="nav">
+  <object id="50" x="162" y="232">
+   <polyline points="40,0 102,0 158,0 200,0 208,0 284,0 296,0 302,-4 314,-6 322,-6 332,-6 342,-4 354,2 370,2 450,2 472,2 534,2 554,2 572,2 574,10 580,48 582,84"/>
+  </object>
+  <object id="51" x="156" y="262">
+   <polyline points="40,0 66,0 104,0 140,0 186,0 216,0 232,0 290,0 298,0 308,8 318,12 324,14 330,14 336,14 346,12 350,10 356,4 366,4 376,4 400,4 444,4 450,4 484,4 508,20 514,54 536,54 588,54"/>
+  </object>
+  <object id="58" x="346" y="298">
+   <polyline points="-4,-24 -4,-36"/>
+  </object>
+  <object id="59" x="398" y="280">
+   <polyline points="-10,0 -10,-18"/>
+  </object>
+  <object id="61" x="494" y="292">
+   <polyline points="-8,-4 -8,-16"/>
+  </object>
+  <object id="66" x="622" y="218">
+   <polyline points="10,-14 12,16"/>
+  </object>
+  <object id="69" x="446" y="214">
+   <polyline points="0,18 0,32 0,48"/>
+  </object>
+  <object id="70" x="382" y="232">
+   <polyline points="-20,0 -10,30"/>
+  </object>
+  <object id="71" x="532" y="234">
+   <polyline points="0,0 0,12 0,32"/>
+  </object>
+  <object id="72" x="602" y="234">
+   <polyline points="10,0 -2,32"/>
+  </object>
+  <object id="75" x="322" y="210">
+   <polyline points="2,-6 -2,22"/>
+  </object>
+  <object id="77" x="372" y="210">
+   <polyline points="-2,-2 -2,22"/>
+  </object>
+  <object id="82" x="486" y="254">
+   <polyline points="0,2 0,22"/>
+  </object>
+  <object id="83" x="192" y="280">
+   <polyline points="4,-18 8,-34 8,-38 10,-48"/>
+  </object>
+  <object id="84" x="142" y="242">
+   <polyline points="36,0 58,0"/>
+  </object>
+  <object id="89" x="692" y="196">
+   <polyline points="0,0 4,38"/>
+  </object>
+  <object id="90" x="714" y="218">
+   <polyline points="0,0 2,16"/>
+  </object>
+  <object id="95" x="606" y="284">
+   <polyline points="0,16 0,-18"/>
+  </object>
+  <object id="96" x="562" y="274">
+   <polyline points="-6,0 -6,-8"/>
+  </object>
+  <object id="97" x="522" y="276">
+   <polyline points="0,0 0,-10"/>
+  </object>
+  <object id="104" x="694" y="338">
+   <polyline points="0,0 -2,-22"/>
+  </object>
+  <object id="108" x="780" y="242">
+   <polyline points="6,0 -44,0"/>
+  </object>
+  <object id="109" x="156" y="216">
+   <polyline points="0,0 22,26"/>
+  </object>
+  <object id="110" x="138" y="266">
+   <polyline points="0,0 40,-24"/>
+  </object>
+  <object id="111" x="218" y="284">
+   <polyline points="0,0 4,-22"/>
+  </object>
+  <object id="112" x="292" y="284">
+   <polyline points="2,0 4,-22"/>
+  </object>
+  <object id="113" x="260" y="270">
+   <polyline points="4,-38 2,-24 0,-8"/>
+  </object>
+  <object id="117" x="266" y="204">
+   <polyline points="0,0 -2,28"/>
+  </object>
+  <object id="123" x="484" y="202">
+   <polyline points="0,0 0,24"/>
+  </object>
+  <object id="124" x="788" y="280">
+   <polyline points="10,0 -46,0"/>
+  </object>
+  <object id="125" x="758" y="328">
+   <polyline points="0,0 -14,-12"/>
+  </object>
+  <object id="142" x="720" y="196">
+   <polyline points="0,0 -28,0"/>
+  </object>
+ </objectgroup>
+ <objectgroup color="#0055ff" name="lift">
+  <object id="126" name="E1" x="262" y="246"/>
+  <object id="127" name="E2" x="446" y="246"/>
+  <object id="128" name="F1" x="486" y="256"/>
+  <object id="129" name="E3" x="532" y="246"/>
+  <object id="130" name="E4" x="742" y="280"/>
+  <object id="132" name="E5" x="200" y="246"/>
+ </objectgroup>
+ <objectgroup color="#0055ff" name="pubs">
+  <object id="138" name="Toliet" x="692" y="196"/>
+  <object id="140" name="Nursely Room" x="720" y="196"/>
+ </objectgroup>
+ <objectgroup color="#ff00ff" name="shop">
+  <object id="143" name="F4-01" x="156" y="216"/>
+  <object id="144" name="F4-38" x="138" y="266"/>
+  <object id="145" name="F4-37" x="218" y="284"/>
+  <object id="146" name="F4-36" x="294" y="284"/>
+  <object id="147" name="F4-35" x="342" y="274"/>
+  <object id="148" name="F4-34" x="388" y="280"/>
+  <object id="149" name="F4-06b-08" x="370" y="208"/>
+  <object id="150" name="F4-05-06a" x="324" y="204"/>
+  <object id="151" name="F4-02-04" x="266" y="204"/>
+  <object id="154" name="F4-10-12" x="484" y="202"/>
+  <object id="155" name="F4-32-33" x="486" y="288"/>
+  <object id="156" name="F4-18-23" x="632" y="204"/>
+  <object id="157" name="F4-29" x="606" y="300"/>
+  <object id="158" name="F4-31" x="522" y="276"/>
+  <object id="159" name="F4-30" x="556" y="274"/>
+  <object id="160" name="F4-28" x="694" y="338"/>
+  <object id="161" name="F4-27" x="758" y="328"/>
+  <object id="162" name="F4-26" x="798" y="280"/>
+  <object id="163" name="F4-25" x="786" y="242"/>
+  <object id="164" name="F4-24" x="714" y="218"/>
+ </objectgroup>
+</map>

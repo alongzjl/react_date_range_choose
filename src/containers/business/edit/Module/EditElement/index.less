@@ -1,0 +1,71 @@
+/*
+* @Author: weijie
+* @Date:   2017-09-28 10:49:49
+ * @Last Modified by: lishengpeng
+ * @Last Modified time: 2018-03-26 12:37:34
+*/
+
+.pg-element-business {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	&.pg-element-LANDSCAPE {
+		min-width:  1020px;
+		min-height: 620px;
+		margin: 0 auto;
+		.pg-element {
+			width:  960px;
+			height: 540px;
+			overflow: hidden;
+		}
+	}
+	&.pg-element-PORTRAIT {
+		min-width:   620px;
+		min-height:  1020px;
+		.pg-element {
+			width:  540px;
+			height: 960px;
+		}
+	}
+	.pg-element {
+		height:  100%;
+		width:   100%;
+		position: relative;
+		background-color: #fff;
+		.pge-layout {
+			width:  100%;
+			height: 100%;
+			& > div,
+			& > section {
+				pointer-events: none;
+			}
+			&:after {
+				content: '';
+				position: absolute;
+				top: 0;
+				left: 0;
+				display: block;
+				width:  100%;
+				height: 100%;
+				border: 1px solid rgba(0, 0, 0, 0);
+				pointer-events: none;
+				z-index: 1;
+			}
+			&.s-active {
+				&:after {
+					border: 1px dashed #2383f0;
+				}
+			}
+			.swiper-pagination {
+				bottom: -25px;
+				width: 100%; 
+				.swiper-pagination-bullet {
+					margin-right: 5px;
+				}
+			}
+		}
+		.pge-remove {
+			display: none;
+		}
+	}
+}

@@ -1,0 +1,55 @@
+/*
+* @Author: weijie
+* @Date:   2017-09-28 10:49:49
+ * @Last Modified by: lishengpeng
+ * @Last Modified time: 2018-03-26 12:37:34
+*/
+
+.pg-element-view {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	&.pg-element-LANDSCAPE {
+		min-width:  960px;
+		min-height: 540px;
+		margin: 0 auto;
+		.pg-element {
+			width:  960px;
+			height: 540px;
+		}
+	}
+	&.pg-element-PORTRAIT {
+		min-width:   540px;
+		min-height:  960px;
+		.pg-element {
+			width:  540px;
+			height: 960px;
+		}
+	}
+	.pg-element {
+		height:  100%;
+		width:   100%;
+		position: relative;
+		background-color: #fff;
+		.pge-layout {
+			width:  100%;
+			height: 100%;
+			& > div {
+				pointer-events: none;
+			}
+			.swiper-pagination {
+				bottom: -25px;
+				width: 100%; 
+				.swiper-pagination-bullet {
+					margin-right: 5px;
+				}
+			}
+		}
+	}
+	img {
+		position: relative;
+		width:  100%;
+		height: 100%;
+		overflow: hidden;
+	}
+}
