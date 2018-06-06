@@ -14,7 +14,7 @@ import * as actions from 'actions'
 import Color       from 'compEdit/EditCommon/Color'
 import ImageUpload from 'compEdit/EditCommon/ImageUpload'
 import StyleManage from 'compEdit/EditCommon/StyleManage'
-
+import textFilter  from  './Text'
 import {
 	Row, Col,
 	Checkbox, Collapse, InputNumber, Radio, Slider, Switch
@@ -39,6 +39,7 @@ class EditStyle extends React.Component {
 
 	onChange(val, css, obj, node) { 
 		let { data, actions, editConfig } = this.props
+		data = textFilter.lineHightAdaptation(data,val,css)
 		let da = data.data
 		let { curData } = editConfig
 		let { parentComp } = curData
