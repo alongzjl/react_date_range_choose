@@ -14,9 +14,10 @@ const globalData = {
 		},
 		list: [JSON.parse(JSON.stringify(tc))]
 	},
-	floors: [],		// 楼层数据
-	catgs: [],		// 分类数据
-	storeList:[],	//店铺数据  
+	floors:    [],	// 楼层数据
+	catgs:     [],	// 分类数据
+	storeList: [],	// 店铺数据
+	copyComp: null,	// 复制组件
 	// 全局特征 
 	feature: {
 	}

@@ -30,6 +30,8 @@ import NavigationFloat   from 'compEdit/EditElement/NavigationFloat'
 import SplitLine         from 'compEdit/EditElement/SplitLine'
 import Map2D             from 'compEdit/EditElement/Map2D'
 
+import ContextMenu       from 'compEdit/EditCommon/ContextMenu'
+
 import * as actions from 'actions'
 
 import { Icon } from 'antd'
@@ -160,17 +162,23 @@ class EditElement extends React.Component {
 					onResizeStart={e => this.selectComp(e, _, i)}
 					onResizeStop={(e, dir, ref, delta, pos) => this.resizeFn(e, ref, delta, pos, _, i)}
 				>
-					<div className={`pge-layout ${aniCls? aniCls: ''}`} style={aniSty} onClick={e => this.selectComp(e, _, i)}>{ compCon }</div>
-					<a className="pge-remove" onClick={e => this.removeComp(e, i)}><Icon type="cross-circle" /></a>
+					<div
+						className={`pge-layout ${aniCls? aniCls: ''}`}
+						style={aniSty}
+						onClick={e => this.selectComp(e, _, i)}
+						onContextMenu={e => this.selectComp(e, _, i, false)}
+					>{ compCon }</div>
 					<div className="handle-drag" onClick={e => e.stopPropagation()}></div>
 				</Rnd>
 			)
+					// <a className="pge-remove" onClick={e => this.removeComp(e, i)}><Icon type="cross-circle" /></a>
 		})
 		return (
 			<div className={`pg-element-parent e-flex-box pg-element-${ct}`}>
 				<section className="pg-element" style={bgStyle}>
 					{ childNode }
 				</section>
+				<ContextMenu parent={'pg-center'} />
 			</div>
 		)
 	}

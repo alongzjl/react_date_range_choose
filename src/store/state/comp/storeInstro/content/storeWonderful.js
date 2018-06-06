@@ -20,10 +20,10 @@ const storeWonderful = extend(deepCopy(require('../../../comp/wonderfulActivity'
 	feature:{ 
 		swiperOptions:{
 			slideOptions:{
-				spaceBetween:25, 
-				slidesPerView:2,  
-				centeredSlides:true,
-			},
+				spaceBetween: 25,
+				slidesPerView: 2,
+				centeredSlides: true
+			}
 		} 
 	}
 })

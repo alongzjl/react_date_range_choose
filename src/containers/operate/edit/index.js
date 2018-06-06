@@ -15,10 +15,11 @@ import { connect } from 'react-redux'
 import EditHeader     from 'compEdit/EditHeader'
 import EditPage       from 'compEdit/EditPage'
 import EditPageManage from 'compEdit/EditPageManage'
+import EditCompLayout from 'compEdit/EditCompLayout'
 import EditContent    from 'compEdit/EditContent'
 import EditElement    from 'compEdit/EditElement'
 import EditStyle      from 'compEdit/EditStyle'
-// import EditAnimation  from 'compEdit/EditAnimation'
+import EditAnimation  from 'compEdit/EditAnimation'
 import EditTheme      from 'compEdit/EditTheme'
 
 import tools from 'services/tools'
@@ -53,13 +54,11 @@ class EditComponent extends React.Component {
 		super(props)
 	}
 
-	componentWillMount() {
-	}
+	componentWillMount() {}
 
-	componentDidMount() {
-	}
+	componentDidMount() {}
 
-	selectPage() {
+	selectPage = (e) => {
 		let { actions, editConfig } = this.props
 		let { curData } = editConfig
 		actions.selectPage(curData.router)
@@ -80,9 +79,9 @@ class EditComponent extends React.Component {
 				<Tabs defaultActiveKey="1" type="card">
 					<TabPane tab="内容" key="1"><EditContent   data={editConfig.curComp} /></TabPane>
 					<TabPane tab="样式" key="2"><EditStyle     data={editConfig.curComp} /></TabPane>
+					<TabPane tab="动画" key="3"><EditAnimation data={editConfig.curComp} /></TabPane>
 				</Tabs>
 			)
-					// <TabPane tab="动画" key="3"><EditAnimation data={editConfig.curComp} /></TabPane>
 		} else if (type === 'theme') {
 			editTab = (<EditTheme data={editConfig.globalData.theme} />)
 		}
@@ -93,14 +92,21 @@ class EditComponent extends React.Component {
 					<div className="pg-left scrollbar">
 						<EditPageManage data={editConfig.pageList} />
 					</div>
-					<div className="pg-center e-flex-box scrollbar" onClick={this.selectPage.bind(this)}>
+					<div className="pg-left scrollbar">
+						<EditCompLayout data={editConfig.curPage} />
+					</div>
+					<div
+						className="pg-center e-flex-box scrollbar"
+						onClick={this.selectPage.bind(this)}
+						onContextMenu={this.selectPage}
+					>
 						<EditElement data={editConfig.curPage} location={location}></EditElement>
 					</div>
 					<div className="pg-right scrollbar">
 						{ editTab }
 					</div>
 
-					{/*<div className="pg-float e-flex-box scrollbar">
+					{<div className="pg-float e-flex-box scrollbar">
 						{ Object.keys(curData).map((_, i) => {
 							var im = curData[_]
 							return (
@@ -110,7 +116,7 @@ class EditComponent extends React.Component {
 								</p>
 							)
 						}) }
-					</div>*/}
+					</div>}
 				</div>
 			</div>
 		);

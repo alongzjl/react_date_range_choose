@@ -169,6 +169,11 @@ export default function editConfig(state = initialState, action) {
 			saveData()
 			return Object.assign(state, action.config)
 
+		case types.UPDATE_COPYCOMP:
+			console.log('复制组件!')
+			state.globalData.copyComp = data
+			return Object.assign({}, state)
+
 		default:
 			return state
 	}

@@ -1,0 +1,129 @@
+/**
+ * @Author: Liao Hui <liaohui>
+ * @Date:   2018-01-25T11:52:09+08:00
+ * @Last modified by:   Liao Hui
+ * @Last modified time: 2018-04-19T14:29:30+08:00
+ */
+
+import React from 'react'
+import './index.less'
+import { bindActionCreators } from 'redux'
+import { connect }  from 'react-redux'
+import { SortableContainer, SortableElement, arrayMove } from 'react-sortable-hoc'
+
+import * as actions from 'actions'
+
+import { Icon } from 'antd'
+import * as variable from 'var'
+var styleMap = variable.styleMap.name,
+	compMap  = variable.compMap.name,
+	compNum  = variable.compMap.num
+ 
+class EditCompLayout extends React.Component {
+	componentWillMount() {}
+
+	componentDidMount() {}
+
+	componentWillUnmount() {}
+
+	removeComp(e, idx) {
+		e.stopPropagation()
+		let { actions } = this.props
+		actions.deleteComp(idx)
+	}
+
+	copyComp(e, item) {
+		e.stopPropagation()
+		let { actions } = this.props
+		actions.updateCopyComp(deepCopy(item))
+	}
+
+	selectComp(e, data, idx) {
+		e.stopPropagation()
+		let { actions, editConfig } = this.props
+		let { curData } = editConfig
+		let { compIdx, cusCompIdx, contentType } = curData
+		if (compIdx === idx && cusCompIdx < 0 && contentType === 'comp') return
+		curData.compIdx    = idx
+		curData.parentComp = null
+		actions.updateCur(curData)	// 更新 当前数据
+		actions.selectComp(data)
+	}
+	onSortEnd(o, e) {
+		let { data, actions, editConfig } = this.props
+		let curData = editConfig.curData
+		let eles = data.elements
+		let old  = o.oldIndex
+		let next = o.newIndex
+		let item = eles[old]
+		if (old === next) {
+			this.selectComp(e, item, next)
+			return
+		}
+		eles.splice(old, 1)
+		eles.splice(next, 0, item)
+		actions.updatePage(curData.pageGroupIdx, curData.pageIdx, data)
+		console.log()
+		this.selectComp(e, item, next)
+	}
+	render() {
+		let { data, editConfig } = this.props
+		let map  = deepCopy(compNum)
+		let eles = data.elements
+		if (!eles.length) return false
+		let names = new Array(eles.length).fill().map((_, i) => {
+			let name = eles[i].name,
+				cn   = compMap[name]
+			++map[name]
+			return cn + map[name]
+		})
+		let SortableItem = SortableElement(({_, i}) => {
+				return (
+					<div className="pl-name">{ names[i] }</div>
+				)
+			}
+		)
+		const SortableList = SortableContainer(({eles}) => {
+			return (
+				<ul>
+					{
+						eles.map((_, i) => (
+							<li key={i} className={`pecl-li${i === editConfig.curData.compIdx? ' s-active': ''}`}>
+								<SortableItem index={i} i={i} _={_} />
+								<div className="pl-ctrl">
+									<a onClick={e => this.copyComp(e, _)}><Icon type="copy"/></a>
+									<a onClick={e => this.removeComp(e, i)}><Icon type="delete"/></a>
+								</div>
+							</li>
+						))
+					}
+				</ul>
+			)
+		})
+		return (
+			<div className="pe-comp-layout">
+				<div className="pecl-list">
+					<SortableList
+						eles={eles}
+						onSortEnd={(o, e) => this.onSortEnd(o, e)}
+					/>
+				</div>
+			</div>
+		)
+	}
+}
+
+
+EditCompLayout.defaultProps = {
+}
+
+const mapStateToProps = state => state
+
+const mapDispatchToProps = dispatch => ({
+	actions: bindActionCreators(actions, dispatch)
+})
+
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(EditCompLayout)
