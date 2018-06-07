@@ -1,24 +1,34 @@
-import React, {Component} from 'react';
+import React from 'react'
+import { hashHistory } from 'react-router'
 
-class NoMatchComponent extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {}
-    }
+class NoMatchComponent extends React.Component {
+	constructor(props) {
+		super(props)
+		this.state = {
+			operate:  '/operate/edit',
+			business: '/business/edit',
+			view:     '/view'
+		}
+	}
 
-    componentDidMount() {
-    }
+	componentDidMount() {
+		let { params } = this.props
+		let { splat } = params
+		let type  = splat.split('/')[0]
+		let route = this.state[type]
+		if (route) hashHistory.push(route)
+	}
 
-    componentWillUnmount() {
-    }
+	componentWillUnmount() {
+	}
 
-    render() {
-        return (
-            <div className="">
+	render() {
+		return (
+			<div className="">
 				您输入的URL地址有误~
 			</div>
-        );
-    }
+		)
+	}
 }
 
-export default NoMatchComponent;
+export default NoMatchComponent

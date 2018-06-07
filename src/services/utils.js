@@ -10,15 +10,6 @@ export function getRootUrl() {
 	return (env ? config[env + 'Url'] : config.rootUrl);
 }
 
-export function getShareUrl() {
-	let env = config.appEnv;
-	let urlStr = 'share' + env.replace(/\w/, function($0) {
-		return $0.toUpperCase();
-	}) + 'Url';
-
-	return (env ? config[urlStr] : config.shareUrl);
-}
-
 export function ConverJson(jsonString) {
 	var rtv;
 	try {

@@ -1,0 +1,23 @@
+.e-list-by-store {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	.ep-item {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		i {
+			display: block;
+		}
+	}
+	&.Style1 {
+		.ep-item {
+			flex-direction: column;
+			p {
+				display: flex;
+				margin-bottom: 0;
+				align-items: center;
+			}
+		}
+	}
+}

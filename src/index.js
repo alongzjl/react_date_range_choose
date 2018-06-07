@@ -5,41 +5,48 @@
  * @Last modified time: 2018-04-18T19:44:00+08:00
 */
 
-import 'core-js/fn/object/assign';
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { createStore, applyMiddleware } from 'redux';
-import { Provider } from 'react-redux';
-import thunk from 'redux-thunk';
-import reducer from './reducers';
-import { Router, Route, hashHistory, Redirect } from 'react-router';
-import Template from './containers/template';
-import TemplateList from './containers/template/list';
-import TemplateAdd from './containers/template/add';
-import TemplateEdit from './containers/template/edit';
-import TemplatePageList from './containers/template/edit/pageList';
-import TemplatePageEdit from './containers/template/edit/pageEdit';
-import NoMatch from './containers/NoMatch';
+import 'core-js/fn/object/assign'
+import React        from 'react'
+import ReactDOM     from 'react-dom'
+import { Provider } from 'react-redux'
+import thunk        from 'redux-thunk'
+import reducer      from 'store/reducers'
+import { createStore, applyMiddleware }         from 'redux'
+import { Router, Route, hashHistory } from 'react-router'
 
-import 'styles/common.less';
-import 'styles/animate.less';
+// require('public/RyWayFinding-1.2.3.min')
 
-const store = createStore(reducer, applyMiddleware(thunk));
+import Operate      from 'operate'
+import OperateEdit  from 'operate/edit'
+import Business     from 'business'
+import BusinessEdit from 'business/edit'
+import View from 'view'
 
-// Render the main component into the dom
+import NoMatch     from './containers/NoMatch'
+
+import 'styles/common.less'
+import 'styles/animate.less'
+import 'antd/dist/antd.less'
+
+let a = '';
+
+const store = createStore(
+	reducer,
+	applyMiddleware(thunk),
+	window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+)
+
 ReactDOM.render((
-    <Provider store={store}>
-        <Router history={hashHistory}>
-            <Redirect from="/" to="template" />
-            <Route path="template" component={Template}>
-                <Route path="list" component={TemplateList} />
-                <Route path="add" component={TemplateAdd} />
-                <Route path="edit" component={TemplateEdit}>
-                    <Route path="pageList/:resolution" component={TemplatePageList} />
-                    <Route path="pageEdit/:resolution/:pageName" component={TemplatePageEdit} />
-                </Route>
-            </Route>
-            <Route path="*" component={NoMatch}/>
-        </Router>
-    </Provider>
-), document.getElementById('app'));
+	<Provider store={store}>
+		<Router history={hashHistory}>
+			<Route path="operate" component={Operate}>
+				<Route path="edit" component={OperateEdit} />
+			</Route>
+			<Route path="business" component={Business}>
+				<Route path="edit" component={BusinessEdit} />
+			</Route>
+			<Route path="view" component={View} />
+			<Route path="*" component={NoMatch} />
+		</Router>
+	</Provider>
+), document.getElementById('app'))
