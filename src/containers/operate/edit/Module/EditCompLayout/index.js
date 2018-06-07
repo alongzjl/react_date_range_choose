@@ -13,7 +13,7 @@ import { SortableContainer, SortableElement, arrayMove } from 'react-sortable-ho
 
 import * as actions from 'actions'
 
-import { Icon } from 'antd'
+import { Icon, message } from 'antd'
 import * as variable from 'var'
 var styleMap = variable.styleMap.name,
 	compMap  = variable.compMap.name,
@@ -28,7 +28,8 @@ class EditCompLayout extends React.Component {
 
 	removeComp(e, idx) {
 		e.stopPropagation()
-		let { actions } = this.props
+		let { actions, data } = this.props
+		message.success(`删除组件: ${compMap[data.elements[idx].name]}!`)
 		actions.deleteComp(idx)
 	}
 
@@ -36,6 +37,7 @@ class EditCompLayout extends React.Component {
 		e.stopPropagation()
 		let { actions } = this.props
 		actions.updateCopyComp(deepCopy(item))
+		message.success(`复制组件: ${compMap[item.name]}!`)
 	}
 
 	selectComp(e, data, idx) {
@@ -52,35 +54,54 @@ class EditCompLayout extends React.Component {
 	onSortEnd(o, e) {
 		let { data, actions, editConfig } = this.props
 		let curData = editConfig.curData
-		let eles = data.elements
+		let eles = deepCopy(data.elements).reverse()
+		let len  = eles.length - 1
 		let old  = o.oldIndex
 		let next = o.newIndex
 		let item = eles[old]
 		if (old === next) {
-			this.selectComp(e, item, next)
+			this.selectComp(e, item, len - next)
 			return
 		}
-		eles.splice(old, 1)
-		eles.splice(next, 0, item)
+		data.elements = arrayMove(eles, old, next).reverse()
+
 		actions.updatePage(curData.pageGroupIdx, curData.pageIdx, data)
-		console.log()
-		this.selectComp(e, item, next)
+		this.selectComp(e, item, len - next)
 	}
 	render() {
 		let { data, editConfig } = this.props
 		let map  = deepCopy(compNum)
 		let eles = data.elements
-		if (!eles.length) return false
+		if (!eles) return false
+		eles = deepCopy(eles)
+		let len  = eles.length - 1
+		eles.reverse()
 		let names = new Array(eles.length).fill().map((_, i) => {
 			let name = eles[i].name,
 				cn   = compMap[name]
 			++map[name]
 			return cn + map[name]
 		})
-		let SortableItem = SortableElement(({_, i}) => {
+		let ctrlNode = eles.map((_, i) => (
+			<li key={i} className={`pecc-li`}>
+				<a onClick={e => this.copyComp(e, _)}><Icon type="copy"/></a>
+				<a onClick={e => this.removeComp(e, len - i)}><Icon type="delete"/></a>
+			</li>
+		))
+		let SortableItem = SortableElement(({_, i, l}) => {
 				return (
-					<div className="pl-name">{ names[i] }</div>
+					<li className={`pecl-li${(l - i) === editConfig.curData.compIdx? ' s-active': ''}`}>
+						<div className="pl-name">{ names[i] }</div>
+						<div className="pl-ctrl">
+							<a><Icon type="copy"/></a>
+							<a><Icon type="delete"/></a>
+						</div>
+					</li>
 				)
+						// <div className="pl-ctrl">
+						// 	<a onClick={e => this.copyComp(e, _)}><Icon type="copy"/></a>
+						// 	<a onClick={e => this.removeComp(e, i)}><Icon type="delete"/></a>
+						// </div>
 			}
 		)
 		const SortableList = SortableContainer(({eles}) => {
@@ -88,25 +109,28 @@ class EditCompLayout extends React.Component {
 				<ul>
 					{
 						eles.map((_, i) => (
-							<li key={i} className={`pecl-li${i === editConfig.curData.compIdx? ' s-active': ''}`}>
-								<SortableItem index={i} i={i} _={_} />
-								<div className="pl-ctrl">
-									<a onClick={e => this.copyComp(e, _)}><Icon type="copy"/></a>
-									<a onClick={e => this.removeComp(e, i)}><Icon type="delete"/></a>
-								</div>
-							</li>
+							<SortableItem key={i} index={i} l={len} i={i} _={_} />
 						))
 					}
 				</ul>
 			)
+							// <li key={i} className={`pecl-li${i === editConfig.curData.compIdx? ' s-active': ''}`}>
+							// 	<SortableItem index={i} i={i} _={_} />
+							// 	<div className="pl-ctrl">
+							// 		<a onClick={e => this.copyComp(e, _)}><Icon type="copy"/></a>
+							// 		<a onClick={e => this.removeComp(e, i)}><Icon type="delete"/></a>
+							// 	</div>
+							// </li>
 		})
 		return (
 			<div className="pe-comp-layout">
+				<div className="pecl-title">图层列表</div>
 				<div className="pecl-list">
 					<SortableList
 						eles={eles}
 						onSortEnd={(o, e) => this.onSortEnd(o, e)}
 					/>
+					<ul className="pecl-ctrl">{ ctrlNode }</ul>
 				</div>
 			</div>
 		)

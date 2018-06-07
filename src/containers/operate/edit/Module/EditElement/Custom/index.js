@@ -89,6 +89,8 @@ class Custom extends React.Component {
 
 	render() {
 		let { data, actions, idx, csn, editConfig, ioInput, ioOuter,name } = this.props
+		let { curData } = editConfig
+		let { compIdx, cusCompIdx } = curData
 		let icomp = ioInput.comp
 		let comp  = data.data.components
 		let childNode = comp.map((_, i) => {
@@ -140,12 +142,12 @@ class Custom extends React.Component {
 					animationIterationCount: iterationCount
 				}
 			}
+					// dragHandleClassName={'.handle-drag-custom'}
 			return (
 				<Rnd
 					key={i}
 					bounds={`.${csn}`}
-					className={i === editConfig.curData.cusCompIdx? 's-active': ''}
-					dragHandleClassName={'.handle-drag-custom'}
+					className={compIdx === idx && i === cusCompIdx? 's-active': ''}
 					size={{
 						width:  layout.width || '100%',
 						height: layout.height
@@ -163,9 +165,9 @@ class Custom extends React.Component {
 					{
 						name != 'storeInstro' ? <a className="pge-remove pge-remove-custom" onClick={e => this.removeComp(e, i, data)}><Icon type="cross-circle" /></a> : null
 					} 
-					<div className="handle-drag-custom" onClick={e => e.stopPropagation()}></div>
 				</Rnd>
 			)
+					// <div className="handle-drag-custom" onClick={e => e.stopPropagation()}></div>
 		})
 		return (
 			<section className={`pg-custom ${csn}`}>

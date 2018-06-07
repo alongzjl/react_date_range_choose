@@ -106,8 +106,23 @@ export default function editConfig(state = initialState, action) {
 			console.log('创建页面!')
 			saveData()
 			return Object.assign({}, state)
-		
 
+		case types.COPY_PAGE:
+			var route    = `p_${++state.pageList.maxPageIdx}`,
+				pageData = deepCopy(pageC[router]),
+				pageName = `${pageData.title} 副本`,
+				gpData   = {
+					router: route,
+					title:  pageName
+				}
+			pageData.title  = pageName
+			pageData.router = route
+			pageC[route] = pageData
+			pageList.group[groupIdx].pages.push(gpData)
+			console.log('复制页面!')
+			saveData()
+			return Object.assign({}, state)
+		
 		case types.UPDATE_PAGE:
 			var pgp = pageList.group[groupIdx].pages[idx]
 			pgp.title          = data.title
@@ -121,12 +136,16 @@ export default function editConfig(state = initialState, action) {
 		case types.DELETE_PAGE:
 			delete pageC[router]
 			pageList.group[groupIdx].pages.splice(idx, 1)
+			// var route = pageList.group[groupIdx].pages[0].router
 			state.curPage       = {}
+			// state.curPage       = pageC[route]
 			state.curComp       = {}
-			curData.router      = ''
+			// curData.router      = ''
+			curData.router      = route
 			curData.compIdx     = -1
 			curData.cusCompIdx  = -1
 			curData.contentType = ''
+			// curData.contentType = 'page'
 			console.log('删除页面!')
 			saveData()
 			return Object.assign({}, state)
@@ -134,14 +153,16 @@ export default function editConfig(state = initialState, action) {
 
 		case types.SELECE_PAGE:
 			// if (curData.router === router) return state
+			var pd = pageC[router]
 			curData.router      = router
-			state.curPage       = pageC[router]
+			state.curPage       = pd
 			state.curComp       = {}
 			curData.router      = router
 			curData.compIdx     = -1
 			curData.cusCompIdx  = -1
 			curData.contentType = 'page'
 			curData.parentComp  = null
+			curData.title       = pd.title
 			console.log('选择页面!')
 			saveData()
 			return Object.assign({}, state)

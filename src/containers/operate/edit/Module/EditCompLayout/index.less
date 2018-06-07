@@ -3,42 +3,94 @@
 	flex-direction: column;
 	height: 100%;
 	background-color: #fff;
+	.pecl-title {
+		width: 100%;
+		height: 40px;
+		line-height: 40px;
+		text-align: center;
+		background-color: #f1f1f1;
+	}
 	.pecl-list {
+		position: relative;
 		display: flex;
 		flex: 1;
 		height: 100%;
 		overflow-x: hidden;
 		overflow-y: auto;
-		ul {
-			width: 100%;
-		}
+	}
+	ul {
+		width: 100%;
 	}
 	.pecl-li {
 		width: 100%;
+		.pl-name,
+		.pl-ctrl {
+			display: flex;
+		}
+		.pl-name {
+			width: 100%;
+			height: 100%;
+			padding-left: 20px;
+			align-items: center;
+		}
+		.pl-ctrl {
+			width: 48px;
+			display: none;
+			a {
+				display: block;
+				width: 24px;
+				height: 24px;
+				line-height: 24px;
+				text-align: center;
+				color: #333;
+				&:hover {
+					color: #2383f0;
+				}
+			}
+			.remove-box {
+				color: #999;
+				font-size: 12px;
+				p {
+					font-size: 14px;
+					color: #666;
+				}
+			}
+			.ep-button {
+				justify-content: flex-start;
+				button {
+					width: 60px;
+					height: 24px;
+					margin-right: 6px;
+				}
+			}
+		}
+		&:hover,
+		&.s-active {
+			background-color: #f4f9ff;
+			.pl-name {
+				color: #2383f0;
+			}
+		}
+		&:hover {
+			.pl-ctrl {
+				display: flex;
+			}
+		}
 	}
-}
-.pecl-li {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-	align-items: center;
-	width: 200px;
-	height: 30px;
-	padding-right: 5px; 
-	border-bottom: 1px solid #eee;
-	.pl-name,
-	.pl-ctrl {
-		display: flex;
-	}
-	.pl-name {
-		width: 100%;
-		height: 100%;
-		padding-left: 20px;
-		align-items: center;
-	}
-	.pl-ctrl {
+	.pecl-ctrl {
+		position: absolute;
+		top: 0;
+		right: 5px;
 		width: 48px;
-		display: none;
+	}
+	.pecc-li {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 100%;
+		height: 30px;
+		opacity: 0;
+		// display: none;
 		a {
 			display: block;
 			width: 24px;
@@ -66,17 +118,23 @@
 				margin-right: 6px;
 			}
 		}
-	}
-	&:hover,
-	&.s-active {
-		background-color: #f4f9ff;
-		.pl-name {
-			color: #2383f0;
+		&:hover {
+			opacity: 1;
 		}
 	}
-	&:hover {
-		.pl-ctrl {
-			display: flex;
-		}
+}
+.pecl-li {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	width: 200px;
+	height: 30px;
+	padding-right: 5px;
+	.pl-name {
+		padding-left: 20px;
+	}
+	.pl-ctrl {
+		display: none;
 	}
 }

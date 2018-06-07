@@ -60,6 +60,12 @@ export const selectPage = (router) => ({
 	router
 })
 
+export const copyPage = (router, groupIdx) => ({
+	type: types.COPY_PAGE,
+	router,
+	groupIdx
+})
+
 // 当前操作项
 export const updateCur = (data) => ({
 	type: types.UPDATE_CUR,

@@ -45,6 +45,7 @@ class EditPage extends React.Component {
 
 	render() {
 		let { data } = this.props
+		if (!data || data.title === undefined) return false
 		let activeKey = ['0', '1']
 		return (
 			<section className="pg-page">

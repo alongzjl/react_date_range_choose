@@ -61,6 +61,7 @@ class EditComponent extends React.Component {
 	selectPage = (e) => {
 		let { actions, editConfig } = this.props
 		let { curData } = editConfig
+		if (!curData.router) return false
 		actions.selectPage(curData.router)
 	}
 
@@ -92,9 +93,12 @@ class EditComponent extends React.Component {
 					<div className="pg-left scrollbar">
 						<EditPageManage data={editConfig.pageList} />
 					</div>
-					<div className="pg-left scrollbar">
-						<EditCompLayout data={editConfig.curPage} />
-					</div>
+					{
+						curData.router &&
+						<div className="pg-left pg-left-fixed scrollbar">
+							<EditCompLayout data={editConfig.curPage} />
+						</div>
+					}
 					<div
 						className="pg-center e-flex-box scrollbar"
 						onClick={this.selectPage.bind(this)}
@@ -106,17 +110,20 @@ class EditComponent extends React.Component {
 						{ editTab }
 					</div>
 
-					{<div className="pg-float e-flex-box scrollbar">
-						{ Object.keys(curData).map((_, i) => {
-							var im = curData[_]
-							return (
-								<p key={i}>
-									<span>{curMap[_]}<br/>{_}</span>
-									{typeof im === 'object'? im? '{...}': 'null': _ === 'contentType'? cTypeMap[im]: im}
-								</p>
-							)
-						}) }
-					</div>}
+					{
+						ENV === 'dev' &&
+						<div className="pg-float e-flex-box scrollbar">
+							{ Object.keys(curData).map((_, i) => {
+								var im = curData[_]
+								return (
+									<p key={i}>
+										<span>{curMap[_]}<br/>{_}</span>
+										{typeof im === 'object'? im? '{...}': 'null': _ === 'contentType'? cTypeMap[im]: im}
+									</p>
+								)
+							}) }
+						</div>
+					}
 				</div>
 			</div>
 		);
