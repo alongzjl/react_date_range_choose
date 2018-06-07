@@ -31,6 +31,7 @@ import SplitLine         from 'compEdit/EditElement/SplitLine'
 import Map2D             from 'compEdit/EditElement/Map2D'
 
 import ContextMenu       from 'compEdit/EditCommon/ContextMenu'
+import ShortcutKey       from 'compEdit/EditCommon/ShortcutKey'
 
 import * as actions from 'actions'
 
@@ -179,7 +180,8 @@ class EditElement extends React.Component {
 				<section className="pg-element" style={bgStyle}>
 					{ childNode }
 				</section>
-				<ContextMenu parent={'pg-center'} />
+				<ContextMenu />
+				<ShortcutKey />
 			</div>
 		)
 	}

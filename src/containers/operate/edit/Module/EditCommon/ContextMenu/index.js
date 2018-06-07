@@ -32,14 +32,14 @@ class ContextMenu extends React.Component {
 
 	componentDidMount() {
 		let { parent } = this.props
-		let doc = document.querySelector(`.${parent}`)
+		let doc = document.querySelector(`${parent || '.pg-center'}`)
 		doc.addEventListener('contextmenu', this._handleContextMenu)
 		doc.addEventListener('click', this._handleClick)
 		doc.addEventListener('scroll', this._handleScroll)
 	}
 	componentWillUnmount() {
 		let { parent } = this.props
-		let doc = document.querySelector(`.${parent}`)
+		let doc = document.querySelector(`${parent || '.pg-center'}`)
 		doc.removeEventListener('contextmenu', this._handleContextMenu)
 		doc.removeEventListener('click', this._handleClick)
 		doc.removeEventListener('scroll', this._handleScroll)
