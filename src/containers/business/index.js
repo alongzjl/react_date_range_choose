@@ -164,7 +164,7 @@ class BusinessComponent extends React.Component {
 		return this.state.load
 		?
 		(
-			<div className="pg-edit">
+			<div className="pg-edit pg-edit-business">
 				{ this.props.children }
 			</div>
 		)
