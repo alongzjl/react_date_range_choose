@@ -15,12 +15,22 @@ const storeWonderful = extend(deepCopy(require('../../../comp/wonderfulActivity'
 			width: 480, 
 			height:286 
 		},
+		style:{
+			swiperImage: {
+				borderRadius:{
+					topLeft:     20,
+					topRight:    20,
+					bottomRight: 20,
+					bottomLeft:  20
+				}
+			}
+		}, 
 		type:'storeWonderful' 
 	}, 
 	feature:{ 
 		swiperOptions:{
 			slideOptions:{
-				spaceBetween:25, 
+				spaceBetween:30, 
 				slidesPerView:2,  
 				centeredSlides:true,
 			},

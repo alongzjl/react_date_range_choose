@@ -8,7 +8,7 @@
 import React from 'react';
 import SkyLight from 'react-skylight';
 import './index.less'
-import { Button, message,Modal,Pagination } from 'antd'
+import { Button, message,Modal,Pagination,Input } from 'antd'
 const commonCss = {
 	dialogStyles: {
 		height: 'auto',
@@ -52,7 +52,8 @@ export default class VideoList extends React.Component {
 		page_size:14,
 		pageSize:14, 
 		name:'', 
-		groupId:42
+		groupId:42,
+		attribute:''
 	} 
 	componentDidMount(){
 		var getData = {
@@ -79,6 +80,9 @@ export default class VideoList extends React.Component {
 		} else if (str == 'groupId') {
 			currentPage = 1
 			this.setState({ groupId: id, currentPage: 1 })
+		}else if(str == 'name'){
+			currentPage = 1
+			this.setState({ name: id, currentPage: 1 })
 		}
 		setTimeout(() => {
 			let postData = { 
@@ -108,7 +112,7 @@ export default class VideoList extends React.Component {
 	}
 	save = () => {
 		if (this.state.choosed_img) {
-			this.props.enter(this.state.choosed_img,this.props.index)
+			this.props.enter(this.state.choosed_img,this.state.attribute,this.props.index)
 			this.addImgModal.hide()
 		} else {
 			message.info(`你还未选择视频!`)
@@ -117,8 +121,14 @@ export default class VideoList extends React.Component {
 	close = () => {
 		this.addImgModal.hide()
 	}
-	save_img = url => {
-		this.setState({choosed_img:url});
+	save_img = (url,attribute) => {
+		this.setState({choosed_img:url,attribute:attribute});
+	}
+	searchName = e => {
+		this.setState({name:e.target.value})
+	}
+	searchList = () => {
+		this.getVideoList('name',this.state.name)
 	}
 	render() {
 		let { firstAdd,type } = this.props
@@ -137,6 +147,9 @@ export default class VideoList extends React.Component {
 					<div className="bottom">
 						<Button type="primary" onClick={this.save}>确定</Button>
 						<Button onClick={this.close}>取消</Button>
+					</div>
+					<div className="searchImg">
+						<Input size="large" placeholder="请输入查询名称" onChange={e=>this.searchName(e)} /><Button type="primary" onClick={this.searchList}>搜索</Button>
 					</div>
 				</div>
 				</SkyLight>
@@ -170,7 +183,7 @@ class VideoModule extends React.Component {
 		}
 		this.props.getVideoList(str, id)
 	}
-	chooseVideo = id => { 
+	chooseVideo = (id,attribute) => { 
 		let videoList = this.state.videoList
 		videoList = videoList.map(item=>{
 			item.id == id ? item.isClicked = !item.isClicked : item.isClicked = false;
@@ -180,7 +193,7 @@ class VideoModule extends React.Component {
 				videoList:videoList
 			})
 		let choosed_video = videoList.filter(item => item.isClicked == true);
-		this.props.save(choosed_video)
+		this.props.save(choosed_video,attribute)
 	}
 	
 	render() {
@@ -218,13 +231,15 @@ function Type({item, choose_one, groupId}) {
 
 function List({item,choose_one}){
 	return (
-		<div onClick={()=>{choose_one(item.id)}} className={item.isClicked?'choosed':''}>
+		<div onClick={()=>{choose_one(item.id,item.attribute)}} className={item.isClicked?'choosed':''}>
 			<div className={item.isClicked?'icon_img':''}>
 				<div className="right-symbol"></div>
 			</div>
 			<video src={item.url} controls="controls">
 				您的浏览器不支持 video 标签。
-			</video> 
+			</video>
+			<div className="showName">{item.name}</div>
+			<div className="showSize">{item.attribute}</div> 
 		</div> 
 	)
 }

@@ -7,6 +7,7 @@ module.exports = {
 		title:        '标题',
 		filterBox:    '盒',
 		filter:       '元素',
+		pageSet:    '分页设置',
 		filterActive: '激活',
 		filterPage:   '上&下一页',
 		PagePrev:     '上一页',

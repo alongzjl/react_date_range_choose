@@ -8,7 +8,7 @@
 // 精彩活动
 const data = {
 	style:     {
-		text: {
+		/*text: {
 			display:        'none',
 			color:          { type: 'custom', color: '#000' },
 			fontSize:       12,
@@ -16,7 +16,7 @@ const data = {
 			fontWeight:     'normal',
 			textAlign:      'center',
 			textDecoration: 'none',
-		},
+		},*/
 		swiperImage: {
 			borderRadius:    {
 				topLeft:     0,
@@ -24,6 +24,43 @@ const data = {
 				bottomRight: 0,
 				bottomLeft:  0
 			}
+		},
+		pageSet: {
+			width:  6,
+			height: 6,
+			justifyContent: 'center',
+			borderWidth:  0,
+			borderStyle: 'solid',
+			borderColor: { type: 'custom', color: '#fff' },
+			background: 'center no-repeat',
+			backgroundSize: 'contain',
+			backgroundImage: { type: 'custom', img: '' },
+			backgroundColor: { type: 'high', color: '#fff' },
+			borderRadius:    {
+				topLeft:     10,
+				topRight:    10,
+				bottomLeft:  10,
+				bottomRight: 10
+			},
+			margin: {
+				top:     10,
+				right:   5
+			},
+			boxShadow: {
+				h_shadow:   0,
+				v_shadow:   0,
+				blur_dis:   0,
+				spread_dis: 0,
+				color:      { type: 'custom', color: '#000' }
+			}
+		},
+		filterActive: {
+			borderWidth: 0,
+			borderStyle: 'solid',
+			borderColor: { type: 'custom', color: '#a240ec' },
+			background: 'center no-repeat',
+			backgroundImage: { type: 'custom', img: '' },
+			backgroundColor: { type: 'main', color: '#a240ec' }
 		}
 	},
 	layout: {
