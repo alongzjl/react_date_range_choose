@@ -5,8 +5,38 @@
  */
 
 .e-navigationFloat {
+	height:100%;
 	width:100%;
-	height:100%; 
+	.swiper-container {
+		height:75%;
+		width:100%;
+		.swiper-slide {
+			box-sizing: border-box;
+			display: flex;
+			align-items: center; 
+			text-align: center; 
+			justify-content: space-around;
+			.only {  
+				display: flex;
+				align-items: center; 
+				flex-direction: column;
+				 overflow: hidden; 
+				img {
+					width:100%;
+					height:100%;
+				}  
+				p {
+					margin-bottom:0;
+					width:100%; 
+				}
+			} 
+		}
+	}
+	
+	.s-disabled {
+		pointer-events: none;
+		opacity: .6;
+	}
 	.navigation_box {
 		width:100%;
 		height:100%;
@@ -36,3 +66,4 @@
 
 	} 
 } 
+

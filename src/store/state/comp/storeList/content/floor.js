@@ -2,7 +2,7 @@
 const data = {
 	layout: {
 		position: 'absolute',
-		top:  110,
+		top:  80,
 		left: 490,
 		width:    40,
 		height:   300
@@ -19,7 +19,7 @@ const data = {
 			height: 25,
 			justifyContent: 'center',
 			margin: {
-				top:     0,
+				top:     15,
 				right:   0,
 				bottom:  25,
 				left:    0,
@@ -55,9 +55,41 @@ const data = {
 			color: { type: 'textHigh', color: '#fff' },
 			background: 'center no-repeat',
 			backgroundColor: { type: 'main', color: '#a240ec' }
+		},
+		filterPage: {
+			width:  32,
+			height: 32,
+			justifyContent: 'center',
+			borderWidth:  0,
+			borderStyle: 'solid',
+			borderColor: { type: 'custom', color: '#fff' },
+			color: { type: 'custom', color: '#666' },
+			background: 'center no-repeat',
+			backgroundSize: 'contain',
+			backgroundColor: { type: 'main', color: '#fff' },
+			borderRadius:    {
+				topLeft:     10,
+				topRight:    10,
+				bottomLeft:  10,
+				bottomRight: 10
+			},
+			boxShadow: {
+				h_shadow:   0,
+				v_shadow:   0,
+				blur_dis:   0,
+				spread_dis: 0,
+				color:      { type: 'custom', color: '#000' }
+			}
+		},
+		PagePrev: {
+			backgroundImage: { type: 'custom', img: '' }
+		},
+		PageNext: {
+			backgroundImage: { type: 'custom', img: '' }
 		}
 	},
 	content: {
+		size:5
 	},
 	animation: {
 		className: '',	// 动画样式

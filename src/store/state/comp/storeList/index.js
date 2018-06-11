@@ -39,19 +39,15 @@ module.exports = {
 	styleList: {
 		idx:  0,
 		list: [{
-			name: '样式1',
+			name: '品牌导购',
 			img:  '',
 			data: JSON.parse(JSON.stringify(data))
 		}, {
-			name: '样式2',
-			img:  '',
-			data: JSON.parse(JSON.stringify(data))
-		}, {
-			name: '样式3',
+			name: '楼层导航',
 			img:  '',
 			data: JSON.parse(JSON.stringify(data))
 		}]
-	},
+	}, 
 	// 功能特性
 	feature: {
 		body: {

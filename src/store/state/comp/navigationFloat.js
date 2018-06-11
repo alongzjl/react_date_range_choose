@@ -67,6 +67,37 @@ const data = {
 				bottom:  5,
 				left:    0,
 			}
+		},
+		filterPage: {
+			width:  50,
+			height: 50,
+			justifyContent: 'center',
+			borderWidth:  0,
+			borderStyle: 'solid',
+			borderColor: { type: 'custom', color: '#fff' },
+			color: { type: 'custom', color: '#666' },
+			background: 'center no-repeat',
+			backgroundSize: 'contain',
+			backgroundColor: { type: 'main', color: '#fff' },
+			borderRadius:    {
+				topLeft:     15,
+				topRight:    15,
+				bottomLeft:  15,
+				bottomRight: 15
+			},
+			boxShadow: {
+				h_shadow:   0,
+				v_shadow:   0,
+				blur_dis:   0,
+				spread_dis: 0,
+				color:      { type: 'custom', color: '#000' }
+			}
+		},
+		PagePrev: {
+			backgroundImage: { type: 'custom', img: '' }
+		},
+		PageNext: {
+			backgroundImage: { type: 'custom', img: '' }
 		}
 	},
 	layout: {
@@ -130,7 +161,8 @@ module.exports = {
 	//布局方式的选择
 	layout:{
 		type:1,
-		position:'left'
+		position:'left',
+		size:5
 	},
 	// 内容管理
 	// 样式列表

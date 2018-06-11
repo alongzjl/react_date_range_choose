@@ -1,11 +1,30 @@
-.e-floor {
-	& > div {
-		display: flex;
-		flex-wrap: wrap;
-		width: 100%;
-		.el-item {
-			display: flex;
-			align-items: center;
+.e-Catg {
+	height:100%;
+	width:100%;
+	.swiper-container {
+		height:75%;
+		width:100%;
+		.swiper-slide {
+			    display: flex;
+			    align-items: center;
+			    flex-direction: row;
+			    justify-content: center;
 		}
 	}
-}
+	.el-item {
+		display: flex;
+		align-items: center;
+	}
+	.s-disabled {
+		pointer-events: none;
+		opacity: .6;
+	}
+	.catgBox {
+		    height: 100%;
+		    width: 100%;
+		    display: flex;
+		    flex-direction: column;
+		    justify-content: space-around;
+		    align-items: center;
+	}
+} 
