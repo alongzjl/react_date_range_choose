@@ -30,6 +30,9 @@ import NavigationFloat   from 'compEdit/EditElement/NavigationFloat'
 import SplitLine         from 'compEdit/EditElement/SplitLine'
 import Map2D             from 'compEdit/EditElement/Map2D'
 
+import ContextMenu       from 'compEdit/EditCommon/ContextMenu'
+import ShortcutKey       from 'compEdit/EditCommon/ShortcutKey'
+
 import * as actions from 'actions'
 
 import { Icon } from 'antd'
@@ -90,8 +93,9 @@ class EditElement extends React.Component {
 
 	render() {
 		let { data, actions, editConfig, location } = this.props
-		let ct     = tempCfg.composeType || 'PORTRAIT',
-			eles   = data.elements || [],
+		let ct     = tempCfg.composeType || 'PORTRAIT'
+		if (!data || data.title === undefined) return (<div className={`pg-element-parent e-flex-box pg-element-${ct}`}><section className="pg-element"></section></div>)
+		let eles   = data.elements || [],
 			theme  = editConfig.globalData.theme,
 			colors = theme.list[theme.idx].colors,
 			color  = data.feature.backgroundColor,
@@ -141,12 +145,12 @@ class EditElement extends React.Component {
 					animationIterationCount: iterationCount
 				}
 			}
+					// bounds={'.pg-center'}
+					// dragHandleClassName={'.handle-drag'}
 			return (
 				<Rnd
 					key={i}
-					bounds={'.pg-center'}
 					className={i === editConfig.curData.compIdx? 's-active': ''}
-					dragHandleClassName={'.handle-drag'}
 					size={{
 						width:  layout.width || '100%',
 						height: layout.height
@@ -160,17 +164,24 @@ class EditElement extends React.Component {
 					onResizeStart={e => this.selectComp(e, _, i)}
 					onResizeStop={(e, dir, ref, delta, pos) => this.resizeFn(e, ref, delta, pos, _, i)}
 				>
-					<div className={`pge-layout ${aniCls? aniCls: ''}`} style={aniSty} onClick={e => this.selectComp(e, _, i)}>{ compCon }</div>
-					<a className="pge-remove" onClick={e => this.removeComp(e, i)}><Icon type="cross-circle" /></a>
-					<div className="handle-drag" onClick={e => e.stopPropagation()}></div>
+					<div
+						className={`pge-layout ${aniCls? aniCls: ''}`}
+						style={aniSty}
+						onClick={e => this.selectComp(e, _, i)}
+						onContextMenu={e => this.selectComp(e, _, i, false)}
+					>{ compCon }</div>
 				</Rnd>
 			)
+					// <a className="pge-remove" onClick={e => this.removeComp(e, i)}><Icon type="cross-circle" /></a>
+					// <div className="handle-drag" onClick={e => e.stopPropagation()}></div>
 		})
 		return (
 			<div className={`pg-element-parent e-flex-box pg-element-${ct}`}>
 				<section className="pg-element" style={bgStyle}>
 					{ childNode }
 				</section>
+				<ContextMenu />
+				<ShortcutKey />
 			</div>
 		)
 	}

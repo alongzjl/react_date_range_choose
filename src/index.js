@@ -28,8 +28,6 @@ import 'styles/common.less'
 import 'styles/animate.less'
 import 'antd/dist/antd.less'
 
-let a = '';
-
 const store = createStore(
 	reducer,
 	applyMiddleware(thunk),

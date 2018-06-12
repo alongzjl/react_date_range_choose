@@ -89,8 +89,8 @@ window.cssFormatByTerm = (obj) => {
 				let w  = v[_], nt = NT[_]
 				const nowData =  nt? nt.substitute({ val: w }): getAttr(w) === 'Number'? (w *2 + 'px'): w
 				obj[p][_] = nowData
-			}) 
-		} 
+			})
+		}
 		else if (formatPxMap[p]) {
 			obj[p] = v * 2 + 'px'
 		}

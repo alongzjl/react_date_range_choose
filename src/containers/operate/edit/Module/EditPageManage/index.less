@@ -1,4 +1,4 @@
-.pe-page-manage {
+.pe-page-manage-operate {
 	display: flex;
 	flex-direction: column;
 	height: 100%;
@@ -22,7 +22,6 @@
 			width: 100%;
 		}
 	}
-
 
 	.page-list {
 		display: flex;
@@ -52,9 +51,12 @@
 			height: 100%;
 			padding-left: 20px;
 			align-items: center;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			overflow: hidden;
 		}
 		.pl-ctrl {
-			width: 48px;
+			width: 64px;
 			display: none;
 			a {
 				display: block;
@@ -86,9 +88,24 @@
 		}
 		&:hover,
 		&.s-active {
-			background-color: #f4f9ff;
+			background-color: #d2e6ff;
 			.pl-name {
 				color: #2383f0;
+			}
+		}
+		&.s-active {
+			position: relative;
+			&::after {
+				content: '';
+				position: absolute;
+				top: 16px;
+				right: 0;
+				display: block;
+				width: 0;
+				height: 0;
+				border-top:    5px solid transparent;
+				border-right:  5px solid #fff;
+				border-bottom: 5px solid transparent;
 			}
 		}
 		&:hover {

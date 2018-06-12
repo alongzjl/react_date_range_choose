@@ -14,7 +14,7 @@ module.exports = {
 	text:              authInit(require('./text')), 
 	//按钮 
 	button:            authInit(require('./button')),  
-	// 自定义
+	// 网页
 	web:               authInit(require('./web')),
 	// 导航列表
 	navigation:        authInit(require('./navigation')),
@@ -25,20 +25,20 @@ module.exports = {
 	// 分割线
 	splitLine:         authInit(require('./splitLine')),
 
-	//店铺简介--标题
+	// 店铺简介--标题
 	storeInstroTitle:  authInit(require('./storeInstro/content/storeInstroTitle')), 
-	//店铺简介---详情
+	// 店铺简介--详情
 	storeInstroInstroduce:  authInit(require('./storeInstro/content/storeInstroInstroduce')),
-	//店铺简介--轮播
+	// 店铺简介--轮播
 	storeWonderful:authInit(require('./storeInstro/content/storeWonderful')),
-	//店铺简介--竖线
+	// 店铺简介--竖线
 	storeSplitLine:authInit(require('./storeInstro/content/storeSplitLine')),
 
-	//店铺详情的标题
+	// 店铺详情-标题
 	instroTitle:       authInit(require('./storeDetails/content/instroTitle')),
-	//店铺详情的logo
+	// 店铺详情-logo
 	instroPicture:     authInit(require('./storeDetails/content/instroPicture')),
-	//店铺详情的立即前往
+	// 店铺详情-前往
 	instroButton:      authInit(require('./storeDetails/content/instroButton')),
 	// 地址
 	address:           authInit(require('./storeDetails/content/address')),

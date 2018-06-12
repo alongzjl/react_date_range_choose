@@ -34,12 +34,6 @@ export const selectComp = (data) => ({
 	data
 })
 
-// export const selectCusComp = (data) => ({
-// 	type: types.SELECT_CUS_COMP,
-// 	data
-// })
-
-
 // 页面操作
 export const addPage = (groupIdx, name) => ({
 	type: types.ADD_PAGE,
@@ -66,6 +60,12 @@ export const selectPage = (router) => ({
 	router
 })
 
+export const copyPage = (router, groupIdx) => ({
+	type: types.COPY_PAGE,
+	router,
+	groupIdx
+})
+
 // 当前操作项
 export const updateCur = (data) => ({
 	type: types.UPDATE_CUR,
@@ -87,5 +87,11 @@ export const updateConfig = (config) => ({
 // pageList
 export const updatePageList = (data) => ({
 	type: types.UPDATE_PAGELIST,
+	data
+})
+
+// 快速操作
+export const updateCopyComp = (data) => ({
+	type: types.UPDATE_COPYCOMP,
 	data
 })
