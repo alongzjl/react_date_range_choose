@@ -19,6 +19,10 @@ const compList = require('state/compList')
 import * as actions from 'actions'
 
 import { Icon, Input, message, Spin } from 'antd'
+import * as variable from 'var'
+var styleMap = variable.styleMap.name,
+	compMap  = variable.compMap.name,
+	compNum  = variable.compMap.num
  
 class Header extends React.Component {
 	constructor(props) {
@@ -45,12 +49,14 @@ class Header extends React.Component {
 				auth     = compC[Comp.name]
 			if (compData.type === 'base' && auth[key]) {
 				Comp.data.components.push(compData)
+				message.success(`添加子组件: ${compMap[key]}!`)
 				return actions.updateComp(null, Comp)
 			} else {
 				message.info('该高级组件内不能添加该基础组件!')
 			}
 		} else {
 			if (compP[key]) {
+				message.success(`添加组件: ${compMap[key]}!`)
 				return actions.addComp(editConfig.curData.router, key)
 			}
 			message.info('该组件内只能添加在高级组件中!')

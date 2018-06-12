@@ -33,7 +33,7 @@ const storeWonderful = extend(deepCopy(require('../../../comp/wonderfulActivity'
 				spaceBetween:30, 
 				slidesPerView:2,  
 				centeredSlides:true,
-			},
+			}, 
 		} 
 	}
 })

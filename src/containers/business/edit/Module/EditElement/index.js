@@ -57,8 +57,9 @@ class EditElement extends React.Component {
 
 	render() {
 		let { data, actions, editConfig, location } = this.props
-		let ct     = tempCfg.composeType || 'PORTRAIT',
-			eles   = data.elements || [],
+		let ct     = tempCfg.composeType || 'PORTRAIT'
+		if (!data || data.title === undefined) return (<div className={`pg-element-parent e-flex-box pg-element-${ct}`}><section className="pg-element"></section></div>)
+		let eles   = data.elements || [],
 			theme  = editConfig.globalData.theme,
 			colors = theme.list[theme.idx].colors,
 			color  = data.feature.backgroundColor,

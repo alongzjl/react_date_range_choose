@@ -12,7 +12,7 @@ import { connect }  from 'react-redux'
 
 import * as actions from 'actions'
 
-import { Icon } from 'antd'
+import { Icon, message } from 'antd'
  
 class EditPageManage extends React.Component {
 	componentWillMount() {}
@@ -24,17 +24,18 @@ class EditPageManage extends React.Component {
 	addPage(groupIdx) {
 		let { actions, editConfig } = this.props
 		actions.addPage(groupIdx, `页面${editConfig.pageList.group[groupIdx].pages.length + 1}`)
+		message.success('添加页面!')
 	}
 
 	deletePage(router, groupIdx, idx) {
-		let { actions } = this.props
+		let { data, actions, editConfig } = this.props
+		let { pageContent, globalData }   = editConfig
+		message.success(`删除页面: ${pageContent[router].title}!`)
 		actions.deletePage(router, groupIdx, idx)
+		let da    = globalData.data
+		let group = data.group[0]
+		let li    = group.pages[0]
 		if (idx === 0) {
-			let { data, editConfig } = this.props
-			let { globalData } = editConfig
-			let da    = globalData.data
-			let group = data.group[0]
-			let li    = group.pages[0]
 			da.homepage = li.router
 			actions.updateGlobal(globalData)
 		}
@@ -46,6 +47,13 @@ class EditPageManage extends React.Component {
 		editConfig.curData.pageIdx  = idx
 		actions.updateCur(editConfig.curData)
 		actions.selectPage(router)
+	}
+
+	copyPage(router, groupIdx) {
+		let { actions, editConfig } = this.props
+		let { pageContent }   = editConfig
+		actions.copyPage(router, groupIdx)
+		message.success(`复制页面: ${pageContent[router].title}!`)
 	}
 
 	setIndex(router, idx) {
@@ -76,6 +84,9 @@ class EditPageManage extends React.Component {
 							onClick={this.setIndex.bind(this, _.router, i)}
 						><Icon type="home" /></a>
 						<a
+							onClick={this.copyPage.bind(this, _.router, 0, i)}
+						><Icon type="copy" /></a>
+						<a
 							style={{ display: data.group[0].pages.length > 1? 'block': 'none' }}
 							onClick={this.deletePage.bind(this, _.router, 0, i)}
 						><Icon type="delete" /></a>
@@ -84,7 +95,7 @@ class EditPageManage extends React.Component {
 			)
 		})
 		return (
-			<div className="pe-page-manage">
+			<div className="pe-page-manage-operate">
 				<div className="pem-add" onClick={this.addPage.bind(this, 0)}><Icon type="plus" /> 添加页面</div>
 				<div className="page-list">
 					<ul>{ childNode }</ul>

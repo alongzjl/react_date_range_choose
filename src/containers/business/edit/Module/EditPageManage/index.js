@@ -45,7 +45,7 @@ class EditPageManage extends React.Component {
 			)
 		})
 		return (
-			<div className="pe-page-manage">
+			<div className="pe-page-manage-business">
 				<div className="page-list">
 					<ul>{ childNode }</ul>
 				</div>

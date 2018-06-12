@@ -19,14 +19,25 @@ coverage
 # node-waf configuration
 .lock-wscript
 
-# Compiled binary addons (http://nodejs.org/api/addons.html)
+# 打包发布目录
 build/Release
 
-# Dependency directory
-# https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git
+# npm依赖包目录
 node_modules
 
 # Bower
 bower_components/
 
 .idea/
+
+# 联调目录
+rd
+
+# 目标文件目录
+dist
+
+# 测试目录
+qa
+
+# 生产目录
+online
