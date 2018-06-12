@@ -43,6 +43,7 @@ class Custom extends React.Component {
 
 	selectComp(e, data, idx, parentIdx, parent) {
 		e.stopPropagation()
+		e.preventDefault()
 		let { actions, editConfig } = this.props
 		let { curData } = editConfig
 		if (curData.compIdx === parentIdx && curData.cusCompIdx === idx) return
