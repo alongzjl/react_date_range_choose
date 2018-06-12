@@ -49,24 +49,9 @@ class NavigationFoat extends React.Component {
 		let { curData, curComp } = editConfig
 		let { parentComp } = curData
 		data.layout.type = value;
-		switch (value) {
-			case 1 : data.data.layout.width = 80;
-			break;
-			case 2 : data.data.layout.width = 80; 
-			break;
-			case 3 : data.data.layout.width = 300;
-			break;
-			default:;
-			break
-		}
 		if(data.layout.position == 'right'){
-			if(data.layout.type == 1){
-				data.data.layout.left = 460;
-			}else if(data.layout.type == 2){
-				data.data.layout.left = 460; 
-			}  
+			data.data.layout.left = 460;
 		}  
-		console.log(value); 
 		actions['updateComp'](null, parentComp? parentComp: data)
 	};
 	handleChangePosition = value => {
@@ -78,11 +63,7 @@ class NavigationFoat extends React.Component {
 			case 'left' : data.data.layout.left = 0;data.data.layout.top = 220;
 			break;
 			case 'right' : 
-					if(data.layout.type == 1){
-						data.data.layout.left = 460;
-					}else if(data.layout.type == 2){
-						data.data.layout.left = 460; 
-					} 
+					data.data.layout.left = 460;
 					data.data.layout.top = 220;
 			break;   
 			default:;   
@@ -106,6 +87,9 @@ class NavigationFoat extends React.Component {
 			},{
 				type:2,
 				show:'布局样式二'
+			},{
+				type:3,
+				show:'布局样式三'
 			}];
 		const options_position = [{type:'left',show:'左'},{type:'right',show:'右'}/*,{type:'top',show:'上'},{type:'bottom',show:'下'}*/];
 		return ( 

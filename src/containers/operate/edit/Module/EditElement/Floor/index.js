@@ -69,8 +69,7 @@ class Floor extends React.Component {
 			  cssp = cssColorFormat(props, 'filterPage'),
 			  cssn = cssColorFormat(props, 'filterPage');
 		const page = this.state.realIndex;
-		let img = data.data.content.filterBGImg,
-			css = cssColorFormat(props, 'filter');
+		let css = cssColorFormat(props, 'filter');
 			return (
 				<div className="floorBox" style={{pointerEvents:`${ioInput.floors.length > size ? "auto" : "none"}`}}>
 					{

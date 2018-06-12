@@ -14,7 +14,8 @@ module.exports = {
 		PageNext:     '下一页',
 		swiperImage:  '轮播',
 		line:         '线',
-		split:        '分隔符'
+		split:        '分隔符',
+		mainTable:    '导航Home'
 	},
 	// 定义样式名称 & 渲染类型 & 相关配置
 	style: {

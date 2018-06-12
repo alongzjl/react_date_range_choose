@@ -13,7 +13,8 @@ import './index.less'
 class NavigationFloat extends React.Component {
 	
 	state = {
-		realIndex:0
+		realIndex:0,
+		showTable:false
 	}
 
 	componentDidMount() {
@@ -61,6 +62,22 @@ class NavigationFloat extends React.Component {
 		this.setState({realIndex:page})
 		this.myNavgSwiper.slideTo(page,500,false);
 	}
+	mainTab() {
+		this.setState({showTable:!this.state.showTable})
+	}
+	//布局样式一
+	renderDom(props) {
+		const { data } = props;
+		return (
+				<div className="navigation_box">
+					{
+						data.data.content.map((item,index) => {
+							return <OnlyNavigation props={props} data={item} key={index}></OnlyNavigation>
+						})
+					}
+				</div>
+			)
+	}
 	//布局样式二
 	renderSwiper(props) { 
 		const { data } = props;
@@ -80,7 +97,7 @@ class NavigationFloat extends React.Component {
 								data.data.content.map((_, i) => { 
 									return (
 										<div className="swiper-slide" key={i}>
-											<OnlyNavigation props={props} data={_} key={i} index={i}></OnlyNavigation>
+											<OnlyNavigation props={props} data={_} key={i}></OnlyNavigation>
 										</div>
 									)
 								})
@@ -93,19 +110,27 @@ class NavigationFloat extends React.Component {
 				</div>
 			)
 	}
-	//布局样式一
-	renderDom(props) {
+	//布局样式三
+	renderDomThree(props) {
 		const { data } = props;
+		const content = data.data.content;
+		const mainCss = cssColorFormat(props,"mainTable");
 		return (
 				<div className="navigation_box">
+					<div className="mainTable" onClick={this.mainTab.bind(this)} style={{...mainCss,marginLeft:-(mainCss.width/2)}}></div>
 					{
-						data.data.content.map((item,index) => {
-							return <OnlyNavigation props={this.props} data={item} key={index} index={index}></OnlyNavigation>
-						})
+						this.state.showTable ? content.map((item,index) => {
+							if(index == 0){
+								return <OnlyNavigation props={props} data={item} key={index} height={mainCss.height}></OnlyNavigation>
+							}else{
+								return <OnlyNavigation props={props} data={item} key={index}></OnlyNavigation>
+							}
+							
+						}) : null
 					}
 				</div>
 			)
-	}
+	} 
 	render() {
 		let { data } = this.props
 		const layout_style = data.layout.type
@@ -114,6 +139,8 @@ class NavigationFloat extends React.Component {
 			chooseDom = this.renderDom.bind(this,this.props)();
 		}else if(layout_style == 2){
 			chooseDom = this.renderSwiper.bind(this,this.props)();
+		}else if(layout_style == 3){
+			chooseDom = this.renderDomThree.bind(this,this.props)();
 		}
 		return (
 			<div className="e-navigationFloat">
@@ -125,11 +152,12 @@ class NavigationFloat extends React.Component {
 	}
 }
 
-function OnlyNavigation({data,props,index}) {
+function OnlyNavigation({data,props,height}) {
 	let css = cssColorFormat(props, 'filter')
 	if (data.highSwitch) css = { ...css, ...cssColorFormat(props, 'filterActive') }
+	if(height) css = {...css,marginTop:height}
 	return (
-		<div className="only" style={css}> 
+		<div className="only" style={css}>  
 			<img src={getImg(data.img)} />
 			<p style={cssColorFormat(props, 'text')}>{data.title}</p>
 		</div> 

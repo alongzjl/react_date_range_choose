@@ -98,13 +98,27 @@ const data = {
 		},
 		PageNext: {
 			backgroundImage: { type: 'custom', img: '' }
+		},
+		mainTable: {
+			height:60,
+			width:60,
+			borderRadius:    {
+				topLeft:     15,
+				topRight:    15,
+				bottomLeft:  15,
+				bottomRight: 15
+			},
+			background: 'center no-repeat',
+			backgroundSize: 'contain',
+			backgroundColor: { type: 'main', color: '#fff' },
+			backgroundImage: { type: 'custom', img: '' }
 		}
 	},
 	layout: {
 		position: 'absolute',
 		top:      220,
 		left:     0,
-		width:    60,
+		width:    80,
 		height:   400
 	},
 	content: [
@@ -131,17 +145,6 @@ const data = {
 			title: '导航4',		// 图片标题
 			highSwitch: false,
 			router: {},			// 路由
-		},{
-			img: { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201805231505125551.png' },
-			title: '导航5',		// 图片标题
-			highSwitch: false,
-			router: {},			// 路由
-		},
-		{
-			img: { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201805231505126509.png' },
-			title: '导航6',		// 图片标题
-			highSwitch: false,
-			router: {},			// 路由
 		}
 	],
 	animation: {
@@ -162,7 +165,7 @@ module.exports = {
 	layout:{
 		type:1,
 		position:'left',
-		size:5
+		size:3
 	},
 	// 内容管理
 	// 样式列表

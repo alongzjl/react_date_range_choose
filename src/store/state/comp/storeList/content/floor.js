@@ -19,9 +19,9 @@ const data = {
 			height: 25,
 			justifyContent: 'center',
 			margin: {
-				top:     15,
+				top:     0,
 				right:   0,
-				bottom:  25,
+				bottom:  0,
 				left:    0,
 			},
 			borderWidth:  1,
@@ -89,7 +89,7 @@ const data = {
 		}
 	},
 	content: {
-		size:5
+		size:4
 	},
 	animation: {
 		className: '',	// 动画样式
