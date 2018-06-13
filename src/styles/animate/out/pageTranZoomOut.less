@@ -1,0 +1,33 @@
+/* 平移缩放 */
+.pageTranZoomOutLeft {
+	animation-name: pageTranZoomOutLeft !important;
+}
+@keyframes pageTranZoomOutLeft {
+	0%   { opacity: 1;  transform: translateX(0)    scale(1);  }
+	40%  { opacity: .8; transform: translateX(0)    scale(.8); }
+	100% { opacity: 0;  transform: translateX(150%) scale(.8); }
+}
+.pageTranZoomOutRight {
+	animation-name: pageTranZoomOutRight !important;
+}
+@keyframes pageTranZoomOutRight {
+	0%   { opacity: 1;  transform: translateX(0)     scale(1);  }
+	40%  { opacity: .8; transform: translateX(0)     scale(.8); }
+	100% { opacity: 0;  transform: translateX(-150%) scale(.8); }
+}
+.pageTranZoomOutBottom {
+	animation-name: pageTranZoomOutBottom !important;
+}
+@keyframes pageTranZoomOutBottom {
+	0%   { opacity: 1;  transform: translateY(0)     scale(1);  }
+	40%  { opacity: .8; transform: translateY(0)     scale(.8); }
+	100% { opacity: 0;  transform: translateY(-150%) scale(.8); }
+}
+.pageTranZoomOutTop {
+	animation-name: pageTranZoomOutTop !important;
+}
+@keyframes pageTranZoomOutTop {
+	0%   { opacity: 1;  transform: translateY(0)    scale(1);  }
+	40%  { opacity: .8; transform: translateY(0)    scale(.8); }
+	100% { opacity: 0;  transform: translateY(150%) scale(.8); }
+}

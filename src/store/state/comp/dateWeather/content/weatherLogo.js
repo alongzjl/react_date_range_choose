@@ -25,7 +25,7 @@ const weatherLogo = extend(deepCopy(require('../../../comp/picture')), {
 				}
 			}
 		},
-		type:"weatherLogo",
+		type: 'weatherLogo',
 		content: {
 			img: { type: 'logo', img: '' }
 		}

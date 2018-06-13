@@ -20,7 +20,7 @@ const RadioButton = Radio.Button
 const RadioGroup  = Radio.Group
 
 import * as variable from 'var'
-var animeMap = variable.animeMap,
+var animeMap = variable.animeCompMap,
 	aStyle   = animeMap.style,
 	aGroup   = animeMap.group,
 	aMap     = animeMap.map

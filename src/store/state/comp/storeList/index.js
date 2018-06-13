@@ -99,7 +99,7 @@ module.exports = {
 			img:  '',
 			data: JSON.parse(JSON.stringify(dataStyle_2))
 		}]
-	}, 
+	},
 	// 功能特性
 	feature: {
 		body: {

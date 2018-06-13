@@ -5,5 +5,6 @@ module.exports = {
 	compMap:        require('./compMap'),
 	composeTypeMap: require('./composeTypeMap'),
 	styleMAuth:     require('./styleManageAuth'),
-	animeMap:       require('./animeMap')
+	animeCompMap:   require('./animeCompMap'),
+	animePageMap:   require('./animePageMap')
 }

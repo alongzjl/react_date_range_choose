@@ -27,6 +27,7 @@ import NoMatch     from './containers/NoMatch'
 import 'styles/common.less'
 import 'styles/animate.less'
 import 'antd/dist/antd.less'
+import 'styles/fonts/iconfont.css'
 
 const store = createStore(
 	reducer,

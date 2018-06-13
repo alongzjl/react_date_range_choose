@@ -119,7 +119,7 @@ export default class PictureList extends React.Component {
 		} else {
 			message.info(`你还未选择图片!`)
 		}
-	} 
+	}
 	close = () => {
 		this.addImgModal.hide()
 	}

@@ -9,6 +9,10 @@ const NT = formatMap.numberTemplate
 const tools = function() {
 (function (window) {
 
+window.storeState = {
+	saveHistory: false		// 是否允许保存历史记录状态 true: 允许 false: 不允许
+}
+
 String.prototype.colorRGB = function() {
 	var sColor = this.toLowerCase(),
 		reg   = /^#([0-9a-f]{3}|[0-9a-f]{6})$/,

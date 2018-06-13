@@ -11,16 +11,11 @@ import { bindActionCreators } from 'redux'
 import { connect }  from 'react-redux'
 import * as actions from 'actions'
 
-import { Row, Col, Icon, Select, message } from 'antd'
-const { Option } = Select
-
-import PictureList from '../PictureList'
+import { Icon, message } from 'antd'
 
 import './index.less'
 import * as variable from 'var'
-var styleMap = variable.styleMap.name,
-	compMap  = variable.compMap.name,
-	compNum  = variable.compMap.num
+var compMap  = variable.compMap.name
 
 class ContextMenu extends React.Component {
 	constructor(props) {
@@ -100,10 +95,29 @@ class ContextMenu extends React.Component {
 
 	removeComp = (e) => {
 		e.stopPropagation()
+		// let { actions, editConfig }  = this.props
+		// let { curData, curComp } = editConfig
+		// message.success(`删除组件: ${compMap[curComp.name]}!`)
+		// actions.deleteComp(curData.compIdx)
 		let { actions, editConfig }  = this.props
 		let { curData, curComp } = editConfig
-		message.success(`删除组件: ${compMap[curComp.name]}!`)
-		actions.deleteComp(curData.compIdx)
+		let { parentComp, compIdx, cusCompIdx } = curData
+		let par = parentComp? parentComp: curComp
+		if (!par.name) return message.success(`组件未选中!`)
+		if (parentComp) {
+			editConfig.curComp = {}
+			curData.cusCompIdx = -1
+			curData.parentComp = null
+			let comp = parentComp.data.components
+			comp.splice(cusCompIdx, 1)
+			message.success(`删除组件: ${compMap[parentComp.name]} - ${compMap[curComp.name]}!`)
+			actions.updateComp(compIdx, parentComp)
+			actions.updateCur(curData)
+			actions.selectComp(parentComp)
+		} else {
+			message.success(`删除组件: ${compMap[curComp.name]}!`)
+			actions.deleteComp(curData.compIdx)
+		}
 	}
 
 	render() {
@@ -114,20 +128,32 @@ class ContextMenu extends React.Component {
 		let { parentComp } = curData
 		let { copyComp } = globalData
 		let par = parentComp? parentComp: curComp
-		console.log(par.name)
-		console.log(copyComp)
+		// console.log(par.name)
+		// console.log(copyComp)
 
 		return (visible || null) && 
 			<div ref={ref => {this.root = ref}} className="context-menu">
-				<div className={`cm-li${par.name === undefined? ' s-disabled': ''}`} onClick={this.copyComp}>
-					<Icon type="copy" /> 复制
-				</div>
+				{
+					parentComp || par.name === undefined
+					?
+					null
+					:
+					(<div className={`cm-li${parentComp || par.name === undefined? ' s-disabled': ''}`} onClick={this.copyComp}>
+						复制
+					</div>)
+				}
 				<div className={`cm-li${!copyComp? ' s-disabled': ''}`} onClick={this.pasteComp}>
-					<Icon type="file-text" /> 粘贴
+					粘贴
 				</div>
-				<div className={`cm-li${par.name === undefined? ' s-disabled': ''}`} onClick={this.removeComp}>
-					<Icon type="delete" /> 删除
-				</div>
+				{
+					parentComp || par.name === undefined
+					?
+					null
+					:
+					(<div className={`cm-li${par.name === undefined? ' s-disabled': ''}`} onClick={this.removeComp}>
+						删除
+					</div>)
+				}
 			</div>
 	}
 }

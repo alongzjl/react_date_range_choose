@@ -17,7 +17,7 @@ class WonderfulActivity extends React.Component {
 	}
 	state = {
 		random: parseInt(Math.random()*1000),
-		realIndex:0
+		realIndex: 0
 	}
 	componentWillReceiveProps(props) {
 		this.init(props)

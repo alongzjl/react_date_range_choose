@@ -1,0 +1,31 @@
+/*
+* @Author: weijie
+* @Date:   2017-09-28 10:49:49
+ * @Last Modified by: lishengpeng
+ * @Last Modified time: 2018-03-26 12:37:34
+*/
+
+.revoke-recovery {
+	position: absolute;
+	top: 40px;
+	right: ~"calc(50% - 298px)";
+	width: 28px;
+	background-color: #6f6f6f;
+	color: #fff;
+	border-radius: 0 6px 6px 0;
+	overflow: hidden;
+	div {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width:  100%;
+		height: 30px;
+		&.s-disabled {
+			pointer-events: none;
+			background-color: #999;
+		}
+		&:hover {
+			background-color: #595858;
+		}
+	}
+}

@@ -1,9 +1,9 @@
 // 图片
 const data = {
 	style:     {
-		image:{
-			transform:       { rotate: 0 },
-			borderRadius:    {
+		image: {
+			transform:    { rotate: 0 },
+			borderRadius: {
 				topLeft:     0,
 				topRight:    0,
 				bottomRight: 0,

@@ -7,5 +7,22 @@ module.exports = {
 	// 页面特征
 	feature: {
 		backgroundColor: { type: 'custom', color: '#fff' }	// 页面背景色
+	},
+	animation: {
+		in: {
+			className: '',
+			direction: '',				// 方向
+			delay: 0,					// 开始时间
+			duration: 1,				// 持续时间
+			iterationCount: 1			// 循环次数
+		},
+		out: {
+			className: '',
+			direction: '',				// 方向
+			delay: 0,					// 开始时间
+			duration: 1,				// 持续时间
+			iterationCount: 1			// 循环次数
+		},
+		interval: 0		// 下一页间隔时间
 	}
 }

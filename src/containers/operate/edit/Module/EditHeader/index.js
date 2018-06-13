@@ -18,7 +18,7 @@ const compList = require('state/compList')
 
 import * as actions from 'actions'
 
-import { Icon, Input, message, Spin } from 'antd'
+import { Input, message, Spin } from 'antd'
 import * as variable from 'var'
 var styleMap = variable.styleMap.name,
 	compMap  = variable.compMap.name,
@@ -135,12 +135,17 @@ class Header extends React.Component {
 			if (_.child) {
 				return (
 					<dl key={i} className="cl-item">
-						<dt onClick={this.addComp.bind(this, _)}>{name}</dt>
+						<dt onClick={this.addComp.bind(this, _)}>
+							<div className="cl-item-icon"></div>
+							{name}
+						</dt>
 						<dd>
 							{
 								child.map((__, j) => {
 									return (
-										<div key={j} onClick={this.addComp.bind(this, __)}>{__.name}</div>
+										<div key={j} onClick={this.addComp.bind(this, __)}>
+											<div className="cl-item-icon"></div>{__.name}
+										</div>
 									)
 								})
 							}
@@ -149,19 +154,21 @@ class Header extends React.Component {
 				)
 			} else {
 				return (
-					<div key={i} className="cl-item" onClick={this.addComp.bind(this, _)}>{name}</div>
+					<div key={i} className="cl-item" onClick={this.addComp.bind(this, _)}>
+						<div className="cl-item-icon"></div>{name}
+					</div>
 				)
 			}
 		})
+					// <Input
+					// 	value={this.state.name}
+					// 	placeholder={'模板名称'}
+					// 	onChange={e => this.tNameChange(e.target.value)}
+					// />
 		return (
 			<div className="pe-header e-flex">
 				{ loading }
 				<div className="peh-left">
-					<Input
-						value={this.state.name}
-						placeholder={'模板名称'}
-						onChange={e => this.tNameChange(e.target.value)}
-					/>
 				</div>
 
 				<div className="peh-center">
@@ -172,9 +179,15 @@ class Header extends React.Component {
 
 				<div className="peh-right">
 					<section className="comp-list">
-						<div className="cl-item" onClick={this.selectTheme.bind(this)}>主题</div>
-						<div className="cl-item" onClick={this.saveData.bind(this)}>保存</div>
-						<div className="cl-item" onClick={this.closeWin}>离开</div>
+						<div className="cl-item" onClick={this.selectTheme.bind(this)}>
+							<div className="cl-item-icon"></div>主题
+						</div>
+						<div className="cl-item" onClick={this.saveData.bind(this)}>
+							<div className="cl-item-icon"></div>保存
+						</div>
+						<div className="cl-item" onClick={this.closeWin}>
+							<div className="cl-item-icon"></div>离开
+						</div>
 					</section>
 				</div>
 			</div>

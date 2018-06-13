@@ -24,17 +24,17 @@ const storeWonderful = extend(deepCopy(require('../../../comp/wonderfulActivity'
 					bottomLeft:  20
 				}
 			}
-		}, 
-		type:'storeWonderful' 
-	}, 
-	feature:{ 
+		},
+		type:'storeWonderful'
+	},
+	feature:{
 		swiperOptions:{
 			slideOptions:{
-				spaceBetween:30, 
-				slidesPerView:2,  
-				centeredSlides:true,
-			}, 
-		} 
+				spaceBetween: 30,
+				slidesPerView: 2,
+				centeredSlides: true
+			}
+		}
 	}
 })
 

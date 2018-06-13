@@ -31,12 +31,13 @@ import ListByStore  from 'compEdit/EditElement/ListByStore'
 import WonderfulActivity from 'compEdit/EditElement/WonderfulActivity'
 
 import * as variable from 'var'
-var animeMap = variable.animeMap,
+var animeMap = variable.animeCompMap,
 	aStyle   = animeMap.style
 
 import './index.less'
 
 class Custom extends React.Component {
+	state = {}
 	componentWillMount() {}
 
 	componentDidMount() {}
@@ -65,6 +66,17 @@ class Custom extends React.Component {
 		actions.updateComp(editConfig.curData.compIdx, parent)
 	}
 
+	dragResize(e, ref, delta, pos, item, idx) {
+		var o = {}
+		o[idx] = {
+			left:   +pos.x,
+			top:    +pos.y,
+			width:  +ref.offsetWidth,
+			height: +ref.offsetHeight
+		}
+		this.setState(o)
+	}
+
 	dragStop(e, d, item, idx, parent) {
 		e.stopPropagation()
 		let { actions, editConfig } = this.props
@@ -91,6 +103,7 @@ class Custom extends React.Component {
 	render() {
 		let { data, actions, idx, csn, editConfig, ioInput, ioOuter,name } = this.props
 		let { curData } = editConfig
+		let state = this.state
 		let { compIdx, cusCompIdx } = curData
 		let icomp = ioInput.comp
 		let comp  = data.data.components
@@ -144,30 +157,39 @@ class Custom extends React.Component {
 				}
 			}
 					// dragHandleClassName={'.handle-drag-custom'}
+
+			state[i] = layout
+			let lay = compIdx === idx && i === cusCompIdx? state[i]: layout
 			return (
 				<Rnd
 					key={i}
 					bounds={`.${csn}`}
 					className={compIdx === idx && i === cusCompIdx? 's-active': ''}
 					size={{
-						width:  layout.width || '100%',
-						height: layout.height
+						width:  lay.width || '100%',
+						height: lay.height
 					}}
 					position={{
-						x: layout.left,
-						y: layout.top
+						x: lay.left,
+						y: lay.top
 					}}
 					onDragStart={e => this.selectComp(e, _, i, idx, data)}
 					onDragStop={(e, d) => this.dragStop(e, d, _, i, data)}
 					onResizeStart={e => this.selectComp(e, _, i, idx, data)}
+					onResize={(e, dir, ref, delta, pos) => this.dragResize(e, ref, delta, pos, _, i)}
 					onResizeStop={(e, dir, ref, delta, pos) => this.resizeFn(e, ref, delta, pos, _, i, data)}
 				>
-					<div className={`pge-layout ${aniCls? aniCls: ''}`} style={aniSty} onClick={e => this.selectComp(e, _, i, idx, data)}>{ compCon }</div>
-					{
-						name != 'storeInstro' ? <a className="pge-remove pge-remove-custom" onClick={e => this.removeComp(e, i, data)}><Icon type="cross-circle" /></a> : null
-					} 
+					<div
+						className={`pge-layout ${aniCls? aniCls: ''}`}
+						style={aniSty}
+						onClick={e => this.selectComp(e, _, i, idx, data)}
+						onContextMenu={e => this.selectComp(e, _, i, idx, data)}
+					>{ compCon }</div>
 				</Rnd>
 			)
+					// {
+					// 	name != 'storeInstro' ? <a className="pge-remove pge-remove-custom" onClick={e => this.removeComp(e, i, data)}><Icon type="cross-circle" /></a> : null
+					// } 
 					// <div className="handle-drag-custom" onClick={e => e.stopPropagation()}></div>
 		})
 		return (

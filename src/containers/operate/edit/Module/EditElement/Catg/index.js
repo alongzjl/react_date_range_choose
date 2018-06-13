@@ -115,7 +115,7 @@ class Catg extends React.Component {
 		return (
 			<section className={`e-Catg ${type}`}>
 				{ dom }
-			</section> 
+			</section>
 		)
 	}
 }

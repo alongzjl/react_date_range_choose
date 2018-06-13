@@ -14,7 +14,8 @@ import * as actions from 'actions'
 import { Collapse, Input } from 'antd'
 const Panel = Collapse.Panel
 
-import Color from 'compEdit/EditCommon/Color'
+import Color     from 'compEdit/EditCommon/Color'
+import PageAnime from 'compEdit/EditCommon/PageAnime'
 
 import './index.less'
 
@@ -43,8 +44,22 @@ class EditPage extends React.Component {
 	}
 
 	render() {
+		let ani = {
+			className: '',
+			direction: '',				// 方向
+			delay: 0,					// 开始时间
+			duration: 1,				// 持续时间
+			iterationCount: 1			// 循环次数
+		}
 		let { data } = this.props
 		if (!data || data.title === undefined) return false
+		if (data.animation === undefined) {
+			data.animation = {
+				in: deepCopy(ani),
+				out: deepCopy(ani),
+				interval: 0
+			}
+		}
 		let activeKey = ['0', '1']
 		return (
 			<section className="pg-page">
@@ -59,7 +74,6 @@ class EditPage extends React.Component {
 									onChange={this.handleFocus.bind(this)}
 								/>
 							</div>
-							<div className="pgsr-auth"></div>
 						</div>
 					</Panel>
 					<Panel header={'编辑'} key="1">
@@ -74,10 +88,11 @@ class EditPage extends React.Component {
 									placement="bottomLeft"
 								/>
 							</div>
-							<div className="pgsr-auth"></div>
 						</div>
 					</Panel>
 				</Collapse>
+				<PageAnime data={data} type={'in'} />
+				<PageAnime data={data} type={'out'} />
 			</section>
 		)
 	}
