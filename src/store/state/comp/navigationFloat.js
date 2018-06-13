@@ -94,10 +94,10 @@ const data = {
 			}
 		},
 		PagePrev: {
-			backgroundImage: { type: 'custom', img: '' }
+			backgroundImage: { type: 'custom', img: "http://rongyi.b0.upaiyun.com/system/mcp/DEV/app/upload/81dd2b08-3361-4b8f-8009-4da47881f37e.png" }
 		},
 		PageNext: {
-			backgroundImage: { type: 'custom', img: '' }
+			backgroundImage: { type: 'custom', img: "http://rongyi.b0.upaiyun.com/system/mcp/DEV/app/upload/75a48794-5e71-41b6-afee-7b4176dd2c8d.png" }
 		},
 		mainTable: {
 			height:60,
