@@ -61,10 +61,42 @@ const data = {
 			color: { type: 'textHigh', color: '#fff' },
 			background: 'center no-repeat',
 			backgroundColor: { type: 'main', color: '#a240ec' }
+		},
+		filterPage: { 
+			width:  32,
+			height: 32,
+			justifyContent: 'center',
+			borderWidth:  0,
+			borderStyle: 'solid',
+			borderColor: { type: 'custom', color: '#fff' },
+			color: { type: 'custom', color: '#666' },
+			background: 'center no-repeat',
+			backgroundSize: 'contain',
+			backgroundColor: { type: 'main', color: '#fff' },
+			borderRadius:    {
+				topLeft:     10,
+				topRight:    10,
+				bottomLeft:  10,
+				bottomRight: 10
+			},
+			boxShadow: {
+				h_shadow:   0,
+				v_shadow:   0,
+				blur_dis:   0,
+				spread_dis: 0,
+				color:      { type: 'custom', color: '#000' }
+			}
+		},
+		PagePrev: {
+			backgroundImage: { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/system/mcp/DEV/app/upload/81dd2b08-3361-4b8f-8009-4da47881f37e.png' }
+		},
+		PageNext: {
+			backgroundImage: { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/system/mcp/DEV/app/upload/75a48794-5e71-41b6-afee-7b4176dd2c8d.png' }
 		}
 	},
 	content: {
-		size:5
+		size:3,
+		switch:   true
 	},
 	animation: {
 		className: '',	// 动画样式

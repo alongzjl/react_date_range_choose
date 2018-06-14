@@ -165,7 +165,9 @@ module.exports = {
 	layout:{
 		type: 1,
 		position: 'left',
-		size: 3
+		size: 3,
+		prevSwitch:   true,
+		nextSwitch:   true
 	},
 	// 内容管理
 	// 样式列表

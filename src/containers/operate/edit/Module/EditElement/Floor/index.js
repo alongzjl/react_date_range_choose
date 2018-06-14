@@ -19,13 +19,13 @@ class Floor extends React.Component {
 	componentDidMount() {
 		let { data,ioInput } = this.props
 		const size = data.data.content.size;
-		this.initSwiper(size)
-	}
+		data.data.content.switch ? this.initSwiper(size) : null
+	} 
 	componentWillReceiveProps(props) {
 		let { data,ioInput } = props
 		const size = data.data.content.size;
-		this.initSwiper(size)
-	}
+		data.data.content.switch ? this.initSwiper(size) : null
+	} 
 	componentWillUnmount() {
 		this.myFloorSwiper.destroy(false)
 	}
@@ -63,41 +63,14 @@ class Floor extends React.Component {
 		this.myFloorSwiper.slideTo(page,500,false);
 	}
 	renderSwiper(props, arr, nowVal) { 
-		const { data,ioInput } = props;
-		const size = data.data.content.size,
-			  allPages = arr.length-size,
-			  cssp = cssColorFormat(props, 'filterPage'),
-			  cssn = cssColorFormat(props, 'filterPage');
-		const page = this.state.realIndex;
+		const page = this.state.realIndex,
+			  content = props.data.data.content;
 		let css = cssColorFormat(props, 'filter');
 			return (
-				<div className="floorBox" style={{pointerEvents:`${ioInput.floors.length > size ? "auto" : "none"}`}}>
+				<div className="floorBox">
 					{
-						ioInput.floors.length > size ? <div className={page < 1? 's-disabled': ''} style={{ ...cssp, ...cssColorFormat(props, 'PagePrev') }} onClick={this.toPageFloor.bind(this, page-1)}></div> : null
-					}
-					<div className={`swiper-container swiper-container_floor`}>
-						<div className="swiper-wrapper"> 
-							{ arr.map((_, i) => { 
-								let nCss = css,
-									name = _.name
-								if (name === nowVal) nCss = { ...css, ...cssColorFormat(props, 'filterActive') }
-								return (
-									<div className="swiper-slide" key={i}>
-										<div
-											className={`el-item${name === nowVal? ' s-active': ''}`}
-											style={nCss}
-											onClick={this.selectVal.bind(this, name)}
-										>
-											{name}
-										</div>
-									</div>
-								)
-							})
-						}
-					    </div>    
-				    </div> 
-				    {
-						ioInput.floors.length > size ?  <div className={page >= allPages? 's-disabled': ''} style={{ ...cssn, ...cssColorFormat(props, 'PageNext') }} onClick={this.toPageFloor.bind(this, page+1)}></div> : null
+						content.switch ? <ShowDirection page={page} css={css} props={props} arr={arr} nowVal={nowVal} toPageFloor={this.toPageFloor.bind(this)} selectVal={this.selectVal.bind(this)} /> :
+						<NoShow arr={arr} css={css} nowVal={nowVal} props={props} selectVal={this.selectVal.bind(this)} />
 					}
 				</div>
 			)
@@ -118,5 +91,66 @@ class Floor extends React.Component {
 		)
 	} 
 }
+function NoShow({arr,css,nowVal,props,selectVal}) {
 
+	return (
+		<div style={{height:"100%",width:"100%"}}>
+			{ arr.map((_, i) => { 
+					let nCss = css,
+						name = _.name
+					if (name === nowVal) nCss = { ...css, ...cssColorFormat(props, 'filterActive') }
+					return (
+						<div className="e-item" key={i}>
+							<div
+								className={`el-item${name === nowVal? ' s-active': ''}`}
+								style={nCss}
+								onClick={()=>{selectVal(name)}}
+							>
+								{name}
+							</div>
+						</div>
+					)
+				})
+			}
+		</div>
+	)
+}
+function ShowDirection({page,css,props,arr,nowVal,toPageFloor,selectVal}) {
+	const { data,ioInput } = props;
+	const size = data.data.content.size,
+		  cssp = cssColorFormat(props, 'filterPage'),
+		  cssn = cssColorFormat(props, 'filterPage');
+	const allPages = arr.length-size;
+	return (
+		<div className="ShowDirection">
+			{
+				ioInput.floors.length > size ? <div className={page < 1? 's-disabled': ''} style={{ ...cssp, ...cssColorFormat(props, 'PagePrev') }} onClick={()=>{toPageFloor(page-1)}}></div> : null
+			}
+			<div className={`swiper-container swiper-container_floor`}>
+				<div className="swiper-wrapper"> 
+					{ arr.map((_, i) => { 
+						let nCss = css,
+							name = _.name
+						if (name === nowVal) nCss = { ...css, ...cssColorFormat(props, 'filterActive') }
+						return (
+							<div className="swiper-slide" key={i}>
+								<div
+									className={`el-item${name === nowVal? ' s-active': ''}`}
+									style={nCss}
+									onClick={()=>{selectVal(name)}}
+								>
+									{name}
+								</div>
+							</div>
+						)
+					})
+				}
+			    </div>    
+		    </div> 
+		    {
+				ioInput.floors.length > size ?  <div className={page >= allPages? 's-disabled': ''} style={{ ...cssn, ...cssColorFormat(props, 'PageNext') }} onClick={()=>{toPageFloor(page+1)}}></div> : null
+			}
+		</div>
+	)
+}
 export default Floor

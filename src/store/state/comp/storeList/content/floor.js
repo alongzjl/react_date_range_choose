@@ -55,7 +55,7 @@ const data = {
 			color: { type: 'textHigh', color: '#fff' },
 			background: 'center no-repeat',
 			backgroundColor: { type: 'main', color: '#a240ec' }
-		},
+		}, 
 		filterPage: {
 			width:  32,
 			height: 32,
@@ -89,7 +89,8 @@ const data = {
 		}
 	},
 	content: {
-		size: 4
+		size: 4,
+		switch:   true
 	},
 	animation: {
 		className: '',	// 动画样式
