@@ -32,11 +32,11 @@ const modules = [
         loader: 'style-loader!css-loader!postcss-loader!less-loader'
     },
     {
-        test: /\.(png|jpg|gif|woff|woff2)$/,
+        test: /\.(png|jpg|gif|woff|woff2|ttf|eot|svg)\??.*$/,
         loader: 'url-loader?limit=10000&name=[path][name]_[hash:8].[ext]'
     },
     {
-        test: /\.(mp3|mp4|ogg|svg)$/,
+        test: /\.(mp3|mp4|ogg)$/,
         loader: 'file-loader'
     }
 ]
