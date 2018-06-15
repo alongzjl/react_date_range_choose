@@ -12,8 +12,6 @@ const filterContent = (data,con) => {
 		content = {}
 	}else if(t == "address" || t == "phone"){
 		content = {img:content.img}
-	}else if(t == "instroButton"){
-		content = {text:content.text}
 	}else{
 		content = con
 	}

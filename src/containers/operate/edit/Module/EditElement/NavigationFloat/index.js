@@ -18,14 +18,14 @@ class NavigationFloat extends React.Component {
 	}
 
 	componentDidMount() {
-		/*let { data } = this.props
+		let { data } = this.props
 		const size = data.layout.size;
-		this.initSwiper(size)*/
+		this.initSwiper(size)
 	}
 	componentWillReceiveProps(props) {
 		let { data } = props
 		const size = data.layout.size;
-		if(data.layout.type == 2){
+		if(data.layout.type == 1){
 			this.initSwiper(size)
 		}
 	}
@@ -53,7 +53,7 @@ class NavigationFloat extends React.Component {
 			observeParents : true//修改swiper的父元素时，自动初始化swiper 
 		}
 		this.myNavgSwiper && this.myNavgSwiper.destroy(false)
-		setTimeout(()=>{this.myNavgSwiper = new Swiper(`.swiper-container_navg`, swiperOptions)},10)
+		setTimeout(()=>{this.myNavgSwiper = new Swiper(`.swiper-container_navg`, swiperOptions)},5)
 	}
 	to = event => {
 		event.preventDefault()
@@ -87,7 +87,7 @@ class NavigationFloat extends React.Component {
 			  cssn = cssColorFormat(props, 'filterPage');
 		const page = this.state.realIndex;
 		return (
-				<div className="navigation_box" style={{pointerEvents:`${data.data.content.length > size ? "auto" : "none"}`}}>
+				<div className="navigation_box">
 					{
 						data.data.content.length > size ? <div className={page < 1? 's-disabled': ''} style={{ ...cssp, ...cssColorFormat(props, 'PagePrev') }} onClick={this.toPageFloor.bind(this, page-1)}></div> : null
 					}
@@ -136,9 +136,9 @@ class NavigationFloat extends React.Component {
 		const layout_style = data.layout.type
 		let chooseDom
 		if(layout_style == 1){
-			chooseDom = this.renderDom.bind(this,this.props)();
-		}else if(layout_style == 2){
 			chooseDom = this.renderSwiper.bind(this,this.props)();
+		}else if(layout_style == 2){
+			chooseDom = this.renderDom.bind(this,this.props)();
 		}else if(layout_style == 3){
 			chooseDom = this.renderDomThree.bind(this,this.props)();
 		}
