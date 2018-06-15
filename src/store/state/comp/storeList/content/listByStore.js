@@ -66,6 +66,7 @@ const data = {
 		}
 	},
 	content: {
+		router: {}	
 	},
 	animation: {
 		className: '',	// 动画样式
