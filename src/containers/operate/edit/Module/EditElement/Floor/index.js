@@ -24,7 +24,7 @@ class Floor extends React.Component {
 	componentWillReceiveProps(props) {
 		let { data,ioInput } = props
 		const size = data.data.content.size;
-		data.data.content.switch ? this.initSwiper(size) : null
+		data.data.content.switch ? setTimeout(()=>{this.initSwiper(size)},10) : null
 	} 
 	componentWillUnmount() {
 		this.myFloorSwiper.destroy(false)
@@ -94,7 +94,7 @@ class Floor extends React.Component {
 function NoShow({arr,css,nowVal,props,selectVal}) {
 
 	return (
-		<div style={{height:"100%",width:"100%"}}>
+		<div className="ShowDirection">
 			{ arr.map((_, i) => { 
 					let nCss = css,
 						name = _.name

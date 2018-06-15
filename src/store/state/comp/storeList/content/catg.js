@@ -4,7 +4,7 @@ const data = {
 		position: 'absolute',
 		top:  36,
 		left: 104,
-		width: 360,
+		width: 400,
 		height:   24
 	},
 	style: {
@@ -95,8 +95,8 @@ const data = {
 		}
 	},
 	content: {
-		size:3,
-		switch:   true
+		switch:   true,
+		size:4
 	},
 	animation: {
 		className: '',	// 动画样式

@@ -89,8 +89,8 @@ const data = {
 		}
 	},
 	content: {
-		size: 4,
-		switch:   true
+		switch:   true,
+		size: 4
 	},
 	animation: {
 		className: '',	// 动画样式

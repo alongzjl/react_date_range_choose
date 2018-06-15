@@ -185,7 +185,7 @@ class EditContent extends React.Component {
 			let dom = this[`render${cm.type}`].bind(this, cm, content, val, p, index)()
 			ci++
 			return (
-				<div className="pgs-row" key={i}>
+				<div className="pgs-row" key={i} style={{display:`${content.isShowDom&&p=='size' ? content.isShowDom :'flex'}`}}>
 					<div className="pgsr-name">{ cm.name }</div>
 					<div className="pgsr-ctrl">{ dom }</div>
 					<div className="pgsr-auth">

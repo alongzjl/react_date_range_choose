@@ -16,7 +16,11 @@ const filterContent = (data,con) => {
 		content = {text:content.text}
 	}else{
 		content = con
-	} 
+	}
+	const name = data.name;
+	 if(name == 'floor' || name == 'catg'){
+	 	content.isShowDom = !content.switch ? 'none' : 'flex'; 
+	 }
 	return content
 } 
 
