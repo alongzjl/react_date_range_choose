@@ -15,20 +15,6 @@ import curData from 'state/cur/curData'
 import { Spin } from 'antd'
 import './index.less'
 
-const pageC = require('state/page')
-const comp  = require('state/comp')
-import * as variable from 'var'
-let compMap = variable.compMap.name
-let typeMap  = {
-	base: 1,
-	advanced: 1
-}
-let attrMap = {
-	Object: 1,
-	Undefined: 1,
-	Array: 1
-}
-
 class OperateComponent extends React.Component {
 	constructor(props) {
 		super(props)
@@ -56,60 +42,6 @@ class OperateComponent extends React.Component {
 			resolve('天气数据')
 		}
 	}
-	dataPlus(da, org, idx1, idx2) {
-		if (!org) return da
-		Object.keys(org).map(_ => {
-			if (_ === 'name' && compMap[da[_]]) return
-			let p1 = da[_]
-			let p2 = org[_]
-			let t1 = getAttr(p1)
-			let t2 = getAttr(p2)
-			if (org.styleList) {
-				idx1 = da.styleList.idx || 0
-				idx2 = org.styleList.idx
-			}
-			if (idx1 !== undefined && idx2 !== undefined) {
-				if (idx1 !== idx2 && (_ === 'content' || _ === 'style')) return
-			}
-			if (p1 === undefined && p2 !== undefined) {
-				da[_] = p2
-				console.log(_)
-				return
-			} else if (t1 === 'Object' && t2 === 'Object') {
-				da[_] = this.dataPlus(p1, p2, idx1, idx2)
-			} else if (t1 === 'Array' && t2 === 'Array') {
-				p2.map((p, i) => {
-					let t = p.type
-					if (typeMap[t]) {
-						p1[i] = this.dataPlus(p, comp[p.name], idx1, idx2)
-					} else {
-						try {
-							p1[i] = this.dataPlus(p, p2[i], idx1, idx2)
-						} catch(e) {
-							console.log(e)
-						}
-					}
-				})
-			}
-		})
-		return da
-	}
-	pageEach(da) {
-		let st = JSON.stringify(da).length
-		Object.keys(da).map(_ => {
-			let pa  = da[_]
-			let pae = pa.elements
-			pae.map((p, i) => {
-				pae[i] = this.dataPlus(p, comp[p.name])
-			})
-		})
-		let ed = JSON.stringify(da).length
-		// console.clear()
-		console.log(st, ed, ed/st)
-		console.log(da)
-		console.log(JSON.stringify(da))
-		return da
-	}
 	getConfig() {
 		let { location, actions, editConfig } = this.props
 		let { globalData } = editConfig
@@ -130,7 +62,8 @@ class OperateComponent extends React.Component {
 				let cfg = JSON.parse(res.data.config).configPC
 				delete res.data.config
 				let cur = cfg.pageList.group[0].pages[0]
-				this.pageEach(cfg.pageContent)
+
+				dataFormat.get.pageEach(cfg.pageContent)
 				// debugger
 				let newCfg = {
 					curComp: {},

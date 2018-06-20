@@ -237,6 +237,8 @@ window.getEnv = () => {
 
 window.Ajax = Fetch.default
 
+window.dataFormat = require('./dataFormat')
+
 
 }(window))
 }

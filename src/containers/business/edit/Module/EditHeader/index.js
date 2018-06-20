@@ -62,7 +62,9 @@ class Header extends React.Component {
 		let { editConfig, location } = this.props
 		let { query } = location
 		let { caseType, id, composeType, templateId, templateThemeId } = tempCfg
-		let cfg = JSON.parse(JSON.stringify(editConfig))
+		let cfg = deepCopy(editConfig)
+
+		cfg.pageContent = dataFormat.save.pageEach(cfg.pageContent)
 
 		let newCon = deepCopy(cfg.pageContent)
 		Object.keys(newCon).map(_ => this.formatPage(newCon[_]))
