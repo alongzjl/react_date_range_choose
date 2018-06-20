@@ -135,6 +135,14 @@ window.textBreak = (str = '') => {
 window.getAttr = (element) => {
 	return Object.prototype.toString.call(element).match(/[A-Z][a-z]*/)[0]
 }
+// 获取真实数据类型
+window.isEmptyObject = (obj) => {
+	try {
+		return !Object.keys(obj).length
+	} catch(e) {
+		return false
+	}
+}
 // 深拷贝
 window.deepCopy = (obj) => {
 	try {

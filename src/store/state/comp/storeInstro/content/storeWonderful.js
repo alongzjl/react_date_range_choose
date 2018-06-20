@@ -26,30 +26,37 @@ const storeWonderful = extend(deepCopy(require('../../../comp/wonderfulActivity'
 			}
 		},
 		content: {
-		list: [
-			{
-				img: { type: 'custom', img: require('images/storeDetailImgs/store_01.png') },
-				title: '图片1',		// 图片标题
-				router: {}			// 路由
-			},
-			{
-				img: { type: 'custom', img: require('images/storeDetailImgs/store_02.png') },
-				title: '图片2',		// 图片标题
-				router: {}			// 路由
-			},
-			{
-				img: { type: 'custom', img: require('images/storeDetailImgs/store_03.png') },
-				title: '图片3',		// 图片标题
-				router: {}			// 路由
-			},
-			{
-				img: { type: 'custom', img: require('images/storeDetailImgs/store_04.png') },
-				title: '图片4',		// 图片标题
-				router: {}			// 路由
-			}
-		]
-	},
-		type:'storeWonderful'
+			list: [
+				{
+					img: { type: 'custom', img: require('images/storeDetailImgs/store_01.png') },
+					title: '图片1',		// 图片标题
+					router: {}			// 路由
+				},
+				{
+					img: { type: 'custom', img: require('images/storeDetailImgs/store_02.png') },
+					title: '图片2',		// 图片标题
+					router: {}			// 路由
+				},
+				{
+					img: { type: 'custom', img: require('images/storeDetailImgs/store_03.png') },
+					title: '图片3',		// 图片标题
+					router: {}			// 路由
+				},
+				{
+					img: { type: 'custom', img: require('images/storeDetailImgs/store_04.png') },
+					title: '图片4',		// 图片标题
+					router: {}			// 路由
+				}
+			]
+		},
+		type:'storeWonderful',
+		animation: {
+			className: '',	// 动画样式
+			direction: '',				// 方向
+			delay: 0,					// 开始时间
+			duration: 1,				// 持续时间
+			iterationCount: 1			// 循环次数
+		}
 	},
 	feature:{
 		swiperOptions:{

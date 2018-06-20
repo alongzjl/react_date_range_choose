@@ -55,7 +55,7 @@ const data = {
 			color: { type: 'textHigh', color: '#fff' },
 			background: 'center no-repeat',
 			backgroundColor: { type: 'main', color: '#a240ec' }
-		}, 
+		},
 		filterPage: {
 			width:  32,
 			height: 32,

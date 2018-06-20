@@ -21,7 +21,14 @@ const instroTitle = extend(deepCopy(require('../../../comp/text')), {
 		content: {
 			text: '优衣库/UNIQLO'
 		},
-		type:'instroTitle'
+		type:'instroTitle',
+		animation: {
+			className: '',	// 动画样式
+			direction: '',				// 方向
+			delay: 0,					// 开始时间
+			duration: 1,				// 持续时间
+			iterationCount: 1			// 循环次数
+		}
 	} 
 }) 
 
