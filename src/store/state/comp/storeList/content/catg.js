@@ -63,8 +63,8 @@ const data = {
 			backgroundColor: { type: 'main', color: '#a240ec' }
 		},
 		filterPage: { 
-			width:  32,
-			height: 32,
+			width:  24,
+			height: 24,
 			justifyContent: 'center',
 			borderWidth:  0,
 			borderStyle: 'solid',

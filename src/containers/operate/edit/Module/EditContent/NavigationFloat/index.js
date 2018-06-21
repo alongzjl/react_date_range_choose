@@ -90,6 +90,9 @@ class NavigationFoat extends React.Component {
 			},{
 				type:3,
 				show:'布局样式三'
+			},{
+				type:4,
+				show:'布局样式四'
 			}];
 		const options_position = [{type:'left',show:'左'},{type:'right',show:'右'}/*,{type:'top',show:'上'},{type:'bottom',show:'下'}*/];
 		return ( 
