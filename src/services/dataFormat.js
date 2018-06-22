@@ -34,10 +34,10 @@ const dataFormat = {
 					p2.map((p, i) => {
 						let t = p.type
 						if (typeMap[t]) {
-							p1[i] = me.dataPlus(p, comp[p.name], idx1, idx2)
+							p1[i] = me.dataPlus(p1[i], comp[p.name], idx1, idx2)
 						} else {
 							try {
-								p1[i] = me.dataPlus(p, p2[i], idx1, idx2)
+								p1[i] = me.dataPlus(p1[i], p2[i], idx1, idx2)
 							} catch(e) {
 								console.log(e)
 							}
