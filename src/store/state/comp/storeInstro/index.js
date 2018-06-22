@@ -16,7 +16,7 @@ const data = {
 		top:      0,
 		left:     0,
 		width:    540,
-		height:   500 
+		height:   450 
 	},  
 	content:   {},
 	animation: {

@@ -69,8 +69,8 @@ const data = {
 			}
 		},
 		filterPage: {
-			width:  50,
-			height: 50,
+			width:  35,
+			height: 35,
 			justifyContent: 'center',
 			borderWidth:  0,
 			borderStyle: 'solid',

@@ -68,7 +68,7 @@ const data = {
 		top:      0,
 		left:     0,
 		width:    540,
-		height:   200
+		height:   300
 	},
 	content: {
 		list: [
