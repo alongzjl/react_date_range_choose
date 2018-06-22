@@ -14,14 +14,20 @@ class NavigationFloat extends React.Component {
 	
 	state = {
 		realIndex:0,
-		showTable:true,
+		showTable:false,
 		id: `swiperContainerNav_${Math.floor(Math.random()*1e9)}`
 	}
 
 	componentDidMount() {
 		let { data } = this.props
 		const size = data.layout.size;
+		const that = this;
 		this.initSwiper(size)
+		document.addEventListener('click',function(){
+			that.setState({
+				showTable:false
+			})
+		},true)
 	}
 	componentWillReceiveProps(props) {
 		let { data } = props
@@ -63,8 +69,9 @@ class NavigationFloat extends React.Component {
 		this.setState({realIndex:page})
 		this.myNavgSwiper.slideTo(page,500,false);
 	}
-	mainTab() {
+	mainTab = e => {
 		this.setState({showTable:!this.state.showTable})
+		e.stopPropagation();
 	}
 	//布局样式一
 	renderDom(props) {
@@ -119,7 +126,7 @@ class NavigationFloat extends React.Component {
 		const classAni = 'animated bounceInDown';
 		return (
 				<div className="navigation_box">
-					<div className="mainTable" onClick={this.mainTab.bind(this)} style={{...mainCss,marginLeft:-(mainCss.width/2)}}></div>
+					<div className="mainTable" onClick={e=>{this.mainTab(e)}} style={{...mainCss,marginLeft:-(mainCss.width/2)}}></div>
 					{
 						this.state.showTable ? content.map((item,index) => {
 							const aniSty = {animationDuration:"0.5s",animationDelay:`${index/4}s`}
@@ -160,7 +167,7 @@ class NavigationFloat extends React.Component {
 		  });
 		return (
 				<div className="navigation_box">
-					<div className="mainTable" onClick={this.mainTab.bind(this)} style={pos_style}>
+					<div className="mainTable" onClick={e=>{this.mainTab(e)}} style={pos_style}>
 						{
 							this.state.showTable ? content.map((item,index) => {
 
