@@ -145,19 +145,19 @@ class Header extends React.Component {
 					<section className="comp-list comp-list-b">
 						<div className="cl-item" onClick={this.selectTheme.bind(this)}>
 							<div className="cl-item-icon">
-								<img src={`./images/icon/theme.png`}/>
+								<img src={require(`images/icon/theme.png`)}/>
 							</div>
 							主题
 						</div>
 						<div className="cl-item" onClick={this.saveData.bind(this)}>
 							<div className="cl-item-icon">
-								<img src={`./images/icon/save.png`}/>
+								<img src={require(`images/icon/save.png`)}/>
 							</div>
 							保存
 						</div>
 						<div className="cl-item" onClick={this.closeWin}>
 							<div className="cl-item-icon">
-								<img src={`./images/icon/exit.png`}/>
+								<img src={require(`images/icon/exit.png`)}/>
 							</div>
 							离开
 						</div>

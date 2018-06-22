@@ -136,7 +136,7 @@ class Header extends React.Component {
 				<dl key={i} className={`cl-item${child? ' cl-item-child': ''}`}>
 					<dt onClick={this.addComp.bind(this, _)}>
 						<div className="cl-item-icon">
-							<img src={`./images/icon/${icon}.png`}/>
+							<img src={require(`images/icon/${icon}.png`)}/>
 						</div>
 						{name}
 						{ child && (<s className="icon-arrow-down"></s>) }
@@ -149,7 +149,7 @@ class Header extends React.Component {
 									return (
 										<div key={j} onClick={this.addComp.bind(this, __)}>
 											<div className="cl-item-icon">
-												<img src={`./images/icon/${__.icon}.png`}/>
+												<img src={require(`images/icon/${__.icon}.png`)}/>
 											</div>
 											{__.name}
 										</div>
@@ -183,19 +183,19 @@ class Header extends React.Component {
 					<section className="comp-list comp-list-b">
 						<div className="cl-item" onClick={this.selectTheme.bind(this)}>
 							<div className="cl-item-icon">
-								<img src={`./images/icon/theme.png`}/>
+								<img src={require(`images/icon/theme.png`)}/>
 							</div>
 							主题
 						</div>
 						<div className="cl-item" onClick={this.saveData.bind(this)}>
 							<div className="cl-item-icon">
-								<img src={`./images/icon/save.png`}/>
+								<img src={require(`images/icon/save.png`)}/>
 							</div>
 							保存
 						</div>
 						<div className="cl-item" onClick={this.closeWin}>
 							<div className="cl-item-icon">
-								<img src={`./images/icon/exit.png`}/>
+								<img src={require(`images/icon/exit.png`)}/>
 							</div>
 							离开
 						</div>
