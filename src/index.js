@@ -23,7 +23,7 @@ import BusinessEdit from 'business/edit'
 import View from 'view'
 
 import NoMatch     from './containers/NoMatch'
-
+import 'animate.css'
 import 'styles/common.less'
 import 'styles/animate.less'
 import 'antd/dist/antd.less'

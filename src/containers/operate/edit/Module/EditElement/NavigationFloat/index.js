@@ -14,7 +14,7 @@ class NavigationFloat extends React.Component {
 	
 	state = {
 		realIndex:0,
-		showTable:false
+		showTable:true
 	}
 
 	componentDidMount() {
@@ -115,15 +115,17 @@ class NavigationFloat extends React.Component {
 		const { data } = props;
 		const content = data.data.content;
 		const mainCss = cssColorFormat(props,"mainTable");
+		const classAni = 'animated bounceInDown';
 		return (
 				<div className="navigation_box">
 					<div className="mainTable" onClick={this.mainTab.bind(this)} style={{...mainCss,marginLeft:-(mainCss.width/2)}}></div>
 					{
 						this.state.showTable ? content.map((item,index) => {
+							const aniSty = {animationDuration:"0.5s",animationDelay:`${index/4}s`}
 							if(index == 0){
-								return <OnlyNavigation props={props} data={item} key={index} rysty={{marginTop:mainCss.height}}></OnlyNavigation>
+								return <OnlyNavigation props={props} data={item} key={index} rysty={{...aniSty,marginTop:mainCss.height}} classAni={classAni}></OnlyNavigation>
 							}else{
-								return <OnlyNavigation props={props} data={item} key={index}></OnlyNavigation>
+								return <OnlyNavigation props={props} data={item} key={index} rysty={aniSty} classAni={classAni}></OnlyNavigation>
 							}
 							
 						}) : null
@@ -133,34 +135,35 @@ class NavigationFloat extends React.Component {
 	} 
 	//布局样式四
 	renderDomFour(props) {
-		const { data } = props,
+		let { data } = props,
 		      content = data.data.content,
 			  mainCss = cssColorFormat(props,"mainTable"),
 			  css = cssColorFormat(props, 'filter'),
-			  pos_style = {...mainCss,left:0,marginTop:-(mainCss.height/2),top:"50%"},
+			  classAni='animated bounceInLeft',
 			  layout = data.data.layout,
 			  layWidth = layout.width,
 			  layHeight = parseInt(layout.height/2),
 			  deg = parseInt(180/(content.length-1)),
-			  number = content.length,
-			  defaultStyle = content.map((item,index)=>{
-		 	  	let t,l,degSelf = (90-deg*index)*Math.PI/180;
-		 	  	if(index < number/2){
-		 	  		t = Math.sin(degSelf)*layHeight + mainCss.height/2-css.height/2;
-					l =  Math.cos(degSelf)*layWidth;
-		 	  	}else{
-		 	  		t = Math.sin(degSelf)*layHeight + mainCss.height/2-css.height/2;
-					l =  Math.cos(degSelf)*layWidth;
-		 	  	}
-					
-				return {position:"absolute",top:t,left:l}
-			  })
+			  number = content.length;
+		  let pos_style = {...mainCss,left:0,marginTop:-(mainCss.height/2),top:"50%"};
+		  if(data.layout.type == 4 && data.layout.position == 'right'){
+		  		pos_style = {...pos_style,left:(data.data.layout.width-mainCss.width)};
+		  		layWidth = (-1*layWidth);
+		  		classAni = 'animated bounceInRight'
+		  }
+		let defaultStyle = content.map((item,index)=>{
+	 	  		let t,l,degSelf = -(90-deg*index)*Math.PI/180;
+	 	  		t = Math.sin(degSelf)*layHeight + mainCss.height/2-css.height/2;
+				l = Math.cos(degSelf)*layWidth+mainCss.width/2-css.width/2;
+	 	  		return {position:"absolute",top:t,left:l,animationDuration:"0.5s",animationDelay:`${index/4}s`}
+		  });
 		return (
 				<div className="navigation_box">
 					<div className="mainTable" onClick={this.mainTab.bind(this)} style={pos_style}>
 						{
 							this.state.showTable ? content.map((item,index) => {
-								return <OnlyNavigation props={props} data={item} key={index} rysty={defaultStyle[index]}></OnlyNavigation>
+
+								return <OnlyNavigation props={props} data={item} key={index} rysty={defaultStyle[index]} classAni={classAni}></OnlyNavigation>
 							}) : null
 						}
 					</div>
@@ -190,12 +193,12 @@ class NavigationFloat extends React.Component {
 	}
 }
 
-function OnlyNavigation({data,props,rysty}) {
+function OnlyNavigation({data,props,rysty,classAni}) {
 	let css = cssColorFormat(props, 'filter')
 	if (data.highSwitch) css = { ...css, ...cssColorFormat(props, 'filterActive') }
 	if(rysty) css = {...css,...rysty}
 	return (
-		<div className="only" style={css}>  
+		<div className={`${classAni ? classAni : ''} only`} style={css}>  
 			<img src={getImg(data.img)} />
 			<p style={cssColorFormat(props, 'text')}>{data.title}</p>
 		</div> 

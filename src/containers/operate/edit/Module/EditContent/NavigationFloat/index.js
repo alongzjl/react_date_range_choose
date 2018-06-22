@@ -45,12 +45,19 @@ class NavigationFoat extends React.Component {
 		actions['updateComp'](null, parentComp? parentComp: data)
 	};
 	handleChangeStyle = value => {
-		let {data,actions,editConfig} = this.props.data;
+		let {data,actions,editConfig} = this.props.data
 		let { curData, curComp } = editConfig
 		let { parentComp } = curData
-		data.layout.type = value;
+		data.layout.type = value
+		if(value == 4){
+			data.data.layout.width = 108
+			data.data.layout.height = 180
+		}else{
+			data.data.layout.width = 80
+			data.data.layout.height = 400
+		}
 		if(data.layout.position == 'right'){
-			data.data.layout.left = 460;
+			value == 4 ? data.data.layout.left = 432 : data.data.layout.left = 460;
 		}  
 		actions['updateComp'](null, parentComp? parentComp: data)
 	};
@@ -60,11 +67,9 @@ class NavigationFoat extends React.Component {
 		let { parentComp } = curData
 		data.layout.position = value;
 		switch (value) { 
-			case 'left' : data.data.layout.left = 0;data.data.layout.top = 220;
+			case 'left' : data.data.layout.left = 0;
 			break;
-			case 'right' : 
-					data.data.layout.left = 460;
-					data.data.layout.top = 220;
+			case 'right' : data.data.layout.left = 540-data.data.layout.width
 			break;   
 			default:;   
 			break
