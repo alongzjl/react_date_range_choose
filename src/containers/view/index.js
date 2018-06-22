@@ -65,6 +65,9 @@ class ViewComponent extends React.Component {
 				let cfg = JSON.parse(res.data.config)[`config${key}`]
 				delete res.data.config
 				let cur = cfg.pageList.group[0].pages[0]
+
+				dataFormat.get.pageEach(cfg.pageContent)
+				
 				let newCfg = {
 					curComp: {},
 					curData: { ...curData, ...cur },

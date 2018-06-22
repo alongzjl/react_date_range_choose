@@ -131,34 +131,36 @@ class Header extends React.Component {
 	render() {
 		let loading = this.state.loading? (<div className="spin-mask"><Spin /></div>): false
 		let compListNode = compList.map((_, i) => {
-			let { child, name } = _
-			if (_.child) {
-				return (
-					<dl key={i} className="cl-item">
-						<dt onClick={this.addComp.bind(this, _)}>
-							<div className="cl-item-icon"></div>
-							{name}
-						</dt>
+			let { icon, child, name } = _
+			return (
+				<dl key={i} className={`cl-item${child? ' cl-item-child': ''}`}>
+					<dt onClick={this.addComp.bind(this, _)}>
+						<div className="cl-item-icon">
+							<img src={`./images/icon/${icon}.png`}/>
+						</div>
+						{name}
+						{ child && (<s className="icon-arrow-down"></s>) }
+					</dt>
+					{
+						child && (
 						<dd>
 							{
-								child.map((__, j) => {
+								child && child.map((__, j) => {
 									return (
 										<div key={j} onClick={this.addComp.bind(this, __)}>
-											<div className="cl-item-icon"></div>{__.name}
+											<div className="cl-item-icon">
+												<img src={`./images/icon/${__.icon}.png`}/>
+											</div>
+											{__.name}
 										</div>
 									)
 								})
 							}
 						</dd>
-					</dl>
-				)
-			} else {
-				return (
-					<div key={i} className="cl-item" onClick={this.addComp.bind(this, _)}>
-						<div className="cl-item-icon"></div>{name}
-					</div>
-				)
-			}
+						)
+					}
+				</dl>
+			)
 		})
 					// <Input
 					// 	value={this.state.name}
@@ -178,15 +180,24 @@ class Header extends React.Component {
 				</div>
 
 				<div className="peh-right">
-					<section className="comp-list">
+					<section className="comp-list comp-list-b">
 						<div className="cl-item" onClick={this.selectTheme.bind(this)}>
-							<div className="cl-item-icon"></div>主题
+							<div className="cl-item-icon">
+								<img src={`./images/icon/theme.png`}/>
+							</div>
+							主题
 						</div>
 						<div className="cl-item" onClick={this.saveData.bind(this)}>
-							<div className="cl-item-icon"></div>保存
+							<div className="cl-item-icon">
+								<img src={`./images/icon/save.png`}/>
+							</div>
+							保存
 						</div>
 						<div className="cl-item" onClick={this.closeWin}>
-							<div className="cl-item-icon"></div>离开
+							<div className="cl-item-icon">
+								<img src={`./images/icon/exit.png`}/>
+							</div>
+							离开
 						</div>
 					</section>
 				</div>

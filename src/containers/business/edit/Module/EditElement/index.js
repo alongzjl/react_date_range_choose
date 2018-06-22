@@ -38,6 +38,7 @@ import * as variable from 'var'
 
 const ctMap = variable.composeTypeMap
 
+
 class EditElement extends React.Component {
 	componentWillMount() {}
 

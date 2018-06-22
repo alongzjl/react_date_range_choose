@@ -14,7 +14,8 @@ class NavigationFloat extends React.Component {
 	
 	state = {
 		realIndex:0,
-		showTable:true
+		showTable:true,
+		id: `swiperContainerNav_${Math.floor(Math.random()*1e9)}`
 	}
 
 	componentDidMount() {
@@ -53,7 +54,7 @@ class NavigationFloat extends React.Component {
 			observeParents : true//修改swiper的父元素时，自动初始化swiper 
 		}
 		this.myNavgSwiper && this.myNavgSwiper.destroy(false)
-		setTimeout(()=>{this.myNavgSwiper = new Swiper(`.swiper-container_navg`, swiperOptions)},5)
+		setTimeout(()=>{this.myNavgSwiper = new Swiper(`#${this.state.id}`, swiperOptions)},5)
 	}
 	to = event => {
 		event.preventDefault()
@@ -91,7 +92,7 @@ class NavigationFloat extends React.Component {
 					{
 						data.data.content.length > size ? <div className={page < 1? 's-disabled': ''} style={{ ...cssp, ...cssColorFormat(props, 'PagePrev') }} onClick={this.toPageFloor.bind(this, page-1)}></div> : null
 					}
-					<div className={`swiper-container swiper-container_navg`}>
+					<div id={this.state.id} className={`swiper-container`}>
 						<div className="swiper-wrapper"> 
 							{ 
 								data.data.content.map((_, i) => { 
@@ -168,7 +169,7 @@ class NavigationFloat extends React.Component {
 						}
 					</div>
 				</div>
-			) 
+			)
 	}
 	render() {
 		let { data } = this.props
