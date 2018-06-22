@@ -137,20 +137,30 @@ class Header extends React.Component {
 			<div className="pe-header e-flex">
 				{ loading }
 				<div className="peh-left">
-					<Input
-						value={this.state.name}
-						placeholder={'模板名称'}
-						onChange={e => this.tNameChange(e.target.value)}
-					/>
 				</div>
 
 				<div className="peh-center"></div>
 
 				<div className="peh-right">
-					<section className="comp-list">
-						<div className="cl-item" onClick={this.selectTheme.bind(this)}>主题</div>
-						<div className="cl-item" onClick={this.saveData.bind(this)}>保存</div>
-						<div className="cl-item" onClick={this.closeWin}>离开</div>
+					<section className="comp-list comp-list-b">
+						<div className="cl-item" onClick={this.selectTheme.bind(this)}>
+							<div className="cl-item-icon">
+								<img src={`./images/icon/theme.png`}/>
+							</div>
+							主题
+						</div>
+						<div className="cl-item" onClick={this.saveData.bind(this)}>
+							<div className="cl-item-icon">
+								<img src={`./images/icon/save.png`}/>
+							</div>
+							保存
+						</div>
+						<div className="cl-item" onClick={this.closeWin}>
+							<div className="cl-item-icon">
+								<img src={`./images/icon/exit.png`}/>
+							</div>
+							离开
+						</div>
 					</section>
 				</div>
 			</div>

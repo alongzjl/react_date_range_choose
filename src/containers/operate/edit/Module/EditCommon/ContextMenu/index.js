@@ -10,6 +10,7 @@ import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect }  from 'react-redux'
 import * as actions from 'actions'
+import { arrayMove } from 'react-sortable-hoc'
 
 import { Icon, message } from 'antd'
 
@@ -120,17 +121,46 @@ class ContextMenu extends React.Component {
 		}
 	}
 
+	layoutSort(e, old, num) {
+		let { actions, editConfig } = this.props
+		let { curData, curPage } = editConfig
+		let eles = curPage.elements
+		let len  = eles.length - 1
+		let next = num === -1? 0: num === 1? len: 0
+		let item = eles[old]
+
+		if (old === next) {
+			this.selectComp(e, item, next)
+			return
+		}
+		curPage.elements = arrayMove(eles, old, next)
+
+		actions.updatePage(curData.pageGroupIdx, curData.pageIdx, curPage)
+		this.selectComp(e, item, next)
+	}
+
+	selectComp(e, data, idx) {
+		e.stopPropagation()
+		let { actions, editConfig } = this.props
+		let { curData } = editConfig
+		let { compIdx, cusCompIdx, contentType } = curData
+		if (compIdx === idx && cusCompIdx < 0 && contentType === 'comp') return
+		curData.compIdx    = idx
+		curData.parentComp = null
+		actions.updateCur(curData)
+		actions.selectComp(data)
+	}
+
 	render() {
 		const { visible } = this.state
 
 		let { actions, editConfig } = this.props
-		let { curData, curComp, globalData } = editConfig
-		let { parentComp } = curData
+		let { curData, curComp, curPage, globalData } = editConfig
+		let { parentComp, compIdx, cusCompIdx } = curData
 		let { copyComp } = globalData
 		let par = parentComp? parentComp: curComp
 		// console.log(par.name)
 		// console.log(copyComp)
-
 		return (visible || null) && 
 			<div ref={ref => {this.root = ref}} className="context-menu">
 				{
@@ -150,9 +180,19 @@ class ContextMenu extends React.Component {
 					?
 					null
 					:
-					(<div className={`cm-li${par.name === undefined? ' s-disabled': ''}`} onClick={this.removeComp}>
-						删除
-					</div>)
+					(
+					<div>
+						<div className={`cm-li${par.name === undefined? ' s-disabled': ''}`} onClick={this.removeComp}>
+							删除
+						</div>
+						<div className={`cm-li${compIdx === curPage.elements.length - 1? ' s-disabled': ''}`} onClick={e => this.layoutSort(e, compIdx, 1)}>
+							置于顶层
+						</div>
+						<div className={`cm-li${compIdx === 0? ' s-disabled': ''}`} onClick={e => this.layoutSort(e, compIdx, -1)}>
+							置于底层
+						</div>
+					</div>
+					)
 				}
 			</div>
 	}
