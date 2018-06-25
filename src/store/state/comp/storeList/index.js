@@ -94,11 +94,11 @@ module.exports = {
 			name: '品牌导购',
 			img:  '',
 			data: JSON.parse(JSON.stringify(dataStyle_1))
-		}, {
+		}/*, {
 			name: '楼层导航',
 			img:  '',
 			data: JSON.parse(JSON.stringify(dataStyle_2))
-		}]
+		}*/]
 	},
 	// 功能特性
 	feature: {
