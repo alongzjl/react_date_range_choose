@@ -54,6 +54,7 @@ const dataFormat = {
 				let pa  = da[_]
 				let pae = pa.elements
 				pae.map((p, i) => {
+					if (p.type === 'advanced') return
 					pae[i] = me.dataPlus(p, comp[p.name])
 				})
 			})
@@ -125,6 +126,7 @@ const dataFormat = {
 			Object.keys(da).map(_ => {
 				let pe = da[_].elements
 				pe.map((p, i) => {
+					if (p.type === 'advanced') return
 					pe[i] = me.dataSlim(p, comp[p.name], p.styleList.idx, 0)
 				})
 			})
