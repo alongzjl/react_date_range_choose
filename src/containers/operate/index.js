@@ -63,7 +63,7 @@ class OperateComponent extends React.Component {
 				delete res.data.config
 				let cur = cfg.pageList.group[0].pages[0]
 
-				dataFormat.get.pageEach(cfg.pageContent)
+				// dataFormat.get.pageEach(cfg.pageContent)
 				// debugger
 				let newCfg = {
 					curComp: {},

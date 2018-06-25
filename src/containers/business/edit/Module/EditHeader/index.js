@@ -64,7 +64,7 @@ class Header extends React.Component {
 		let { caseType, id, composeType, templateId, templateThemeId } = tempCfg
 		let cfg = deepCopy(editConfig)
 
-		cfg.pageContent = dataFormat.save.pageEach(cfg.pageContent)
+		// cfg.pageContent = dataFormat.save.pageEach(cfg.pageContent)
 
 		let newCon = deepCopy(cfg.pageContent)
 		Object.keys(newCon).map(_ => this.formatPage(newCon[_]))

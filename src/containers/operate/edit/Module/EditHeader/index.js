@@ -81,8 +81,8 @@ class Header extends React.Component {
 		// this.setState({ loading: true })
 		let config = {
 			configPC: {
-				pageContent: dataFormat.save.pageEach(cfg.pageContent),
-				// pageContent: cfg.pageContent,
+				// pageContent: dataFormat.save.pageEach(cfg.pageContent),
+				pageContent: cfg.pageContent,
 				pageList:    cfg.pageList,
 				globalData:  cfg.globalData
 			}
