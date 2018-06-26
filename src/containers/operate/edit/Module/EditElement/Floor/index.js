@@ -13,7 +13,8 @@ import './index.less'
 class Floor extends React.Component {
 
 	state = {
-		realIndex:0
+		realIndex:0,
+		id: `swiperContainerFloor_${Math.floor(Math.random()*1e9)}`
 	}
 
 	componentDidMount() {
@@ -34,7 +35,7 @@ class Floor extends React.Component {
 			realIndex = this.state.realIndex;
 		const swiperOptions = {
 			direction : 'vertical',
-			 slidesPerView: size,
+			slidesPerView: size,
       		spaceBetween: 0,
       		on:{
 				slideNextTransitionStart:function(){
@@ -50,7 +51,7 @@ class Floor extends React.Component {
 			observeParents : true//修改swiper的父元素时，自动初始化swiper 
 		}
 		this.myFloorSwiper && this.myFloorSwiper.destroy(false)
-		this.myFloorSwiper = new Swiper(`.swiper-container_floor`, swiperOptions)
+		this.myFloorSwiper = new Swiper(`#${this.state.id}`, swiperOptions)
 	}
 	selectVal(str) {
 		let { parent, actions, ioInput, ioOuter } = this.props
@@ -69,7 +70,7 @@ class Floor extends React.Component {
 			return (
 				<div className="floorBox">
 					{
-						content.switch ? <ShowDirection page={page} css={css} props={props} arr={arr} nowVal={nowVal} toPageFloor={this.toPageFloor.bind(this)} selectVal={this.selectVal.bind(this)} /> :
+						content.switch ? <ShowDirection id={this.state.id} page={page} css={css} props={props} arr={arr} nowVal={nowVal} toPageFloor={this.toPageFloor.bind(this)} selectVal={this.selectVal.bind(this)} /> :
 						<NoShow arr={arr} css={css} nowVal={nowVal} props={props} selectVal={this.selectVal.bind(this)} />
 					}
 				</div>
@@ -115,7 +116,7 @@ function NoShow({arr,css,nowVal,props,selectVal}) {
 		</div>
 	)
 }
-function ShowDirection({page,css,props,arr,nowVal,toPageFloor,selectVal}) {
+function ShowDirection({id, page,css,props,arr,nowVal,toPageFloor,selectVal}) {
 	const { data,ioInput } = props;
 	const size = data.data.content.size,
 		  cssp = cssColorFormat(props, 'filterPage'),
@@ -126,7 +127,7 @@ function ShowDirection({page,css,props,arr,nowVal,toPageFloor,selectVal}) {
 			{
 				ioInput.floors.length > size ? <div className={page < 1? 's-disabled': ''} style={{ ...cssp, ...cssColorFormat(props, 'PagePrev') }} onClick={()=>{toPageFloor(page-1)}}></div> : null
 			}
-			<div className={`swiper-container swiper-container_floor`}>
+			<div id={id} className={`swiper-container swiper-container_floor`}>
 				<div className="swiper-wrapper"> 
 					{ arr.map((_, i) => { 
 						let nCss = css,
