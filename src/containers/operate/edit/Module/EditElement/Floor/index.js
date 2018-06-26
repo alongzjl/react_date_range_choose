@@ -27,7 +27,7 @@ class Floor extends React.Component {
 		data.data.content.switch ? setTimeout(()=>{this.initSwiper(size)},10) : null
 	} 
 	componentWillUnmount() {
-		this.myFloorSwiper.destroy(false)
+		data.data.content.switch ? this.myFloorSwiper.destroy(false) : null
 	}
 	initSwiper = size => {
 		let that = this,

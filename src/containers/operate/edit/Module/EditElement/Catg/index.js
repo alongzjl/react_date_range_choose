@@ -26,7 +26,7 @@ class Catg extends React.Component {
 		data.data.content.switch ? setTimeout(()=>{this.initSwiper(size)},10) : null
 	}
 	componentWillUnmount() {
-		this.myCatgSwiper.destroy(false)
+		data.data.content.switch ? this.myCatgSwiper.destroy(false) : null
 	}
 	initSwiper = size => {
 		let that = this,
