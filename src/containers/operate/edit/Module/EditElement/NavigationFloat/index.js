@@ -37,7 +37,7 @@ class NavigationFloat extends React.Component {
 		}
 	}
 	componentWillUnmount() {
-		let { data } = props
+		let { data } = this.props
 		if(data.layout.type == 1){
 			this.myNavgSwiper.destroy(false)
 		}
