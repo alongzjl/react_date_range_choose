@@ -171,6 +171,7 @@ class Header extends React.Component {
 			<div className="pe-header e-flex">
 				{ loading }
 				<div className="peh-left">
+					<div className="logo"></div>
 				</div>
 
 				<div className="peh-center">
