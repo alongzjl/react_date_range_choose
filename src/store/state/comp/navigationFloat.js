@@ -111,7 +111,7 @@ const data = {
 			background: 'center no-repeat',
 			backgroundSize: 'cover',
 			backgroundColor: { type: 'custom', color: '#fff' },
-			backgroundImage: { type: 'custom', img: require('images/home.png') }
+			backgroundImage: { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201806261721226583.png' }
 		}
 	},
 	layout: {
