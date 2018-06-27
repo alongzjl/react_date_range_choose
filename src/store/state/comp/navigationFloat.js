@@ -145,18 +145,6 @@ const data = {
 			title: '导航4',		// 图片标题
 			highSwitch: false,
 			router: {},			// 路由
-		},
-		{
-			img: { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201805231505123352.png' },
-			title: '导航5',		// 图片标题
-			highSwitch: false,
-			router: {},			// 路由
-		}, 
-		{
-			img: { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201805231505124540.png' },
-			title: '导航6',		// 图片标题
-			highSwitch: false,
-			router: {},			// 路由
 		}
 	],
 	animation: {
