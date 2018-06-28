@@ -75,6 +75,9 @@ class ShortcutKey extends React.Component {
 	key_delete = (e) => {
 		this.removeComp(e)
 	}
+	key_backspace = (e) => {
+		this.removeComp(e)
+	}
 	// 撤销
 	key_ctrl_z = (e) => {
 		var doc = document.querySelector('#btnRevoke')

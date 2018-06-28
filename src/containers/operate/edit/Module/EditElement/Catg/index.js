@@ -12,7 +12,8 @@ import './index.less'
 
 class Catg extends React.Component {
 	state = {
-		realIndex:0
+		realIndex:0,
+		id: `swiperContainerCatg_${Math.floor(Math.random()*1e9)}`
 	}
 
 	componentDidMount() {
@@ -50,7 +51,7 @@ class Catg extends React.Component {
 			observeParents : true//修改swiper的父元素时，自动初始化swiper 
 		}
 		this.myCatgSwiper && this.myCatgSwiper.destroy(false)
-		this.myCatgSwiper = new Swiper(`.swiper-container_catg`, swiperOptions)
+		this.myCatgSwiper = new Swiper(`#${this.state.id}`, swiperOptions)
 	}
 	selectVal(str) {
 		let { parent, actions, ioInput, ioOuter } = this.props
@@ -69,7 +70,7 @@ class Catg extends React.Component {
 			return (
 				<div className="catgBox">
 					{
-						content.switch ? <ShowDirection page={page} css={css} props={props} arr={arr} nowVal={nowVal} toPageFloor={this.toPageFloor.bind(this)} selectVal={this.selectVal.bind(this)} /> :
+						content.switch ? <ShowDirection id={this.state.id} page={page} css={css} props={props} arr={arr} nowVal={nowVal} toPageFloor={this.toPageFloor.bind(this)} selectVal={this.selectVal.bind(this)} /> :
 						<NoShow arr={arr} css={css} nowVal={nowVal} props={props} selectVal={this.selectVal.bind(this)} />
 					}
 				</div>
@@ -79,8 +80,6 @@ class Catg extends React.Component {
 	renderStyle1(props, catgs, nowVal) {
 		return this.renderSwiper.bind(this, props, catgs, nowVal)()
 	}
-
-	
 	render() {
 		let { type, editConfig, ioInput } = this.props
 		let { catgs } = ioInput
@@ -119,7 +118,7 @@ function NoShow({arr,css,nowVal,props,selectVal}) {
 	)
 }
 
-function ShowDirection({page,css,props,arr,nowVal,toPageFloor,selectVal}) {
+function ShowDirection({id, page,css,props,arr,nowVal,toPageFloor,selectVal}) {
 	const { data,ioInput } = props;
 	const size = data.data.content.size,
 		  cssp = cssColorFormat(props, 'filterPage'),
@@ -130,7 +129,7 @@ function ShowDirection({page,css,props,arr,nowVal,toPageFloor,selectVal}) {
 			{
 				ioInput.floors.length > size ? <div className={page < 1? 's-disabled': ''} style={{ ...cssp, ...cssColorFormat(props, 'PagePrev') }} onClick={()=>{toPageFloor(page-1)}}></div> : null
 			}
-			<div className={`swiper-container swiper-container_catg`}>
+			<div id={id} className={`swiper-container swiper-container_catg`}>
 				<div className="swiper-wrapper"> 
 					{ arr.map((_, i) => { 
 						let nCss = css,
