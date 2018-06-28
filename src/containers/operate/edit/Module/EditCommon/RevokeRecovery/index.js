@@ -23,7 +23,7 @@ class RevokeRecovery extends React.Component {
 		let { curData, curPage } = editConfig
 		let router = curData.router
 		this.state = {
-			max: 10,
+			max: 30,
 			router,
 			idx: 0,
 			history: [deepCopy(curPage)]
