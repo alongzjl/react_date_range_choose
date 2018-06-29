@@ -100,7 +100,7 @@ class NavigationFloat extends React.Component {
 					<div id={this.state.id} className={`swiper-container`}>
 						<div className="swiper-wrapper"> 
 							{ 
-								data.data.content.map((_, i) => { 
+								data.data.content.map((_, i) => {
 									return (
 										<div className="swiper-slide" key={i}>
 											<OnlyNavigation props={props} data={_} key={i}></OnlyNavigation>
@@ -168,7 +168,6 @@ class NavigationFloat extends React.Component {
 					<div className="mainTable" onClick={e=>{this.mainTab(e)}} style={pos_style}>
 						{
 							this.state.showTable ? content.map((item,index) => {
-
 								return <OnlyNavigation props={props} data={item} key={index} rysty={defaultStyle[index]} classAni={classAni}></OnlyNavigation>
 							}) : null
 						}

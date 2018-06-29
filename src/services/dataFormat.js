@@ -1,69 +1,189 @@
 import * as variable from 'var'
 const comp  = require('state/comp')
+const page  = require('state/page')
 let compMap = variable.compMap.name
 let typeMap  = {
-	base: 1,
+	base:     1,
 	advanced: 1
+}
+let pageMap = {
+	feature:   1,
+	animation: 1
+}
+let eleMap = {
+	type:       1,
+	data:       1,
+	styleList:  1,
+	feature:    1,
+	layout:     1,
+	auth:       1
+}
+let featureMap = {
+	floors: 1,
+	catgs:  1,
+	list:   1,
+	comp:   1,
+	time:   1
 }
 
 const dataFormat = {
 	get: {
-		dataPlus: function(da, org, idx1, idx2) {
-			if (!org) return da
-			let me = this
-			Object.keys(org).map(_ => {
-				if (_ === 'name' && compMap[da[_]]) return
-				let p1 = da[_]
-				let p2 = org[_]
-				let t1 = getAttr(p1)
-				let t2 = getAttr(p2)
-				if (org.styleList) {
-					idx1 = da.styleList.idx || 0
-					idx2 = org.styleList.idx
+		// comp数据处理
+		comp: {
+			// 更新
+			plus: function(da, org, key, daParent, cs) {
+				let dType = getAttr(da),
+					oType = getAttr(org)
+				if (da === undefined || dType !== oType) {
+					daParent[key] = org; return
 				}
-				if (idx1 !== undefined && idx2 !== undefined) {
-					if (idx1 !== idx2 && (_ === 'content' || _ === 'style')) return
-				}
-				if (p1 === undefined && p2 !== undefined) {
-					da[_] = p2
-					// console.log(_)
-					return
-				} else if (t1 === 'Object' && t2 === 'Object') {
-					da[_] = me.dataPlus(p1, p2, idx1, idx2)
-				} else if (t1 === 'Array' && t2 === 'Array') {
-					p2.map((p, i) => {
-						let t = p.type
-						if (typeMap[t]) {
-							p1[i] = me.dataPlus(p1[i], comp[p.name], idx1, idx2)
-						} else {
-							try {
-								p1[i] = me.dataPlus(p1[i], p2[i], idx1, idx2)
-							} catch(e) {
-								console.log(e)
-							}
+				switch(oType) {
+					case 'Object':
+						switch(key) {
+							case 'feature':
+								Object.keys(org).map(_ => {
+									if (!featureMap[_]) {
+										this.plus(da[_], org[_], _, da, cs? cs: key === 'components')
+									}
+								})
+								break
+							case 'styleList':
+								let { idx, list } = da,
+									oli  = org.list,
+									dlen = list.length,
+									olen = oli.length
+								if (idx === undefined || !org[idx]) da.idx = org.idx
+								if (dlen !== olen) {
+									// 老 > 新: 删老
+									if (dlen > olen) {
+										list.splice(olen, dlen - olen)
+									} else {
+										da.list = list.concat(oli.slice(dlen, olen - dlen))
+									}
+								}
+								// break
+							default:
+								Object.keys(org).map(_ => {
+									this.plus(da[_], org[_], _, da, cs? cs: key === 'components')
+								})
 						}
-					})
+						
+						break
+					case 'Array':
+						da.map((_, i) => {
+							this.plus(_, org[i] || org[0], i, da, cs? cs: key === 'components')
+						})
+						break
+					default:
 				}
+			},
+			// 去旧
+			slim: function(da, org, key, daParent, cs) {
+				let dType = getAttr(da),
+					oType = getAttr(org),
+					kType = getAttr(key)
+				if (org === undefined) {
+					// if (cs) debugger
+					delete daParent[key]; return
+				}
+				switch(dType) {
+					case 'Object':
+						switch(key) {
+							case 'feature':
+								Object.keys(da).map(_ => {
+									if (!featureMap[_]) {
+										this.plus(da[_], org[_], _, da, cs? cs: key === 'components')
+									}
+								})
+								break
+							default:
+								Object.keys(da).map(_ => {
+									this.plus(da[_], org[_], _, da, cs? cs: key === 'components')
+								})
+						}
+						break
+					case 'Array':
+						da.map((_, i) => {
+							this.plus(_, org[_], i, da, cs? cs: key === 'components')
+						})
+						break
+					default:
+				}
+			}
+		},
+		// page数据处理
+		page: {
+			// 更新
+			plus: function(da, org, key, daParent) {
+				let dType = getAttr(da),
+					oType = getAttr(org)
+				if (da === undefined || dType !== oType) {
+					daParent[key] = org; return
+				}
+				switch(oType) {
+					case 'Object':
+						Object.keys(org).map(_ => {
+							this.plus(da[_], org[_], _, da)
+						})
+						break
+					default:
+				}
+			},
+			// 去旧
+			slim: function(da, org, key, daParent) {
+				let dType = getAttr(da),
+					oType = getAttr(org)
+				if (org === undefined) {
+					delete daParent[key]; return
+				}
+				switch(dType) {
+					case 'Object':
+						Object.keys(org).map(_ => {
+							this.slim(da[_], org[_], _, da)
+						})
+						break
+					default:
+				}
+			}
+		},
+		// 组件数据对比
+		compComp: function(da, org) {
+			Object.keys(org).map(_ => {
+				if (!eleMap[_]) return
+				this.comp.plus(da[_], org[_], _, da)
 			})
-			return da
+			Object.keys(da).map(_ => {
+				if (!eleMap[_]) return
+				this.comp.slim(da[_], org[_], _, da)
+			})
+		},
+		// page数据比对
+		pageComp: function(da, org) {
+			Object.keys(org).map(_ => {
+				if (!pageMap[_]) return
+				this.page.plus(da[_], org[_], _, da)
+			})
+			Object.keys(da).map(_ => {
+				if (!pageMap[_]) return
+				this.page.slim(da[_], org[_], _, da)
+			})
 		},
 		pageEach: function(da) {
-			let me = this
 			let st = JSON.stringify(da).length
 			Object.keys(da).map(_ => {
 				let pa  = da[_]
 				let pae = pa.elements
+				this.pageComp(pa, deepCopy(page))
 				pae.map((p, i) => {
-					if (p.type === 'advanced') return
-					pae[i] = me.dataPlus(p, comp[p.name])
+					this.compComp(p, comp[p.name])
 				})
 			})
-			let ed = JSON.stringify(da).length
-			// console.clear()
-			console.log(st, ed, ed/st)
+			// let ed = JSON.stringify(da).length
+			console.clear()
+			// console.log(st, ed, ed/st)
 			// console.log(da)
 			// console.log(JSON.stringify(da))
-			return da
+			// return da
 		}
 	},
 	save: {

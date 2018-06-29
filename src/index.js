@@ -11,8 +11,8 @@ import ReactDOM     from 'react-dom'
 import { Provider } from 'react-redux'
 import thunk        from 'redux-thunk'
 import reducer      from 'store/reducers'
-import { createStore, applyMiddleware }         from 'redux'
-import { Router, Route, hashHistory } from 'react-router'
+import { createStore, applyMiddleware } from 'redux'
+import { Router, Route, hashHistory }   from 'react-router'
 
 // require('public/RyWayFinding-1.2.3.min')
 

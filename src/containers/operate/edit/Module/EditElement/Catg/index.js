@@ -124,6 +124,7 @@ function ShowDirection({id, page,css,props,arr,nowVal,toPageFloor,selectVal}) {
 		  cssp = cssColorFormat(props, 'filterPage'),
 		  cssn = cssColorFormat(props, 'filterPage');
 	const allPages = arr.length-size;
+
 	return (
 		<div className="ShowDirection" style={cssColorFormat(props, 'filterBox')}>
 			{
