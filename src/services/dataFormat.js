@@ -118,7 +118,7 @@ const dataFormat = {
 								break
 							default:
 								da.map((_, i) => {
-									this.slim(_, org[_], i, da)
+									this.slim(_, org[i], i, da)
 								})
 						}
 						break
@@ -219,7 +219,6 @@ const dataFormat = {
 					if (idx1 !== idx2 && (_ === 'content' || _ === 'style')) return
 				}
 				if (getAttr(p1) !== getAttr(p2)) {
-					// debugger
 					return
 				} else if (getAttr(p1) === 'Object') {
 					if (isEmptyObject(p1) && isEmptyObject(p2)) {
