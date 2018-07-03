@@ -40,6 +40,8 @@ const dataFormat = {
 				switch(oType) {
 					case 'Object':
 						switch(key) {
+							case 'router':
+								break
 							case 'feature':
 								Object.keys(org).map(_ => {
 									if (!featureMap[_]) {
@@ -107,6 +109,8 @@ const dataFormat = {
 				switch(dType) {
 					case 'Object':
 						switch(key) {
+							case 'router':
+								break
 							case 'feature':
 								Object.keys(da).map(_ => {
 									if (!featureMap[_]) {
@@ -213,7 +217,21 @@ const dataFormat = {
 				let pae = pa.elements
 				this.pageComp(pa, deepCopy(page))
 				pae.map((p, i) => {
-					this.compComp(p, comp[p.name])
+					var psi = p.styleList.idx || 0,
+						c   = deepCopy(comp[p.name]),
+						cs  = c.styleList,
+						csl = cs.list,
+						csi = cs.idx
+					if (psi) {
+						if (csl[psi]) {
+							c.data = csl[psi].data
+							cs.idx = psi
+						} else {
+							c.data = csl[0].data
+							cs.idx = 0
+						}
+					}
+					this.compComp(p, c)
 				})
 			})
 			// let ed = JSON.stringify(da).length
