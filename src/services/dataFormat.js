@@ -144,7 +144,7 @@ const dataFormat = {
 								break
 							default:
 								da.map((_, i) => {
-									this.slim(_, org[i], i, da)
+									this.slim(_, org[i] || org[0], i, da)
 								})
 						}
 						break
