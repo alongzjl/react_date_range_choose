@@ -73,7 +73,18 @@ const dataFormat = {
 						switch(key) {
 							case 'components':
 								da.map((_, i) => {
-									this.plus(da[_], comp[_.name], i, da)
+									var dn = _.name, on
+									for (var j = 0, l = org.length; j < l; j++) {
+										var o = org[j],
+											n = o.name,
+											s = o.styleList
+										if (dn === n) {
+											on = o
+											if (_.styleList.idx === s.idx) break
+										}
+									}
+									on = on? on: comp[dn]
+									this.plus(_, on, i, da)
 								})
 								break
 							default:
@@ -113,6 +124,17 @@ const dataFormat = {
 						switch(key) {
 							case 'components':
 								da.map((_, i) => {
+									var dn = _.name, on, ca
+									for (var j = 0, l = org.length; j < l; j++) {
+										var o = org[j],
+											n = o.name,
+											s = o.styleList
+										if (dn === n) {
+											on = o
+											if (_.styleList.idx === s.idx) break
+										}
+									}
+									on = on? on: comp[dn]
 									this.slim(da[_], comp[_.name], i, da)
 								})
 								break
@@ -186,6 +208,7 @@ const dataFormat = {
 		pageEach: function(da) {
 			let st = JSON.stringify(da).length
 			Object.keys(da).map(_ => {
+				// if (_ !== 'p_1002') return
 				let pa  = da[_]
 				let pae = pa.elements
 				this.pageComp(pa, deepCopy(page))
@@ -202,75 +225,6 @@ const dataFormat = {
 		}
 	},
 	save: {
-		dataSlim: function(da, org, idx1, idx2) {
-			if (!org) return da
-			let me = this
-			Object.keys(da).map(_ => {
-				if (_ === 'name' && compMap[da[_]]) return
-				let p1 = da[_]
-				let p2 = org[_]
-				let t1 = getAttr(p1)
-				let t2 = getAttr(p2)
-				if (org.styleList) {
-					idx1 = da.styleList.idx
-					idx2 = org.styleList.idx
-				}
-				if (idx1 !== undefined && idx2 !== undefined) {
-					if (idx1 !== idx2 && (_ === 'content' || _ === 'style')) return
-				}
-				if (getAttr(p1) !== getAttr(p2)) {
-					return
-				} else if (getAttr(p1) === 'Object') {
-					if (isEmptyObject(p1) && isEmptyObject(p2)) {
-						delete da[_]
-					} else {
-						var o = me.dataSlim(p1, p2, idx1, idx2)
-						if (!o) {
-							delete da[_]
-						} else {
-							da[_] = o
-						}
-					}
-				} else if (getAttr(p1) === 'Array') {
-					if (!p1.length) {
-						delete da[_]
-					} else {
-						p1.map((p, i) => {
-							let t = p.type
-							if (typeMap[t]) {
-								p1[i] = me.dataSlim(p, comp[p.name], idx1, idx2)
-							} else {
-								try {
-									p1[i] = me.dataSlim(p, p2[i], idx1, idx2)
-								} catch(e) {
-									console.log(e)
-								}
-							}
-						})
-					}
-				} else if (p1 === p2) {
-					delete da[_]
-				}
-			})
-			return isEmptyObject(da)? false: da
-		},
-		pageEach: function(da) {
-			let me = this
-			let st = JSON.stringify(da).length
-			Object.keys(da).map(_ => {
-				let pe = da[_].elements
-				pe.map((p, i) => {
-					if (p.type === 'advanced') return
-					pe[i] = me.dataSlim(p, comp[p.name], p.styleList.idx, 0)
-				})
-			})
-			let ed = JSON.stringify(da).length
-			console.clear()
-			console.log(st, ed, ed/st)
-			console.log(da)
-			console.log(JSON.stringify(da))
-			return da
-		}
 	}
 }
 
