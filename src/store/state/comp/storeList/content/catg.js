@@ -16,7 +16,7 @@ const data = {
 		},
 		filter: {
 			height:     24,
-			lineHeight: 24,
+			width: 60,
 			justifyContent: 'center',
 			margin: {
 				top:     0,
@@ -24,12 +24,12 @@ const data = {
 				bottom:  0,
 				left:    0,
 			},
-			padding: {
+			/*padding: {
 				top:     0,
 				right:   15,
 				bottom:  0,
 				left:    15,
-			},
+			},*/
 			borderWidth:   2,
 			borderStyle:  'solid',
 			borderColor:  { type: 'custom', color: 'rgba(0, 0, 0, 0)', rgb: '#000', alpha: 0 },
