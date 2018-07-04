@@ -101,6 +101,11 @@ module.exports = [
 					icon: 'list',
 					name: '列表',
 					key:  'listByStore'
+				},
+				{
+					icon: 'list',
+					name: '楼层地图',
+					key:  'floorMap'
 				}
 			]
 		},

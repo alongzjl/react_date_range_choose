@@ -41,7 +41,6 @@ class Navigation extends React.Component {
 		add_default.push(obj); 
 		add_default = data.data.content.concat(add_default);
 		data.data.content = add_default;
-		console.log(value);  
 		actions['updateComp'](null, parentComp? parentComp: data)
 	};    
 	render() {   

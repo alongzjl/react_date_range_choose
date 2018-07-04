@@ -72,6 +72,41 @@ class NavigationFloat extends React.Component {
 		e.stopPropagation();
 	}
 	//布局样式一
+	renderSwiper(props) { 
+		const { data } = props;
+		const size = data.layout.size,
+			  pageSwitch = data.layout.pageSwitch,
+			  allPages = data.data.content.length-size,
+			  cssp = cssColorFormat(props, 'filterPage'),
+			  cssn = cssColorFormat(props, 'filterPage');
+		const page = this.state.realIndex;
+		return (
+				<div className="navigation_box">
+					{
+						pageSwitch ? <div className={page < 1? 's-disabled': ''} style={{ ...cssp, ...cssColorFormat(props, 'PagePrev') }} onClick={this.toPageFloor.bind(this, page-1)}></div> : null
+					}
+					<div style={{width:'100%',height:`${pageSwitch?'70%':'100%'}`}}>
+						<div id={this.state.id} className={`swiper-container`}>
+							<div className="swiper-wrapper"> 
+								{ 
+									data.data.content.map((_, i) => {
+										return (
+											<div className="swiper-slide" key={i}>
+												<OnlyNavigation props={props} data={_} key={i}></OnlyNavigation>
+											</div>
+										)
+									})
+								}
+						    </div>    
+					    </div> 
+					</div>
+				    {
+						pageSwitch ?  <div className={page >= allPages? 's-disabled': ''} style={{ ...cssn, ...cssColorFormat(props, 'PageNext') }} onClick={this.toPageFloor.bind(this, page+1)}></div> : null
+					}
+				</div>
+			)
+	}
+	//布局样式二
 	renderDom(props) {
 		const { data } = props;
 		return (
@@ -80,38 +115,6 @@ class NavigationFloat extends React.Component {
 						data.data.content.map((item,index) => {
 							return <OnlyNavigation props={props} data={item} key={index}></OnlyNavigation>
 						})
-					}
-				</div>
-			)
-	}
-	//布局样式二
-	renderSwiper(props) { 
-		const { data } = props;
-		const size = data.layout.size,
-			  allPages = data.data.content.length-size,
-			  cssp = cssColorFormat(props, 'filterPage'),
-			  cssn = cssColorFormat(props, 'filterPage');
-		const page = this.state.realIndex;
-		return (
-				<div className="navigation_box">
-					{
-						data.data.content.length > size ? <div className={page < 1? 's-disabled': ''} style={{ ...cssp, ...cssColorFormat(props, 'PagePrev') }} onClick={this.toPageFloor.bind(this, page-1)}></div> : null
-					}
-					<div id={this.state.id} className={`swiper-container`}>
-						<div className="swiper-wrapper"> 
-							{ 
-								data.data.content.map((_, i) => {
-									return (
-										<div className="swiper-slide" key={i}>
-											<OnlyNavigation props={props} data={_} key={i}></OnlyNavigation>
-										</div>
-									)
-								})
-							}
-					    </div>    
-				    </div> 
-				    {
-						data.data.content.length > size ?  <div className={page >= allPages? 's-disabled': ''} style={{ ...cssn, ...cssColorFormat(props, 'PageNext') }} onClick={this.toPageFloor.bind(this, page+1)}></div> : null
 					}
 				</div>
 			)

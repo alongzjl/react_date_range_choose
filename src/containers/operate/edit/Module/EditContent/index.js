@@ -25,6 +25,8 @@ import NavigationFloat   from './NavigationFloat'
 import Weather           from './Weather'
 import WonderfulActivity from './WonderfulActivity'
 import Page              from './Page'
+import ListByStore       from './ListByStore'
+import Map2D             from './Map2D'
 import filterContent     from './filter'
 
 import * as variable from 'var'
@@ -185,7 +187,7 @@ class EditContent extends React.Component {
 			let dom = this[`render${cm.type}`].bind(this, cm, content, val, p, index)()
 			ci++
 			return (
-				<div className="pgs-row" key={i} style={{display:`${content.isShowDom&&p=='size' ? content.isShowDom :'flex'}`}}>
+				<div className="pgs-row" key={i} style={{display:`${content.isShowDom&&(p=='size'||p=='pageSwitch') ? content.isShowDom :'flex'}`}}>
 					<div className="pgsr-name">{ cm.name }</div>
 					<div className="pgsr-ctrl">{ dom }</div>
 					<div className="pgsr-auth">
@@ -214,6 +216,8 @@ class EditContent extends React.Component {
 		else if (compName === 'weather')           compCon = (<Weather           data={this.props}/>)
 		else if (compName === 'wonderfulActivity') compCon = (<WonderfulActivity data={this.props}/>)
 		else if (compName === 'swiperImage')       compCon = (<SwiperImage       data={this.props}/>)
+		else if (compName === 'listByStore')       compCon = (<ListByStore       data={this.props}/>)
+		else if (compName === 'map2D')             compCon = (<Map2D       data={this.props}/>)	
 		if (content.length) {
 			activeKey = Array.from(new Array(content.length + 1), (_, i) => `${i}`)
 			childNode = content.map((_, i) => {

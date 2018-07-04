@@ -19,9 +19,9 @@ const data = {
 			height: 25,
 			justifyContent: 'center',
 			margin: {
-				top:     0,
+				top:     10,
 				right:   0,
-				bottom:  0,
+				bottom:  10,
 				left:    0,
 			},
 			borderWidth:  1,
@@ -90,7 +90,8 @@ const data = {
 	},
 	content: {
 		switch:   true,
-		size: 4
+		size: 4,
+		pageSwitch:false
 	},
 	animation: {
 		className: '',	// 动画样式

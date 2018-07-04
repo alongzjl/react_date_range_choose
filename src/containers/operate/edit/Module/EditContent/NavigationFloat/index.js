@@ -18,12 +18,6 @@ import './index.less'
 
 class NavigationFoat extends React.Component {
 	
-	componentWillReceiveProps(props) {
-		
-	}; 
-	componentDidMount() {
-		
-	};
 	cb = key => {
 		console.log(key)
 	};
@@ -82,7 +76,14 @@ class NavigationFoat extends React.Component {
 		let { parentComp } = curData
 		data.layout.size = val
 		actions['updateComp'](null, parentComp? parentComp: data)
-	}   
+	}  
+	onChangepage = e =>{
+		let {data,actions,editConfig} = this.props.data
+		let { curData, curComp } = editConfig
+		let { parentComp } = curData
+		data.layout.pageSwitch = e.target.checked
+		actions['updateComp'](null, parentComp? parentComp: data)
+	} 
 	render() {  
 		let { data } = this.props.data      
 		const options = [2,3,4,5,6,7,8,9,10,11,12,13,14,15];
@@ -133,13 +134,22 @@ class NavigationFoat extends React.Component {
    							 </Select>
    						</div>
    						{
-   							data.layout.type == 2 ? <div key={3} className="pgs-row">
-	   							<div className="pgsr-name">数量</div> 
+   							data.layout.type == 1 ? <div key={3} className="pgs-row">
+	   							<div className="pgsr-name">显示数量</div> 
 	   							<InputNumber
 									min={0} max={100} step={1}
 									value={data.layout.size} onChange={v => this.onChangeSize(v)}
 									style={{ width: '120px' }}
 								/> 
+							</div> : null
+   						}
+   						{
+   							data.layout.type == 1 ? <div key={4} className="pgs-row">
+	   							<div className="pgsr-name">翻页开关</div> 
+	   							<Checkbox checked={data.layout.pageSwitch || false} 
+	   							onChange={v => this.onChangepage(v)}
+	   							style={{ width: '120px' }}
+								/>
 							</div> : null
    						}
    					</Panel>

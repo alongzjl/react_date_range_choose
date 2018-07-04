@@ -8,7 +8,8 @@ module.exports = {
 		catg:        1,
 		page:        1,
 		reset:       1,
-		listByStore: 1
+		listByStore: 1,
+		floorMap:    1
 	},
 	storeInstro: { 
 		storeSplitLine:         1, 

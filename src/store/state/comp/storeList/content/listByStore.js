@@ -66,7 +66,8 @@ const data = {
 		}
 	},
 	content: {
-		router: {}	
+		router: {},
+		animationType:1
 	},
 	animation: {
 		className: '',	// 动画样式

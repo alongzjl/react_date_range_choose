@@ -24,14 +24,27 @@ class ListByStore extends React.Component {
 		ioInput.body.page = str
 		ioOuter(ioInput)
 	}
-
+	end = e =>{
+		e.target.style.opacity = 1;
+	}
 	renderDom(props, list) {
+		let type = props.data.data.content.animationType,
+			defaultStyle = cssColorFormat(props, 'filter'),
+			animationStyle = {"animationDuration":"0.2s","animationDelay":"0s","animationIterationCount":1},
+			animationClass;
+		defaultStyle = {...defaultStyle,...animationStyle};
+		switch(type) {
+			case 1  : animationClass = "fadeInCenter";break
+			case 2  : animationClass = "bounceInCenter";break
+			default : animationClass = "fadeInCenter";break
+		}
 		let node = list.map((_, i) => {
 			return (
 				<div
 					key={i}
-					style={cssColorFormat(props, 'filter')}
-					className={'ep-item'}
+					style={{...defaultStyle,animationDelay:`${0.2*i}s`}}
+					className={`ep-item ${animationClass}`}
+					onAnimationEnd={e=>{this.end(e)}}
 				>
 					<p><img  style={cssColorFormat(props, 'image')} src={_.pic} /></p>
 					<p><span style={cssColorFormat(props, 'title')}>{_.name}</span></p>

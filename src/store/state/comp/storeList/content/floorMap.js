@@ -1,22 +1,22 @@
 /**
- * @Author: gaoyang
- * @Date:   2018-05-17
+ * @Author: Along
+ * @Date:   2018-07-04
 
  */
 
-// 按钮
+// 楼层地图
 const data = {
 	layout: {
 		position: 'absolute',
-		top:      0,
+		top:      340,
 		left:     0,
 		width:    540,
-		height:   540
+		height:   400
 	}, 
 	style: {
-		text: {}
+		
 	},
-	content: {themeColor:'#fff'},
+	content: {},
 	animation: {
 		className: '',	// 动画样式
 		direction: '',				// 方向
@@ -27,7 +27,7 @@ const data = {
 }
 
 module.exports = {
-	name: 'map2D',
+	name: 'floorMap',
 	type: 'base',
 	data: JSON.parse(JSON.stringify(data)),
 	// 样式列表

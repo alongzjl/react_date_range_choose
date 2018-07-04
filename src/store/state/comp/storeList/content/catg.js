@@ -96,7 +96,8 @@ const data = {
 	},
 	content: {
 		switch:   true,
-		size:4
+		size:4,
+		pageSwitch:false
 	},
 	animation: {
 		className: '',	// 动画样式

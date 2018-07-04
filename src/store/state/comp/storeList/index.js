@@ -6,7 +6,7 @@ const l  = authInit(require('./content/letter'))
 const r  = authInit(require('./content/reset'))
 const p  = authInit(require('./content/page'))
 const ls = authInit(require('./content/listByStore'))
-const map = authInit(require('../map2D'))
+const floorMap = authInit(require('./content//floorMap'))
 
 // 店铺列表
 const dataStyle_1 = {
@@ -51,14 +51,7 @@ const p_2 = extend(deepCopy(p), {
 			top:  300, 
 		} 
 	}
-})
-const map_2 = extend(deepCopy(map), {
-	data:{
-		layout: {
-			top:  350, 
-		}
-	}
-})
+}) 
 // 楼层导航
 const dataStyle_2 = {
 	layout: {
@@ -66,7 +59,7 @@ const dataStyle_2 = {
 		top:      100,
 		left:     0,
 		width:    540,
-		height:   500
+		height:   750
 	},
 	style: {
 	},
@@ -80,7 +73,7 @@ const dataStyle_2 = {
 		duration: 1,				// 持续时间
 		iterationCount: 1			// 循环次数
 	},
-	components: [f_2,p_2,ls_2,map] 
+	components: [f_2,p_2,ls_2,floorMap] 
 }
 
 module.exports = {
@@ -94,11 +87,11 @@ module.exports = {
 			name: '品牌导购',
 			img:  '',
 			data: JSON.parse(JSON.stringify(dataStyle_1))
-		}/*, {
+		}, {
 			name: '楼层导航',
 			img:  '',
 			data: JSON.parse(JSON.stringify(dataStyle_2))
-		}*/]
+		}]
 	},
 	// 功能特性
 	feature: {
@@ -115,12 +108,3 @@ module.exports = {
 		list:   []		// 商品
 	}
 }
-// {
-// 	page: 1,
-//  size: 10,
-// 	filter: [
-// 	{key: 'catg', val: 'axcmakljdskldklskla'},
-// 	{key: 'floor', val: 'axcmakljdskldklskla123'},
-// 	{key: 'letter', val: 'A'}
-// 	]
-// }

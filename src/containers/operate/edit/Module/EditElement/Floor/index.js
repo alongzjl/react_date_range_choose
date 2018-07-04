@@ -120,37 +120,40 @@ function NoShow({arr,css,nowVal,props,selectVal}) {
 function ShowDirection({id, page,css,props,arr,nowVal,toPageFloor,selectVal}) {
 	const { data,ioInput } = props;
 	const size = data.data.content.size,
+		  pageSwitch = data.data.content.pageSwitch,
 		  cssp = cssColorFormat(props, 'filterPage'),
 		  cssn = cssColorFormat(props, 'filterPage');
 	const allPages = arr.length-size;
-	return (
-		<div className="ShowDirection" style={cssColorFormat(props, 'filterBox')}>
+	return ( 
+		<div className="ShowDirection pageShow" style={cssColorFormat(props, 'filterBox')}>
 			{
-				ioInput.floors.length > size ? <div className={page < 1? 's-disabled': ''} style={{ ...cssp, ...cssColorFormat(props, 'PagePrev') }} onClick={()=>{toPageFloor(page-1)}}></div> : null
+				pageSwitch ? <div className={page < 1? 's-disabled': ''} style={{ ...cssp, ...cssColorFormat(props, 'PagePrev') }} onClick={()=>{toPageFloor(page-1)}}></div> : null
 			}
-			<div id={id} className={`swiper-container swiper-container_floor`}>
-				<div className="swiper-wrapper"> 
-					{ arr.map((_, i) => { 
-						let nCss = css,
-							name = _.name
-						if (name === nowVal) nCss = { ...css, ...cssColorFormat(props, 'filterActive') }
-						return (
-							<div className="swiper-slide" key={i}>
-								<div
-									className={`el-item${name === nowVal? ' s-active': ''}`}
-									style={nCss}
-									onClick={()=>{selectVal(name)}}
-								>
-									{name}
+			<div style={{width:'100%',height:`${pageSwitch?'75%':'100%'}`}}>
+				<div id={id} className={`swiper-container swiper-container_floor`}>
+					<div className="swiper-wrapper"> 
+						{ arr.map((_, i) => { 
+							let nCss = css,
+								name = _.name
+							if (name === nowVal) nCss = { ...css, ...cssColorFormat(props, 'filterActive') }
+							return (
+								<div className="swiper-slide" key={i}>
+									<div
+										className={`el-item${name === nowVal? ' s-active': ''}`}
+										style={nCss}
+										onClick={()=>{selectVal(name)}}
+									>
+										{name}
+									</div>
 								</div>
-							</div>
-						)
-					})
-				}
-			    </div>    
-		    </div> 
+							)
+						})
+					}
+				    </div>    
+			    </div> 
+			</div>
 		    {
-				ioInput.floors.length > size ?  <div className={page >= allPages? 's-disabled': ''} style={{ ...cssn, ...cssColorFormat(props, 'PageNext') }} onClick={()=>{toPageFloor(page+1)}}></div> : null
+				pageSwitch ?  <div className={page >= allPages? 's-disabled': ''} style={{ ...cssn, ...cssColorFormat(props, 'PageNext') }} onClick={()=>{toPageFloor(page+1)}}></div> : null
 			}
 		</div>
 	)

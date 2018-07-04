@@ -57,6 +57,8 @@ module.exports = {
 	reset:             authInit(require('./storeList/content/reset')),
 	// 列表 (店铺)
 	listByStore:       authInit(require('./storeList/content/listByStore')),
+	// 楼层地图
+	floorMap:          authInit(require('./storeList/content/floorMap')),
 
 	// 天气日期
 	time:              authInit(require('./dateWeather/content/time')),

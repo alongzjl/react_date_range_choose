@@ -167,9 +167,8 @@ module.exports = {
 		type: 1,
 		position: 'left',
 		size: 3,
-		prevSwitch:   true,
-		nextSwitch:   true
-	},
+		pageSwitch:   true
+	}, 
 	// 内容管理
 	// 样式列表
 	styleList: {
