@@ -1,3 +1,4 @@
+
 import * as variable from 'var'
 const comp  = require('state/comp')
 const page  = require('state/page')
@@ -245,5 +246,4 @@ const dataFormat = {
 	save: {
 	}
 }
-
 module.exports = dataFormat
