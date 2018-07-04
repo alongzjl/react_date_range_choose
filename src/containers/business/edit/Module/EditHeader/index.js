@@ -62,7 +62,9 @@ class Header extends React.Component {
 		let { editConfig, location } = this.props
 		let { query } = location
 		let { caseType, id, composeType, templateId, templateThemeId } = tempCfg
-		let cfg = JSON.parse(JSON.stringify(editConfig))
+		let cfg = deepCopy(editConfig)
+
+		// cfg.pageContent = dataFormat.save.pageEach(cfg.pageContent)
 
 		let newCon = deepCopy(cfg.pageContent)
 		Object.keys(newCon).map(_ => this.formatPage(newCon[_]))
@@ -135,20 +137,31 @@ class Header extends React.Component {
 			<div className="pe-header e-flex">
 				{ loading }
 				<div className="peh-left">
-					<Input
-						value={this.state.name}
-						placeholder={'模板名称'}
-						onChange={e => this.tNameChange(e.target.value)}
-					/>
+					<div className="logo"></div>
 				</div>
 
 				<div className="peh-center"></div>
 
 				<div className="peh-right">
-					<section className="comp-list">
-						<div className="cl-item" onClick={this.selectTheme.bind(this)}>主题</div>
-						<div className="cl-item" onClick={this.saveData.bind(this)}>保存</div>
-						<div className="cl-item" onClick={this.closeWin}>离开</div>
+					<section className="comp-list comp-list-b">
+						<div className="cl-item" onClick={this.selectTheme.bind(this)}>
+							<div className="cl-item-icon">
+								<img src={require(`images/icon/theme.png`)}/>
+							</div>
+							主题
+						</div>
+						<div className="cl-item" onClick={this.saveData.bind(this)}>
+							<div className="cl-item-icon">
+								<img src={require(`images/icon/save.png`)}/>
+							</div>
+							保存
+						</div>
+						<div className="cl-item" onClick={this.closeWin}>
+							<div className="cl-item-icon">
+								<img src={require(`images/icon/exit.png`)}/>
+							</div>
+							离开
+						</div>
 					</section>
 				</div>
 			</div>

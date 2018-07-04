@@ -11,8 +11,8 @@ import ReactDOM     from 'react-dom'
 import { Provider } from 'react-redux'
 import thunk        from 'redux-thunk'
 import reducer      from 'store/reducers'
-import { createStore, applyMiddleware }         from 'redux'
-import { Router, Route, hashHistory } from 'react-router'
+import { createStore, applyMiddleware } from 'redux'
+import { Router, Route, hashHistory }   from 'react-router'
 
 // require('public/RyWayFinding-1.2.3.min')
 
@@ -23,10 +23,11 @@ import BusinessEdit from 'business/edit'
 import View from 'view'
 
 import NoMatch     from './containers/NoMatch'
-
+import 'animate.css'
 import 'styles/common.less'
 import 'styles/animate.less'
 import 'antd/dist/antd.less'
+import 'styles/fonts/iconfont.css'
 
 const store = createStore(
 	reducer,

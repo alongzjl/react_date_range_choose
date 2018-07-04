@@ -28,6 +28,8 @@ import NavigationFloat   from 'compEdit/EditElement/NavigationFloat'
 import SplitLine         from 'compEdit/EditElement/SplitLine'
 import Map2D             from 'compEdit/EditElement/Map2D'
 
+import RevokeRecovery    from 'compEdit/EditCommon/RevokeRecovery'
+
 import * as actions from 'actions'
 
 import './index.less'
@@ -35,6 +37,7 @@ import './index.less'
 import * as variable from 'var'
 
 const ctMap = variable.composeTypeMap
+
 
 class EditElement extends React.Component {
 	componentWillMount() {}
@@ -111,6 +114,7 @@ class EditElement extends React.Component {
 				<section className="pg-element" style={bgStyle}>
 					{ childNode }
 				</section>
+				<RevokeRecovery />
 			</div>
 		)
 	}

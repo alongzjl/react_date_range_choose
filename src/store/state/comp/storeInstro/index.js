@@ -16,14 +16,15 @@ const data = {
 		top:      0,
 		left:     0,
 		width:    540,
-		height:   500 
+		height:   450 
 	},  
 	content:   {},
 	animation: {
 		className: '',	// 动画样式
-		delay: 1,					// 开始时间
+		direction: '',				// 方向
+		delay: 0,					// 开始时间
 		duration: 1,				// 持续时间
-		iterationCount: 'infinite'	// 循环次数
+		iterationCount: 1			// 循环次数
 	},
 	// 组件管理  
 	components: [t,s,w,l]

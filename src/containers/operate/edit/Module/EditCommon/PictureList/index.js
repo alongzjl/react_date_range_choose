@@ -8,7 +8,7 @@
 import React from 'react';
 import SkyLight from 'react-skylight';
 import './index.less'
-import { Button, Upload, message,Modal,Pagination,Icon } from 'antd'
+import { Button, Upload, message,Modal,Pagination,Icon,Input } from 'antd'
 import Url from 'public/Url'
 const commonCss = {
 	dialogStyles: {
@@ -64,6 +64,7 @@ export default class PictureList extends React.Component {
 		imgTypes: [],
 		imgList:  [],
 		page_img: {},
+		attribute:'',
 		currentPage: 1,
 		page:1,
 		page_size:14,
@@ -81,6 +82,9 @@ export default class PictureList extends React.Component {
 		} else if (str == 'groupId') {
 			currentPage = 1
 			this.setState({ groupId: id, currentPage: 1 })
+		}else if(str == 'name'){
+			currentPage = 1
+			this.setState({ name: id, currentPage: 1 })
 		}
 		setTimeout(() => {
 			let postData = {
@@ -101,25 +105,6 @@ export default class PictureList extends React.Component {
 				this.setState({
 					imgList:res.data,
 					page_img:res.page
-					// imgList: [
-					// 	{
-					// 		id: 1,
-					// 		url: 'http://rongyi.b0.upaiyun.com/system/smartService/null/201801180034041097.png'
-					// 	},
-					// 	{
-					// 		id: 2,
-					// 		url: 'http://rongyi.b0.upaiyun.com/system/smartService/null/201801180034041093.png'
-					// 	},
-					// 	{
-					// 		id: 3,
-					// 		url: 'http://rongyi.b0.upaiyun.com/commodity/text/201805191205157047.png'
-					// 	}
-					// ],
-					// page_img: {
-					// 	currentPage: 1,
-					// 	totalPage: 2,
-					// 	pageSize: 10
-					// }
 				})
 			})
 		}, 10)
@@ -129,7 +114,7 @@ export default class PictureList extends React.Component {
 	}
 	save = () => {
 		if (this.state.choosed_img) {
-			this.props.enter(this.state.choosed_img,this.props.index)
+			this.props.enter(this.state.choosed_img,this.state.attribute,this.props.index)
 			this.addImgModal.hide()
 		} else {
 			message.info(`你还未选择图片!`)
@@ -138,8 +123,14 @@ export default class PictureList extends React.Component {
 	close = () => {
 		this.addImgModal.hide()
 	}
-	save_img = url => {
-		this.setState({choosed_img:url});
+	save_img = (url,attribute) => {
+		this.setState({choosed_img:url,attribute:attribute});
+	}
+	searchName = e => {
+		this.setState({name:e.target.value})
+	}
+	searchList = () => {
+		this.getImgList('name',this.state.name)
 	}
 	render() {
 		return (
@@ -157,6 +148,9 @@ export default class PictureList extends React.Component {
 					<div className="bottom">
 						<Button type="primary" onClick={this.save}>确定</Button>
 						<Button onClick={this.close}>取消</Button>
+					</div>
+					<div className="searchImg">
+						<Input size="large" placeholder="请输入查询名称" onChange={e=>this.searchName(e)} /><Button type="primary" onClick={this.searchList}>搜索</Button>
 					</div>
 				</div>
 				</SkyLight>
@@ -191,7 +185,7 @@ class ImgModule extends React.Component {
 		}
 		this.props.getImgList(str, id)
 	}
-	chooseImg(img) {
+	chooseImg(img,attribute) {
 		let img_list = this.state.imgList
 		img_list = img_list.map(item=>{
 			item.id === img ? item.isClicked = !item.isClicked : item.isClicked = false
@@ -201,18 +195,18 @@ class ImgModule extends React.Component {
 			imgList:img_list
 		})
 		let choosed_img = img_list.filter(item => item.isClicked == true);
-		this.props.save(choosed_img)
+		this.props.save(choosed_img,attribute)
 	};
 	customRequest = info => {
 		const that = this
 		this.setState({loading:true})
 		let id = window.uif.userInfo.id || '1'
-		const paramsData = {
+		let paramsData = {
 			userId:id,
 			mallId:'',
-			imageName:'along',
 			imageSourceType:'OPERATION'
-		}
+		} 
+		paramsData.imageName = info.file.name.split(".")[0];
 		if (getEnv() === 'business') {
 			paramsData.imageSourceType = 'BUSINESS'
 			paramsData.mallId = uif.userInfo.mallMid
@@ -280,14 +274,15 @@ function Type({item, choose_one, groupId}) {
 		<div className={item.id === groupId? 's-active': ''} onClick={()=>{choose_one('groupId', item.id)}}>{item.name}</div>
 	)
 }
-
-function List({item,choose_one}){
-	return (
-		<div onClick={()=>{choose_one(item.id)}} className={item.isClicked?'choosed':''}>
-			<div className={item.isClicked?'icon_img':''}>
-				<div className="right-symbol"></div>
+function List({ item,choose_one }) {
+	return  (
+			<div onClick={()=>{choose_one(item.id,item.attribute)}} className={item.isClicked?'choosed':''}>
+				<div className={item.isClicked?'icon_img':''}>
+					<div className="right-symbol"></div>
+				</div>
+				<img src={item.url} />
+				<div className="showName">{item.name}</div>
+				<div className="showSize">{item.attribute}</div>
 			</div>
-			<img src={item.url} />
-		</div>
-	)
+		)
 }

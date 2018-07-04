@@ -44,7 +44,7 @@
 	display: flex;
 	width: 100%;
 	/*min-height: 1020px;*/
-	height: ~"calc(100% - 48px)";
+	height: ~"calc(100% - 60px)";
 	overflow: hidden;
 	// & > div {
 	// 	height: 100%;
@@ -247,7 +247,8 @@
 
 .pg-left-fixed {
 	position: fixed;
-	top: 48px;
+	z-index: 1;
+	top: 60px;
 	bottom: 0;
 	left: 180px;
 }
@@ -255,11 +256,11 @@
 
 .pg-float {
 	position: fixed;
-	top:  60px;
-	left: 420px;
+	top:  70px;
+	left: 380px;
 	overflow-x: hidden;
 	overflow-y: auto;
-	height: ~"calc(100% - 60px)";
+	height: ~"calc(100% - 70px)";
 	pointer-events: none;
 	p {
 		display: flex;

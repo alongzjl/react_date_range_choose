@@ -2,190 +2,191 @@
 module.exports = [
 	// [
 		{
-			icon: 'base-control',
+			icon: 'basicsComponent',
 			name: '基础组件',
 			child: [
 				{
-					icon: 'text-control',
+					icon: 'text',
 					name: '文本',
 					key:  'text'
 				},
 				{
-					icon: 'button-control',
+					icon: 'button',
 					name: '按钮',
 					key:  'button'
 				},
 				{
-					icon: 'img-control',
+					icon: 'image',
 					name: '图片',
 					key:  'picture'
 				},
 				{
-					icon: 'splitLine-control',
+					icon: 'splitLine',
 					name: '分割线',
 					key:  'splitLine'
 				},
 				{
-					icon: 'video-control',
+					icon: 'video',
 					name: '视频', 
 					key:  'video'
 				},
 				{
-					icon: 'carouse-control',
+					icon: 'carousel',
 					name: '轮播',
 					key:  'swiperImage'
 				},
 				{
-					icon: 'wonderfulActivity-control',
+					icon: 'carousel',
 					name: '精彩活动',
 					key:  'wonderfulActivity'
 				},
 				{
-					icon: 'web-control',
+					icon: 'html',
 					name: '网页',
 					key:  'web'
 				},
 				{
-					icon: 'time-control',
+					icon: 'date&time',
 					name: '时间日期',
 					key:  'time'
 				},
 				{
-					icon: 'weather-control',
+					icon: 'weather',
 					name: '天气',
 					key:  'weather'
 				},
 				{
-					icon: 'navigation-control',
+					icon: 'navigation',
 					name: '导航列表',
 					key:  'navigation', 
 				},
 				{
-					icon: 'navigationFloat-control',
+					icon: 'navigation',
 					name: '悬浮导航', 
 					key:  'navigationFloat', 
 				},
 			]
 		},
 		{
-			icon: 'store-control',
+			icon: 'store',
 			name: '店铺列表',
 			key:  'storeList',
 			child: [
 				{
-					icon: 'letter-control',
+					icon: 'characterNav',
 					name: '字母',
 					key:  'letter'
 				},
 				{
-					icon: 'floor-control',
+					icon: 'floorNav',
 					name: '楼层',
 					key:  'floor'
 				},
 				{
-					icon: 'catg-control',
+					icon: 'classifyNav',
 					name: '分类',
 					key:  'catg'
 				},
 				{
-					icon: 'page-control',
+					icon: 'sorter',
 					name: '分页',
 					key:  'page'
 				},
 				{
-					icon: 'reset-control',
+					icon: 'reset',
 					name: '重置',
 					key:  'reset'
 				},
 				{
-					icon: 'list-control',
+					icon: 'list',
 					name: '列表',
 					key:  'listByStore'
 				}
 			]
 		},
 		{
-			icon: 'storeInstro-control',
+			icon: 'aboutStore',
 			name: '店铺简介',
 			key:  'storeInstro',
 			child: [
 				{
-					icon: 'text-control',
+					icon: 'aboutStore',
 					name: '店铺简介',
 					key:  'storeInstroTitle'
 				},
 				{
-					icon: 'text-control',
+					icon: 'text',
 					name: '店铺详情',
 					key:  'storeInstroInstroduce'
-				},{
-					icon: 'wonderfulActivity-control',
+				},
+				{
+					icon: 'carousel',
 					name: '轮播图片',
 					key:  'storeWonderful'
 				}, 
 				{
-					icon: 'storeSplitLine-control',
+					icon: 'splitLine2',
 					name: '图案装饰',
 					key:  'storeSplitLine'
 				} 
 			]
 		},
 		{
-			icon: 'storeDetails-control',
+			icon: 'storeDetails',
 			name: '店铺详情',
 			key:  'storeDetails',
 			child: [
 				{
-					icon: 'text-control',
+					icon: 'image',
 					name: '店铺LOGO',
 					key:  'instroPicture'
 				},
 				{
-					icon: 'text-control',
+					icon: 'text',
 					name: '店铺名称',
 					key:  'instroTitle'
 				},
 				{
-					icon: 'address-control',
+					icon: 'floorNav',
 					name: '楼层显示',
 					key:  'address'
 				},
 				{
-					icon: 'address-control',
+					icon: 'phone',
 					name: '电话显示',
 					key:  'phone' 
 				}, 
 				{
-					icon: 'button-control',
+					icon: 'button',
 					name: '前往按钮',
 					key:  'instroButton'
 				}
 			]
 		},
 		{
-			icon: 'dateWeather-control',
+			icon: 'dateWeather',
 			name: '日期天气',
 			key:  'dateWeather',
 			child: [
 				{
-					icon: 'time-control',
+					icon: 'date&time',
 					name: '时间日期',
 					key:  'time'
 				},
 				{
-					icon: 'weather-control',
+					icon: 'weather',
 					name: '天气',
 					key:  'weather'
 				},
 				{
-					icon: 'img-control',
+					icon: 'image',
 					name: '图片',
 					key:  'weatherLogo'
 				}
 			]
 		},
 		{
-			icon: 'map2D-control',
+			icon: '2DMap',
 			name: '2D地图',
 			key:  'map2D'
 		}

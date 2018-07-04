@@ -15,16 +15,7 @@ const weatherLogo = extend(deepCopy(require('../../../comp/picture')), {
 			width:  130,
 			height: 60
 		},
-		style: {
-			image:{
-				borderRadius: {
-					topLeft:     0,
-					topRight:    0,
-					bottomRight: 0,
-					bottomLeft:  0
-				}
-			}
-		},
+		type: 'weatherLogo',
 		content: {
 			img: { type: 'logo', img: '' }
 		}

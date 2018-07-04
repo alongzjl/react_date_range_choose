@@ -103,6 +103,16 @@ const weather3 = extend(styleIdxChange(7, deepCopy(w)), {
 		}
 	}
 })
+const pic      = extend(deepCopy(p), {
+	data: {
+		layout: {
+			top:    35,
+			left:   390,
+			width:  130,
+			height: 32
+		}
+	}
+})
 
 // 店铺列表
 const data = {
@@ -131,7 +141,7 @@ const data = {
 		weather,
 		weather2,
 		weather3,
-		p
+		pic
 	]
 }
 

@@ -8,7 +8,7 @@
 import React from 'react'
 import {
 	Row, Col,
-	Button, Card, Checkbox, Collapse, Select,message,Icon } from 'antd' 
+	Button, Card, Checkbox, Collapse, Select,message,Icon,InputNumber } from 'antd' 
 
 const { Panel }    = Collapse
 const Option = Select.Option;
@@ -36,7 +36,7 @@ class NavigationFoat extends React.Component {
 		let obj = {   
 			img: { type: 'custom', img: '' },			// 图片url
 			title: `导航${data.data.content.length+1}`,		// 图片标题
-			router: ''  	 		// 路由 
+			router: {}  	 		// 路由 
 		}
 		add_default.push(obj); 
 		add_default = data.data.content.concat(add_default);
@@ -45,28 +45,20 @@ class NavigationFoat extends React.Component {
 		actions['updateComp'](null, parentComp? parentComp: data)
 	};
 	handleChangeStyle = value => {
-		let {data,actions,editConfig} = this.props.data;
+		let {data,actions,editConfig} = this.props.data
 		let { curData, curComp } = editConfig
 		let { parentComp } = curData
-		data.layout.type = value;
-		switch (value) {
-			case 1 : data.data.layout.width = 80;
-			break;
-			case 2 : data.data.layout.width = 120; 
-			break;
-			case 3 : data.data.layout.width = 300;
-			break;
-			default:;
-			break
+		data.layout.type = value
+		if(value == 4){
+			data.data.layout.width = 108
+			data.data.layout.height = 180
+		}else{
+			data.data.layout.width = 80
+			data.data.layout.height = 400
 		}
 		if(data.layout.position == 'right'){
-			if(data.layout.type == 1){
-				data.data.layout.left = 460;
-			}else if(data.layout.type == 2){
-				data.data.layout.left = 420; 
-			}  
+			value == 4 ? data.data.layout.left = 432 : data.data.layout.left = 460;
 		}  
-		console.log(value); 
 		actions['updateComp'](null, parentComp? parentComp: data)
 	};
 	handleChangePosition = value => {
@@ -75,22 +67,22 @@ class NavigationFoat extends React.Component {
 		let { parentComp } = curData
 		data.layout.position = value;
 		switch (value) { 
-			case 'left' : data.data.layout.left = 0;data.data.layout.top = 220;
+			case 'left' : data.data.layout.left = 0;
 			break;
-			case 'right' : 
-					if(data.layout.type == 1){
-						data.data.layout.left = 460;
-					}else if(data.layout.type == 2){
-						data.data.layout.left = 420; 
-					} 
-					data.data.layout.top = 220;
+			case 'right' : data.data.layout.left = 540-data.data.layout.width
 			break;   
 			default:;   
 			break
 		}
-		console.log(value); 
 		actions['updateComp'](null, parentComp? parentComp: data)
-	};    
+	}; 
+	onChangeSize = val =>{
+		let {data,actions,editConfig} = this.props.data
+		let { curData, curComp } = editConfig
+		let { parentComp } = curData
+		data.layout.size = val
+		actions['updateComp'](null, parentComp? parentComp: data)
+	}   
 	render() {  
 		let { data } = this.props.data      
 		const options = [2,3,4,5,6,7,8,9,10,11,12,13,14,15];
@@ -100,6 +92,12 @@ class NavigationFoat extends React.Component {
 			},{
 				type:2,
 				show:'布局样式二'
+			},{
+				type:3,
+				show:'布局样式三'
+			},{
+				type:4,
+				show:'布局样式四'
 			}];
 		const options_position = [{type:'left',show:'左'},{type:'right',show:'右'}/*,{type:'top',show:'上'},{type:'bottom',show:'下'}*/];
 		return ( 
@@ -134,7 +132,17 @@ class NavigationFoat extends React.Component {
      							} 
    							 </Select>
    						</div>
-					</Panel>
+   						{
+   							data.layout.type == 2 ? <div key={3} className="pgs-row">
+	   							<div className="pgsr-name">数量</div> 
+	   							<InputNumber
+									min={0} max={100} step={1}
+									value={data.layout.size} onChange={v => this.onChangeSize(v)}
+									style={{ width: '120px' }}
+								/> 
+							</div> : null
+   						}
+   					</Panel>
 				</Collapse>	
 			</div>  
 		) 

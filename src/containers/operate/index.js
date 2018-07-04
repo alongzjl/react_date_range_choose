@@ -15,7 +15,6 @@ import curData from 'state/cur/curData'
 import { Spin } from 'antd'
 import './index.less'
 
-
 class OperateComponent extends React.Component {
 	constructor(props) {
 		super(props)
@@ -63,6 +62,9 @@ class OperateComponent extends React.Component {
 				let cfg = JSON.parse(res.data.config).configPC
 				delete res.data.config
 				let cur = cfg.pageList.group[0].pages[0]
+
+				dataFormat.get.pageEach(cfg.pageContent)
+				// debugger
 				let newCfg = {
 					curComp: {},
 					curData: { ...curData, ...cur },

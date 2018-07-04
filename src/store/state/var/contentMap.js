@@ -20,5 +20,6 @@ module.exports = {
 	suffix:        { name: '后缀',    type: 'Input', min: 0, max: 5 },
 	template:      { name: '模板',    type: 'Textarea', min: 0, max: 200, autosize: { minRows: 1, maxRows: 6 } },
 	router:        { name: '页面跳转', type: 'Router' },
+	switch:        { name: '翻页开关', type: 'Checkbox' },
 	size:          { name: '数量', type: 'Number', min: 1, max: 20 }
 }

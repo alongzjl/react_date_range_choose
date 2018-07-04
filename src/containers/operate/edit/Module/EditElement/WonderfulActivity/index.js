@@ -16,19 +16,14 @@ class WonderfulActivity extends React.Component {
 		super(props)
 	}
 	state = {
-		random: parseInt(Math.random()*1000)
+		random: parseInt(Math.random()*1000),
+		realIndex: 0
 	}
 	componentWillReceiveProps(props) {
 		this.init(props)
 	}
 	componentDidMount() {
-		const content = this.props.data.data.content
-		if (content && content.length > 0) {
-			this.setState({
-				lists: content
-			})
-			this.init(this.props)
-		}
+		this.init(this.props)
 	} 
 
 	to(e) {
@@ -58,35 +53,67 @@ class WonderfulActivity extends React.Component {
 					new_obj[key] = obj[key];
 				} 
 			}  
-		}  
-		new_obj.pagination = {
-				el: '.swiper-pagination',//分页元素
-				type: 'bullets',          //类型 ‘fraction’  分式 ‘progressbar’  进度条
-				clickable :true,  //此参数设置为true时，点击分页器的指示点分页器会控制Swiper切换。
-		}   
+		} 
+		new_obj.on = {
+			slideChange:()=>{
+				this.mySwiper ? this.setState({realIndex:this.mySwiper.realIndex}) : null
+			}
+		} 
 		new_obj.watchSlidesProgress = true;
 		new_obj.observer = true;//修改swiper自己或子元素时，自动初始化swiper 
 		new_obj.observeParents = true;//修改swiper的父元素时，自动初始化swiper 
-		console.log(new_obj);
 		return new_obj  
+	}
+	componentWillUnmount() {
+		this.mySwiper.destroy(false)
 	}
 	render() {
 		let { data } = this.props
-		let type = getAttr(data.data.content)
-		const content = type === 'Array'? data.data.content: data.data.content.list
+		const content = data.data.content.list
 		return ( 
 			<div className="e-WonderfulActivity">
 				<div className={`swiper-container swiper-container_${this.state.random} outer_box`}>
 					<div className="swiper-wrapper">
 						{
-							content.map((item, i) => <div className="swiper-slide" key={i}><div className="text_show" style={cssColorFormat(this.props, 'text')}>{item.title}</div><img src={item.img.img} style={cssColorFormat(this.props, 'swiperImage')} /></div>)
+							content.map((item, i) => <div className="swiper-slide" key={i}>{/*<div className="text_show" style={cssColorFormat(this.props, 'text')}>{item.title}</div>*/}<img src={item.img.img} style={cssColorFormat(this.props, 'swiperImage')} /></div>)
 						}   
 					</div>
-					<div className="swiper-pagination"></div>
-				</div> 
+				</div>
+				<PageRY totalPage={content.length} currentPage={this.state.realIndex} props={this.props}></PageRY> 
 			</div>
 		)  
 	}
 }
 
+class PageRY extends React.Component {
+	
+	renderDom(props, totalPage,currentPage) {
+		let node = Array.from(new Array(totalPage)).map((_, i) => {
+			let cur = i
+			let nCss = cssColorFormat(props, 'pageSet')
+			if (currentPage === cur) nCss = { ...nCss, ...cssColorFormat(props, 'filterActive') }
+			return (
+				<div
+					key={i}
+					style={nCss}
+					className={`ep-item${currentPage === cur? ' s-active': ''}`}
+				>
+				</div>
+			)
+		})
+		node = (
+			<div className="ep-page">{node}</div>
+		)
+		return node
+	}
+
+	render() {
+		let { totalPage,currentPage,props } = this.props
+		return (
+			<section className="e-page">
+				{ this.renderDom.bind(this, props, totalPage,currentPage)() }
+			</section>
+		)
+	}
+}
 export default WonderfulActivity

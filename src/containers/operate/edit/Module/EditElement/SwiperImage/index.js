@@ -20,7 +20,8 @@ class SwiperImage extends React.Component {
 		this.init(this.props)
 	} 
 	state = {
-		random: parseInt(Math.random()*1000)
+		random: parseInt(Math.random()*1000),
+		realIndex: 0
 	}
 	to = event => {
 		event.preventDefault()
@@ -50,26 +51,22 @@ class SwiperImage extends React.Component {
 				}  
 			} 
 		}
-		new_obj.pagination = {
-				el: '.swiper-pagination',//分页元素
-				type: 'bullets',          //类型 ‘fraction’  分式 ‘progressbar’  进度条
-				clickable :true,  //此参数设置为true时，点击分页器的指示点分页器会控制Swiper切换。
-		}  
+		new_obj.on = {
+			slideChange:()=>{
+				this.mySwiperImage ? this.setState({realIndex:this.mySwiperImage.realIndex}) : null
+			}
+		}
 		new_obj.watchSlidesProgress = true;
 		new_obj.observer = true;//修改swiper自己或子元素时，自动初始化swiper 
 		new_obj.observeParents = true;//修改swiper的父元素时，自动初始化swiper 
 		return new_obj  
 	};  
-	swiperType = () => {
-		return {
-        	
-			
-		 }
+	componentWillUnmount() {
+		this.mySwiperImage.destroy(false)
 	}
 	render() {
 		let { data } = this.props
 		data = data.data
-		const a = cssColorFormat(this.props, 'swiperImage')
 		return (
 			<div className="e-SwiperImage">
 				<div className={`swiper-container swiper-container_${this.state.random} outer_box`}>
@@ -79,14 +76,42 @@ class SwiperImage extends React.Component {
 						}
 					</div>
 				</div>
-				<div className="swiper-pagination"></div>
+				<PageRY totalPage={data.content.length} currentPage={this.state.realIndex} props={this.props}></PageRY>
 			</div>
 		)
 	}
 }
 
-export default SwiperImage
+class PageRY extends React.Component {
+	
+	renderDom(props, totalPage,currentPage) {
+		let node = Array.from(new Array(totalPage)).map((_, i) => {
+			let cur = i
+			let nCss = cssColorFormat(props, 'pageSet')
+			if (currentPage === cur) nCss = { ...nCss, ...cssColorFormat(props, 'filterActive') }
+			return (
+				<div
+					key={i}
+					style={nCss}
+					className={`ep-item${currentPage === cur? ' s-active': ''}`}
+				>
+				</div>
+			)
+		})
+		node = (
+			<div className="ep-page">{node}</div>
+		)
+		return node
+	}
 
-/*
-<div className="swiper-button-prev"></div>  
-<div className="swiper-button-next"></div>							*/
+	render() {
+		let { totalPage,currentPage,props } = this.props
+		return (
+			<section className="e-page">
+				{ this.renderDom.bind(this, props, totalPage,currentPage)() }
+			</section>
+		)
+	}
+}
+
+export default SwiperImage

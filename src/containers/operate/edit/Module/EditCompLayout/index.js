@@ -15,8 +15,7 @@ import * as actions from 'actions'
 
 import { Icon, message } from 'antd'
 import * as variable from 'var'
-var styleMap = variable.styleMap.name,
-	compMap  = variable.compMap.name,
+var compMap  = variable.compMap.name,
 	compNum  = variable.compMap.num
  
 class EditCompLayout extends React.Component {

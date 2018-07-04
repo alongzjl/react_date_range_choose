@@ -30,8 +30,7 @@ const data = {
 				right:   0,
 				bottom:  0,
 				left:    0,
-			}, 
-			animation:      '0s 0s 1'			// 动画 (0: 开始时间, 1: 持续时间, 2: 循环次数)
+			}
 		}, 
 		image:{
 			height:17, 

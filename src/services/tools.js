@@ -9,6 +9,10 @@ const NT = formatMap.numberTemplate
 const tools = function() {
 (function (window) {
 
+window.storeState = {
+	saveHistory: false		// 是否允许保存历史记录状态 true: 允许 false: 不允许
+}
+
 String.prototype.colorRGB = function() {
 	var sColor = this.toLowerCase(),
 		reg   = /^#([0-9a-f]{3}|[0-9a-f]{6})$/,
@@ -131,6 +135,14 @@ window.textBreak = (str = '') => {
 window.getAttr = (element) => {
 	return Object.prototype.toString.call(element).match(/[A-Z][a-z]*/)[0]
 }
+// 获取真实数据类型
+window.isEmptyObject = (obj) => {
+	try {
+		return !Object.keys(obj).length
+	} catch(e) {
+		return false
+	}
+}
 // 深拷贝
 window.deepCopy = (obj) => {
 	try {
@@ -224,6 +236,8 @@ window.getEnv = () => {
 }
 
 window.Ajax = Fetch.default
+
+window.dataFormat = require('./dataFormat')
 
 
 }(window))

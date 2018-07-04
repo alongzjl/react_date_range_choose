@@ -7,13 +7,15 @@ module.exports = {
 		title:        '标题',
 		filterBox:    '盒',
 		filter:       '元素',
+		pageSet:    '分页设置',
 		filterActive: '激活',
 		filterPage:   '上&下一页',
 		PagePrev:     '上一页',
 		PageNext:     '下一页',
 		swiperImage:  '轮播',
 		line:         '线',
-		split:        '分隔符'
+		split:        '分隔符',
+		mainTable:    '导航Home'
 	},
 	// 定义样式名称 & 渲染类型 & 相关配置
 	style: {

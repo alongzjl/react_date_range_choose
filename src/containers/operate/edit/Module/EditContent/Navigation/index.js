@@ -36,7 +36,7 @@ class Navigation extends React.Component {
 		let obj = {   
 			img: { type: 'custom', img: '' },			// 图片url
 			title: `导航${data.data.content.length+1}`,		// 图片标题
-			router: ''  	 		// 路由 
+			router: {}  	 		// 路由 
 		}
 		add_default.push(obj); 
 		add_default = data.data.content.concat(add_default);

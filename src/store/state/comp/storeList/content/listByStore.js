@@ -66,6 +66,7 @@ const data = {
 		}
 	},
 	content: {
+		router: {}	
 	},
 	animation: {
 		className: '',	// 动画样式
@@ -73,7 +74,7 @@ const data = {
 		delay: 0,					// 开始时间
 		duration: 1,				// 持续时间
 		iterationCount: 1			// 循环次数
-	},
+	}
 }
 
 module.exports = {

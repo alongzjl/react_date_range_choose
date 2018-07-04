@@ -65,6 +65,9 @@ class BusinessComponent extends React.Component {
 				let cfg = JSON.parse(res.data.config).configPC
 				delete res.data.config
 				let cur = cfg.pageList.group[0].pages[0]
+
+				dataFormat.get.pageEach(cfg.pageContent)
+				// debugger
 				let newCfg = {
 					curComp: {},
 					curData: { ...curData, ...cur },

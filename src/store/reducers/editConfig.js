@@ -37,7 +37,6 @@ export default function editConfig(state = initialState, action) {
 			saveData()
 			return Object.assign({}, state)
 
-
 		case types.UPDATE_COMP:
 			var { parentComp, cusCompIdx } = curData
 			var sl = data.styleList,
@@ -60,7 +59,6 @@ export default function editConfig(state = initialState, action) {
 			saveData()
 			return Object.assign({}, state)
 
-
 		case types.DELETE_COMP:
 			pageC[curData.router].elements.splice(idx, 1)
 			state.curPage = pageC[curData.router]
@@ -73,7 +71,6 @@ export default function editConfig(state = initialState, action) {
 			saveData()
 			return Object.assign({}, state)
 
-
 		case types.SELECT_COMP:
 			var { parentComp } = curData
 			if (!parentComp) {
@@ -82,7 +79,7 @@ export default function editConfig(state = initialState, action) {
 			} else console.log('选择子组件!')
 			state.curComp       = data
 			curData.contentType = 'comp'
-			saveData()
+			// saveData()
 			return Object.assign({}, state)
 
 
@@ -104,7 +101,7 @@ export default function editConfig(state = initialState, action) {
 				title:  name
 			})
 			console.log('创建页面!')
-			saveData()
+			// saveData()
 			return Object.assign({}, state)
 
 		case types.COPY_PAGE:
@@ -120,7 +117,7 @@ export default function editConfig(state = initialState, action) {
 			pageC[route] = pageData
 			pageList.group[groupIdx].pages.push(gpData)
 			console.log('复制页面!')
-			saveData()
+			// saveData()
 			return Object.assign({}, state)
 		
 		case types.UPDATE_PAGE:
@@ -129,27 +126,21 @@ export default function editConfig(state = initialState, action) {
 			pageC[data.router] = data
 			state.curPage      = data
 			console.log('更新页面!')
-			saveData()
+			// saveData()
 			return Object.assign({}, state)
 		
-
 		case types.DELETE_PAGE:
 			delete pageC[router]
 			pageList.group[groupIdx].pages.splice(idx, 1)
-			// var route = pageList.group[groupIdx].pages[0].router
 			state.curPage       = {}
-			// state.curPage       = pageC[route]
 			state.curComp       = {}
-			// curData.router      = ''
 			curData.router      = route
 			curData.compIdx     = -1
 			curData.cusCompIdx  = -1
 			curData.contentType = ''
-			// curData.contentType = 'page'
 			console.log('删除页面!')
-			saveData()
+			// saveData()
 			return Object.assign({}, state)
-
 
 		case types.SELECE_PAGE:
 			// if (curData.router === router) return state
@@ -164,30 +155,30 @@ export default function editConfig(state = initialState, action) {
 			curData.parentComp  = null
 			curData.title       = pd.title
 			console.log('选择页面!')
-			saveData()
+			// saveData()
 			return Object.assign({}, state)
 
 		case types.UPDATE_CUR:
 			state.curData = data
 			console.log('更新当前数据!')
-			saveData()
+			// saveData()
 			return Object.assign({}, state)
 
 		case types.UPDATE_GLOBAL:
 			state.globalData = data
 			console.log('更新全局数据!')
-			saveData()
+			// saveData()
 			return Object.assign({}, state)
 
 		case types.UPDATE_PAGELIST:
 			state.pageList = data
 			console.log('更新全局数据!')
-			saveData()
+			// saveData()
 			return Object.assign({}, state)
 
 		case types.UPDATE_CONFIG:
 			console.log('更新整个config!')
-			saveData()
+			// saveData()
 			return Object.assign(state, action.config)
 
 		case types.UPDATE_COPYCOMP:
@@ -204,9 +195,11 @@ export default function editConfig(state = initialState, action) {
 let startTime = Date.now()
 function saveData() {
 	var diffTime = Date.now() - startTime
-	// if (diffTime > 1000) {
+	if (diffTime > 1000) {
 		// 保存步骤
-	// }
+		// console.log(diffTime)
+		window.storeState.saveHistory = true
+	}
 	startTime = Date.now()
 	console.log(`操作间隔: ${diffTime} ms`)
 }

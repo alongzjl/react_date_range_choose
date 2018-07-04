@@ -6,6 +6,7 @@
 */
 
 .pg-element-parent {
+	position: relative;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -24,6 +25,24 @@
 		.pg-element {
 			width:  540px;
 			height: 960px;
+		}
+	}
+	.pg-element-child {
+		height:  100%;
+		width:   100%;
+		position: relative;
+	}
+	.pg-element-next {
+		position: absolute;
+		top: 0;
+		left: 0;
+		height:  100%;
+		width:   100%;
+		pointer-events: none;
+		opacity: 0;
+		background-image: url('/images/img-page-next.jpg');
+		&.animate {
+			opacity: 1;
 		}
 	}
 	.pg-element {
@@ -82,6 +101,9 @@
 			border-radius: 0 0 8px 0;
 			// background-color: rgba(255, 0, 0, 1);
 		}
+		&.animate {
+			overflow: hidden;
+		}
 	}
 }
 
@@ -101,25 +123,28 @@
 	}
 	& > span {
 		& > div {
-			display: none;
-			&:nth-child(6) {
+			// display: none;
+			z-index: 10;
+			&:nth-child(n+5) {
 				display: flex;
 				justify-content: center;
 				align-items: center;
 				&:after {
 					content: '';
 					display: none;
-					width: 6px;
-					height: 6px;
-					background-color: #000;
+					width:  8px;
+					height: 8px;
+					background-color: #fff;
+					border: 0 solid #333;
+					box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .15);
 				}
 			}
 		}
 	}
 	&.s-active {
-		z-index: 100;
+		z-index: 10;
 		&:after {
-			border: 1px solid #000;
+			border: 1px solid #e4e4e4;
 		}
 		& > span {
 			& > div:nth-child(n+5) {
@@ -134,15 +159,17 @@
 		.pge-remove {
 			display: block;
 		}
+		&:after {
+			border: 2px solid #43bffe
+		}
 	}
 	.react-draggable {
 		.pge-remove {
 			display: none;
 		}
 		&:hover {
-			.handle-drag-custom,
-			.pge-remove-custom {
-				display: block;
+			&:after {
+				border: 1px solid #43bffe
 			}
 		}
 	}

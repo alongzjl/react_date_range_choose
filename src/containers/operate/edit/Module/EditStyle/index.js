@@ -14,7 +14,7 @@ import * as actions from 'actions'
 import Color       from 'compEdit/EditCommon/Color'
 import ImageUpload from 'compEdit/EditCommon/ImageUpload'
 import StyleManage from 'compEdit/EditCommon/StyleManage'
-
+import StyleFilter from './StyleFilter'
 import {
 	Row, Col,
 	Checkbox, Collapse, InputNumber, Radio, Slider, Switch
@@ -37,8 +37,10 @@ class EditStyle extends React.Component {
 
 	componentWillUnmount() {}
 
-	onChange(val, css, obj, node) { 
+	onChange(val, css, obj,node, attribute) { 
 		let { data, actions, editConfig } = this.props
+		data = StyleFilter.lineHightAdaptation(data,val,css)
+		data = StyleFilter.imageAdaptation(data,attribute)
 		let da = data.data
 		let { curData } = editConfig
 		let { parentComp } = curData
@@ -176,9 +178,9 @@ class EditStyle extends React.Component {
 	}
 	// 背景图
 	renderBGImage(cfg, data, obj, val, key, node) {
-		let onImage = url => {
+		let onImage = (url, attribute) => {
 			obj[key].img = url
-			this.onChange.bind(this, url, key, obj, 'img')()
+			this.onChange.bind(this, url, key, obj, 'img', attribute)()
 		}
 		return (
 			<ImageUpload

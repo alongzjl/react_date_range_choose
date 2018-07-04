@@ -11,6 +11,7 @@ import { hashHistory } from 'react-router'
 import { bindActionCreators } from 'redux'
 import { connect }  from 'react-redux'
 
+const pageC    = require('state/page')
 const comp     = require('state/comp')
 const compC    = require('state/compChild')
 const compP    = require('state/compParent')
@@ -18,11 +19,9 @@ const compList = require('state/compList')
 
 import * as actions from 'actions'
 
-import { Icon, Input, message, Spin } from 'antd'
+import { Input, message, Spin } from 'antd'
 import * as variable from 'var'
-var styleMap = variable.styleMap.name,
-	compMap  = variable.compMap.name,
-	compNum  = variable.compMap.num
+let compMap = variable.compMap.name
  
 class Header extends React.Component {
 	constructor(props) {
@@ -62,18 +61,16 @@ class Header extends React.Component {
 			message.info('该组件内只能添加在高级组件中!')
 		} 
 	}
-
 	selectTheme() {
 		let { actions, editConfig } = this.props
 		editConfig.curData.contentType = 'theme'
 		actions.updateCur(editConfig.curData)
 	}
-
 	saveData() {
 		let { editConfig, location } = this.props
 		let { query } = location
 		let { templateType, id, composeType, adsFlag } = tempCfg
-		let cfg = JSON.parse(JSON.stringify(editConfig))
+		let cfg = deepCopy(editConfig)
 
 		let gd = cfg.globalData
 		cfg.globalData = {
@@ -81,13 +78,17 @@ class Header extends React.Component {
 			theme:   gd.theme,
 			feature: gd.feature
 		}
+		// this.setState({ loading: true })
 		let config = {
 			configPC: {
+				// pageContent: dataFormat.save.pageEach(cfg.pageContent),
 				pageContent: cfg.pageContent,
 				pageList:    cfg.pageList,
 				globalData:  cfg.globalData
 			}
 		}
+		// this.setState({ loading: false })
+		// return false
 		let da = {
 			adsFlag: adsFlag || 0,
 			config: JSON.stringify(config),
@@ -119,7 +120,6 @@ class Header extends React.Component {
 		}).catch(e => { this.setState({ loading: false }) })
 		// console.log(JSON.stringify(config))
 	}
-
 	tNameChange(name) {
 		this.setState({ name: name })
 		tempCfg.name = name
@@ -131,37 +131,47 @@ class Header extends React.Component {
 	render() {
 		let loading = this.state.loading? (<div className="spin-mask"><Spin /></div>): false
 		let compListNode = compList.map((_, i) => {
-			let { child, name } = _
-			if (_.child) {
-				return (
-					<dl key={i} className="cl-item">
-						<dt onClick={this.addComp.bind(this, _)}>{name}</dt>
+			let { icon, child, name } = _
+			return (
+				<dl key={i} className={`cl-item${child? ' cl-item-child': ''}`}>
+					<dt onClick={this.addComp.bind(this, _)}>
+						<div className="cl-item-icon">
+							<img src={require(`images/icon/${icon}.png`)}/>
+						</div>
+						{name}
+						{ child && (<s className="icon-arrow-down"></s>) }
+					</dt>
+					{
+						child && (
 						<dd>
 							{
-								child.map((__, j) => {
+								child && child.map((__, j) => {
 									return (
-										<div key={j} onClick={this.addComp.bind(this, __)}>{__.name}</div>
+										<div key={j} onClick={this.addComp.bind(this, __)}>
+											<div className="cl-item-icon">
+												<img src={require(`images/icon/${__.icon}.png`)}/>
+											</div>
+											{__.name}
+										</div>
 									)
 								})
 							}
 						</dd>
-					</dl>
-				)
-			} else {
-				return (
-					<div key={i} className="cl-item" onClick={this.addComp.bind(this, _)}>{name}</div>
-				)
-			}
+						)
+					}
+				</dl>
+			)
 		})
+					// <Input
+					// 	value={this.state.name}
+					// 	placeholder={'模板名称'}
+					// 	onChange={e => this.tNameChange(e.target.value)}
+					// />
 		return (
 			<div className="pe-header e-flex">
 				{ loading }
 				<div className="peh-left">
-					<Input
-						value={this.state.name}
-						placeholder={'模板名称'}
-						onChange={e => this.tNameChange(e.target.value)}
-					/>
+					<div className="logo"></div>
 				</div>
 
 				<div className="peh-center">
@@ -171,10 +181,25 @@ class Header extends React.Component {
 				</div>
 
 				<div className="peh-right">
-					<section className="comp-list">
-						<div className="cl-item" onClick={this.selectTheme.bind(this)}>主题</div>
-						<div className="cl-item" onClick={this.saveData.bind(this)}>保存</div>
-						<div className="cl-item" onClick={this.closeWin}>离开</div>
+					<section className="comp-list comp-list-b">
+						<div className="cl-item" onClick={this.selectTheme.bind(this)}>
+							<div className="cl-item-icon">
+								<img src={require(`images/icon/theme.png`)}/>
+							</div>
+							主题
+						</div>
+						<div className="cl-item" onClick={this.saveData.bind(this)}>
+							<div className="cl-item-icon">
+								<img src={require(`images/icon/save.png`)}/>
+							</div>
+							保存
+						</div>
+						<div className="cl-item" onClick={this.closeWin}>
+							<div className="cl-item-icon">
+								<img src={require(`images/icon/exit.png`)}/>
+							</div>
+							离开
+						</div>
 					</section>
 				</div>
 			</div>
