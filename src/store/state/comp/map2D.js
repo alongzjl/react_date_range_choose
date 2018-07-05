@@ -16,7 +16,7 @@ const data = {
 	style: {
 		text: {}
 	},
-	content: {themeColor:'#fff'},
+	content: {themeColor:{type:'main',color:'#fff'}},
 	animation: {
 		className: '',	// 动画样式
 		direction: '',				// 方向
