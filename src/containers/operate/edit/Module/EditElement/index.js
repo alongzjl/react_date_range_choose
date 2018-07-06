@@ -186,7 +186,8 @@ class EditElement extends React.Component {
 				}
 			}
 
-			let lay = i === compIdx? state[i]: layout
+			let sl  = state[i]
+			let lay = i === compIdx? sl? sl: layout: layout
 
 			return (
 				<Rnd
