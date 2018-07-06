@@ -124,20 +124,20 @@ class NavigationFloat extends React.Component {
 		const { data } = props;
 		const content = data.data.content;
 		const mainCss = cssColorFormat(props,"mainTable");
-		const classAni = 'animated bounceInDown';
+		const classAni = this.state.showTable ? 'animated fadeInDownBig' : 'animated fadeOutUpBig';
 		return (
 				<div className="navigation_box">
 					<div className="mainTable" onClick={e=>{this.mainTab(e)}} style={{...mainCss,marginLeft:-(mainCss.width/2)}}></div>
 					{
-						this.state.showTable ? content.map((item,index) => {
-							const aniSty = {animationDuration:"0.5s",animationDelay:`${index/4}s`}
+						 content.map((item,index) => {
+							const aniSty = {animationDuration:"0.5s",animationDelay:`${this.state.showTable ? index/4 : (content.length-index)/4}s`}
 							if(index == 0){
 								return <OnlyNavigation props={props} data={item} key={index} rysty={{...aniSty,marginTop:mainCss.height}} classAni={classAni}></OnlyNavigation>
 							}else{
 								return <OnlyNavigation props={props} data={item} key={index} rysty={aniSty} classAni={classAni}></OnlyNavigation>
 							}
 							
-						}) : null
+						})
 					}
 				</div>
 			)
@@ -148,7 +148,7 @@ class NavigationFloat extends React.Component {
 		      content = data.data.content,
 			  mainCss = cssColorFormat(props,"mainTable"),
 			  css = cssColorFormat(props, 'filter'),
-			  classAni='animated bounceInLeft',
+			  classAni = this.state.showTable ? 'animated fadeInRight' : 'animated fadeOutLeft',
 			  layout = data.data.layout,
 			  layWidth = layout.width,
 			  layHeight = parseInt(layout.height/2),
@@ -158,7 +158,7 @@ class NavigationFloat extends React.Component {
 		  if(data.layout.type == 4 && data.layout.position == 'right'){
 		  		pos_style = {...pos_style,left:(data.data.layout.width-mainCss.width)};
 		  		layWidth = (-1*layWidth);
-		  		classAni = 'animated bounceInRight'
+		  		classAni = this.state.showTable ? 'animated fadeInLeft' : 'animated fadeOutRight'
 		  }
 		let defaultStyle = content.map((item,index)=>{
 	 	  		let t,l,degSelf = -(90-deg*index)*Math.PI/180;
@@ -170,9 +170,9 @@ class NavigationFloat extends React.Component {
 				<div className="navigation_box">
 					<div className="mainTable" onClick={e=>{this.mainTab(e)}} style={pos_style}>
 						{
-							this.state.showTable ? content.map((item,index) => {
+							content.map((item,index) => {
 								return <OnlyNavigation props={props} data={item} key={index} rysty={defaultStyle[index]} classAni={classAni}></OnlyNavigation>
-							}) : null
+							})
 						}
 					</div>
 				</div>
