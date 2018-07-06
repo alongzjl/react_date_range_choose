@@ -6,7 +6,7 @@ const l  = authInit(require('./content/letter'))
 const r  = authInit(require('./content/reset'))
 const p  = authInit(require('./content/page'))
 const ls = authInit(require('./content/listByStore'))
-const floorMap = authInit(require('./content//floorMap'))
+const floorMap = authInit(require('./content/floorMap'))
 
 // 店铺列表
 const dataStyle_1 = {
