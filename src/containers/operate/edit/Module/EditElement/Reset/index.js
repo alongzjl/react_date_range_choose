@@ -33,8 +33,10 @@ class Reset extends React.Component {
 
 	renderStyle1(props, body) {
 		let con = props.data.data.content
+		let { floor, letter, catg } = body
 		let { filterBGImg, text } = con
 		let css = cssColorFormat(props, 'filter')
+		if (floor === '' && letter === '' && catg === '') css = { ...css, ...cssColorFormat(props, 'filterActive') }
 		return (
 			<div style={css} onClick={this.selectVal.bind(this, body)}>{ text }</div>
 		)

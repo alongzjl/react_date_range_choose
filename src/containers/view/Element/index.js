@@ -38,6 +38,30 @@ import * as variable from 'var'
 
 const ctMap = variable.composeTypeMap
 
+const compContent = (name, data, actions, type, idx, csn) => {
+	var props  = { data, actions, type, idx, csn }
+	var render = {
+		picture:           <Picture           {...props} />,
+		web:               <Web               {...props} />,
+		video:             <Video             {...props} />,
+		text:              <Text              {...props} />,
+		button:            <Button            {...props} />,
+		swiperImage:       <SwiperImage       {...props} />,
+		wonderfulActivity: <WonderfulActivity {...props} />,
+		time:              <Time              {...props} />,
+		weather:           <Weather           {...props} />,
+		navigation:        <Navigation        {...props} />,
+		navigationFloat:   <NavigationFloat   {...props} />,
+		storeList:         <StoreList         {...props} />,
+		storeDetails:      <StoreDetails      {...props} />,
+		storeInstro:       <StoreInstro       {...props} />,
+		splitLine:         <SplitLine         {...props} />,
+		dateWeather:       <DateWeather       {...props} />,
+		map2D:             <Map2D             {...props} />
+	}
+	return render[name]
+}
+
 class Element extends React.Component {
 	constructor(props) {
 		super(props)
@@ -51,6 +75,7 @@ class Element extends React.Component {
 	render() {
 		let { data, actions, editConfig, time, location } = this.props
 		let ct     = tempCfg.composeType || 'PORTRAIT',
+			ads    = tempCfg.adsFlag? 'ads': ''
 			eles   = data.elements || [],
 			theme  = editConfig.globalData.theme,
 			colors = theme.list[theme.idx].colors,
@@ -70,24 +95,8 @@ class Element extends React.Component {
 				styleIdx  = _.styleList.idx,
 				csn       = `handle-drag-${Math.floor(Math.random()*1e9)}`,
 				isEdit    = true,
-				compCon
-			if (compName === 'picture')                compCon = (<Picture           data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
-			else if (compName === 'web')               compCon = (<Web               data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
-			else if (compName === 'video')             compCon = (<Video             data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
-			else if (compName === 'text')              compCon = (<Text              data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
-			else if (compName === 'button')            compCon = (<Button            data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
-			else if (compName === 'swiperImage')       compCon = (<SwiperImage       data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
-			else if (compName === 'wonderfulActivity') compCon = (<WonderfulActivity data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
-			else if (compName === 'time')              compCon = (<Time              data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
-			else if (compName === 'weather')           compCon = (<Weather           data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
-			else if (compName === 'navigation')        compCon = (<Navigation        data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
-			else if (compName === 'navigationFloat')   compCon = (<NavigationFloat   data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
-			else if (compName === 'storeList')         compCon = (<StoreList         data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
-			else if (compName === 'storeDetails')      compCon = (<StoreDetails      data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
-			else if (compName === 'storeInstro')       compCon = (<StoreInstro       data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
-			else if (compName === 'splitLine')         compCon = (<SplitLine         data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
-			else if (compName === 'dateWeather')       compCon = (<DateWeather       data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
-			else if (compName === 'map2D')             compCon = (<Map2D             data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
+				compCon   = compContent(compName, _, actions, `Style${styleIdx + 1}`, i, csn)
+			
 			if (!compCon) return false
 			return (
 				<div key={i} className="pge-layout" style={cssColorFormat({ data: _ }, 'layout')}>{ compCon }</div>
@@ -95,9 +104,15 @@ class Element extends React.Component {
 		})
 		return (
 			<div className={`pg-element-view e-flex-box pg-element-${ct}`}>
-				<section className="pg-element" style={bgStyle}>
-					{ childNode }
-				</section>
+				<div className="pg-element-box">
+					{ ads
+						? <div className="ads-placeholder">16:9广告位</div>
+						: null
+					}
+					<section className="pg-element" style={bgStyle}>
+						{ childNode }
+					</section>
+				</div>
 			</div>
 		)
 	}

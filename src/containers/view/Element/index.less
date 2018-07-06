@@ -13,6 +13,7 @@
 		min-width:  960px;
 		min-height: 540px;
 		margin: 0 auto;
+		.pg-element-box,
 		.pg-element {
 			width:  960px;
 			height: 540px;
@@ -21,10 +22,27 @@
 	&.pg-element-PORTRAIT {
 		min-width:   540px;
 		min-height:  960px;
+		.pg-element-box,
 		.pg-element {
 			width:  540px;
 			height: 960px;
 		}
+	}
+	&.pg-element-PORTRAIT.ads {
+		.pg-element {
+			width:  540px;
+			height: 960px - 304px;
+		}
+	}
+	.ads-placeholder {
+		display: flex;
+		width:  540px;
+		height: 304px;
+		justify-content: center;
+		align-items: center;
+		font-size: 24px;
+		color: #999;
+		background-color: #d8d8d8;
 	}
 	.pg-element {
 		height:  100%;
