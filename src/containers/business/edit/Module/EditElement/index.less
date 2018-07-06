@@ -13,6 +13,7 @@
 		min-width:  1020px;
 		min-height: 620px;
 		margin: 0 auto;
+		.pg-element-box,
 		.pg-element {
 			width:  960px;
 			height: 540px;
@@ -22,14 +23,53 @@
 	&.pg-element-PORTRAIT {
 		min-width:   620px;
 		min-height:  1020px;
+		.pg-element-box,
 		.pg-element {
 			width:  540px;
 			height: 960px;
 		}
 	}
-	.pg-element {
+	&.pg-element-PORTRAIT.ads {
+		.pg-element {
+			width:  540px;
+			height: 960px - 304px;
+		}
+	}
+	.ads-placeholder {
+		display: flex;
+		width:  540px;
+		height: 304px;
+		justify-content: center;
+		align-items: center;
+		font-size: 24px;
+		color: #999;
+		background-color: #d8d8d8;
+	}
+	.pg-element-child {
 		height:  100%;
 		width:   100%;
+		position: relative;
+	}
+	.pg-element-next {
+		position: absolute;
+		top: 0;
+		left: 0;
+		height:  100%;
+		width:   100%;
+		pointer-events: none;
+		opacity: 0;
+		background-image: url('/images/img-page-next.jpg');
+		&.animate {
+			opacity: 1;
+		}
+	}
+	.pg-element-box {
+		background-color: #fff;
+		box-shadow: 0 2px 10px rgba(0, 0, 0, .5);
+	}
+	.pg-element {
+		// height:  100%;
+		// width:   100%;
 		position: relative;
 		background-color: #fff;
 		.pge-layout {

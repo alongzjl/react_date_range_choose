@@ -16,7 +16,6 @@ import { Icon } from 'antd'
 import Picture      from 'compEdit/EditElement/Picture'
 import Web          from 'compEdit/EditElement/Web'
 import Button       from 'compEdit/EditElement/Button'
-import SplitLine    from 'compEdit/EditElement/SplitLine'
 import Text         from 'compEdit/EditElement/Text'
 import Time         from 'compEdit/EditElement/Time'
 import Weather      from 'compEdit/EditElement/Weather'
@@ -35,13 +34,53 @@ import * as variable from 'var'
 var animeMap = variable.animeCompMap,
 	aStyle   = animeMap.style
 
+const compContent = (name, data, parent, editConfig, actions, type, ioInput, ioOuter) => {
+	var props  = { data, parent, editConfig, actions, type, ioInput, ioOuter }
+	var render = {
+		picture:           <Picture           {...props} />,
+		web:               <Web               {...props} />,
+		button:            <Button            {...props} />,
+		text:              <Text              {...props} />,
+		time:              <Time              {...props} />,
+		weather:           <Weather           {...props} />,
+		address:           <Address           {...props} />,
+		swiperImage:       <SwiperImage       {...props} />,
+		letter:            <Letter            {...props} />,
+		floor:             <Floor             {...props} />,
+		wonderfulActivity: <WonderfulActivity {...props} />,
+		catg:              <Catg              {...props} />,
+		page:              <Page              {...props} />,
+		floorMap:          <FloorMap          {...props} />,
+		reset:             <Reset             {...props} />,
+		listByStore:       <ListByStore       {...props} />
+	}
+	return render[name]
+}
+
 import './index.less'
 
 class Custom extends React.Component {
-	state = {}
+	constructor(props) {
+		super(props)
+		let state = {}
+		let comp = props.data.data.components || []
+		comp.map((_, i) => {
+			state[i] = _.data.layout
+		})
+		this.state = state
+	}
 	componentWillMount() {}
 
 	componentDidMount() {}
+	// componentWillReceiveProps() {
+	// 	let state = {}
+	// 	let comp  = this.props.data.data.components || []
+	// 	comp.map((_, i) => {
+	// 		state[i] = _.data.layout
+	// 	})
+	// 	this.setState(state)
+	// 	console.log('更新Props')
+	// }
 
 	selectComp(e, data, idx, parentIdx, parent) {
 		e.stopPropagation()
@@ -60,10 +99,10 @@ class Custom extends React.Component {
 		e.stopPropagation()
 		let { actions, editConfig } = this.props
 		let lay = item.data.layout
-		lay.left   = pos.x
-		lay.top    = pos.y
-		lay.width  = ref.offsetWidth
-		lay.height = ref.offsetHeight
+		lay.left   = +pos.x
+		lay.top    = +pos.y
+		lay.width  = +ref.offsetWidth
+		lay.height = +ref.offsetHeight
 		actions.updateComp(editConfig.curData.compIdx, parent)
 	}
 
@@ -81,10 +120,11 @@ class Custom extends React.Component {
 	dragStop(e, d, item, idx, parent) {
 		e.stopPropagation()
 		let { actions, editConfig } = this.props
+		let s   = this.state[idx]
 		let lay = item.data.layout
 		if (lay.left === d.x && lay.top  === d.y) return
-		lay.left = d.x
-		lay.top  = d.y
+		s.left = lay.left = +d.x
+		s.top  = lay.top  = +d.y
 		actions.updateComp(editConfig.curData.compIdx, parent)
 	}
 
@@ -115,7 +155,7 @@ class Custom extends React.Component {
 				ani      = _.data.animation,
 				aniCls   = '',
 				aniSty   = {},
-				compCon
+				compCon  = compContent(compName, _, data, editConfig, actions, `Style${styleIdx + 1}`, ioInput, ioOuter)
 
 			if (icomp && icomp[compName]) {
 				let v   = icomp[compName],
@@ -129,23 +169,6 @@ class Custom extends React.Component {
 				})
 			}
 
-			if (compName === 'picture')                compCon = (<Picture           data={_} parent={data} editConfig={editConfig} actions={actions} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} />)
-			else if (compName === 'web')               compCon = (<Web               data={_} parent={data} editConfig={editConfig} actions={actions} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} />)
-			else if (compName === 'splitLine')         compCon = (<SplitLine         data={_} parent={data} editConfig={editConfig} actions={actions} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} />)
-			else if (compName === 'button')            compCon = (<Button            data={_} parent={data} editConfig={editConfig} actions={actions} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} />)
-			else if (compName === 'text')              compCon = (<Text              data={_} parent={data} editConfig={editConfig} actions={actions} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} />)
-			else if (compName === 'time')              compCon = (<Time              data={_} parent={data} editConfig={editConfig} actions={actions} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} />)
- 			else if (compName === 'weather')           compCon = (<Weather           data={_} parent={data} editConfig={editConfig} actions={actions} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} />)
-			else if (compName === 'address')           compCon = (<Address           data={_} parent={data} editConfig={editConfig} actions={actions} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} />)
-			else if (compName === 'swiperImage')       compCon = (<SwiperImage       data={_} parent={data} editConfig={editConfig} actions={actions} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} />)
-			else if (compName === 'letter')            compCon = (<Letter            data={_} parent={data} editConfig={editConfig} actions={actions} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} />)
-			else if (compName === 'floor')             compCon = (<Floor             data={_} parent={data} editConfig={editConfig} actions={actions} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} />)
-			else if (compName === 'wonderfulActivity') compCon = (<WonderfulActivity data={_} parent={data} editConfig={editConfig} actions={actions} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} />)
-			else if (compName === 'catg')              compCon = (<Catg              data={_} parent={data} editConfig={editConfig} actions={actions} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} />)
-			else if (compName === 'page')              compCon = (<Page              data={_} parent={data} editConfig={editConfig} actions={actions} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} />)
-			else if (compName === 'reset')             compCon = (<Reset             data={_} parent={data} editConfig={editConfig} actions={actions} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} />)
-			else if (compName === 'listByStore')       compCon = (<ListByStore       data={_} parent={data} editConfig={editConfig} actions={actions} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} />)
-			else if (compName === 'floorMap')          compCon = (<FloorMap               data={_} parent={data} editConfig={editConfig} actions={actions} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} />)
 			if (!compCon) return false
 			if (ani.className) {
 				let item = aStyle[ani.className]
@@ -158,10 +181,9 @@ class Custom extends React.Component {
 					animationIterationCount: iterationCount
 				}
 			}
-					// dragHandleClassName={'.handle-drag-custom'}
 
-			state[i] = layout
 			let lay = compIdx === idx && i === cusCompIdx? state[i]: layout
+
 			return (
 				<Rnd
 					key={i}
@@ -189,10 +211,6 @@ class Custom extends React.Component {
 					>{ compCon }</div>
 				</Rnd>
 			)
-					// {
-					// 	name != 'storeInstro' ? <a className="pge-remove pge-remove-custom" onClick={e => this.removeComp(e, i, data)}><Icon type="cross-circle" /></a> : null
-					// } 
-					// <div className="handle-drag-custom" onClick={e => e.stopPropagation()}></div>
 		})
 		return (
 			<section className={`pg-custom ${csn}`}>

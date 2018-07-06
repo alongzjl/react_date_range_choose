@@ -26,10 +26,35 @@ import Address      from 'compEdit/EditElement/Address'
 import Catg         from 'compEdit/EditElement/Catg'
 import Page         from 'compEdit/EditElement/Page'
 import Reset        from 'compEdit/EditElement/Reset'
+import FloorMap     from 'compEdit/EditElement/FloorMap'
 import ListByStore  from 'compEdit/EditElement/ListByStore'
 import WonderfulActivity from 'compEdit/EditElement/WonderfulActivity'
 
 import './index.less'
+
+const compContent = (name, data, parent, editConfig, actions, type, ioInput, ioOuter) => {
+	var props  = { data, parent, editConfig, actions, type, ioInput, ioOuter }
+	var render = {
+		picture:           <Picture           {...props} />,
+		web:               <Web               {...props} />,
+		splitLine:         <SplitLine         {...props} />,
+		button:            <Button            {...props} />,
+		text:              <Text              {...props} />,
+		time:              <Time              {...props} />,
+		weather:           <Weather           {...props} />,
+		address:           <Address           {...props} />,
+		swiperImage:       <SwiperImage       {...props} />,
+		letter:            <Letter            {...props} />,
+		floor:             <Floor             {...props} />,
+		wonderfulActivity: <WonderfulActivity {...props} />,
+		catg:              <Catg              {...props} />,
+		page:              <Page              {...props} />,
+		floorMap:          <FloorMap          {...props} />,
+		reset:             <Reset             {...props} />,
+		listByStore:       <ListByStore       {...props} />
+	}
+	return render[name]
+}
 
 class Custom extends React.Component {
 	componentWillMount() {}
@@ -89,7 +114,7 @@ class Custom extends React.Component {
 				layout   = _.data.layout,
 				styleIdx = _.styleList.idx,
 				isEdit   = true,
-				compCon
+				compCon  = compContent(compName, _, data, editConfig, actions, `Style${styleIdx + 1}`, ioInput, ioOuter)
 
 			if (icomp && icomp[compName]) {
 				let v   = icomp[compName],
@@ -103,22 +128,6 @@ class Custom extends React.Component {
 				})
 			}
 
-
-			if (compName === 'picture')                compCon = (<Picture           data={_} parent={data} editConfig={editConfig} actions={actions} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} />)
-			else if (compName === 'web')               compCon = (<Web               data={_} parent={data} editConfig={editConfig} actions={actions} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} />)
-			else if (compName === 'button')            compCon = (<Button            data={_} parent={data} editConfig={editConfig} actions={actions} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} />)
-			else if (compName === 'text')              compCon = (<Text              data={_} parent={data} editConfig={editConfig} actions={actions} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} />)
-			else if (compName === 'time')              compCon = (<Time              data={_} parent={data} editConfig={editConfig} actions={actions} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} />)
- 			else if (compName === 'weather')           compCon = (<Weather           data={_} parent={data} editConfig={editConfig} actions={actions} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} />)
-			else if (compName === 'address')           compCon = (<Address           data={_} parent={data} editConfig={editConfig} actions={actions} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} />)
-			else if (compName === 'swiperImage')       compCon = (<SwiperImage       data={_} parent={data} editConfig={editConfig} actions={actions} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} />)
-			else if (compName === 'letter')            compCon = (<Letter            data={_} parent={data} editConfig={editConfig} actions={actions} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} />)
-			else if (compName === 'floor')             compCon = (<Floor             data={_} parent={data} editConfig={editConfig} actions={actions} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} />)
-			else if (compName === 'wonderfulActivity') compCon = (<WonderfulActivity data={_} parent={data} editConfig={editConfig} actions={actions} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} />)
-			else if (compName === 'catg')              compCon = (<Catg              data={_} parent={data} editConfig={editConfig} actions={actions} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} />)
-			else if (compName === 'page')              compCon = (<Page              data={_} parent={data} editConfig={editConfig} actions={actions} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} />)
-			else if (compName === 'reset')             compCon = (<Reset             data={_} parent={data} editConfig={editConfig} actions={actions} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} />)
-			else if (compName === 'listByStore')       compCon = (<ListByStore       data={_} parent={data} editConfig={editConfig} actions={actions} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} />)
 			return (
 				<div key={i} className="pge-layout" style={cssColorFormat({ data: _ }, 'layout')}>{ compCon }</div>
 			)

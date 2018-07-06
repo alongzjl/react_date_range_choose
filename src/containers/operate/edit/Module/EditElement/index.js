@@ -9,7 +9,6 @@ import React from 'react'
 
 import { bindActionCreators } from 'redux'
 import { connect }  from 'react-redux'
-
 import Rnd from 'react-rnd'
 
 import Picture           from 'compEdit/EditElement/Picture'
@@ -38,21 +37,61 @@ import * as actions from 'actions'
 
 import { Icon } from 'antd'
 
-import './index.less'
-
 import * as variable from 'var'
 
 const ctMap  = variable.composeTypeMap
 var animeMap = variable.animeCompMap,
 	aStyle   = animeMap.style
 
+const compContent = (name, data, actions, type, idx, csn) => {
+	var props  = { data, actions, type, idx, csn }
+	var render = {
+		picture:           <Picture           {...props} />,
+		web:               <Web               {...props} />,
+		video:             <Video             {...props} />,
+		text:              <Text              {...props} />,
+		button:            <Button            {...props} />,
+		swiperImage:       <SwiperImage       {...props} />,
+		wonderfulActivity: <WonderfulActivity {...props} />,
+		time:              <Time              {...props} />,
+		weather:           <Weather           {...props} />,
+		navigation:        <Navigation        {...props} />,
+		navigationFloat:   <NavigationFloat   {...props} />,
+		storeList:         <StoreList         {...props} />,
+		storeDetails:      <StoreDetails      {...props} />,
+		storeInstro:       <StoreInstro       {...props} />,
+		splitLine:         <SplitLine         {...props} />,
+		dateWeather:       <DateWeather       {...props} />,
+		map2D:             <Map2D             {...props} />
+	}
+	return render[name]
+}
+
+import './index.less'
+
 class EditElement extends React.Component {
-	state = {}
+	constructor(props) {
+		super(props)
+		let state = {}
+		let eles = props.data.elements || []
+		eles.map((_, i) => {
+			state[i] = _.data.layout
+		})
+		this.state = state
+	}
 	componentWillMount() {}
 
 	componentDidMount() {}
 
 	componentWillUnmount() {}
+	componentWillReceiveProps() {
+		let state = {}
+		let eles  = this.props.data.elements || []
+		eles.map((_, i) => {
+			state[i] = _.data.layout
+		})
+		this.setState(state)
+	}
 
 	selectComp(e, data, idx) {
 		e.stopPropagation()
@@ -91,10 +130,11 @@ class EditElement extends React.Component {
 	dragStop(e, d, item, idx) {
 		e.stopPropagation()
 		let { actions } = this.props
-		let lay  = item.data.layout
+		let s   = this.state[idx]
+		let lay = item.data.layout
 		if (lay.left === d.x && lay.top  === d.y) return
-		lay.left = +d.x
-		lay.top  = +d.y
+		s.left = lay.left = +d.x
+		s.top  = lay.top  = +d.y
 		actions.updateComp(idx, item)
 	}
 
@@ -106,10 +146,11 @@ class EditElement extends React.Component {
 
 	render() {
 		let { data, actions, editConfig, location } = this.props
-		let compIdx = editConfig.curData.compIdx
-		let state = this.state
+		let { pageGroupIdx, pageIdx, compIdx } = editConfig.curData
+		let state  = this.state
 		let ct     = tempCfg.composeType || 'PORTRAIT'
-		if (!data || data.title === undefined) return (<div className={`pg-element-parent e-flex-box pg-element-${ct}`}><section className="pg-element"></section></div>)
+		let ads    = tempCfg.adsFlag? 'ads': ''
+		if (!data || data.title === undefined) return <div className={`pg-element-parent e-flex-box pg-element-${ct} ${ads}`}><section className="pg-element"></section></div>
 		let eles   = data.elements || [],
 			theme  = editConfig.globalData.theme,
 			colors = theme.list[theme.idx].colors,
@@ -117,9 +158,8 @@ class EditElement extends React.Component {
 			type   = color.type
 		ct = ctMap[ct]? ct: 'PORTRAIT'
 		if (!colors[type] && type !== 'custom') {
-			let curData = editConfig.curData
 			color.type = 'custom'
-			return actions.updatePage(curData.pageGroupIdx, curData.pageIdx, data)
+			return actions.updatePage(pageGroupIdx, pageIdx, data)
 		}
 		let bgStyle   = data.feature? { backgroundColor: type === 'custom'? color.color: colors[type].color }: {}
 		let childNode = eles.map((_, i) => {
@@ -130,25 +170,10 @@ class EditElement extends React.Component {
 				ani       = _.data.animation,
 				aniCls    = '',
 				aniSty    = {},
-				compCon
-			if (compName === 'picture')                compCon = (<Picture           data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
-			else if (compName === 'web')               compCon = (<Web               data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
-			else if (compName === 'video')             compCon = (<Video             data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
-			else if (compName === 'text')              compCon = (<Text              data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
-			else if (compName === 'button')            compCon = (<Button            data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
-			else if (compName === 'swiperImage')       compCon = (<SwiperImage       data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
-			else if (compName === 'wonderfulActivity') compCon = (<WonderfulActivity data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
-			else if (compName === 'time')              compCon = (<Time              data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
- 			else if (compName === 'weather')           compCon = (<Weather           data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
- 			else if (compName === 'navigation')        compCon = (<Navigation        data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
- 			else if (compName === 'navigationFloat')   compCon = (<NavigationFloat   data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
-			else if (compName === 'storeList')         compCon = (<StoreList         data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
-			else if (compName === 'storeDetails')      compCon = (<StoreDetails      data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
-			else if (compName === 'storeInstro')       compCon = (<StoreInstro       data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
-			else if (compName === 'splitLine')         compCon = (<SplitLine         data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
-			else if (compName === 'dateWeather')       compCon = (<DateWeather       data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
-			else if (compName === 'map2D')             compCon = (<Map2D             data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
+				compCon   = compContent(compName, _, actions, `Style${styleIdx + 1}`, i, csn)
+
 			if (!compCon) return false
+
 			if (ani.className) {
 				let item = aStyle[ani.className]
 				let { direction, delay, iterationCount } = ani
@@ -160,11 +185,9 @@ class EditElement extends React.Component {
 					animationIterationCount: iterationCount
 				}
 			}
-					// bounds={'.pg-center'}
-					// dragHandleClassName={'.handle-drag'}
-			
-			state[i] = layout
+
 			let lay = i === compIdx? state[i]: layout
+
 			return (
 				<Rnd
 					key={i}
@@ -191,17 +214,21 @@ class EditElement extends React.Component {
 					>{ compCon }</div>
 				</Rnd>
 			)
-					// <a className="pge-remove" onClick={e => this.removeComp(e, i)}><Icon type="cross-circle" /></a>
-					// <div className="handle-drag" onClick={e => e.stopPropagation()}></div>
 		})
 		return (
-			<div className={`pg-element-parent e-flex-box pg-element-${ct}`}>
-				<section id="pgElement" className="pg-element">
-					<div id="pgElementChild" className="pg-element-child" style={bgStyle}>
-						{ childNode }
-					</div>
-					<div id="pgElementNext" className="pg-element-next"></div>
-				</section>
+			<div className={`pg-element-parent e-flex-box pg-element-${ct} ${ads}`}>
+				<div className="pg-element-box">
+					{ ads
+						? <div className="ads-placeholder">16:9广告位</div>
+						: null
+					}
+					<section id="pgElement" className="pg-element">
+						<div id="pgElementChild" className="pg-element-child" style={bgStyle}>
+							{ childNode }
+						</div>
+						<div id="pgElementNext" className="pg-element-next"></div>
+					</section>
+				</div>
 				<ContextMenu />
 				<ShortcutKey />
 				<RevokeRecovery />

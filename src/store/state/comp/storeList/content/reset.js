@@ -44,6 +44,15 @@ const data = {
 				spread_dis: 0,
 				color:      { type: 'custom', color: '#000' }
 			}
+		},
+		filterActive: {
+			borderWidth: 2,
+			borderStyle: 'solid',
+			backgroundImage: { type: 'custom', img: '' },
+			borderColor: { type: 'auxiliary', color: '#a240ec' },
+			color: { type: 'textHigh', color: '#fff' },
+			background: 'center no-repeat',
+			backgroundColor: { type: 'main', color: '#a240ec' }
 		}
 	},
 	content: {

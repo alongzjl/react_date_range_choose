@@ -26,7 +26,8 @@ class ShortcutKey extends React.Component {
 		else if (/Win\S+/.test(pf)) os = 'win'
 		this.state = {
 			active: false,
-			os: os
+			os: os,
+			meta: false
 		}
 	}
 
@@ -34,17 +35,19 @@ class ShortcutKey extends React.Component {
 		if (!this.state.os) return false
 		let { parent } = this.props
 		let doc = document.querySelector(`${parent || '.pg-center'}`)
-		doc.addEventListener('mouseover', this._handleMouseOver)
-		doc.addEventListener('mouseout',  this._handleMouseOut)
+		doc.addEventListener('mouseover',    this._handleMouseOver)
+		doc.addEventListener('mouseout',     this._handleMouseOut)
 		document.addEventListener('keydown', this._handleKeyDown)
+		document.addEventListener('keyup',   this._handleKeyUp)
 	}
 	componentWillUnmount() {
 		if (!this.state.os) return false
 		let { parent } = this.props
 		let doc = document.querySelector(`${parent || '.pg-center'}`)
-		doc.removeEventListener('mouseover', this._handleMouseOver)
-		doc.removeEventListener('mouseout',  this._handleMouseOut)
+		doc.removeEventListener('mouseover',    this._handleMouseOver)
+		doc.removeEventListener('mouseout',     this._handleMouseOut)
 		document.removeEventListener('keydown', this._handleKeyDown)
+		document.removeEventListener('keyup',   this._handleKeyUp)
 	}
 	_handleMouseOver = e => {
 		this.setState({ active: true })
@@ -53,22 +56,40 @@ class ShortcutKey extends React.Component {
 		this.setState({ active: false })
 	}
 	_handleKeyDown = e => {
-		let active = this.state.active
+		let { active, meta, os } = this.state
 		if (!active) return
-		let key   = e.key.toLocaleLowerCase()
-		let ctrl  = e.ctrlKey? 'ctrl_': ''
-		let shift = e.shiftKey? 'shift_': ''
-		let Fn   = this[`key_${ctrl}${shift}${key}`]
-		console.log(key)
+		let key   = e.key.toLocaleLowerCase(),
+			ctrl  = e.ctrlKey? 'ctrl_': '',
+			comd  = meta? 'meta_': '',
+			shift = e.shiftKey? 'shift_': '',
+			Fn   = this[`key_${os === 'mac'? comd: ctrl}${shift}${key}`]
+		console.log(`keydown: ${key}`)
 		if (!Fn) return
 		Fn(e)
+	}
+	_handleKeyUp = e => {
+		let key = e.key.toLocaleLowerCase()
+		console.log(`keyup: ${key}`)
+		if (key === 'meta') this.setState({ meta: false })
+	}
+	// OSX 下的command取代ctrl
+	key_meta = (e) => {
+		const { os } = this.state
+		if (os != 'mac') return false
+		this.setState({ meta: true })
 	}
 	// 复制
 	key_ctrl_c = (e) => {
 		this.copyComp(e)
 	}
+	key_meta_c = (e) => {
+		this.copyComp(e)
+	}
 	// 粘贴
 	key_ctrl_v = (e) => {
+		this.pasteComp(e)
+	}
+	key_meta_v = (e) => {
 		this.pasteComp(e)
 	}
 	// 删除
@@ -83,8 +104,16 @@ class ShortcutKey extends React.Component {
 		var doc = document.querySelector('#btnRevoke')
 		doc.click()
 	}
+	key_meta_z = (e) => {
+		var doc = document.querySelector('#btnRevoke')
+		doc.click()
+	}
 	// 恢复
 	key_ctrl_y = (e) => {
+		var doc = document.querySelector('#btnRecovery')
+		doc.click()
+	}
+	key_meta_y = (e) => {
 		var doc = document.querySelector('#btnRecovery')
 		doc.click()
 	}
