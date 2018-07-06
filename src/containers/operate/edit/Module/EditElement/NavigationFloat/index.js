@@ -15,13 +15,14 @@ class NavigationFloat extends React.Component {
 	state = {
 		realIndex:0,
 		showTable:false,
+		first:false,
 		id: `swiperContainerNav_${Math.floor(Math.random()*1e9)}`
 	}
 
 	componentDidMount() {
 		let { data } = this.props
 		const size = data.layout.size;
-		const that = this;
+		this.setState({first:true});
 		data.layout.type == 1 ? this.initSwiper(size) : null
 	}
 	componentWillReceiveProps(props) {
@@ -68,7 +69,7 @@ class NavigationFloat extends React.Component {
 		this.myNavgSwiper.slideTo(page,500,false);
 	}
 	mainTab = e => {
-		this.setState({showTable:!this.state.showTable})
+		this.setState({showTable:!this.state.showTable,first:false})
 		e.stopPropagation();
 	}
 	//布局样式一
@@ -124,13 +125,13 @@ class NavigationFloat extends React.Component {
 		const { data } = props;
 		const content = data.data.content;
 		const mainCss = cssColorFormat(props,"mainTable");
-		const classAni = this.state.showTable ? 'animated fadeInDownBig' : 'animated fadeOutUpBig';
+		const classAni = this.state.showTable ? 'animated fadeInDown' : !this.state.first ? 'animated fadeOutUp' : null;
 		return (
 				<div className="navigation_box">
 					<div className="mainTable" onClick={e=>{this.mainTab(e)}} style={{...mainCss,marginLeft:-(mainCss.width/2)}}></div>
 					{
 						 content.map((item,index) => {
-							const aniSty = {animationDuration:"0.5s",animationDelay:`${this.state.showTable ? index/4 : (content.length-index)/4}s`}
+							const aniSty = {animationDuration:"0.3s",animationDelay:`${this.state.showTable ? index/5 : (content.length-index)/5}s`}
 							if(index == 0){
 								return <OnlyNavigation props={props} data={item} key={index} rysty={{...aniSty,marginTop:mainCss.height}} classAni={classAni}></OnlyNavigation>
 							}else{
@@ -148,7 +149,7 @@ class NavigationFloat extends React.Component {
 		      content = data.data.content,
 			  mainCss = cssColorFormat(props,"mainTable"),
 			  css = cssColorFormat(props, 'filter'),
-			  classAni = this.state.showTable ? 'animated fadeInRight' : 'animated fadeOutLeft',
+			  classAni = this.state.showTable ? 'animated rollIn' : !this.state.first ? 'animated rotateOutUpLeft' : null,
 			  layout = data.data.layout,
 			  layWidth = layout.width,
 			  layHeight = parseInt(layout.height/2),
@@ -158,13 +159,13 @@ class NavigationFloat extends React.Component {
 		  if(data.layout.type == 4 && data.layout.position == 'right'){
 		  		pos_style = {...pos_style,left:(data.data.layout.width-mainCss.width)};
 		  		layWidth = (-1*layWidth);
-		  		classAni = this.state.showTable ? 'animated fadeInLeft' : 'animated fadeOutRight'
-		  }
+		  		classAni = this.state.showTable ? 'animated lightSpeedIn' : !this.state.first ? 'animated rollOut' : null
+		  } 
 		let defaultStyle = content.map((item,index)=>{
 	 	  		let t,l,degSelf = -(90-deg*index)*Math.PI/180;
 	 	  		t = Math.sin(degSelf)*layHeight + mainCss.height/2-css.height/2;
 				l = Math.cos(degSelf)*layWidth+mainCss.width/2-css.width/2;
-	 	  		return {position:"absolute",top:t,left:l,animationDuration:"0.5s",animationDelay:`${index/4}s`}
+	 	  		return {position:"absolute",top:t,left:l,animationDuration:"0.3s",animationDelay:`${index/5}s`}
 		  });
 		return (
 				<div className="navigation_box">
