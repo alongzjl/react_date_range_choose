@@ -1,4 +1,3 @@
-
 import * as variable from 'var'
 const comp  = require('state/comp')
 const page  = require('state/page')
@@ -78,12 +77,14 @@ const dataFormat = {
 								da.map((_, i) => {
 									var dn = _.name, on
 									for (var j = 0, l = org.length; j < l; j++) {
-										var o = org[j],
-											n = o.name,
-											s = o.styleList
+										var o  = org[j],
+											n  = o.name,
+											s1 = _.styleList,
+											s  = o.styleList
+										if (s1.idx === undefined) s1.idx = 0
 										if (dn === n) {
 											on = o
-											if (_.styleList.idx === s.idx) break
+											if (s1.idx === s.idx) break
 										}
 									}
 									on = on? on: comp[dn]
