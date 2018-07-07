@@ -37,7 +37,6 @@ const compContent = (name, data, parent, editConfig, actions, type, ioInput, ioO
 	var render = {
 		picture:           <Picture           {...props} />,
 		web:               <Web               {...props} />,
-		splitLine:         <SplitLine         {...props} />,
 		button:            <Button            {...props} />,
 		text:              <Text              {...props} />,
 		time:              <Time              {...props} />,

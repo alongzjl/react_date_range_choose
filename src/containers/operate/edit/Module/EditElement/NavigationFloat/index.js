@@ -160,7 +160,7 @@ class NavigationFloat extends React.Component {
 		  		pos_style = {...pos_style,left:(data.data.layout.width-mainCss.width)};
 		  		layWidth = (-1*layWidth);
 		  		classAni = this.state.showTable ? 'animated lightSpeedIn' : !this.state.first ? 'animated rollOut' : null
-		  } 
+		  }
 		let defaultStyle = content.map((item,index)=>{
 	 	  		let t,l,degSelf = -(90-deg*index)*Math.PI/180;
 	 	  		t = Math.sin(degSelf)*layHeight + mainCss.height/2-css.height/2;

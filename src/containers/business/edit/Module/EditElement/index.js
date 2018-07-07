@@ -37,6 +37,8 @@ import './index.less'
 import * as variable from 'var'
 
 const ctMap = variable.composeTypeMap
+var animeMap = variable.animeCompMap,
+	aStyle   = animeMap.style
 
 const compContent = (name, data, actions, type, idx, csn) => {
 	var props  = { data, actions, type, idx, csn },
@@ -83,6 +85,7 @@ class EditElement extends React.Component {
 
 	render() {
 		let { data, actions, editConfig, location } = this.props
+		let { pageGroupIdx, pageIdx, compIdx } = editConfig.curData
 		let ct     = tempCfg.composeType || 'PORTRAIT'
 		let ads    = tempCfg.adsFlag? 'ads': ''
 		if (!data || data.title === undefined) return (<div className={`pg-element-parent e-flex-box pg-element-${ct} ${ads}`}><section className="pg-element"></section></div>)
@@ -93,9 +96,8 @@ class EditElement extends React.Component {
 			type   = color.type
 		ct = ctMap[ct]? ct: 'PORTRAIT'
 		if (!colors[type] && type !== 'custom') {
-			let curData = editConfig.curData
 			color.type = 'custom'
-			return actions.updatePage(curData.pageGroupIdx, curData.pageIdx, data)
+			return actions.updatePage(pageGroupIdx, pageIdx, data)
 		}
 		let bgStyle   = data.feature? { backgroundColor: type === 'custom'? color.color: colors[type].color }: {}
 		let childNode = eles.map((_, i) => {
@@ -103,14 +105,29 @@ class EditElement extends React.Component {
 				layout    = _.data.layout,
 				styleIdx  = _.styleList.idx,
 				csn       = `ry-jimmy`,
+				ani       = _.data.animation,
+				aniCls    = '',
+				aniSty    = {},
 				compCon   = compContent(compName, _, actions, `Style${styleIdx + 1}`, i, csn)
 			
 			if (!compCon) return false
+
+			if (ani.className) {
+				let item = aStyle[ani.className]
+				let { direction, delay, iterationCount } = ani
+				if (!direction || !item.list) ani.direction = item.list? item.list[0] || '': ''
+				aniCls = `animate ${ani.className}${ani.direction}`
+				aniSty = {
+					animationDuration: `${ani.duration}s`,
+					animationDelay:    `${delay}s`,
+					animationIterationCount: iterationCount
+				}
+			}
 				
 			return (
 				<div
 					key={i}
-					className={`pge-layout${i === editConfig.curData.compIdx? ' s-active': ''}`}
+					className={`pge-layout${i === compIdx? ' s-active': ''} ${aniCls? aniCls: ''}`}
 					style={layout}
 					onClick={e => this.selectComp(e, _, i)}
 				>
@@ -125,8 +142,11 @@ class EditElement extends React.Component {
 						? <div className="ads-placeholder">16:9广告位</div>
 						: null
 					}
-					<section className="pg-element" style={bgStyle}>
-						{ childNode }
+					<section id="pgElement" className="pg-element">
+						<div id="pgElementChild" className="pg-element-child" style={bgStyle}>
+							{ childNode }
+						</div>
+						<div id="pgElementNext" className="pg-element-next"></div>
 					</section>
 					<RevokeRecovery />
 				</div>

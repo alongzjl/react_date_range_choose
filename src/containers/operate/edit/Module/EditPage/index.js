@@ -26,12 +26,6 @@ class EditPage extends React.Component {
 
 	componentWillUnmount() {}
 
-	handleFocus(e) {
-		// let { actions, data, editConfig } = this.props,
-		// 	{ pageGroupIdx, pageIdx }     = editConfig.curData
-		// data.title = e.currentTarget.value
-		// actions.updatePage(pageGroupIdx, pageIdx, data)
-	}
 	onChange(e, key) {
 		let { actions, data, editConfig } = this.props,
 			{ pageGroupIdx, pageIdx }     = editConfig.curData,
@@ -77,7 +71,7 @@ class EditPage extends React.Component {
 			duration: 1,				// 持续时间
 			iterationCount: 1			// 循环次数
 		}
-		let { data } = this.props,
+		let { data }    = this.props,
 			{ feature } = data
 		if (!data || data.title === undefined) return false
 		if (data.animation === undefined) {

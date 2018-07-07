@@ -75,7 +75,7 @@ class Element extends React.Component {
 	render() {
 		let { data, actions, editConfig, time, location } = this.props
 		let ct     = tempCfg.composeType || 'PORTRAIT',
-			ads    = tempCfg.adsFlag? 'ads': ''
+			ads    = tempCfg.adsFlag? 'ads': '',
 			eles   = data.elements || [],
 			theme  = editConfig.globalData.theme,
 			colors = theme.list[theme.idx].colors,
@@ -103,7 +103,7 @@ class Element extends React.Component {
 			)
 		})
 		return (
-			<div className={`pg-element-view e-flex-box pg-element-${ct}`}>
+			<div className={`pg-element-view e-flex-box pg-element-${ct} ${ads}`}>
 				<div className="pg-element-box">
 					{ ads
 						? <div className="ads-placeholder">16:9广告位</div>

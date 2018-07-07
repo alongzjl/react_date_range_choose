@@ -18,7 +18,7 @@ import EditPageManage from 'compEditB/EditPageManage'
 import EditContent    from 'compEditB/EditContent'
 import EditElement    from 'compEditB/EditElement'
 import EditStyle      from 'compEditB/EditStyle'
-// import EditAnimation  from 'compEditB/EditAnimation'
+import EditAnimation  from 'compEdit/EditAnimation'
 import EditTheme      from 'compEditB/EditTheme'
 
 import tools from 'services/tools'
@@ -65,9 +65,9 @@ class EditComponent extends React.Component {
 				<Tabs defaultActiveKey="1" type="card">
 					<TabPane tab="内容" key="1"><EditContent   data={editConfig.curComp} /></TabPane>
 					<TabPane tab="样式" key="2"><EditStyle     data={editConfig.curComp} /></TabPane>
+					<TabPane tab="动画" key="3"><EditAnimation data={editConfig.curComp} /></TabPane>
 				</Tabs>
 			)
-			// <TabPane tab="动画" key="3"><EditAnimation data={editConfig.curComp} /></TabPane>
 		} else if (type === 'theme') {
 			editTab = (<EditTheme data={editConfig.globalData.theme} />)
 		}
