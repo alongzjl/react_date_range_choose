@@ -132,7 +132,7 @@ function ShowDirection({id, page,css,props,arr,nowVal,toPageFloor,selectVal}) {
 				pageSwitch ? <div className={page < 1? 's-disabled': ''} style={{ ...cssp, ...cssColorFormat(props, 'PagePrev') }} onClick={()=>{toPageFloor(page-1)}}></div> : null
 			}
 			<div style={{height:'100%',width:`${pageSwitch ? '70%' : '100%'}`}}>
-				<div id={id} className={`swiper-container swiper-container_catg`}>
+				<div id={id} className={`swiper-container swiper-no-swiping swiper-container_catg`}>
 					<div className="swiper-wrapper"> 
 						{ arr.map((_, i) => { 
 							let nCss = css,
