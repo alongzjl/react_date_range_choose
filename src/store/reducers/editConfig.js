@@ -16,10 +16,12 @@ export default function editConfig(state = initialState, action) {
 	let curData    = state.curData,
 		pageC      = state.pageContent,
 		pageList   = state.pageList,
+		globalData = state.globalData,
 		router     = action.router,
 		groupIdx   = action.groupIdx,
 		idx        = action.idx,
 		data       = action.data,
+		save       = action.save,
 		key        = action.key,
 		name       = action.name
 
@@ -126,7 +128,7 @@ export default function editConfig(state = initialState, action) {
 			pageC[data.router] = data
 			state.curPage      = data
 			console.log('更新页面!')
-			// saveData()
+			save && saveData()
 			return Object.assign({}, state)
 		
 		case types.DELETE_PAGE:
@@ -145,15 +147,17 @@ export default function editConfig(state = initialState, action) {
 		case types.SELECE_PAGE:
 			// if (curData.router === router) return state
 			var pd = pageC[router]
-			curData.router      = router
-			state.curPage       = pd
-			state.curComp       = {}
+			curData.router       = router
+			state.curPage        = pd
+			state.curComp        = {}
+			globalData.multiComp = { type: '', index: {}, list: [] }
 			curData.router      = router
 			curData.compIdx     = -1
 			curData.cusCompIdx  = -1
 			curData.contentType = 'page'
 			curData.parentComp  = null
 			curData.title       = pd.title
+
 			console.log('选择页面!')
 			// saveData()
 			return Object.assign({}, state)
@@ -183,7 +187,7 @@ export default function editConfig(state = initialState, action) {
 
 		case types.UPDATE_COPYCOMP:
 			console.log('复制组件!')
-			state.globalData.copyComp = data
+			globalData.copyComp = data
 			return Object.assign({}, state)
 
 		default:

@@ -70,7 +70,7 @@ class OperateComponent extends React.Component {
 					curPage: cfg.pageContent[cur.router]
 				}
 				window.tempCfg = res.data
-				cfg.globalData = { ...cfg.globalData, ...{
+				cfg.globalData = { ...globalData, ...cfg.globalData, ...{
 					storeList:    globalData.storeList,
 					catgs:        globalData.catgs,
 					floors:       globalData.floors,

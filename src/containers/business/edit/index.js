@@ -21,7 +21,6 @@ import EditStyle      from 'compEditB/EditStyle'
 import EditAnimation  from 'compEdit/EditAnimation'
 import EditTheme      from 'compEditB/EditTheme'
 
-import tools from 'services/tools'
 import * as actions from 'actions'
 
 import 'rc-color-picker/assets/index.css'
@@ -30,8 +29,6 @@ import './index.less'
 
 import { Tabs } from 'antd'
 const TabPane = Tabs.TabPane
-
-tools()
 
 class EditComponent extends React.Component {
 	constructor(props) {

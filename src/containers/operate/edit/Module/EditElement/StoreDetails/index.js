@@ -11,7 +11,10 @@ import CustomO from 'compEdit/EditElement/Custom'
 import CustomB from 'compEditB/EditElement/Custom'
 import CustomV from 'view/Element/Custom'
 
-let Custom
+let cusMap = {
+	operate:  CustomO,
+	business: CustomB
+}
 
 class StoreDetails extends React.Component {
 	constructor(props) {
@@ -34,17 +37,11 @@ class StoreDetails extends React.Component {
 	}
 
 	render() {
-		let { data, actions, idx, csn } = this.props
-		if (envType === 'operate')       Custom = CustomO
-		else if (envType === 'business') Custom = CustomB
-		else                             Custom = CustomV
+		let Custom = cusMap[envType] || CustomV
 		this.init.bind(this)()
 		return (
 			<Custom
-				data={data}
-				actions={actions}
-				idx={idx}
-				csn={csn}
+				{...this.props}
 				ioInput={this.state.ioInput}
 				ioOuter={this.ioOuter.bind(this)}
 			/> 

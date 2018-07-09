@@ -41,11 +41,12 @@ export const addPage = (groupIdx, name) => ({
 	name
 })
 
-export const updatePage = (groupIdx, idx, data) => ({
+export const updatePage = (groupIdx, idx, data, save = false) => ({
 	type: types.UPDATE_PAGE,
 	groupIdx,
 	idx,
-	data
+	data,
+	save
 })
 
 export const deletePage = (router, groupIdx, idx) => ({

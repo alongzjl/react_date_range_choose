@@ -28,6 +28,7 @@ import Page         from 'compEdit/EditElement/Page'
 import Reset        from 'compEdit/EditElement/Reset'
 import FloorMap     from 'compEdit/EditElement/FloorMap'
 import ListByStore  from 'compEdit/EditElement/ListByStore'
+import SplitLine         from 'compEdit/EditElement/SplitLine'
 import WonderfulActivity from 'compEdit/EditElement/WonderfulActivity'
 
 import './index.less'
@@ -49,6 +50,7 @@ const compContent = (name, data, parent, editConfig, actions, type, ioInput, ioO
 		catg:              <Catg              {...props} />,
 		page:              <Page              {...props} />,
 		floorMap:          <FloorMap          {...props} />,
+		splitLine:         <SplitLine         {...props} />,
 		reset:             <Reset             {...props} />,
 		listByStore:       <ListByStore       {...props} />
 	}

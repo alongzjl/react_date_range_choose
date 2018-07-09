@@ -30,14 +30,10 @@ class StoreInstro extends React.Component {
 	}
 
 	render() {
-		let { data, actions, idx, csn } = this.props;
 		this.init.bind(this)();
 		return (
 			<Custom
-				data={data}
-				actions={actions}
-				idx={idx}
-				csn={csn}
+				{...this.props}
 				ioInput={this.state.ioInput}
 				ioOuter={this.ioOuter.bind(this)}
 			/> 

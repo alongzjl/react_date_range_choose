@@ -14,15 +14,15 @@ import reducer      from 'store/reducers'
 import { createStore, applyMiddleware } from 'redux'
 import { Router, Route, hashHistory }   from 'react-router'
 
-// require('public/RyWayFinding-1.2.3.min')
-
 import Operate      from 'operate'
 import OperateEdit  from 'operate/edit'
 import Business     from 'business'
 import BusinessEdit from 'business/edit'
-import View from 'view'
+import View         from 'view'
+import NoMatch      from './containers/NoMatch'
 
-import NoMatch     from './containers/NoMatch'
+import 'services/tools'
+
 import 'animate.css'
 import 'styles/common.less'
 import 'styles/animate.less'

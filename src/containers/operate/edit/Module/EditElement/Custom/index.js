@@ -11,7 +11,7 @@ import { connect }  from 'react-redux'
 import * as actions from 'actions'
 
 import Rnd from 'react-rnd'
-import { Icon } from 'antd'
+import { Icon, message } from 'antd'
 
 import Picture      from 'compEdit/EditElement/Picture'
 import Web          from 'compEdit/EditElement/Web'
@@ -28,6 +28,7 @@ import Page         from 'compEdit/EditElement/Page'
 import Reset        from 'compEdit/EditElement/Reset'
 import FloorMap     from 'compEdit/EditElement/FloorMap'
 import ListByStore  from 'compEdit/EditElement/ListByStore'
+import SplitLine         from 'compEdit/EditElement/SplitLine'
 import WonderfulActivity from 'compEdit/EditElement/WonderfulActivity'
 
 import * as variable from 'var'
@@ -51,6 +52,7 @@ const compContent = (name, data, parent, editConfig, actions, type, ioInput, ioO
 		catg:              <Catg              {...props} />,
 		page:              <Page              {...props} />,
 		floorMap:          <FloorMap          {...props} />,
+		splitLine:         <SplitLine         {...props} />,
 		reset:             <Reset             {...props} />,
 		listByStore:       <ListByStore       {...props} />
 	}
@@ -62,37 +64,64 @@ import './index.less'
 class Custom extends React.Component {
 	constructor(props) {
 		super(props)
-		let state = {}
-		let comp = props.data.data.components || []
-		comp.map((_, i) => {
-			state[i] = _.data.layout
-		})
-		this.state = state
+		this.state = {}
 	}
 	componentWillMount() {}
 
 	componentDidMount() {}
-	// componentWillReceiveProps() {
-	// 	let state = {}
-	// 	let comp  = this.props.data.data.components || []
-	// 	comp.map((_, i) => {
-	// 		state[i] = _.data.layout
-	// 	})
-	// 	this.setState(state)
-	// 	console.log('更新Props')
-	// }
+	componentWillReceiveProps() {
+		let { data, editConfig } = this.props
+		let { cusCompIdx } = editConfig.curData
+		let state = {}
+		let comp  = data.data.components || []
+		if (cusCompIdx < 0 || !comp[cusCompIdx]) return
+		state[cusCompIdx] = comp[cusCompIdx].data.layout
+		this.setState(state)
+		console.log('更新ChildProps')
+	}
 
 	selectComp(e, data, idx, parentIdx, parent) {
 		e.stopPropagation()
 		e.preventDefault()
-		let { actions, editConfig } = this.props
-		let { curData } = editConfig
-		if (curData.compIdx === parentIdx && curData.cusCompIdx === idx) return
+		this.state[idx] = deepCopy(data.data.layout)
+		let { actions, editConfig, keyCtrl } = this.props
+		let { globalData, curData } = editConfig
+		let { compIdx, cusCompIdx } = curData
+		let { type } = globalData.multiComp
+		if (keyCtrl && (type === 'parent' || (type === 'child' && parentIdx !== compIdx))) return
+		if (compIdx === parentIdx && cusCompIdx === idx) return
 		curData.compIdx    = parentIdx
 		curData.cusCompIdx = idx
 		curData.parentComp = parent
 		actions.updateCur(curData)		// 更新 当前数据
 		actions.selectComp(data)
+	}
+
+	selectMulti(e, idx, parentIdx) {
+		e.stopPropagation()
+		let { actions, editConfig, keyCtrl } = this.props
+		let { globalData, curData } = editConfig
+		let { compIdx, cusCompIdx } = curData
+		let { multiComp }   = globalData
+		let { index, list, type } = multiComp
+		if (keyCtrl) {
+			if (type === 'parent' || (type === 'child' && parentIdx !== compIdx)) return message.success('不能跨级选组件!')
+			if (index[idx]) {
+				// delete index[idx]
+				list.remove(idx)
+			}
+			index[idx] = true
+			list.unshift(idx)
+		} else {
+			var s = {}
+			s[idx] = true
+			multiComp.index = s
+			multiComp.list  = [idx]
+		}
+		multiComp.type = 'child'
+		multiComp.parentIdx = parentIdx
+		actions.updateGlobal(globalData)
+		console.log(JSON.stringify(multiComp.list))
 	}
 
 	resizeFn(e, ref, delta, pos, item, idx, parent) {
@@ -143,7 +172,9 @@ class Custom extends React.Component {
 
 	render() {
 		let { data, actions, idx, csn, editConfig, ioInput, ioOuter,name } = this.props
-		let { curData } = editConfig
+		let { globalData, curData } = editConfig
+		let { multiComp } = globalData
+		let { index, type } = multiComp
 		let state = this.state
 		let { compIdx, cusCompIdx } = curData
 		let icomp = ioInput.comp
@@ -182,13 +213,13 @@ class Custom extends React.Component {
 				}
 			}
 
-			let lay = compIdx === idx && i === cusCompIdx? state[i]: layout
-
+			let sl  = state[i]
+			let lay = compIdx === idx && i === cusCompIdx? sl? sl: layout: layout
 			return (
 				<Rnd
 					key={i}
 					bounds={`.${csn}`}
-					className={compIdx === idx && i === cusCompIdx? 's-active': ''}
+					className={`${compIdx === idx && (type === 'child' && index[i])? 's-select': ''} ${compIdx === idx && i === cusCompIdx? 's-active': ''}`}
 					size={{
 						width:  lay.width || '100%',
 						height: lay.height
@@ -206,7 +237,7 @@ class Custom extends React.Component {
 					<div
 						className={`pge-layout ${aniCls? aniCls: ''}`}
 						style={aniSty}
-						onClick={e => this.selectComp(e, _, i, idx, data)}
+						onClick={e => {this.selectComp(e, _, i, idx, data);this.selectMulti(e, i, idx)}}
 						onContextMenu={e => this.selectComp(e, _, i, idx, data)}
 					>{ compCon }</div>
 				</Rnd>
