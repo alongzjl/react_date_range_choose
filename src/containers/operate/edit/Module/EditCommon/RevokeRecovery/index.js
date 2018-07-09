@@ -46,16 +46,16 @@ class RevokeRecovery extends React.Component {
 			// debugger
 		} else if (window.storeState.saveHistory) {
 			// 允许保存历史
-			console.clear()
-			console.log('保存记录!')
+			// console.clear()
+			// console.log('保存记录!')
 			let { max, idx, history } = this.state
 			if (idx) history.splice(0, idx)
 			history.unshift(deepCopy(curPage))
 			// 超出存储长度后删除最初项
 			if (history.length > max) history.pop()
 			this.setState({ idx: 0, history: history })
-			console.log(this.state.idx)
-			console.log(this.state.history)
+			// console.log(this.state.idx)
+			// console.log(this.state.history)
 			window.storeState.saveHistory = false
 		}
 	}

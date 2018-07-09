@@ -35,7 +35,7 @@ import RevokeRecovery    from 'compEdit/EditCommon/RevokeRecovery'
 
 import * as actions from 'actions'
 
-import { Icon } from 'antd'
+import { Icon, message } from 'antd'
 
 import * as variable from 'var'
 
@@ -43,8 +43,8 @@ const ctMap  = variable.composeTypeMap
 var animeMap = variable.animeCompMap,
 	aStyle   = animeMap.style
 
-const compContent = (name, data, actions, type, idx, csn) => {
-	var props  = { data, actions, type, idx, csn }
+const compContent = (name, data, actions, type, idx, csn, keyCtrl) => {
+	var props  = { data, actions, type, idx, csn, keyCtrl }
 	var render = {
 		picture:           <Picture           {...props} />,
 		web:               <Web               {...props} />,
@@ -72,37 +72,73 @@ import './index.less'
 class EditElement extends React.Component {
 	constructor(props) {
 		super(props)
-		let state = {}
-		let eles = props.data.elements || []
-		eles.map((_, i) => {
-			state[i] = _.data.layout
-		})
-		this.state = state
+		this.state = { keyCtrl: false }
 	}
 	componentWillMount() {}
 
 	componentDidMount() {}
 
 	componentWillUnmount() {}
+
 	componentWillReceiveProps() {
+		let { data, editConfig } = this.props
+		let { compIdx } = editConfig.curData
 		let state = {}
-		let eles  = this.props.data.elements || []
-		eles.map((_, i) => {
-			state[i] = _.data.layout
-		})
+		let eles  = data.elements || []
+		if (compIdx < 0 || !eles[compIdx]) return
+		state[compIdx] = eles[compIdx].data.layout
 		this.setState(state)
+		console.log('更新Props')
 	}
 
+	keyDown = (k, e) => {
+		if (k === 'meta' || k === 'control') this.setState({ keyCtrl: true })
+	}
+	keyUp = (k, e) => {
+		if (k === 'meta' || k === 'control') this.setState({ keyCtrl: false })
+	}
+	
 	selectComp(e, data, idx) {
 		e.stopPropagation()
+		let { keyCtrl } = this.state
 		let { actions, editConfig } = this.props
-		let { curData } = editConfig
+		let { curData, globalData } = editConfig
+		let { type } = globalData.multiComp
 		let { compIdx, cusCompIdx, contentType } = curData
+		if (keyCtrl && type === 'child') return
 		if (compIdx === idx && cusCompIdx < 0 && contentType === 'comp') return
+		this.state[idx] = deepCopy(data.data.layout)
 		curData.compIdx    = idx
 		curData.parentComp = null
 		actions.updateCur(curData)	// 更新 当前数据
 		actions.selectComp(data)
+	}
+
+	selectMulti(e, idx) {
+		e.stopPropagation()
+		let { keyCtrl } = this.state
+		let { actions, editConfig } = this.props
+		let { globalData } = editConfig
+		let { multiComp }  = globalData
+		let { index, list, type } = multiComp
+		if (keyCtrl) {
+			if (type === 'child') return message.success('不能跨级选组件!')
+			if (index[idx]) {
+				// delete index[idx]
+				list.remove(idx)
+			}
+			index[idx] = true
+			list.unshift(idx)
+		} else {
+			var s = {}
+			s[idx] = true
+			multiComp.index = s
+			multiComp.list  = [idx]
+		}
+		multiComp.type = 'parent'
+		delete multiComp.parentIdx
+		actions.updateGlobal(globalData)
+		console.log(JSON.stringify(multiComp.list))
 	}
 
 	resizeFn(e, ref, delta, pos, item, idx) {
@@ -129,6 +165,7 @@ class EditElement extends React.Component {
 	
 	dragStop(e, d, item, idx) {
 		e.stopPropagation()
+		// e.preventDefault()
 		let { actions } = this.props
 		let s   = this.state[idx]
 		let lay = item.data.layout
@@ -146,7 +183,10 @@ class EditElement extends React.Component {
 
 	render() {
 		let { data, actions, editConfig, location } = this.props
-		let { pageGroupIdx, pageIdx, compIdx } = editConfig.curData
+		let { globalData, curData } = editConfig
+		let { pageGroupIdx, pageIdx, compIdx } = curData
+		let { multiComp } = globalData
+		let { index } = multiComp
 		let state  = this.state
 		let ct     = tempCfg.composeType || 'PORTRAIT'
 		let ads    = tempCfg.adsFlag? 'ads': ''
@@ -170,7 +210,7 @@ class EditElement extends React.Component {
 				ani       = _.data.animation,
 				aniCls    = '',
 				aniSty    = {},
-				compCon   = compContent(compName, _, actions, `Style${styleIdx + 1}`, i, csn)
+				compCon   = compContent(compName, _, actions, `Style${styleIdx + 1}`, i, csn, state.keyCtrl)
 
 			if (!compCon) return false
 
@@ -192,7 +232,7 @@ class EditElement extends React.Component {
 			return (
 				<Rnd
 					key={i}
-					className={i === compIdx? 's-active': ''}
+					className={`${i in index? 's-select': ''} ${i === compIdx? 's-active': ''}`}
 					size={{
 						width:  lay.width || '100%',
 						height: lay.height
@@ -210,11 +250,12 @@ class EditElement extends React.Component {
 					<div
 						className={`pge-layout ${aniCls? aniCls: ''}`}
 						style={aniSty}
-						onClick={e => this.selectComp(e, _, i)}
+						onClick={e => {this.selectComp(e, _, i);this.selectMulti(e, i)}}
 						onContextMenu={e => this.selectComp(e, _, i)}
 					>{ compCon }</div>
 				</Rnd>
 			)
+						// onClick={e => e.preventDefault();this.selectComp(e, _, i)}
 		})
 		return (
 			<div className={`pg-element-parent e-flex-box pg-element-${ct} ${ads}`}>
@@ -231,7 +272,7 @@ class EditElement extends React.Component {
 					</section>
 				</div>
 				<ContextMenu />
-				<ShortcutKey />
+				<ShortcutKey keyDown={this.keyDown} keyUp={this.keyUp} />
 				<RevokeRecovery />
 			</div>
 		)

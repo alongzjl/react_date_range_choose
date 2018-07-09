@@ -164,6 +164,7 @@
 			}
 		}
 	}
+	&.s-select,
 	&.s-active {
 		z-index: 10;
 		&:after {
@@ -173,6 +174,20 @@
 			& > div:nth-child(n+5) {
 				&:after {
 					display: block;
+				}
+			}
+		}
+	}
+	&.s-active {
+		&:after {
+			border: 2px solid #43bffe;
+		}
+		& > span {
+			& > div {
+				&:nth-child(n+5) {
+					&:after {
+						background-color: #43bffe;
+					}
 				}
 			}
 		}

@@ -22,7 +22,6 @@ import EditStyle      from 'compEdit/EditStyle'
 import EditAnimation  from 'compEdit/EditAnimation'
 import EditTheme      from 'compEdit/EditTheme'
 
-import tools from 'services/tools'
 import * as actions from 'actions'
 
 import 'rc-color-picker/assets/index.css'
@@ -31,8 +30,6 @@ import './index.less'
 
 import { Tabs } from 'antd'
 const TabPane = Tabs.TabPane
-
-tools()
 
 const curMap = {
 	parentComp:   '父组件',
@@ -101,7 +98,7 @@ class EditComponent extends React.Component {
 					}
 					<div
 						className="pg-center e-flex-box scrollbar"
-						onClick={this.selectPage.bind(this)}
+						onClick={this.selectPage}
 						onContextMenu={this.selectPage}
 					>
 						<EditElement data={editConfig.curPage} location={location}></EditElement>

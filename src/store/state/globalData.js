@@ -14,11 +14,15 @@ const globalData = {
 		},
 		list: [JSON.parse(JSON.stringify(tc))]
 	},
-	floors:    [],	// 楼层数据
-	catgs:     [],	// 分类数据
-	storeList: [],	// 店铺数据
-	copyComp: null,	// 复制组件
-	cutComp:  null,	// 剪切组件
+	floors:    [],		// 楼层数据
+	catgs:     [],		// 分类数据
+	storeList: [],		// 店铺数据
+	copyComp:  null,	// 复制组件
+	multiComp: {		// 多选组件
+		type:   '',
+		index:  {},
+		list:   []
+	},
 	// 全局特征 
 	feature: {
 	}
