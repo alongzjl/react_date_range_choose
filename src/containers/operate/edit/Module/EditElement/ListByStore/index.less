@@ -1,8 +1,19 @@
 .e-list-by-store {
-	display: flex;
-	flex-wrap: wrap;
-	align-items: center;
+	&>div {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+	}
 	.ep-item {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		opacity: 0;
+		i {
+			display: block;
+		}
+	}
+	.ep-item-two {
 		display: flex;
 		justify-content: center;
 		align-items: center;
@@ -20,6 +31,18 @@
 				margin-bottom: 0;
 				align-items: center;
 			}
+		}
+		.ep-item-two {
+			flex-direction: column;
+			opacity: 0;
+			p {
+				display: flex;
+				margin-bottom: 0;
+				align-items: center;
+			}
+		}
+		.ani_add {
+			opacity: 1
 		}
 	}
 }
