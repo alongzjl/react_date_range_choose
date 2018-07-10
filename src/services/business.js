@@ -28,6 +28,7 @@ module.exports = extend(window, {
 	storeState: {
 		saveHistory: false		// 是否允许保存历史记录状态 true: 允许 false: 不允许
 	},
+	storeData: {},
 	// 组件样式格式化
 	cssColorFormat(props, key) {
 		// let st  = Date.now()
