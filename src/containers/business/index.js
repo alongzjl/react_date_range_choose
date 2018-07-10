@@ -30,6 +30,30 @@ class BusinessComponent extends React.Component {
 		let { actions } = this.props
 		actions.updateTime()
 	}
+	getFloor() {
+		return (resolve, reject) => {
+			let { mallMid } = window.uif.userInfo
+			Ajax.get(`/mcp-gateway/mall/getFloorList?mallId=${mallMid}`).then(res => {
+				storeData.floorList = res.data.list
+				return resolve('楼层数据')
+			}, err => {
+				storeData.floorList = []
+				return resolve('楼层数据')
+			})
+		}
+	}
+	getCatg() {
+		return (resolve, reject) => {
+			let { mallMid } = window.uif.userInfo
+			Ajax.get(`/mcp-gateway/mall/getShopCustomCategoryList?mallId=${mallMid}`).then(res => {
+				storeData.catgList = res.data.list
+				return resolve('业态数据')
+			}, err => {
+				storeData.catgList = []
+				return resolve('业态数据')
+			})
+		}
+	}
 	getWeather() {
 		return (resolve) => {
 			window.weather = {
@@ -60,7 +84,7 @@ class BusinessComponent extends React.Component {
 		let api = `/mcp-gateway/${type}/get?${type}Id=${id}`
 		if (type === 'template') api += '&phase=RELEASE'
 
-		return function(resolve, reject) {
+		return (resolve, reject) => {
 			Ajax.get(api).then(res => {
 				let cfg = JSON.parse(res.data.config).configPC
 				delete res.data.config
@@ -144,7 +168,7 @@ class BusinessComponent extends React.Component {
 		this.getUserInfo(() => {
 			let { editConfig } = this.props
 			let { globalData } = editConfig
-			let arr = ['getConfig', 'getWeather']
+			let arr = ['getConfig', 'getWeather', 'getFloor', 'getCatg']
 			let promises = arr.map(key => new Promise(this[key](globalData)))
 			Promise.all(promises).then(() => {
 				this.setState({ load: true })
