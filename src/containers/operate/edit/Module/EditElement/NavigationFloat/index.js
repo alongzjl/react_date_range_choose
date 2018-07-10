@@ -72,6 +72,9 @@ class NavigationFloat extends React.Component {
 		this.setState({showTable:!this.state.showTable,first:false})
 		e.stopPropagation();
 	}
+	end = e =>{
+		this.state.showTable ? e.target.style.transform = 'scale(1)' : e.target.style.transform = 'scale(.01)';
+	}
 	//布局样式一
 	renderSwiper(props) { 
 		const { data } = props;
@@ -149,7 +152,6 @@ class NavigationFloat extends React.Component {
 		      content = data.data.content,
 			  mainCss = cssColorFormat(props,"mainTable"),
 			  css = cssColorFormat(props, 'filter'),
-			  classAni = this.state.showTable ? 'animated rollIn' : !this.state.first ? 'animated rotateOutUpLeft' : null,
 			  layout = data.data.layout,
 			  layWidth = layout.width,
 			  layHeight = parseInt(layout.height/2),
@@ -159,22 +161,27 @@ class NavigationFloat extends React.Component {
 		  if(data.layout.type == 4 && data.layout.position == 'right'){
 		  		pos_style = {...pos_style,left:(data.data.layout.width-mainCss.width)};
 		  		layWidth = (-1*layWidth);
-		  		classAni = this.state.showTable ? 'animated lightSpeedIn' : !this.state.first ? 'animated rollOut' : null
-		  }
+		   }
 		let defaultStyle = content.map((item,index)=>{
 	 	  		let t,l,degSelf = -(90-deg*index)*Math.PI/180;
 	 	  		t = Math.sin(degSelf)*layHeight + mainCss.height/2-css.height/2;
 				l = Math.cos(degSelf)*layWidth+mainCss.width/2-css.width/2;
-	 	  		return {position:"absolute",top:t,left:l,animationDuration:"0.3s",animationDelay:`${index/5}s`}
+	 	  		return {position:"absolute",top:t,left:l,animationDuration:"0.3s",animationDelay:'0.5s'}
 		  });
+		  let mainAni = {marginTop:-(mainCss.height/2),marginLeft:-(mainCss.width/2)}
 		return (
 				<div className="navigation_box">
 					<div className="mainTable" onClick={e=>{this.mainTab(e)}} style={pos_style}>
-						{
-							content.map((item,index) => {
-								return <OnlyNavigation props={props} data={item} key={index} rysty={defaultStyle[index]} classAni={classAni}></OnlyNavigation>
-							})
-						}
+						<div 
+						style={mainAni}
+						className={`navAniFour ${this.state.showTable ? 'scaleBig' : 'scaleLitter'}`}
+						onAnimationEnd={e=>{this.end(e)}}>
+							{
+								content.map((item,index) => {
+									return <OnlyNavigation props={props} data={item} key={index} rysty={defaultStyle[index]}></OnlyNavigation>
+								})
+							}
+						</div>
 					</div>
 				</div>
 			)

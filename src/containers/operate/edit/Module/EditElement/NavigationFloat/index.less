@@ -58,13 +58,32 @@
 				height:100%;
 				width:100%;
 			}
+			.navAniFour {
+				position: absolute;
+				top:50%;
+				left:50%;
+				width:100%;
+				height:100%;
+				transform:scale(0.01);
+			}
+			.scaleBig {
+				animation-name:scaleBigRY !important;
+				animation-duration: 0.3s;
+    			animation-delay: 0s; 
+    			transition-timing-function:ease;
+			}
+			.scaleLitter {
+				animation-name:scaleLitterRY !important;
+				animation-duration: 0.3s;
+    			animation-delay: 0s; 
+    			transition-timing-function:ease;
+			}
 		}
 		.only {  
 			display: flex;
 			align-items: center; 
 			flex-direction: column;
 			 overflow: hidden; 
-			 opacity: 0;
 			img {
 				width:100%;
 				height:100%;
@@ -79,4 +98,12 @@
 	.style_2 {
 
 	} 
-} 
+}  
+@keyframes scaleBigRY{
+	0%{transform:scale(.01)}
+	100%{transform:scale(1)}
+}
+@keyframes scaleLitterRY{
+	0%{transform:scale(1)}
+	100%{transform:scale(.01)}
+}
