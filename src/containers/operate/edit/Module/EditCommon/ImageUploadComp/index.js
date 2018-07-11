@@ -65,24 +65,39 @@ class ImageUploadComp extends React.Component {
 	render() {
 		let { img, name, actions, editConfig, index, data } = this.props
 		let btnNode
-		let imgVal = img && img.img
-		let theme   = editConfig.globalData.theme
-		let colors  = JSON.parse(JSON.stringify(theme.list[theme.idx].colors))
+		let imgVal   = img && img.img
+		let videoVal = img && img.video
+		let theme  = editConfig.globalData.theme
+		let colors = JSON.parse(JSON.stringify(theme.list[theme.idx].colors))
 		let selectNode
 		colors.custom = {
 			name:  '自定义',
 			img: imgVal
 		}
 		if (name === 'video') {
+			if (videoVal) {
+				btnNode = (
+					<div className="add_img add_video">
+						<div className="shadow">
+							<div className="add_text_change" onClick={this.showList.bind(this)}><Icon type="reload" /></div>
+							<div className="add_text_remove" onClick={this.removeImg.bind(this)}><Icon type="close" /></div>
+						</div>
+					</div>
+				)
+			} else {
+				btnNode = (
+					<div className="add_img" onClick={this.showList.bind(this)}>
+						<div className="add_text"><Icon type="plus" /></div>
+					</div>
+				)
+			}
 			return (
 				<div className="pg-img-upload">
 					<Row type="flex" align="middle" style={{ width: '100%' }}>
 						<Col span={9}>
-							<div className="add_img" onClick={this.showList.bind(this)}>
-								<div className="add_text"><Icon type="plus" /></div>
-							</div>
+							{ btnNode }
 						</Col>
-					</Row> 
+					</Row>
 					<VideoList
 						ref={com => { this.addImgModal = com }}
 						props={this.props}
@@ -118,29 +133,27 @@ class ImageUploadComp extends React.Component {
 		if (img.type === 'custom') {
 			if (imgVal) {
 				btnNode = (
-					<Col span={9}>
-						<div className="add_img" style={{ backgroundImage: `url('${imgVal}')` }}>
-							<div className="shadow">
-								<div className="add_text_change" onClick={this.showList.bind(this)}><Icon type="reload" /></div>
-								<div className="add_text_remove" onClick={this.removeImg.bind(this)}><Icon type="close" /></div>
-							</div>
+					<div className="add_img" style={{ backgroundImage: `url('${imgVal}')` }}>
+						<div className="shadow">
+							<div className="add_text_change" onClick={this.showList.bind(this)}><Icon type="reload" /></div>
+							<div className="add_text_remove" onClick={this.removeImg.bind(this)}><Icon type="close" /></div>
 						</div>
-					</Col>
+					</div>
 				)
 			} else {
 				btnNode = (
-					<Col span={9}>
-						<div className="add_img" onClick={this.showList.bind(this)}>
-							<div className="add_text"><Icon type="plus" /></div>
-						</div>
-					</Col>
+					<div className="add_img" onClick={this.showList.bind(this)}>
+						<div className="add_text"><Icon type="plus" /></div>
+					</div>
 				)
 			}
 		}
 		return (
 			<div className="pg-img-upload">
 				<Row type="flex" align="middle" style={{ width: '100%' }}>
-					{ btnNode }
+					<Col span={9}>
+						{ btnNode }
+					</Col>
 					{ selectNode }
 				</Row>
 				<PictureList
