@@ -16,8 +16,9 @@ const  { TextArea } = Input
 const  { Panel }    = Collapse
 const Option = Select.Option
 
-import RouterJump      from 'compEdit/EditCommon/RouterJump'
-import ImageUploadComp from 'compEdit/EditCommon/ImageUploadComp'
+import RouterJump        from 'compEdit/EditCommon/RouterJump'
+import ImageUploadComp   from 'compEdit/EditCommon/ImageUploadComp'
+import HtmlUpload        from 'compEdit/EditCommon/HtmlUpload'
 
 import SwiperImage       from './SwiperImage'
 import Navigation        from './Navigation'
@@ -142,6 +143,16 @@ class EditContent extends React.Component {
 				name={`video`}
 				action={'updateComp'}
 				style={{ width: '100%' }}
+			/>
+		)
+	}
+	// 上传组件
+	renderFile(cfg, con, val, key, index) {
+		return (
+			<HtmlUpload
+				data={val}
+				style={{ width: '100%' }}
+				onChange={v => this.onChange(v, con, key, index)}
 			/>
 		)
 	}

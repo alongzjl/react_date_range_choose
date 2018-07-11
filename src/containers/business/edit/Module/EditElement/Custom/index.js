@@ -70,6 +70,9 @@ class Custom extends React.Component {
 			let compName = _.name,
 				layout   = _.data.layout,
 				styleIdx = _.styleList.idx,
+				ani      = _.data.animation,
+				aniCls   = '',
+				aniSty   = {},
 				isEdit   = true,
 				compCon  = compContent(compName, _, data, editConfig, actions, `Style${styleIdx + 1}`, ioInput, ioOuter)
 
@@ -85,13 +88,25 @@ class Custom extends React.Component {
 				})
 			}
 
+			if (ani.className) {
+				let item = aStyle[ani.className]
+				let { direction, delay, iterationCount } = ani
+				if (!direction || !item.list) ani.direction = item.list? item.list[0] || '': ''
+				aniCls = `animate ${ani.className}${ani.direction}`
+				aniSty = {
+					animationDuration: `${ani.duration}s`,
+					animationDelay:    `${delay}s`,
+					animationIterationCount: iterationCount
+				}
+			}
+
 			if (!compCon) return false
 				
 			return (
 				<div
 					key={i}
 					className={`pge-layout`}
-					style={layout}
+					style={{ ...layout, ...aniSty }}
 				>
 					{ compCon }
 				</div>

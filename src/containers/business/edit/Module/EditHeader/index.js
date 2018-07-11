@@ -109,7 +109,8 @@ class Header extends React.Component {
 			Ajax.createCrop({
 				url: `${window.location.origin}${window.location.pathname}#/view?id=${tempCfg.id}`,
 				w: 540,
-				h: 960
+				h: 960,
+				t: 1000
 			}).then(cover => {
 				Ajax.post(`/mcp-gateway/case/updateCoverImgUrl`, {
 					caseId: tempCfg.id,

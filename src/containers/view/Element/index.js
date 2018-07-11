@@ -27,6 +27,7 @@ import Navigation        from 'compEdit/EditElement/Navigation'
 import NavigationFloat   from 'compEdit/EditElement/NavigationFloat'
 import SplitLine         from 'compEdit/EditElement/SplitLine'
 import Map2D             from 'compEdit/EditElement/Map2D'
+import Html              from 'compEdit/EditElement/Html'
 
 import * as actions from 'actions'
 
@@ -57,7 +58,8 @@ const compContent = (name, data, actions, type, idx, csn) => {
 		storeInstro:       <StoreInstro       {...props} />,
 		splitLine:         <SplitLine         {...props} />,
 		dateWeather:       <DateWeather       {...props} />,
-		map2D:             <Map2D             {...props} />
+		map2D:             <Map2D             {...props} />,
+		html:              <Html              {...props} />
 	}
 	return render[name]
 }

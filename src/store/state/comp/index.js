@@ -59,7 +59,6 @@ module.exports = {
 	listByStore:       authInit(require('./storeList/content/listByStore')),
 	// 楼层地图
 	floorMap:          authInit(require('./storeList/content/floorMap')),
-
 	// 天气日期
 	time:              authInit(require('./dateWeather/content/time')),
 	// 天气 
@@ -76,5 +75,7 @@ module.exports = {
 	// 日期天气
 	dateWeather:       authInit(require('./dateWeather/index')),
 	// 2d地图组件
-	map2D:             authInit(require('./map2D'))
+	map2D:             authInit(require('./map2D')),
+	// 组件上传
+	html:              authInit(require('./html'))
 }
