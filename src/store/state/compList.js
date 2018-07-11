@@ -103,7 +103,7 @@ module.exports = [
 					key:  'listByStore'
 				},
 				{
-					icon: 'list',
+					icon: 'floorMap',
 					name: '楼层地图',
 					key:  'floorMap'
 				}
