@@ -13,17 +13,9 @@ const pagec = require('state/page/content')
 
 const initialState = state
 export default function editConfig(state = initialState, action) {
-	let curData    = state.curData,
-		pageC      = state.pageContent,
-		pageList   = state.pageList,
-		globalData = state.globalData,
-		router     = action.router,
-		groupIdx   = action.groupIdx,
-		idx        = action.idx,
-		data       = action.data,
-		save       = action.save,
-		key        = action.key,
-		name       = action.name
+	let pageC = state.pageContent,
+		{ curData, pageList, globalData } = state,
+		{ router, groupIdx, idx, data, save, key, name } = action
 
 	switch (action.type) {
 		
@@ -40,26 +32,37 @@ export default function editConfig(state = initialState, action) {
 			return Object.assign({}, state)
 
 		case types.UPDATE_COMP:
+			// var { parentComp, cusCompIdx } = curData
+			// var sl = data.styleList,
+			// 	sd = sl.list[sl.idx]
+			// console.clear()
+			// if (parentComp) {
+			// 	var da = data.data.components[cusCompIdx]
+			// 	if (da) {
+			// 		var csl = da.styleList,
+			// 			csd = csl.list[csl.idx]
+			// 		csd.data = deepCopy(da.data)
+			// 	}
+			// 	console.log(data.data)
+			// }
+			// sd.data = deepCopy(data.data)
+			// pageC[curData.router].elements[curData.compIdx] = data
+			// state.curPage   = pageC[curData.router]
+			// curData.compIdx = idx || curData.compIdx
+			// console.log('更新组件!')
+			// saveData()
+			// return Object.assign({}, state)
+
+			/* 除styleList代码 START */
 			var { parentComp, cusCompIdx } = curData
-			var sl = data.styleList,
-				sd = sl.list[sl.idx]
 			console.clear()
-			if (parentComp) {
-				var da = data.data.components[cusCompIdx]
-				if (da) {
-					let csl = da.styleList,
-						csd = csl.list[csl.idx]
-					csd.data = JSON.parse(JSON.stringify(da.data))
-				}
-				console.log(data.data)
-			}
-			sd.data = JSON.parse(JSON.stringify(data.data))
 			pageC[curData.router].elements[curData.compIdx] = data
 			state.curPage   = pageC[curData.router]
 			curData.compIdx = idx || curData.compIdx
 			console.log('更新组件!')
 			saveData()
 			return Object.assign({}, state)
+			/* 除styleList代码 END */
 
 		case types.DELETE_COMP:
 			pageC[curData.router].elements.splice(idx, 1)
@@ -87,7 +90,7 @@ export default function editConfig(state = initialState, action) {
 
 		// 页面操作
 		case types.ADD_PAGE:
-			var pageData = JSON.parse(JSON.stringify(pagec)),
+			var pageData = deepCopy(pagec),
 				route    = `p_${++state.pageList.maxPageIdx}`
 			pageData.router     = route
 			pageData.title      = name
@@ -210,7 +213,10 @@ function saveData() {
 
 // 获取组件数据
 function getCompData(state, key) {
-	let compData = JSON.parse(JSON.stringify(comp[key]))
+	let compData = deepCopy(comp[key])
+	/* 除styleList代码 START */
+	delete compData.styleList.list
+	/* 除styleList代码 END */
 	let init = initFn[key]
 	if (init) init(state, compData.feature)
 	return compData

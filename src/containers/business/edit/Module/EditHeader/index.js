@@ -45,7 +45,7 @@ class Header extends React.Component {
 		data.layout = cssFormatByTerm(layout)
 	}
 	formatEle(obj) {
-		let { type, data, styleList } = obj
+		let { type, data } = obj
 		if (type === 'base') {
 			this.formatStyle(data)
 			delete obj.auth

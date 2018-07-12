@@ -48,11 +48,7 @@ class EditContent extends React.Component {
 		let { curData } = editConfig
 		let { content } = data.data
 		let { parentComp } = curData
-		// if (index === undefined) {
-		// 	con[key] = val
-		// } else {
-			con[key] = val
-		// }
+		con[key] = val
 		actions.updateComp(null, parentComp? parentComp: data)
 	}
 

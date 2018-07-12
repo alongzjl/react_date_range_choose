@@ -73,7 +73,10 @@ class StyleManage extends React.Component {
 		if (newIdx === idx) return
 		data[parentKey].idx = newIdx
 		if (action === 'updateComp') {
-			data.data = data[parentKey].list[newIdx].data
+			// 除styleList代码 START
+			data.data = deepCopy(list[newIdx].data)
+			// 除styleList代码 END
+			// data.data = data[parentKey].list[newIdx].data
 			return actions[action](null, parentComp? parentComp: data)
 		}
 		else if (action === 'updateGlobal') return actions[action](data)
