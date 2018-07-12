@@ -75,23 +75,46 @@ class ContextMenu extends React.Component {
 	copyComp = (e) => {
 		e.stopPropagation()
 		let { actions, editConfig } = this.props
-		let { curData, curComp, globalData } = editConfig
+		let { curData, curComp, curPage, globalData } = editConfig
 		let { parentComp } = curData
-		let { copyComp } = globalData
-		let par = parentComp? parentComp: curComp
-
-		message.success(`复制组件: ${compMap[par.name]}!`)
-		actions.updateCopyComp(deepCopy(par))
+		let { copyComp, multiComp } = globalData
+		let { parentIdx, list, type } = multiComp
+		if (!list.length) return message.warning(`组件未选中!`)
+		let comps = []
+		let cComp = {}
+		if (parentComp) {
+			let cs = parentComp.data.components
+			list.map(_ => comps.push(cs[_]))
+			cComp.name = parentComp.name
+		} else {
+			let ce = curPage.elements
+			list.map(_ => comps.push(ce[_]))
+		}
+		cComp.list = comps
+		message.success(`复制组件!`)
+		actions.updateCopyComp(deepCopy(cComp))
 	}
 
 	pasteComp = (e) => {
 		e.stopPropagation()
 		let { actions, editConfig }  = this.props
-		let { curData, curPage, globalData } = editConfig
+		let { curData, curComp, curPage, globalData } = editConfig
+		let { parentComp, pageGroupIdx, pageIdx } = curData
 		let { copyComp } = globalData
-		curPage.elements.push(deepCopy(copyComp))
-		message.success(`粘贴组件: ${compMap[copyComp.name]}!`)
-		actions.updatePage(curData.pageGroupIdx, curData.pageIdx, curPage)
+		let { name, list } = copyComp
+		if (!copyComp) return message.warning(`没有可粘贴的组件!`)
+		let par = parentComp? parentComp: curComp
+		if ((parentComp && parentComp.name === name) || (name && curComp.name === name)) {
+			par.data.components = par.data.components.concat(deepCopy(list))
+		} else if (!name) {
+			curPage.elements = curPage.elements.concat(deepCopy(list))
+		} else {
+			return message.warning(`不同级别无法粘贴组件!`)
+		}
+		// curPage.elements.push(deepCopy(copyComp))
+		// message.success(`粘贴组件: ${compMap[copyComp.name]}!`)
+		message.success(`粘贴组件!`)
+		actions.updatePage(pageGroupIdx, pageIdx, curPage)
 	}
 
 	removeComp = (e) => {
@@ -124,6 +147,7 @@ class ContextMenu extends React.Component {
 	layoutSort(e, old, num) {
 		let { actions, editConfig } = this.props
 		let { curData, curPage } = editConfig
+		let { pageGroupIdx, pageIdx } = curData
 		let eles = curPage.elements
 		let len  = eles.length - 1
 		let next = num === -1? 0: num === 1? len: 0
@@ -131,12 +155,14 @@ class ContextMenu extends React.Component {
 
 		if (old === next) {
 			this.selectComp(e, item, next)
+			this.selectMulti(next)
 			return
 		}
 		curPage.elements = arrayMove(eles, old, next)
 
-		actions.updatePage(curData.pageGroupIdx, curData.pageIdx, curPage)
+		actions.updatePage(pageGroupIdx, pageIdx, curPage)
 		this.selectComp(e, item, next)
+		this.selectMulti(next)
 	}
 
 	selectComp(e, data, idx) {
@@ -149,6 +175,32 @@ class ContextMenu extends React.Component {
 		curData.parentComp = null
 		actions.updateCur(curData)
 		actions.selectComp(data)
+	}
+
+	selectMulti(idx) {
+		let { keyCtrl } = this.state
+		let { actions, editConfig } = this.props
+		let { globalData } = editConfig
+		let { multiComp }  = globalData
+		let { index, list, type } = multiComp
+		if (keyCtrl) {
+			if (type === 'child') return message.success('不能跨级选组件!')
+			if (index[idx]) {
+				// delete index[idx]
+				list.remove(idx)
+			}
+			index[idx] = true
+			list.unshift(idx)
+		} else {
+			var s = {}
+			s[idx] = true
+			multiComp.index = s
+			multiComp.list  = [idx]
+		}
+		multiComp.type = 'parent'
+		delete multiComp.parentIdx
+		actions.updateGlobal(globalData)
+		console.log(JSON.stringify(multiComp.list))
 	}
 
 	render() {

@@ -34,9 +34,16 @@ class EditCompLayout extends React.Component {
 
 	copyComp(e, item) {
 		e.stopPropagation()
-		let { actions } = this.props
-		actions.updateCopyComp(deepCopy(item))
-		message.success(`复制组件: ${compMap[item.name]}!`)
+		let { actions, editConfig } = this.props
+		let { curData, curComp, curPage, globalData } = editConfig
+		let { parentComp } = curData
+		let { copyComp, multiComp } = globalData
+		let { parentIdx, list, type } = multiComp
+		let cComp = { list: [item] }
+		if (parentComp) cComp.name = parentComp.name
+		message.success(`复制组件!`)
+		actions.updateCopyComp(deepCopy(cComp))
+		// message.success(`复制组件: ${compMap[item.name]}!`)
 	}
 
 	selectComp(e, data, idx) {
