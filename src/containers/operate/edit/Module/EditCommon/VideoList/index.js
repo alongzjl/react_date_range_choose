@@ -235,9 +235,7 @@ function List({item,choose_one}){
 			<div className={item.isClicked?'icon_img':''}>
 				<div className="right-symbol"></div>
 			</div>
-			<video src={item.url} controls="controls">
-				您的浏览器不支持 video 标签。
-			</video>
+			<img src={item.preview} style={{height:'100%',width:'100%'}} />
 			<div className="showName">{item.name}</div>
 			<div className="showSize">{item.attribute}</div> 
 		</div> 

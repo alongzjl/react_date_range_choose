@@ -44,6 +44,7 @@ class ImageUploadComp extends React.Component {
 		let { parentComp } = curData
 		const length = content.length
 		img[name] = imgList[0].url
+		name == "video" ? img.preview = imgList[0].preview : null
 		actions[action](null, parentComp? parentComp: data)
 	}
 

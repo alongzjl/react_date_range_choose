@@ -16,7 +16,7 @@ const data = {
 	}, 
 	// 内容管理
 	content: { 
-		video:    { type: 'custom', video: '' },
+		video:    { type: 'custom', video: '',preview:''},
 	},  
 	// 动画设置 
 	animation: {
