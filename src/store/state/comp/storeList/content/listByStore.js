@@ -90,7 +90,7 @@ module.exports = {
 			name: '样式1',
 			img:  '',
 			data: JSON.parse(JSON.stringify(data))
-		}, {
+		}/*, {
 			name: '样式2',
 			img:  '',
 			data: JSON.parse(JSON.stringify(data))
@@ -98,7 +98,7 @@ module.exports = {
 			name: '样式3',
 			img:  '',
 			data: JSON.parse(JSON.stringify(data))
-		}]
+		}*/]
 	},
 	// 功能特性
 	feature: {

@@ -21,7 +21,7 @@ const data = {
 		pageSet: {
 			width:  6,
 			height: 6,
-			justifyContent: 'center',
+			/*justifyContent: 'center',*/
 			borderWidth:  0,
 			borderStyle: 'solid',
 			borderColor: { type: 'custom', color: '#fff' },

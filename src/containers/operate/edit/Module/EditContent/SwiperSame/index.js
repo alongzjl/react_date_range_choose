@@ -29,7 +29,7 @@ const setOptions = {
  	]},  
  
  	spaceBetween: {name:'图片间距', type: 'Number', min: 0, max: 100, step: 1 },
- 	slidesPerView: {name:'显示数量', type: 'Number', min: 1, max: 5, step: 1 },
+ 	slidesPerView: {name:'显示数量', type: 'Number', min: 1, max: 100, step: 1 },
  	centeredSlides:{name:'居中显示',type:'Switch',true:true,false:false}, 
 
 	speed: {name:'切换速度', type: 'Number', min: 100, max: 3000, step: 100 },
