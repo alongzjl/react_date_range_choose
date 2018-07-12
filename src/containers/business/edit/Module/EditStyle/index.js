@@ -23,6 +23,7 @@ const { Panel }   = Collapse
 const RadioButton = Radio.Button
 const RadioGroup  = Radio.Group
 
+import * as comp from 'state/comp'
 import * as variable from 'var'
 
 var styleMap = variable.styleMap.name,
@@ -253,7 +254,10 @@ class EditStyle extends React.Component {
 		let da       = data.data
 		let { style, layout } = da
 		if (!style) return false
-		let styleList  = data.styleList			// 样式列表
+		// let styleList  = data.styleList			// 样式列表
+		// 除styleList代码 START
+		let styleList  = comp[data.name].styleList	// 样式列表
+		// 除styleList代码 END
 		let styles     = Object.keys(style)		// 具体样式
 		let comps      = data.data.components
 		let activeKey  = Array.from(new Array(styles.length), (_, i) => `${i}`)
@@ -268,7 +272,7 @@ class EditStyle extends React.Component {
 					add={false}
 					edit={false}
 					list={styleList.list}
-					idx={styleList.idx}
+					idx={data.styleList.idx}
 					parentKey={'styleList'}
 					action={'updateComp'}
 					name={'样式'}

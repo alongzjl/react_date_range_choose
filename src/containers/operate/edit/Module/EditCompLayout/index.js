@@ -50,6 +50,22 @@ class EditCompLayout extends React.Component {
 		actions.updateCur(curData)	// 更新 当前数据
 		actions.selectComp(data)
 	}
+	selectMulti(idx) {
+		let { actions, editConfig } = this.props
+		let { globalData, curData } = editConfig
+		let { parentComp } = curData
+		let { multiComp }  = globalData
+		let { index, list, type } = multiComp
+		
+		var s = {}
+		s[idx] = true
+		multiComp.index = s
+		multiComp.list  = [idx]
+		multiComp.type = 'parent'
+		delete multiComp.parentIdx
+		actions.updateGlobal(globalData)
+		console.log(JSON.stringify(multiComp.list))
+	}
 	onSortEnd(o, e) {
 		let { data, actions, editConfig } = this.props
 		let curData = editConfig.curData
@@ -60,6 +76,7 @@ class EditCompLayout extends React.Component {
 		let item = eles[old]
 		if (old === next) {
 			this.selectComp(e, item, len - next)
+			this.selectMulti(len - next)
 			return
 		}
 		data.elements = arrayMove(eles, old, next).reverse()
@@ -113,13 +130,6 @@ class EditCompLayout extends React.Component {
 					}
 				</ul>
 			)
-							// <li key={i} className={`pecl-li${i === editConfig.curData.compIdx? ' s-active': ''}`}>
-							// 	<SortableItem index={i} i={i} _={_} />
-							// 	<div className="pl-ctrl">
-							// 		<a onClick={e => this.copyComp(e, _)}><Icon type="copy"/></a>
-							// 		<a onClick={e => this.removeComp(e, i)}><Icon type="delete"/></a>
-							// 	</div>
-							// </li>
 		})
 		return (
 			<div className="pe-comp-layout">

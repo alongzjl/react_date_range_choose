@@ -38,7 +38,7 @@ class Header extends React.Component {
 
 	addComp(item) {
 		let { actions, editConfig } = this.props
-		let { curComp, curData } = editConfig
+		let { curComp, curData, curPage } = editConfig
 		let { parentComp } = curData
 		let { key } = item
 		if (!key) return
@@ -49,6 +49,7 @@ class Header extends React.Component {
 			if (compData.type === 'base' && auth[key]) {
 				Comp.data.components.push(compData)
 				message.success(`添加子组件: ${compMap[key]}!`)
+				this.selectMulti(Comp.data.components.length - 1)
 				return actions.updateComp(null, Comp)
 			} else {
 				message.info('该高级组件内不能添加该基础组件!')
@@ -56,10 +57,31 @@ class Header extends React.Component {
 		} else {
 			if (compP[key]) {
 				message.success(`添加组件: ${compMap[key]}!`)
-				return actions.addComp(editConfig.curData.router, key)
+				this.selectMulti(curPage.elements.length)
+				return actions.addComp(curData.router, key)
 			}
 			message.info('该组件内只能添加在高级组件中!')
 		} 
+	}
+	selectMulti(idx) {
+		let { actions, editConfig } = this.props
+		let { globalData, curData } = editConfig
+		let { parentComp } = curData
+		let { multiComp }  = globalData
+		let { index, list, type } = multiComp
+		
+		var s = {}
+		s[idx] = true
+		multiComp.index = s
+		multiComp.list  = [idx]
+		if (parentComp) {
+			multiComp.type = 'child'
+		} else {
+			multiComp.type = 'parent'
+			delete multiComp.parentIdx
+		}
+		actions.updateGlobal(globalData)
+		console.log(JSON.stringify(multiComp.list))
 	}
 	selectTheme() {
 		let { actions, editConfig } = this.props
