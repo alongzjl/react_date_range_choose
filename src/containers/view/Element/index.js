@@ -108,7 +108,7 @@ class Element extends React.Component {
 			<div className={`pg-element-view e-flex-box pg-element-${ct} ${ads}`}>
 				<div className="pg-element-box">
 					{ ads
-						? <div className="ads-placeholder">16:9广告位</div>
+						? <div className="ads-placeholder"></div>
 						: null
 					}
 					<section className="pg-element" style={bgStyle}>
