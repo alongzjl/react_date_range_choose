@@ -50,10 +50,10 @@ const dataFormat = {
 								})
 								break
 							case 'styleList':
-								let { idx, list } = da,
-									oli  = org.list,
-									dlen = list.length,
-									olen = oli.length
+								let { idx } = da
+									// oli  = org.list,
+									// dlen = list.length,
+									// olen = oli.length
 								if (idx === undefined || !org[idx]) da.idx = org.idx
 								// if (dlen !== olen) {
 								// 	// 老 > 新: 删老
