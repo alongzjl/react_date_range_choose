@@ -71,7 +71,8 @@ class EditPage extends React.Component {
 			duration: 1,				// 持续时间
 			iterationCount: 1			// 循环次数
 		}
-		let { data }    = this.props,
+		let { data, editConfig } = this.props,
+			{ pageIdx } = editConfig.curData,
 			{ feature } = data
 		if (!data || data.title === undefined) return false
 		if (data.animation === undefined) {
@@ -112,16 +113,21 @@ class EditPage extends React.Component {
 							</div>
 							<div className="pgsr-auth"></div>
 						</div>
-						<div className="pgs-row">
-							<div className="pgsr-name">返回时间</div>
-							<div className="pgsr-ctrl">
-								{ this.renderSlider({
-									min: 10,
-									max: 600,
-									step: 10
-								}, feature.homeTime || 30, 'feature.homeTime') }
+						{
+							pageIdx
+							?
+							<div className="pgs-row">
+								<div className="pgsr-name">返回时间</div>
+								<div className="pgsr-ctrl">
+									{ this.renderSlider({
+										min: 10,
+										max: 600,
+										step: 10
+									}, feature.homeTime || 30, 'feature.homeTime') }
+								</div>
 							</div>
-						</div>
+							: null
+						}
 					</Panel>
 				</Collapse>
 				<PageAnime data={data} type={'in'} />
