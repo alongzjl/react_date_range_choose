@@ -9,7 +9,7 @@ const data = {
 	},
 	style:     {
 		filterBox: {
-			fontSize:       8, 
+			fontSize:       12,
 			fontStyle:      'normal',
 			fontWeight:     'normal',
 			textDecoration: 'none',
