@@ -32,35 +32,9 @@ class ListByStore extends React.Component {
 		)
 	}
 }
+
 //动画一
-function RenderDom({ props, list }) {
-	let end = e =>{
-		e.target.style.opacity = 1;
-	}
-	let defaultStyle = cssColorFormat(props, 'filter'),
-		animationStyle = {"animationDuration":"0.5s","animationDelay":"0s","animationIterationCount":1};
-	defaultStyle = {...defaultStyle,...animationStyle};
-	let node = list.map((_, i) => {
-		return (
-			<div
-				key={i}
-				style={{...defaultStyle,animationDelay:`${0.1*i}s`}}
-				className={`ep-item fadeInCenter`}
-				onAnimationEnd={e=>{end(e)}}
-			>
-				<p><img  style={cssColorFormat(props, 'image')} src={_.pic} /></p>
-				<p><span style={cssColorFormat(props, 'title')}>{_.name}</span></p>
-				<p>
-					<i    style={cssColorFormat(props, 'posIcon')}></i>
-					<span style={cssColorFormat(props, 'text')}>{_.floor}</span>
-				</p>
-			</div>
-		)
-	})
-	return (<div>{ node }</div>)
-}
-//动画二
-function RenderDomTwo({props, list}) {
+function RenderDom({props, list}) {
 	let end = e =>{
 		e.target.style.opacity = 1;
 	}
@@ -84,6 +58,33 @@ function RenderDomTwo({props, list}) {
 							<span style={cssColorFormat(props, 'text')}>{_.floor}</span>
 						</p>
 				</div>
+			</div>
+		)
+	})
+	return (<div>{ node }</div>)
+}
+//动画二
+function RenderDomTwo({ props, list }) {
+	let end = e =>{
+		e.target.style.opacity = 1;
+	}
+	let defaultStyle = cssColorFormat(props, 'filter'),
+		animationStyle = {"animationDuration":"0.5s","animationDelay":"0s","animationIterationCount":1};
+	defaultStyle = {...defaultStyle,...animationStyle};
+	let node = list.map((_, i) => {
+		return (
+			<div
+				key={i}
+				style={{...defaultStyle,animationDelay:`${0.1*i}s`}}
+				className={`ep-item fadeInCenter`}
+				onAnimationEnd={e=>{end(e)}}
+			>
+				<p><img  style={cssColorFormat(props, 'image')} src={_.pic} /></p>
+				<p><span style={cssColorFormat(props, 'title')}>{_.name}</span></p>
+				<p>
+					<i    style={cssColorFormat(props, 'posIcon')}></i>
+					<span style={cssColorFormat(props, 'text')}>{_.floor}</span>
+				</p>
 			</div>
 		)
 	})

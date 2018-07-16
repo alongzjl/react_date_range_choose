@@ -30,7 +30,7 @@ class ListByStore extends React.Component {
 	render() {
 		const { data } = this.props
 		const type = data.data.data.content.animationType
-		let option = [{name:'淡入',value:1},{name:'平铺',value:2}]
+		let option = [{name:'淡入淡出',value:1},{name:'逐行进入',value:2}]
 		return (
 			<div className="e-listByStore-content">
 				<Collapse activeKey={['0']} onChange={this.cb}>
