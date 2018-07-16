@@ -51,19 +51,7 @@ const dataFormat = {
 								break
 							case 'styleList':
 								let { idx } = da
-									// oli  = org.list,
-									// dlen = list.length,
-									// olen = oli.length
-								if (idx === undefined || !org[idx]) da.idx = org.idx
-								// if (dlen !== olen) {
-								// 	// 老 > 新: 删老
-								// 	if (dlen > olen) {
-								// 		list.splice(olen, dlen - olen)
-								// 	} else {
-								// 		da.list = list.concat(oli.slice(dlen, olen - dlen))
-								// 	}
-								// }
-
+								if (idx === undefined || !org.list[idx]) da.idx = org.idx || 0
 								// 除styleList代码 START
 								if (da.list) delete da.list
 								break
@@ -81,20 +69,18 @@ const dataFormat = {
 						switch(key) {
 							case 'components':
 								da.map((_, i) => {
-									var dn = _.name, on
-									for (var j = 0, l = org.length; j < l; j++) {
-										var o  = org[j],
-											n  = o.name,
-											s1 = _.styleList,
-											s  = o.styleList
-										if (s1.idx === undefined) s1.idx = 0
-										if (dn === n) {
-											on = o
-											if (s1.idx === s.idx) break
-										}
-									}
-									on = on? on: comp[dn]
-									this.plus(_, on, i, da)
+									var dn = _.name,
+										cd = deepCopy(comp[dn]),
+										s1 = _.styleList
+									s1.idx = s1.idx || 0
+									var i1 = s1.idx,
+										l1 = s1.list,
+										s2 = cd.styleList,
+										i2 = s2.idx,
+										l2 = s2.list
+									s2.idx  = i1 || 0
+									cd.data = l2[i1].data
+									this.plus(_, cd, i, da)
 								})
 								break
 							default:
@@ -136,18 +122,18 @@ const dataFormat = {
 						switch(key) {
 							case 'components':
 								da.map((_, i) => {
-									var dn = _.name, on, ca
-									for (var j = 0, l = org.length; j < l; j++) {
-										var o = org[j],
-											n = o.name,
-											s = o.styleList
-										if (dn === n) {
-											on = o
-											if (_.styleList.idx === s.idx) break
-										}
-									}
-									on = on? on: comp[dn]
-									this.slim(da[_], comp[_.name], i, da)
+									var dn = _.name,
+										cd = deepCopy(comp[dn]),
+										s1 = _.styleList
+									s1.idx = s1.idx || 0
+									var i1 = s1.idx,
+										l1 = s1.list,
+										s2 = cd.styleList,
+										i2 = s2.idx,
+										l2 = s2.list
+									s2.idx  = i1 || 0
+									cd.data = l2[i1].data
+									this.plus(_, cd, i, da)
 								})
 								break
 							default:
