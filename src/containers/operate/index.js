@@ -54,7 +54,7 @@ class OperateComponent extends React.Component {
 					name: name || '',
 					templateType: templateType || 'MALL',
 					composeType:  composeType  || 'PORTRAIT',
-					adsFlag:      adsFlag      || 0
+					adsFlag:      ~~adsFlag      || 0
 				}
 				return resolve('模板数据')
 			}
