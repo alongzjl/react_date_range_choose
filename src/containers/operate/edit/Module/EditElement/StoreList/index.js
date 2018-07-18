@@ -20,6 +20,7 @@ let cusMap = {
 class StoreList extends React.Component {
 	constructor(props) {
 		super(props)
+		this.makeArr = this.makeArr.bind(this)
 	}
 	componentWillMount() {}
 
@@ -31,28 +32,32 @@ class StoreList extends React.Component {
 		let { data, actions, idx, csn } = this.props
 		let body = ipt.body
 		let keys = []
-		ipt.list = new Array(12).fill().map((_, i) => {
-			var m = Math.floor(Math.random() * 1e2)
-			return {
-				id: i + 1,
-				name:  '康帅傅',
-				price: `${m}.99`,
-				floor: `L1=1${('00' + m).substr(-2)}`,
-				no:    `1${('00' + m).substr(-2)}`,
-				mall_id: '54f403eae4b002000cf63762',
-				pic: 'http://rongyi.b0.upaiyun.com/commodity/text/201805191209037272.png'
-			}
-		})
+		let size = data.data.content.size || 12
+		ipt.list = this.makeArr(size)
 		this.setState({ ioInput: ipt })
 		console.clear()
 		console.log(body)
 	}
-
+	makeArr(size){
+		return new Array(size).fill().map((_, i) => {
+			var m = Math.floor(Math.random() * 1e2)
+			return {
+				id: i + 1,
+				name:  'UNIQLO',
+				price: `${m}.99`,
+				floor: `L1=1${('00' + m).substr(-2)}`,
+				no:    `1${('00' + m).substr(-2)}`,
+				mall_id: '54f403eae4b002000cf63762',
+				pic: 'http://rongyi.b0.upaiyun.com/commodity/text/201805311433385479.png'
+			}
+		})
+	}
 	init() {
 		let { data } = this.props
 		let { feature } = data
 		let { content } = data.data
 		feature.body.size = content.size
+		feature.list = this.makeArr(content.size)
 		this.state = {
 			ioInput: feature
 		}
