@@ -138,11 +138,11 @@ class EditElement extends React.Component {
 			)
 		})
 		return (
-			<div className={`pg-element-business e-flex-box pg-element-${ct} ${ads}`}>
+			<div className={`pg-element-business e-flex-box pg-element-${ct}`}>
 				<div className="pg-element-box">
-					{ ads
+					{ /*ads
 						? <div className="ads-placeholder"></div>
-						: null
+						: null*/
 					}
 					<section id="pgElement" className="pg-element">
 						<div id="pgElementChild" className="pg-element-child" style={bgStyle}>
