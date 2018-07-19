@@ -99,7 +99,7 @@ function aniTime(props,list){
 		  l = filter.margin.split(' '),
 		  all = list.length,
 		  w = Math.floor(widthBox/(widthSelf+parseInt(l[1])+parseInt(l[3]))),
-		  number = Math.floor(all/w) > w ? Math.floor(all/w) : w,
+		  number = Math.ceil(all/w) > w ? Math.ceil(all/w) : w,
 		  arr = [],
 		  postArr = [];
 	for(let i = 0;i<number*number;i++){
@@ -126,12 +126,16 @@ function aniTime(props,list){
 			}
 		}
 	}
-	if(Math.floor(all/w) > w){
+	if(Math.ceil(all/w) > w){
 		arr.map((item,index)=>{
 			const num = number - w;
 			for(let j = 0;j<number;j++){
 				if(index>=j*number && index<j*number+w){
-					postArr[index] = {...list[index-num*j],show:item};
+					if((index-num*j) > (all-1)){
+						postArr[index] = {show:'none'}
+					}else{
+						postArr[index] = {...list[index-num*j],show:item};
+					}
 					break
 				}else{
 					postArr[index] = {show:'none'}
