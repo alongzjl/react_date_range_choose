@@ -261,11 +261,11 @@ class EditElement extends React.Component {
 						// onClick={e => e.preventDefault();this.selectComp(e, _, i)}
 		})
 		return (
-			<div className={`pg-element-parent e-flex-box pg-element-${ct} ${ads}`}>
+			<div className={`pg-element-parent e-flex-box pg-element-${ct}`}>
 				<div className="pg-element-box">
-					{ ads
+					{ /*ads
 						? <div className="ads-placeholder"></div>
-						: null
+						: null*/
 					}
 					<section id="pgElement" className="pg-element">
 						<div id="pgElementChild" className="pg-element-child" style={bgStyle}>
