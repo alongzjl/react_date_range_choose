@@ -9,6 +9,7 @@ import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect }  from 'react-redux'
 import * as actions from 'actions'
+import './index.less'
 
 import Rnd from 'react-rnd'
 import { Icon } from 'antd'
@@ -31,7 +32,9 @@ import ListByStore  from 'compEdit/EditElement/ListByStore'
 import SplitLine         from 'compEdit/EditElement/SplitLine'
 import WonderfulActivity from 'compEdit/EditElement/WonderfulActivity'
 
-import './index.less'
+import * as variable from 'var'
+var animeMap = variable.animeCompMap,
+	aStyle   = animeMap.style
 
 const compContent = (name, data, parent, editConfig, actions, type, ioInput, ioOuter) => {
 	var props  = { data, parent, editConfig, actions, type, ioInput, ioOuter }

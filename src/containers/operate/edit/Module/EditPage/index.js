@@ -54,6 +54,7 @@ class EditPage extends React.Component {
 				<Col span={3}></Col>
 				<Col span={9}>
 					<InputNumber
+						disabled={cfg.disabled || false}
 						min={cfg.min || 0} max={cfg.max || 100} step={cfg.step || 1}
 						value={val} onChange={v => this.onChange(v, key)}
 						style={{ width: '100%' }}
@@ -120,7 +121,8 @@ class EditPage extends React.Component {
 									{ this.renderSlider({
 										min: 10,
 										max: 600,
-										step: 10
+										step: 10,
+										disabled: true
 									}, feature.homeTime || 30, 'feature.homeTime') }
 								</div>
 							</div>
