@@ -23,6 +23,7 @@ import Weather           from 'compEdit/EditElement/Weather'
 import StoreList         from 'compEdit/EditElement/StoreList'
 import StoreDetails      from 'compEdit/EditElement/StoreDetails'
 import StoreInstro       from 'compEdit/EditElement/StoreInstro'
+import GoodsList         from 'compEdit/EditElement/GoodsList'
 import DateWeather       from 'compEdit/EditElement/DateWeather'
 import Navigation        from 'compEdit/EditElement/Navigation'
 import NavigationFloat   from 'compEdit/EditElement/NavigationFloat'
@@ -60,6 +61,7 @@ const compContent = (name, data, actions, type, idx, csn, keyCtrl) => {
 		navigation:        <Navigation        {...props} />,
 		navigationFloat:   <NavigationFloat   {...props} />,
 		storeList:         <StoreList         {...props} />,
+		goodsList:         <GoodsList         {...props} />,
 		storeDetails:      <StoreDetails      {...props} />,
 		storeInstro:       <StoreInstro       {...props} />,
 		splitLine:         <SplitLine         {...props} />,

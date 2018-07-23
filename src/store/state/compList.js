@@ -191,6 +191,28 @@ module.exports = [
 			]
 		},
 		{
+			icon: 'store',
+			name: '商品列表',
+			key:  'goodsList',
+			child: [
+				{
+					icon: 'sorter',
+					name: '分页',
+					key:  'page'
+				},
+				{
+					icon: 'reset',
+					name: '重置',
+					key:  'reset'
+				},
+				{
+					icon: 'list',
+					name: '列表',
+					key:  'listByGoods'
+				}
+			]
+		},
+		{
 			icon: '2DMap',
 			name: '2D地图',
 			key:  'map2D'

@@ -17,5 +17,6 @@ module.exports = {
 	storeInstro:       1,
 	dateWeather:       1,
 	map2D:             1,
-	html:              1
+	html:              1,
+	goodsList:         1
 }

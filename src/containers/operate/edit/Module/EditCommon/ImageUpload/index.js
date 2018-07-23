@@ -36,7 +36,7 @@ class ImageUpload extends React.Component {
 	enter(imgList,attribute) {
 		let cb  = this.props.enter,
 			url = imgList[0].url
-		cb && cb(url,attribute)
+		cb && cb(url, attribute)
 	}
 
 	changeImgType(val) {
@@ -59,7 +59,7 @@ class ImageUpload extends React.Component {
 		let btnNode, selectNode
 		let imgVal  = img && img.img
 		let theme   = editConfig.globalData.theme
-		let colors  = JSON.parse(JSON.stringify(theme.list[theme.idx].colors))
+		let colors  = deepCopy(theme.list[theme.idx].colors)
 		colors.custom = {
 			name: '自定义',
 			img:  imgVal

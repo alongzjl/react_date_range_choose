@@ -19,6 +19,9 @@ const Option = Select.Option
 import RouterJump        from 'compEdit/EditCommon/RouterJump'
 import ImageUploadComp   from 'compEdit/EditCommon/ImageUploadComp'
 import HtmlUpload        from 'compEdit/EditCommon/HtmlUpload'
+import CompLayout        from 'compEdit/EditCommon/CompLayout'
+
+import ChildElement      from './ChildElement'
 
 import SwiperImage       from './SwiperImage'
 import Navigation        from './Navigation'
@@ -43,6 +46,13 @@ class EditContent extends React.Component {
 
 	componentWillUnmount() {}
 
+	updateComp = () => {
+		let { data, actions, editConfig } = this.props
+		let { curData } = editConfig
+		let { content } = data.data
+		let { parentComp } = curData
+		actions.updateComp(null, parentComp? parentComp: data)
+	}
 	onChange(val, con, key, index) {
 		let { data, actions, editConfig } = this.props
 		let { curData } = editConfig
@@ -211,20 +221,25 @@ class EditContent extends React.Component {
 	}
 
 	render() {
-		let { data, actions } = this.props
+		let { data, actions, editConfig } = this.props
 		let compName = data.name
 		if (!compName) return false
-		let content  = data.data.content
+		let { curData } = editConfig
+		let { parentComp } = curData
+		let da = data.data
+		let { content } = da
+		let compLay = da.componentLayout
 		let compCon
 		let childNode
 		let activeKey
+		let feature
 		if (compName === 'navigation')             compCon = (<Navigation        data={this.props}/>)
 		else if (compName === 'navigationFloat')   compCon = (<NavigationFloat   data={this.props}/>)
 		else if (compName === 'weather')           compCon = (<Weather           data={this.props}/>)
 		else if (compName === 'wonderfulActivity') compCon = (<WonderfulActivity data={this.props}/>)
 		else if (compName === 'swiperImage')       compCon = (<SwiperImage       data={this.props}/>)
 		else if (compName === 'listByStore')       compCon = (<ListByStore       data={this.props}/>)
-		else if (compName === 'map2D')             compCon = (<Map2D       data={this.props}/>)	
+		else if (compName === 'map2D')             compCon = (<Map2D             data={this.props}/>)	
 		if (content.length) {
 			activeKey = Array.from(new Array(content.length + 1), (_, i) => `${i}`)
 			childNode = content.map((_, i) => {
@@ -243,13 +258,29 @@ class EditContent extends React.Component {
 				<Panel header={'内容编辑'} key={0}>
 					{ con }
 				</Panel>
-				:
-				false
+				: null
 			)
+		}
+		if (parentComp) {
+			var { filter } = da.style
+			feature = parentComp.feature
 		}
 		return (
 			<section className="ry-roll-screen-config">
 				{ compCon }
+				{
+					compLay
+					?
+					<Collapse activeKey={['0', '1']}>
+						<Panel header={`编辑布局`} key={0}>
+							<CompLayout list={feature.list} map={feature.map} layout={compLay} parentLayout={filter} updateComp={this.updateComp} />
+						</Panel>
+						<Panel header={`子元素`} key={1}>
+							<ChildElement name={compName} layout={compLay} updateComp={this.updateComp} />
+						</Panel>
+					</Collapse>
+					: null
+				}
 				<Collapse activeKey={activeKey} onChange={this.cb}>
 					{ childNode }
 				</Collapse>

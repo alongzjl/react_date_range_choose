@@ -1,0 +1,50 @@
+/*
+* @Author: weijie
+* @Date:   2017-09-28 10:49:49
+ * @Last Modified by: lishengpeng
+ * @Last Modified time: 2018-03-26 12:37:34
+*/
+
+.comp-layout {
+}
+.cl-parent {
+	display: flex;
+	width: 100%;
+	.cl-left,
+	.cl-center,
+	.cl-right {
+		display: flex;
+	}
+	.cl-left {
+		flex: 1;
+		justify-content: center;
+		align-items: center;
+		flex-direction: column;
+	}
+	.cl-right {
+		width: 300px;
+	}
+	.cl-style {
+		height: 100%;
+	}
+	.cl-element {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		margin: 30px auto;
+		box-shadow: 0 2px 10px rgba(0, 0, 0, .5);
+		.cl-element-child {
+			position: relative;
+			transform: scale(2);
+			// zoom: 2;
+		}
+		.pge-layout {
+			pointer-events: none;
+		}
+		.react-draggable {
+			&:hover {
+				z-index: 10;
+			}
+		}
+	}
+}

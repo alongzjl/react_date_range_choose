@@ -28,11 +28,11 @@ module.exports = {
 	// 店铺简介--标题
 	storeInstroTitle:  authInit(require('./storeInstro/content/storeInstroTitle')), 
 	// 店铺简介--详情
-	storeInstroInstroduce:  authInit(require('./storeInstro/content/storeInstroInstroduce')),
+	storeInstroInstroduce: authInit(require('./storeInstro/content/storeInstroInstroduce')),
 	// 店铺简介--轮播
-	storeWonderful:authInit(require('./storeInstro/content/storeWonderful')),
+	storeWonderful:    authInit(require('./storeInstro/content/storeWonderful')),
 	// 店铺简介--竖线
-	storeSplitLine:authInit(require('./storeInstro/content/storeSplitLine')),
+	storeSplitLine:    authInit(require('./storeInstro/content/storeSplitLine')),
 
 	// 店铺详情-标题
 	instroTitle:       authInit(require('./storeDetails/content/instroTitle')),
@@ -77,5 +77,13 @@ module.exports = {
 	// 2d地图组件
 	map2D:             authInit(require('./map2D')),
 	// 组件上传
-	html:              authInit(require('./html'))
+	html:              authInit(require('./html')),
+	// 图片-绑定
+	pictureBind:       authInit(require('./pictureBind')),
+	// 文本-绑定
+	textBind:          authInit(require('./textBind')),
+	// 商品列表
+	goodsList:         authInit(require('./goodsList/index')),
+	// 列表 (店铺)
+	listByGoods:       authInit(require('./goodsList/content/listByGoods'))
 }

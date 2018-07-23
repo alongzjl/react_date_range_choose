@@ -3,7 +3,7 @@ const data = {
 	style:     {
 		text: { 
 			textAlign:      'center',
-			fontSize:       12,
+			fontSize:       12, 
 			lineHeight:     18,
 			transform:       { rotate: 0 },
 			fontStyle:      'normal',
@@ -27,7 +27,7 @@ const data = {
 		height:   30
 	},
 	content: {
-		text:   '', 			// 文字内容
+		bind:   '', 			// 绑定字段
 		router: {}				// 路由
 	},
 	type:'normal',
@@ -43,7 +43,7 @@ var style = {
 }
 
 module.exports = {
-	name: 'text',
+	name: 'textBind',
 	type: 'base',
 	// 位置大小
 	// 样式管理
@@ -56,15 +56,7 @@ module.exports = {
 			name:  '样式1',
 			img:   '',
 			data:  JSON.parse(JSON.stringify(data))
-		}/*, {
-			name:  '样式2',
-			img:   '',
-			data:  JSON.parse(JSON.stringify(data))
-		}, {
-			name:  '样式3',
-			img:   '',
-			data:  JSON.parse(JSON.stringify(data))
-		}*/] 
+		}] 
 	},
 	// 功能特性
 	feature: {

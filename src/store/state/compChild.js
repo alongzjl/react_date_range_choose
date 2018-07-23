@@ -28,5 +28,10 @@ module.exports = {
 		weatherLogo: 1,
 		time:    1,
 		weather: 1
-	}
+	},
+	goodsList: {
+		page:        1,
+		reset:       1,
+		listByGoods: 1
+	},
 }

@@ -9,6 +9,7 @@ import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect }  from 'react-redux'
 import * as actions from 'actions'
+import './index.less'
 
 import Rnd from 'react-rnd'
 import { Icon, message } from 'antd'
@@ -28,6 +29,7 @@ import Page         from 'compEdit/EditElement/Page'
 import Reset        from 'compEdit/EditElement/Reset'
 import FloorMap     from 'compEdit/EditElement/FloorMap'
 import ListByStore  from 'compEdit/EditElement/ListByStore'
+import ListByGoods  from 'compEdit/EditElement/goodsList/ListByGoods'
 import SplitLine         from 'compEdit/EditElement/SplitLine'
 import WonderfulActivity from 'compEdit/EditElement/WonderfulActivity'
 
@@ -54,12 +56,11 @@ const compContent = (name, data, parent, editConfig, actions, type, ioInput, ioO
 		floorMap:          <FloorMap          {...props} />,
 		splitLine:         <SplitLine         {...props} />,
 		reset:             <Reset             {...props} />,
-		listByStore:       <ListByStore       {...props} />
+		listByStore:       <ListByStore       {...props} />,
+		listByGoods:       <ListByGoods       {...props} />
 	}
 	return render[name]
 }
-
-import './index.less'
 
 class Custom extends React.Component {
 	constructor(props) {
