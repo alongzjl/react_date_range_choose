@@ -27,14 +27,14 @@ class StoreList extends React.Component {
 	componentDidMount() {}
 
 	componentWillUnmount() {}
-	// componentWillReceiveProps() {
-	// 	let { data } = this.props
-	// 	let { feature } = data
-	// 	let ipt = deepCopy(feature)
-	// 	this.getList(ipt)
-	// 	this.state = { ioInput: ipt }
-	// 	this.ioOuter(ipt)
-	// }
+	componentWillReceiveProps() {
+		let { data } = this.props
+		let { feature } = data
+		let ipt = deepCopy(feature)
+		this.getList(ipt)
+		this.state = { ioInput: ipt }
+		this.ioOuter(ipt)
+	}
 
 	ioOuter(ipt) {
 		this.getList(ipt)
