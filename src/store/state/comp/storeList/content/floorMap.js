@@ -9,9 +9,9 @@ const data = {
 	layout: {
 		position: 'absolute',
 		top:      340,
-		left:     0,
-		width:    540,
-		height:   400
+		left:     45,
+		width:    450,
+		height:   450
 	}, 
 	style: {
 		

@@ -56,10 +56,10 @@ const p_2 = extend(deepCopy(p), {
 const dataStyle_2 = {
 	layout: {
 		position: 'absolute',
-		top:      100,
+		top:      0,
 		left:     0,
 		width:    540,
-		height:   750
+		height:   850
 	},
 	style: {
 	},
