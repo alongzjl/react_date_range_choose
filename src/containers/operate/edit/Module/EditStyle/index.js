@@ -37,13 +37,16 @@ class EditStyle extends React.Component {
 
 	componentWillUnmount() {}
 
-	onChange(val, css, obj,node, attribute) { 
+	onChange(val, css, obj,cfg,node, attribute) { 
 		let { data, actions, editConfig } = this.props
 		data = StyleFilter.lineHightAdaptation(data,val,css)
 		data = StyleFilter.imageAdaptation(data,attribute)
 		let da = data.data
 		let { curData } = editConfig
 		let { parentComp } = curData
+		if(getAttr(val) == 'Number'){
+			val = val > cfg.max ? cfg.max : val
+		} 
 		if (node) {
 			obj[css][node] = val
 		} else {
@@ -70,7 +73,7 @@ class EditStyle extends React.Component {
 		return (
 			<InputNumber
 				min={cfg.min || 0} max={cfg.max || 100} step={cfg.step || 1}
-				value={val} onChange={v => this.onChange(v, key, obj, node)}
+				value={val} onChange={v => this.onChange(v, key, obj,cfg, node)}
 				style={{ width: '100%' }}
 			/>
 		)
@@ -102,7 +105,7 @@ class EditStyle extends React.Component {
 			{ name: '右', value: 'right' }
 		]
 		return (
-			<RadioGroup size="small" onChange={_ => this.onChange(_.target.value, key, obj, node)} value={val}>
+			<RadioGroup size="small" onChange={_ => this.onChange(_.target.value, key, obj,cfg, node)} value={val}>
 				{ option.map((_, i) => (<RadioButton key={i} value={_.value}>{_.name}</RadioButton>)) }
 			</RadioGroup>
 		)
@@ -110,7 +113,7 @@ class EditStyle extends React.Component {
 	// 边框样式
 	renderSolid(cfg, data, obj, val, key, node) {
 		return (
-			<RadioGroup size="small" onChange={_ => this.onChange(_.target.value, key, obj, node)} value={val}>
+			<RadioGroup size="small" onChange={_ => this.onChange(_.target.value, key, obj,cfg, node)} value={val}>
 				<RadioButton value="solid">实线</RadioButton>
 				<RadioButton value="double">双线</RadioButton>
 				<RadioButton value="dashed">虚线</RadioButton>
@@ -121,7 +124,7 @@ class EditStyle extends React.Component {
 	// 边框样式
 	renderBGSize(cfg, data, obj, val, key, node) {
 		return (
-			<RadioGroup size="small" onChange={_ => this.onChange(_.target.value, key, obj, node)} value={val}>
+			<RadioGroup size="small" onChange={_ => this.onChange(_.target.value, key, obj,cfg, node)} value={val}>
 				<RadioButton value="contain">居中</RadioButton>
 				<RadioButton value="cover">充满</RadioButton>
 			</RadioGroup> 
@@ -142,7 +145,7 @@ class EditStyle extends React.Component {
 	renderCheckbox(cfg, data, obj, val, key, node) {
 		return (
 			<Checkbox
-				checked={val === cfg.true} onChange={v => this.onChange(v.target.checked? cfg.true: cfg.false, key, obj, node)}
+				checked={val === cfg.true} onChange={v => this.onChange(v.target.checked? cfg.true: cfg.false, key, obj,cfg, node)}
 			/>
 		)
 	}
@@ -151,7 +154,7 @@ class EditStyle extends React.Component {
 		return (
 			<Switch
 				size="small"
-				checked={val === cfg.true} onChange={v => this.onChange(v? cfg.true: cfg.false, key, obj, node)}
+				checked={val === cfg.true} onChange={v => this.onChange(v? cfg.true: cfg.false, key, obj,cfg, node)}
 			/>
 		)
 	}
@@ -162,14 +165,14 @@ class EditStyle extends React.Component {
 				<Col span={12}>
 					<Slider
 						min={cfg.min || 0} max={cfg.max || 100} step={cfg.step || 1}
-						value={val} onChange={v => this.onChange(v, key, obj, node)}
+						value={val} onChange={v => this.onChange(v, key, obj,cfg, node)}
 					/>
 				</Col>
 				<Col span={3}></Col>
 				<Col span={9}>
 					<InputNumber
 						min={cfg.min || 0} max={cfg.max || 100} step={cfg.step || 1}
-						value={val} onChange={v => this.onChange(v, key, obj, node)}
+						value={val} onChange={v => this.onChange(v, key, obj,cfg, node)}
 						style={{ width: '100%' }}
 					/>
 				</Col>

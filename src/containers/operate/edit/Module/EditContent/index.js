@@ -53,11 +53,12 @@ class EditContent extends React.Component {
 		let { parentComp } = curData
 		actions.updateComp(null, parentComp? parentComp: data)
 	}
-	onChange(val, con, key, index) {
+	onChange(val, con, key,cfg, index) {
 		let { data, actions, editConfig } = this.props
 		let { curData } = editConfig
 		let { content } = data.data
 		let { parentComp } = curData
+		val = val > cfg.max ? cfg.max : val 
 		con[key] = val
 		actions.updateComp(null, parentComp? parentComp: data)
 	}
@@ -93,7 +94,7 @@ class EditContent extends React.Component {
 				min={cfg.min || 0} max={cfg.max || 100}
 				placeholder={cfg.placeholder || '右侧编辑内容'}
 				autosize={cfg.autosize || false}
-				value={val} onChange={v => this.onChange(v.target.value, con, key, index)}
+				value={val} onChange={v => this.onChange(v.target.value, con, key,cfg, index)}
 				style={{ width: '100%' }}
 			/>
 		)
@@ -103,7 +104,7 @@ class EditContent extends React.Component {
 		return (
 			<InputNumber
 				min={cfg.min || 0} max={cfg.max || 100} step={cfg.step || 1}
-				value={val} onChange={v => this.onChange(v, con, key, index)}
+				value={val} onChange={v => this.onChange(v, con, key,cfg, index)}
 				style={{ width: '100%' }}
 			/>
 		)
@@ -113,7 +114,7 @@ class EditContent extends React.Component {
 		return (
 			<Input
 				min={cfg.min || 0} max={cfg.max || 100}
-				value={val} onChange={v => this.onChange(v.target.value, con, key, index)}
+				value={val} onChange={v => this.onChange(v.target.value, con, key,cfg, index)}
 				style={{ width: '100%' }}
 			/>
 		)
@@ -158,7 +159,7 @@ class EditContent extends React.Component {
 			<HtmlUpload
 				data={val}
 				style={{ width: '100%' }}
-				onChange={v => this.onChange(v, con, key, index)}
+				onChange={v => this.onChange(v, con, key,cfg, index)}
 			/>
 		)
 	}
@@ -167,7 +168,7 @@ class EditContent extends React.Component {
 		return (
 			<Input
 				minLength={cfg.min || 0} maxLength={cfg.max || 100}
-				defaultValue={val} onBlur={v => this.onChange(v.target.value, con, key, index)}
+				defaultValue={val} onBlur={v => this.onChange(v.target.value, con, key,cfg, index)}
 				style={{ width: '100%' }}
 			/>
 		)
@@ -177,7 +178,7 @@ class EditContent extends React.Component {
 		return (
 			<Input
 				minLength={cfg.min || 0} maxLength={cfg.max || 100}
-				defaultValue={val} onChange={v => this.onChange(v.target.value, con, key, index)}
+				defaultValue={val} onChange={v => this.onChange(v.target.value, con, key,cfg, index)}
 				style={{ width: '100%' }}
 			/>
 		)
@@ -186,7 +187,7 @@ class EditContent extends React.Component {
 	renderCheckbox(cfg, con, val, key, index) {
 		return (
 			<Checkbox
-				checked={val || cfg.defaultValue || false} onChange={v => this.onChange(v.target.checked, con, key, index)}
+				checked={val || cfg.defaultValue || false} onChange={v => this.onChange(v.target.checked, con, key,cfg, index)}
 			/>
 		)
 	}
