@@ -30,7 +30,7 @@ import Weather           from './Weather'
 import WonderfulActivity from './WonderfulActivity'
 import Page              from './Page'
 import ListByStore       from './ListByStore'
-import Map2D             from './Map2D'
+import ThemeColor        from './ThemeColor'
 import filterContent     from './filter'
 
 import * as variable from 'var'
@@ -240,7 +240,8 @@ class EditContent extends React.Component {
 		else if (compName === 'wonderfulActivity') compCon = (<WonderfulActivity data={this.props}/>)
 		else if (compName === 'swiperImage')       compCon = (<SwiperImage       data={this.props}/>)
 		else if (compName === 'listByStore')       compCon = (<ListByStore       data={this.props}/>)
-		else if (compName === 'map2D')             compCon = (<Map2D             data={this.props}/>)	
+		else if (compName === 'map2D')             compCon = (<ThemeColor        data={this.props}/>)
+		else if (compName === 'floorMap')          compCon = (<ThemeColor        data={this.props}/>)	
 		if (content.length) {
 			activeKey = Array.from(new Array(content.length + 1), (_, i) => `${i}`)
 			childNode = content.map((_, i) => {

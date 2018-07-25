@@ -16,7 +16,7 @@ const Option = Select.Option;
 
 import './index.less' 
 
-class Map2D extends React.Component {
+class ThemeColor extends React.Component {
 	
 	cb = key => {
 		console.log(key)
@@ -28,9 +28,7 @@ class Map2D extends React.Component {
 			theme  = editConfig.globalData.theme,
 			themeColor = data.data.content.themeColor,
 		 	colors = JSON.parse(JSON.stringify(theme.list[theme.idx].colors));
-		value != 'custom' ? data.data.content.themeColor = {type:value,color:colors[value].color} : 
-		 data.data.content.themeColor = {type:value,color:themeColor.color};
-		console.log(value); 
+		data.data.content.themeColor.type = value;
 		actions['updateComp'](null, parentComp? parentComp: data)
 	};
 	changeCustomColor = c => {
@@ -40,7 +38,7 @@ class Map2D extends React.Component {
 		let { data, actions, editConfig }  = this.props.data
 		let { curData } = editConfig
 		let { parentComp } = curData
-		data.data.content.themeColor = {type:'custom',color:col}
+		data.data.content.themeColor = {type:'custom',color:col,alpha:c.alpha,rgb:c.color}
 		return actions['updateComp'](null, parentComp? parentComp: data)
 	}
 	render() {
@@ -112,4 +110,4 @@ class Map2D extends React.Component {
 	}
 }
 
-export default Map2D
+export default ThemeColor

@@ -9,14 +9,14 @@ const data = {
 	layout: {
 		position: 'absolute',
 		top:      340,
-		left:     45,
-		width:    450,
-		height:   450
+		left:     0,
+		width:    540,
+		height:   540
 	}, 
 	style: {
 		
 	},
-	content: {},
+	content: {themeColor:{type:'main',color:'#cfad81'}},
 	animation: {
 		className: '',	// 动画样式
 		direction: '',				// 方向

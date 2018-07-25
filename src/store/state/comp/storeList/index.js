@@ -59,7 +59,7 @@ const dataStyle_2 = {
 		top:      0,
 		left:     0,
 		width:    540,
-		height:   850
+		height:   900
 	},
 	style: {
 	},
