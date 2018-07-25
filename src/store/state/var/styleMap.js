@@ -84,25 +84,25 @@ module.exports = {
 		borderStyle:       { name: '边框样式', type: 'Solid' },
 		borderColor:       { name: '边框颜色', type: 'Color' },
 		margin:            { name: '外边距', type: 'Complex', child: {
-			top:     { name: '上', type: 'Number', max: 40 },
-			right:   { name: '右', type: 'Number', max: 40 },
-			bottom:  { name: '下', type: 'Number', max: 40 },
-			left:    { name: '左', type: 'Number', max: 40 }
+			top:     { name: '上', type: 'Number', max: 300 },
+			right:   { name: '右', type: 'Number', max: 300 },
+			bottom:  { name: '下', type: 'Number', max: 300 },
+			left:    { name: '左', type: 'Number', max: 300 }
 		} },
-		marginTop:         { name: '外边距上', type: 'Number', max: 20 },
-		marginRight:       { name: '外边距右', type: 'Number', max: 20 },
-		marginBottom:      { name: '外边距下', type: 'Number', max: 20 },
-		marginLeft:        { name: '外边距左', type: 'Number', max: 20 },
+		marginTop:         { name: '外边距上', type: 'Number', max: 300 },
+		marginRight:       { name: '外边距右', type: 'Number', max: 300 },
+		marginBottom:      { name: '外边距下', type: 'Number', max: 300 },
+		marginLeft:        { name: '外边距左', type: 'Number', max: 300 },
 		padding:           { name: '内边距', type: 'Complex', child: {
-			top:     { name: '上', type: 'Number', max: 40 },
-			right:   { name: '右', type: 'Number', max: 40 },
-			bottom:  { name: '下', type: 'Number', max: 40 },
-			left:    { name: '左', type: 'Number', max: 40 }
+			top:     { name: '上', type: 'Number', max: 300 },
+			right:   { name: '右', type: 'Number', max: 300 },
+			bottom:  { name: '下', type: 'Number', max: 300 },
+			left:    { name: '左', type: 'Number', max: 300 }
 		} },
-		paddingTop:        { name: '内边距上', type: 'Number', max: 20 },
-		paddingRight:      { name: '内边距右', type: 'Number', max: 20 },
-		paddingBottom:     { name: '内边距下', type: 'Number', max: 20 },
-		paddingLeft:       { name: '内边距左', type: 'Number', max: 20 },
+		paddingTop:        { name: '内边距上', type: 'Number', max: 300 },
+		paddingRight:      { name: '内边距右', type: 'Number', max: 300 },
+		paddingBottom:     { name: '内边距下', type: 'Number', max: 300 },
+		paddingLeft:       { name: '内边距左', type: 'Number', max: 300 },
 		justifyContent:    { name: '对齐方式', type: 'TextAlign', option: [
 			{ name: '左', value: 'flex-start' },
 			{ name: '中', value: 'center' },

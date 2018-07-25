@@ -1,3 +1,5 @@
+let { deepCopy } = require('state/common')
+
 // 图片
 const data = {
 	style:     {
@@ -8,7 +10,7 @@ const data = {
 				color: { type: 'custom', color: '#000' }
 			}
 		}  
-	}, 
+	},
 	layout: {
 		position: 'absolute',
 		top:      0,
@@ -25,7 +27,7 @@ const data = {
 		iterationCount: 1			// 循环次数
 	}
 }
-const data2 = JSON.parse(JSON.stringify(data))
+const data2 = deepCopy(data)
 data2.style.line = {
 	borderLeft: {
 		width: 1,
@@ -46,7 +48,7 @@ module.exports = {
 	type: 'base',
 	// 位置大小
 	// 样式管理
-	data: JSON.parse(JSON.stringify(data)),
+	data: deepCopy(data),
 	// 内容管理
 	// 样式列表
 	styleList: {
@@ -55,12 +57,12 @@ module.exports = {
 			{
 				name: '横向',
 				img:  '',
-				data: JSON.parse(JSON.stringify(data))
+				data: deepCopy(data)
 			},
 			{
 				name: '纵向',
 				img:  '',
-				data: JSON.parse(JSON.stringify(data2))
+				data: deepCopy(data2)
 			}
 		]
 	},

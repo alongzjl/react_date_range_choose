@@ -32,6 +32,17 @@ module.exports = {
 	goodsList: {
 		page:        1,
 		reset:       1,
-		listByGoods: 1
+		listByGoods: 1,
+		swiperBind:  1
 	},
+	goodsDetails: {
+		picture:     1,
+		text:        1,
+		pictureBind: 1,
+		textBind:    1,
+		swiperBind:  1,
+		area:        1,
+		goodsBar:    1,
+		pictureListBind: 1
+	}
 }

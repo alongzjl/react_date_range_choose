@@ -2,17 +2,26 @@ let { deepCopy } = require('state/common')
 
 // 图片
 const data = {
-	style:     {},
+	style:     {
+		filterBox: {
+			transform:    { rotate: 0 },
+			borderRadius: {
+				topLeft:     0,
+				topRight:    0,
+				bottomRight: 0,
+				bottomLeft:  0
+			},
+			backgroundColor: { type: 'custom', color: '#f00' }
+		}
+	},
 	layout: {
 		position: 'absolute',
 		top:      0,
 		left:     0,
-		width:    540,
-		height:   260
+		width:    120,
+		height:   120
 	},
-	content: {
-		url: ''
-	},
+	content: {},
 	animation: {
 		className: '',	// 动画样式
 		direction: '',				// 方向
@@ -23,12 +32,13 @@ const data = {
 }
 
 module.exports = {
-	name: 'web',
+	name: 'area',
 	type: 'base',
 	// 位置大小
 	// 样式管理
 	data: deepCopy(data),
 	// 内容管理
+	// 样式列表
 	styleList: {
 		idx:  0,
 		list: [{

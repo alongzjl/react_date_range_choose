@@ -9,7 +9,11 @@ import './index.less'
 
 export default class TextBind extends React.Component {
 	render() {
-		let { data, item } = this.props,
+		let props = this.props,
+			{ ioInput } = props,
+			ipt = ioInput? ioInput: props,
+			{ data } = props,
+			{ item } = ipt,
 			{ bind } = data.data.content,
 			text = bind? item[bind]: ''
 		return (

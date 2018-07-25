@@ -32,6 +32,12 @@ import ListByStore  from 'compEdit/EditElement/ListByStore'
 import ListByGoods  from 'compEdit/EditElement/goodsList/ListByGoods'
 import SplitLine         from 'compEdit/EditElement/SplitLine'
 import WonderfulActivity from 'compEdit/EditElement/WonderfulActivity'
+import PictureBind       from 'compEdit/EditElement/PictureBind'
+import TextBind          from 'compEdit/EditElement/TextBind'
+import SwiperBind        from 'compEdit/EditElement/SwiperBind'
+import Area              from 'compEdit/EditElement/Area'
+import PictureListBind   from 'compEdit/EditElement/PictureListBind'
+import GoodsBar          from 'compEdit/EditElement/goodsDetails/GoodsBar'
 
 import * as variable from 'var'
 var animeMap = variable.animeCompMap,
@@ -57,7 +63,13 @@ const compContent = (name, data, parent, editConfig, actions, type, ioInput, ioO
 		splitLine:         <SplitLine         {...props} />,
 		reset:             <Reset             {...props} />,
 		listByStore:       <ListByStore       {...props} />,
-		listByGoods:       <ListByGoods       {...props} />
+		listByGoods:       <ListByGoods       {...props} />,
+		pictureBind:       <PictureBind       {...props} />,
+		textBind:          <TextBind          {...props} />,
+		swiperBind:        <SwiperBind        {...props} />,
+		area:              <Area              {...props} />,
+		pictureListBind:   <PictureListBind   {...props} />,
+		goodsBar:          <GoodsBar          {...props} />
 	}
 	return render[name]
 }
@@ -172,7 +184,7 @@ class Custom extends React.Component {
 	}
 
 	render() {
-		let { data, actions, idx, csn, editConfig, ioInput, ioOuter,name } = this.props
+		let { data, actions, idx, csn, editConfig, ioInput, ioOuter, name } = this.props
 		let { globalData, curData } = editConfig
 		let { multiComp } = globalData
 		let { index, type } = multiComp
@@ -229,6 +241,7 @@ class Custom extends React.Component {
 						x: lay.left,
 						y: lay.top
 					}}
+					style={{ position: lay.position }}
 					onDragStart={e => this.selectComp(e, _, i, idx, data)}
 					onDragStop={(e, d) => this.dragStop(e, d, _, i, data)}
 					onResizeStart={e => this.selectComp(e, _, i, idx, data)}
@@ -245,7 +258,7 @@ class Custom extends React.Component {
 			)
 		})
 		return (
-			<section className={`pg-custom ${csn}`}>
+			<section className={`pg-custom ele-${data.name} ${csn} scrollbar`}>
 				{ childNode }
 			</section>
 		)

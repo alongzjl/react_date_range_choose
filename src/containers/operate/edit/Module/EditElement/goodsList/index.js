@@ -64,6 +64,7 @@ export default class GoodsList extends React.Component {
 				// name:     '康帅傅' + chs,
 				name:     chs,
 				pic:      'http://rongyi.b0.upaiyun.com/commodity/text/201807191807420161.jpg',
+				pics:     'http://a.vpimg3.com/upload/merchandise/pdcvis/2018/07/04/176/79c5de67-8f8f-4463-a82d-364d3dcd92e5_420x420_90.jpg,http://a.vpimg3.com/upload/merchandise/pdcvis/2018/07/04/62/bacab0f7-7b39-4631-b6ff-029e65ae5339_420x420_90.jpg,http://a.vpimg3.com/upload/merchandise/pdcvis/2018/07/04/115/51673b5a-f7ac-47f2-8dc3-ad6f8560631e_420x420_90.jpg',
 				QRPic:    'http://rongyi.b0.upaiyun.com/commodity/text/201807181419502662.png'
 			}
 		})
@@ -80,6 +81,7 @@ export default class GoodsList extends React.Component {
 			oldPrice:  '原价',
 			name:      '商品名称',
 			pic:       '图片',
+			pics:      '图片列表',
 			QRPic:     '二维码',
 		}
 		this.state = { ioInput: ipt }

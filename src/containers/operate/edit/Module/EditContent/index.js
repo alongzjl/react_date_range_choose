@@ -53,7 +53,7 @@ class EditContent extends React.Component {
 		let { parentComp } = curData
 		actions.updateComp(null, parentComp? parentComp: data)
 	}
-	onChange(val, con, key,cfg, index) {
+	onChange(val, con, key, cfg, index) {
 		let { data, actions, editConfig } = this.props
 		let { curData } = editConfig
 		let { content } = data.data
@@ -191,6 +191,27 @@ class EditContent extends React.Component {
 			/>
 		)
 	}
+	// 绑定
+	renderBind(cfg, con, val, key, index) {
+		let { editConfig } = this.props
+		let { parentComp } = editConfig.curData
+		let { item, map }  = parentComp.feature
+		let opts = Object.keys(map).map((_, i) => {
+			return <Option key={i} value={_}>{map[_]}</Option>
+		})
+		return (
+			<div>
+				<Select
+					value={val}
+					style={{ width: '100%' }}
+					onChange={v => { this.onChange(v, con, key, cfg, index) }}
+				>
+					<Option value={''}>无</Option>
+					{ opts }
+				</Select>
+			</div>
+		)
+	}
 
 	renObj(data, content, index) {
 		content = filterContent(data,content)
@@ -275,7 +296,7 @@ class EditContent extends React.Component {
 					?
 					<Collapse activeKey={['0', '1']}>
 						<Panel header={`编辑布局`} key={0}>
-							<CompLayout list={feature.list} map={feature.map} layout={compLay} parentLayout={filter} updateComp={this.updateComp} />
+							<CompLayout list={feature.list} item={feature.item} map={feature.map} layout={compLay} parentLayout={filter} updateComp={this.updateComp} />
 						</Panel>
 						<Panel header={`子元素`} key={1}>
 							<ChildElement name={compName} layout={compLay} updateComp={this.updateComp} />

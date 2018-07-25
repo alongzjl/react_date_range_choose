@@ -30,6 +30,8 @@ import NavigationFloat   from 'compEdit/EditElement/NavigationFloat'
 import SplitLine         from 'compEdit/EditElement/SplitLine'
 import Map2D             from 'compEdit/EditElement/Map2D'
 import Html              from 'compEdit/EditElement/Html'
+import GoodsDetails      from 'compEdit/EditElement/GoodsDetails'
+import Area              from 'compEdit/EditElement/Area'
 
 import ContextMenu       from 'compEdit/EditCommon/ContextMenu'
 import ShortcutKey       from 'compEdit/EditCommon/ShortcutKey'
@@ -67,7 +69,9 @@ const compContent = (name, data, actions, type, idx, csn, keyCtrl) => {
 		splitLine:         <SplitLine         {...props} />,
 		dateWeather:       <DateWeather       {...props} />,
 		map2D:             <Map2D             {...props} />,
-		html:              <Html              {...props} />
+		html:              <Html              {...props} />,
+		goodsDetails:      <GoodsDetails      {...props} />,
+		area:              <Area              {...props} />
 	}
 	return render[name]
 }
@@ -233,7 +237,7 @@ class EditElement extends React.Component {
 
 			let sl  = state[i]
 			let lay = i === compIdx? sl? sl: layout: layout
-
+			
 			return (
 				<Rnd
 					key={i}

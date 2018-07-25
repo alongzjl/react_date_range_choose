@@ -57,11 +57,13 @@ export default class CompLayout extends React.Component {
 		this.setState({ visible: false })
 	}
 	renderDom = (layout) => {
-		let { updateComp, list } = this.props
+		let { updateComp, list, item } = this.props
+		if (!list && !item) return null
+		let da = list? list[0]: item
 		return layout.map((_, i) => {
 			var { name, data } = _,
 				lay = data.layout,
-				dom = compContent(name, _, list[0])
+				dom = compContent(name, _, da)
 			return (
 				<RndModule
 					key={i}
@@ -78,7 +80,7 @@ export default class CompLayout extends React.Component {
 		})
 	}
 	render() {
-		let { list, map, layout, parentLayout, updateComp } = this.props
+		let { map, layout, parentLayout, updateComp } = this.props
 		let { visible, id, idx } = this.state
 		let { width, height } = parentLayout
 		let pLay = {

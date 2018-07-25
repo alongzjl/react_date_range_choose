@@ -106,6 +106,21 @@ module.exports = extend(window, {
 			split.push(m)
 		})
 		return split
+	},
+	// 节流
+	throttle(cb, wait, mustRun) {
+		var timeout, startTime = new Date()
+		return function() {
+			var context = this,
+				curTime = new Date()
+			clearTimeout(timeout)
+			if (curTime - startTime >= (mustRun || 500)) {
+				cb.apply(context, arguments)
+				startTime = curTime
+			} else {
+				timeout = setTimeout(cb, (wait || 600))
+			}
+		}
 	}
 	// Ajax: require('./ajax')
 })

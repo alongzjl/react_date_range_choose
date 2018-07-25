@@ -3,7 +3,7 @@
  * @Date:   2018-05-08
  
  */
-
+let { deepCopy } = require('state/common')
 
 // 精彩活动
 const data = {
@@ -103,13 +103,13 @@ module.exports = {
 	name: 'wonderfulActivity',
 	type: 'base',
 	// 样式管理
-	data: JSON.parse(JSON.stringify(data)),
+	data: deepCopy(data),
 	styleList: {
 		idx:  0,
 		list: [{
 			name: '样式1',
 			img:  '',
-			data: JSON.parse(JSON.stringify(data))
+			data: deepCopy(data)
 		}]
 	},
 	// 功能特性

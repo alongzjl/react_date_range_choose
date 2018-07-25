@@ -3,6 +3,7 @@
  * @Date:   2018-05-07
 
  */
+let { deepCopy } = require('state/common')
 
 // 按钮
 const data = {
@@ -68,14 +69,14 @@ const data = {
 module.exports = {
 	name: 'button',
 	type: 'base',
-	data: JSON.parse(JSON.stringify(data)),
+	data: deepCopy(data),
 	// 样式列表
 	styleList: {
 		idx:  0,
 		list: [{
 			name:  '样式1',
 			img:   '',
-			data:  JSON.parse(JSON.stringify(data))
+			data:  deepCopy(data)
 		}]
 	},
 	// 功能特性

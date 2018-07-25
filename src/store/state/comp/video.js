@@ -3,6 +3,7 @@
  * @Date:   2018-05-08
  
  */ 
+let { deepCopy } = require('state/common')
 
 // 视频
 const data = {
@@ -32,7 +33,7 @@ module.exports = {
 	name: 'video',
 	type: 'base',
 	// 样式管理
-	data: JSON.parse(JSON.stringify(data)),
+	data: deepCopy(data),
 	// 组件样式
 	// 样式列表
 	styleList: {
@@ -40,7 +41,7 @@ module.exports = {
 		list: [{
 			name: '样式1',
 			img:  '',
-			data: JSON.parse(JSON.stringify(data))
+			data: deepCopy(data)
 		}],
 	}, 
 	// 功能特性

@@ -21,6 +21,11 @@ module.exports = [
 					key:  'picture'
 				},
 				{
+					icon: 'image',
+					name: '区域色块',
+					key:  'area'
+				},
+				{
 					icon: 'splitLine',
 					name: '分割线',
 					key:  'splitLine'
@@ -213,9 +218,61 @@ module.exports = [
 			]
 		},
 		{
+			icon: 'store',
+			name: '商品详情',
+			key: 'goodsDetails',
+			child: [
+				{
+					icon: 'text',
+					name: '文本',
+					key:  'text'
+				},
+				{
+					icon: 'image',
+					name: '图片',
+					key:  'picture'
+				},
+				{
+					icon: 'text',
+					name: '文本绑定',
+					key:  'textBind'
+				},
+				{
+					icon: 'image',
+					name: '图片绑定',
+					key:  'pictureBind'
+				},
+				{
+					icon: 'carousel',
+					name: '轮播图绑定',
+					key:  'swiperBind'
+				},
+				{
+					icon: 'image',
+					name: '区域色块',
+					key:  'area'
+				},
+				{
+					icon: 'carousel',
+					name: '图片列表绑定',
+					key:  'pictureListBind'
+				},
+				{
+					icon: 'carousel',
+					name: '商品条',
+					key:  'goodsBar'
+				}
+			]
+		},
+		{
 			icon: '2DMap',
 			name: '2D地图',
 			key:  'map2D'
+		},
+		{
+			icon: 'html',
+			name: '组件上传',
+			key:  'html'
 		}
 	// ],
 ]

@@ -1,8 +1,16 @@
+let { deepCopy } = require('state/common')
+
 // 图片
 const data = {
 	style:     {
 		image: {
-			transform:    { rotate: 0 },
+			transform: { rotate: 0 },
+			margin: {
+				top:    0,
+				right:  0,
+				bottom: 0,
+				left:   0
+			},
 			borderRadius: {
 				topLeft:     0,
 				topRight:    0,
@@ -13,10 +21,10 @@ const data = {
 	},
 	layout: {
 		position: 'absolute',
-		top:      0,
-		left:     0,
-		width:    120,
-		height:   120
+		top:    0,
+		left:   0,
+		width:  120,
+		height: 120
 	},
 	content: {
 		bind:   '',
@@ -36,7 +44,7 @@ module.exports = {
 	type: 'base',
 	// 位置大小
 	// 样式管理
-	data: JSON.parse(JSON.stringify(data)),
+	data: deepCopy(data),
 	// 内容管理
 	// 样式列表
 	styleList: {
@@ -44,7 +52,7 @@ module.exports = {
 		list: [{
 			name: '样式1',
 			img:  '',
-			data: JSON.parse(JSON.stringify(data))
+			data: deepCopy(data)
 		}]
 	},
 	// 功能特性

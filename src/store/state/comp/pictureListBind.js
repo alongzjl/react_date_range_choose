@@ -2,9 +2,33 @@ let { deepCopy } = require('state/common')
 
 // 图片
 const data = {
-	style:     {
+	style: {
+		filterBox: {
+			width: 120,
+			backgroundColor: { type: 'custom', color: '#fff' },
+			padding: {
+				top:     0,
+				right:   0,
+				bottom:  0,
+				left:    0
+			},
+			borderRadius: {
+				topLeft:     0,
+				topRight:    0,
+				bottomRight: 0,
+				bottomLeft:  0
+			}
+		},
 		image: {
+			width:  120,
+			height: 120,
 			transform:    { rotate: 0 },
+			margin: {
+				top:    0,
+				right:  0,
+				bottom: 0,
+				left:   0
+			},
 			borderRadius: {
 				topLeft:     0,
 				topRight:    0,
@@ -15,13 +39,13 @@ const data = {
 	},
 	layout: {
 		position: 'absolute',
-		top:      0,
-		left:     0,
-		width:    120,
-		height:   120
+		top:    0,
+		left:   0,
+		width:  120,
+		height: 120
 	},
 	content: {
-		img:    { type: 'custom', img: '' },	// 图片url
+		bind:   '',
 		router: {},	// 路由
 	},
 	animation: {
@@ -34,7 +58,7 @@ const data = {
 }
 
 module.exports = {
-	name: 'picture',
+	name: 'pictureListBind',
 	type: 'base',
 	// 位置大小
 	// 样式管理

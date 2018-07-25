@@ -8,12 +8,24 @@
 import React from 'react'
 import './index.less'
 
-export default class PictureBind extends React.Component {
+export default class PictureListBind extends React.Component {
 	componentWillMount() {}
 
 	componentDidMount() {}
 
 	componentWillUnmount() {}
+
+	renderImage = img => {
+		let props = this.props,
+			{ style } = props.data.data,
+			imgs = img.split(','),
+			css  = cssColorFormat(props, 'image')
+		return (
+			<div className="eplb-box" style={cssColorFormat(props, 'filterBox')}>
+				{ imgs.map((_, i) => <div key={i} style={css}><img src={_} /></div>) }
+			</div>
+		)
+	}
 
 	render() {
 		let props = this.props,
@@ -28,8 +40,8 @@ export default class PictureBind extends React.Component {
 			false
 			:
 			(
-				<div className="e-picture-bind" style={cssColorFormat(this.props, 'image')}>
-					<img src={img} />
+				<div className="e-picture-list-bind">
+					{ this.renderImage(img) }
 				</div>
 			)
 	}
