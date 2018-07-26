@@ -1,4 +1,9 @@
 .e-goods-bar {
 	display: flex;
 	flex-wrap: wrap;
+	opacity: 0;
+	transition: opacity ease .2s;
+	&.s-show {
+		opacity: 1;
+	}
 }

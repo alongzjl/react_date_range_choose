@@ -1,20 +1,62 @@
-
 .pe-comp-layout {
+	position: relative;
 	display: flex;
 	flex-direction: column;
+	width: 34px;
 	height: 100%;
-	background-color: #fff;
 	font-size: 12px;
+	background-color: #f2f2f2;
+	&.pe-comp-layout-open {
+		width: 180px;
+		background-color: #fff;
+		border-right: 1px solid #c1c1c1;
+		.pecl-title,
+		.pecl-list {
+			display: flex;
+		}
+		.bar-open {
+			display: none;
+		}
+		.bar-close {
+			display: block;
+		}
+	}
+	.bar-open,
+	.bar-close {
+		position: absolute;
+		top:  8px;
+		left: 8px;
+		width:  24px;
+		height: 24px;
+		line-height: 24px;
+		text-align: center;
+		border-radius: 2px;
+		color: #333;
+		font-size: 14px;
+		&:hover {
+			background-color: #d8d8d8;
+		}
+	}
+	.bar-open {
+		display: block;
+	}
+	.bar-close {
+		display: none;
+	}
+	.pecl-title,
+	.pecl-list {
+		display: none;
+	}
 	.pecl-title {
+		position: relative;
 		width: 100%;
 		height: 40px;
 		line-height: 40px;
-		text-align: center;
+		justify-content: center;
 		background-color: #f1f1f1;
 	}
 	.pecl-list {
 		position: relative;
-		display: flex;
 		flex: 1;
 		height: 100%;
 		overflow-x: hidden;

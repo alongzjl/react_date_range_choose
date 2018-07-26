@@ -253,7 +253,6 @@ class ShortcutKey extends React.Component {
 			curData.cusCompIdx = -1
 			curData.parentComp = null
 			let comp = parentComp.data.components
-			// message.success(`删除组件: ${compMap[parentComp.name]} - ${compMap[curComp.name]}!`)
 			message.success(`删除组件!`)
 			actions.updateComp(compIdx, parentComp)
 			actions.updateCur(curData)
@@ -264,6 +263,7 @@ class ShortcutKey extends React.Component {
 			curPage.elements = ce.removeByIdx(list)
 			message.success(`删除组件: ${compMap[curComp.name]}!`)
 			actions.updatePage(pageGroupIdx, pageIdx, curPage)
+			document.querySelector('.pg-center').click()
 		}
 		globalData.multiComp = { type: '', index: {}, list: [] }
 		actions.updateGlobal(globalData)

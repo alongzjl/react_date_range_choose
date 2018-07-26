@@ -19,6 +19,9 @@ var compMap  = variable.compMap.name,
 	compNum  = variable.compMap.num
  
 class EditCompLayout extends React.Component {
+	state = {
+		check: true
+	}
 	componentWillMount() {}
 
 	componentDidMount() {}
@@ -73,7 +76,7 @@ class EditCompLayout extends React.Component {
 		actions.updateGlobal(globalData)
 		console.log(JSON.stringify(multiComp.list))
 	}
-	onSortEnd(o, e) {
+	onSortEnd = (o, e) => {
 		let { data, actions, editConfig } = this.props
 		let curData = editConfig.curData
 		let eles = deepCopy(data.elements).reverse()
@@ -91,8 +94,15 @@ class EditCompLayout extends React.Component {
 		actions.updatePage(curData.pageGroupIdx, curData.pageIdx, data)
 		this.selectComp(e, item, len - next)
 	}
+	barHide = e => {
+		this.setState({ check: false })
+	}
+	barShow = e => {
+		this.setState({ check: true })
+	}
 	render() {
 		let { data, editConfig } = this.props
+		let { check } = this.state
 		let map  = deepCopy(compNum)
 		let eles = data.elements
 		if (!eles) return false
@@ -139,12 +149,14 @@ class EditCompLayout extends React.Component {
 			)
 		})
 		return (
-			<div className="pe-comp-layout">
+			<div className={`pe-comp-layout${check? ' pe-comp-layout-open': ''}`}>
 				<div className="pecl-title">图层列表</div>
+				<a className="bar-open" onClick={this.barShow} title="展开图层列表"><Icon type="menu-unfold" /></a>
+				<a className="bar-close" onClick={this.barHide} title="关闭图层列表"><Icon type="menu-fold" /></a>
 				<div className="pecl-list">
 					<SortableList
 						eles={eles}
-						onSortEnd={(o, e) => this.onSortEnd(o, e)}
+						onSortEnd={this.onSortEnd}
 					/>
 					<ul className="pecl-ctrl">{ ctrlNode }</ul>
 				</div>

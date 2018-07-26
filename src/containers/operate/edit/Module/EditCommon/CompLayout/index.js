@@ -93,14 +93,14 @@ export default class CompLayout extends React.Component {
 			<div className="comp-layout">
 				<a onClick={this.showModal}>编辑布局</a>
 				<Modal
-					width={'80%'}
+					width={'90%'}
 					visible={visible}
 					title="编辑布局"
 					onCancel={this.handleCancel}
 					footer={null}
 				>
 					<div className="cl-parent">
-						<div className="cl-left">
+						<div className="cl-left scrollbar">
 							宽度: { width * 2 }
 							&nbsp;
 							高度: { height * 2 }

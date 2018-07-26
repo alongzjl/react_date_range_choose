@@ -41,10 +41,11 @@ export default class GoodsDetails extends React.Component {
 	}
 
 	componentWillReceiveProps() {
-		let { data } = this.props
+		let { data, csn } = this.props
 		let { feature } = data
 		let ipt = deepCopy(feature)
-		ipt.scrollTop = 0
+		let doc = document.querySelector(`.${csn}`)
+		ipt.scrollTop = doc? doc.scrollTop: 0
 		this.getItem(ipt)
 		this.state = { ioInput: ipt }
 		this.ioOuter(ipt)
@@ -100,10 +101,11 @@ export default class GoodsDetails extends React.Component {
 	}
 
 	init = () => {
-		let { data } = this.props
+		let { data, csn } = this.props
 		let { feature } = data
 		let ipt = deepCopy(feature)
-		ipt.scrollTop = 0
+		let doc = document.querySelector(`.${csn}`)
+		ipt.scrollTop = doc? doc.scrollTop: 0
 		this.getItem(ipt)
 		feature.map = {
 			price:     '价格',

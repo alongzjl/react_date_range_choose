@@ -128,11 +128,11 @@ const QR = extend(deepCopy(pb), {
 // 字母排序
 const data = {
 	layout: {
-		position: 'absolute',
-		top:  10,
-		left: 5,
-		width:  535,
-		height: 540
+		position: 'fixed',
+		top:  0,
+		left: 0,
+		width:  520,
+		height: 90
 	},
 	style: {
 		filterBox: {
@@ -151,8 +151,8 @@ const data = {
 			backgroundColor: { type: 'custom', color: '#fff' },
 			margin: {
 				top:     0,
-				right:   4,
-				bottom:  4,
+				right:   0,
+				bottom:  0,
 				left:    0,
 			},
 			borderRadius: {

@@ -29,12 +29,18 @@ module.exports = {
 		textAlign:         { name: '对齐方式', type: 'TextAlign', option: [
 			{ name: '左', value: 'left' },
 			{ name: '中', value: 'center' },
-			{ name: '右', value: 'right' },
+			{ name: '右', value: 'right' }
 		] },
 		color:             { name: '字体颜色', type: 'Color' },
 		fontWeight:        { name: '粗细',    type: 'Switch', true: 'bold',      false: 'normal' },
 		fontStyle:         { name: '斜体',    type: 'Switch', true: 'italic',    false: 'normal' },
-		textDecoration:    { name: '下划线',  type: 'Switch', true: 'underline', false: 'none' },
+		// textDecoration:    { name: '下划线',  type: 'Switch', true: 'underline', false: 'none' },
+		textDecoration:    { name: '文本线条',    type: 'TextAlign', option: [
+			{ name: '无', value: 'none' },
+			{ name: '下', value: 'underline' },
+			{ name: '中', value: 'line-through' },
+			{ name: '上', value: 'overline' }
+		] },
 		opacity:           { name: '透明度',  type: 'Slider', min: 0, max: 1, step: 0.01 },
 		backgroundImage:   { name: '背景图',  type: 'BGImage' },
 		backgroundColor:   { name: '背景颜色', type: 'Color' },

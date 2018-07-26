@@ -46,7 +46,7 @@ class Header extends React.Component {
 			let compData = JSON.parse(JSON.stringify(comp[key])),
 				Comp     = parentComp || curComp,
 				auth     = compC[Comp.name]
-			if (compData.type === 'base' && auth[key]) {
+			if (compData.type != 'advanced' && auth[key]) {
 				Comp.data.components.push(compData)
 				message.success(`添加子组件: ${compMap[key]}!`)
 				this.selectMulti(Comp.data.components.length - 1)

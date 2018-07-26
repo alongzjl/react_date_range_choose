@@ -13,7 +13,7 @@ const data = {
 			height: 24,
 			lineHeight: 20,
 			justifyContent: 'center',
-			fontSize:       8, 
+			fontSize:       12, 
 			fontStyle:      'normal',
 			fontWeight:     'normal',
 			textDecoration: 'none',

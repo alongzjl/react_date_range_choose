@@ -92,7 +92,7 @@ class EditComponent extends React.Component {
 					</div>
 					{
 						curData.router &&
-						<div className="pg-left pg-left-fixed scrollbar">
+						<div className="pg-left scrollbar">
 							<EditCompLayout data={editConfig.curPage} />
 						</div>
 					}
@@ -108,7 +108,7 @@ class EditComponent extends React.Component {
 					</div>
 
 					{
-						ENV === 'dev' &&
+						/*ENV === 'dev' &&
 						<div className="pg-float e-flex-box scrollbar">
 							{ Object.keys(curData).map((_, i) => {
 								var im = curData[_]
@@ -119,7 +119,7 @@ class EditComponent extends React.Component {
 									</p>
 								)
 							}) }
-						</div>
+						</div>*/
 					}
 				</div>
 			</div>

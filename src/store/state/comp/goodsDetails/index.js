@@ -102,7 +102,6 @@ const PIcon = extend(deepCopy(t), {
 				// textAlign:  'left',
 				fontSize:   23,
 				lineHeight: 28,
-				fontFamily: 'Impact',
 				color: { type: 'custom', color: '#da2339' }
 			}
 		},
@@ -483,11 +482,8 @@ const GoodsPic = extend(deepCopy(plb), {
 const GB = extend(deepCopy(gb), {
 	data: {
 		layout: {
-			position: 'fixed',
 			top:  10,
-			left: 10,
-			width:  520,
-			height: 90
+			left: 10
 		}
 	}
 })
@@ -496,10 +492,10 @@ const data = {
 	style: {},
 	layout:    {
 		position: 'absolute',
-		top:      303,
+		top:      0,
 		left:     0,
 		width:    540,
-		height:   657
+		height:   960
 	},
 	content:   {},
 	animation: {

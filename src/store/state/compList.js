@@ -22,7 +22,7 @@ module.exports = [
 				},
 				{
 					icon: 'image',
-					name: '区域色块',
+					name: '背景色块',
 					key:  'area'
 				},
 				{
@@ -200,16 +200,16 @@ module.exports = [
 			name: '商品列表',
 			key:  'goodsList',
 			child: [
-				{
-					icon: 'sorter',
-					name: '分页',
-					key:  'page'
-				},
-				{
-					icon: 'reset',
-					name: '重置',
-					key:  'reset'
-				},
+				// {
+				// 	icon: 'sorter',
+				// 	name: '分页',
+				// 	key:  'page'
+				// },
+				// {
+				// 	icon: 'reset',
+				// 	name: '重置',
+				// 	key:  'reset'
+				// },
 				{
 					icon: 'list',
 					name: '列表',
@@ -234,32 +234,32 @@ module.exports = [
 				},
 				{
 					icon: 'text',
-					name: '文本绑定',
+					name: '文本-绑定',
 					key:  'textBind'
 				},
 				{
 					icon: 'image',
-					name: '图片绑定',
+					name: '图片-绑定',
 					key:  'pictureBind'
 				},
 				{
 					icon: 'carousel',
-					name: '轮播图绑定',
+					name: '轮播图-绑定',
 					key:  'swiperBind'
 				},
 				{
 					icon: 'image',
-					name: '区域色块',
+					name: '背景色块',
 					key:  'area'
 				},
 				{
 					icon: 'carousel',
-					name: '图片列表绑定',
+					name: '图片列表-绑定',
 					key:  'pictureListBind'
 				},
 				{
 					icon: 'carousel',
-					name: '商品条',
+					name: '详情浮动条',
 					key:  'goodsBar'
 				}
 			]
