@@ -16,19 +16,14 @@ export default class GoodsBar extends React.Component {
 		super(props)
 		this.state = {}
 	}
-	renderList = (item) => {
-		let { data } = this.props,
-			{ componentLayout, layout } = data.data
-		return <Layout data={item} layout={layout} components={componentLayout} styleObj={cssColorFormat(this.props, 'filter')} />
-	}
 	render() {
 		let props = this.props,
 			{ data, ioInput } = props,
-			{ componentLayout, layout, content } = data.data,
+			{ componentLayout = {}, layout = {}, content } = data.data,
 			{ item, scrollTop } = ioInput,
 			{ showTop } = content
 		return (
-			<section className={`e-goods-bar${scrollTop > showTop? ' s-show': ''}`} style={cssColorFormat(props, 'filterBox')}>
+			<section className={`e-goods-bar${scrollTop >= showTop? ' s-show': ''}`} style={cssColorFormat(props, 'filterBox')}>
 				<Layout data={item} layout={layout} components={componentLayout} styleObj={cssColorFormat(props, 'filter')} />
 			</section>
 		)

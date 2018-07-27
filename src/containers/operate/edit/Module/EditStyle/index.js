@@ -197,12 +197,8 @@ class EditStyle extends React.Component {
 	render() {
 		let { data } = this.props
 		let da       = data.data
+		if (!da) return null
 		let { style, layout } = da
-		if (!style) return false
-		// let styleList  = data.styleList				// 样式列表
-		// 除styleList代码 START
-		let styleList  = comp[data.name].styleList		// 样式列表
-		// 除styleList代码 END
 		let styles     = Object.keys(style)	// 具体样式
 		let activeKey  = Array.from(new Array(styles.length), (_, i) => `${i}`)
 		// 位置大小
@@ -270,7 +266,7 @@ class EditStyle extends React.Component {
 					data={data}
 					add={false}
 					edit={false}
-					list={styleList.list}
+					list={data.styleList.list}
 					idx={data.styleList.idx}
 					parentKey={'styleList'}
 					action={'updateComp'}

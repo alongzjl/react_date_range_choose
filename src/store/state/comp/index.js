@@ -95,5 +95,7 @@ module.exports = {
 	// 图片列表-绑定
 	pictureListBind:   authInit(require('./pictureListBind')),
 	// 商品条
-	goodsBar:          authInit(require('./goodsDetails/content/goodsBar'))
+	goodsBar:          authInit(require('./goodsDetails/content/goodsBar')),
+	// 商品信息
+	goodsBlock:        authInit(require('./goodsDetails/content/goodsBlock'))
 }

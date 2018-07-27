@@ -38,6 +38,7 @@ import SwiperBind        from 'compEdit/EditElement/SwiperBind'
 import Area              from 'compEdit/EditElement/Area'
 import PictureListBind   from 'compEdit/EditElement/PictureListBind'
 import GoodsBar          from 'compEdit/EditElement/goodsDetails/GoodsBar'
+import GoodsBlock        from 'compEdit/EditElement/goodsDetails/GoodsBlock'
 
 import * as variable from 'var'
 var animeMap = variable.animeCompMap,
@@ -69,7 +70,8 @@ const compContent = (name, data, parent, editConfig, actions, type, ioInput, ioO
 		swiperBind:        <SwiperBind        {...props} />,
 		area:              <Area              {...props} />,
 		pictureListBind:   <PictureListBind   {...props} />,
-		goodsBar:          <GoodsBar          {...props} />
+		goodsBar:          <GoodsBar          {...props} />,
+		goodsBlock:        <GoodsBlock        {...props} />
 	}
 	return render[name]
 }

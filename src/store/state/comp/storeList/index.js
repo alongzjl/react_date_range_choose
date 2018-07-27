@@ -1,5 +1,4 @@
-const common = require('state/common')
-let { authInit, deepCopy, extend, styleIdxChange } = common
+const { authInit, deepCopy, extend } = require('state/common')
 const c  = authInit(require('./content/catg'))
 const f  = authInit(require('./content/floor'))
 const l  = authInit(require('./content/letter'))

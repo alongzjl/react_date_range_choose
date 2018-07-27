@@ -16,6 +16,20 @@ let cusMap = {
 	operate:  CustomO,
 	business: CustomB
 }
+let featureMap = {
+	price:     '价格',
+	oldPrice:  '原价',
+	brand:     '品牌',
+	name:      '商品名称',
+	pic:       '图片',
+	pics:      '图片列表',
+	QRPic:     '二维码',
+	sTime:     '上架时间',
+	catg:      '产品分类',
+	pType:     '包装种类',
+	artNo:     '货号',
+	spec:      '颜色规格'
+}
 
 export default class GoodsDetails extends React.Component {
 	constructor(props) {
@@ -98,6 +112,7 @@ export default class GoodsDetails extends React.Component {
 			spec:     '72米色 09黑色'
 		}
 		feature.item = ipt.item
+		feature.map  = featureMap
 	}
 
 	init = () => {
@@ -107,20 +122,6 @@ export default class GoodsDetails extends React.Component {
 		let doc = document.querySelector(`.${csn}`)
 		ipt.scrollTop = doc? doc.scrollTop: 0
 		this.getItem(ipt)
-		feature.map = {
-			price:     '价格',
-			oldPrice:  '原价',
-			brand:     '品牌',
-			name:      '商品名称',
-			pic:       '图片',
-			pics:      '图片列表',
-			QRPic:     '二维码',
-			sTime:     '上架时间',
-			catg:      '产品分类',
-			pType:     '包装种类',
-			artNo:     '货号',
-			spec:      '颜色规格'
-		}
 		this.state = { ioInput: ipt }
 	}
 

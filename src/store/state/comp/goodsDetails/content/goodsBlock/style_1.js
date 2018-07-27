@@ -1,15 +1,29 @@
 const common = require('state/common')
 let { authInit, deepCopy, extend } = common
-const pb = authInit(require('../../pictureBind'))
-const t  = authInit(require('../../text'))
-const tb = authInit(require('../../textBind'))
+const t  = authInit(require('state/comp/text'))
+const pb = authInit(require('state/comp/pictureBind'))
+const tb = authInit(require('state/comp/textBind'))
+const sb = authInit(require('state/comp/swiperBind'))
 
+const Spr = extend(deepCopy(sb), {
+	data: {
+		layout: {
+			top:  10,
+			left: 10,
+			width:  200,
+			height: 200
+		},
+		content: {
+			bind: 'pics'
+		}
+	}
+})
 const Name = extend(deepCopy(tb), {
 	data: {
 		layout: {
 			top:  10,
-			left: 15,
-			width:  275,
+			left: 225,
+			width:  285,
 			height: 42
 		},
 		style:     {
@@ -28,8 +42,8 @@ const Name = extend(deepCopy(tb), {
 const PIcon = extend(deepCopy(t), {
 	data: {
 		layout: {
-			top:  24,
-			left: 314,
+			top:  80,
+			left: 226,
 			width:  20,
 			height: 28
 		},
@@ -38,7 +52,6 @@ const PIcon = extend(deepCopy(t), {
 				// textAlign:  'left',
 				fontSize:   23,
 				lineHeight: 28,
-				fontFamily: 'Impact',
 				color: { type: 'custom', color: '#da2339' }
 			}
 		},
@@ -50,9 +63,9 @@ const PIcon = extend(deepCopy(t), {
 const Price = extend(deepCopy(tb), {
 	data: {
 		layout: {
-			top:  12,
-			left: 334,
-			width:  110,
+			top:  68,
+			left: 246,
+			width:  155,
 			height: 43
 		},
 		style:     {
@@ -72,8 +85,8 @@ const Price = extend(deepCopy(tb), {
 const OPT = extend(deepCopy(t), {
 	data: {
 		layout: {
-			top:  60,
-			left: 315,
+			top:  114,
+			left: 228,
 			width:  30,
 			height: 16
 		},
@@ -93,8 +106,8 @@ const OPT = extend(deepCopy(t), {
 const OPrice = extend(deepCopy(tb), {
 	data: {
 		layout: {
-			top:  57,
-			left: 346,
+			top:  111,
+			left: 260,
 			width:  50,
 			height: 20
 		},
@@ -114,47 +127,51 @@ const OPrice = extend(deepCopy(tb), {
 const QR = extend(deepCopy(pb), {
 	data: {
 		layout: {
-			top:  16,
-			left: 445,
-			width:  60,
-			height: 60
+			top:  99,
+			left: 416,
+			width:  94,
+			height: 94
 		},
 		content: {
 			bind: 'QRPic'
 		}
 	}
 })
+const QRT = extend(deepCopy(t), {
+	data: {
+		layout: {
+			top:  194,
+			left: 416,
+			width:  94,
+			height: 14
+		},
+		style:     {
+			text: {
+				lineHeight: 14,
+				color: { type: 'custom', color: '#999' }
+			}
+		},
+		content: {
+			text: '扫码即可购买'
+		}
+	}
+})
 
 // 字母排序
-const data = {
+module.exports = {
 	layout: {
-		position: 'fixed',
+		position: 'absolute',
 		top:  0,
 		left: 0,
 		width:  520,
-		height: 90
+		height: 220
 	},
 	style: {
 		filterBox: {
-			fontSize:       12,
-			fontStyle:      'normal',
-			fontWeight:     'normal',
-			textDecoration: 'none',
-			color: { type: 'main', color: '#333' }
-		},
-		filter: {
-			width:  520,
-			height: 90,
 			borderWidth:  0,
 			borderStyle: 'solid',
 			borderColor: { type: 'main', color: '#fff' },
 			backgroundColor: { type: 'custom', color: '#fff' },
-			margin: {
-				top:     0,
-				right:   0,
-				bottom:  0,
-				left:    0,
-			},
 			borderRadius: {
 				topLeft:     6,
 				topRight:    6,
@@ -170,34 +187,13 @@ const data = {
 			}
 		}
 	},
-	componentLayout: [ Name, PIcon, Price, OPT, OPrice, QR ],
-	content: {
-		showTop: 230
-	},
+	componentLayout: [ Spr, Name, PIcon, Price, OPT, OPrice, QR, QRT ],
+	content: {},
 	animation: {
 		className: '',		// 动画样式
 		direction: '',		// 方向
 		delay: 0,			// 开始时间
 		duration: 1,		// 持续时间
 		iterationCount: 1	// 循环次数
-	}
-}
-
-module.exports = {
-	name: 'goodsBar',
-	type: 'layout',
-	// 位置大小
-	data: deepCopy(data),
-	// 样式列表
-	styleList: {
-		idx:  0,
-		list: [{
-			name: '样式1',
-			img:  '',
-			data: deepCopy(data)
-		}]
-	},
-	// 功能特性
-	feature: {
 	}
 }

@@ -36,6 +36,9 @@ import filterContent     from './filter'
 import * as variable from 'var'
 
 var conMap = variable.contentMap
+var plMap  = {
+	listByGoods: 1
+}
 
 import './index.less'
 
@@ -255,6 +258,7 @@ class EditContent extends React.Component {
 		let childNode
 		let activeKey
 		let feature
+		let parentLayout = {}
 		if (compName === 'navigation')             compCon = (<Navigation        data={this.props}/>)
 		else if (compName === 'navigationFloat')   compCon = (<NavigationFloat   data={this.props}/>)
 		else if (compName === 'weather')           compCon = (<Weather           data={this.props}/>)
@@ -285,7 +289,7 @@ class EditContent extends React.Component {
 			)
 		}
 		if (parentComp) {
-			var { filter } = da.style
+			parentLayout = plMap[compName]? da.style.filter: da.layout
 			feature = parentComp.feature
 		}
 		return (
@@ -296,7 +300,7 @@ class EditContent extends React.Component {
 					?
 					<Collapse activeKey={['0', '1']}>
 						<Panel header={`编辑布局`} key={0}>
-							<CompLayout list={feature.list} item={feature.item} map={feature.map} layout={compLay} parentLayout={filter} updateComp={this.updateComp} />
+							<CompLayout list={feature.list} item={feature.item} map={feature.map} layout={compLay} parentLayout={parentLayout} updateComp={this.updateComp} />
 						</Panel>
 						<Panel header={`子元素`} key={1}>
 							<ChildElement name={compName} layout={compLay} updateComp={this.updateComp} />

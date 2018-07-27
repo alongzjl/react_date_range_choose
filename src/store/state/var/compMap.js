@@ -42,7 +42,8 @@ module.exports = {
 		goodsDetails:      '商品详情',
 		area:              '区域色块',
 		pictureListBind:   '图片列表绑定',
-		goodsBar:          '商品条'
+		goodsBar:          '商品条',
+		goodsBlock:        '商品信息'
 	},
 	num: {
 		address:           0,
@@ -87,6 +88,7 @@ module.exports = {
 		goodsDetails:      0,
 		area:              0,
 		pictureListBind:   0,
-		goodsBar:          0
+		goodsBar:          0,
+		goodsBlock:        0
 	}
 }

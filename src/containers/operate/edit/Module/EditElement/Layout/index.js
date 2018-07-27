@@ -19,8 +19,8 @@ import * as variable from 'var'
 var animeMap = variable.animeCompMap,
 	aStyle   = animeMap.style
 
-const compContent = (name, data, item, editConfig, actions, type, ioInput, ioOuter) => {
-	var props  = { data, item, editConfig, actions, type, ioInput, ioOuter }
+const compContent = (name, data, item) => {
+	var props  = { data, item }
 	var render = {
 		picture:     <Picture     {...props} />,
 		text:        <Text        {...props} />,
@@ -49,11 +49,10 @@ export default class Layout extends React.Component {
 		let childNode = components.map((_, i) => {
 			let compName = _.name,
 				layout   = _.data.layout,
-				styleIdx = _.styleList.idx,
-				compCon  = compContent(compName, _, data, `Style${styleIdx + 1}`)
-			// debugger
+				compCon  = compContent(compName, _, data)
+
 			if (!compCon) return false
-				
+
 			return (
 				<div
 					key={i}
@@ -62,7 +61,6 @@ export default class Layout extends React.Component {
 				>{ compCon }</div>
 			)
 		})
-		// debugger
 		return (
 			<section className={`pg-layout-ele`} style={styleObj}>
 				{ childNode }
