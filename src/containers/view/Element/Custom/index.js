@@ -28,8 +28,16 @@ import Page         from 'compEdit/EditElement/Page'
 import Reset        from 'compEdit/EditElement/Reset'
 import FloorMap     from 'compEdit/EditElement/FloorMap'
 import ListByStore  from 'compEdit/EditElement/ListByStore'
+import ListByGoods  from 'compEdit/EditElement/goodsList/ListByGoods'
 import SplitLine         from 'compEdit/EditElement/SplitLine'
 import WonderfulActivity from 'compEdit/EditElement/WonderfulActivity'
+import PictureBind       from 'compEdit/EditElement/PictureBind'
+import TextBind          from 'compEdit/EditElement/TextBind'
+import SwiperBind        from 'compEdit/EditElement/SwiperBind'
+import Area              from 'compEdit/EditElement/Area'
+import PictureListBind   from 'compEdit/EditElement/PictureListBind'
+import GoodsBar          from 'compEdit/EditElement/goodsDetails/GoodsBar'
+import GoodsBlock        from 'compEdit/EditElement/goodsDetails/GoodsBlock'
 
 import './index.less'
 
@@ -52,7 +60,15 @@ const compContent = (name, data, parent, editConfig, actions, type, ioInput, ioO
 		floorMap:          <FloorMap          {...props} />,
 		splitLine:         <SplitLine         {...props} />,
 		reset:             <Reset             {...props} />,
-		listByStore:       <ListByStore       {...props} />
+		listByStore:       <ListByStore       {...props} />,
+		listByGoods:       <ListByGoods       {...props} />,
+		pictureBind:       <PictureBind       {...props} />,
+		textBind:          <TextBind          {...props} />,
+		swiperBind:        <SwiperBind        {...props} />,
+		area:              <Area              {...props} />,
+		pictureListBind:   <PictureListBind   {...props} />,
+		goodsBar:          <GoodsBar          {...props} />,
+		goodsBlock:        <GoodsBlock        {...props} />
 	}
 	return render[name]
 }

@@ -22,12 +22,15 @@ import Weather           from 'compEdit/EditElement/Weather'
 import StoreList         from 'compEdit/EditElement/StoreList'
 import StoreDetails      from 'compEdit/EditElement/StoreDetails'
 import StoreInstro       from 'compEdit/EditElement/StoreInstro'
+import GoodsList         from 'compEdit/EditElement/GoodsList'
 import DateWeather       from 'compEdit/EditElement/DateWeather'
 import Navigation        from 'compEdit/EditElement/Navigation'
 import NavigationFloat   from 'compEdit/EditElement/NavigationFloat'
 import SplitLine         from 'compEdit/EditElement/SplitLine'
 import Map2D             from 'compEdit/EditElement/Map2D'
 import Html              from 'compEdit/EditElement/Html'
+import GoodsDetails      from 'compEdit/EditElement/GoodsDetails'
+import Area              from 'compEdit/EditElement/Area'
 
 import * as actions from 'actions'
 
@@ -54,12 +57,15 @@ const compContent = (name, data, actions, type, idx, csn) => {
 		navigation:        <Navigation        {...props} />,
 		navigationFloat:   <NavigationFloat   {...props} />,
 		storeList:         <StoreList         {...props} />,
+		goodsList:         <GoodsList         {...props} />,
 		storeDetails:      <StoreDetails      {...props} />,
 		storeInstro:       <StoreInstro       {...props} />,
 		splitLine:         <SplitLine         {...props} />,
 		dateWeather:       <DateWeather       {...props} />,
 		map2D:             <Map2D             {...props} />,
-		html:              <Html              {...props} />
+		html:              <Html              {...props} />,
+		goodsDetails:      <GoodsDetails      {...props} />,
+		area:              <Area              {...props} />
 	}
 	return render[name]
 }
