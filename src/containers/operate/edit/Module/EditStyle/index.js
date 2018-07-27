@@ -200,6 +200,7 @@ class EditStyle extends React.Component {
 		if (!da) return null
 		let { style, layout } = da
 		let styles     = Object.keys(style)	// 具体样式
+		let styleList  = comp[data.name].styleList        // 样式列表
 		let activeKey  = Array.from(new Array(styles.length), (_, i) => `${i}`)
 		// 位置大小
 		let layoutNode = Object.keys(layout).map((q, j) => {
@@ -266,7 +267,7 @@ class EditStyle extends React.Component {
 					data={data}
 					add={false}
 					edit={false}
-					list={data.styleList.list}
+					list={styleList.list}
 					idx={data.styleList.idx}
 					parentKey={'styleList'}
 					action={'updateComp'}

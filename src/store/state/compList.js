@@ -224,7 +224,7 @@ module.exports = [
 			child: [
 				{
 					icon: 'carousel',
-					name: '详情浮动条',
+					name: '信息浮动条',
 					key:  'goodsBar'
 				},
 				{
