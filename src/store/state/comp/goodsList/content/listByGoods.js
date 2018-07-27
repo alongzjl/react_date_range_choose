@@ -102,13 +102,6 @@ const data = {
 	},
 	style: {
 		filterBox: {
-			fontSize:       12,
-			fontStyle:      'normal',
-			fontWeight:     'normal',
-			textDecoration: 'none',
-			color: { type: 'main', color: '#333' }
-		},
-		filter: {
 			width:  174,
 			height: 260,
 			borderWidth:  0,

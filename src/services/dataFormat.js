@@ -52,22 +52,19 @@ const dataFormat = {
 							case 'styleList':
 								let { idx } = da
 								if (idx === undefined || !org.list[idx]) da.idx = org.idx || 0
-								// 除styleList代码 START
 								if (da.list) delete da.list
 								break
-								// 除styleList代码 END
-
 								// break
 							default:
 								Object.keys(org).map(_ => {
 									this.plus(da[_], org[_], _, da)
 								})
 						}
-						
 						break
 					case 'Array':
 						switch(key) {
 							case 'components':
+							case 'componentLayout':
 								da.map((_, i) => {
 									var dn = _.name,
 										cd = deepCopy(comp[dn]),
@@ -121,6 +118,7 @@ const dataFormat = {
 					case 'Array':
 						switch(key) {
 							case 'components':
+							case 'componentLayout':
 								da.map((_, i) => {
 									var dn = _.name,
 										cd = deepCopy(comp[dn]),
@@ -133,7 +131,7 @@ const dataFormat = {
 										l2 = s2.list
 									s2.idx  = i1 || 0
 									cd.data = l2[i1].data
-									this.plus(_, cd, i, da)
+									this.slim(_, cd, i, da)
 								})
 								break
 							default:

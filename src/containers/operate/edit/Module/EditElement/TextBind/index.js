@@ -20,7 +20,7 @@ export default class TextBind extends React.Component {
 			<div className={`e-text`}>
 				<div
 					style={cssColorFormat(this.props, 'text')}
-					dangerouslySetInnerHTML={{__html: textBreak(text || '右侧编辑内容')}}
+					dangerouslySetInnerHTML={{__html: textBreak(text)}}
 				></div>
 			</div>
 		)

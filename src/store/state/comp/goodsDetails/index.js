@@ -18,7 +18,6 @@ const gbk = authInit(require('./content/goodsBlock'))
 const GB = extend(deepCopy(gb), {
 	data: {
 		layout: {
-			top:  10,
 			left: 10
 		}
 	}
@@ -48,7 +47,7 @@ const GBINFO2 = extend(styleIdxChange(1, deepCopy(gbk)), {
 const GoodsPic = extend(deepCopy(plb), {
 	data: {
 		layout: {
-			top:  442,
+			top:  372,
 			left: 10,
 			width:  520,
 			height: 120

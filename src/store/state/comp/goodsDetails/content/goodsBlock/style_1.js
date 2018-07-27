@@ -73,7 +73,6 @@ const Price = extend(deepCopy(tb), {
 				textAlign:  'left',
 				fontSize:   35,
 				lineHeight: 43,
-				fontFamily: 'Impact',
 				color: { type: 'custom', color: '#da2339' }
 			}
 		},

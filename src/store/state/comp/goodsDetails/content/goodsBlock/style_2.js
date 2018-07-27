@@ -38,66 +38,11 @@ const Name1 = extend(deepCopy(t), {
 		}
 	}
 })
-// 上架时间
+// 退换货政策
 const Name2 = extend(deepCopy(Name1), {
 	data: {
 		layout: {
-			top:  80
-		},
-		content: {
-			text: '上架时间:'
-		}
-	}
-})
-// 产品分类
-const Name3 = extend(deepCopy(Name2), {
-	data: {
-		layout: {
-			left:  198
-		},
-		content: {
-			text: '产品分类:'
-		}
-	}
-})
-// 包装种类
-const Name4 = extend(deepCopy(Name2), {
-	data: {
-		layout: {
-			left: 405
-		},
-		content: {
-			text: '包装种类:'
-		}
-	}
-})
-// 货号
-const Name5 = extend(deepCopy(Name2), {
-	data: {
-		layout: {
-			top:  106
-		},
-		content: {
-			text: '货号:'
-		}
-	}
-})
-// 颜色规格
-const Name6 = extend(deepCopy(Name3), {
-	data: {
-		layout: {
-			top:  106
-		},
-		content: {
-			text: '颜色规格:'
-		}
-	}
-})
-// 退换货政策
-const Name7 = extend(deepCopy(Name5), {
-	data: {
-		layout: {
-			top:  132,
+			top:  70,
 			width: 72
 		},
 		content: {
@@ -106,10 +51,10 @@ const Name7 = extend(deepCopy(Name5), {
 	}
 })
 // 包邮说明
-const Name8 = extend(deepCopy(Name5), {
+const Name3 = extend(deepCopy(Name1), {
 	data: {
 		layout: {
-			top:  158
+			top:  96
 		},
 		content: {
 			text: '包邮说明:'
@@ -138,76 +83,11 @@ const Con1 = extend(deepCopy(tb), {
 		}
 	}
 })
-// 上架时间
-const Con2 = extend(deepCopy(Con1), {
-	data: {
-		layout: {
-			top:  80,
-			left: 70,
-			width:  120
-		},
-		style: {
-			text: {
-				color: { type: 'custom', color: '#999' }
-			}
-		},
-		content: {
-			bind: 'sTime'
-		}
-	}
-})
-// 产品分类
-const Con3 = extend(deepCopy(Con2), {
-	data: {
-		layout: {
-			left:  258
-		},
-		content: {
-			bind: 'catg'
-		}
-	}
-})
-// 包装种类
-const Con4 = extend(deepCopy(Con2), {
-	data: {
-		layout: {
-			left: 465,
-			width: 55
-		},
-		content: {
-			bind: 'pType'
-		}
-	}
-})
-// 货号
-const Con5 = extend(deepCopy(Con2), {
-	data: {
-		layout: {
-			top:  106,
-			left: 70
-		},
-		content: {
-			bind: 'artNo'
-		}
-	}
-})
-// 颜色规格
-const Con6 = extend(deepCopy(Con3), {
-	data: {
-		layout: {
-			top:  106,
-			left: 258
-		},
-		content: {
-			bind: 'spec'
-		}
-	}
-})
 // 退换货政策
-const Con7 = extend(deepCopy(Name7), {
+const Con2 = extend(deepCopy(Name1), {
 	data: {
 		layout: {
-			top:  132,
+			top:  70,
 			left: 82,
 			width: 300
 		},
@@ -222,10 +102,10 @@ const Con7 = extend(deepCopy(Name7), {
 	}
 })
 // 包邮说明
-const Con8 = extend(deepCopy(Con7), {
+const Con3 = extend(deepCopy(Con2), {
 	data: {
 		layout: {
-			top:  158,
+			top:  96,
 			left: 70
 		},
 		content: {
@@ -241,7 +121,7 @@ module.exports = {
 		top:  0,
 		left: 0,
 		width:  520,
-		height: 220
+		height: 148
 	},
 	style: {
 		filterBox: {
@@ -266,8 +146,8 @@ module.exports = {
 	},
 	componentLayout: [
 		Title,
-		Name1, Name2, Name3, Name4, Name5, Name6, Name7, Name8,
-		Con1, Con2, Con3, Con4, Con5, Con6, Con7, Con8
+		Name1, Name2, Name3,
+		Con1,  Con2,  Con3
 	],
 	content: {},
 	animation: {

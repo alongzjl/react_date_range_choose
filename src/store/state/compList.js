@@ -258,7 +258,7 @@ module.exports = [
 					key:  'swiperBind'
 				},
 				{
-					icon: 'carousel',
+					icon: 'classifyNav',
 					name: '图片列表-绑定',
 					key:  'pictureListBind'
 				}

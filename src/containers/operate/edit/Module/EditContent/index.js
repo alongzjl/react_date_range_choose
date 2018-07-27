@@ -254,11 +254,11 @@ class EditContent extends React.Component {
 		let da = data.data
 		let { content } = da
 		let compLay = da.componentLayout
-		let compCon
-		let childNode
-		let activeKey
-		let feature
-		let parentLayout = {}
+		let parentLayout,
+			compCon,
+			childNode,
+			activeKey,
+			feature
 		if (compName === 'navigation')             compCon = (<Navigation        data={this.props}/>)
 		else if (compName === 'navigationFloat')   compCon = (<NavigationFloat   data={this.props}/>)
 		else if (compName === 'weather')           compCon = (<Weather           data={this.props}/>)
@@ -289,8 +289,8 @@ class EditContent extends React.Component {
 			)
 		}
 		if (parentComp) {
-			parentLayout = plMap[compName]? da.style.filter: da.layout
-			feature = parentComp.feature
+			parentLayout = plMap[compName]? da.style.filterBox: da.layout
+			feature      = parentComp.feature
 		}
 		return (
 			<section className="ry-roll-screen-config">
@@ -300,7 +300,7 @@ class EditContent extends React.Component {
 					?
 					<Collapse activeKey={['0', '1']}>
 						<Panel header={`编辑布局`} key={0}>
-							<CompLayout list={feature.list} item={feature.item} map={feature.map} layout={compLay} parentLayout={parentLayout} updateComp={this.updateComp} />
+							<CompLayout list={feature.list} item={feature.item} map={feature.map} props={this.props} layout={compLay} parentLayout={parentLayout} updateComp={this.updateComp} />
 						</Panel>
 						<Panel header={`子元素`} key={1}>
 							<ChildElement name={compName} layout={compLay} updateComp={this.updateComp} />

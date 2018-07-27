@@ -82,9 +82,9 @@ export default class CompLayout extends React.Component {
 		})
 	}
 	render() {
-		let { map, layout, parentLayout, updateComp } = this.props
+		let { map, layout, parentLayout = {}, props = {}, updateComp } = this.props
 		let { visible, id, idx } = this.state
-		let { width, height } = parentLayout
+		let { width = 0, height = 0 } = parentLayout
 		let pLay = {
 			width:  width * 2,
 			height: height * 2
@@ -93,7 +93,7 @@ export default class CompLayout extends React.Component {
 		let data = idx > -1? layout[idx]: false
 		return (
 			<div className="comp-layout">
-				<a onClick={this.showModal}>编辑布局</a>
+				<a className="btn-edit-layout" onClick={this.showModal}>编辑布局</a>
 				<Modal
 					width={'90%'}
 					visible={visible}
@@ -107,7 +107,7 @@ export default class CompLayout extends React.Component {
 							&nbsp;
 							高度: { height * 2 }
 							<div className="cl-element" style={pLay}>
-								<div className="cl-element-child" id={id} style={{ width, height }}>
+								<div className="cl-element-child" id={id} style={{ width, height, ...cssColorFormat(props, 'filterBox') }}>
 									{ renderDom }
 								</div>
 							</div>

@@ -19,7 +19,7 @@ export default class ListByStore extends React.Component {
 	renderList = (item, i) => {
 		let { data } = this.props,
 			{ componentLayout, layout } = data.data
-		return <Layout key={i} data={item} layout={layout} components={componentLayout} styleObj={cssColorFormat(this.props, 'filter')} />
+		return <Layout key={i} data={item} layout={layout} components={componentLayout} styleObj={cssColorFormat(this.props, 'filterBox')} />
 	}
 	render() {
 		let { ioInput } = this.props
@@ -28,7 +28,7 @@ export default class ListByStore extends React.Component {
 			return this.renderList(_, i)
 		})
 		return (
-			<section className={`e-list-by-goods`} style={cssColorFormat(this.props, 'filterBox')}>
+			<section className={`e-list-by-goods`}>
 				{ dom }
 			</section>
 		)

@@ -9,7 +9,7 @@ import './index.less'
 
 import Custom from 'compEdit/EditContent/Custom'
 
-import { Collapse, Checkbox, Icon, Input, Select } from 'antd'
+import { Row, Col, Collapse, Checkbox, Icon, Input, Select } from 'antd'
 const  { TextArea } = Input
 const  { Option, OptGroup } = Select
 const  { Panel }  = Collapse
@@ -36,6 +36,7 @@ var dataMap = {
 	name:      '商品名称',
 	pic:       '图片',
 	QRPic:     '二维码',
+	brand:     '品牌'
 }
 
 export default class ChildElement extends React.Component {
@@ -94,7 +95,17 @@ export default class ChildElement extends React.Component {
 				let render = this[`render${cm.type}`]
 				if (!render) return false
 				let dom = render.bind(this, cm, content, val, p, i)()
-				return <div key={j}>{dom}</div>
+				return (
+					<div key={j}>
+						<Row>
+							<Col span={21}>{ dom }</Col>
+							<Col span={1}></Col>
+							<Col span={2}>
+								<span onClick={() => { this.removeElement(i) }}><Icon type="close" /></span>
+							</Col>
+						</Row>
+					</div>
+				)
 			})
 			return (
 				<div className="pgs-row" key={i}>
@@ -111,7 +122,7 @@ export default class ChildElement extends React.Component {
 		return (
 			<TextArea
 				min={cfg.min || 0} max={cfg.max || 100}
-				placeholder={cfg.placeholder || '右侧编辑内容'}
+				placeholder={cfg.placeholder || '请填入内容'}
 				autosize={cfg.autosize || false}
 				value={val}
 				onChange={v => { con[key] = v.target.value; this.update() }}
@@ -137,13 +148,12 @@ export default class ChildElement extends React.Component {
 			<div>
 				<Select
 					value={val}
-					style={{ width: '60%', marginRight: 10 }}
+					style={{ width: '68.5%' }}
 					onChange={v => { con[key] = v; this.update() }}
 				>
 					<Option value={''}>无</Option>
 					{ opts }
 				</Select>
-				<span onClick={() => { this.removeElement(idx) }}><Icon type="close" /></span>
 			</div>
 		)
 	}

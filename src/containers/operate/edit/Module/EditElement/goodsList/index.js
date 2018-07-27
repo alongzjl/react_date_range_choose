@@ -82,7 +82,7 @@ export default class GoodsList extends React.Component {
 			name:      '商品名称',
 			pic:       '图片',
 			pics:      '图片列表',
-			QRPic:     '二维码',
+			QRPic:     '二维码'
 		}
 		this.state = { ioInput: ipt }
 	}

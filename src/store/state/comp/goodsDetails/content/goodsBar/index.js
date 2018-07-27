@@ -35,10 +35,8 @@ const PIcon = extend(deepCopy(t), {
 		},
 		style:     {
 			text: {
-				// textAlign:  'left',
 				fontSize:   23,
 				lineHeight: 28,
-				fontFamily: 'Impact',
 				color: { type: 'custom', color: '#da2339' }
 			}
 		},
@@ -60,7 +58,6 @@ const Price = extend(deepCopy(tb), {
 				textAlign:  'left',
 				fontSize:   35,
 				lineHeight: 43,
-				fontFamily: 'Impact',
 				color: { type: 'custom', color: '#da2339' }
 			}
 		},
@@ -172,7 +169,7 @@ const data = {
 	},
 	componentLayout: [ Name, PIcon, Price, OPT, OPrice, QR ],
 	content: {
-		showTop: 230
+		showTop: 150
 	},
 	animation: {
 		className: '',		// 动画样式
