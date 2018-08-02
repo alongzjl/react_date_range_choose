@@ -86,8 +86,9 @@ module.exports = {
 	swiperBind:        authInit(require('./swiperBind')),
 	// 商品列表
 	goodsList:         authInit(require('./goodsList')),
-	// 列表 (店铺)
+	// 列表&轮播 (商品)
 	listByGoods:       authInit(require('./goodsList/content/listByGoods')),
+	swiperByGoods:     authInit(require('./goodsList/content/swiperByGoods')),
 	// 商品详情
 	goodsDetails:      authInit(require('./goodsDetails')),
 	// 区域色块
@@ -97,5 +98,11 @@ module.exports = {
 	// 商品条
 	goodsBar:          authInit(require('./goodsDetails/content/goodsBar')),
 	// 商品信息
-	goodsBlock:        authInit(require('./goodsDetails/content/goodsBlock'))
+	goodsBlock:        authInit(require('./goodsDetails/content/goodsBlock')),
+	// 切换标签
+	tabs:              authInit(require('./tabs')),
+	// 标签分类
+	catgByTabs:        authInit(require('./tabs/content/catgByTabs')),
+	// 子元素
+	childElement:      authInit(require('./childElement'))
 }

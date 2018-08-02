@@ -48,7 +48,7 @@ module.exports = {
 		boxShadow:         { name: '元素阴影', type: 'Complex', child: {
 			h_shadow:   { name: 'X偏移', type: 'Number', max: 20 },
 			v_shadow:   { name: 'Y偏移', type: 'Number', max: 20 },
-			blur_dis:   { name: '模糊度', type: 'Number', max: 20 },
+			blur_dis:   { name: '模糊度', type: 'Number', max: 60 },
 			spread_dis: { name: '大小',  type: 'Number', max: 20 },
 			color:      { name: '颜色',  type: 'Color' }
 		} },

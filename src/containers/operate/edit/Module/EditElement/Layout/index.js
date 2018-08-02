@@ -19,8 +19,8 @@ import * as variable from 'var'
 var animeMap = variable.animeCompMap,
 	aStyle   = animeMap.style
 
-const compContent = (name, data, item) => {
-	var props  = { data, item }
+const compContent = (name, data, item, autoplay) => {
+	var props  = { data, item, autoplay }
 	var render = {
 		picture:     <Picture     {...props} />,
 		text:        <Text        {...props} />,
@@ -45,11 +45,11 @@ export default class Layout extends React.Component {
 	// componentWillReceiveProps() {}
 
 	render() {
-		let { data, layout, components, styleObj } = this.props
+		let { data, layout, components, autoplay, styleObj } = this.props
 		let childNode = components.map((_, i) => {
 			let compName = _.name,
 				layout   = _.data.layout,
-				compCon  = compContent(compName, _, data)
+				compCon  = compContent(compName, _, data, autoplay)
 
 			if (!compCon) return false
 

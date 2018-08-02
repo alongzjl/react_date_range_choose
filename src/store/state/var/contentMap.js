@@ -25,5 +25,27 @@ module.exports = {
 	pageSwitch:    { name: '翻页开关', type: 'Checkbox' },
 	size:          { name: '显示数量', type: 'Number', min: 1, max: 20 },
 	file:          { name: '文档',    type: 'File' },
-	showTop:       { name: '滚动高度', type: 'Number', min: 0, max: 1000 }
+	showTop:       { name: '滚动高度', type: 'Number', min: 0, max: 1000 },
+	direction:     { name: '方向',    type: 'Radio', option: [
+		{ name: '水平', value: 'horizontal' },
+		{ name: '垂直', value: 'vertical' }
+	] },
+	effect:        { name: '效果',    type: 'RadioMix', option: [
+		{ name: '位移切换', value: 'slide' },
+		{ name: '淡入', value: 'fade' },
+		{ name: '方块', value: 'cube' },
+		{ name: '3D流', value: 'coverflow' },
+		{ name: '3D翻转', value: 'flip' }
+	] },
+	autoplay:      { name: '自动播放', type: 'Switch' },
+	loop:          { name: '循环播放', type: 'Switch' },
+	speed:         { name: '切换速度', type: 'Number', min: 0, max: 2e4, step: 100 },
+	delay:         { name: '停留时长', type: 'Number', min: 0, max: 5e3, step: 100 },
+	slidesPerView:  { name: '显示数量', type: 'Number', min: 1, max: 10 },
+	slidesPerGroup: { name: '滚动数量', type: 'Number', min: 1, max: 10 },
+	centeredSlides: { name: '居中排列', type: 'Switch' },
+	spaceBetween:   { name: '图片间距', type: 'Number', min: -500, max: 500 },
+	slidesOffsetBefore: { name: '左偏移量', type: 'Number', min: -1000, max: 1000 },
+	swiperOptions:  { name: '轮播配置', type: 'Options' },
+	// recommendGoods: { name: '推荐商品', type: 'Goods' }
 }

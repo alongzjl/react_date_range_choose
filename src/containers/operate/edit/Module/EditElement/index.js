@@ -32,6 +32,7 @@ import Map2D             from 'compEdit/EditElement/Map2D'
 import Html              from 'compEdit/EditElement/Html'
 import GoodsDetails      from 'compEdit/EditElement/GoodsDetails'
 import Area              from 'compEdit/EditElement/Area'
+import Tabs              from 'compEdit/EditElement/Tabs'
 
 import ContextMenu       from 'compEdit/EditCommon/ContextMenu'
 import ShortcutKey       from 'compEdit/EditCommon/ShortcutKey'
@@ -71,7 +72,8 @@ const compContent = (name, data, actions, type, idx, csn, keyCtrl) => {
 		map2D:             <Map2D             {...props} />,
 		html:              <Html              {...props} />,
 		goodsDetails:      <GoodsDetails      {...props} />,
-		area:              <Area              {...props} />
+		area:              <Area              {...props} />,
+		tabs:              <Tabs              {...props} />
 	}
 	return render[name]
 }

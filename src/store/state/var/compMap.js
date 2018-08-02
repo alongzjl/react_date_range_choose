@@ -36,6 +36,7 @@ module.exports = {
 		instroButton:          '店铺详情-前往',
 		goodsList:         '商品列表',
 		listByGoods:       '商品列表-列表',
+		swiperByGoods:     '商品轮播',
 		pictureBind:       '图片绑定',
 		textBind:          '文本绑定',
 		swiperBind:        '轮播绑定',
@@ -43,7 +44,10 @@ module.exports = {
 		area:              '区域色块',
 		pictureListBind:   '图片列表绑定',
 		goodsBar:          '商品条',
-		goodsBlock:        '商品信息'
+		goodsBlock:        '商品信息',
+		tabs:              '标签切换',
+		catgByTabs:        '分类',
+		childElement:      '子元素',
 	},
 	num: {
 		address:           0,
@@ -82,6 +86,7 @@ module.exports = {
 		instroButton:          0,
 		goodsList:         0,
 		listByGoods:       0,
+		swiperByGoods:     0,
 		pictureBind:       0,
 		textBind:          0,
 		swiperBind:        0,
@@ -89,6 +94,9 @@ module.exports = {
 		area:              0,
 		pictureListBind:   0,
 		goodsBar:          0,
-		goodsBlock:        0
+		goodsBlock:        0,
+		tabs:              0,
+		childElement:      0,
+		catgByTabs:        0
 	}
 }

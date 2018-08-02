@@ -7,8 +7,6 @@
 import React from 'react'
 import './index.less'
 
-import Custom from 'compEdit/EditContent/Custom'
-
 import { Row, Col, Collapse, Checkbox, Icon, Input, Select } from 'antd'
 const  { TextArea } = Input
 const  { Option, OptGroup } = Select
@@ -29,14 +27,6 @@ var fieldMap = {
 	img:  1,
 	text: 1,
 	bind: 1
-}
-var dataMap = {
-	price:     '价格',
-	oldPrice:  '原价',
-	name:      '商品名称',
-	pic:       '图片',
-	QRPic:     '二维码',
-	brand:     '品牌'
 }
 
 export default class ChildElement extends React.Component {
@@ -141,6 +131,9 @@ export default class ChildElement extends React.Component {
 	}
 	// 绑定
 	renderBind(cfg, con, val, key, idx) {
+		let { name, map } = this.props
+		let dataMap = deepCopy(map)
+		if (name === 'swiperByGoods') dataMap.desc = '商品描述'
 		let opts = Object.keys(dataMap).map((_, i) => {
 			return <Option key={i} value={_}>{dataMap[_]}</Option>
 		})

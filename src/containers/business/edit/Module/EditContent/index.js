@@ -23,7 +23,6 @@ import SwiperImage       from 'compEdit/EditContent/SwiperImage'
 import Navigation        from 'compEdit/EditContent/Navigation'
 import NavigationFloat   from 'compEdit/EditContent/NavigationFloat'
 import WonderfulActivity from 'compEdit/EditContent/WonderfulActivity'
-import Page              from 'compEdit/EditContent/Page'
 
 import * as variable from 'var'
 

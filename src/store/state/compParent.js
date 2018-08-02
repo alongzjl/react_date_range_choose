@@ -20,5 +20,6 @@ module.exports = {
 	html:              1,
 	goodsList:         1,
 	goodsDetails:      1,
-	area:              1
+	area:              1,
+	tabs:              1
 }

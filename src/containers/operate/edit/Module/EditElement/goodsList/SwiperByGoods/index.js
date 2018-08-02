@@ -1,0 +1,46 @@
+import React from 'react'
+import './index.less'
+
+import Layout from 'compEdit/EditElement/Layout'
+import SwiperElement from 'compEdit/EditCommon/SwiperElement'
+
+export default class SwiperByGoods extends React.Component {
+	constructor(props) {
+		super(props)
+	}
+
+	componentWillReceiveProps(props) {}
+
+	componentDidMount() {}
+
+	componentWillUnmount() {}
+
+	renderDom = e => {
+		let { data } = this.props,
+			{ content, componentLayout, layout } = data.data,
+			{ recommendGoods } = content
+		let slide = recommendGoods.map((_, i) => {
+			return (
+				<div className="swiper-slide" key={i}>
+					<Layout
+						data={_}
+						layout={layout}
+						components={componentLayout}
+						autoplay={true}
+						styleObj={cssColorFormat(this.props, 'filterBox')}
+					/>
+				</div>
+			)
+		})
+		return <SwiperElement options={content.swiperOptions} random={parseInt(Math.random() * 1e9)}>{ slide }</SwiperElement>
+	}
+	render() {
+		let dom = this.renderDom()
+
+		return (
+			<section className={`e-swiper-by-goods`}>
+				{ dom }
+			</section>
+		)
+	}
+}

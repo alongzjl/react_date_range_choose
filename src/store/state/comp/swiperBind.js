@@ -65,7 +65,20 @@ const data = {
 		height:   200
 	},
 	content: {
-		bind: ''
+		bind: '',
+		swiperOptions: {
+			direction: 'horizontal',
+			effect:  'slide',
+			autoplay: true,
+			loop:  true,
+			speed: 300,
+			delay: 2000,
+			spaceBetween:   0,
+			slidesPerView:  1,
+			slidesPerGroup: 1,
+			slidesOffsetBefore: 0,
+			centeredSlides: true
+		}
 	},
 	animation: {
 		className: '',	// 动画样式
@@ -93,26 +106,5 @@ module.exports = {
 	},
 	// 功能特性
 	feature: {
-		style: {
-			layout: '0',	// 外观样式
-			title:  '0'		// 标题样式
-		},
-		layout: 1,
-		swiperOptions: {
-			direction: 'horizontal',	// 轮播方向 vertical
-			effect:'slide',				// 'slide' or 'fade' or 'cube' or 'coverflow' or 'flip'
-			autoplay: true,				// 播放开关
-			loop : true,				// 循环
-			speed: 1000,				// 切换速度
-			slideOptions: {
-				spaceBetween:  0,
-				slidesPerView: 1,
-				centeredSlides: true
-			},
-			autoplayOptions: {
-				delay: 1000,					// 1秒切换一次
-				disableOnInteraction: false,	// 用户操作swiper之后，是否禁止autoplay。默认为true：停止。
-			}
-		}
 	}
 }

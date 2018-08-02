@@ -6,13 +6,13 @@
 */
 
 .comp-layout {
-	.btn-edit-layout {
-		display: block;
-		width: 60px;
-		margin: 0 auto;
-		text-align: center;
-		font-size: 12px;
-	}
+}
+.btn-edit-layout {
+	display: block;
+	width: 60px;
+	margin: 0 auto;
+	text-align: center;
+	font-size: 12px;
 }
 .cl-parent {
 	display: flex;
@@ -41,13 +41,15 @@
 	}
 	.cl-element {
 		display: flex;
-		justify-content: center;
-		align-items: center;
+		// justify-content: center;
+		// align-items: center;
 		margin: 30px auto;
 		box-shadow: 0 2px 10px rgba(0, 0, 0, .5);
 		.cl-element-child {
 			position: relative;
+			overflow: hidden;
 			transform: scale(2);
+			transform-origin: 0 0;
 			// zoom: 2;
 		}
 		.pge-layout {

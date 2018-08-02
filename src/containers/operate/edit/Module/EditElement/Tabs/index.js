@@ -31,72 +31,34 @@ let featureMap = {
 	spec:      '颜色规格'
 }
 
-export default class GoodsDetails extends React.Component {
+export default class Tabs extends React.Component {
 	constructor(props) {
 		super(props)
 		this.init()
 	}
 	componentWillMount() {}
 
-	componentDidMount() {
-		let csn = this.props.csn
-		if (!csn) return false
-		let doc = document.querySelector(`.${csn}`)
-		doc.addEventListener('scroll', throttle(this._handleScroll, 500, 500))
-	}
+	componentDidMount() {}
 
-	componentWillUnmount() {
-		let csn = this.props.csn
-		if (!csn) return false
-		let doc = document.querySelector(`.${csn}`)
-		doc.removeEventListener('scroll', throttle(this._handleScroll, 500, 500))
-	}
+	componentWillUnmount() {}
 
 	componentWillReceiveProps() {
 		let { data, csn } = this.props
 		let { feature } = data
 		let ipt = deepCopy(feature)
-		let doc = document.querySelector(`.${csn}`)
-		ipt.scrollTop = doc? doc.scrollTop: 0
-		this.getItem(ipt)
 		this.state = { ioInput: ipt }
 		this.ioOuter(ipt)
 	}
 
-	_handleScroll = e => {
-		let { ioInput } = this.state
-		let doc = document.querySelector(`.${this.props.csn}`),
-			st = doc.scrollTop
-		this.setState({
-			ioInput: {
-				...ioInput,
-				scrollTop: st
-			}
-		})
-	}
-
 	ioOuter(ipt) {
-		this.getItem(ipt)
 		this.setState({ ioInput: ipt })
 		console.clear()
-	}
-
-	getItem = (ipt) => {
-		let { data } = this.props
-		let { feature } = data
-		let { content } = data.data
-		ipt.item = mock.item.goods()
-		delete feature.item
-		delete feature.map
 	}
 
 	init = () => {
 		let { data, csn } = this.props
 		let { feature } = data
 		let ipt = deepCopy(feature)
-		let doc = document.querySelector(`.${csn}`)
-		ipt.scrollTop = doc? doc.scrollTop: 0
-		this.getItem(ipt)
 		this.state = { ioInput: ipt }
 	}
 

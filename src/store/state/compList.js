@@ -214,6 +214,11 @@ module.exports = [
 					icon: 'list',
 					name: '列表',
 					key:  'listByGoods'
+				},
+				{
+					icon: 'list',
+					name: '推荐列表',
+					key:  'swiperByGoods'
 				}
 			]
 		},
@@ -268,11 +273,6 @@ module.exports = [
 			icon: '2DMap',
 			name: '2D地图',
 			key:  'map2D'
-		},
-		{
-			icon: 'html',
-			name: '组件上传',
-			key:  'html'
 		}
 	// ],
 ]

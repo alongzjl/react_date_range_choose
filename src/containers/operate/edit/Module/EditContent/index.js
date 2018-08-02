@@ -11,16 +11,17 @@ import { bindActionCreators } from 'redux'
 import { connect }  from 'react-redux'
 import * as actions from 'actions'
 
-import { Checkbox, Collapse, Icon, Input, InputNumber, Select } from 'antd'
+import { Checkbox, Collapse, Icon, Input, InputNumber, Radio, Select, Switch } from 'antd'
 const  { TextArea } = Input
 const  { Panel }    = Collapse
+const RadioButton   = Radio.Button
+const RadioGroup    = Radio.Group
 const Option = Select.Option
 
 import RouterJump        from 'compEdit/EditCommon/RouterJump'
 import ImageUploadComp   from 'compEdit/EditCommon/ImageUploadComp'
 import HtmlUpload        from 'compEdit/EditCommon/HtmlUpload'
 import CompLayout        from 'compEdit/EditCommon/CompLayout'
-
 import ChildElement      from './ChildElement'
 
 import SwiperImage       from './SwiperImage'
@@ -28,19 +29,43 @@ import Navigation        from './Navigation'
 import NavigationFloat   from './NavigationFloat'
 import Weather           from './Weather'
 import WonderfulActivity from './WonderfulActivity'
-import Page              from './Page'
 import ListByStore       from './ListByStore'
 import ThemeColor        from './ThemeColor'
 import filterContent     from './filter'
+import SwiperByGoods     from './SwiperByGoods'
 
 import * as variable from 'var'
 
 var conMap = variable.contentMap
 var plMap  = {
-	listByGoods: 1
+	listByGoods:   'filterBox',
+	swiperByGoods: 'filterBox'
+}
+var mockMap  = {
+	listByGoods: { type: 'list', name: 'goods', field: 'size' },
+	goodsBlock:  { type: 'item', name: 'goods' },
+	goodsBar:    { type: 'item', name: 'goods' },
+	pictureListBind: { type: 'item', name: 'goods' },
+	swiperByGoods:   { type: 'item', name: 'goods' }
 }
 
 import './index.less'
+
+const compContent = (name, data, onChange) => {
+	var props  = { data, onChange }
+	var render = {
+		navigation:        <Navigation        {...props} />,
+		navigationFloat:   <NavigationFloat   {...props} />,
+		weather:           <Weather           {...props} />,
+		wonderfulActivity: <WonderfulActivity {...props} />,
+		swiperImage:       <SwiperImage       {...props} />,
+		listByStore:       <ListByStore       {...props} />,
+		map2D:             <ThemeColor        {...props} />,
+		floorMap:          <ThemeColor        {...props} />,
+		swiperByGoods:     <SwiperByGoods     {...props} />
+	}
+	return render[name]
+}
 
 class EditContent extends React.Component {
 	componentWillMount() {}
@@ -56,7 +81,7 @@ class EditContent extends React.Component {
 		let { parentComp } = curData
 		actions.updateComp(null, parentComp? parentComp: data)
 	}
-	onChange(val, con, key, cfg, index) {
+	onChange = (val, con, key, cfg, index) => {
 		let { data, actions, editConfig } = this.props
 		let { curData } = editConfig
 		let { content } = data.data
@@ -74,9 +99,6 @@ class EditContent extends React.Component {
 		actions.updateComp(null, parentComp? parentComp: data)
 	}
 
-	cb(key) {
-		// console.log(key)
-	}
 	deleteCom(index) { 
 		let { data, actions, editConfig } = this.props;
 		let { curData, curComp } = editConfig
@@ -190,15 +212,47 @@ class EditContent extends React.Component {
 	renderCheckbox(cfg, con, val, key, index) {
 		return (
 			<Checkbox
-				checked={val || cfg.defaultValue || false} onChange={v => this.onChange(v.target.checked, con, key,cfg, index)}
+				checked={val || cfg.defaultValue || false} onChange={v => this.onChange(v.target.checked, con, key, cfg, index)}
 			/>
+		)
+	}
+	renderSwitch(cfg, con, val, key, index) {
+		return (
+			<Switch
+				size="small"
+				checked={val || false} onChange={v => this.onChange(v, con, key, cfg, index)}
+			/>
+		)
+	}
+	// 筛选框
+	renderRadio(cfg, con, val, key, index) {
+		let { option } = cfg
+		return (
+			<RadioGroup size="small" onChange={_ => this.onChange(_.target.value, con, key, cfg, index)} value={val}>
+				{ option.map((_, i) => (<RadioButton key={i} value={_.value}>{_.name}</RadioButton>)) }
+			</RadioGroup>
+		)
+	}
+	// 筛选框
+	renderRadioMix(cfg, con, val, key, index) {
+		let { option } = cfg
+		return (
+			<div className="sc-radio-group">
+				{ option.map((_, i) => (
+					<span
+						key={i}
+						className={`sc-radio-button-wrapper${val === _.value? ' s-active': ''}`}
+						value={_.value}
+						onClick={e => this.onChange(_.value, con, key, cfg, index)}
+					>{_.name}</span>
+				)) }
+			</div>
 		)
 	}
 	// 绑定
 	renderBind(cfg, con, val, key, index) {
-		let { editConfig } = this.props
-		let { parentComp } = editConfig.curData
-		let { item, map }  = parentComp.feature
+		let { data } = this.props
+		let { item, map } = this.createMock(data.name)
 		let opts = Object.keys(map).map((_, i) => {
 			return <Option key={i} value={_}>{map[_]}</Option>
 		})
@@ -207,12 +261,33 @@ class EditContent extends React.Component {
 				<Select
 					value={val}
 					style={{ width: '100%' }}
-					onChange={v => { this.onChange(v, con, key, cfg, index) }}
+					onChange={v => this.onChange(v, con, key, cfg, index)}
 				>
 					<Option value={''}>无</Option>
 					{ opts }
 				</Select>
 			</div>
+		)
+	}
+	// 复合
+	renderOptions(cfg, con, val, key, index) {
+		const keys      = Object.keys(val)
+		const childNode = keys.map((_, i) => {
+			if (_ === 'name') return null
+			let v  = val[_],
+				cm = conMap[_],
+				fn = this[`render${cm.type}`],
+				dom = fn.bind(this, cm, val, v, _)()
+			return (
+				<div className="pgs-row" key={i}>
+					<div className="pgsr-name" style={{ width: 52 }}>{ cm.name }</div>
+					<div className="pgsr-ctrl">{ dom }</div>
+				</div>
+			)
+		})
+
+		return (
+			<div>{ childNode }</div>
 		)
 	}
 
@@ -245,6 +320,17 @@ class EditContent extends React.Component {
 		return childNode
 	}
 
+	createMock(cn, da) {
+		var obj = {},
+			mk  = mockMap[cn]
+		if (!mk) return {}
+		var { type, name, field } = mk
+		obj[type]  = mock[type][name]()
+		obj.map    = mock.map[name]()
+		if (da) obj.layout = plMap[cn]? da.style[plMap[cn]]: da.layout
+		return obj
+	}
+
 	render() {
 		let { data, actions, editConfig } = this.props
 		let compName = data.name
@@ -254,19 +340,13 @@ class EditContent extends React.Component {
 		let da = data.data
 		let { content } = da
 		let compLay = da.componentLayout
+		let mockData = {}
 		let parentLayout,
-			compCon,
 			childNode,
 			activeKey,
-			feature
-		if (compName === 'navigation')             compCon = (<Navigation        data={this.props}/>)
-		else if (compName === 'navigationFloat')   compCon = (<NavigationFloat   data={this.props}/>)
-		else if (compName === 'weather')           compCon = (<Weather           data={this.props}/>)
-		else if (compName === 'wonderfulActivity') compCon = (<WonderfulActivity data={this.props}/>)
-		else if (compName === 'swiperImage')       compCon = (<SwiperImage       data={this.props}/>)
-		else if (compName === 'listByStore')       compCon = (<ListByStore       data={this.props}/>)
-		else if (compName === 'map2D')             compCon = (<ThemeColor        data={this.props}/>)
-		else if (compName === 'floorMap')          compCon = (<ThemeColor        data={this.props}/>)	
+			feature,
+			compCon = compContent(compName, this.props, this.onChange)
+
 		if (content.length) {
 			activeKey = Array.from(new Array(content.length + 1), (_, i) => `${i}`)
 			childNode = content.map((_, i) => {
@@ -289,26 +369,25 @@ class EditContent extends React.Component {
 			)
 		}
 		if (parentComp) {
-			parentLayout = plMap[compName]? da.style.filterBox: da.layout
-			feature      = parentComp.feature
+			mockData = this.createMock(compName, da)
 		}
 		return (
 			<section className="ry-roll-screen-config">
-				{ compCon }
 				{
 					compLay
 					?
-					<Collapse activeKey={['0', '1']}>
+					<Collapse defaultActiveKey={['0', '1']}>
 						<Panel header={`编辑布局`} key={0}>
-							<CompLayout list={feature.list} item={feature.item} map={feature.map} props={this.props} layout={compLay} parentLayout={parentLayout} updateComp={this.updateComp} />
+							<CompLayout list={mockData.list} item={mockData.item} map={mockData.map} props={this.props} layout={compLay} parentLayout={mockData.layout} updateComp={this.updateComp} />
 						</Panel>
 						<Panel header={`子元素`} key={1}>
-							<ChildElement name={compName} layout={compLay} updateComp={this.updateComp} />
+							<ChildElement name={compName} layout={compLay} map={mockData.map} updateComp={this.updateComp} />
 						</Panel>
 					</Collapse>
 					: null
 				}
-				<Collapse activeKey={activeKey} onChange={this.cb}>
+				{ compCon }
+				<Collapse defaultActiveKey={activeKey}>
 					{ childNode }
 				</Collapse>
 			</section>

@@ -43,10 +43,13 @@ class Header extends React.Component {
 		let { key } = item
 		if (!key) return
 		if (curComp.type === 'advanced' || parentComp) {
-			let compData = JSON.parse(JSON.stringify(comp[key])),
+			let compData = deepCopy(comp[key]),
 				Comp     = parentComp || curComp,
+				{ max }  = Comp.feature,
 				auth     = compC[Comp.name]
 			if (compData.type != 'advanced' && auth[key]) {
+				if (max != undefined) compData.feature.id = ++max
+				delete compData.styleList.list
 				Comp.data.components.push(compData)
 				message.success(`添加子组件: ${compMap[key]}!`)
 				this.selectMulti(Comp.data.components.length - 1)

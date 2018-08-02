@@ -30,10 +30,8 @@ module.exports = {
 		weather: 1
 	},
 	goodsList: {
-		page:        1,
-		reset:       1,
-		listByGoods: 1,
-		swiperBind:  1
+		listByGoods:   1,
+		swiperByGoods: 1
 	},
 	goodsDetails: {
 		picture:     1,
@@ -45,5 +43,9 @@ module.exports = {
 		goodsBar:    1,
 		goodsBlock:  1,
 		pictureListBind: 1
-	}
+	},
+	tabs: {
+		catgByTabs:   1,
+		childElement: 1
+	},
 }
