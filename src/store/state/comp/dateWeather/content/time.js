@@ -1,5 +1,4 @@
-const common = require('state/common')
-let { authInit, deepCopy, extend } = common
+let { authInit, deepCopy, extendRmSL } = require('state/common')
 
 // 时间日期
 const data = {
@@ -53,7 +52,7 @@ const data = {
 	}
 }
 
-const data2 = extend(deepCopy(data), {
+const data2 = extendRmSL(deepCopy(data), {
 	content: { split: '-' }
 })
 

@@ -1,9 +1,4 @@
-/**
- * @Author: Along
- * @Date:   2018-05-10
- */
-
-let { authInit, deepCopy, extend, styleIdxChange } = require('state/common')
+let { authInit, deepCopy, extendRmSL, styleIdxChange } = require('state/common')
 const a   = authInit(require('../area'))
 const p   = authInit(require('../picture'))
 const pb  = authInit(require('../pictureBind'))
@@ -15,7 +10,7 @@ const gb  = authInit(require('./content/goodsBar'))
 const gbk = authInit(require('./content/goodsBlock'))
 
 /* 商品条 */
-const GB = extend(deepCopy(gb), {
+const GB = extendRmSL(deepCopy(gb), {
 	data: {
 		layout: {
 			left: 10
@@ -24,7 +19,7 @@ const GB = extend(deepCopy(gb), {
 })
 
 /* 商品描述 */
-const GBINFO = extend(deepCopy(gbk), {
+const GBINFO = extendRmSL(deepCopy(gbk), {
 	data: {
 		layout: {
 			top:  10,
@@ -34,7 +29,7 @@ const GBINFO = extend(deepCopy(gbk), {
 })
 
 /* 商品详情 */
-const GBINFO2 = extend(styleIdxChange(1, deepCopy(gbk)), {
+const GBINFO2 = extendRmSL(styleIdxChange(1, deepCopy(gbk)), {
 	data: {
 		layout: {
 			top:  240,
@@ -44,7 +39,7 @@ const GBINFO2 = extend(styleIdxChange(1, deepCopy(gbk)), {
 })
 
 /* 商品图 */
-const GoodsPic = extend(deepCopy(plb), {
+const GoodsPic = extendRmSL(deepCopy(plb), {
 	data: {
 		layout: {
 			top:  372,

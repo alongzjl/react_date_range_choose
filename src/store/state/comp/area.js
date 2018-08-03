@@ -5,6 +5,7 @@ const data = {
 	style:     {
 		filterBox: {
 			transform:    { rotate: 0 },
+			opacity: 1,
 			borderRadius: {
 				topLeft:     0,
 				topRight:    0,

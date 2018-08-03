@@ -1,4 +1,4 @@
-const { authInit, deepCopy, extend } = require('state/common')
+const { authInit, deepCopy, extendRmSL } = require('state/common')
 const c  = authInit(require('./content/catg'))
 const f  = authInit(require('./content/floor'))
 const l  = authInit(require('./content/letter'))
@@ -30,21 +30,21 @@ const dataStyle_1 = {
 	},
 	components: [c,f,l,r,p,ls] 
 }
-const f_2 = extend(deepCopy(f), {
+const f_2 = extendRmSL(deepCopy(f), {
 	data:{
 		layout: {
 			top:  0, 
 		}
 	}
 })
-const ls_2 = extend(deepCopy(ls), {
+const ls_2 = extendRmSL(deepCopy(ls), {
 	data:{
 		layout: {
 			top:  0, 
 		}
 	}
 })
-const p_2 = extend(deepCopy(p), {
+const p_2 = extendRmSL(deepCopy(p), {
 	data:{
 		layout: {
 			top:  300, 
@@ -78,18 +78,18 @@ const dataStyle_2 = {
 module.exports = {
 	name: 'storeList',
 	type: 'advanced',
-	data: JSON.parse(JSON.stringify(dataStyle_1)),
+	data: deepCopy(dataStyle_1),
 	// 动画设置
 	styleList: {
 		idx:  0,
 		list: [{
 			name: '品牌导购',
 			img:  '',
-			data: JSON.parse(JSON.stringify(dataStyle_1))
+			data: deepCopy(dataStyle_1)
 		}, {
 			name: '楼层导航',
 			img:  '',
-			data: JSON.parse(JSON.stringify(dataStyle_2))
+			data: deepCopy(dataStyle_2)
 		}]
 	},
 	// 功能特性

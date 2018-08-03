@@ -16,10 +16,13 @@ export default class SwiperByGoods extends React.Component {
 	componentWillUnmount() {}
 
 	renderDom = e => {
-		let { data } = this.props,
+		let { data, ioInput } = this.props,
+			{ list } = ioInput,
 			{ content, componentLayout, layout } = data.data,
 			{ recommendGoods } = content
-		let slide = recommendGoods.map((_, i) => {
+		let finalList = envType === 'operate'? list: recommendGoods
+
+		let slide = finalList.map((_, i) => {
 			return (
 				<div className="swiper-slide" key={i}>
 					<Layout

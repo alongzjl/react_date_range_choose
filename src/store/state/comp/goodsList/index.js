@@ -1,43 +1,25 @@
-let { authInit, deepCopy, extend, styleIdxChange } = require('state/common')
-const list   = authInit(require('./content/listByGoods'))
-const swiper = authInit(require('./content/swiperByGoods'))
-
-// 店铺列表
-const dataStyle_1 = {
-	layout: {
-		position: 'absolute',
-		top:      0,
-		left:     0,
-		width:    540,
-		height:   800
-	},
-	style: {
-	},
-	content: {
-		size: 6
-	},
-	animation: {
-		className: '',	// 动画样式
-		direction: '',				// 方向
-		delay: 0,					// 开始时间
-		duration: 1,				// 持续时间
-		iterationCount: 1			// 循环次数
-	},
-	components: [swiper] 
-}
+let { authInit, deepCopy, extend } = require('state/common')
+const style_1 = require('./style_1')
+const style_2 = require('./style_2')
 
 module.exports = {
 	name: 'goodsList',
 	type: 'advanced',
-	data: deepCopy(dataStyle_1),
+	data: deepCopy(style_1),
 	// 动画设置
 	styleList: {
 		idx:  0,
-		list: [{
-			name: '品牌导购',
+		list: [
+		{
+			name: '商品列表',
 			img:  '',
-			data: deepCopy(dataStyle_1)
-		}]
+			data: deepCopy(style_1)
+		}, {
+			name: '推荐商品',
+			img:  '',
+			data: deepCopy(style_2)
+		}
+		]
 	},
 	// 功能特性
 	feature: {
@@ -45,8 +27,6 @@ module.exports = {
 			page:   1,
 			size:   6,
 			total:  0
-		},
-		list: [],		// 商品
-		map: {}			// 映射
+		}
 	}
 }

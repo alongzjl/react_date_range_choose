@@ -30,5 +30,12 @@ module.exports = {
 		text:        1,
 		pictureBind: 1,
 		textBind:    1
+	},
+	catgByGoods: {
+		area:        1,
+		picture:     1,
+		text:        1,
+		pictureBind: 1,
+		textBind:    1
 	}
 }

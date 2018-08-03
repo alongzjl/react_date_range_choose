@@ -1,5 +1,4 @@
-const common = require('state/common')
-let { authInit } = common
+let { authInit } = require('state/common')
 
 // 组件元素数据
 module.exports = {
@@ -86,12 +85,13 @@ module.exports = {
 	swiperBind:        authInit(require('./swiperBind')),
 	// 商品列表
 	goodsList:         authInit(require('./goodsList')),
-	// 列表&轮播 (商品)
-	listByGoods:       authInit(require('./goodsList/content/listByGoods')),
-	swiperByGoods:     authInit(require('./goodsList/content/swiperByGoods')),
+	// 列表&轮播&分类 (商品)
+	listByGoods:       authInit(require('./goodsList/content/list')),
+	swiperByGoods:     authInit(require('./goodsList/content/swiper')),
+	catgByGoods:       authInit(require('./goodsList/content/catg')),
 	// 商品详情
 	goodsDetails:      authInit(require('./goodsDetails')),
-	// 区域色块
+	// 背景色块
 	area:              authInit(require('./area')),
 	// 图片列表-绑定
 	pictureListBind:   authInit(require('./pictureListBind')),

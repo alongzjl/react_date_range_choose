@@ -1,16 +1,17 @@
 let { authInit, deepCopy, extendRmSL, styleIdxChange } = require('state/common')
-const p  = authInit(require('../../picture'))
-const pb = authInit(require('../../pictureBind'))
-const t  = authInit(require('../../text'))
-const tb = authInit(require('../../textBind'))
+const a  = authInit(require('state/comp/area'))
+// const p  = authInit(require('state/comp/picture'))
+const pb = authInit(require('state/comp/pictureBind'))
+// const t  = authInit(require('state/comp/text'))
+const tb = authInit(require('state/comp/textBind'))
 
 const gPic = extendRmSL(deepCopy(pb), {
 	data: {
 		layout: {
-			top:  12,
-			left: 12,
-			width:  152,
-			height: 152
+			top:  5,
+			left: 30,
+			width:  40,
+			height: 40
 		},
 		content: {
 			bind: 'pic'
@@ -20,19 +21,25 @@ const gPic = extendRmSL(deepCopy(pb), {
 const gName = extendRmSL(deepCopy(tb), {
 	data: {
 		layout: {
-			top:  166,
-			left: 12,
-			width:  152,
-			height: 36
+			top:  45,
+			width:  100,
+			height: 16
 		},
 		content: {
 			bind: 'name'
+		}
+	}
+})
+const gLine = extendRmSL(deepCopy(a), {
+	data: {
+		layout: {
+			top:  74,
+			left: 20,
+			width:  60,
+			height: 4
 		},
-		style: {
-			text: {
-				textAlign: 'left',
-				color: { type: 'custom', color: '#666' }
-			}
+		content: {
+			bind: 'name'
 		}
 	}
 })
@@ -41,25 +48,18 @@ const gName = extendRmSL(deepCopy(tb), {
 const data = {
 	layout: {
 		position: 'absolute',
-		top:  10,
-		left: 5,
-		width:  535,
-		height: 540
+		top:  0,
+		left: 0,
+		width:  540,
+		height: 80
 	},
 	style: {
 		filterBox: {
-			width:  100,
-			height: 100,
-			borderWidth: 0,
+			flexWrap: 'nowrap',
+			borderWidth:  0,
 			borderStyle: 'solid',
 			borderColor: { type: 'main', color: '#fff' },
 			backgroundColor: { type: 'custom', color: '#fff' },
-			margin: {
-				top:     0,
-				right:   4,
-				bottom:  4,
-				left:    0,
-			},
 			borderRadius:    {
 				topLeft:     0,
 				topRight:    0,
@@ -73,11 +73,15 @@ const data = {
 				spread_dis: 0,
 				color:      { type: 'custom', color: '#000' }
 			}
+		},
+		filter: {
+			width:  100,
+			height: 80
 		}
 	},
-	componentLayout: [ gPic, gName ],
+	componentLayout: [ gPic, gName, gLine ],
 	content: {
-		tabs: []
+		router: {},
 	},
 	animation: {
 		className: '',		// 动画样式
@@ -89,7 +93,7 @@ const data = {
 }
 
 module.exports = {
-	name: 'catgByTabs',
+	name: 'catgByGoods',
 	type: 'layout',
 	// 位置大小
 	data: deepCopy(data),

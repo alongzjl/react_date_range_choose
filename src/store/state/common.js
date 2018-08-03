@@ -5,12 +5,12 @@ function handleObj(obj) {
 }
 const Fn = {
 	authInit: function(da) {
+		da = Fn.deepCopy(da)
 		let { data, feature } = da
 		let style     = Fn.deepCopy(data.style),
 			content   = Fn.deepCopy(data.content),
 			animation = Fn.deepCopy(data.animation),
 			fture     = Fn.deepCopy(feature)
-
 		for (var p in style) {
 			handleObj(style[p])
 		}
@@ -18,12 +18,7 @@ const Fn = {
 		handleObj(content)
 		handleObj(fture)
 		handleObj(animation)
-		da.auth = {
-			style:     style,
-			content:   content,
-			animation: animation,
-			feature:   fture
-		}
+		da.auth = { style, content, animation, fture }
 		return da
 	},
 	deepCopy: (obj) => {
@@ -48,6 +43,14 @@ const Fn = {
 			}
 		}
 		return org
+	},
+	extendRmSL: (org, obj) => {
+		var newObj = Fn.extend(org, obj),
+			{ styleList } = newObj
+		if (!styleList) return newObj
+		var { list } = styleList
+		if (list) delete styleList.list
+		return newObj
 	},
 	getClass: (obj) => {
 		return Object.prototype.toString.call(obj).match(/^\[object\s(.*)\]$/)[1]

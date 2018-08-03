@@ -1,11 +1,10 @@
-const common = require('state/common')
-let { authInit, deepCopy, extend, styleIdxChange } = common
-const p  = authInit(require('../../picture'))
-const pb = authInit(require('../../pictureBind'))
-const t  = authInit(require('../../text'))
-const tb = authInit(require('../../textBind'))
+let { authInit, deepCopy, extendRmSL, styleIdxChange } = require('state/common')
+const p  = authInit(require('state/comp/picture'))
+const pb = authInit(require('state/comp/pictureBind'))
+const t  = authInit(require('state/comp/text'))
+const tb = authInit(require('state/comp/textBind'))
 
-const gPic = extend(deepCopy(pb), {
+const gPic = extendRmSL(deepCopy(pb), {
 	data: {
 		layout: {
 			top:  12,
@@ -18,7 +17,7 @@ const gPic = extend(deepCopy(pb), {
 		}
 	}
 })
-const gName = extend(deepCopy(tb), {
+const gName = extendRmSL(deepCopy(tb), {
 	data: {
 		layout: {
 			top:  166,
@@ -37,7 +36,7 @@ const gName = extend(deepCopy(tb), {
 		}
 	}
 })
-const rmbIcon = extend(deepCopy(t), {
+const rmbIcon = extendRmSL(deepCopy(t), {
 	data: {
 		layout: {
 			top:  230,
@@ -56,7 +55,7 @@ const rmbIcon = extend(deepCopy(t), {
 		}
 	}
 })
-const gPrice = extend(deepCopy(tb), {
+const gPrice = extendRmSL(deepCopy(tb), {
 	data: {
 		layout: {
 			top:  224,
@@ -77,7 +76,7 @@ const gPrice = extend(deepCopy(tb), {
 		}
 	}
 })
-const gBuy = extend(deepCopy(p), {
+const gBuy = extendRmSL(deepCopy(p), {
 	data: {
 		layout: {
 			top:  205,
@@ -95,13 +94,13 @@ const gBuy = extend(deepCopy(p), {
 const data = {
 	layout: {
 		position: 'absolute',
-		top:  10,
-		left: 5,
+		top:  0,
+		left: 0,
 		width:  535,
 		height: 540
 	},
 	style: {
-		filterBox: {
+		filter: {
 			width:  174,
 			height: 260,
 			borderWidth:  0,

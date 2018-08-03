@@ -1,5 +1,4 @@
-const common = require('state/common')
-let { authInit, deepCopy, extend } = common
+let { authInit, deepCopy, extendRmSL } = require('state/common')
 
 // 天气
 const data = {
@@ -36,7 +35,7 @@ const data = {
 		iterationCount: 1			// 循环次数
 	}
 }
-const data2 = extend(deepCopy(data), {
+const data2 = extendRmSL(deepCopy(data), {
 	style: {
 		split: {
 			fontSize:     24, 
@@ -57,7 +56,7 @@ const data2 = extend(deepCopy(data), {
 		template: '今天天气: {type} 气温: {temp} 空气质量: {aqi} {aqiInfo} 风向: {direct} {power}'
 	}
 })
-const data3 = extend(deepCopy(data), {
+const data3 = extendRmSL(deepCopy(data), {
 	layout: {
 		width: 52,
 		height: 52
@@ -99,7 +98,7 @@ const data3 = extend(deepCopy(data), {
 	}
 })
 delete data3.style.text
-const data4 = extend(deepCopy(data3), {
+const data4 = extendRmSL(deepCopy(data3), {
 	style: {
 		image: {
 			backgroundColor: { type: 'main', color: '#000' }
@@ -112,7 +111,7 @@ module.exports = {
 	type: 'base',
 	// 位置大小
 	// 样式管理
-	data: JSON.parse(JSON.stringify(data)),
+	data: deepCopy(data),
 	// 内容管理
 	// 样式列表
 	styleList: {
@@ -120,39 +119,39 @@ module.exports = {
 		list: [{
 			name:  '温度',
 			img:   '',
-			data:  JSON.parse(JSON.stringify(data))
+			data:  deepCopy(data)
 		}, {
 			name:  '空气质量',
 			img:   '',
-			data:  JSON.parse(JSON.stringify(data))
+			data:  deepCopy(data)
 		}, {
 			name:  '空气质量描述',
 			img:   '',
-			data:  JSON.parse(JSON.stringify(data))
+			data:  deepCopy(data)
 		}, {
 			name:  '天气',
 			img:   '',
-			data:  JSON.parse(JSON.stringify(data))
+			data:  deepCopy(data)
 		}, {
 			name:  '风向',
 			img:   '',
-			data:  JSON.parse(JSON.stringify(data))
+			data:  deepCopy(data)
 		}, {
 			name:  '强度',
 			img:   '',
-			data:  JSON.parse(JSON.stringify(data))
+			data:  deepCopy(data)
 		}, {
 			name:  '图标',
 			img:   '',
-			data:  JSON.parse(JSON.stringify(data3))
+			data:  deepCopy(data3)
 		}, {
 			name:  '纯色图标',
 			img:   '',
-			data:  JSON.parse(JSON.stringify(data4))
+			data:  deepCopy(data4)
 		}, {
 			name:  '自定义',
 			img:   '',
-			data:  JSON.parse(JSON.stringify(data2))
+			data:  deepCopy(data2)
 		}] 
 	},
 	// 功能特性

@@ -17,9 +17,12 @@ export default class SwiperByGoods extends React.Component {
 			{ content } = da,
 			{ recommendGoods } = content
 		
-		return <GoodsListModal
-					list={recommendGoods}
-					onChange={v => onChange(v, content, 'recommendGoods', {})}
-				/>
+		return envType === 'business'
+		?
+		<GoodsListModal
+			list={recommendGoods}
+			onChange={v => onChange(v, content, 'recommendGoods', {})}
+		/>
+		: null
 	}
 }

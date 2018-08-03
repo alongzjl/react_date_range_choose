@@ -119,6 +119,12 @@ module.exports = extend(window, {
 					pics:      '图片列表',
 					QRPic:     '二维码'
 				}
+			},
+			goodsCatg() {
+				return {
+					name: '类名',
+					pic:  '图片'
+				}
 			}
 		},
 		list: {
@@ -131,10 +137,22 @@ module.exports = extend(window, {
 						price:    `${m}.9`,
 						oldPrice: `${m2}.9`,
 						brand:    'TELEFLORA',
-						name:     `${i}拜亚动力/拜雅（Beyerdynamic）Xelento remote 榭兰图 线控版特斯拉旗舰入耳式耳塞`,
+						name:     `${i}-拜亚动力/拜雅（Beyerdynamic）Xelento remote 榭兰图 线控版特斯拉旗舰入耳式耳塞`,
 						pic:      'http://rongyi.b0.upaiyun.com/commodity/text/201807191807420161.jpg',
 						pics:     'http://a.vpimg3.com/upload/merchandise/pdcvis/2018/07/04/176/79c5de67-8f8f-4463-a82d-364d3dcd92e5_420x420_90.jpg,http://a.vpimg3.com/upload/merchandise/pdcvis/2018/07/04/62/bacab0f7-7b39-4631-b6ff-029e65ae5339_420x420_90.jpg,http://a.vpimg3.com/upload/merchandise/pdcvis/2018/07/04/115/51673b5a-f7ac-47f2-8dc3-ad6f8560631e_420x420_90.jpg',
-						QRPic:    'http://rongyi.b0.upaiyun.com/commodity/text/201807181419502662.png'
+						QRPic:    'http://rongyi.b0.upaiyun.com/commodity/text/201807181419502662.png',
+						desc:     `商品描述-${i+8}`
+					}
+				})
+			},
+			goodsCatg(num = 1) {
+				return Array.apply(null, { length: num }).map((_, i) => {
+					var m   = Math.floor(1e3 + i * 1.2),
+						m2  = m + Math.floor(i * 1.6)
+					return {
+						id:   i + 1,
+						name: `${i}-榭兰图`,
+						pic:  'http://rongyi.b0.upaiyun.com/commodity/text/201807191807420161.jpg'
 					}
 				})
 			}
@@ -151,6 +169,13 @@ module.exports = extend(window, {
 					pics:     'http://a.vpimg3.com/upload/merchandise/pdcvis/2018/07/04/176/79c5de67-8f8f-4463-a82d-364d3dcd92e5_420x420_90.jpg,http://a.vpimg3.com/upload/merchandise/pdcvis/2018/07/04/62/bacab0f7-7b39-4631-b6ff-029e65ae5339_420x420_90.jpg,http://a.vpimg3.com/upload/merchandise/pdcvis/2018/07/04/115/51673b5a-f7ac-47f2-8dc3-ad6f8560631e_420x420_90.jpg',
 					QRPic:    'http://rongyi.b0.upaiyun.com/commodity/text/201807181419502662.png',
 					desc:     '商品描述'
+				}
+			},
+			goodsCatg() {
+				return {
+					id:       1,
+					name:     'TELEFLORA 11朵粉紫玫瑰七夕花束预定当天自提',
+					pic:      'http://rongyi.b0.upaiyun.com/commodity/text/201807191807420161.jpg'
 				}
 			}
 		}

@@ -1,5 +1,4 @@
-const common = require('state/common')
-let { authInit, deepCopy, extend } = common
+let { authInit, deepCopy, extend } = require('state/common')
 const pb = authInit(require('state/comp/pictureBind'))
 const t  = authInit(require('state/comp/text'))
 const tb = authInit(require('state/comp/textBind'))

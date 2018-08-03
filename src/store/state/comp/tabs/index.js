@@ -1,5 +1,4 @@
-const common = require('state/common')
-let { authInit, deepCopy, extend, styleIdxChange } = common
+let { authInit, deepCopy, extend, styleIdxChange } = require('state/common')
 // const list = authInit(require('./content/listByGoods'))
 
 // 店铺列表

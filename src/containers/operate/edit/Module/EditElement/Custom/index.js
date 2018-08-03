@@ -42,6 +42,7 @@ import GoodsBlock    from 'compEdit/EditElement/goodsDetails/GoodsBlock'
 import CatgByTabs    from 'compEdit/EditElement/Tabs/CatgByTabs'
 import ChildElement  from 'compEdit/EditElement/ChildElement'
 import SwiperByGoods from 'compEdit/EditElement/goodsList/SwiperByGoods'
+import CatgByGoods   from 'compEdit/EditElement/CatgByGoods'
 
 import * as variable from 'var'
 var animeMap = variable.animeCompMap,
@@ -77,7 +78,8 @@ const compContent = (name, data, parent, editConfig, actions, type, ioInput, ioO
 		goodsBlock:        <GoodsBlock        {...props} />,
 		catgByTabs:        <CatgByTabs        {...props} />,
 		childElement:      <ChildElement      {...props} />,
-		swiperByGoods:     <SwiperByGoods      {...props} />
+		swiperByGoods:     <SwiperByGoods     {...props} />,
+		catgByGoods:       <CatgByGoods       {...props} />
 	}
 	return render[name]
 }

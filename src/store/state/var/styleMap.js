@@ -113,6 +113,10 @@ module.exports = {
 			{ name: '左', value: 'flex-start' },
 			{ name: '中', value: 'center' },
 			{ name: '右', value: 'flex-end' }
+		] },
+		flexWrap: { name: '元素换行', type: 'TextAlign', option: [
+			{ name: '不换行', value: 'nowrap' },
+			{ name: '换行', value: 'wrap' }
 		] }
 	}
 }

@@ -1,10 +1,9 @@
-const common = require('state/common')
-let { authInit, deepCopy, extend,styleIdxChange } = common
+let { authInit, deepCopy, extendRmSL, styleIdxChange } = require('state/common')
 const p = authInit(require('./content/weatherLogo'))
 const t = authInit(require('./content/time'))
 const w = authInit(require('./content/weather'))
 
-const time     = extend(styleIdxChange(1, deepCopy(t)), {
+const time     = extendRmSL(styleIdxChange(1, deepCopy(t)), {
 	data: {
 		layout: {
 			top:  18,
@@ -20,7 +19,7 @@ const time     = extend(styleIdxChange(1, deepCopy(t)), {
 		}
 	}
 })
-const time2    = extend(styleIdxChange(2, deepCopy(t)), {
+const time2    = extendRmSL(styleIdxChange(2, deepCopy(t)), {
 	data: {
 		layout: {
 			top:    60,
@@ -43,7 +42,7 @@ const time2    = extend(styleIdxChange(2, deepCopy(t)), {
 		}
 	}
 })
-const time3    = extend(styleIdxChange(4, deepCopy(t)), {
+const time3    = extendRmSL(styleIdxChange(4, deepCopy(t)), {
 	data: {
 		layout: {
 			top:    60,
@@ -59,7 +58,7 @@ const time3    = extend(styleIdxChange(4, deepCopy(t)), {
 		}
 	}
 })
-const weather  = extend(deepCopy(w), {
+const weather  = extendRmSL(deepCopy(w), {
 	data: {
 		layout: {
 			top:    30,
@@ -76,7 +75,7 @@ const weather  = extend(deepCopy(w), {
 		}
 	}
 })
-const weather2 = extend(styleIdxChange(3, deepCopy(w)), {
+const weather2 = extendRmSL(styleIdxChange(3, deepCopy(w)), {
 	data: {
 		layout: {
 			top:    56,
@@ -93,7 +92,7 @@ const weather2 = extend(styleIdxChange(3, deepCopy(w)), {
 		}
 	}
 })
-const weather3 = extend(styleIdxChange(7, deepCopy(w)), {
+const weather3 = extendRmSL(styleIdxChange(7, deepCopy(w)), {
 	data: {
 		layout: {
 			top:    30,
@@ -103,7 +102,7 @@ const weather3 = extend(styleIdxChange(7, deepCopy(w)), {
 		}
 	}
 })
-const pic      = extend(deepCopy(p), {
+const pic      = extendRmSL(deepCopy(p), {
 	data: {
 		layout: {
 			top:    35,

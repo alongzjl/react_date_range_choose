@@ -1,13 +1,6 @@
-/**
- * @Author: Along
- * @Date:   2018-05-30
- 
- */
- 
-const common = require('state/common')
-let { deepCopy, extend } = common
+let { deepCopy, extendRmSL } = require('state/common')
 
-const phone = extend(deepCopy(require('./address')), {
+const phone = extendRmSL(deepCopy(require('./address')), {
 	data: { 
 		layout: {
 			top:  54, 

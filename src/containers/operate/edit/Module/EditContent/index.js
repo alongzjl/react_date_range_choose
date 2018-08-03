@@ -38,7 +38,8 @@ import * as variable from 'var'
 
 var conMap = variable.contentMap
 var plMap  = {
-	listByGoods:   'filterBox',
+	catgByGoods:   'filter',
+	listByGoods:   'filter',
 	swiperByGoods: 'filterBox'
 }
 var mockMap  = {
@@ -46,7 +47,8 @@ var mockMap  = {
 	goodsBlock:  { type: 'item', name: 'goods' },
 	goodsBar:    { type: 'item', name: 'goods' },
 	pictureListBind: { type: 'item', name: 'goods' },
-	swiperByGoods:   { type: 'item', name: 'goods' }
+	swiperByGoods:   { type: 'item', name: 'goods' },
+	catgByGoods:     { type: 'item', name: 'goodsCatg' }
 }
 
 import './index.less'

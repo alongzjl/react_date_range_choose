@@ -1,10 +1,4 @@
-/**
- * @Author: Along
- * @Date:   2018-05-10
- */
-
-const common = require('state/common')
-let { authInit, deepCopy, extend } = common
+let { authInit, deepCopy, extend } = require('state/common')
 const t  = authInit(require('./content/instroTitle'))
 const p  = authInit(require('./content/instroPicture'))
 const b  = authInit(require('./content/instroButton'))
@@ -35,13 +29,13 @@ module.exports = {
 	name: 'storeDetails',
 	type: 'advanced',
 	// 样式管理
-	data: JSON.parse(JSON.stringify(data)),
+	data: deepCopy(data),
 	styleList: {
 		idx:  0,
 		list: [{
 			name: '样式1',
 			img:  '',
-			data: JSON.parse(JSON.stringify(data))
+			data: deepCopy(data)
 		}]
 	}, 
 	// 功能特性

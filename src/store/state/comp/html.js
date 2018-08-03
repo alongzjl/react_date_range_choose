@@ -1,3 +1,4 @@
+let { deepCopy } = require('state/common')
 // 图片
 const data = {
 	style:  {},
@@ -25,14 +26,14 @@ module.exports = {
 	type: 'base',
 	// 位置大小
 	// 样式管理
-	data: JSON.parse(JSON.stringify(data)),
+	data: deepCopy(data),
 	// 内容管理
 	styleList: {
 		idx:  0,
 		list: [{
 			name: '样式1',
 			img:  '',
-			data: JSON.parse(JSON.stringify(data))
+			data: deepCopy(data)
 		}]
 	},
 	// 功能特性

@@ -1,12 +1,11 @@
-const common = require('state/common')
-let { authInit, deepCopy, extend, styleIdxChange } = common
-const p  = authInit(require('../../picture'))
-const pb = authInit(require('../../pictureBind'))
-const t  = authInit(require('../../text'))
-const tb = authInit(require('../../textBind'))
+let { authInit, deepCopy, extendRmSL, styleIdxChange } = require('state/common')
+const p  = authInit(require('state/comp/picture'))
+const pb = authInit(require('state/comp/pictureBind'))
+const t  = authInit(require('state/comp/text'))
+const tb = authInit(require('state/comp/textBind'))
 const sb = authInit(require('state/comp/swiperBind'))
 
-const Name = extend(deepCopy(tb), {
+const Name = extendRmSL(deepCopy(tb), {
 	data: {
 		layout: {
 			top:  25,
@@ -27,7 +26,7 @@ const Name = extend(deepCopy(tb), {
 		}
 	}
 })
-const PIcon = extend(deepCopy(t), {
+const PIcon = extendRmSL(deepCopy(t), {
 	data: {
 		layout: {
 			top:  114,
@@ -48,7 +47,7 @@ const PIcon = extend(deepCopy(t), {
 		}
 	}
 })
-const Price = extend(deepCopy(tb), {
+const Price = extendRmSL(deepCopy(tb), {
 	data: {
 		layout: {
 			top:  101,
@@ -69,7 +68,7 @@ const Price = extend(deepCopy(tb), {
 		}
 	}
 })
-const PriceT = extend(deepCopy(t), {
+const PriceT = extendRmSL(deepCopy(t), {
 	data: {
 		layout: {
 			top:  106,
@@ -88,7 +87,7 @@ const PriceT = extend(deepCopy(t), {
 		}
 	}
 })
-const OPT = extend(deepCopy(t), {
+const OPT = extendRmSL(deepCopy(t), {
 	data: {
 		layout: {
 			top:  122.5,
@@ -107,7 +106,7 @@ const OPT = extend(deepCopy(t), {
 		}
 	}
 })
-const OPrice = extend(deepCopy(tb), {
+const OPrice = extendRmSL(deepCopy(tb), {
 	data: {
 		layout: {
 			top:  120,
@@ -129,7 +128,7 @@ const OPrice = extend(deepCopy(tb), {
 		}
 	}
 })
-const QR = extend(deepCopy(pb), {
+const QR = extendRmSL(deepCopy(pb), {
 	data: {
 		layout: {
 			top:  26.5,
@@ -142,7 +141,7 @@ const QR = extend(deepCopy(pb), {
 		}
 	}
 })
-const QRT = extend(deepCopy(t), {
+const QRT = extendRmSL(deepCopy(t), {
 	data: {
 		layout: {
 			top:  123.5,
@@ -161,7 +160,7 @@ const QRT = extend(deepCopy(t), {
 		}
 	}
 })
-const Spr = extend(deepCopy(sb), {
+const Spr = extendRmSL(deepCopy(sb), {
 	data: {
 		layout: {
 			top:  154,
@@ -174,7 +173,7 @@ const Spr = extend(deepCopy(sb), {
 		}
 	}
 })
-const DescT = extend(deepCopy(tb), {
+const DescT = extendRmSL(deepCopy(tb), {
 	data: {
 		layout: {
 			top:  75,
@@ -248,7 +247,7 @@ const data = {
 			direction: 'horizontal',
 			effect:  'slide',
 			autoplay: true,
-			loop:  true,
+			loop:  false,
 			speed: 500,
 			delay: 3000,
 			spaceBetween:   150,

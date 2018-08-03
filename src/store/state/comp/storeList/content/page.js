@@ -1,3 +1,4 @@
+let { deepCopy } = require('state/common')
 // 字母排序
 const data = {
 	layout: {
@@ -110,7 +111,7 @@ module.exports = {
 	type: 'base',
 	// 位置大小
 	// 样式管理
-	data: JSON.parse(JSON.stringify(data)),
+	data: deepCopy(data),
 	// 内容管理
 	// 样式列表
 	styleList: {
@@ -118,15 +119,15 @@ module.exports = {
 		list: [{
 			name: '样式1',
 			img:  '',
-			data: JSON.parse(JSON.stringify(data))
+			data: deepCopy(data)
 		}, {
 			name: '样式2',
 			img:  '',
-			data: JSON.parse(JSON.stringify(data))
+			data: deepCopy(data)
 		}, {
 			name: '样式3',
 			img:  '',
-			data: JSON.parse(JSON.stringify(data))
+			data: deepCopy(data)
 		}]
 	},
 	// 功能特性

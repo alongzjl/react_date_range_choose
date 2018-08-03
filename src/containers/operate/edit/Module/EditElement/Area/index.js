@@ -16,6 +16,10 @@ export default class Area extends React.Component {
 	componentWillUnmount() {}
 
 	render() {
-		return <div className="e-picture" style={cssColorFormat(this.props, 'filterBox')}></div>
+		let { show = true } = this.props
+		return show
+		?
+		<div className="e-picture" style={cssColorFormat(this.props, 'filterBox')}></div>
+		: null
 	}
 }

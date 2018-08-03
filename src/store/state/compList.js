@@ -216,6 +216,11 @@ module.exports = [
 					key:  'listByGoods'
 				},
 				{
+					icon: 'classifyNav',
+					name: '分类',
+					key:  'catgByGoods'
+				},
+				{
 					icon: 'list',
 					name: '推荐列表',
 					key:  'swiperByGoods'
@@ -238,41 +243,38 @@ module.exports = [
 					key:  'goodsBlock'
 				},
 				{
-					icon: 'text',
-					name: '文本',
-					key:  'text'
-				},
-				{
-					icon: 'image',
-					name: '图片',
-					key:  'picture'
-				},
-				{
-					icon: 'text',
-					name: '文本-绑定',
-					key:  'textBind'
-				},
-				{
-					icon: 'image',
-					name: '图片-绑定',
-					key:  'pictureBind'
-				},
-				{
-					icon: 'carousel',
-					name: '轮播图-绑定',
-					key:  'swiperBind'
-				},
-				{
 					icon: 'classifyNav',
 					name: '图片列表-绑定',
 					key:  'pictureListBind'
 				}
 			]
 		},
+		// {
+		// 	icon: 'store',
+		// 	name: '标签切换',
+		// 	key: 'tabs',
+		// 	child: [
+		// 		{
+		// 			icon: 'carousel',
+		// 			name: '标签',
+		// 			key:  'catgByTabs'
+		// 		},
+		// 		{
+		// 			icon: 'carousel',
+		// 			name: '子元素',
+		// 			key:  'childElement'
+		// 		}
+		// 	]
+		// },
 		{
 			icon: '2DMap',
 			name: '2D地图',
 			key:  'map2D'
+		},
+		{
+			icon: 'html',
+			name: '组件上传',
+			key:  'html'
 		}
 	// ],
 ]

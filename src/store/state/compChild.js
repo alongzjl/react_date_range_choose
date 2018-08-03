@@ -31,15 +31,10 @@ module.exports = {
 	},
 	goodsList: {
 		listByGoods:   1,
-		swiperByGoods: 1
+		swiperByGoods: 1,
+		catgByGoods:   1
 	},
 	goodsDetails: {
-		picture:     1,
-		text:        1,
-		pictureBind: 1,
-		textBind:    1,
-		swiperBind:  1,
-		area:        1,
 		goodsBar:    1,
 		goodsBlock:  1,
 		pictureListBind: 1

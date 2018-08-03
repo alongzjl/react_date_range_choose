@@ -1,9 +1,9 @@
-const { authInit, deepCopy, extend } = require('state/common')
+let { authInit, deepCopy, extendRmSL } = require('state/common')
 const p  = authInit(require('state/comp/picture'))
 const t  = authInit(require('state/comp/text'))
 const tb = authInit(require('state/comp/textBind'))
 
-const Title = extend(deepCopy(p), {
+const Title = extendRmSL(deepCopy(p), {
 	data: {
 		layout: {
 			top:  7,
@@ -18,7 +18,7 @@ const Title = extend(deepCopy(p), {
 })
 
 // 品牌名称
-const Name1 = extend(deepCopy(t), {
+const Name1 = extendRmSL(deepCopy(t), {
 	data: {
 		layout: {
 			top:  44,
@@ -39,7 +39,7 @@ const Name1 = extend(deepCopy(t), {
 	}
 })
 // 退换货政策
-const Name2 = extend(deepCopy(Name1), {
+const Name2 = extendRmSL(deepCopy(Name1), {
 	data: {
 		layout: {
 			top:  70,
@@ -51,7 +51,7 @@ const Name2 = extend(deepCopy(Name1), {
 	}
 })
 // 包邮说明
-const Name3 = extend(deepCopy(Name1), {
+const Name3 = extendRmSL(deepCopy(Name1), {
 	data: {
 		layout: {
 			top:  96
@@ -63,7 +63,7 @@ const Name3 = extend(deepCopy(Name1), {
 })
 
 // 品牌名称
-const Con1 = extend(deepCopy(tb), {
+const Con1 = extendRmSL(deepCopy(tb), {
 	data: {
 		layout: {
 			top:  44,
@@ -84,7 +84,7 @@ const Con1 = extend(deepCopy(tb), {
 	}
 })
 // 退换货政策
-const Con2 = extend(deepCopy(Name1), {
+const Con2 = extendRmSL(deepCopy(Name1), {
 	data: {
 		layout: {
 			top:  70,
@@ -102,7 +102,7 @@ const Con2 = extend(deepCopy(Name1), {
 	}
 })
 // 包邮说明
-const Con3 = extend(deepCopy(Con2), {
+const Con3 = extendRmSL(deepCopy(Con2), {
 	data: {
 		layout: {
 			top:  96,

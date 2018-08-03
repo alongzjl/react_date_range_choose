@@ -19,6 +19,7 @@ import Text        from 'compEdit/EditElement/Text'
 import PictureBind from 'compEdit/EditElement/PictureBind'
 import TextBind    from 'compEdit/EditElement/TextBind'
 import SwiperBind  from 'compEdit/EditElement/SwiperBind'
+import Area        from 'compEdit/EditElement/Area'
 
 const compContent = (name, data, item) => {
 	var props  = { data, item }
@@ -27,7 +28,8 @@ const compContent = (name, data, item) => {
 		text:        <Text        {...props} />,
 		pictureBind: <PictureBind {...props} />,
 		textBind:    <TextBind    {...props} />,
-		swiperBind:  <SwiperBind  {...props} />
+		swiperBind:  <SwiperBind  {...props} />,
+		area:        <Area        {...props} />
 	}
 	return render[name]
 }

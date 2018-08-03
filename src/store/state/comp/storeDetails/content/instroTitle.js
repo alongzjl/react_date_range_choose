@@ -1,13 +1,6 @@
-/**
- * @Author: Along
- * @Date:   2018-05-30
- 
- */
- 
-const common = require('state/common')
-let { deepCopy, extend } = common
+let { deepCopy, extendRmSL } = require('state/common')
 
-const instroTitle = extend(deepCopy(require('../../../comp/text')), {
+const instroTitle = extendRmSL(deepCopy(require('../../../comp/text')), {
 	data: {
 		layout: {
 			top:  30, 

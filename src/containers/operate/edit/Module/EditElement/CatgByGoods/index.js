@@ -4,7 +4,7 @@ import './index.less'
 import { Icon, Pagination } from 'antd'
 import Layout from 'compEdit/EditElement/Layout'
 
-export default class ListByStore extends React.Component {
+export default class CatgByStore extends React.Component {
 	constructor(props) {
 		super(props)
 		this.state = {}
@@ -16,13 +16,15 @@ export default class ListByStore extends React.Component {
 	}
 	render() {
 		let { ioInput } = this.props
-		let { list } = ioInput
-		let dom = list.map((_, i) => {
+		let { catg } = ioInput
+		let dom = catg.map((_, i) => {
 			return this.renderList(_, i)
 		})
 		return (
-			<section className={`e-list-by-goods`}>
-				{ dom }
+			<section className={`e-catg-by-goods scrollbar`}>
+				<div className="e-catg-by-goods-box" style={cssColorFormat(this.props, 'filterBox')}>
+					{ dom }
+				</div>
 			</section>
 		)
 	}

@@ -1,3 +1,4 @@
+let { deepCopy } = require('state/common')
 // 字母排序
 const data = {
 	layout: {
@@ -72,22 +73,22 @@ var style = {
 module.exports = {
 	name: 'reset',
 	type: 'base',
-	data: JSON.parse(JSON.stringify(data)),
+	data: deepCopy(data),
 	// 样式列表
 	styleList: {
 		idx:  0,
 		list: [{
 			name: '样式1',
 			img:  '',
-			data: JSON.parse(JSON.stringify(data))
+			data: deepCopy(data)
 		}, {
 			name: '样式2',
 			img:  '',
-			data: JSON.parse(JSON.stringify(data))
+			data: deepCopy(data)
 		}, {
 			name: '样式3',
 			img:  '',
-			data: JSON.parse(JSON.stringify(data))
+			data: deepCopy(data)
 		}]
 	},
 	// 功能特性

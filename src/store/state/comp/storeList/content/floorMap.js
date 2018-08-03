@@ -1,8 +1,4 @@
-/**
- * @Author: Along
- * @Date:   2018-07-04
-
- */
+let { deepCopy } = require('state/common')
 
 // 楼层地图
 const data = {
@@ -29,14 +25,14 @@ const data = {
 module.exports = {
 	name: 'floorMap',
 	type: 'base',
-	data: JSON.parse(JSON.stringify(data)),
+	data: deepCopy(data),
 	// 样式列表
 	styleList: {
 		idx:  0,
 		list: [{
 			name:  '样式1',
 			img:   '',
-			data:  JSON.parse(JSON.stringify(data))
+			data:  deepCopy(data)
 		}]
 	},
 	// 功能特性
