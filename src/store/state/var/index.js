@@ -7,5 +7,6 @@ module.exports = {
 	styleMAuth:     require('./styleManageAuth'),
 	animeCompMap:   require('./animeCompMap'),
 	animePageMap:   require('./animePageMap'),
-	fieldMap:       require('./fieldMap')
+	fieldMap:       require('./fieldMap'),
+	childElementActiveMap: require('./childElementActiveMap')
 }

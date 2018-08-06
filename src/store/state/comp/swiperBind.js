@@ -2,17 +2,8 @@ let { authInit, deepCopy } = require('state/common')
 
 // 轮播图
 const data = {
-	style:    {
-		text: {
-			display:        'none',
-			color:          { type: 'custom', color: '#000' },
-			fontSize:       12,
-			fontStyle:      'normal',
-			fontWeight:     'normal',
-			textAlign:      'center',
-			textDecoration: 'none'
-		},
-		swiperImage:{
+	style: {
+		swiperImage: {
 			borderRadius:    {
 				topLeft:     0,
 				topRight:    0,
@@ -20,25 +11,34 @@ const data = {
 				bottomLeft:  0
 			}
 		},
-		pageSet: {
-			width:  6,
-			height: 6,
-			borderWidth:  0,
+		paginationBox: {
+			borderWidth: 0,
 			borderStyle: 'solid',
 			borderColor: { type: 'custom', color: '#fff' },
-			background: 'center no-repeat',
-			backgroundSize: 'contain',
-			backgroundImage: { type: 'custom', img: '' },
-			backgroundColor: { type: 'high', color: '#fff' },
 			borderRadius:    {
 				topLeft:     10,
 				topRight:    10,
 				bottomLeft:  10,
 				bottomRight: 10
 			},
+			backgroundColor: { type: 'high', color: '#fff' }
+		},
+		pagination: {
+			width:  6,
+			height: 6,
+			borderWidth: 0,
+			borderStyle: 'solid',
+			borderColor: { type: 'custom', color: '#fff' },
+			borderRadius:    {
+				topLeft:     10,
+				topRight:    10,
+				bottomLeft:  10,
+				bottomRight: 10
+			},
+			backgroundColor: { type: 'high', color: '#fff' },
 			margin: {
-				top:   10,
-				right: 5
+				top:     10,
+				right:   5
 			},
 			boxShadow: {
 				h_shadow:   0,
@@ -48,21 +48,19 @@ const data = {
 				color:      { type: 'custom', color: '#000' }
 			}
 		},
-		filterActive: {
+		paginationActive: {
 			borderWidth: 0,
 			borderStyle: 'solid',
 			borderColor: { type: 'custom', color: '#a240ec' },
-			background: 'center no-repeat',
-			backgroundImage: { type: 'custom', img: '' },
 			backgroundColor: { type: 'main', color: '#a240ec' }
 		}
 	},
 	layout: {
 		position: 'absolute',
-		top:      0,
-		left:     0,
-		width:    540,
-		height:   200
+		top:    0,
+		left:   0,
+		width:  540,
+		height: 200
 	},
 	content: {
 		bind: '',
@@ -77,7 +75,8 @@ const data = {
 			slidesPerView:  1,
 			slidesPerGroup: 1,
 			slidesOffsetBefore: 0,
-			centeredSlides: true
+			centeredSlides: true,
+			pagination: false
 		}
 	},
 	animation: {

@@ -271,10 +271,10 @@ module.exports = [
 			name: '2D地图',
 			key:  'map2D'
 		},
-		{
-			icon: 'html',
-			name: '组件上传',
-			key:  'html'
-		}
+		// {
+		// 	icon: 'html',
+		// 	name: '组件上传',
+		// 	key:  'html'
+		// }
 	// ],
 ]

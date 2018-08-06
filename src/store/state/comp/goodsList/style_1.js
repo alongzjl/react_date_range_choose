@@ -11,14 +11,7 @@ const goodsList = extendRmSL(deepCopy(list), {
 	}
 })
 
-const goodsCatg = extendRmSL(deepCopy(catg), {
-	data: {
-		// layout: {
-		// 	top:  0,
-		// 	left: 0
-		// }
-	}
-})
+const goodsCatg = extendRmSL(deepCopy(catg), {})
 
 // 商品列表
 module.exports = {
@@ -27,7 +20,7 @@ module.exports = {
 		top:      0,
 		left:     0,
 		width:    540,
-		height:   600
+		height:   630
 	},
 	style: {},
 	content: {

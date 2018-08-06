@@ -23,7 +23,8 @@ let featureMap = {
 	catgs:  1,
 	list:   1,
 	comp:   1,
-	time:   1
+	time:   1,
+	active: 1
 }
 
 const dataFormat = {

@@ -4,7 +4,8 @@ let { deepCopy } = require('state/common')
 const data = {
 	style:     {
 		image: {
-			transform:    { rotate: 0 },
+			transform: { rotate: 0 },
+			opacity:   1,
 			borderRadius: {
 				topLeft:     0,
 				topRight:    0,

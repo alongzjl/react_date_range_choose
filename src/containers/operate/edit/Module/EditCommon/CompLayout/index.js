@@ -8,7 +8,7 @@
 import React from 'react'
 import './index.less'
 
-import { Icon, message, Modal } from 'antd'
+import { Checkbox, Icon, message, Modal } from 'antd'
 
 import Rnd from 'react-rnd'
 
@@ -36,6 +36,7 @@ const compContent = (name, data, item) => {
 
 import * as variable from 'var'
 var compMap = variable.compMap.name
+var activeMap = variable.childElementActiveMap
 
 export default class CompLayout extends React.Component {
 	constructor(props) {
@@ -43,7 +44,8 @@ export default class CompLayout extends React.Component {
 		this.state = {
 			visible: false,
 			id: `lay_${Math.floor(Math.random()*1e9)}`,
-			idx: -1
+			idx: -1,
+			active: false
 		}
 	}
 
@@ -60,7 +62,7 @@ export default class CompLayout extends React.Component {
 	handleCancel = () => {
 		this.setState({ visible: false })
 	}
-	renderDom = (layout) => {
+	renderDom = (layout, isActive) => {
 		let { updateComp, list, item } = this.props
 		if (!list && !item) return null
 		let da = list? list[0]: item
@@ -79,20 +81,25 @@ export default class CompLayout extends React.Component {
 					active={i === this.state.idx}
 					updateIdx={this.updateIdx}
 					updateComp={updateComp}
+					isActive={isActive}
+					isAV={this.state.active}
 				/>
 			)
 		})
 	}
 	render() {
-		let { map, layout, parentLayout = {}, props = {}, updateComp } = this.props
-		let { visible, id, idx } = this.state
+		let { map, layout, parentLayout = {}, props = {}, updateComp, styleName } = this.props
+		let { name } = props.data
+		let { visible, id, idx, active } = this.state
 		let { width = 0, height = 0 } = parentLayout
 		let pLay = {
 			width:  width * 2,
 			height: height * 2
 		}
-		let renderDom = this.renderDom(layout)
+		let isActive = activeMap[name]
+		let renderDom = this.renderDom(layout, isActive)
 		let data = idx > -1? layout[idx]: false
+		let css = styleName? cssColorFormat(props, styleName): {}
 		return (
 			<div className="comp-layout">
 				<a className="btn-edit-layout" onClick={this.showModal}>编辑布局</a>
@@ -105,11 +112,28 @@ export default class CompLayout extends React.Component {
 				>
 					<div className="cl-parent">
 						<div className="cl-left scrollbar">
-							宽度: { width * 2 }
-							&nbsp;
-							高度: { height * 2 }
+							<div>
+								宽度: { width * 2 }
+								&nbsp;
+								高度: { height * 2 }
+								&nbsp;
+								{
+									isActive
+									?
+									<span>
+										激活状态:
+										<Checkbox
+											style={{ marginLeft: 5 }}
+											title="激活状态开关"
+											checked={active || false}
+											onChange={v => this.setState({ active: v.target.checked })}
+										/>
+									</span>
+									: null
+								}
+							</div>
 							<div className="cl-element" style={pLay}>
-								<div className="cl-element-child" id={id} style={{ width, height, ...cssColorFormat(props, 'filterBox') }}>
+								<div className="cl-element-child" id={id} style={{ ...css, width, height }}>
 									{ renderDom }
 								</div>
 							</div>
@@ -159,6 +183,7 @@ class RndModule extends React.Component {
 	dragResize = (e, ref, delta, pos) => {
 		var o = {
 			layout: {
+				position: 'absolute',
 				left:   +pos.x,
 				top:    +pos.y,
 				width:  +ref.offsetWidth,
@@ -178,28 +203,30 @@ class RndModule extends React.Component {
 		updateComp()
 	}
 	render() {
-		let { bounds, dom, item, idx, active, updateIdx, updateComp } = this.props
+		let { bounds, dom, item, idx, active, updateIdx, updateComp, isActive, isAV } = this.props
+		let av = item.feature.active
 		let { layout } = this.state
 		let lay = layout
-		return (
-			<Rnd
-				className={`${active? 's-active': ''}`}
-				bounds={bounds}
-				size={{
-					width:  lay.width || '100%',
-					height: lay.height
-				}}
-				position={{
-					x: lay.left,
-					y: lay.top
-				}}
-				onDragStart={() => updateIdx(idx)}
-				onDragStop={(e, d) => this.dragStop(e, d, item)}
-				onResize={(e, dir, ref, delta, pos) => this.dragResize(e, ref, delta, pos, item)}
-				onResizeStop={(e, dir, ref, delta, pos) => this.dragResizeStop(e, ref, delta, pos, item)}
-			>
-				<div className={`pge-layout`}>{ dom }</div>
-			</Rnd>
-		)
+		return !isActive || (isActive && isAV && av) || (isActive && !isAV && !av)
+		?
+		<Rnd
+			className={`${active? 's-active': ''}`}
+			bounds={bounds}
+			size={{
+				width:  lay.width || '100%',
+				height: lay.height
+			}}
+			position={{
+				x: lay.left,
+				y: lay.top
+			}}
+			onDragStart={() => updateIdx(idx)}
+			onDragStop={(e, d) => this.dragStop(e, d, item)}
+			onResize={(e, dir, ref, delta, pos) => this.dragResize(e, ref, delta, pos, item)}
+			onResizeStop={(e, dir, ref, delta, pos) => this.dragResizeStop(e, ref, delta, pos, item)}
+		>
+			<div className={`pge-layout`}>{ dom }</div>
+		</Rnd>
+		: null
 	}
 }

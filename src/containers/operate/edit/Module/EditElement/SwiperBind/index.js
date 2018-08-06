@@ -28,9 +28,7 @@ export default class SwiperBind extends React.Component {
 			slide = list.map((_, i) => {
 			return <div className="swiper-slide" key={i}><img src={_}  style={cssColorFormat(this.props, 'swiperImage')} /></div>
 		})
-		return (
-			<SwiperElement options={options}>{ slide }</SwiperElement>
-		)
+		return <SwiperElement props={this.props} options={options}>{ slide }</SwiperElement>
 	}
 	render() {
 		let props = this.props,

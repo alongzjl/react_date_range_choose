@@ -9,20 +9,42 @@ export default class CatgByStore extends React.Component {
 		super(props)
 		this.state = {}
 	}
-	renderList = (item, i) => {
+	onChange = (e, item) => {
+		e.stopPropagation()
+		let { ioInput, ioOuter } = this.props,
+			{ body } = ioInput
+		body.catg = item.id
+		ioOuter(ioInput)
+	}
+	renderList = (item, catg) => {
 		let { data } = this.props,
+			{ id } = item,
 			{ componentLayout, layout } = data.data
-		return <Layout key={i} data={item} layout={layout} components={componentLayout} styleObj={cssColorFormat(this.props, 'filter')} />
+		let isAV = id === catg,
+			cl   = []
+		componentLayout.map(_ => {
+			var { active } = _.feature
+			if ((isAV && active) || (!isAV && !active)) {
+				cl.push(_)
+			}
+		})
+		return <Layout
+			data={item}
+			layout={layout}
+			components={cl}
+			styleObj={cssColorFormat(this.props, 'filter')}
+			isActive={true}
+		/>
 	}
 	render() {
 		let { ioInput } = this.props
-		let { catg } = ioInput
+		let { catg, body } = ioInput
 		let dom = catg.map((_, i) => {
-			return this.renderList(_, i)
+			return <div key={i} onClick={e => this.onChange(e, _)}>{this.renderList(_, body.catg)}</div>
 		})
 		return (
-			<section className={`e-catg-by-goods scrollbar`}>
-				<div className="e-catg-by-goods-box" style={cssColorFormat(this.props, 'filterBox')}>
+			<section className={`e-catg-by-goods scrollbar`} style={cssColorFormat(this.props, 'filterBox')}>
+				<div className="e-catg-by-goods-box" style={cssColorFormat(this.props, 'filterFlex')}>
 					{ dom }
 				</div>
 			</section>

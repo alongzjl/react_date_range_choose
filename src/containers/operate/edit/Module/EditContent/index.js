@@ -40,7 +40,8 @@ var conMap = variable.contentMap
 var plMap  = {
 	catgByGoods:   'filter',
 	listByGoods:   'filter',
-	swiperByGoods: 'filterBox'
+	swiperByGoods: 'filterBox',
+	goodsBar:      'filter'
 }
 var mockMap  = {
 	listByGoods: { type: 'list', name: 'goods', field: 'size' },
@@ -380,7 +381,7 @@ class EditContent extends React.Component {
 					?
 					<Collapse defaultActiveKey={['0', '1']}>
 						<Panel header={`编辑布局`} key={0}>
-							<CompLayout list={mockData.list} item={mockData.item} map={mockData.map} props={this.props} layout={compLay} parentLayout={mockData.layout} updateComp={this.updateComp} />
+							<CompLayout list={mockData.list} item={mockData.item} map={mockData.map} props={this.props} layout={compLay} parentLayout={mockData.layout} styleName={plMap[compName]} updateComp={this.updateComp} />
 						</Panel>
 						<Panel header={`子元素`} key={1}>
 							<ChildElement name={compName} layout={compLay} map={mockData.map} updateComp={this.updateComp} />

@@ -33,7 +33,7 @@ export default class GoodsList extends React.Component {
 		let ipt = deepCopy(feature)
 		this.getList(ipt)
 		this.state = { ioInput: ipt }
-		this.ioOuter(ipt)
+		// this.ioOuter(ipt)
 	}
 
 	ioOuter(ipt) {
