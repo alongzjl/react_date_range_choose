@@ -41,6 +41,7 @@ export default class SwiperElement extends React.Component {
 				this.setState({ current: this.swiper.realIndex })
 			}
 		}
+		delete opts.pagination
 		delete opts.delay
 		return opts
 	}

@@ -42,7 +42,7 @@ import GoodsBlock    from 'compEdit/EditElement/goodsDetails/GoodsBlock'
 import CatgByTabs    from 'compEdit/EditElement/Tabs/CatgByTabs'
 import ChildElement  from 'compEdit/EditElement/ChildElement'
 import SwiperByGoods from 'compEdit/EditElement/goodsList/SwiperByGoods'
-import CatgByGoods   from 'compEdit/EditElement/CatgByGoods'
+import CatgByGoods   from 'compEdit/EditElement/GoodsList/CatgByGoods'
 
 import * as variable from 'var'
 var animeMap = variable.animeCompMap,

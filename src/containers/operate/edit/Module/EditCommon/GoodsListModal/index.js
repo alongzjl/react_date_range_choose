@@ -4,6 +4,8 @@ import { Col, Row, Collapse, Button, Icon, Input, message, Modal, Table } from '
 const { TextArea } = Input
 const { Panel } = Collapse
 
+import ImageUploadGroup from 'compEdit/EditCommon/ImageUploadGroup'
+
 const columns = [
 	{
 		title: '商品名称',
@@ -77,7 +79,7 @@ export default class GoodsListModal extends React.Component {
 		this.rowSelection.selectedRowKeys = []
 	}
 	handleOk = () => {
-		let { list, onChange } = this.props,
+		let { list, updateComp } = this.props,
 			state  = this.state,
 			{ listMap } = state,
 			listCa = state.row,
@@ -94,7 +96,7 @@ export default class GoodsListModal extends React.Component {
 		})
 		this.handleCancel()
 		this.setState({ listMap: this.listMap(this.props) })
-		onChange(list)
+		updateComp()
 	}
 	getList = cfg => {
 		let { mallMid }  = window.uif.userInfo
@@ -141,13 +143,18 @@ export default class GoodsListModal extends React.Component {
 		// })
 	}
 	itemRemove = idx => {
-		var { list, onChange } = this.props
-		onChange(list.removeByIdx(idx))
+		var { list, updateComp } = this.props
+		list.splice(idx, 1)
+		updateComp()
+	}
+	imgUpload = (imgs, obj) => {
+		obj.pics = imgs.join(',')
+		this.props.updateComp()
 	}
 	renderList = e => {
-		var { list, onChange } = this.props
+		var { list, updateComp } = this.props
 		return list.map((_, i) => {
-			var { name, desc } = _
+			var { name, desc, pics } = _
 			return (
 				<div className="pgs-row" key={i}>
 					<div className="pgsr-name">商品{i + 1}</div>
@@ -163,10 +170,18 @@ export default class GoodsListModal extends React.Component {
 										placeholder={'商品描述'}
 										autosize={false}
 										value={desc} onChange={v => {
-											_.desc = v.target.value; onChange(list)
+											_.desc = v.target.value; updateComp()
 										}}
-										style={{ width: '100%' }}
+										style={{ width: '100%', marginTop: 10 }}
 									/>
+								</Row>
+								<Row>
+									<div style={{marginTop: 10}}>
+										<ImageUploadGroup
+											enter={imgs => this.imgUpload(imgs, _)}
+											imgs={pics.split(',')}
+										/>
+									</div>
 								</Row>
 							</Col>
 							<Col span={1}></Col>
@@ -210,12 +225,12 @@ export default class GoodsListModal extends React.Component {
 					size={'small'}
 					rowSelection={this.rowSelection}
 					pagination={pagination}
-					onChange={this.onChange}
 					columns={columns}
 					dataSource={list}
 				/>
 			</Modal>
 		)
+					// onChange={this.onChange}
 	}
 
 	render() {
@@ -223,9 +238,14 @@ export default class GoodsListModal extends React.Component {
 		return (
 			<div className="goods-list-modal">
 				<Collapse defaultActiveKey={['0', '1']}>
-					<Panel header={`添加商品`} key={0}>
-						<a className="btn-edit-layout" onClick={this.showModal}>+ 添加</a>
-					</Panel>
+					{
+						list.length < 20
+						?
+						<Panel header={`添加商品`} key={0}>
+							<a className="btn-edit-layout" onClick={this.showModal}>+ 添加</a>
+						</Panel>
+						: null
+					}
 					{
 						list.length
 						?

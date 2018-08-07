@@ -23,6 +23,7 @@ import SwiperImage       from 'compEdit/EditContent/SwiperImage'
 import Navigation        from 'compEdit/EditContent/Navigation'
 import NavigationFloat   from 'compEdit/EditContent/NavigationFloat'
 import WonderfulActivity from 'compEdit/EditContent/WonderfulActivity'
+import SwiperByGoods     from 'compEdit/EditContent/SwiperByGoods'
 
 import * as variable from 'var'
 
@@ -32,6 +33,18 @@ var conMap  = variable.contentMap,
 
 import './index.less'
 
+const compContent = (name, data, updateComp) => {
+	var props  = { data: { data }, updateComp }
+	var render = {
+		navigation:        <Navigation        {...props} />,
+		navigationFloat:   <NavigationFloat   {...props} />,
+		wonderfulActivity: <WonderfulActivity {...props} />,
+		swiperImage:       <SwiperImage       {...props} />,
+		swiperByGoods:     <SwiperByGoods     {...props} />
+	}
+	return render[name]
+}
+
 class EditContent extends React.Component {
 	componentWillMount() {}
 
@@ -39,7 +52,14 @@ class EditContent extends React.Component {
 
 	componentWillUnmount() {}
 
-	onChange(val, key, obj, index) {
+	updateComp = () => {
+		let { data, actions, editConfig } = this.props
+		let { curData } = editConfig
+		let { content } = data.data
+		let { parentComp } = curData
+		actions.updateComp(null, parentComp? parentComp: data)
+	}
+	onChange = (val, key, obj, index) => {
 		let { data, actions, editConfig } = this.props
 		let { curData } = editConfig
 		let { content } = data.data
@@ -56,9 +76,6 @@ class EditContent extends React.Component {
 		actions.updateComp(null, parentComp? parentComp: data)
 	}
 
-	cb(key) {
-		// console.log(key)
-	}
 	deleteCom(index) { 
 		let { data, actions, editConfig } = this.props
 		let { curData, curComp } = editConfig
@@ -164,7 +181,81 @@ class EditContent extends React.Component {
 			/>
 		)
 	}
+	renderSwitch(cfg, data, obj, val, key, index) {
+		return (
+			<Switch
+				size="small"
+				checked={val || false} onChange={v => this.onChange(v, key, obj)}
+			/>
+		)
+	}
+	// 筛选框
+	renderRadio(cfg, data, obj, val, key, index) {
+		let { option } = cfg
+		return (
+			<RadioGroup size="small" onChange={_ => this.onChange(_.target.value, key, obj)} value={val}>
+				{ option.map((_, i) => (<RadioButton key={i} value={_.value}>{_.name}</RadioButton>)) }
+			</RadioGroup>
+		)
+	}
+	// 筛选框
+	renderRadioMix(cfg, data, obj, val, key, index) {
+		let { option } = cfg
+		return (
+			<div className="sc-radio-group">
+				{ option.map((_, i) => (
+					<span
+						key={i}
+						className={`sc-radio-button-wrapper${val === _.value? ' s-active': ''}`}
+						value={_.value}
+						onClick={e => this.onChange(_.value, key, obj)}
+					>{_.name}</span>
+				)) }
+			</div>
+		)
+	}
+	// 绑定
+	renderBind = (cfg, data, obj, val, key, index) => {
+		debugger
+		let da = this.props.data
+		let { item, map } = this.createMock(data.name)
+		let opts = Object.keys(map).map((_, i) => {
+			return <Option key={i} value={_}>{map[_]}</Option>
+		})
+		return (
+			<div>
+				<Select
+					value={val}
+					style={{ width: '100%' }}
+					onChange={v => this.onChange(v, key, obj)}
+				>
+					<Option value={''}>无</Option>
+					{ opts }
+				</Select>
+			</div>
+		)
+	}
+	// 复合
+	renderOptions(cfg, data, obj, val, key, index) {
+		const keys      = Object.keys(val)
+		const childNode = keys.map((_, i) => {
+			if (_ === 'name') return null
+			let v  = val[_],
+				cm = conMap[_],
+				fn = this[`render${cm.type}`],
+				dom = fn.bind(this, data, cm, val, v, _)()
+			return (
+				<div className="pgs-row" key={i}>
+					<div className="pgsr-name" style={{ width: 52 }}>{ cm.name }</div>
+					<div className="pgsr-ctrl">{ dom }</div>
+				</div>
+			)
+		})
 
+		return (
+			<div>{ childNode }</div>
+		)
+	}
 	renObj(parent, data, content, index) {
 		let me = this
 		let ci = 0
@@ -191,15 +282,18 @@ class EditContent extends React.Component {
 		if (!ci) return false
 		return childNode
 	}
-	chiObj(data, init) {
+	chiObj = (data, init) => {
 		let comps = data.data.components
 		if (!comps) return false
 		return comps.map((_, i) => {
-			let con  = _.data.content
+			let _da  = _.data
+			let con  = _da.content
 			let name = _.name
 			let cn   = compMap[name]
 			let OK   = false
 			let map  = deepCopy(compNum)
+			let compLay = _da.componentLayout
+			let compCon = compContent(name, _, this.updateComp)
 			let childNode
 			if (con.length) {
 				childNode = con.map((_, j) => {
@@ -224,11 +318,12 @@ class EditContent extends React.Component {
 					:
 					false
 				)
-				if (!childNode) return false
+				if (!childNode && !compCon) return false
 			}
 			++map[name]
 			return (
 				<Panel header={`${cn}${map[name]}`} key={init + i}>
+					{ compCon }
 					{ childNode }
 				</Panel>
 			)
@@ -239,14 +334,11 @@ class EditContent extends React.Component {
 		let { data, actions, editConfig } = this.props
 		let compName = data.name
 		let content  = data.data.content
-		let compCon
 		let childNode
 		let activeKey
 		let chiObj
-		if (compName === 'navigation')             compCon = (<Navigation        data={this.props}/>)
-		else if (compName === 'navigationFloat')   compCon = (<NavigationFloat   data={this.props}/>)
-		else if (compName === 'wonderfulActivity') compCon = (<WonderfulActivity data={this.props}/>)
-		else if (compName === 'swiperImage')       compCon = (<SwiperImage       data={this.props}/>)
+		let compCon = compContent(compName, this.props, this.updateComp)
+		
 		if (content.length) {
 			childNode = content.map((_, i) => {
 				return (
@@ -274,7 +366,7 @@ class EditContent extends React.Component {
 		return (
 			<section className="pg-content-business">
 				{ compCon }
-				<Collapse activeKey={activeKey} onChange={this.cb}>
+				<Collapse activeKey={activeKey}>
 					{ childNode }
 					{ chiObj }
 				</Collapse>

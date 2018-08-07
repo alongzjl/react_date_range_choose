@@ -20,7 +20,7 @@ export default class SwiperByGoods extends React.Component {
 			{ list } = ioInput,
 			{ content, componentLayout, layout } = data.data,
 			{ recommendGoods } = content
-		let finalList = envType === 'operate'? list: recommendGoods
+		let finalList = envType === 'business'? recommendGoods: list
 
 		let slide = finalList.map((_, i) => {
 			return (

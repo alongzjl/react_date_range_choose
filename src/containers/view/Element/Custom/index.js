@@ -9,6 +9,7 @@ import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect }  from 'react-redux'
 import * as actions from 'actions'
+import './index.less'
 
 import Rnd from 'react-rnd'
 import { Icon } from 'antd'
@@ -36,10 +37,12 @@ import TextBind          from 'compEdit/EditElement/TextBind'
 import SwiperBind        from 'compEdit/EditElement/SwiperBind'
 import Area              from 'compEdit/EditElement/Area'
 import PictureListBind   from 'compEdit/EditElement/PictureListBind'
-import GoodsBar          from 'compEdit/EditElement/goodsDetails/GoodsBar'
-import GoodsBlock        from 'compEdit/EditElement/goodsDetails/GoodsBlock'
+import GoodsBar      from 'compEdit/EditElement/goodsDetails/GoodsBar'
+import GoodsBlock    from 'compEdit/EditElement/goodsDetails/GoodsBlock'
+import ChildElement  from 'compEdit/EditElement/ChildElement'
+import SwiperByGoods from 'compEdit/EditElement/goodsList/SwiperByGoods'
+import CatgByGoods   from 'compEdit/EditElement/GoodsList/CatgByGoods'
 
-import './index.less'
 
 const compContent = (name, data, parent, editConfig, actions, type, ioInput, ioOuter) => {
 	var props  = { data, parent, editConfig, actions, type, ioInput, ioOuter }
@@ -68,7 +71,10 @@ const compContent = (name, data, parent, editConfig, actions, type, ioInput, ioO
 		area:              <Area              {...props} />,
 		pictureListBind:   <PictureListBind   {...props} />,
 		goodsBar:          <GoodsBar          {...props} />,
-		goodsBlock:        <GoodsBlock        {...props} />
+		goodsBlock:        <GoodsBlock        {...props} />,
+		childElement:      <ChildElement      {...props} />,
+		swiperByGoods:     <SwiperByGoods     {...props} />,
+		catgByGoods:       <CatgByGoods       {...props} />
 	}
 	return render[name]
 }

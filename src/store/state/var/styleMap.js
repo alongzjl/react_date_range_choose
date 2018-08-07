@@ -94,10 +94,10 @@ module.exports = {
 		borderStyle:       { name: '边框样式', type: 'Solid' },
 		borderColor:       { name: '边框颜色', type: 'Color' },
 		margin:            { name: '外边距', type: 'Complex', child: {
-			top:     { name: '上', type: 'Number', max: 300 },
-			right:   { name: '右', type: 'Number', max: 300 },
-			bottom:  { name: '下', type: 'Number', max: 300 },
-			left:    { name: '左', type: 'Number', max: 300 }
+			top:     { name: '上', type: 'Number', min: -300, max: 300 },
+			right:   { name: '右', type: 'Number', min: -300, max: 300 },
+			bottom:  { name: '下', type: 'Number', min: -300, max: 300 },
+			left:    { name: '左', type: 'Number', min: -300, max: 300 }
 		} },
 		marginTop:         { name: '外边距上', type: 'Number', max: 300 },
 		marginRight:       { name: '外边距右', type: 'Number', max: 300 },

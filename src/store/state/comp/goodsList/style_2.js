@@ -5,7 +5,8 @@ const catg = authInit(require('./content/catg'))
 const goodsList = extendRmSL(deepCopy(swiper), {
 	data: {
 		layout: {
-			top:  90
+			top:  60,
+			height: 600
 		}
 	}
 })
@@ -19,7 +20,7 @@ module.exports = {
 		top:      0,
 		left:     0,
 		width:    540,
-		height:   630
+		height:   660
 	},
 	style: {},
 	content: {
@@ -32,5 +33,5 @@ module.exports = {
 		duration: 1,		// 持续时间
 		iterationCount: 1	// 循环次数
 	},
-	components: [ goodsCatg, goodsList ]
+	components: [ goodsList, goodsCatg ]
 }

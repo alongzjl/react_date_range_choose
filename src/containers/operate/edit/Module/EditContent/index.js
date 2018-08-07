@@ -54,8 +54,8 @@ var mockMap  = {
 
 import './index.less'
 
-const compContent = (name, data, onChange) => {
-	var props  = { data, onChange }
+const compContent = (name, data, updateComp) => {
+	var props  = { data, updateComp }
 	var render = {
 		navigation:        <Navigation        {...props} />,
 		navigationFloat:   <NavigationFloat   {...props} />,
@@ -348,7 +348,7 @@ class EditContent extends React.Component {
 			childNode,
 			activeKey,
 			feature,
-			compCon = compContent(compName, this.props, this.onChange)
+			compCon = compContent(compName, this.props, this.updateComp)
 
 		if (content.length) {
 			activeKey = Array.from(new Array(content.length + 1), (_, i) => `${i}`)

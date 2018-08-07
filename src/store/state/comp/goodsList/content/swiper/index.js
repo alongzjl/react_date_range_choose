@@ -237,10 +237,11 @@ const data = {
 				v_shadow:   0,
 				blur_dis:   60,
 				spread_dis: 0,
-				color:      { type: 'custom', color: 'rgba(0,0,0,.24)' }
+				color:      { type: 'custom', color: 'rgba(0,0,0,0.24)', alpha: 24 }
 			}
 		},
 		paginationBox: {
+			height: 4,
 			borderWidth: 0,
 			borderStyle: 'solid',
 			borderColor: { type: 'custom', color: '#fff' },
@@ -250,11 +251,17 @@ const data = {
 				bottomLeft:  10,
 				bottomRight: 10
 			},
-			backgroundColor: { type: 'high', color: '#fff' }
+			backgroundColor: { type: 'custom', color: 'rgba(239, 116, 132, 0.14)', alpha: 14 },
+			margin: {
+				top:    -30,
+				right:  0,
+				bottom: 0,
+				left:   0
+			}
 		},
 		pagination: {
-			width:  6,
-			height: 6,
+			width:  16,
+			height: 8,
 			borderWidth: 0,
 			borderStyle: 'solid',
 			borderColor: { type: 'custom', color: '#fff' },
@@ -264,10 +271,12 @@ const data = {
 				bottomLeft:  10,
 				bottomRight: 10
 			},
-			backgroundColor: { type: 'high', color: '#fff' },
+			backgroundColor: { type: 'custom', color: '#ef7484' },
 			margin: {
-				top:     10,
-				right:   5
+				top:    0,
+				right:  0,
+				bottom: 0,
+				left:   0
 			},
 			boxShadow: {
 				h_shadow:   0,
@@ -275,13 +284,15 @@ const data = {
 				blur_dis:   0,
 				spread_dis: 0,
 				color:      { type: 'custom', color: '#000' }
-			}
+			},
+			opacity: 0
 		},
 		paginationActive: {
 			borderWidth: 0,
 			borderStyle: 'solid',
-			borderColor: { type: 'custom', color: '#a240ec' },
-			backgroundColor: { type: 'main', color: '#a240ec' }
+			borderColor: { type: 'custom', color: '#fff' },
+			backgroundColor: { type: 'custom', color: '#ef7484' },
+			opacity: 1
 		}
 	},
 	componentLayout: [ Name, DescT, PIcon, Price, PriceT, OPT, OPrice, QR, QRT, Spr ],
@@ -300,6 +311,7 @@ const data = {
 			centeredSlides: true,
 			pagination: true
 		},
+		router: {},
 		recommendGoods: []
 	},
 	animation: {
