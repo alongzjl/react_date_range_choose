@@ -5,6 +5,7 @@ const data = {
 	style:     {
 		image: {
 			transform: { rotate: 0 },
+			opacity:   1,
 			margin: {
 				top:    0,
 				right:  0,

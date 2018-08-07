@@ -1,7 +1,16 @@
-let { authInit, deepCopy } = require('state/common')
+let { authInit, deepCopy, extendRmSL } = require('state/common')
 const swiper = authInit(require('./content/swiper'))
+const catg = authInit(require('./content/catg'))
 
-const goodsList = deepCopy(swiper)
+const goodsList = extendRmSL(deepCopy(swiper), {
+	data: {
+		layout: {
+			top:  90
+		}
+	}
+})
+
+const goodsCatg = extendRmSL(deepCopy(catg), {})
 
 // 推荐商品
 module.exports = {
@@ -10,7 +19,7 @@ module.exports = {
 		top:      0,
 		left:     0,
 		width:    540,
-		height:   600
+		height:   630
 	},
 	style: {},
 	content: {
@@ -23,5 +32,5 @@ module.exports = {
 		duration: 1,		// 持续时间
 		iterationCount: 1	// 循环次数
 	},
-	components: [goodsList]
+	components: [ goodsCatg, goodsList ]
 }

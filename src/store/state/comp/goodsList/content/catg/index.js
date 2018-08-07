@@ -1,17 +1,20 @@
 let { authInit, deepCopy, extendRmSL, styleIdxChange } = require('state/common')
 const a  = authInit(require('state/comp/area'))
-// const p  = authInit(require('state/comp/picture'))
 const pb = authInit(require('state/comp/pictureBind'))
-// const t  = authInit(require('state/comp/text'))
 const tb = authInit(require('state/comp/textBind'))
 
 const gPic = extendRmSL(deepCopy(pb), {
 	data: {
 		layout: {
 			top:  5,
-			left: 30,
+			left: 36,
 			width:  40,
 			height: 40
+		},
+		style: {
+			image: {
+				opacity: 0.2
+			}
 		},
 		content: {
 			bind: 'pic'
@@ -22,26 +25,59 @@ const gName = extendRmSL(deepCopy(tb), {
 	data: {
 		layout: {
 			top:  45,
-			width:  100,
+			width:  112,
 			height: 16
+		},
+		style: {
+			text: {
+				opacity: 0.2
+			}
 		},
 		content: {
 			bind: 'name'
 		}
 	}
 })
-const gLine = extendRmSL(deepCopy(a), {
+const gPicAV = extendRmSL(deepCopy(pb), {
+	data: {
+		layout: {
+			top:  5,
+			left: 36,
+			width:  40,
+			height: 40
+		},
+		content: {
+			bind: 'pic'
+		}
+	},
+	feature: { active: true }
+})
+const gNameAV = extendRmSL(deepCopy(tb), {
+	data: {
+		layout: {
+			top:  45,
+			width:  112,
+			height: 16
+		},
+		content: {
+			bind: 'name'
+		}
+	},
+	feature: { active: true }
+})
+const gLineAV = extendRmSL(deepCopy(a), {
 	data: {
 		layout: {
 			top:  74,
-			left: 20,
+			left: 26,
 			width:  60,
 			height: 4
 		},
 		content: {
 			bind: 'name'
 		}
-	}
+	},
+	feature: { active: true }
 })
 
 // 字母排序
@@ -54,13 +90,21 @@ const data = {
 		height: 80
 	},
 	style: {
+		filterFlex: {
+			flexWrap: 'nowrap'
+		},
 		filterBox: {
-			flexWrap: 'nowrap',
 			borderWidth:  0,
 			borderStyle: 'solid',
 			borderColor: { type: 'main', color: '#fff' },
 			backgroundColor: { type: 'custom', color: '#fff' },
-			borderRadius:    {
+			padding: {
+				top:    0,
+				right:  34,
+				bottom: 0,
+				left:   34
+			},
+			borderRadius: {
 				topLeft:     0,
 				topRight:    0,
 				bottomLeft:  0,
@@ -71,15 +115,15 @@ const data = {
 				v_shadow:   0,
 				blur_dis:   0,
 				spread_dis: 0,
-				color:      { type: 'custom', color: '#000' }
+				color: { type: 'custom', color: '#000' }
 			}
 		},
 		filter: {
-			width:  100,
+			width:  112,
 			height: 80
 		}
 	},
-	componentLayout: [ gPic, gName, gLine ],
+	componentLayout: [ gPic, gName, gPicAV, gNameAV, gLineAV ],
 	content: {
 		router: {},
 	},

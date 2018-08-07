@@ -45,6 +45,7 @@ module.exports = {
 	slidesPerGroup: { name: '滚动数量', type: 'Number', min: 1, max: 10 },
 	centeredSlides: { name: '居中排列', type: 'Switch' },
 	spaceBetween:   { name: '图片间距', type: 'Number', min: -500, max: 500 },
+	pagination:     { name: '分页器', type: 'Switch' },
 	slidesOffsetBefore: { name: '左偏移量', type: 'Number', min: -1000, max: 1000 },
 	swiperOptions:  { name: '轮播配置', type: 'Options' },
 	// recommendGoods: { name: '推荐商品', type: 'Goods' }

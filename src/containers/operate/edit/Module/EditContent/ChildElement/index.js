@@ -22,6 +22,7 @@ var compMap = variable.compMap,
 	cmName  = compMap.name,
 	cmNum   = compMap.num,
 	conMap  = variable.contentMap
+var activeMap = variable.childElementActiveMap
 
 var fieldMap = {
 	img:  1,
@@ -71,10 +72,14 @@ export default class ChildElement extends React.Component {
 			</Select>
 		)
 	}
-	childList(layout) {
+	onActive = (v, feature) => {
+		feature.active = v
+		this.update()
+	}
+	childList(layout, isActive) {
 		var num = deepCopy(cmNum)
 		return layout.map((_, i) => {
-			var { name, data } = _,
+			var { name, data, feature } = _,
 				{ content } = data
 			num[name] += 1
 			var numN = num[name]
@@ -88,7 +93,20 @@ export default class ChildElement extends React.Component {
 				return (
 					<div key={j}>
 						<Row>
-							<Col span={21}>{ dom }</Col>
+							<Col span={21}>
+								{ dom }
+								{
+									isActive
+									?
+									<Checkbox
+										style={{ marginLeft: 5 }}
+										title="激活状态开关"
+										checked={feature.active || false}
+										onChange={v => this.onActive(v.target.checked, feature)}
+									/>
+									: null
+								}
+							</Col>
 							<Col span={1}></Col>
 							<Col span={2}>
 								<span onClick={() => { this.removeElement(i) }}><Icon type="close" /></span>
@@ -138,16 +156,14 @@ export default class ChildElement extends React.Component {
 			return <Option key={i} value={_}>{dataMap[_]}</Option>
 		})
 		return (
-			<div>
-				<Select
-					value={val}
-					style={{ width: '68.5%' }}
-					onChange={v => { con[key] = v; this.update() }}
-				>
-					<Option value={''}>无</Option>
-					{ opts }
-				</Select>
-			</div>
+			<Select
+				value={val}
+				style={{ width: '68.5%' }}
+				onChange={v => { con[key] = v; this.update() }}
+			>
+				<Option value={''}>无</Option>
+				{ opts }
+			</Select>
 		)
 	}
 
@@ -165,7 +181,7 @@ export default class ChildElement extends React.Component {
 				</div>
 			</div>
 		)
-		let childList = this.childList(layout)
+		let childList = this.childList(layout, activeMap[name])
 		return (
 			<div>
 				{ childAdd }

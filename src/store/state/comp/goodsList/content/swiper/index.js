@@ -239,6 +239,49 @@ const data = {
 				spread_dis: 0,
 				color:      { type: 'custom', color: 'rgba(0,0,0,.24)' }
 			}
+		},
+		paginationBox: {
+			borderWidth: 0,
+			borderStyle: 'solid',
+			borderColor: { type: 'custom', color: '#fff' },
+			borderRadius:    {
+				topLeft:     10,
+				topRight:    10,
+				bottomLeft:  10,
+				bottomRight: 10
+			},
+			backgroundColor: { type: 'high', color: '#fff' }
+		},
+		pagination: {
+			width:  6,
+			height: 6,
+			borderWidth: 0,
+			borderStyle: 'solid',
+			borderColor: { type: 'custom', color: '#fff' },
+			borderRadius:    {
+				topLeft:     10,
+				topRight:    10,
+				bottomLeft:  10,
+				bottomRight: 10
+			},
+			backgroundColor: { type: 'high', color: '#fff' },
+			margin: {
+				top:     10,
+				right:   5
+			},
+			boxShadow: {
+				h_shadow:   0,
+				v_shadow:   0,
+				blur_dis:   0,
+				spread_dis: 0,
+				color:      { type: 'custom', color: '#000' }
+			}
+		},
+		paginationActive: {
+			borderWidth: 0,
+			borderStyle: 'solid',
+			borderColor: { type: 'custom', color: '#a240ec' },
+			backgroundColor: { type: 'main', color: '#a240ec' }
 		}
 	},
 	componentLayout: [ Name, DescT, PIcon, Price, PriceT, OPT, OPrice, QR, QRT, Spr ],
@@ -254,7 +297,8 @@ const data = {
 			slidesPerView:  2,
 			slidesPerGroup: 1,
 			slidesOffsetBefore: 0,
-			centeredSlides: true
+			centeredSlides: true,
+			pagination: true
 		},
 		recommendGoods: []
 	},
