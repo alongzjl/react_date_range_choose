@@ -37,5 +37,10 @@ module.exports = {
 		text:        1,
 		pictureBind: 1,
 		textBind:    1
+	},
+	resetByGoods: {
+		area:    1,
+		picture: 1,
+		text:    1
 	}
 }

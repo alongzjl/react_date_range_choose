@@ -17,7 +17,7 @@ const gPic = extendRmSL(deepCopy(pb), {
 			}
 		},
 		content: {
-			bind: 'pic'
+			bind: 'img'
 		}
 	}
 })
@@ -47,7 +47,7 @@ const gPicAV = extendRmSL(deepCopy(pb), {
 			height: 40
 		},
 		content: {
-			bind: 'pic'
+			bind: 'img'
 		}
 	},
 	feature: { active: true }
@@ -72,9 +72,6 @@ const gLineAV = extendRmSL(deepCopy(a), {
 			left: 26,
 			width:  60,
 			height: 4
-		},
-		content: {
-			bind: 'name'
 		}
 	},
 	feature: { active: true }
@@ -125,7 +122,8 @@ const data = {
 	},
 	componentLayout: [ gPic, gName, gPicAV, gNameAV, gLineAV ],
 	content: {
-		router: {},
+		rel: 0,
+		router: {}
 	},
 	animation: {
 		className: '',		// 动画样式

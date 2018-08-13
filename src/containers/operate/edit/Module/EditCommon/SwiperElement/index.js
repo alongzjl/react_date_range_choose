@@ -49,7 +49,8 @@ export default class SwiperElement extends React.Component {
 	render() {
 
 		let opts  = this.optsFormat(),
-			{ children, props, options } = this.props
+			{ children, props, options = {} } = this.props,
+			{ pagination = false } = options
 		return children
 		?
 		(

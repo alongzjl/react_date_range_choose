@@ -4,17 +4,17 @@ import { Col, Row, Collapse, Button, Icon, Input, message, Modal, Table } from '
 const { TextArea } = Input
 const { Panel } = Collapse
 
-import ImageUploadGroup from 'compEdit/EditCommon/ImageUploadGroup'
+import ImageUpload from 'compEdit/EditCommon/ImageUpload'
 
 const columns = [
 	{
-		title: '商品名称',
+		title: '商品分类名称',
 		dataIndex: 'name'
 	}
 ]
 const listMax = 20
 
-export default class GoodsListModal extends React.Component {
+export default class GoodsCatgModal extends React.Component {
 	constructor(props) {
 		super(props)
 		var { rel } = props.content
@@ -84,7 +84,7 @@ export default class GoodsListModal extends React.Component {
 			pageSize,
 			...cfg
 		}
-		let li = mock.list.goods(10)
+		let li = mock.list.goodsCatg(10)
 		this.rowSelection.selectedRowKeys = []
 		this.setState({
 			list: li,
@@ -131,7 +131,7 @@ export default class GoodsListModal extends React.Component {
 		return (
 			<Modal
 				visible={visible}
-				title="请选择关联推荐商品"
+				title="请选择关联商品分类"
 				width={`60%`}
 				onOk={this.handleOk}
 				onCancel={this.handleCancel}
@@ -168,7 +168,7 @@ export default class GoodsListModal extends React.Component {
 		return (
 			<div className="goods-list-modal">
 				<Collapse defaultActiveKey={['0']}>
-					<Panel header={`关联推荐商品`} key={0}>
+					<Panel header={`关联分类`} key={0}>
 						<a className="btn-edit-layout" onClick={this.showModal}>关联</a>
 					</Panel>
 				</Collapse>

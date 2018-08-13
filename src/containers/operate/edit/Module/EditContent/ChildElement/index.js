@@ -91,10 +91,18 @@ export default class ChildElement extends React.Component {
 				if (!render) return false
 				let dom = render.bind(this, cm, content, val, p, i)()
 				return (
-					<div key={j}>
+					<div key={j} style={{ display: 'inline-block', width: '86%' }}>
+						{ dom }
+					</div>
+				)
+			})
+			return (
+				<div className="pgs-row" key={i}>
+					<div className="pgsr-name">{cmName[name]}{numN}</div>
+					<div className="pgsr-ctrl">
 						<Row>
 							<Col span={21}>
-								{ dom }
+								{ node }
 								{
 									isActive
 									?
@@ -112,14 +120,6 @@ export default class ChildElement extends React.Component {
 								<span onClick={() => { this.removeElement(i) }}><Icon type="close" /></span>
 							</Col>
 						</Row>
-					</div>
-				)
-			})
-			return (
-				<div className="pgs-row" key={i}>
-					<div className="pgsr-name">{cmName[name]}{numN}</div>
-					<div className="pgsr-ctrl">
-						{ node }
 					</div>
 				</div>
 			)
@@ -158,7 +158,7 @@ export default class ChildElement extends React.Component {
 		return (
 			<Select
 				value={val}
-				style={{ width: '68.5%' }}
+				style={{ width: '80%' }}
 				onChange={v => { con[key] = v; this.update() }}
 			>
 				<Option value={''}>无</Option>

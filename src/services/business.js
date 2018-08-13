@@ -115,15 +115,15 @@ module.exports = extend(window, {
 					oldPrice:  '原价',
 					brand:     '品牌',
 					name:      '商品名称',
-					pic:       '图片',
-					pics:      '图片列表',
+					pic:       '封面',
+					pics:      '详情图',
 					QRPic:     '二维码'
 				}
 			},
 			goodsCatg() {
 				return {
-					name: '类名',
-					pic:  '图片'
+					name: '名称',
+					img:  '图片'
 				}
 			}
 		},
@@ -133,7 +133,7 @@ module.exports = extend(window, {
 					var m   = Math.floor(1e3 + i * 1.2),
 						m2  = m + Math.floor(i * 1.6)
 					return {
-						id:       i + 1,
+						id:       i,
 						price:    `${m}.9`,
 						oldPrice: `${m2}.9`,
 						brand:    'TELEFLORA',
@@ -150,9 +150,9 @@ module.exports = extend(window, {
 					var m   = Math.floor(1e3 + i * 1.2),
 						m2  = m + Math.floor(i * 1.6)
 					return {
-						id:   i + 1,
+						id:   i,
 						name: `${i}-榭兰图`,
-						pic:  'http://rongyi.b0.upaiyun.com/commodity/text/201807191807420161.jpg'
+						img:  'http://rongyi.b0.upaiyun.com/commodity/text/201807191807420161.jpg'
 					}
 				})
 			}
@@ -173,9 +173,8 @@ module.exports = extend(window, {
 			},
 			goodsCatg() {
 				return {
-					id:       1,
-					name:     'TELEFLORA 11朵粉紫玫瑰七夕花束预定当天自提',
-					pic:      'http://rongyi.b0.upaiyun.com/commodity/text/201807191807420161.jpg'
+					id:   -1,
+					name: 'TELEFLORA 11朵粉紫玫瑰七夕花束预定当天自提',
 				}
 			}
 		}

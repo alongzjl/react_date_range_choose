@@ -205,11 +205,11 @@ module.exports = [
 				// 	name: '分页',
 				// 	key:  'page'
 				// },
-				// {
-				// 	icon: 'reset',
-				// 	name: '重置',
-				// 	key:  'reset'
-				// },
+				{
+					icon: 'reset',
+					name: '重置',
+					key:  'resetByGoods'
+				},
 				{
 					icon: 'list',
 					name: '列表',

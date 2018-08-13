@@ -19,8 +19,11 @@ export default class SwiperByGoods extends React.Component {
 		let { data, ioInput } = this.props,
 			{ list } = ioInput,
 			{ content, componentLayout, layout } = data.data,
-			{ recommendGoods } = content
-		let finalList = envType === 'business'? recommendGoods: list
+			{ rel } = content
+		let finalList = list
+		if (envType === 'business') {
+			// 根据rel获取推荐商品
+		}
 
 		let slide = finalList.map((_, i) => {
 			return (

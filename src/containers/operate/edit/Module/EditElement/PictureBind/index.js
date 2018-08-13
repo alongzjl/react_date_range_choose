@@ -22,7 +22,8 @@ export default class PictureBind extends React.Component {
 			{ data } = props,
 			{ item } = ipt,
 			{ bind } = data.data.content,
-			img = bind? item[bind]: ''
+			img = bind? item[bind] || '': ''
+		img = typeof img === 'string'? img: compImgFormat(this.props, img)
 		return envType === 'business' && !img
 			?
 			false

@@ -11,10 +11,12 @@ import { bindActionCreators } from 'redux'
 import { connect }  from 'react-redux'
 import * as actions from 'actions'
 
-import { Card, Checkbox, Collapse, Icon, Input, InputNumber, Select } from 'antd'
+import { Card, Checkbox, Collapse, Icon, Input, InputNumber, Radio, Select, Switch } from 'antd'
 const  { TextArea } = Input
 const  { Panel }    = Collapse
 const Option = Select.Option
+const RadioButton = Radio.Button
+const RadioGroup  = Radio.Group
 
 import RouterJump      from 'compEdit/EditCommon/RouterJump'
 import ImageUploadComp from 'compEdit/EditCommon/ImageUploadComp'
@@ -23,6 +25,7 @@ import SwiperImage       from 'compEdit/EditContent/SwiperImage'
 import Navigation        from 'compEdit/EditContent/Navigation'
 import NavigationFloat   from 'compEdit/EditContent/NavigationFloat'
 import WonderfulActivity from 'compEdit/EditContent/WonderfulActivity'
+import CatgByGoods       from 'compEdit/EditContent/CatgByGoods'
 import SwiperByGoods     from 'compEdit/EditContent/SwiperByGoods'
 
 import * as variable from 'var'
@@ -40,6 +43,7 @@ const compContent = (name, data, updateComp) => {
 		navigationFloat:   <NavigationFloat   {...props} />,
 		wonderfulActivity: <WonderfulActivity {...props} />,
 		swiperImage:       <SwiperImage       {...props} />,
+		catgByGoods:       <CatgByGoods       {...props} />,
 		swiperByGoods:     <SwiperByGoods     {...props} />
 	}
 	return render[name]
@@ -242,8 +246,8 @@ class EditContent extends React.Component {
 			if (_ === 'name') return null
 			let v  = val[_],
 				cm = conMap[_],
-				fn = this[`render${cm.type}`],
-				dom = fn.bind(this, data, cm, val, v, _)()
+				fn = this[`render${cm.type}`]
+			let dom = fn.bind(this, cm, data, val, v, _)()
 			return (
 				<div className="pgs-row" key={i}>
 					<div className="pgsr-name" style={{ width: 52 }}>{ cm.name }</div>

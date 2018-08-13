@@ -32,6 +32,7 @@ import WonderfulActivity from './WonderfulActivity'
 import ListByStore       from './ListByStore'
 import ThemeColor        from './ThemeColor'
 import filterContent     from './filter'
+import CatgByGoods       from './CatgByGoods'
 import SwiperByGoods     from './SwiperByGoods'
 
 import * as variable from 'var'
@@ -41,15 +42,18 @@ var plMap  = {
 	catgByGoods:   'filter',
 	listByGoods:   'filter',
 	swiperByGoods: 'filterBox',
+	// resetByGoods:  'filter',
 	goodsBar:      'filter'
 }
 var mockMap  = {
-	listByGoods: { type: 'list', name: 'goods', field: 'size' },
+	listByGoods: { type: 'list', name: 'goods', size: 6 },
 	goodsBlock:  { type: 'item', name: 'goods' },
 	goodsBar:    { type: 'item', name: 'goods' },
 	pictureListBind: { type: 'item', name: 'goods' },
-	swiperByGoods:   { type: 'item', name: 'goods' },
-	catgByGoods:     { type: 'item', name: 'goodsCatg' }
+	swiperByGoods:   { type: 'list', name: 'goods', size: 6 },
+	// catgByGoods:     { type: 'content', name: 'goodsCatg', field: 'list' },
+	catgByGoods:     { type: 'list', name: 'goodsCatg' },
+	resetByGoods:    { type: 'item', name: 'goodsCatg' }
 }
 
 import './index.less'
@@ -65,6 +69,7 @@ const compContent = (name, data, updateComp) => {
 		listByStore:       <ListByStore       {...props} />,
 		map2D:             <ThemeColor        {...props} />,
 		floorMap:          <ThemeColor        {...props} />,
+		catgByGoods:       <CatgByGoods       {...props} />,
 		swiperByGoods:     <SwiperByGoods     {...props} />
 	}
 	return render[name]
@@ -327,9 +332,14 @@ class EditContent extends React.Component {
 		var obj = {},
 			mk  = mockMap[cn]
 		if (!mk) return {}
-		var { type, name, field } = mk
-		obj[type]  = mock[type][name]()
-		obj.map    = mock.map[name]()
+		var { type, name, size } = mk
+		// if (type = 'content') {
+		// 	obj.list = da.content[field]
+		// 	obj.map  = mock.map[name]()
+		// } else {
+			obj[type] = mock[type][name](size)
+			obj.map   = mock.map[name]()
+		// }
 		if (da) obj.layout = plMap[cn]? da.style[plMap[cn]]: da.layout
 		return obj
 	}
@@ -344,8 +354,7 @@ class EditContent extends React.Component {
 		let { content } = da
 		let compLay = da.componentLayout
 		let mockData = {}
-		let parentLayout,
-			childNode,
+		let childNode,
 			activeKey,
 			feature,
 			compCon = compContent(compName, this.props, this.updateComp)

@@ -7,16 +7,16 @@
 import React from 'react'
 import './index.less'
 
-import GoodsListModal from 'compEdit/EditCommon/GoodsListModal'
+import GoodsCatgModal from 'compEdit/EditCommon/GoodsCatgModal'
 
 
-export default class SwiperByGoods extends React.Component {
+export default class CatgByGoods extends React.Component {
 	render() {
 		let { data, updateComp } = this.props,
 			da = data.data.data
 		return envType === 'business'
 		?
-		<GoodsListModal
+		<GoodsCatgModal
 			content={da.content}
 			updateComp={updateComp}
 		/>

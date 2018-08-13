@@ -131,10 +131,6 @@ class EditCompLayout extends React.Component {
 						</div>
 					</li>
 				)
-						// <div className="pl-ctrl">
-						// 	<a onClick={e => this.copyComp(e, _)}><Icon type="copy"/></a>
-						// 	<a onClick={e => this.removeComp(e, i)}><Icon type="delete"/></a>
-						// </div>
 			}
 		)
 		const SortableList = SortableContainer(({eles}) => {

@@ -89,6 +89,7 @@ module.exports = {
 	listByGoods:       authInit(require('./goodsList/content/list')),
 	swiperByGoods:     authInit(require('./goodsList/content/swiper')),
 	catgByGoods:       authInit(require('./goodsList/content/catg')),
+	resetByGoods:      authInit(require('./goodsList/content/reset')),
 	// 商品详情
 	goodsDetails:      authInit(require('./goodsDetails')),
 	// 背景色块

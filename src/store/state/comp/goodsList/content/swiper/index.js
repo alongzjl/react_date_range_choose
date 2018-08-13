@@ -311,8 +311,8 @@ const data = {
 			centeredSlides: true,
 			pagination: true
 		},
-		router: {},
-		recommendGoods: []
+		rel: 0,
+		router: {}
 	},
 	animation: {
 		className: '',		// 动画样式

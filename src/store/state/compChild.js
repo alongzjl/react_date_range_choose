@@ -12,7 +12,7 @@ module.exports = {
 		floorMap:    1
 	},
 	storeInstro: { 
-		storeSplitLine:         1, 
+		storeSplitLine:        1, 
 		storeInstroInstroduce: 1, 
 		storeInstroTitle:      1,
 		storeWonderful:     1    
@@ -32,7 +32,8 @@ module.exports = {
 	goodsList: {
 		listByGoods:   1,
 		swiperByGoods: 1,
-		catgByGoods:   1
+		catgByGoods:   1,
+		resetByGoods:  1
 	},
 	goodsDetails: {
 		goodsBar:    1,

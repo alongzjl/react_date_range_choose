@@ -33,12 +33,12 @@ export default class CatgByGoods extends React.Component {
 			layout={layout}
 			components={cl}
 			styleObj={cssColorFormat(this.props, 'filter')}
-			isActive={true}
 		/>
 	}
 	render() {
-		let { ioInput } = this.props
-		let { catg, body } = ioInput
+		let { data, ioInput } = this.props,
+			// { rel } = data.data.content,
+			{ body, catg } = ioInput
 		let dom = catg.map((_, i) => {
 			return <div key={i} onClick={e => this.onChange(e, _)}>{this.renderList(_, body.catg)}</div>
 		})
