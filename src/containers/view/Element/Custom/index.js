@@ -29,7 +29,7 @@ import Page         from 'compEdit/EditElement/Page'
 import Reset        from 'compEdit/EditElement/Reset'
 import FloorMap     from 'compEdit/EditElement/FloorMap'
 import ListByStore  from 'compEdit/EditElement/ListByStore'
-import ListByGoods  from 'compEdit/EditElement/goodsList/ListByGoods'
+import ListByGoods  from 'compEdit/EditElement/GoodsList/ListByGoods'
 import SplitLine         from 'compEdit/EditElement/SplitLine'
 import WonderfulActivity from 'compEdit/EditElement/WonderfulActivity'
 import PictureBind       from 'compEdit/EditElement/PictureBind'
@@ -37,11 +37,12 @@ import TextBind          from 'compEdit/EditElement/TextBind'
 import SwiperBind        from 'compEdit/EditElement/SwiperBind'
 import Area              from 'compEdit/EditElement/Area'
 import PictureListBind   from 'compEdit/EditElement/PictureListBind'
-import GoodsBar      from 'compEdit/EditElement/goodsDetails/GoodsBar'
-import GoodsBlock    from 'compEdit/EditElement/goodsDetails/GoodsBlock'
+import GoodsBar      from 'compEdit/EditElement/GoodsDetails/GoodsBar'
+import GoodsBlock    from 'compEdit/EditElement/GoodsDetails/GoodsBlock'
 import ChildElement  from 'compEdit/EditElement/ChildElement'
-import SwiperByGoods from 'compEdit/EditElement/goodsList/SwiperByGoods'
+import SwiperByGoods from 'compEdit/EditElement/GoodsList/SwiperByGoods'
 import CatgByGoods   from 'compEdit/EditElement/GoodsList/CatgByGoods'
+import ResetByGoods  from 'compEdit/EditElement/GoodsList/ResetByGoods'
 
 
 const compContent = (name, data, parent, editConfig, actions, type, ioInput, ioOuter) => {
@@ -74,7 +75,8 @@ const compContent = (name, data, parent, editConfig, actions, type, ioInput, ioO
 		goodsBlock:        <GoodsBlock        {...props} />,
 		childElement:      <ChildElement      {...props} />,
 		swiperByGoods:     <SwiperByGoods     {...props} />,
-		catgByGoods:       <CatgByGoods       {...props} />
+		catgByGoods:       <CatgByGoods       {...props} />,
+		resetByGoods:      <ResetByGoods      {...props} />
 	}
 	return render[name]
 }
