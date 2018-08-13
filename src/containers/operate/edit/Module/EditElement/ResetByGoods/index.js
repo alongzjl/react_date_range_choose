@@ -9,21 +9,25 @@ export default class ResetByGoods extends React.Component {
 	}
 
 	componentWillReceiveProps(props) {}
-
 	componentDidMount() {}
-
 	componentWillUnmount() {}
 
 	renderDom = e => {
-		let { data } = this.props,
-			{ content, componentLayout, layout } = data.data
-
+		let { data, ioInput } = this.props,
+			{ catg } = ioInput.body,
+			{ componentLayout, layout } = data.data
+		let cl = []
+		componentLayout.map(_ => {
+			var { active } = _.feature
+			if ((typeof catg != 'number' && active) || (typeof catg === 'number' && !active)) {
+				cl.push(_)
+			}
+		})
 		let slide = (
 			<Layout
 				data={{}}
 				layout={layout}
-				components={componentLayout}
-				styleObj={cssColorFormat(this.props, 'filterBox')}
+				components={cl}
 			/>
 		)
 		return slide
@@ -32,7 +36,7 @@ export default class ResetByGoods extends React.Component {
 		let dom = this.renderDom()
 
 		return (
-			<section className={`e-reset-by-goods`}>
+			<section className={`e-reset-by-goods`} style={cssColorFormat(this.props, 'filterBox')}>
 				{ dom }
 			</section>
 		)

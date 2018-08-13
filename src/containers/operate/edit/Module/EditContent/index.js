@@ -42,7 +42,7 @@ var plMap  = {
 	catgByGoods:   'filter',
 	listByGoods:   'filter',
 	swiperByGoods: 'filterBox',
-	// resetByGoods:  'filter',
+	// resetByGoods:  'filterBox',
 	goodsBar:      'filter'
 }
 var mockMap  = {

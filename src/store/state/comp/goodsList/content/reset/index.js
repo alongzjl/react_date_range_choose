@@ -7,7 +7,7 @@ const gPic = extendRmSL(deepCopy(p), {
 	data: {
 		layout: {
 			top:  5,
-			left: 36,
+			left: 30,
 			width:  40,
 			height: 40
 		},
@@ -25,7 +25,7 @@ const gName = extendRmSL(deepCopy(t), {
 	data: {
 		layout: {
 			top:  45,
-			width:  112,
+			width:  100,
 			height: 16
 		},
 		style: {
@@ -42,7 +42,7 @@ const gPicAV = extendRmSL(deepCopy(p), {
 	data: {
 		layout: {
 			top:  5,
-			left: 36,
+			left: 30,
 			width:  40,
 			height: 40
 		},
@@ -69,7 +69,7 @@ const gLineAV = extendRmSL(deepCopy(a), {
 	data: {
 		layout: {
 			top:  74,
-			left: 26,
+			left: 20,
 			width:  60,
 			height: 4
 		}
@@ -83,24 +83,15 @@ const data = {
 		position: 'absolute',
 		top:  0,
 		left: 0,
-		width:  540,
+		width:  100,
 		height: 80
 	},
 	style: {
-		filterFlex: {
-			flexWrap: 'nowrap'
-		},
 		filterBox: {
 			borderWidth:  0,
 			borderStyle: 'solid',
 			borderColor: { type: 'main', color: '#fff' },
 			backgroundColor: { type: 'custom', color: '#fff' },
-			padding: {
-				top:    0,
-				right:  34,
-				bottom: 0,
-				left:   34
-			},
 			borderRadius: {
 				topLeft:     0,
 				topRight:    0,
@@ -114,10 +105,6 @@ const data = {
 				spread_dis: 0,
 				color: { type: 'custom', color: '#000' }
 			}
-		},
-		filter: {
-			width:  112,
-			height: 80
 		}
 	},
 	componentLayout: [ gPic, gName, gPicAV, gNameAV, gLineAV ],
