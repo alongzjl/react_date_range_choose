@@ -12,6 +12,13 @@ export default class ResetByGoods extends React.Component {
 	componentDidMount() {}
 	componentWillUnmount() {}
 
+	onChange = e => {
+		e.stopPropagation()
+		let { ioInput, ioOuter } = this.props,
+			{ body } = ioInput
+		delete body.catg
+		ioOuter(ioInput)
+	}
 	renderDom = e => {
 		let { data, ioInput } = this.props,
 			{ catg } = ioInput.body,
@@ -36,7 +43,11 @@ export default class ResetByGoods extends React.Component {
 		let dom = this.renderDom()
 
 		return (
-			<section className={`e-reset-by-goods`} style={cssColorFormat(this.props, 'filterBox')}>
+			<section
+				className={`e-reset-by-goods`}
+				style={cssColorFormat(this.props, 'filterBox')}
+				onClick={e => this.onChange(e)}
+			>
 				{ dom }
 			</section>
 		)

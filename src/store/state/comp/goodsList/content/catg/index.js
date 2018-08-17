@@ -17,7 +17,7 @@ const gPic = extendRmSL(deepCopy(pb), {
 			}
 		},
 		content: {
-			bind: 'img'
+			bind: 'url'
 		}
 	}
 })
@@ -34,7 +34,7 @@ const gName = extendRmSL(deepCopy(tb), {
 			}
 		},
 		content: {
-			bind: 'name'
+			bind: 'categoryName'
 		}
 	}
 })
@@ -47,7 +47,7 @@ const gPicAV = extendRmSL(deepCopy(pb), {
 			height: 40
 		},
 		content: {
-			bind: 'img'
+			bind: 'url'
 		}
 	},
 	feature: { active: true }
@@ -60,7 +60,7 @@ const gNameAV = extendRmSL(deepCopy(tb), {
 			height: 16
 		},
 		content: {
-			bind: 'name'
+			bind: 'categoryName'
 		}
 	},
 	feature: { active: true }

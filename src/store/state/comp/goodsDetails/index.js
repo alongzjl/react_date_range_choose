@@ -42,7 +42,7 @@ const GBINFO2 = extendRmSL(styleIdxChange(1, deepCopy(gbk)), {
 const GoodsPic = extendRmSL(deepCopy(plb), {
 	data: {
 		layout: {
-			top:  372,
+			top:  320,
 			left: 10,
 			width:  520,
 			height: 120
@@ -69,7 +69,7 @@ const GoodsPic = extendRmSL(deepCopy(plb), {
 			}
 		},
 		content: {
-			bind: 'pics'
+			bind: 'commodityPicList'
 		}
 	}
 })

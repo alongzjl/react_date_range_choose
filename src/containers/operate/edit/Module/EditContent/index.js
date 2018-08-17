@@ -50,8 +50,7 @@ var mockMap  = {
 	goodsBlock:  { type: 'item', name: 'goods' },
 	goodsBar:    { type: 'item', name: 'goods' },
 	pictureListBind: { type: 'item', name: 'goods' },
-	swiperByGoods:   { type: 'list', name: 'goods', size: 6 },
-	// catgByGoods:     { type: 'content', name: 'goodsCatg', field: 'list' },
+	swiperByGoods:   { type: 'list', name: 'reGoods', size: 6 },
 	catgByGoods:     { type: 'list', name: 'goodsCatg' },
 	resetByGoods:    { type: 'item', name: 'goodsCatg' }
 }

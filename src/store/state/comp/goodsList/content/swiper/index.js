@@ -64,7 +64,7 @@ const Price = extendRmSL(deepCopy(tb), {
 			}
 		},
 		content: {
-			bind: 'price'
+			bind: 'currentPrice'
 		}
 	}
 })
@@ -124,7 +124,7 @@ const OPrice = extendRmSL(deepCopy(tb), {
 			}
 		},
 		content: {
-			bind: 'oldPrice'
+			bind: 'originalPrice'
 		}
 	}
 })
@@ -137,7 +137,7 @@ const QR = extendRmSL(deepCopy(pb), {
 			height: 95
 		},
 		content: {
-			bind: 'QRPic'
+			bind: 'qrcode'
 		}
 	}
 })
@@ -169,7 +169,7 @@ const Spr = extendRmSL(deepCopy(sb), {
 			height: 344
 		},
 		content: {
-			bind: 'pics'
+			bind: 'showPicList'
 		}
 	}
 })
@@ -203,7 +203,7 @@ const DescT = extendRmSL(deepCopy(tb), {
 			}
 		},
 		content: {
-			bind: 'desc'
+			bind: 'recommendReason'
 		}
 	}
 })

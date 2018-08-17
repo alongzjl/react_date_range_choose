@@ -3,24 +3,37 @@ import './index.less'
 
 import { Icon, Pagination } from 'antd'
 import Layout from 'compEdit/EditElement/Layout'
+import * as Server from 'server'
 
 export default class CatgByGoods extends React.Component {
 	constructor(props) {
 		super(props)
-		this.state = {}
+		var { catg } = props.ioInput
+		this.state = {
+			list: envType !== 'business'? catg: []
+		}
+		if (envType === 'business') this.getData()
 	}
 	onChange = (e, item) => {
 		e.stopPropagation()
 		let { ioInput, ioOuter } = this.props,
 			{ body } = ioInput
-		body.catg = item.id
+		body.catg = item.categoryId
 		ioOuter(ioInput)
 	}
-	renderList = (item, catg) => {
+	getData = cb => {
+		let { ioInput, ioOuter } = this.props
+		Server.goods.getCategoryList(o => {
+			this.setState({ list: o })
+			ioInput.catg = o
+			ioOuter(ioInput)
+		})
+	}
+	renderItem = (item, catg) => {
 		let { data } = this.props,
-			{ id } = item,
+			{ categoryId } = item,
 			{ componentLayout, layout } = data.data
-		let isAV = id === catg,
+		let isAV = categoryId === catg,
 			cl   = []
 		componentLayout.map(_ => {
 			var { active } = _.feature
@@ -35,13 +48,15 @@ export default class CatgByGoods extends React.Component {
 			styleObj={cssColorFormat(this.props, 'filter')}
 		/>
 	}
-	render() {
-		let { data, ioInput } = this.props,
-			// { rel } = data.data.content,
-			{ body, catg } = ioInput
-		let dom = catg.map((_, i) => {
-			return <div key={i} onClick={e => this.onChange(e, _)}>{this.renderList(_, body.catg)}</div>
+	renderList = () => {
+		let { body } = this.props.ioInput,
+			{ list } = this.state
+		return list.map((_, i) => {
+			return <div key={i} onClick={e => this.onChange(e, _)}>{this.renderItem(_, body.catg)}</div>
 		})
+	}
+	render() {
+		let dom = this.renderList()
 		return (
 			<section className={`e-catg-by-goods scrollbar`} style={cssColorFormat(this.props, 'filterBox')}>
 				<div className="e-catg-by-goods-box" style={cssColorFormat(this.props, 'filterFlex')}>

@@ -31,13 +31,13 @@ export default class SwiperBind extends React.Component {
 		return <SwiperElement props={this.props} options={options}>{ slide }</SwiperElement>
 	}
 	render() {
-		let props = this.props,
-			{ ioInput } = props,
-			ipt = ioInput? ioInput: props,
-			{ data } = props,
-			{ item } = ipt,
-			{ bind, swiperOptions } = data.data.content,
-			imgs = bind? item[bind].split(','): [null]
+		let props = this.props
+		let { ioInput } = props
+		let ipt = ioInput? ioInput: props
+		let { data } = props
+		let { item } = ipt
+		let { bind, swiperOptions } = data.data.content
+		let imgs = bind? item[bind] || []: []
 		let dom = this.renderDom(imgs, swiperOptions)
 
 		return (

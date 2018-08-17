@@ -20,7 +20,7 @@ const Name = extendRmSL(deepCopy(tb), {
 			}
 		},
 		content: {
-			bind: 'name'
+			bind: 'commodityName'
 		}
 	}
 })
@@ -61,7 +61,7 @@ const Price = extendRmSL(deepCopy(tb), {
 			}
 		},
 		content: {
-			bind: 'price'
+			bind: 'currentPrice'
 		}
 	}
 })
@@ -103,7 +103,7 @@ const OPrice = extendRmSL(deepCopy(tb), {
 			}
 		},
 		content: {
-			bind: 'oldPrice'
+			bind: 'originalPrice'
 		}
 	}
 })
@@ -116,7 +116,7 @@ const QR = extendRmSL(deepCopy(pb), {
 			height: 60
 		},
 		content: {
-			bind: 'QRPic'
+			bind: 'qrcode'
 		}
 	}
 })

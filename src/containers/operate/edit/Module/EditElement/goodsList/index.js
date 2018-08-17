@@ -11,6 +11,7 @@ import './index.less'
 import CustomO from 'compEdit/EditElement/Custom'
 import CustomB from 'compEditB/EditElement/Custom'
 import CustomV from 'view/Element/Custom'
+import * as Server from 'server'
 
 let cusMap = {
 	operate:  CustomO,
@@ -23,34 +24,37 @@ export default class GoodsList extends React.Component {
 		this.init()
 	}
 	componentWillMount() {}
-
 	componentDidMount() {}
-
 	componentWillUnmount() {}
 	componentWillReceiveProps() {
-		let { data } = this.props
-		let { feature } = data
-		let ipt = deepCopy(feature)
+		let { feature } = this.props.data
+		let { ioInput } = this.state
+		let ipt  = deepCopy(feature)
+		ipt.body = ioInput.body
 		this.getList(ipt)
-		this.state = { ioInput: ipt }
-		// this.ioOuter(ipt)
+		this.state = {
+			ioInput: ipt
+		}
 	}
 
-	ioOuter(ipt) {
+	ioOuter = ipt => {
+		let { data } = this.props
 		this.getList(ipt)
 		this.setState({ ioInput: ipt })
 		console.clear()
+		console.log(ipt.body)
 	}
 
-	getList = (ipt) => {
+	getList = ipt => {
 		let { data } = this.props
 		let { feature } = data
 		let { content } = data.data
-		let size = ipt.body.size = content.size
-		ipt.list = mock.list.goods(size)
-		ipt.catg = mock.list.goodsCatg(10)
 		delete feature.list
 		delete feature.map
+		let size = ipt.body.size = content.size
+		ipt.list = mock.list.goods(size)
+		ipt.relist = mock.list.reGoods(size)
+		ipt.catg = mock.list.goodsCatg(10)
 	}
 
 	init = () => {
@@ -63,7 +67,6 @@ export default class GoodsList extends React.Component {
 
 	render() {
 		let Custom = cusMap[envType] || CustomV
-		// this.init()
 		return (
 			<Custom
 				{...this.props}

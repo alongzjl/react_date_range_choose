@@ -15,10 +15,9 @@ export default class PictureListBind extends React.Component {
 
 	componentWillUnmount() {}
 
-	renderImage = img => {
+	renderImage = imgs => {
 		let props = this.props,
 			{ style } = props.data.data,
-			imgs = img.split(','),
 			css  = cssColorFormat(props, 'image')
 		return (
 			<div className="eplb-box" style={cssColorFormat(props, 'filterBox')}>
@@ -34,14 +33,14 @@ export default class PictureListBind extends React.Component {
 			{ data } = props,
 			{ item } = ipt,
 			{ bind } = data.data.content,
-			img = bind? item[bind]: ''
-		return envType === 'business' && !img
+			imgs = bind? item[bind] || []: []
+		return envType === 'business' && !imgs
 			?
 			false
 			:
 			(
 				<div className="e-picture-list-bind">
-					{ this.renderImage(img) }
+					{ this.renderImage(imgs) }
 				</div>
 			)
 	}

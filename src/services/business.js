@@ -111,19 +111,27 @@ module.exports = extend(window, {
 		map: {
 			goods() {
 				return {
-					price:     '价格',
-					oldPrice:  '原价',
-					brand:     '品牌',
-					name:      '商品名称',
-					pic:       '封面',
-					pics:      '详情图',
-					QRPic:     '二维码'
+					currentPrice:     '现价',
+					originalPrice:    '原价',
+					commodityName:    '商品名称',
+					commodityPicList: '商品图片',
+					qrcode:           '二维码',
+				}
+			},
+			reGoods() {
+				return {
+					currentPrice:    '现价',
+					originalPrice:   '原价',
+					name:            '商品名称',
+					recommendReason: '推荐理由',
+					showPicList:     '轮播图列表',
+					qrcode:          '二维码'
 				}
 			},
 			goodsCatg() {
 				return {
-					name: '名称',
-					img:  '图片'
+					categoryName: '分类名称',
+					url:          '分类图片'
 				}
 			}
 		},
@@ -134,14 +142,34 @@ module.exports = extend(window, {
 						m2  = m + Math.floor(i * 1.6)
 					return {
 						id:       i,
-						price:    `${m}.9`,
-						oldPrice: `${m2}.9`,
-						brand:    'TELEFLORA',
-						name:     `${i}-拜亚动力/拜雅（Beyerdynamic）Xelento remote 榭兰图 线控版特斯拉旗舰入耳式耳塞`,
-						pic:      'http://rongyi.b0.upaiyun.com/commodity/text/201807191807420161.jpg',
-						pics:     'http://a.vpimg3.com/upload/merchandise/pdcvis/2018/07/04/176/79c5de67-8f8f-4463-a82d-364d3dcd92e5_420x420_90.jpg,http://a.vpimg3.com/upload/merchandise/pdcvis/2018/07/04/62/bacab0f7-7b39-4631-b6ff-029e65ae5339_420x420_90.jpg,http://a.vpimg3.com/upload/merchandise/pdcvis/2018/07/04/115/51673b5a-f7ac-47f2-8dc3-ad6f8560631e_420x420_90.jpg',
-						QRPic:    'http://rongyi.b0.upaiyun.com/commodity/text/201807181419502662.png',
-						desc:     `商品描述-${i+8}`
+						currentPrice:  `${m}.9`,
+						originalPrice: `${m2}.9`,
+						commodityName: `${i}-拜亚动力/拜雅（Beyerdynamic）Xelento remote 榭兰图 线控版特斯拉旗舰入耳式耳塞`,
+						commodityPicList: [
+							'http://a.vpimg3.com/upload/merchandise/pdcvis/2018/07/04/176/79c5de67-8f8f-4463-a82d-364d3dcd92e5_420x420_90.jpg',
+							'http://a.vpimg3.com/upload/merchandise/pdcvis/2018/07/04/62/bacab0f7-7b39-4631-b6ff-029e65ae5339_420x420_90.jpg',
+							'http://a.vpimg3.com/upload/merchandise/pdcvis/2018/07/04/115/51673b5a-f7ac-47f2-8dc3-ad6f8560631e_420x420_90.jpg'
+						],
+						qrcode: 'http://rongyi.b0.upaiyun.com/commodity/text/201807181419502662.png'
+					}
+				})
+			},
+			reGoods(num = 1) {
+				return Array.apply(null, { length: num }).map((_, i) => {
+					var m   = Math.floor(1e3 + i * 1.2),
+						m2  = m + Math.floor(i * 1.6)
+					return {
+						id:       i,
+						currentPrice:  `${m}.9`,
+						originalPrice: `${m2}.9`,
+						name:          `${i}-拜亚动力/拜雅（Beyerdynamic）Xelento remote 榭兰图 线控版特斯拉旗舰入耳式耳塞`,
+						showPicList: [
+							'http://a.vpimg3.com/upload/merchandise/pdcvis/2018/07/04/176/79c5de67-8f8f-4463-a82d-364d3dcd92e5_420x420_90.jpg',
+							'http://a.vpimg3.com/upload/merchandise/pdcvis/2018/07/04/62/bacab0f7-7b39-4631-b6ff-029e65ae5339_420x420_90.jpg',
+							'http://a.vpimg3.com/upload/merchandise/pdcvis/2018/07/04/115/51673b5a-f7ac-47f2-8dc3-ad6f8560631e_420x420_90.jpg'
+						],
+						recommendReason: `推荐理由-${i+8}`,
+						qrcode: 'http://rongyi.b0.upaiyun.com/commodity/text/201807181419502662.png'
 					}
 				})
 			},
@@ -150,9 +178,9 @@ module.exports = extend(window, {
 					var m   = Math.floor(1e3 + i * 1.2),
 						m2  = m + Math.floor(i * 1.6)
 					return {
-						id:   i,
-						name: `${i}-榭兰图`,
-						img:  'http://rongyi.b0.upaiyun.com/commodity/text/201807191807420161.jpg'
+						categoryId:   i,
+						categoryName: `${i}-榭兰图`,
+						url:  'http://rongyi.b0.upaiyun.com/commodity/text/201807191807420161.jpg'
 					}
 				})
 			}
@@ -161,20 +189,37 @@ module.exports = extend(window, {
 			goods() {
 				return {
 					id:       1,
-					price:    `9925.0`,
-					oldPrice: `9799.9`,
-					brand:    'TELEFLORA',
-					name:     'TELEFLORA 11朵粉紫玫瑰七夕花束预定当天自提',
-					pic:      'http://rongyi.b0.upaiyun.com/commodity/text/201807191807420161.jpg',
-					pics:     'http://a.vpimg3.com/upload/merchandise/pdcvis/2018/07/04/176/79c5de67-8f8f-4463-a82d-364d3dcd92e5_420x420_90.jpg,http://a.vpimg3.com/upload/merchandise/pdcvis/2018/07/04/62/bacab0f7-7b39-4631-b6ff-029e65ae5339_420x420_90.jpg,http://a.vpimg3.com/upload/merchandise/pdcvis/2018/07/04/115/51673b5a-f7ac-47f2-8dc3-ad6f8560631e_420x420_90.jpg',
-					QRPic:    'http://rongyi.b0.upaiyun.com/commodity/text/201807181419502662.png',
-					desc:     '商品描述'
+					currentPrice:  `9925.0`,
+					originalPrice: `9799.9`,
+					commodityName: 'TELEFLORA 11朵粉紫玫瑰七夕花束预定当天自提',
+					commodityPicList: [
+						'http://a.vpimg3.com/upload/merchandise/pdcvis/2018/07/04/176/79c5de67-8f8f-4463-a82d-364d3dcd92e5_420x420_90.jpg',
+						'http://a.vpimg3.com/upload/merchandise/pdcvis/2018/07/04/62/bacab0f7-7b39-4631-b6ff-029e65ae5339_420x420_90.jpg',
+						'http://a.vpimg3.com/upload/merchandise/pdcvis/2018/07/04/115/51673b5a-f7ac-47f2-8dc3-ad6f8560631e_420x420_90.jpg'
+					],
+					qrcode: 'http://rongyi.b0.upaiyun.com/commodity/text/201807181419502662.png'
+				}
+			},
+			reGoods() {
+				return {
+					id: 1,
+					currentPrice:  `9925.0`,
+					originalPrice: `9799.9`,
+					name:          `拜亚动力/拜雅（Beyerdynamic）Xelento remote 榭兰图 线控版特斯拉旗舰入耳式耳塞`,
+					showPicList: [
+						'http://a.vpimg3.com/upload/merchandise/pdcvis/2018/07/04/176/79c5de67-8f8f-4463-a82d-364d3dcd92e5_420x420_90.jpg',
+						'http://a.vpimg3.com/upload/merchandise/pdcvis/2018/07/04/62/bacab0f7-7b39-4631-b6ff-029e65ae5339_420x420_90.jpg',
+						'http://a.vpimg3.com/upload/merchandise/pdcvis/2018/07/04/115/51673b5a-f7ac-47f2-8dc3-ad6f8560631e_420x420_90.jpg'
+					],
+					recommendReason: `推荐理由`,
+					qrcode: 'http://rongyi.b0.upaiyun.com/commodity/text/201807181419502662.png'
 				}
 			},
 			goodsCatg() {
 				return {
-					id:   -1,
-					name: 'TELEFLORA 11朵粉紫玫瑰七夕花束预定当天自提',
+					categoryId:   -1,
+					categoryName: `榭兰图`,
+					url:  'http://rongyi.b0.upaiyun.com/commodity/text/201807191807420161.jpg'
 				}
 			}
 		}

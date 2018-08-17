@@ -13,7 +13,7 @@ const gPic = extendRmSL(deepCopy(pb), {
 			height: 152
 		},
 		content: {
-			bind: 'pic'
+			bind: 'commodityPicList'
 		}
 	}
 })
@@ -26,7 +26,7 @@ const gName = extendRmSL(deepCopy(tb), {
 			height: 36
 		},
 		content: {
-			bind: 'name'
+			bind: 'commodityName'
 		},
 		style: {
 			text: {
@@ -64,7 +64,7 @@ const gPrice = extendRmSL(deepCopy(tb), {
 			height: 30
 		},
 		content: {
-			bind: 'price'
+			bind: 'currentPrice'
 		},
 		style: {
 			text: {

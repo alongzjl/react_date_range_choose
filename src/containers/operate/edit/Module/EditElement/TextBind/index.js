@@ -18,11 +18,11 @@ export default class TextBind extends React.Component {
 			text = bind? item[bind]: '',
 			dom
 
-		if (bind !== 'desc') {
+		if (bind !== 'recommendReason') {
 			dom = <div
-					style={cssColorFormat(this.props, 'text')}
-					dangerouslySetInnerHTML={{__html: textBreak(text)}}
-				></div>
+				style={cssColorFormat(this.props, 'text')}
+				dangerouslySetInnerHTML={{__html: textBreak(text)}}
+			></div>
 		} else {
 			dom = text
 			?

@@ -3,29 +3,32 @@ import './index.less'
 
 import Layout from 'compEdit/EditElement/Layout'
 import SwiperElement from 'compEdit/EditCommon/SwiperElement'
+import * as Server from 'server'
 
 export default class SwiperByGoods extends React.Component {
 	constructor(props) {
 		super(props)
+		var { relist } = props.ioInput
+		this.state = {
+			list: envType !== 'business'? relist: []
+		}
+		if (envType === 'business') this.getData()
 	}
 
 	componentWillReceiveProps(props) {}
-
 	componentDidMount() {}
-
 	componentWillUnmount() {}
 
-	renderDom = e => {
-		let { data, ioInput } = this.props,
-			{ list } = ioInput,
-			{ content, componentLayout, layout } = data.data,
-			{ rel } = content
-		let finalList = list
-		if (envType === 'business') {
-			// 根据rel获取推荐商品
-		}
+	getData = cb => {
+		Server.goods.getRecGoodsList(o => {
+			this.setState({ list: o })
+		})
+	}
 
-		let slide = finalList.map((_, i) => {
+	renderDom = e => {
+		let { content, componentLayout, layout } = this.props.data.data,
+			{ list } = this.state
+		let slide = list.map((_, i) => {
 			return (
 				<div className="swiper-slide" key={i}>
 					<Layout

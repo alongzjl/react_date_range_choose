@@ -56,7 +56,7 @@ const gNameAV = extendRmSL(deepCopy(t), {
 	data: {
 		layout: {
 			top:  45,
-			width:  112,
+			width:  100,
 			height: 16
 		},
 		content: {

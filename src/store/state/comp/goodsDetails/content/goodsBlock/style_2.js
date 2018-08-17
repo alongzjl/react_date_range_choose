@@ -17,13 +17,13 @@ const Title = extendRmSL(deepCopy(p), {
 	}
 })
 
-// 品牌名称
+// 退换货政策
 const Name1 = extendRmSL(deepCopy(t), {
 	data: {
 		layout: {
 			top:  44,
 			left: 10,
-			width:  60,
+			width:  72,
 			height: 16
 		},
 		style: {
@@ -34,41 +34,18 @@ const Name1 = extendRmSL(deepCopy(t), {
 			}
 		},
 		content: {
-			text: '品牌名称:'
-		}
-	}
-})
-// 退换货政策
-const Name2 = extendRmSL(deepCopy(Name1), {
-	data: {
-		layout: {
-			top:  70,
-			width: 72
-		},
-		content: {
 			text: '退换货政策:'
 		}
 	}
 })
-// 包邮说明
-const Name3 = extendRmSL(deepCopy(Name1), {
-	data: {
-		layout: {
-			top:  96
-		},
-		content: {
-			text: '包邮说明:'
-		}
-	}
-})
 
-// 品牌名称
-const Con1 = extendRmSL(deepCopy(tb), {
+// 退换货政策
+const Con1 = extendRmSL(deepCopy(t), {
 	data: {
 		layout: {
 			top:  44,
-			left: 70,
-			width:  200,
+			left: 82,
+			width:  300,
 			height: 16
 		},
 		style: {
@@ -79,37 +56,7 @@ const Con1 = extendRmSL(deepCopy(tb), {
 			}
 		},
 		content: {
-			bind: 'brand'
-		}
-	}
-})
-// 退换货政策
-const Con2 = extendRmSL(deepCopy(Name1), {
-	data: {
-		layout: {
-			top:  70,
-			left: 82,
-			width: 300
-		},
-		style: {
-			text: {
-				color: { type: 'custom', color: '#999' }
-			}
-		},
-		content: {
 			text: '非商品质量问题不支持退货'
-		}
-	}
-})
-// 包邮说明
-const Con3 = extendRmSL(deepCopy(Con2), {
-	data: {
-		layout: {
-			top:  96,
-			left: 70
-		},
-		content: {
-			text: '包邮（除西藏、新疆、海南、港澳台）'
 		}
 	}
 })
@@ -121,7 +68,7 @@ module.exports = {
 		top:  0,
 		left: 0,
 		width:  520,
-		height: 148
+		height: 100
 	},
 	style: {
 		filterBox: {
@@ -146,8 +93,8 @@ module.exports = {
 	},
 	componentLayout: [
 		Title,
-		Name1, Name2, Name3,
-		Con1,  Con2,  Con3
+		Name1,
+		Con1
 	],
 	content: {},
 	animation: {
