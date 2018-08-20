@@ -55,6 +55,7 @@ module.exports = {
             styles:     `${defaultSettings.srcPath}/styles`,
             images:     `${defaultSettings.srcPath}/images`,
             services:   `${defaultSettings.srcPath}/services`,
+            server:     `${defaultSettings.srcPath}/server`,
             config:     `${defaultSettings.srcPath}/config/` + (REACT_WEBPACK_ENV || 'dev')
         }
     },
