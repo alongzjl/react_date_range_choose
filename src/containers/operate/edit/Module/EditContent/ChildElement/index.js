@@ -14,7 +14,7 @@ const  { Panel }  = Collapse
 
 import ImageUpload from 'compEdit/EditCommon/ImageUpload'
 
-import * as cElement from 'state/ChildElement'
+import * as cElement from 'state/childElement'
 import * as variable from 'var'
 
 const comp  = require('state/comp')
