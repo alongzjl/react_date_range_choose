@@ -12,7 +12,7 @@ export default class CatgByGoods extends React.Component {
 		this.state = {
 			list: envType !== 'business'? catg: []
 		}
-		if (envType === 'business') this.getData()
+		this.getData()
 	}
 	onChange = (e, item) => {
 		e.stopPropagation()
@@ -22,6 +22,7 @@ export default class CatgByGoods extends React.Component {
 		ioOuter(ioInput)
 	}
 	getData = cb => {
+		if (envType !== 'business') return
 		let { ioInput, ioOuter } = this.props
 		Server.goods.getCategoryList(o => {
 			this.setState({ list: o })

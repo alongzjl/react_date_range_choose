@@ -12,7 +12,7 @@ export default class ListByStore extends React.Component {
 		this.state = {
 			list: envType !== 'business'? list: []
 		}
-		if (envType === 'business') this.getData(1)
+		this.getData(1)
 	}
 	componentWillReceiveProps(props) {
 		var { catg } = props.ioInput.body,
@@ -20,6 +20,7 @@ export default class ListByStore extends React.Component {
 		if (catg && catg !== id) this.getData(catg)
 	}
 	getData = id => {
+		if (envType !== 'business') return
 		Server.goods.getGoodsList(id, o => {
 			this.setState({ list: o })
 		})

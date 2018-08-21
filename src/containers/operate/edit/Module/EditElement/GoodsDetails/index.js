@@ -51,6 +51,7 @@ export default class GoodsDetails extends React.Component {
 	}
 
 	getData = ipt => {
+		if (envType !== 'business') return
 		Server.goods.getGoodsDetails(o => {
 			ipt.item = o
 			this.setState({ ioInput: ipt })
@@ -80,7 +81,7 @@ export default class GoodsDetails extends React.Component {
 		let { feature } = data
 		let { content } = data.data
 		ipt.item = envType !== 'business'? item: {}
-		if (envType === 'business') this.getData(ipt)
+		this.getData(ipt)
 		delete feature.item
 		delete feature.map
 	}

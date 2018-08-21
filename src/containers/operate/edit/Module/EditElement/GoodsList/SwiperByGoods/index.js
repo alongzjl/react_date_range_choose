@@ -12,7 +12,7 @@ export default class SwiperByGoods extends React.Component {
 		this.state = {
 			list: envType !== 'business'? relist: []
 		}
-		if (envType === 'business') this.getData()
+		this.getData()
 	}
 
 	componentWillReceiveProps(props) {}
@@ -20,6 +20,7 @@ export default class SwiperByGoods extends React.Component {
 	componentWillUnmount() {}
 
 	getData = cb => {
+		if (envType !== 'business') return
 		Server.goods.getRecGoodsList(o => {
 			this.setState({ list: o })
 		})

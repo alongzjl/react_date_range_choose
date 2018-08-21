@@ -9,7 +9,7 @@ module.exports = {
 	// 分类列表
 	getCategoryList(cb) {
 		Ajax.postJSON(`${tcPath}/getTerminalCategoryList`, getMallId()).then(res => {
-			var list = res.data.list
+			var list = res.data? res.data.list: []
 			list = [
 				{
 					"url": "http://dev.hdp.rongyi.com/1213123123/20171025/264c8ea8097b3379f315ae94fd97d374.jpg",
@@ -66,7 +66,7 @@ module.exports = {
 	// 分类商品列表
 	getGoodsList(categoryId = '', cb) {
 		Ajax.postJSON(`${cPath}/getTerminalCommodityList`, getMallId({ categoryId })).then(res => {
-			var list = res.data.list
+			var list = res.data? res.data.list: []
 			list = [
 				{
 					"relateCommodityCount": 1,
@@ -113,7 +113,7 @@ module.exports = {
 	// 推荐商品列表
 	getRecGoodsList(cb) {
 		Ajax.postJSON(`${cPath}/getTerminalRecommendCommodityList`, getMallId()).then(res => {
-			var list = res.data.list
+			var list = res.data? res.data.list: []
 			list = [
 				{
 					"landingPageUrl": 1,
@@ -173,7 +173,7 @@ module.exports = {
 	// 商品详情
 	getGoodsDetails(cb) {
 		Ajax.postJSON(`${cPath}/getTerminalCommodityList`, getMallId({ categoryId: 1 })).then(res => {
-			var list = res.data.list
+			var list = res.data? res.data.list: []
 			list = [
 				{
 					"relateCommodityCount": 1,
