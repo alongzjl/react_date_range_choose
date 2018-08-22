@@ -33,10 +33,10 @@ class ImageUpload extends React.Component {
 		this.addImgModal.show()
 	}
 
-	enter(imgList,attribute) {
-		let cb  = this.props.enter,
-			url = imgList[0].url
-		cb && cb(url, attribute)
+	enter(imgList, attribute) {
+		let { enter, img } = this.props
+		img.img = imgList[0].url
+		enter && enter()
 	}
 
 	changeImgType(val) {

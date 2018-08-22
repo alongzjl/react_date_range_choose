@@ -34,6 +34,7 @@ export default class PictureListBind extends React.Component {
 			{ item } = ipt,
 			{ bind } = data.data.content,
 			imgs = bind? item[bind] || []: []
+		if (getAttr(imgs) === 'String') imgs = []
 		return envType === 'business' && !imgs
 			?
 			false
