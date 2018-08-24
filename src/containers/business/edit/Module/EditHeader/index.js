@@ -54,6 +54,7 @@ class Header extends React.Component {
 			data.components.map(_ => this.formatEle(_))
 		} else if (type === 'layout') {
 			data.layout = cssFormatByTerm(data.layout)
+			data.style = cssFormatByTerm(data.style)
 			data.componentLayout.map(_ => this.formatEle(_))
 		}
 	}
