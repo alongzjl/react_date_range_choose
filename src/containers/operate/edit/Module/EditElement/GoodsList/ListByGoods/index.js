@@ -36,7 +36,7 @@ export default class ListByGoods extends React.Component {
 	render() {
 		let dom = this.renderList()
 		return (
-			<section className={`e-list-by-goods`}>
+			<section className={`e-list-by-goods scrollbar`}>
 				{ dom }
 			</section>
 		)
