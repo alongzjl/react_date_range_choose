@@ -2,6 +2,9 @@
 const extend = require('util')._extend
 
 module.exports = extend(window, {
+	rn(num = 1) {
+		return Math.random() * num >> 0
+	},
 	// 获取真实数据类型
 	getAttr(element) {
 		return Object.prototype.toString.call(element).match(/[A-Z][a-z]*/)[0]

@@ -6,6 +6,15 @@ const formatImage      = formatMap.image
 const formatPxMap2     = formatMap.px2
 const NT = formatMap.numberTemplate
 
+const cdnUrl = 'http://rongyi.b0.upaiyun.com/commodity/text'
+const pics = [
+	'201808271739138841',
+	'201808271739139870',
+	'201808271739140771',
+	'201808271739141416',
+	'201808271739142502'
+]
+
 /* window 扩展方法 */
 const Fetch  = require('public/Fetch')
 const extend = require('util')._extend
@@ -138,49 +147,53 @@ module.exports = extend(window, {
 		list: {
 			goods(num = 1) {
 				return Array.apply(null, { length: num }).map((_, i) => {
-					var m   = Math.floor(1e3 + i * 1.2),
-						m2  = m + Math.floor(i * 1.6)
+					var m   = 1e3 + i * 1.2 >> 0,
+						m2  = m + i * 1.6 >> 0
 					return {
 						id:       i,
 						currentPrice:  `${m}.9`,
 						originalPrice: `${m2}.9`,
-						commodityName: `${i}-拜亚动力/拜雅（Beyerdynamic）Xelento remote 榭兰图 线控版特斯拉旗舰入耳式耳塞`,
-						commodityPicList: [
-							'http://a.vpimg3.com/upload/merchandise/pdcvis/2018/07/04/176/79c5de67-8f8f-4463-a82d-364d3dcd92e5_420x420_90.jpg',
-							'http://a.vpimg3.com/upload/merchandise/pdcvis/2018/07/04/62/bacab0f7-7b39-4631-b6ff-029e65ae5339_420x420_90.jpg',
-							'http://a.vpimg3.com/upload/merchandise/pdcvis/2018/07/04/115/51673b5a-f7ac-47f2-8dc3-ad6f8560631e_420x420_90.jpg'
-						],
-						qrcode: 'http://rongyi.b0.upaiyun.com/commodity/text/201807181419502662.png'
+						commodityName: `商品-${i+1}`,
+						commodityPicList: [`${cdnUrl}/${pics[rn(5)]}.png`],
+						qrcode: `${cdnUrl}/201808271756227480.png`
 					}
 				})
 			},
 			reGoods(num = 1) {
 				return Array.apply(null, { length: num }).map((_, i) => {
-					var m   = Math.floor(1e3 + i * 1.2),
-						m2  = m + Math.floor(i * 1.6)
+					var m   = 1e3 + i * 1.2 >> 0,
+						m2  = m + i * 1.6 >> 0
 					return {
-						id:       i,
+						id: i,
 						currentPrice:  `${m}.9`,
 						originalPrice: `${m2}.9`,
 						name:          `${i}-拜亚动力/拜雅（Beyerdynamic）Xelento remote 榭兰图 线控版特斯拉旗舰入耳式耳塞`,
 						showPicList: [
-							'http://a.vpimg3.com/upload/merchandise/pdcvis/2018/07/04/176/79c5de67-8f8f-4463-a82d-364d3dcd92e5_420x420_90.jpg',
-							'http://a.vpimg3.com/upload/merchandise/pdcvis/2018/07/04/62/bacab0f7-7b39-4631-b6ff-029e65ae5339_420x420_90.jpg',
-							'http://a.vpimg3.com/upload/merchandise/pdcvis/2018/07/04/115/51673b5a-f7ac-47f2-8dc3-ad6f8560631e_420x420_90.jpg'
+							`${cdnUrl}/${pics[rn(5)]}.png`,
+							`${cdnUrl}/${pics[rn(5)]}.png`,
+							`${cdnUrl}/${pics[rn(5)]}.png`
 						],
 						recommendReason: `推荐理由-${i+8}`,
-						qrcode: 'http://rongyi.b0.upaiyun.com/commodity/text/201807181419502662.png'
+						qrcode: `${cdnUrl}/201808271756227480.png`
 					}
 				})
 			},
 			goodsCatg(num = 1) {
+				var catg = ['餐饮', '潮流', '儿童', '美发', '生活'],
+					pics = [
+						'201808271728380089',
+						'201808271728381172',
+						'201808271728382159',
+						'201808271728383194',
+						'201808271728384138'
+					]
 				return Array.apply(null, { length: num }).map((_, i) => {
-					var m   = Math.floor(1e3 + i * 1.2),
-						m2  = m + Math.floor(i * 1.6)
+					var m   = 1e3 + i * 1.2 >> 0,
+						m2  = m + i * 1.6 >> 0
 					return {
 						categoryId:   i,
-						categoryName: `${i}-榭兰图`,
-						url:  'http://rongyi.b0.upaiyun.com/commodity/text/201807191807420161.jpg'
+						categoryName: catg[i],
+						url:  `${cdnUrl}/${pics[i]}.png`
 					}
 				})
 			}
@@ -193,11 +206,11 @@ module.exports = extend(window, {
 					originalPrice: `9799.9`,
 					commodityName: 'TELEFLORA 11朵粉紫玫瑰七夕花束预定当天自提',
 					commodityPicList: [
-						'http://a.vpimg3.com/upload/merchandise/pdcvis/2018/07/04/176/79c5de67-8f8f-4463-a82d-364d3dcd92e5_420x420_90.jpg',
-						'http://a.vpimg3.com/upload/merchandise/pdcvis/2018/07/04/62/bacab0f7-7b39-4631-b6ff-029e65ae5339_420x420_90.jpg',
-						'http://a.vpimg3.com/upload/merchandise/pdcvis/2018/07/04/115/51673b5a-f7ac-47f2-8dc3-ad6f8560631e_420x420_90.jpg'
+						`${cdnUrl}/${pics[rn(5)]}.png`,
+						`${cdnUrl}/${pics[rn(5)]}.png`,
+						`${cdnUrl}/${pics[rn(5)]}.png`
 					],
-					qrcode: 'http://rongyi.b0.upaiyun.com/commodity/text/201807181419502662.png'
+					qrcode: `${cdnUrl}/201808271756227480.png`
 				}
 			},
 			reGoods() {
@@ -205,21 +218,21 @@ module.exports = extend(window, {
 					id: 1,
 					currentPrice:  `9925.0`,
 					originalPrice: `9799.9`,
-					name:          `拜亚动力/拜雅（Beyerdynamic）Xelento remote 榭兰图 线控版特斯拉旗舰入耳式耳塞`,
+					name:          `商品-1`,
 					showPicList: [
-						'http://a.vpimg3.com/upload/merchandise/pdcvis/2018/07/04/176/79c5de67-8f8f-4463-a82d-364d3dcd92e5_420x420_90.jpg',
-						'http://a.vpimg3.com/upload/merchandise/pdcvis/2018/07/04/62/bacab0f7-7b39-4631-b6ff-029e65ae5339_420x420_90.jpg',
-						'http://a.vpimg3.com/upload/merchandise/pdcvis/2018/07/04/115/51673b5a-f7ac-47f2-8dc3-ad6f8560631e_420x420_90.jpg'
+						`${cdnUrl}/${pics[rn(5)]}.png`,
+						`${cdnUrl}/${pics[rn(5)]}.png`,
+						`${cdnUrl}/${pics[rn(5)]}.png`
 					],
 					recommendReason: `推荐理由`,
-					qrcode: 'http://rongyi.b0.upaiyun.com/commodity/text/201807181419502662.png'
+					qrcode: `${cdnUrl}/201808271756227480.png`
 				}
 			},
 			goodsCatg() {
 				return {
 					categoryId:   -1,
 					categoryName: `榭兰图`,
-					url:  'http://rongyi.b0.upaiyun.com/commodity/text/201807191807420161.jpg'
+					url:  `${cdnUrl}/201807191807420161.jpg`
 				}
 			}
 		}

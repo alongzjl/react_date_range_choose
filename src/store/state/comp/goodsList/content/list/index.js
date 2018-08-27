@@ -128,7 +128,7 @@ const gBuy = extendRmSL(deepCopy(p), {
 			height: 40
 		},
 		content: {
-			img: { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201807191930194263.png' }
+			img: { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201808271717186978.png' }
 		}
 	}
 })

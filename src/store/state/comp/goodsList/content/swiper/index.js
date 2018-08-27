@@ -1,9 +1,9 @@
 let { authInit, deepCopy, extendRmSL, styleIdxChange } = require('state/common')
 const p  = authInit(require('state/comp/picture'))
-const pb = authInit(require('state/comp/pictureBind'))
 const t  = authInit(require('state/comp/text'))
 const tb = authInit(require('state/comp/textBind'))
 const sb = authInit(require('state/comp/swiperBind'))
+const qr = authInit(require('state/comp/qrcodeBind'))
 
 const Name = extendRmSL(deepCopy(tb), {
 	data: {
@@ -68,22 +68,16 @@ const Price = extendRmSL(deepCopy(tb), {
 		}
 	}
 })
-const PriceT = extendRmSL(deepCopy(t), {
+const PriceT = extendRmSL(deepCopy(p), {
 	data: {
 		layout: {
-			top:  106,
-			left: 154.5,
-			width:  70,
-			height: 17
-		},
-		style:     {
-			text: {
-				lineHeight: 16,
-				color: { type: 'custom', color: '#da2339' }
-			}
+			top:  108,
+			left: 154,
+			width:  64,
+			height: 12
 		},
 		content: {
-			text: '现场专享价'
+			img: { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201808271801007506.png' }
 		}
 	}
 })
@@ -128,34 +122,23 @@ const OPrice = extendRmSL(deepCopy(tb), {
 		}
 	}
 })
-const QR = extendRmSL(deepCopy(pb), {
+const QR = extendRmSL(deepCopy(qr), {
 	data: {
 		layout: {
 			top:  26.5,
 			left: 274,
 			width:  95,
-			height: 95
+			height: 115
 		},
-		content: {
-			bind: 'qrcode'
-		}
-	}
-})
-const QRT = extendRmSL(deepCopy(t), {
-	data: {
-		layout: {
-			top:  123.5,
-			left: 275,
-			width:  94,
-			height: 14
-		},
-		style:     {
+		style: {
 			text: {
 				lineHeight: 14,
-				color: { type: 'custom', color: '#999' }
+				color: { type: 'custom', color: '#999' },
+				marginTop: 2
 			}
 		},
 		content: {
+			bind: 'qrcode',
 			text: '扫码即可购买'
 		}
 	}
@@ -295,7 +278,7 @@ const data = {
 			opacity: 1
 		}
 	},
-	componentLayout: [ Name, DescT, PIcon, Price, PriceT, OPT, OPrice, QR, QRT, Spr ],
+	componentLayout: [ Name, DescT, PIcon, Price, PriceT, OPT, OPrice, QR, Spr ],
 	content: {
 		swiperOptions: {
 			direction: 'horizontal',
