@@ -14,9 +14,10 @@
 	&>.swiper-wrapper {
 		&>.swiper-slide {
 			position: relative;
-			transition: ~"filter ease .3s, transform ease .3s";
+			// transition: ~"filter ease .3s, transform ease .3s";
+			transition: ~"transform ease .3s";
 			transform: scale3d(0.9,.9,.9);
-			filter: blur(4px);
+			// filter: blur(4px);
 			pointer-events: none;
 			&>.pg-layout-ele {
 				position: absolute;
@@ -26,7 +27,7 @@
 		}
 		&>.swiper-slide-active {
 			transform: scale3d(1,1,1);
-			filter: blur(0);
+			// filter: blur(0);
 			z-index: 1;
 		}
 	}

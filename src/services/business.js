@@ -153,7 +153,7 @@ module.exports = extend(window, {
 						id:       i,
 						currentPrice:  `${m}.9`,
 						originalPrice: `${m2}.9`,
-						commodityName: `TELEFLORA 11朵粉紫玫瑰七夕花束预定当天自提`,
+						commodityName: `TELEFLORA 11朵粉紫玫瑰七夕花束预定`,
 						commodityPicList: [`${cdnUrl}/${pics[rn(5)]}.png`],
 						qrcode: `${cdnUrl}/201808271756227480.png`
 					}
@@ -167,7 +167,7 @@ module.exports = extend(window, {
 						id: i,
 						currentPrice:  `${m}.9`,
 						originalPrice: `${m2}.9`,
-						name:          `TELEFLORA 11朵粉紫玫瑰七夕花束预定当天自提`,
+						name:          `TELEFLORA 11朵粉紫玫瑰七夕花束预定`,
 						showPicList: [
 							`${cdnUrl}/${pics[rn(5)]}.png`,
 							`${cdnUrl}/${pics[rn(5)]}.png`,
@@ -204,7 +204,7 @@ module.exports = extend(window, {
 					id:       1,
 					currentPrice:  `9925.0`,
 					originalPrice: `9799.9`,
-					commodityName: 'TELEFLORA 11朵粉紫玫瑰七夕花束预定当天自提',
+					commodityName: 'TELEFLORA 11朵粉紫玫瑰七夕花束预定',
 					commodityPicList: [
 						`${cdnUrl}/${pics[rn(5)]}.png`,
 						`${cdnUrl}/${pics[rn(5)]}.png`,
