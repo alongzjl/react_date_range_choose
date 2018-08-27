@@ -115,6 +115,7 @@ const OPrice = extendRmSL(deepCopy(tb), {
 				textAlign:  'left',
 				fontSize:   15,
 				lineHeight: 20,
+				textDecoration: 'line-through',
 				color: { type: 'custom', color: '#999' }
 			}
 		},
