@@ -153,7 +153,7 @@ module.exports = extend(window, {
 						id:       i,
 						currentPrice:  `${m}.9`,
 						originalPrice: `${m2}.9`,
-						commodityName: `商品-${i+1}`,
+						commodityName: `TELEFLORA 11朵粉紫玫瑰七夕花束预定当天自提`,
 						commodityPicList: [`${cdnUrl}/${pics[rn(5)]}.png`],
 						qrcode: `${cdnUrl}/201808271756227480.png`
 					}
@@ -167,7 +167,7 @@ module.exports = extend(window, {
 						id: i,
 						currentPrice:  `${m}.9`,
 						originalPrice: `${m2}.9`,
-						name:          `${i}-拜亚动力/拜雅（Beyerdynamic）Xelento remote 榭兰图 线控版特斯拉旗舰入耳式耳塞`,
+						name:          `TELEFLORA 11朵粉紫玫瑰七夕花束预定当天自提`,
 						showPicList: [
 							`${cdnUrl}/${pics[rn(5)]}.png`,
 							`${cdnUrl}/${pics[rn(5)]}.png`,
@@ -231,7 +231,7 @@ module.exports = extend(window, {
 			goodsCatg() {
 				return {
 					categoryId:   -1,
-					categoryName: `榭兰图`,
+					categoryName: `运动`,
 					url:  `${cdnUrl}/201807191807420161.jpg`
 				}
 			}
