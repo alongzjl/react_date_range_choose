@@ -109,6 +109,15 @@ export default class Fetch {
 			}, resolve, reject);
 		});
 	}
+	static postJSON_C(url, config = {}) {
+		return new Promise((resolve, reject) => {
+			Fetch.remote(url, {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify(config)
+			}, resolve, reject);
+		});
+	}
 
 	static createCrop(config = {}) {
 		var host = ENV === 'qa'

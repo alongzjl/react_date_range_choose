@@ -2,6 +2,7 @@ let { authInit, deepCopy, extendRmSL } = require('state/common')
 const pb = authInit(require('state/comp/pictureBind'))
 const t  = authInit(require('state/comp/text'))
 const tb = authInit(require('state/comp/textBind'))
+const qr = authInit(require('state/comp/qrcodeBind'))
 
 const Name = extendRmSL(deepCopy(tb), {
 	data: {
@@ -107,7 +108,7 @@ const OPrice = extendRmSL(deepCopy(tb), {
 		}
 	}
 })
-const QR = extendRmSL(deepCopy(pb), {
+const QR = extendRmSL(deepCopy(qr), {
 	data: {
 		layout: {
 			top:  16,

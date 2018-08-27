@@ -105,5 +105,7 @@ module.exports = {
 	// 标签分类
 	catgByTabs:        authInit(require('./tabs/content/catgByTabs')),
 	// 子元素
-	childElement:      authInit(require('./childElement'))
+	childElement:      authInit(require('./childElement')),
+	// 二维码绑定
+	qrcodeBind:        authInit(require('./qrcodeBind'))
 }

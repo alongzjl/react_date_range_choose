@@ -20,6 +20,7 @@ import PictureBind from 'compEdit/EditElement/PictureBind'
 import TextBind    from 'compEdit/EditElement/TextBind'
 import SwiperBind  from 'compEdit/EditElement/SwiperBind'
 import Area        from 'compEdit/EditElement/Area'
+import QrcodeBind  from 'compEdit/EditElement/QrcodeBind'
 
 const compContent = (name, data, item) => {
 	var props  = { data, item }
@@ -29,7 +30,8 @@ const compContent = (name, data, item) => {
 		pictureBind: <PictureBind {...props} />,
 		textBind:    <TextBind    {...props} />,
 		swiperBind:  <SwiperBind  {...props} />,
-		area:        <Area        {...props} />
+		area:        <Area        {...props} />,
+		qrcodeBind:  <QrcodeBind  {...props} />
 	}
 	return render[name]
 }

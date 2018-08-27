@@ -3,14 +3,25 @@ function getMallId(da = {}) {
 	if (mallId) da.mallId = mallId
 	return da
 }
-var tcPath = '/mcp-gateway/terminalCategory',
-	cPath  = '/mcp-gateway/commodity'
+
+var host = ENV === 'qa' || ENV === 'dev'
+	?
+	'52.internal.rongyi.com'
+	:
+	ENV === 'dist'	// v4
+	?
+	'52.internal.rongyi.com'
+	:
+	'52.internal.rongyi.com'
+
+var tcPath = `//${host}/mcp-gateway/terminalCategory`,
+	cPath  = `//${host}/mcp-gateway/commodity`
+
 module.exports = {
 	// 分类列表
 	getCategoryList(cb) {
-		Ajax.postJSON(`${tcPath}/getTerminalCategoryList`, getMallId()).then(res => {
-			var list = res.data? res.data.list: []
-			list = [
+		Ajax.postJSON_C(`${tcPath}/getTerminalCategoryList`, getMallId()).then(res => {
+			var list = res.data && res.data.list.length? res.data.list: [
 				{
 					"url": "http://dev.hdp.rongyi.com/1213123123/20171025/264c8ea8097b3379f315ae94fd97d374.jpg",
 					"sourceId": 27,
@@ -65,9 +76,8 @@ module.exports = {
 	},
 	// 分类商品列表
 	getGoodsList(categoryId = '', cb) {
-		Ajax.postJSON(`${cPath}/getTerminalCommodityList`, getMallId({ categoryId })).then(res => {
-			var list = res.data? res.data.list: []
-			list = [
+		Ajax.postJSON_C(`${cPath}/getTerminalCommodityList`, getMallId({ categoryId })).then(res => {
+			var list = res.data && res.data.list.length? res.data.list: [
 				{
 					"relateCommodityCount": 1,
 					"relateRfidCount": 1,
@@ -112,9 +122,8 @@ module.exports = {
 	},
 	// 推荐商品列表
 	getRecGoodsList(cb) {
-		Ajax.postJSON(`${cPath}/getTerminalRecommendCommodityList`, getMallId()).then(res => {
-			var list = res.data? res.data.list: []
-			list = [
+		Ajax.postJSON_C(`${cPath}/getTerminalRecommendCommodityList`, getMallId()).then(res => {
+			var list = res.data && res.data.list.length? res.data.list: [
 				{
 					"landingPageUrl": 1,
 					"showPicList": [
@@ -172,9 +181,9 @@ module.exports = {
 	},
 	// 商品详情
 	getGoodsDetails(cb) {
-		Ajax.postJSON(`${cPath}/getTerminalCommodityList`, getMallId({ categoryId: 1 })).then(res => {
-			var list = res.data? res.data.list: []
-			list = [
+		// Ajax.postJSON_C(`${cPath}/getTerminalCommodityList`, getMallId({ categoryId: 1 })).then(res => {
+			// var list = res.data && res.data.list.length? res.data.list: [
+			var list = [
 				{
 					"relateCommodityCount": 1,
 					"relateRfidCount": 1,
@@ -196,6 +205,6 @@ module.exports = {
 				}
 			]
 			cb && cb(list[0])
-		})
+		// })
 	}
 }

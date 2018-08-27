@@ -3,6 +3,7 @@ const t  = authInit(require('state/comp/text'))
 const pb = authInit(require('state/comp/pictureBind'))
 const tb = authInit(require('state/comp/textBind'))
 const sb = authInit(require('state/comp/swiperBind'))
+const qr = authInit(require('state/comp/qrcodeBind'))
 
 const Spr = extendRmSL(deepCopy(sb), {
 	data: {
@@ -122,34 +123,23 @@ const OPrice = extendRmSL(deepCopy(tb), {
 		}
 	}
 })
-const QR = extendRmSL(deepCopy(pb), {
+const QR = extendRmSL(deepCopy(qr), {
 	data: {
 		layout: {
 			top:  99,
 			left: 416,
 			width:  94,
-			height: 94
+			height: 114
 		},
-		content: {
-			bind: 'qrcode'
-		}
-	}
-})
-const QRT = extendRmSL(deepCopy(t), {
-	data: {
-		layout: {
-			top:  194,
-			left: 416,
-			width:  94,
-			height: 14
-		},
-		style:     {
+		style: {
 			text: {
 				lineHeight: 14,
-				color: { type: 'custom', color: '#999' }
+				color: { type: 'custom', color: '#999' },
+				marginTop: 2
 			}
 		},
 		content: {
+			bind: 'qrcode',
 			text: '扫码即可购买'
 		}
 	}
@@ -185,7 +175,7 @@ module.exports = {
 			}
 		}
 	},
-	componentLayout: [ Spr, Name, PIcon, Price, OPT, OPrice, QR, QRT ],
+	componentLayout: [ Spr, Name, PIcon, Price, OPT, OPrice, QR ],
 	content: {},
 	animation: {
 		className: '',		// 动画样式
