@@ -8,7 +8,7 @@
 import React from 'react'
 import './index.less'
 
-export default class PictureBind extends React.Component {
+export default class QrcodeBind extends React.Component {
 	componentWillMount() {}
 
 	componentDidMount() {}
