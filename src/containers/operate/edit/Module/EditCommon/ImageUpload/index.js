@@ -35,8 +35,8 @@ class ImageUpload extends React.Component {
 
 	enter(imgList, attribute) {
 		let { enter, img } = this.props
-		img.img = imgList[0].url
-		enter && enter()
+		let url = img.img = imgList[0].url
+		enter && enter(url, attribute)
 	}
 
 	changeImgType(val) {
