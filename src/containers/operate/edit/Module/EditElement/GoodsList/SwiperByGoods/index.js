@@ -42,7 +42,7 @@ export default class SwiperByGoods extends React.Component {
 				</div>
 			)
 		})
-		return <SwiperElement props={this.props} options={content.swiperOptions} random={parseInt(Math.random() * 1e9)}>{ slide }</SwiperElement>
+		return <SwiperElement props={this.props} options={content.swiperOptions} rebuild={true}>{ slide }</SwiperElement>
 	}
 	render() {
 		let dom = this.renderDom()

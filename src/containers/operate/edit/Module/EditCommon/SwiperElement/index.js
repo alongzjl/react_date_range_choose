@@ -6,12 +6,23 @@ export default class SwiperElement extends React.Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			random: parseInt(Math.random() * 1e9)
+			random: Math.random() * 1e9 >> 0,
+			children: props.children
 		}
 		this.swiper = null
 	}
 
-	componentWillReceiveProps(props) {}
+	componentWillReceiveProps(props) {
+		let { rebuild = false } = props
+		if (!rebuild) return
+		this.setState({ children: [] })
+		setTimeout(() => {
+			if (!this) return
+			this.setState({
+				children: props.children
+			})
+		})
+	}
 
 	componentWillMount() {}
 
@@ -33,7 +44,7 @@ export default class SwiperElement extends React.Component {
 		let { autoplay, delay } = opts
 		if (autoplay) opts.autoplay = { delay, disableOnInteraction: false }
 		// opts.rebuildOnUpdate = true
-		opts.shouldSwiperUpdate = true
+		// opts.shouldSwiperUpdate = true
 		opts.containerClass  = `swiper-element swiper-container customized-container-${random}`
 		opts.on = {
 			slideChange: e => {
@@ -49,9 +60,10 @@ export default class SwiperElement extends React.Component {
 	render() {
 
 		let opts  = this.optsFormat(),
-			{ children, props, options = {} } = this.props,
+			{ props, options = {} } = this.props,
+			{ children } = this.state,
 			{ pagination = false } = options
-		return children
+		return children && children.length
 		?
 		(
 			<div className="swiper-element">
