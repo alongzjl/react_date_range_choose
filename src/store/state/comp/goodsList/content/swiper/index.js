@@ -166,6 +166,7 @@ const DescT = extendRmSL(deepCopy(tb), {
 		},
 		style:     {
 			text: {
+				textAlign:  'left',
 				lineHeight: 12,
 				color: { type: 'custom', color: '#da2339' },
 				padding: {
