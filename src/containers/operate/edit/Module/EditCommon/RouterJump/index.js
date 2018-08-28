@@ -169,15 +169,16 @@ class RouterJump extends React.Component {
 
 	render() {
 		let { data, content, editConfig } = this.props
+		let { url } = content
 		let { pageList } = editConfig
 		let pageGroup  = pageList.group
+		let hasRouter  = false
 		let selectNode = pageGroup.map((gp, i) => {
 			let { name, pages } = gp
-			let pageNode  = pages.map((pg, j) => {
+			let pageNode = pages.map((pg, j) => {
 				let { router, title } = pg
-				return (
-					<Option key={j} value={router}>{ title }</Option>
-				)
+				if (url === router) hasRouter = true
+				return <Option key={j} value={router}>{ title }</Option>
 			})
 			return (
 				<OptGroup key={i} label={name}>
@@ -185,6 +186,7 @@ class RouterJump extends React.Component {
 				</OptGroup>
 			)
 		})
+		if (!hasRouter) content.url = ''
 		let featureNode = (
 			<OptGroup label={'功能'}>
 				<Option value="back">返回</Option>
@@ -195,7 +197,7 @@ class RouterJump extends React.Component {
 		return (
 			<div>
 				<Select
-					value={content.url || ''}
+					value={url || ''}
 					style={{ width: '100%' }}
 					onChange={this.onChange}
 				>

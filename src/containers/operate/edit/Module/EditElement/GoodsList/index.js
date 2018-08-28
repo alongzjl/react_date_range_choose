@@ -54,7 +54,7 @@ export default class GoodsList extends React.Component {
 		let size = ipt.body.size = content.size
 		ipt.list = mock.list.goods(size)
 		ipt.relist = mock.list.reGoods(size)
-		ipt.catg = mock.list.goodsCatg(10)
+		ipt.catg = mock.list.goodsCatg(5)
 	}
 
 	init = () => {

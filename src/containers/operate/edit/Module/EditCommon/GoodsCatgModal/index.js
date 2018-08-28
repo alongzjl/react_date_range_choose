@@ -84,7 +84,7 @@ export default class GoodsCatgModal extends React.Component {
 			pageSize,
 			...cfg
 		}
-		let li = mock.list.goodsCatg(10)
+		let li = mock.list.goodsCatg(5)
 		this.rowSelection.selectedRowKeys = []
 		this.setState({
 			list: li,
