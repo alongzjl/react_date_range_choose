@@ -12,7 +12,7 @@ var host = ENV === 'qa' || ENV === 'dev'
 	?
 	'api.v4.rongyi.com'
 	:
-	'api.rongyi.com'
+	'api.rongyiguang.com'
 
 var tcPath = `//${host}/mcp-gateway/terminalCategory`,
 	cPath  = `//${host}/mcp-gateway/commodity`
