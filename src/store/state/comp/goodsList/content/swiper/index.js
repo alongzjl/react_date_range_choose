@@ -14,7 +14,7 @@ const Name = extendRmSL(deepCopy(tb), {
 			height: 42
 		},
 		content: {
-			bind: 'name'
+			bind: 'commodityName'
 		},
 		style: {
 			text: {
