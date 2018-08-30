@@ -23,7 +23,9 @@ class WonderfulActivity extends React.Component {
  
 
 	render() {
-		let data  = this.props.data; 
+		let { data } = this.props;
+		if (!data.editConfig) data = data.data
+		if (!data.editConfig) return
 		return (  
 			<SwiperSame data={data} /> 
 		)
