@@ -37,12 +37,20 @@ import TextBind          from 'compEdit/EditElement/TextBind'
 import SwiperBind        from 'compEdit/EditElement/SwiperBind'
 import Area              from 'compEdit/EditElement/Area'
 import PictureListBind   from 'compEdit/EditElement/PictureListBind'
-import GoodsBar      from 'compEdit/EditElement/GoodsDetails/GoodsBar'
-import GoodsBlock    from 'compEdit/EditElement/GoodsDetails/GoodsBlock'
-import ChildElement  from 'compEdit/EditElement/ChildElement'
-import SwiperByGoods from 'compEdit/EditElement/GoodsList/SwiperByGoods'
-import CatgByGoods   from 'compEdit/EditElement/GoodsList/CatgByGoods'
-import ResetByGoods  from 'compEdit/EditElement/GoodsList/ResetByGoods'
+import GoodsBar       from 'compEdit/EditElement/GoodsDetails/GoodsBar'
+import GoodsBlock     from 'compEdit/EditElement/GoodsDetails/GoodsBlock'
+import ChildElement   from 'compEdit/EditElement/ChildElement'
+import SwiperByGoods  from 'compEdit/EditElement/GoodsList/SwiperByGoods'
+import CatgByGoods    from 'compEdit/EditElement/GoodsList/CatgByGoods'
+import ResetByGoods   from 'compEdit/EditElement/GoodsList/ResetByGoods'
+import ListByStore2   from 'compEdit/EditElement/StoreList2/List'
+import CatgByStore2   from 'compEdit/EditElement/StoreList2/Catg'
+import ResetByStore2  from 'compEdit/EditElement/StoreList2/Reset'
+import FloorByStore2  from 'compEdit/EditElement/StoreList2/Floor'
+import LetterByStore2 from 'compEdit/EditElement/StoreList2/Letter'
+import PageByStore2   from 'compEdit/EditElement/StoreList2/Page'
+import MapByStore2    from 'compEdit/EditElement/StoreList2/Map'
+import StoreBlock     from 'compEdit/EditElement/StoreDetails2/Block'
 
 
 const compContent = (name, data, parent, editConfig, actions, type, ioInput, ioOuter) => {
@@ -76,7 +84,15 @@ const compContent = (name, data, parent, editConfig, actions, type, ioInput, ioO
 		childElement:      <ChildElement      {...props} />,
 		swiperByGoods:     <SwiperByGoods     {...props} />,
 		catgByGoods:       <CatgByGoods       {...props} />,
-		resetByGoods:      <ResetByGoods      {...props} />
+		resetByGoods:      <ResetByGoods      {...props} />,
+		listByStore2:      <ListByStore2      {...props} />,
+		catgByStore2:      <CatgByStore2      {...props} />,
+		resetByStore2:     <ResetByStore2     {...props} />,
+		floorByStore2:     <FloorByStore2     {...props} />,
+		letterByStore2:    <LetterByStore2    {...props} />,
+		pageByStore2:      <PageByStore2      {...props} />,
+		mapByStore2:       <MapByStore2       {...props} />,
+		storeBlock:        <StoreBlock        {...props} />,
 	}
 	return render[name]
 }

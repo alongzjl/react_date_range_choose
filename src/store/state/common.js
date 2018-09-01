@@ -4,6 +4,9 @@ function handleObj(obj) {
 	}
 }
 const Fn = {
+	rn: (num = 1) => {
+		return Math.random() * num >> 0
+	},
 	authInit: function(da) {
 		da = Fn.deepCopy(da)
 		let { data, feature } = da

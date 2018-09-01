@@ -88,6 +88,7 @@ const data = {
 	},
 	style: {
 		filterFlex: {
+			flexDirection: 'row',
 			flexWrap: 'nowrap'
 		},
 		filterBox: {

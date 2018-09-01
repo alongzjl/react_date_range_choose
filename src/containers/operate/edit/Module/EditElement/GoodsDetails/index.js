@@ -12,6 +12,8 @@ import CustomO from 'compEdit/EditElement/Custom'
 import CustomB from 'compEditB/EditElement/Custom'
 import CustomV from 'view/Element/Custom'
 import * as Server from 'server'
+import * as variable from 'var'
+var mockMap = variable.mockMap.item
 
 let cusMap = {
 	operate:  CustomO,
@@ -77,7 +79,7 @@ export default class GoodsDetails extends React.Component {
 
 	getItem = (ipt) => {
 		let { data } = this.props
-		let item = mock.item.goods()
+		let item = mockMap[data.name] || {}
 		let { feature } = data
 		let { content } = data.data
 		ipt.item = envType !== 'business'? item: {}

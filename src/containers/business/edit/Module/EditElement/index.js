@@ -22,6 +22,8 @@ import Weather           from 'compEdit/EditElement/Weather'
 import StoreList         from 'compEdit/EditElement/StoreList'
 import StoreDetails      from 'compEdit/EditElement/StoreDetails'
 import StoreInstro       from 'compEdit/EditElement/StoreInstro'
+import StoreList2        from 'compEdit/EditElement/StoreList2'
+import StoreDetails2     from 'compEdit/EditElement/StoreDetails2'
 import GoodsList         from 'compEdit/EditElement/GoodsList'
 import DateWeather       from 'compEdit/EditElement/DateWeather'
 import Navigation        from 'compEdit/EditElement/Navigation'
@@ -31,6 +33,7 @@ import Map2D             from 'compEdit/EditElement/Map2D'
 import Html              from 'compEdit/EditElement/Html'
 import GoodsDetails      from 'compEdit/EditElement/GoodsDetails'
 import Area              from 'compEdit/EditElement/Area'
+import Qrcode            from 'compEdit/EditElement/Qrcode'
 
 import RevokeRecovery    from 'compEdit/EditCommon/RevokeRecovery'
 
@@ -67,7 +70,10 @@ const compContent = (name, data, actions, type, idx, csn) => {
 		map2D:             <Map2D             {...props} />,
 		html:              <Html              {...props} />,
 		goodsDetails:      <GoodsDetails      {...props} />,
-		area:              <Area              {...props} />
+		area:              <Area              {...props} />,
+		qrcode:            <Qrcode            {...props} />,
+		storeList2:        <StoreList2        {...props} />,
+		storeDetails2:     <StoreDetails2     {...props} />
 	}
 	return render[name]
 }

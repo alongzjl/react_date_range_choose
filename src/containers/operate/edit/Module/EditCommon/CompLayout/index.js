@@ -37,15 +37,16 @@ const compContent = (name, data, item) => {
 }
 
 import * as variable from 'var'
-var compMap = variable.compMap.name
-var activeMap = variable.childElementActiveMap
+var compMap   = variable.compMap.name,
+	activeMap = variable.childElementActiveMap,
+	mockMap   = variable.mockMap.item
 
 export default class CompLayout extends React.Component {
 	constructor(props) {
 		super(props)
 		this.state = {
 			visible: false,
-			id: `lay_${Math.floor(Math.random()*1e9)}`,
+			id: `lay_${rn(1e9)}`,
 			idx: -1,
 			active: false
 		}
@@ -65,9 +66,9 @@ export default class CompLayout extends React.Component {
 		this.setState({ visible: false })
 	}
 	renderDom = (layout, isActive) => {
-		let { updateComp, list, item } = this.props
-		if (!list && !item) return null
-		let da = list? list[0]: item
+		let { updateComp, props } = this.props,
+			{ name } = props.data
+		let da = mockMap[name] || {}
 		return layout.map((_, i) => {
 			var { name, data } = _,
 				lay = data.layout,
@@ -95,10 +96,10 @@ export default class CompLayout extends React.Component {
 		let { visible, id, idx, active } = this.state
 		let { width = 0, height = 0 } = parentLayout
 		let pLay = {
-			width:  width * 2,
-			height: height * 2
+			width:  width,
+			height: height
 		}
-		let isActive = activeMap[name]
+		let isActive  = activeMap[name]
 		let renderDom = this.renderDom(layout, isActive)
 		let data = idx > -1? layout[idx]: false
 		let css = styleName? cssColorFormat(props, styleName): {}

@@ -121,6 +121,11 @@ module.exports = {
 		flexWrap: { name: '元素换行', type: 'TextAlign', option: [
 			{ name: '不换行', value: 'nowrap' },
 			{ name: '换行', value: 'wrap' }
-		] }
+		] },
+		flexDirection: { name: '元素方向', type: 'TextAlign', option: [
+			{ name: '横向', value: 'row' },
+			{ name: '纵向', value: 'column' }
+		] },
+		textIndent: { name: '缩进', type: 'Number', min: 0, max: 100 }
 	}
 }

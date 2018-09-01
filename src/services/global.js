@@ -17,6 +17,10 @@ module.exports = extend(window, {
 			return false
 		}
 	},
+	// 判断对象是否相等
+	comObject(objA, objB) {
+		return JSON.stringify(objA) === JSON.stringify(objB)
+	},
 	// 深拷贝
 	deepCopy(obj) {
 		try {

@@ -55,6 +55,12 @@ module.exports = {
 		listByStore2:      '店铺列表-列表',
 		catgByStore2:      '店铺分类',
 		storeBlock:        '店铺信息',
+		pageByStore2:      '店铺分页',
+		floorByStore2:     '店铺楼层',
+		letterByStore2:    '店铺字母',
+		resetByStore2:     '店铺重置',
+		mapByStore2:       '店铺导航',
+		qrcode:            '二维码',
 		qrcodeBind:        '二维码绑定'
 	},
 	num: {
@@ -113,6 +119,12 @@ module.exports = {
 		listByStore2:    0,
 		catgByStore2:    0,
 		storeBlock:      0,
-		qrcodeBind:      0
+		pageByStore2:    0,
+		floorByStore2:   0,
+		letterByStore2:  0,
+		resetByStore2:   0,
+		mapByStore2:     0,
+		qrcode:          0,
+		qrcodeBind:      0,
 	}
 }

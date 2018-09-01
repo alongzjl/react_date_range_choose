@@ -11,6 +11,7 @@ import { bindActionCreators } from 'redux'
 import { connect }  from 'react-redux'
 import * as actions from 'actions'
 
+import Color       from 'compEdit/EditCommon/Color'
 import { Checkbox, Collapse, Icon, Input, InputNumber, Radio, Select, Switch } from 'antd'
 const  { TextArea } = Input
 const  { Panel }    = Collapse
@@ -37,22 +38,15 @@ import SwiperByGoods     from './SwiperByGoods'
 
 import * as variable from 'var'
 
-var conMap = variable.contentMap
+var conMap   = variable.contentMap
+var fieldMap = variable.fieldMap
 var plMap  = {
 	catgByGoods:   'filter',
 	listByGoods:   'filter',
 	swiperByGoods: 'filterBox',
 	// resetByGoods:  'filterBox',
-	goodsBar:      'filter'
-}
-var mockMap  = {
-	listByGoods: { type: 'list', name: 'goods', size: 6 },
-	goodsBlock:  { type: 'item', name: 'goods' },
-	goodsBar:    { type: 'item', name: 'goods' },
-	pictureListBind: { type: 'item', name: 'goods' },
-	swiperByGoods:   { type: 'list', name: 'reGoods', size: 6 },
-	catgByGoods:     { type: 'list', name: 'goodsCatg' },
-	resetByGoods:    { type: 'item', name: 'goodsCatg' }
+	goodsBar:      'filter',
+	listByStore2:  'filter',
 }
 
 import './index.less'
@@ -215,6 +209,18 @@ class EditContent extends React.Component {
 			/>
 		)
 	}
+	// 颜色
+	renderColor = (cfg, con, val, key, index) => {
+		let { data } = this.props
+		return (
+			<Color
+				data={data}
+				color={val}
+				action={'updateComp'}
+				placement="bottomLeft"
+			/>
+		)
+	}
 	// 开关
 	renderCheckbox(cfg, con, val, key, index) {
 		return (
@@ -258,8 +264,12 @@ class EditContent extends React.Component {
 	}
 	// 绑定
 	renderBind(cfg, con, val, key, index) {
-		let { data } = this.props
-		let { item, map } = this.createMock(data.name)
+		let { data, editConfig } = this.props
+		let { parentComp } = editConfig.curData
+		if (!parentComp) return
+		let map = fieldMap[parentComp.name]
+		// debugger
+		if (!map) return
 		let opts = Object.keys(map).map((_, i) => {
 			return <Option key={i} value={_}>{map[_]}</Option>
 		})
@@ -328,17 +338,7 @@ class EditContent extends React.Component {
 	}
 
 	createMock(cn, da) {
-		var obj = {},
-			mk  = mockMap[cn]
-		if (!mk) return {}
-		var { type, name, size } = mk
-		// if (type = 'content') {
-		// 	obj.list = da.content[field]
-		// 	obj.map  = mock.map[name]()
-		// } else {
-			obj[type] = mock[type][name](size)
-			obj.map   = mock.map[name]()
-		// }
+		var obj = {}
 		if (da) obj.layout = plMap[cn]? da.style[plMap[cn]]: da.layout
 		return obj
 	}
@@ -389,10 +389,10 @@ class EditContent extends React.Component {
 					?
 					<Collapse defaultActiveKey={['0', '1']}>
 						<Panel header={`编辑布局`} key={0}>
-							<CompLayout list={mockData.list} item={mockData.item} map={mockData.map} props={this.props} layout={compLay} parentLayout={mockData.layout} styleName={plMap[compName]} updateComp={this.updateComp} />
+							<CompLayout props={this.props} layout={compLay} parentLayout={mockData.layout} styleName={plMap[compName]} updateComp={this.updateComp} />
 						</Panel>
 						<Panel header={`子元素`} key={1}>
-							<ChildElement name={compName} layout={compLay} map={mockData.map} updateComp={this.updateComp} />
+							<ChildElement name={compName} layout={compLay} updateComp={this.updateComp} />
 						</Panel>
 					</Collapse>
 					: null

@@ -7,16 +7,17 @@ const data = {
 			textAlign:      'center',
 			fontSize:       12,
 			lineHeight:     18,
-			transform:       { rotate: 0 },
+			transform:      { rotate: 0 },
 			fontStyle:      'normal',
 			fontWeight:     'normal',
 			textDecoration: 'none',
+			textIndent:     0,
 			opacity:        1,
 			textShadow:     {
 				h_shadow:   0,
 				v_shadow:   0,
 				blur_dis:   0,
-				color:      { type: 'custom', color: '#000', alpha: 0 }
+				color:      { type: 'custom', color: 'rgba(0,0,0,0)', rgb: '#000', alpha: 0  }
 			},
 			color:          { type: 'custom', color: '#333' }
 		}

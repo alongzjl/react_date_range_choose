@@ -98,6 +98,7 @@ class StyleManage extends React.Component {
 
 	render() {
 		let { add = true, edit = true, data, list, idx, name, max, editConfig } = this.props
+		let len = list.length
 		let activeKey = Array.from(new Array(2), (_, i) => `${i}`)
 		let curData   = list[idx]
 		let editNode
@@ -146,7 +147,8 @@ class StyleManage extends React.Component {
 				</Panel>
 			)
 		}
-		return (
+		return len > 1
+		? (
 			<Collapse defaultActiveKey={activeKey} onChange={this.cb}>
 				<Panel header={`${name}管理`} key={0}>
 					<ul className="pgs-sl">
@@ -156,7 +158,7 @@ class StyleManage extends React.Component {
 				</Panel>
 				{ editNode }
 			</Collapse>
-		)
+		): null
 	}
 }
 

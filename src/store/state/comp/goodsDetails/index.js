@@ -1,11 +1,5 @@
 let { authInit, deepCopy, extendRmSL, styleIdxChange } = require('state/common')
-const a   = authInit(require('../area'))
-const p   = authInit(require('../picture'))
-const pb  = authInit(require('../pictureBind'))
 const plb = authInit(require('../pictureListBind'))
-const t   = authInit(require('../text'))
-const tb  = authInit(require('../textBind'))
-const sb  = authInit(require('../swiperBind'))
 const gb  = authInit(require('./content/goodsBar'))
 const gbk = authInit(require('./content/goodsBlock'))
 

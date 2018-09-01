@@ -11,7 +11,8 @@ import { bindActionCreators } from 'redux'
 import { connect }  from 'react-redux'
 import * as actions from 'actions'
 
-import { Card, Checkbox, Collapse, Icon, Input, InputNumber, Radio, Select, Switch } from 'antd'
+import Color       from 'compEdit/EditCommon/Color'
+import { Checkbox, Collapse, Icon, Input, InputNumber, Radio, Select, Switch } from 'antd'
 const  { TextArea } = Input
 const  { Panel }    = Collapse
 const Option = Select.Option
@@ -174,6 +175,17 @@ class EditContent extends React.Component {
 				minLength={cfg.min || 0} maxLength={cfg.max || 100}
 				defaultValue={val} onChange={v => this.onChange(v.target.value, key, obj, index)}
 				style={{ width: '100%' }}
+			/>
+		)
+	}
+	// 颜色
+	renderColor = (cfg, data, obj, val, key, index) => {
+		return (
+			<Color
+				data={data}
+				color={val}
+				action={'updateComp'}
+				placement="bottomLeft"
 			/>
 		)
 	}

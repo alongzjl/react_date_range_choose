@@ -21,10 +21,11 @@ const comp  = require('state/comp')
 var compMap = variable.compMap,
 	cmName  = compMap.name,
 	cmNum   = compMap.num,
-	conMap  = variable.contentMap
-var activeMap = variable.childElementActiveMap
+	conMap  = variable.contentMap,
+	fieldMap  = variable.fieldMap,
+	activeMap = variable.childElementActiveMap
 
-var fieldMap = {
+var fMap = {
 	img:  1,
 	text: 1,
 	bind: 1
@@ -84,7 +85,7 @@ export default class ChildElement extends React.Component {
 			num[name] += 1
 			var numN = num[name]
 			var node = Object.keys(content).map((p, j) => {
-				if (!fieldMap[p]) return false
+				if (!fMap[p]) return false
 				let cm     = conMap[p]
 				let val    = content[p]
 				let render = this[`render${cm.type}`]
@@ -150,8 +151,9 @@ export default class ChildElement extends React.Component {
 	// 绑定
 	renderBind(cfg, con, val, key, idx) {
 		let { name, map } = this.props
-		let dataMap = deepCopy(map)
-		if (name === 'swiperByGoods') dataMap.desc = '商品描述'
+		let dataMap = fieldMap[name]
+		// debugger
+		if (!dataMap) return
 		let opts = Object.keys(dataMap).map((_, i) => {
 			return <Option key={i} value={_}>{dataMap[_]}</Option>
 		})
@@ -170,7 +172,7 @@ export default class ChildElement extends React.Component {
 	render() {
 		let { name, layout } = this.props
 		let { key } = this.state
-		let comps = cElement[name]
+		let comps = cElement[name]// || {}
 		let selList = this.selList(comps)
 		let childAdd = (
 			<div className="pgs-row">

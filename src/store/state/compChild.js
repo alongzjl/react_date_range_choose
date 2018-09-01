@@ -24,6 +24,13 @@ module.exports = {
 		instroButton:  1, 
 		instroPicture: 1
 	},
+	storeList2: {
+		listByStore2:   1,
+		catgByStore2:   1
+	},
+	storeDetails2: {
+		storeBlock:   1
+	},
 	dateWeather: {
 		weatherLogo: 1,
 		time:    1,
@@ -39,6 +46,19 @@ module.exports = {
 		goodsBar:    1,
 		goodsBlock:  1,
 		pictureListBind: 1
+	},
+	storeList2: {
+		listByStore2:   1,
+		catgByStore2:   1,
+		pageByStore2:   1,
+		floorByStore2:  1,
+		letterByStore2: 1,
+		resetByStore2:  1,
+		mapByStore2:    1
+	},
+	storeDetails2: {
+		storeBlock: 1,
+		swiperBind: 1
 	},
 	tabs: {
 		catgByTabs:   1,

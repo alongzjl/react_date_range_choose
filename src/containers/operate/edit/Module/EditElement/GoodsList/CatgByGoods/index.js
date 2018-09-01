@@ -30,11 +30,12 @@ export default class CatgByGoods extends React.Component {
 			ioOuter(ioInput)
 		})
 	}
-	renderItem = (item, catg) => {
+	renderItem = (item, catg, idx) => {
 		let { data } = this.props,
 			{ categoryId } = item,
-			{ componentLayout, layout } = data.data
-		let isAV = categoryId === catg,
+			{ componentLayout, layout } = data.data,
+			// isAV = categoryId === catg,
+			isAV = !idx,
 			cl   = []
 		componentLayout.map(_ => {
 			var { active } = _.feature
@@ -53,7 +54,7 @@ export default class CatgByGoods extends React.Component {
 		let { body } = this.props.ioInput,
 			{ list } = this.state
 		return list.map((_, i) => {
-			return <div key={i} onClick={e => this.onChange(e, _)}>{this.renderItem(_, body.catg)}</div>
+			return <div key={i} onClick={e => this.onChange(e, _)}>{this.renderItem(_, body.catg, i)}</div>
 		})
 	}
 	render() {

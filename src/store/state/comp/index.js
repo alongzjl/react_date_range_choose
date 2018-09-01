@@ -83,29 +83,48 @@ module.exports = {
 	textBind:          authInit(require('./textBind')),
 	// 轮播-绑定
 	swiperBind:        authInit(require('./swiperBind')),
+
+	/* 商品 开始 */
 	// 商品列表
 	goodsList:         authInit(require('./goodsList')),
 	// 列表&轮播&分类 (商品)
-	listByGoods:       authInit(require('./goodsList/content/list')),
-	swiperByGoods:     authInit(require('./goodsList/content/swiper')),
-	catgByGoods:       authInit(require('./goodsList/content/catg')),
-	resetByGoods:      authInit(require('./goodsList/content/reset')),
+	listByGoods:       authInit(require('./goodsList/content/list')),		// 列表
+	swiperByGoods:     authInit(require('./goodsList/content/swiper')),		// 轮播
+	catgByGoods:       authInit(require('./goodsList/content/catg')),		// 分类
+	resetByGoods:      authInit(require('./goodsList/content/reset')),		// 重置
 	// 商品详情
 	goodsDetails:      authInit(require('./goodsDetails')),
+	goodsBar:          authInit(require('./goodsDetails/content/goodsBar')),	// 商品条
+	goodsBlock:        authInit(require('./goodsDetails/content/goodsBlock')),	// 商品信息
+	/* 商品 结束 */
+
+	/* 店铺 开始 */
+	// 店铺列表
+	storeList2:        authInit(require('./storeList2')),
+	listByStore2:      authInit(require('./storeList2/content/list')),		// 列表
+	catgByStore2:      authInit(require('./storeList2/content/catg')),		// 分类
+	pageByStore2:      authInit(require('./storeList2/content/page')),		// 分页
+	floorByStore2:     authInit(require('./storeList2/content/floor')),		// 楼层
+	letterByStore2:    authInit(require('./storeList2/content/letter')),	// 字母
+	resetByStore2:     authInit(require('./storeList2/content/reset')),		// 重置
+	mapByStore2:       authInit(require('./storeList2/content/map')),		// 导航
+	// 店铺详情
+	storeDetails2:     authInit(require('./storeDetails2')),
+	storeBlock:        authInit(require('./storeDetails2/content/storeBlock')),	// 信息
+	/* 店铺 结束 */
+
 	// 背景色块
 	area:              authInit(require('./area')),
 	// 图片列表-绑定
 	pictureListBind:   authInit(require('./pictureListBind')),
-	// 商品条
-	goodsBar:          authInit(require('./goodsDetails/content/goodsBar')),
-	// 商品信息
-	goodsBlock:        authInit(require('./goodsDetails/content/goodsBlock')),
 	// 切换标签
 	tabs:              authInit(require('./tabs')),
 	// 标签分类
 	catgByTabs:        authInit(require('./tabs/content/catgByTabs')),
 	// 子元素
 	childElement:      authInit(require('./childElement')),
+	// 二维码
+	qrcode:            authInit(require('./qrcode')),
 	// 二维码绑定
 	qrcodeBind:        authInit(require('./qrcodeBind'))
 }

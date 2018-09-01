@@ -28,7 +28,15 @@ const goodsCatg  = extendRmSL(deepCopy(catg), {
 		}
 	}
 })
-const goodsReset = deepCopy(reset)
+var { componentLayout } = deepCopy(reset).data
+componentLayout[0].feature.active = true
+componentLayout[1].feature.active = true
+delete componentLayout[2].feature.active
+delete componentLayout[3].feature.active
+delete componentLayout[4].feature.active
+const goodsReset = extendRmSL(deepCopy(reset), {
+	data: { componentLayout }
+})
 
 // 推荐商品
 module.exports = {
