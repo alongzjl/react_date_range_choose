@@ -74,7 +74,7 @@ module.exports = {
 				return {
 					...deepCopy(Item.goods),
 					id: i + 1,
-					commodityPicList: Array.apply(null, { length: rn(6)+1 }).map(() => `${cdnUrl}/${pics[rn(5)]}.png`)
+					commodityPicList: Array.apply(null, { length: 3 }).map(() => `${cdnUrl}/${pics[rn(5)]}.png`)
 				}
 			})
 		},
@@ -83,7 +83,7 @@ module.exports = {
 				return {
 					...deepCopy(Item.reGoods),
 					id: i + 1,
-					showPicList: Array.apply(null, { length: rn(6)+1 }).map(_ => `${cdnUrl}/${pics[rn(5)]}.png`)
+					showPicList: Array.apply(null, { length: 3 }).map((p, j) => `${cdnUrl}/${pics[j]}.png`)
 				}
 			})
 		},

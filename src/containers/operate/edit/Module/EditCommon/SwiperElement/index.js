@@ -30,7 +30,7 @@ export default class SwiperElement extends React.Component {
 
 	componentWillUnmount() {}
 
-	optsFormat = e => {
+	optsFormat = len => {
 		let { options = {
 			direction: 'horizontal',
 			effect:  'slide',
@@ -41,10 +41,14 @@ export default class SwiperElement extends React.Component {
 		} } = this.props,
 			{ random }  = this.state,
 			opts = deepCopy(options)
+		delete opts.pagination
+		if (len < 2) {
+			opts.autoplay = false
+			opts.loop = false
+			return opts
+		}
 		let { autoplay, delay } = opts
 		if (autoplay) opts.autoplay = { delay, disableOnInteraction: false }
-		// opts.rebuildOnUpdate = true
-		// opts.shouldSwiperUpdate = true
 		opts.containerClass  = `swiper-element swiper-container customized-container-${random}`
 		opts.on = {
 			slideChange: e => {
@@ -52,18 +56,17 @@ export default class SwiperElement extends React.Component {
 				this.setState({ current: this.swiper.realIndex })
 			}
 		}
-		delete opts.pagination
 		delete opts.delay
 		return opts
 	}
 
 	render() {
-
-		let opts  = this.optsFormat(),
-			{ props, options = {} } = this.props,
+		let { props, options = {} } = this.props,
 			{ children } = this.state,
-			{ pagination = false } = options
-		return children && children.length
+			len = children.length,
+			{ pagination = false } = options,
+			opts  = this.optsFormat(len)
+		return children && len
 		?
 		(
 			<div className="swiper-element">
