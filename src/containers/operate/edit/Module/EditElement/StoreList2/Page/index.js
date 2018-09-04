@@ -7,7 +7,7 @@ import * as Server from 'server'
 
 const numArr = Array.from(new Array(10), (_, i) => { return {name: `${i+1}`}})
 
-export default class LetterByStore2 extends React.Component {
+export default class PageByStore2 extends React.Component {
 	// constructor(props) {
 	// 	super(props)
 	// }

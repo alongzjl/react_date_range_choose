@@ -111,7 +111,7 @@ const data = {
 }
 
 module.exports = {
-	name: 'resetByGoods',
+	name: 'resetByStore2',
 	type: 'layout',
 	// 位置大小
 	data: deepCopy(data),
