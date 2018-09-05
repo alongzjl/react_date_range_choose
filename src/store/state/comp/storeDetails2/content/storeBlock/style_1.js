@@ -99,19 +99,6 @@ const PhoneT = extendRmSL(deepCopy(tb), {
 		}
 	}
 })
-const Go = extendRmSL(deepCopy(p), {
-	data: {
-		layout: {
-			top:  30,
-			left: 467,
-			width:  40,
-			height: 40
-		},
-		content: {
-			img: { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/system/mcp/DEV/app/upload/136c4156-08c9-4d37-8ffc-da00c7b5af7b.png' }
-		}
-	}
-})
 
 // 字母排序
 module.exports = {
@@ -143,7 +130,7 @@ module.exports = {
 			}
 		}
 	},
-	componentLayout: [ Logo, Name, Pos, PosT, Phone, PhoneT, Go ],
+	componentLayout: [ Logo, Name, Pos, PosT, Phone, PhoneT ],
 	content: {},
 	animation: {
 		className: '',		// 动画样式

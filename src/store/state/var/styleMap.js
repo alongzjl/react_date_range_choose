@@ -1,3 +1,10 @@
+const bStyleMap = [
+	{ name: '实线', value: 'solid' },
+	{ name: '双线', value: 'double' },
+	{ name: '虚线', value: 'dashed' },
+	{ name: '点状', value: 'dotted' }
+]
+
 // 高级组件对应添加子组件
 module.exports = {
 	name: {
@@ -30,7 +37,7 @@ module.exports = {
 		height:            { name: '高',      type: 'Number', min: 0, max: 960 },
 		lineHeight:        { name: '行高',    type: 'Number' },
 		fontSize:          { name: '字号',    type: 'Number', min: 6, max: 90, step: 1 },
-		textAlign:         { name: '对齐方式', type: 'TextAlign', option: [
+		textAlign:         { name: '对齐方式', type: 'Radio', option: [
 			{ name: '左', value: 'left' },
 			{ name: '中', value: 'center' },
 			{ name: '右', value: 'right' }
@@ -38,8 +45,7 @@ module.exports = {
 		color:             { name: '字体颜色', type: 'Color' },
 		fontWeight:        { name: '粗细',    type: 'Switch', true: 'bold',      false: 'normal' },
 		fontStyle:         { name: '斜体',    type: 'Switch', true: 'italic',    false: 'normal' },
-		// textDecoration:    { name: '下划线',  type: 'Switch', true: 'underline', false: 'none' },
-		textDecoration:    { name: '文本线条',    type: 'TextAlign', option: [
+		textDecoration:    { name: '文本线条',    type: 'Radio', option: [
 			{ name: '无', value: 'none' },
 			{ name: '下', value: 'underline' },
 			{ name: '中', value: 'line-through' },
@@ -48,7 +54,11 @@ module.exports = {
 		opacity:           { name: '透明度',  type: 'Slider', min: 0, max: 1, step: 0.01 },
 		backgroundImage:   { name: '背景图',  type: 'BGImage' },
 		backgroundColor:   { name: '背景颜色', type: 'Color' },
-		backgroundSize:    { name: '背景样式', type: 'BGSize' },
+		backgroundSize:    { name: '背景样式', type: 'Radio', option: [
+			{ name: '居中', value: 'contain' },
+			{ name: '充满', value: 'cover' },
+			{ name: '拉伸', value: '100% 100%' }
+		] },
 		boxShadow:         { name: '元素阴影', type: 'Complex', child: {
 			h_shadow:   { name: 'X偏移', type: 'Number', max: 20 },
 			v_shadow:   { name: 'Y偏移', type: 'Number', max: 20 },
@@ -82,16 +92,16 @@ module.exports = {
 		} },
 		borderTop:         { name: '上边框', type: 'Complex', child: {
 			width:   { name: '宽度', type: 'Number', max: 40 },
-			style:   { name: '样式', type: 'Solid' },
+			style:   { name: '样式', type: 'Radio', option: bStyleMap },
 			color:   { name: '颜色', type: 'Color' },
 		} },
 		borderLeft:         { name: '左边框', type: 'Complex', child: {
 			width:   { name: '宽度', type: 'Number', max: 40 },
-			style:   { name: '样式', type: 'Solid' },
+			style:   { name: '样式', type: 'Radio', option: bStyleMap },
 			color:   { name: '颜色', type: 'Color' },
 		} },
 		borderWidth:       { name: '边框宽度', type: 'Number' },
-		borderStyle:       { name: '边框样式', type: 'Solid' },
+		borderStyle:       { name: '边框样式', type: 'Radio', option: bStyleMap },
 		borderColor:       { name: '边框颜色', type: 'Color' },
 		margin:            { name: '外边距', type: 'Complex', child: {
 			top:     { name: '上', type: 'Number', min: -300, max: 300 },
@@ -113,16 +123,16 @@ module.exports = {
 		paddingRight:      { name: '内边距右', type: 'Number', max: 300 },
 		paddingBottom:     { name: '内边距下', type: 'Number', max: 300 },
 		paddingLeft:       { name: '内边距左', type: 'Number', max: 300 },
-		justifyContent:    { name: '对齐方式', type: 'TextAlign', option: [
+		justifyContent:    { name: '对齐方式', type: 'Radio', option: [
 			{ name: '左', value: 'flex-start' },
 			{ name: '中', value: 'center' },
 			{ name: '右', value: 'flex-end' }
 		] },
-		flexWrap: { name: '元素换行', type: 'TextAlign', option: [
+		flexWrap: { name: '元素换行', type: 'Radio', option: [
 			{ name: '不换行', value: 'nowrap' },
 			{ name: '换行', value: 'wrap' }
 		] },
-		flexDirection: { name: '元素方向', type: 'TextAlign', option: [
+		flexDirection: { name: '元素方向', type: 'Radio', option: [
 			{ name: '横向', value: 'row' },
 			{ name: '纵向', value: 'column' }
 		] },

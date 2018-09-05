@@ -28,9 +28,6 @@ module.exports = {
 		listByStore2:   1,
 		catgByStore2:   1
 	},
-	storeDetails2: {
-		storeBlock:   1
-	},
 	dateWeather: {
 		weatherLogo: 1,
 		time:    1,
@@ -58,7 +55,8 @@ module.exports = {
 	},
 	storeDetails2: {
 		storeBlock: 1,
-		swiperBind: 1
+		swiperBind: 1,
+		button: 1
 	},
 	tabs: {
 		catgByTabs:   1,

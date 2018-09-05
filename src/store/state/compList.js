@@ -234,6 +234,11 @@ module.exports = [
 					icon: 'carousel',
 					name: '轮播图片',
 					key:  'swiperBind'
+				},
+				{
+					icon: 'button',
+					name: '前往按钮',
+					key:  'button'
 				}
 			]
 		},

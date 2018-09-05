@@ -1,13 +1,30 @@
 let { authInit, deepCopy, extendRmSL, styleIdxChange } = require('state/common')
+const b   = authInit(require('state/comp/button'))
 const sb  = authInit(require('./content/storeBlock'))
 const swb = authInit(require('state/comp/swiperBind'))
 
 /* 店铺详情 */
-const INFO = extendRmSL(styleIdxChange(0, deepCopy(sb)), {
+const INFO = extendRmSL(styleIdxChange(0, deepCopy(sb)))
+
+const Go = extendRmSL(deepCopy(b), {
 	data: {
 		layout: {
-			// top:  0,
-			// left: 0
+			top:  30,
+			left: 467,
+			width:  40,
+			height: 40
+		},
+		content: {
+			text:   '',
+			router: {}
+		},
+		style: {
+			text: {
+				backgroundSize:  'cover',
+				backgroundColor: { type: 'custom', color: 'rgba(0,0,0,0)', rgb: '#000', alpha: 0 },
+				backgroundImage: { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/system/mcp/DEV/app/upload/136c4156-08c9-4d37-8ffc-da00c7b5af7b.png' },
+				borderWidth: 0
+			}
 		}
 	}
 })
@@ -53,7 +70,7 @@ const data = {
 	},
 	// 组件管理
 	components: [
-		INFO, Swiper
+		INFO, Go, Swiper
 	]
 }
 
