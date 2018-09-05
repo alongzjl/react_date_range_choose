@@ -10,9 +10,10 @@ export default class SwiperByGoods extends React.Component {
 		super(props)
 		var s = this.init(props, this.state)
 		this.state = { ...s }
+	}
+	componentWillMount() {
 		this.getData()
 	}
-
 	componentWillReceiveProps(props) {
 		var state = this.state
 		var s = this.init(props, state)
@@ -23,12 +24,12 @@ export default class SwiperByGoods extends React.Component {
 	}
 	componentDidMount() {}
 	componentWillUnmount() {}
+
 	init = (props, state) => {
-		var { ioInput, data } = props,
-			{ relist } = ioInput,
-			{ content, componentLayout, layout } = data.data,
+		var { data } = props.data,
+			{ content, componentLayout, layout } = data,
 			{ swiperOptions } = content,
-			list = envType !== 'business'? deepCopy(relist): []
+			list = state? state.list: []
 		if (!state) return deepCopy({ list, swiperOptions, componentLayout, layout, rebuild: false })
 		return deepCopy({
 			list, swiperOptions, componentLayout, layout,

@@ -1,10 +1,3 @@
-/**
- * @Author: Liao Hui
- * @Date:   2018-04-21T17:21:39+08:00
- * @Last modified by:   Liao Hui
- * @Last modified time: 2018-04-24T13:47:49+08:00
- */
-
 import React from 'react'
 import './index.less'
 
@@ -12,8 +5,6 @@ import CustomO from 'compEdit/EditElement/Custom'
 import CustomB from 'compEditB/EditElement/Custom'
 import CustomV from 'view/Element/Custom'
 import * as Server from 'server'
-import * as variable from 'var'
-var mockMap = variable.mockMap.item
 
 let cusMap = {
 	operate:  CustomO,
@@ -25,7 +16,9 @@ export default class GoodsDetails extends React.Component {
 		super(props)
 		this.init()
 	}
-	componentWillMount() {}
+	componentWillMount() {
+		this.getData()
+	}
 
 	componentDidMount() {
 		let csn = this.props.csn
@@ -40,20 +33,15 @@ export default class GoodsDetails extends React.Component {
 		doc.removeEventListener('scroll', throttle(this._handleScroll, 500, 500))
 	}
 	componentWillReceiveProps() {
-		let { data, csn } = this.props
-		let { ioInput } = this.state
-		let { feature } = data
-		let ipt = deepCopy(feature)
+		let { csn } = this.props
+		let ipt = this.state.ioInput
 		let doc = document.querySelector(`.${csn}`)
 		ipt.scrollTop = doc? doc.scrollTop: 0
-		ipt.item = ioInput.item
-		// this.getItem(ipt)
 		this.state = { ioInput: ipt }
-		// this.ioOuter(ipt)
 	}
 
-	getData = ipt => {
-		if (envType !== 'business') return
+	getData = e => {
+		let ipt = this.state.ioInput
 		Server.goods.getGoodsDetails(o => {
 			ipt.item = o
 			this.setState({ ioInput: ipt })
@@ -78,12 +66,9 @@ export default class GoodsDetails extends React.Component {
 	}
 
 	getItem = (ipt) => {
-		let { data } = this.props
-		let item = mockMap[data.name] || {}
-		let { feature } = data
-		let { content } = data.data
-		ipt.item = envType !== 'business'? item: {}
-		this.getData(ipt)
+		let { feature } = this.props.data
+		ipt.item = {}
+
 		delete feature.item
 		delete feature.map
 	}

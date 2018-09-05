@@ -13,11 +13,27 @@ const data = {
 			textDecoration: 'none',
 			textIndent:     0,
 			opacity:        1,
+			backgroundColor: { type: 'custom', color: 'rgba(0,0,0,0)', rgb: '#000', alpha: 0 },
+			borderRadius:    {
+				topLeft:     0,
+				topRight:    0,
+				bottomRight: 0,
+				bottomLeft:  0
+			},
+			borderWidth:     0,
+			borderStyle:     'solid',
+			borderColor: 	 { type: 'custom', color: '#333' },
+			padding: {
+				top:     0,
+				right:   0,
+				bottom:  0,
+				left:    0,
+			},
 			textShadow:     {
 				h_shadow:   0,
 				v_shadow:   0,
 				blur_dis:   0,
-				color:      { type: 'custom', color: 'rgba(0,0,0,0)', rgb: '#000', alpha: 0  }
+				color:      { type: 'custom', color: 'rgba(0,0,0,0)', rgb: '#000', alpha: 0 }
 			},
 			color:          { type: 'custom', color: '#333' }
 		}

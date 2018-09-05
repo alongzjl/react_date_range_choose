@@ -39,7 +39,7 @@ const compContent = (name, data, item) => {
 import * as variable from 'var'
 var compMap   = variable.compMap.name,
 	activeMap = variable.childElementActiveMap,
-	mockMap   = variable.mockMap.item
+	mockMap   = variable.mock.item
 
 export default class CompLayout extends React.Component {
 	constructor(props) {

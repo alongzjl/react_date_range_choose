@@ -8,26 +8,25 @@ import * as Server from 'server'
 export default class ListByStore2 extends React.Component {
 	constructor(props) {
 		super(props)
-		var { list } = props.ioInput
-		this.state = {
-			list: envType !== 'business'? list: []
-		}
-		this.getData(1)
+		this.state = { list: [] }
+	}
+	componentWillMount() {
+		this.getData()
 	}
 	componentWillReceiveProps(props) {
-		var { catg } = props.ioInput.body,
-			{ id }   = this.state
-		if (catg && catg !== id) this.getData(catg)
+		var { size } = props.ioInput.body,
+			size2 = this.state.size
+		if (size2 != size) this.getData()
 	}
-	getData = id => {
-		if (envType !== 'business') return
-		Server.goods.getGoodsList(id, o => {
-			this.setState({ list: o })
+	getData = e => {
+		var { size } = this.props.ioInput.body
+		Server.store.getList(size, o => {
+			this.setState({ list: o, size: size })
 		})
 	}
 	renderList = e => {
 		let { data, ioInput } = this.props,
-			{ list } = this.state,
+			{ list = [] } = this.state,
 			{ componentLayout, layout } = data.data
 		return list.map((_, i) => {
 			return <Layout key={i} data={_} layout={layout} components={componentLayout} styleObj={cssColorFormat(this.props, 'filter')} />

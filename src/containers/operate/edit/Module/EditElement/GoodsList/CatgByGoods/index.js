@@ -8,26 +8,14 @@ import * as Server from 'server'
 export default class CatgByGoods extends React.Component {
 	constructor(props) {
 		super(props)
-		var { catg } = props.ioInput
-		this.state = {
-			list: envType !== 'business'? catg: []
-		}
+		this.state = { list: [] }
+	}
+	componentWillMount() {
 		this.getData()
 	}
-	onChange = (e, item) => {
-		e.stopPropagation()
-		let { ioInput, ioOuter } = this.props,
-			{ body } = ioInput
-		body.catg = item.categoryId
-		ioOuter(ioInput)
-	}
-	getData = cb => {
-		if (envType !== 'business') return
-		let { ioInput, ioOuter } = this.props
+	getData = e => {
 		Server.goods.getCategoryList(o => {
 			this.setState({ list: o })
-			ioInput.catg = o
-			ioOuter(ioInput)
 		})
 	}
 	renderItem = (item, catg, idx) => {
@@ -54,7 +42,7 @@ export default class CatgByGoods extends React.Component {
 		let { body } = this.props.ioInput,
 			{ list } = this.state
 		return list.map((_, i) => {
-			return <div key={i} onClick={e => this.onChange(e, _)}>{this.renderItem(_, body.catg, i)}</div>
+			return <div key={i}>{this.renderItem(_, body.catg, i)}</div>
 		})
 	}
 	render() {

@@ -8,6 +8,6 @@ module.exports = {
 	animeCompMap:   require('./animeCompMap'),
 	animePageMap:   require('./animePageMap'),
 	fieldMap:       require('./fieldMap'),
-	mockMap:        require('./mockMap'),
+	mock:           require('./mock'),
 	childElementActiveMap: require('./childElementActiveMap'),
 }
