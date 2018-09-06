@@ -7,6 +7,11 @@
 import React from 'react'
 import './index.less'
 
+const typeMap = {
+	String: 1,
+	Number: 1
+}
+
 export default class TextBind extends React.Component {
 	render() {
 		let props = this.props,
@@ -15,8 +20,9 @@ export default class TextBind extends React.Component {
 			{ data } = props,
 			{ item } = ipt,
 			{ bind } = data.data.content,
-			text = bind? item[bind]: '',
+			text = bind? item[bind] || '': '',
 			dom
+		if (!typeMap[getAttr(text)]) text = ''
 
 		if (bind !== 'recommendReason') {
 			dom = <div

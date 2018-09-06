@@ -8,6 +8,8 @@
 import React from 'react'
 import './index.less'
 
+const imgRP = /https?\:\/\/.*?/
+
 export default class QrcodeBind extends React.Component {
 	componentWillMount() {}
 
@@ -24,6 +26,7 @@ export default class QrcodeBind extends React.Component {
 			{ bind, text = '' } = data.data.content,
 			img = bind? item[bind] || '': ''
 		img = getAttr(img) === 'String'? img: getAttr(img) === 'Array'? img[0] || '': compImgFormat(this.props, img)
+		if (!imgRP.test(img)) img = ''
 		return envType === 'business' && !img
 			?
 			false

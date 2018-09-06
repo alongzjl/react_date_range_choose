@@ -38,9 +38,7 @@ export default class SwiperByGoods extends React.Component {
 	}
 
 	getData = cb => {
-		if (envType !== 'business') return
-		let state = this.state,
-			{ list } = state
+		let { list } = this.state
 		Server.goods.getRecGoodsList(o => {
 			if (!comObject(list, o)) {
 				this.setState({ list: o, rebuild: true })

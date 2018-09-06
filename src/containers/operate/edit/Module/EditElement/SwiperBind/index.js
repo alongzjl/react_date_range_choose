@@ -37,6 +37,7 @@ export default class SwiperBind extends React.Component {
 		let { item } = ipt
 		let { bind, swiperOptions } = data.data.content
 		let imgs = bind? item[bind] || []: []
+		if (getAttr(imgs) !== 'Array') imgs = []
 		if (!state) return deepCopy({ imgs, swiperOptions, rebuild: false })
 		return deepCopy({
 			imgs, swiperOptions,
