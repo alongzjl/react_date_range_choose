@@ -17,8 +17,8 @@ export default class Qrcode extends React.Component {
 
 	render() {
 		let { data } = this.props
-		let img = data.data.content.img
-		return envType === 'business' && !img.img
+		let url = data.data.content.url
+		return envType === 'business' && !url
 			?
 			false
 			:

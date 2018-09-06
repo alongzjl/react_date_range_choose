@@ -23,7 +23,7 @@ export default class TextBind extends React.Component {
 			text = bind? item[bind] || '': '',
 			dom
 		if (!typeMap[getAttr(text)]) text = ''
-
+		text += ''
 		if (bind !== 'recommendReason') {
 			dom = <div
 				style={cssColorFormat(this.props, 'text')}

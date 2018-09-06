@@ -172,7 +172,7 @@ export default class ChildElement extends React.Component {
 	render() {
 		let { name, layout } = this.props
 		let { key } = this.state
-		let comps = cElement[name]// || {}
+		let comps = cElement[name] || {}
 		let selList = this.selList(comps)
 		let childAdd = (
 			<div className="pgs-row">

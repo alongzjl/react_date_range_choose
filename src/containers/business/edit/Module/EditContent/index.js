@@ -12,7 +12,7 @@ import { connect }  from 'react-redux'
 import * as actions from 'actions'
 
 import Color       from 'compEdit/EditCommon/Color'
-import { Checkbox, Collapse, Icon, Input, InputNumber, Radio, Select, Switch } from 'antd'
+import { Card, Checkbox, Collapse, Icon, Input, InputNumber, Radio, Select, Switch } from 'antd'
 const  { TextArea } = Input
 const  { Panel }    = Collapse
 const Option = Select.Option
@@ -31,9 +31,10 @@ import SwiperByGoods     from 'compEdit/EditContent/SwiperByGoods'
 
 import * as variable from 'var'
 
-var conMap  = variable.contentMap,
-	compMap = variable.compMap.name,
-	compNum = variable.compMap.num
+var conMap   = variable.contentMap,
+	fieldMap = variable.fieldMap,
+	compMap  = variable.compMap.name,
+	compNum  = variable.compMap.num
 
 import './index.less'
 
@@ -232,9 +233,7 @@ class EditContent extends React.Component {
 	}
 	// 绑定
 	renderBind = (cfg, data, obj, val, key, index) => {
-		debugger
-		let da = this.props.data
-		let { item, map } = this.createMock(data.name)
+		let map = fieldMap[data.name]
 		let opts = Object.keys(map).map((_, i) => {
 			return <Option key={i} value={_}>{map[_]}</Option>
 		})

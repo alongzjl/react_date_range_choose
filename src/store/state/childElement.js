@@ -68,6 +68,10 @@ module.exports = {
 		picture:  1,
 		textBind: 1
 	},
+	resetByStore2: {
+		picture:  1,
+		text:     1
+	},
 	storeBlock: {
 		area:        1,
 		picture:     1,
