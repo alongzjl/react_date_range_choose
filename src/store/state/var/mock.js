@@ -105,19 +105,19 @@ module.exports = {
 				}
 			})
 		},
-		storeCatg(num = 1) {
-			return Array.apply(null, { length: num }).map((_, i) => {
+		storeCatg() {
+			return Array.apply(null, { length: catg.length }).map((_, i) => {
 				return {
 					id:   i + 1,
-					name: catg[rn(catg.length)]
+					name: catg[i]
 				}
 			})
 		},
-		storeFloor(num = 1) {
-			return Array.apply(null, { length: num }).map((_, i) => {
+		storeFloor() {
+			return Array.apply(null, { length: floor.length }).map((_, i) => {
 				return {
 					id:   i + 1,
-					name: floor[rn(floor.length)]
+					name: floor[i]
 				}
 			})
 		},

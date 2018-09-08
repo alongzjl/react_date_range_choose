@@ -10,6 +10,7 @@ import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect }  from 'react-redux'
 import * as actions from 'actions'
+import './index.less'
 
 import Color       from 'compEdit/EditCommon/Color'
 import ImageUpload from 'compEdit/EditCommon/ImageUpload'
@@ -32,7 +33,6 @@ var styleMap = variable.styleMap.name,
 	compNum  = variable.compMap.num,
 	smAuth   = variable.styleMAuth
    
-import './index.less'
 
 class EditStyle extends React.Component {
 	componentWillMount() {}
@@ -88,8 +88,8 @@ class EditStyle extends React.Component {
 			<div>{ childNode }</div>
 		)
 	}
-	// 偏移
-	renderTextAlign(cfg, data, obj, val, key, node) {
+	// 选择框偏移
+	renderRadio(cfg, data, obj, val, key, node) {
 		let option = cfg.option || [
 			{ name: '左', value: 'left' },
 			{ name: '中', value: 'center' },
@@ -99,26 +99,6 @@ class EditStyle extends React.Component {
 			<RadioGroup size="small" onChange={_ => this.onChange(_.target.value, key, obj, node)} value={val}>
 				{ option.map((_, i) => (<RadioButton key={i} value={_.value}>{_.name}</RadioButton>)) }
 			</RadioGroup>
-		)
-	}
-	// 边框样式
-	renderSolid(cfg, data, obj, val, key, node) {
-		return (
-			<RadioGroup size="small" onChange={_ => this.onChange(_.target.value, key, obj, node)} value={val}>
-				<RadioButton value="solid">实线</RadioButton>
-				<RadioButton value="double">双线</RadioButton>
-				<RadioButton value="dashed">虚线</RadioButton>
-				<RadioButton value="dotted">点状</RadioButton> 
-			</RadioGroup> 
-		)
-	}
-	// 边框样式
-	renderBGSize(cfg, data, obj, val, key, node) {
-		return (
-			<RadioGroup size="small" onChange={_ => this.onChange(_.target.value, key, obj, node)} value={val}>
-				<RadioButton value="contain">居中</RadioButton>
-				<RadioButton value="cover">充满</RadioButton>
-			</RadioGroup> 
 		)
 	}
 	// 颜色

@@ -5,7 +5,7 @@ module.exports = ({ host, mockList, mockItem, getMallId }) => {
 		getCategoryList(cb) {
 			// if (envType !== 'business') {
 				var { storeCatg, storeFloor } = mockList
-				cb && cb({floor: storeFloor(10), catg: storeCatg(10) })
+				cb && cb({floor: storeFloor(), catg: storeCatg() })
 			// } else {
 			// 	Ajax.post(`${path}/shopTypeFloorList`, getMallId()).then(res => {
 			// 		var { floorList, typeList } = res.data? res.data: {}
