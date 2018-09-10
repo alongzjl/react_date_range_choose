@@ -116,7 +116,7 @@ config.devServer = {
 
 // Add needed loaders to the defaults here
 config.module.loaders.push({
-	test: /\.(js|jsx)$/,
+	test: /\.jsx?$/,
 	loader: 'react-hot!babel-loader',
 	include: [].concat(
 		config.additionalPaths,
