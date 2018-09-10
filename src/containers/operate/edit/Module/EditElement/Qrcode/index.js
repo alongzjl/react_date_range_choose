@@ -18,14 +18,10 @@ export default class Qrcode extends React.Component {
 	render() {
 		let { data } = this.props
 		let url = data.data.content.url
-		return envType === 'business' && !url
-			?
-			false
-			:
-			(
+		return (
 			<div className="e-qrcode" style={cssColorFormat(this.props, 'image')}>
 				<img src="http://rongyi.b0.upaiyun.com/commodity/text/201808271756227480.png" />
 			</div>
-			)
+		)
 	}
 }

@@ -16,7 +16,7 @@ const { Option } = Select
 
 import PictureList from '../PictureList'
 import VideoList from '../VideoList' 
-import { imageAdaptation } from '../../EditStyle/StyleFilter'
+import StyleFilter from '../../EditStyle/StyleFilter'
  
 import './index.less'
 
@@ -37,7 +37,7 @@ class ImageUploadComp extends React.Component {
 
 	enter(imgList, attribute, index) {
 		let { data, img, name, action, actions, editConfig } = this.props
-		if (envType === 'operate') data = imageAdaptation(data, attribute)
+		if (envType === 'operate') data = StyleFilter.imageAdaptation(data, attribute)
 		let da = data.data
 		let { content }    = da
 		let { curData }    = editConfig
