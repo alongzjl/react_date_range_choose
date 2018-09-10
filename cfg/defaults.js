@@ -44,7 +44,7 @@ function getDefaultModules() {
     return {
         preLoaders: [
             {
-                test: /\.(js|jsx)$/,
+                test: /\.jsx?)$/,
                 include: srcPath,
                 loader: 'eslint-loader'
             }

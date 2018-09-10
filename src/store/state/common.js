@@ -1,6 +1,8 @@
+const fieldFilter = require('./var/contentFieldFilter').operate
+
 function handleObj(obj) {
 	for (var p in obj) {
-		obj[p] = false
+		obj[p] = fieldFilter[p]? true: false
 	}
 }
 const Fn = {

@@ -60,7 +60,9 @@ const data = {
 		width:    540,
 		height:   960
 	},
-	content:   {},
+	content:   {
+		dataSource: 'base'
+	},
 	animation: {
 		className: '',	// 动画样式
 		direction: '',				// 方向

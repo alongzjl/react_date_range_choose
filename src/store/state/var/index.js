@@ -10,4 +10,5 @@ module.exports = {
 	fieldMap:       require('./fieldMap'),
 	mock:           require('./mock'),
 	childElementActiveMap: require('./childElementActiveMap'),
+	contentFieldFilter:    require('./contentFieldFilter'),
 }

@@ -94,6 +94,11 @@ class EditContent extends React.Component {
 		}
 	}
 
+	urlCheck(val) {
+		var RP = /https?\:\/\/[-\w+&@#/%?=~_|!:,.;]+[-\w+&@#/%=~_|]/
+		if (val === '' || RP.test(val)) return ''
+		return 'URL格式不正确'
+	}
 	/* 渲染组件开始 */
 	// 文本
 	renderTextarea(cfg, data, obj, val, key, index) {
@@ -162,11 +167,15 @@ class EditContent extends React.Component {
 	// 网址
 	renderUrl(cfg, data, obj, val, key, index) {
 		return (
-			<Input
-				min={cfg.min || 0} max={cfg.max || 100}
-				defaultValue={val} onBlur={v => this.onChange(v.target.value, key, obj, index)}
-				style={{ width: '100%' }}
-			/>
+			<div>
+				<TextArea
+					min={cfg.min || 0} max={cfg.max || 200}
+					autosize={cfg.autosize || false}
+					defaultValue={val} onBlur={v => this.onChange(v.target.value, key, obj, index)}
+					style={{ width: '100%' }}
+				/>
+				<p style={{ color: 'red', marginTop: 5 }}>{ this.urlCheck(val) }</p>
+			</div>
 		)
 	}
 	// 文本

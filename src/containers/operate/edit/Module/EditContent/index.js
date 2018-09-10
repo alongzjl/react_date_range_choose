@@ -39,7 +39,7 @@ import SwiperByGoods     from './SwiperByGoods'
 import * as variable from 'var'
 
 var conMap   = variable.contentMap
-var fieldMap = variable.fieldMap
+var { fieldMap, contentFieldFilter } = variable
 var plMap  = {
 	catgByGoods:   'filter',
 	listByGoods:   'filter',
@@ -111,6 +111,12 @@ class EditContent extends React.Component {
 			actions.updateComp(null, parentComp? parentComp: data)
 		}   
 		
+	}
+
+	urlCheck(val) {
+		var RP = /https?\:\/\/[-\w+&@#/%?=~_|!:,.;]+[-\w+&@#/%=~_|]/
+		if (val === '' || RP.test(val)) return ''
+		return 'URL格式不正确'
 	}
 	/* 渲染组件开始 */
 	// 文本
@@ -192,11 +198,15 @@ class EditContent extends React.Component {
 	// 网址
 	renderUrl(cfg, con, val, key, index) {
 		return (
-			<Input
-				minLength={cfg.min || 0} maxLength={cfg.max || 100}
-				defaultValue={val} onBlur={v => this.onChange(v.target.value, con, key,cfg, index)}
-				style={{ width: '100%' }}
-			/>
+			<div>
+				<TextArea
+					minLength={cfg.min || 0} maxLength={cfg.max || 100}
+					autosize={cfg.autosize || false}
+					defaultValue={val} onBlur={v => this.onChange(v.target.value, con, key,cfg, index)}
+					style={{ width: '100%' }}
+				/>
+				<p style={{ color: 'red', marginTop: 5 }}>{ this.urlCheck(val) }</p>
+			</div>
 		)
 	}
 	// 文本
@@ -312,7 +322,7 @@ class EditContent extends React.Component {
 		content = filterContent(data,content)
 		let ci = 0
 		let childNode = Object.keys(content).map((p, i) => {
-			if (!conMap[p]) return false
+			if (!conMap[p] || contentFieldFilter[envType][p]) return false
 			let cm     = conMap[p]
 			let val    = content[p]
 			let render = this[`render${cm.type}`]
@@ -325,7 +335,7 @@ class EditContent extends React.Component {
 					<div className="pgsr-name">{ cm.name }</div>
 					<div className="pgsr-ctrl">{ dom }</div>
 					<div className="pgsr-auth">
-						<Checkbox checked={data.auth.content[p]} onChange={_ => this.onChangeAuth(_.target.checked, p)} />
+						<Checkbox checked={data.auth.content[p] || false} onChange={_ => this.onChangeAuth(_.target.checked, p)} />
 					</div>
 					{  
 						data.name !='picture'&&cm.name=='图片'?<div className="delete" onClick={()=>{this.deleteCom(index)}}><Icon type="close-circle" style={{ fontSize: 18}} /></div>:null
