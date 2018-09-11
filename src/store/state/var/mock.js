@@ -43,6 +43,7 @@ var Item = {
 	},
 	store: {
 		id:       1,
+		categories: [{ name: '运动' }],
 		logo:     `${cdnUrl}/201805311433385479.png`,
 		pictures: new Array(5).fill().map(_ => `${cdnSUrl}/${picsS[rn(4)]}.png`),
 		praiseAmount: rn(1e4),

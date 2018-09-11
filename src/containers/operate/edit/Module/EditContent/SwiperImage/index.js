@@ -26,6 +26,8 @@ class SwiperImage extends React.Component {
 
 	addImg() {
 		let props = this.props.data
+		if (!props.editConfig) props = props.data
+		if (!props.editConfig) return
 		let { data, actions, editConfig } = props
 		let { curData }    = editConfig
 		let { content }    = data.data

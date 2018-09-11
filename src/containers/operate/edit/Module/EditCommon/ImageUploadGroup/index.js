@@ -16,14 +16,21 @@ import PictureList from '../PictureList'
 export default class ImageUploadGroup extends React.Component {
 	constructor(props) {
 		super(props)
+		var { width = 0, height = 0 } = props.data.data.layout
 		this.state = {
-			idx: null
+			idx: null,
+			width, height
 		}
 	}
 
 	componentWillMount() {}
 
 	componentDidMount() {}
+
+	componentWillReceiveProps(props) {
+		var { width = 0, height = 0 } = props.data.data.layout
+		this.setState({ width, height })
+	}
 
 	componentWillUnmount() {}
 
@@ -33,6 +40,7 @@ export default class ImageUploadGroup extends React.Component {
 	}
 
 	enter = imgList => {
+		if (!imgList.length) return
 		let { imgs } = this.props,
 			{ idx } = this.state,
 			url = imgList[0].url,

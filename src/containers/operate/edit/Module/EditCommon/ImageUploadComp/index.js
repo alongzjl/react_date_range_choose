@@ -23,11 +23,18 @@ import './index.less'
 class ImageUploadComp extends React.Component {
 	constructor(props) {
 		super(props)
+		var { width = 0, height = 0 } = props.data.data.layout
+		this.state = { width, height }
 	}
 
 	componentWillMount() {}
 
 	componentDidMount() {}
+
+	componentWillReceiveProps(props) {
+		var { width = 0, height = 0 } = props.data.data.layout
+		this.setState({ width, height })
+	}
 
 	componentWillUnmount() {}
 
@@ -36,6 +43,7 @@ class ImageUploadComp extends React.Component {
 	}
 
 	enter(imgList, attribute, index) {
+		if (!imgList.length) return
 		let { data, img, name, action, actions, editConfig } = this.props
 		if (envType === 'operate') data = StyleFilter.imageAdaptation(data, attribute)
 		let da = data.data
@@ -65,12 +73,14 @@ class ImageUploadComp extends React.Component {
 
 	render() {
 		let { img, name, actions, editConfig, index, data } = this.props
+		let { width, height } = this.state
 		let btnNode
 		let imgVal   = img && img.img
 		let videoVal = img && img.video
 		let theme  = editConfig.globalData.theme
 		let colors = JSON.parse(JSON.stringify(theme.list[theme.idx].colors))
 		let selectNode
+		let scaleNode
 		colors.custom = {
 			name:  '自定义',
 			img: imgVal
@@ -120,6 +130,7 @@ class ImageUploadComp extends React.Component {
 				</Option>
 			)
 		})
+
 		selectNode = (
 			<Col span={15}>
 				<Select
@@ -141,6 +152,7 @@ class ImageUploadComp extends React.Component {
 						</div>
 					</div>
 				)
+				scaleNode = <div className="img_scale">{ width * 2 } x { height * 2 }</div>
 			} else {
 				btnNode = (
 					<div className="add_img" onClick={this.showList.bind(this)}>
@@ -154,6 +166,7 @@ class ImageUploadComp extends React.Component {
 				<Row type="flex" align="middle" style={{ width: '100%' }}>
 					<Col span={9}>
 						{ btnNode }
+						{ scaleNode }
 					</Col>
 					{ selectNode }
 				</Row>

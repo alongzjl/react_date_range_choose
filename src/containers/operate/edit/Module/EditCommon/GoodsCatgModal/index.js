@@ -4,8 +4,6 @@ import { Col, Row, Collapse, Button, Icon, Input, message, Modal, Table } from '
 const { TextArea } = Input
 const { Panel } = Collapse
 
-import ImageUpload from 'compEdit/EditCommon/ImageUpload'
-
 const columns = [
 	{
 		title: '商品分类名称',

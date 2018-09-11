@@ -21,11 +21,18 @@ import './index.less'
 class ImageUpload extends React.Component {
 	constructor(props) {
 		super(props)
+		var { width = 0, height = 0 } = props.data.data.layout
+		this.state = { width, height }
 	}
 
 	componentWillMount() {}
 
 	componentDidMount() {}
+
+	componentWillReceiveProps(props) {
+		var { width = 0, height = 0 } = props.data.data.layout
+		this.setState({ width, height })
+	}
 
 	componentWillUnmount() {}
 
@@ -56,7 +63,8 @@ class ImageUpload extends React.Component {
 
 	render() {
 		let { img, actions, editConfig } = this.props
-		let btnNode, selectNode
+		let { width, height } = this.state
+		let btnNode, selectNode, scaleNode
 		let imgVal  = img && img.img
 		let theme   = editConfig.globalData.theme
 		let colors  = deepCopy(theme.list[theme.idx].colors)
@@ -76,6 +84,7 @@ class ImageUpload extends React.Component {
 						</div>
 					</Col>
 				)
+				scaleNode = <div className="img_scale">{ width * 2 } x { height * 2 }</div>
 			} else {
 				btnNode = (
 					<Col span={9}>
@@ -111,6 +120,7 @@ class ImageUpload extends React.Component {
 				<Row type="flex" align="middle" style={{ width: '100%' }}>
 					{ btnNode }
 					{ selectNode }
+					{ scaleNode }
 				</Row>
 				<PictureList
 					ref={com => { this.addImgModal = com }}

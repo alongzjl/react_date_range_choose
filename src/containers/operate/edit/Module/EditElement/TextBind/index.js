@@ -22,7 +22,14 @@ export default class TextBind extends React.Component {
 			{ bind } = data.data.content,
 			text = bind? item[bind] || '': '',
 			dom
-		if (!typeMap[getAttr(text)]) text = ''
+		if (bind === 'categories') {
+			if (text && getAttr(text) === 'Array') {
+				var text1 = text[0]
+				text = text1 && getAttr(text1) === 'Object'? text1.name: ''
+			}
+		} else {
+			if (!typeMap[getAttr(text)]) text = ''
+		}
 		text += ''
 		if (bind !== 'recommendReason') {
 			dom = <div

@@ -94,7 +94,11 @@ export default class CompLayout extends React.Component {
 		let { map, layout, parentLayout = {}, props = {}, updateComp, styleName } = this.props
 		let { name } = props.data
 		let { visible, id, idx, active } = this.state
-		let { width = 0, height = 0 } = parentLayout
+		let { width = 0, height = 0, margin } = parentLayout
+		if (margin) {
+			var { top = 0, right = 0, bottom = 0, left = 0 } = margin
+			width += (right + left)
+		}
 		let pLay = {
 			width:  width,
 			height: height

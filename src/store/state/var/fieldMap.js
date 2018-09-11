@@ -28,7 +28,8 @@ var Map = {
 		pictures:     '店铺图片',
 		praiseAmount: '点赞数',
 		contact:      '联系方式',
-		qrcode:       '二维码'
+		qrcode:       '二维码',
+		categories:   '分类名称'
 	},
 	storeCatg: {
 		name: '店铺类型'

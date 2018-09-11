@@ -90,7 +90,7 @@ export default class ChildElement extends React.Component {
 				let val    = content[p]
 				let render = this[`render${cm.type}`]
 				if (!render) return false
-				let dom = render.bind(this, cm, content, val, p, i)()
+				let dom = render.bind(this, cm, content, val, p, i, _)()
 				return (
 					<div key={j} style={{ display: 'inline-block', width: '86%' }}>
 						{ dom }
@@ -140,9 +140,10 @@ export default class ChildElement extends React.Component {
 		)
 	}
 	// 图片
-	renderImage(cfg, con, val) {
+	renderImage(cfg, con, val, name, idx, data) {
 		return (
 			<ImageUpload
+				data={data}
 				enter={this.update}
 				img={val}
 			/>
