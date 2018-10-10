@@ -97,6 +97,7 @@
     "redux": "^3.6.0",
     "redux-thunk": "^2.1.0",
     "remove": "^0.1.5",
+    "video-react": "^0.13.0",
     "whatwg-fetch": "^2.0.4"
   },
   "license": "ISC"

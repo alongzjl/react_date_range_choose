@@ -88,7 +88,7 @@ class ImageUploadComp extends React.Component {
 		if (name === 'video') {
 			if (videoVal) {
 				btnNode = (
-					<div className="add_img add_video">
+					<div className="add_img add_video" style={{ backgroundImage: `url('${img.preview}')` }}>
 						<div className="shadow">
 							<div className="add_text_change" onClick={this.showList.bind(this)}><Icon type="reload" /></div>
 							<div className="add_text_remove" onClick={this.removeImg.bind(this)}><Icon type="close" /></div>
@@ -114,10 +114,10 @@ class ImageUploadComp extends React.Component {
 						props={this.props}
 						data={this.props}
 						actions={actions}
-						index={0}
+						index={index}
 						type={data.name}
 						enter={this.enter}
-					/>
+					/> 
 				</div>
 			)
 		}
@@ -175,7 +175,6 @@ class ImageUploadComp extends React.Component {
 					props={this.props}
 					data={this.props}
 					actions={actions}
-					index={0}
 					enter={this.enter}
 					index={index}
 				/>

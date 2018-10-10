@@ -34,12 +34,26 @@ class SwiperImage extends React.Component {
 		let { parentComp } = curData
 		content.push({
 			img: { type: 'custom', img: '' },
-			title: `图片${content.length + 1}`,
-			router: {}
+			router: {},
+			type:'image'
 		})
 		actions.updateComp(null, parentComp? parentComp: data)
 	}
-
+	addVideo() {
+		let props = this.props.data
+		if (!props.editConfig) props = props.data
+		if (!props.editConfig) return
+		let { data, actions, editConfig } = props
+		let { curData }    = editConfig
+		let { content }    = data.data
+		let { parentComp } = curData
+		content.push({
+			img: { type: 'custom', video: '' },
+			router: {},
+			type:'video'
+		})
+		actions.updateComp(null, parentComp? parentComp: data)
+	}
 	render() {
 		let props = this.props.data
 		if (!props.editConfig) props = props.data
@@ -59,7 +73,18 @@ class SwiperImage extends React.Component {
 									<Row type="flex" align="middle" style={{ width: '100%' }}>
 										<Col span={9}>
 											<div className="add_img" onClick={this.addImg.bind(this)}>
-												<div className="add_text"><Icon type="plus" /></div>
+												<div className="add_text"><Icon type="picture" /></div>
+											</div>
+										</Col>
+									</Row>
+								</div>
+							</div>
+							<div className="pgsr-ctrl">
+								<div className="pg-img-upload">
+									<Row type="flex" align="middle" style={{ width: '100%' }}>
+										<Col span={9}>
+											<div className="add_img" onClick={this.addVideo.bind(this)}>
+												<div className="add_text"><Icon type="video-camera" /></div>
 											</div>
 										</Col>
 									</Row>

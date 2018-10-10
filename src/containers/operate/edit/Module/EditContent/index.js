@@ -182,6 +182,7 @@ class EditContent extends React.Component {
 				name={`video`}
 				action={'updateComp'}
 				style={{ width: '100%' }}
+				index={index}
 			/>
 		)
 	}
@@ -320,10 +321,10 @@ class EditContent extends React.Component {
 
 	renObj(data, content, index) {
 		content = filterContent(data,content)
-		let ci = 0
+		let ci = 0,showT = content.type == 'image' ? conMap['img'] : conMap['video']
 		let childNode = Object.keys(content).map((p, i) => {
 			if (!conMap[p] || contentFieldFilter[envType][p]) return false
-			let cm     = conMap[p]
+			let cm     = p == 'img' ? showT : conMap[p]
 			let val    = content[p]
 			let render = this[`render${cm.type}`]
 			if (!render) return false
@@ -338,7 +339,7 @@ class EditContent extends React.Component {
 						<Checkbox checked={data.auth.content[p] || false} onChange={_ => this.onChangeAuth(_.target.checked, p)} />
 					</div>
 					{  
-						data.name !='picture'&&cm.name=='图片'?<div className="delete" onClick={()=>{this.deleteCom(index)}}><Icon type="close-circle" style={{ fontSize: 18}} /></div>:null
+						(data.name !='picture'&&cm.name=='图片') || (p == 'img'&&cm.name=='视频') ? <div className="delete" onClick={()=>{this.deleteCom(index)}}><Icon type="close-circle" style={{ fontSize: 18}} /></div>:null
 					} 
 				</div> 
 			)

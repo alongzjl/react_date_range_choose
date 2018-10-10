@@ -3,7 +3,7 @@ let { deepCopy } = require('state/common')
 // 轮播图
 const data = {
 	style:    {
-		text: {
+		/*text: {
 			display:        'none',
 			color:          { type: 'custom', color: '#000' },
 			fontSize:       12,
@@ -11,7 +11,7 @@ const data = {
 			fontWeight:     'normal',
 			textAlign:      'center',
 			textDecoration: 'none'
-		},
+		},*/
 		swiperImage:{
 			borderRadius:    {
 				topLeft:     0,
@@ -68,18 +68,21 @@ const data = {
 	content: [
 		{
 			img: { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201805231506216176.jpg' },
-			title: '图片1',		// 图片标题
-			router: {}			// 路由
+			//title: '图片1',		// 图片标题
+			router: {},			// 路由
+			type:'image'
 		},
 		{
 			img: { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201805231506213816.jpg' },
-			title: '图片2',		// 图片标题
-			router: {}			// 路由
+			//title: '图片2',		// 图片标题
+			router: {},			// 路由
+			type:'image'
 		},
 		{   
 			img: { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201805231506215219.jpg' },
-			title: '图片3',		// 图片标题
-			router: {}			// 路由
+			//title: '图片3',		// 图片标题
+			router: {},			// 路由
+			type:'image'
 		}
 	],
 	animation: {
