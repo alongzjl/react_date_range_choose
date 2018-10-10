@@ -227,8 +227,9 @@ class EditElement extends React.Component {
 				ani       = _.data.animation,
 				aniCls    = '',
 				aniSty    = {},
+				lockAspectRatio = compName == 'picture' ? true :false,
 				compCon   = compContent(compName, _, actions, `Style${styleIdx + 1}`, i, csn, state.keyCtrl)
-
+			
 			if (!compCon) return false
 
 			if (ani.className) {
@@ -257,7 +258,8 @@ class EditElement extends React.Component {
 					position={{
 						x: lay.left,
 						y: lay.top
-					}}
+					}}  
+					lockAspectRatio={lockAspectRatio}
 					onDragStart={e => this.selectComp(e, _, i)}
 					onDragStop={(e, d) => this.dragStop(e, d, _, i)}
 					onResizeStart={e => this.selectComp(e, _, i)}

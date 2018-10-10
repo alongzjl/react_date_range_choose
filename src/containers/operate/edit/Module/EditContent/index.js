@@ -321,7 +321,7 @@ class EditContent extends React.Component {
 
 	renObj(data, content, index) {
 		content = filterContent(data,content)
-		let ci = 0,showT = content.type == 'image' ? conMap['img'] : conMap['video']
+		let ci = 0,showT = content.type == 'video' ? conMap['video'] : conMap['img']
 		let childNode = Object.keys(content).map((p, i) => {
 			if (!conMap[p] || contentFieldFilter[envType][p]) return false
 			let cm     = p == 'img' ? showT : conMap[p]

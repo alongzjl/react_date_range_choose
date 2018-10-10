@@ -24,7 +24,7 @@ class SwiperImage extends React.Component {
 	state = {
 		random: Date.now() + parseInt(Math.random()*1000),
 		realIndex: 0,
-		content:[],
+		content:[{img:''}],
 		delay:1000,
 	    speed:1000,
 	    autoplay:true
@@ -53,6 +53,11 @@ class SwiperImage extends React.Component {
 				title:_.title
 			}
 		});
+		if(contentNew.length <= 1){
+			this.mySwiperImage && this.mySwiperImage.destroy(false);
+			this.setState({content:contentNew})
+			return false
+		}
 		swiperOptions = this.formatObj(swiperOptions);
 		this.setState({ 
 			delay:2000,
@@ -159,8 +164,9 @@ class SwiperImage extends React.Component {
 	};
 	render() {
 		return (
-			<div className="e-SwiperImage">
-				<div className={`swiper-container swiper-container_${this.state.random} outer_box`}>
+			<div className="e-SwiperImage" id="e-SwiperImage">
+				{
+					this.state.content.length > 1 ? <div className={`swiper-container swiper-container_${this.state.random} outer_box`}>
 					<div className="swiper-wrapper">
 						{ 
 			             	this.state.content.map((_,index)=><div className="swiper-slide" key={index} style={cssColorFormat(this.props, 'swiperImage')}>
@@ -175,7 +181,11 @@ class SwiperImage extends React.Component {
 			             </div>)
 			          }  
 					</div>
-				</div> 
+				</div> : ( this.state.content[0].img.indexOf('.mp4') > -1 ? <div className="videoRY"><Player autoPlay src={this.state.content[0].img} loop >
+				                  <BigPlayButton className="videoButton" /> 
+				                  <ControlBar autoHide={true} disableDefaultControls={true} />
+				                </Player><div className="shadow"></div></div> : <img src={this.state.content[0].img} />)
+				} 
 				<PageRY totalPage={this.state.content.length} currentPage={this.state.realIndex} props={this.props}></PageRY>
 			</div>
 		)
@@ -208,7 +218,7 @@ class PageRY extends React.Component {
 		let { totalPage,currentPage,props } = this.props
 		return (
 			<section className="e-page">
-				{ this.renderDom.bind(this, props, totalPage,currentPage)() }
+				{ totalPage > 1 ? this.renderDom.bind(this, props, totalPage,currentPage)() : null }
 			</section>
 		)
 	}
