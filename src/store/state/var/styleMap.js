@@ -35,6 +35,10 @@ module.exports = {
 		left:              { name: '左',      type: 'Number', min: -1000, max: 960 },
 		width:             { name: '宽',      type: 'Number', min: 0, max: 960 },
 		height:            { name: '高',      type: 'Number', min: 0, max: 960 },
+		lockAspectRatio: { name: '拉伸比例', type: 'Radio', option: [
+			{ name: '任意', value: false },
+			{ name: '等比', value: true }
+		] },
 		lineHeight:        { name: '行高',    type: 'Number' },
 		fontSize:          { name: '字号',    type: 'Number', min: 6, max: 90, step: 1 },
 		textAlign:         { name: '对齐方式', type: 'Radio', option: [

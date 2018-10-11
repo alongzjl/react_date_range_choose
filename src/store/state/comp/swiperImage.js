@@ -58,13 +58,14 @@ const data = {
 			backgroundColor: { type: 'main', color: '#a240ec' }
 		}
 	},
-	layout: {
+	layout: { 
 		position: 'absolute',
 		top:      0,
 		left:     0,
 		width:    540,
-		height:   200
-	},
+		height:   304,
+		lockAspectRatio:true
+	}, 
 	content: [
 		{
 			img: { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201805231506216176.jpg' },

@@ -227,7 +227,7 @@ class EditElement extends React.Component {
 				ani       = _.data.animation,
 				aniCls    = '',
 				aniSty    = {},
-				lockAspectRatio = compName == 'picture' ? true :false,
+				lockAspectRatio = layout.lockAspectRatio,
 				compCon   = compContent(compName, _, actions, `Style${styleIdx + 1}`, i, csn, state.keyCtrl)
 			
 			if (!compCon) return false

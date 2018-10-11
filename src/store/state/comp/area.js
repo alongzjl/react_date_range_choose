@@ -20,7 +20,8 @@ const data = {
 		top:      0,
 		left:     0,
 		width:    120,
-		height:   120
+		height:   120,
+		lockAspectRatio:false
 	},
 	content: {},
 	animation: {

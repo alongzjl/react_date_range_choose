@@ -23,7 +23,7 @@ class Picture extends React.Component {
 			false
 			:
 			(
-			<div className="e-picture" style={cssColorFormat(this.props, 'image')}>
+			<div className="e-picture" id="e-picture" style={cssColorFormat(this.props, 'image')}>
 				<img src={compImgFormat(this.props, img)} />
 			</div>
 			)

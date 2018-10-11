@@ -68,7 +68,8 @@ const data = {
 		top:      0,
 		left:     0,
 		width:    540,
-		height:   300
+		height:   300,
+		lockAspectRatio:true
 	},
 	content: {
 		list: [

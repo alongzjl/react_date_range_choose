@@ -173,7 +173,6 @@ class SwiperImage extends React.Component {
 							 {/*<div className="text_show" style={cssColorFormat(this.props, 'text')}>{_.title}</div>*/}
 			             	 {
 				                _.img.indexOf('.mp4') > -1 ? <div className="videoRY"><Player src={_.img} ref={`RYPlayer_${index+1}`} >
-				                  <LoadingSpinner /> 
 				                  <BigPlayButton className="videoButton" /> 
 				                  <ControlBar autoHide={true} disableDefaultControls={true} />
 				                </Player><div className="shadow"></div></div> : <img src={_.img} />

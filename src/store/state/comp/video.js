@@ -13,7 +13,8 @@ const data = {
 		top:      0,
 		left:     0,
 		width:    540,
-		height:   150
+		height:   150,
+		lockAspectRatio:true
 	}, 
 	// 内容管理
 	content: { 
