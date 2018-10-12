@@ -13,9 +13,10 @@ import * as actions from 'actions'
 
 import ColorPicker from 'rc-color-picker'
 import ThemeManage from 'compEdit/EditCommon/ThemeManage'
+import BackMusic from 'compEdit/EditCommon/BackMusic'
 import { Collapse, Icon, Input, Select } from 'antd'
 const Panel  = Collapse.Panel
-const Option = Select.Option
+const Option = Select.Option 
 
 import ImageUploadTheme from 'compEdit/EditCommon/ImageUploadTheme'
 
@@ -229,6 +230,11 @@ class EditTheme extends React.Component {
 						{ childNode }
 					</Panel>
 				</Collapse>
+				<BackMusic
+					data={editConfig.globalData}
+					action={'updateGlobal'}
+					isBusiness={false}
+				/> 
 			</section>
 		)
 	}
