@@ -79,5 +79,6 @@ module.exports = {
 	},
 	// 功能特性
 	feature: {
+		editStatus:true
 	}
 }

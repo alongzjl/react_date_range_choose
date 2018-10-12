@@ -52,8 +52,8 @@ const ctMap  = variable.composeTypeMap
 var animeMap = variable.animeCompMap,
 	aStyle   = animeMap.style
 
-const compContent = (name, data, actions, type, idx, csn, keyCtrl) => {
-	var props  = { data, actions, type, idx, csn, keyCtrl }
+const compContent = (name, data, actions, type, idx, csn, keyCtrl,contentEditable) => {
+	var props  = { data, actions, type, idx, csn, keyCtrl,contentEditable }
 	var render = {
 		picture:           <Picture           {...props} />,
 		web:               <Web               {...props} />,
@@ -191,7 +191,11 @@ class EditElement extends React.Component {
 		s.top  = lay.top  = +d.y
 		actions.updateComp(idx, item)
 	}
-
+	changeEditable = (item, idx) => {
+		let { actions } = this.props
+		item['feature'].editStatus != undefined ? item['feature'].editStatus = true : null
+		actions.updateComp(idx, item)
+	}
 	removeComp(e, idx) {
 		e.stopPropagation()
 		let { actions } = this.props
@@ -212,7 +216,8 @@ class EditElement extends React.Component {
 			theme  = editConfig.globalData.theme,
 			colors = theme.list[theme.idx].colors,
 			color  = data.feature.backgroundColor,
-			type   = color.type
+			type   = color.type,
+			disableDragging = false
 		ct = ctMap[ct]? ct: 'PORTRAIT'
 		if (!colors[type] && type !== 'custom') {
 			color.type = 'custom'
@@ -228,10 +233,11 @@ class EditElement extends React.Component {
 				aniCls    = '',
 				aniSty    = {},
 				lockAspectRatio = layout.lockAspectRatio,
-				compCon   = compContent(compName, _, actions, `Style${styleIdx + 1}`, i, csn, state.keyCtrl)
+				editStatus = _.feature&&_.feature.editStatus;
+			disableDragging = i === compIdx ? editStatus : false
+			let compCon   = compContent(compName, _, actions, `Style${styleIdx + 1}`, i, csn, state.keyCtrl,disableDragging)
 			
 			if (!compCon) return false
-
 			if (ani.className) {
 				let item = aStyle[ani.className]
 				let { direction, delay, iterationCount } = ani
@@ -242,11 +248,9 @@ class EditElement extends React.Component {
 					animationDelay:    `${delay}s`,
 					animationIterationCount: iterationCount
 				}
-			}
-
+			} 
 			let sl  = state[i]
 			let lay = i === compIdx? sl? sl: layout: layout
-			
 			return (
 				<Rnd
 					key={i}
@@ -258,7 +262,8 @@ class EditElement extends React.Component {
 					position={{
 						x: lay.left,
 						y: lay.top
-					}}  
+					}}
+					disableDragging={disableDragging} 
 					lockAspectRatio={lockAspectRatio}
 					onDragStart={e => this.selectComp(e, _, i)}
 					onDragStop={(e, d) => this.dragStop(e, d, _, i)}
@@ -271,10 +276,10 @@ class EditElement extends React.Component {
 						style={aniSty}
 						onClick={e => {this.selectComp(e, _, i);this.selectMulti(e, i)}}
 						onContextMenu={e => this.selectComp(e, _, i)}
+						onDoubleClick={()=>this.changeEditable(_,i)}
 					>{ compCon }</div>
 				</Rnd>
 			)
-						// onClick={e => e.preventDefault();this.selectComp(e, _, i)}
 		})
 		return (
 			<div className={`pg-element-parent e-flex-box pg-element-${ct}`}>
@@ -289,9 +294,9 @@ class EditElement extends React.Component {
 						</div>
 						<div id="pgElementNext" className="pg-element-next"></div>
 					</section>
-				</div>
+				</div> 
 				<ContextMenu />
-				<ShortcutKey keyDown={this.keyDown} keyUp={this.keyUp} />
+				<ShortcutKey keyDown={this.keyDown} keyUp={this.keyUp} disableDragging={disableDragging} />
 				<PostMessage />
 				<RevokeRecovery />
 			</div>
