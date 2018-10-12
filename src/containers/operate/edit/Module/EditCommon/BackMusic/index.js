@@ -21,7 +21,7 @@ class BackMusic extends React.Component {
 		actions[action](data)
 	} 
 	addMusic = () => {
-
+		
 	}
 	removeMusic = () => {
 

@@ -6,6 +6,7 @@
  */
 
 import React from 'react'
+import CommonQuestion from 'compEdit/EditCommon/CommonQuestion' 
 import './index.less'
 import { hashHistory } from 'react-router'
 import { bindActionCreators } from 'redux'
@@ -85,6 +86,14 @@ class Header extends React.Component {
 		}
 		actions.updateGlobal(globalData)
 		console.log(JSON.stringify(multiComp.list))
+	}
+	//预览模板
+	review(){
+
+	}
+	//常见问题
+	question(){
+		this.questionModal.show()
 	}
 	selectTheme() {
 		let { actions, editConfig } = this.props
@@ -208,6 +217,18 @@ class Header extends React.Component {
 
 				<div className="peh-right">
 					<section className="comp-list comp-list-b">
+						<div className="cl-item" onClick={this.question.bind(this)}>
+							<div className="cl-item-icon">
+								<img src={require(`images/icon/theme.png`)}/>
+							</div>
+							常见问题
+						</div>
+						<div className="cl-item" onClick={this.review.bind(this)}>
+							<div className="cl-item-icon">
+								<img src={require(`images/icon/theme.png`)}/>
+							</div>
+							预览
+						</div>
 						<div className="cl-item" onClick={this.selectTheme.bind(this)}>
 							<div className="cl-item-icon">
 								<img src={require(`images/icon/theme.png`)}/>
@@ -228,6 +249,9 @@ class Header extends React.Component {
 						</div>
 					</section>
 				</div>
+				<CommonQuestion
+						ref={com => { this.questionModal = com }}
+					/> 
 			</div>
 		)
 	}
