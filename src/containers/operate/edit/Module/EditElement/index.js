@@ -35,15 +35,14 @@ import Html              from 'compEdit/EditElement/Html'
 import GoodsDetails      from 'compEdit/EditElement/GoodsDetails'
 import Area              from 'compEdit/EditElement/Area'
 import Qrcode            from 'compEdit/EditElement/Qrcode'
-// import Tabs              from 'compEdit/EditElement/Tabs'
 
 import ContextMenu       from 'compEdit/EditCommon/ContextMenu'
 import ShortcutKey       from 'compEdit/EditCommon/ShortcutKey'
 import PostMessage       from 'compEdit/EditCommon/PostMessage'
 import RevokeRecovery    from 'compEdit/EditCommon/RevokeRecovery'
-
+import InductionLine     from 'compEdit/EditElement/InductionLine'
+ 
 import * as actions from 'actions'
-
 import { Icon, message } from 'antd'
 
 import * as variable from 'var'
@@ -89,15 +88,15 @@ import './index.less'
 class EditElement extends React.Component {
 	constructor(props) {
 		super(props)
-		this.state = { keyCtrl: false }
+		this.state = { keyCtrl: false,v:false,h:false,vPosition:{left:0},hPosition:{top:0} }
 	}
-	componentWillMount() {}
-
-	componentDidMount() {}
-
-	componentWillUnmount() {}
-
+	componentDidMount() {
+		
+	}
 	componentWillReceiveProps() {
+		this.stateLayout()
+	}
+	stateLayout = () => {
 		let { data, editConfig } = this.props
 		let { compIdx } = editConfig.curData
 		let state = {}
@@ -105,9 +104,7 @@ class EditElement extends React.Component {
 		if (compIdx < 0 || !eles[compIdx]) return
 		state[compIdx] = eles[compIdx].data.layout
 		this.setState(state)
-		console.log('更新Props')
 	}
-
 	keyDown = (k, e) => {
 		if (k === 'meta' || k === 'control') this.setState({ keyCtrl: true })
 	}
@@ -157,7 +154,7 @@ class EditElement extends React.Component {
 		actions.updateGlobal(globalData)
 		console.log(JSON.stringify(multiComp.list))
 	}
-
+	//scale停止
 	resizeFn(e, ref, delta, pos, item, idx) {
 		e.stopPropagation()
 		let { actions } = this.props
@@ -166,9 +163,10 @@ class EditElement extends React.Component {
 		lay.top    = +pos.y
 		lay.width  = +ref.offsetWidth
 		lay.height = +ref.offsetHeight
+		this.setState({v:false,h:false}) 
 		actions.updateComp(idx, item)
-	}
-
+	} 
+	//scale
 	dragResize(e, ref, delta, pos, item, idx) {
 		var o = {}
 		o[idx] = {
@@ -177,20 +175,45 @@ class EditElement extends React.Component {
 			width:  +ref.offsetWidth,
 			height: +ref.offsetHeight
 		}
+		this.showLine(pos,item,idx,{width:ref.offsetWidth,height:ref.offsetHeight})
 		this.setState(o)
-	}
-	
+	} 
+	//拖拽
+	dragMove(e,param,_,i) {
+		this.showLine(param,_,i)
+	} 
+	//显示提示线
+	showLine = (param,_,i,obj) => {
+		let { data, actions } = this.props,
+			eles   = data.elements || [],
+			bodySty = {width:540,height:960,left:0,top:0},
+			layout = obj ? {..._.data.layout,...obj} : _.data.layout,
+			InductionLineObj = InductionLine(param,eles,layout,i,bodySty);
+		console.log(JSON.stringify(InductionLineObj)) 
+		/*	v= InductionLineObj.v,h=InductionLineObj.h
+		if(v){
+			this.setState({v:true,vPosition:{left:`${v.left}px`,p_left:v.p_left}})
+		}else{
+			this.setState({v:false,vPosition:{p_left:param.x}})
+		} 
+		if(h){
+			this.setState({h:true,hPosition:{top:`${h.top}px`,p_top:h.p_top}})
+		}else{ 
+			this.setState({h:false,hPosition:{p_top:param.y}})
+		}   */
+	}  
+	//拖拽停止
 	dragStop(e, d, item, idx) {
 		e.stopPropagation()
 		// e.preventDefault()
 		let { actions } = this.props
-		let s   = this.state[idx]
 		let lay = item.data.layout
 		if (lay.left === d.x && lay.top  === d.y) return
-		s.left = lay.left = +d.x
-		s.top  = lay.top  = +d.y
+		lay.left = d.x//this.state.vPosition.p_left
+		lay.top  = d.y//this.state.hPosition.p_top
+		this.setState({v:false,h:false})  
 		actions.updateComp(idx, item)
-	}
+	} 
 	changeEditable = (item, idx) => {
 		let { actions } = this.props
 		item['feature'].editStatus != undefined ? item['feature'].editStatus = true : null
@@ -266,6 +289,7 @@ class EditElement extends React.Component {
 					disableDragging={disableDragging} 
 					lockAspectRatio={lockAspectRatio}
 					onDragStart={e => this.selectComp(e, _, i)}
+					onDrag={(e,param) => this.dragMove(e,param,_,i)}
 					onDragStop={(e, d) => this.dragStop(e, d, _, i)}
 					onResizeStart={e => this.selectComp(e, _, i)}
 					onResize={(e, dir, ref, delta, pos) => this.dragResize(e, ref, delta, pos, _, i)}
@@ -292,6 +316,8 @@ class EditElement extends React.Component {
 						<div id="pgElementChild" className="pg-element-child" style={bgStyle}>
 							{ childNode }
 						</div>
+						{state.h ? <div className="inductionLine-h" style={state.hPosition}></div> : null}
+						{state.v ? <div className="inductionLine-v" style={state.vPosition}></div> : null}
 						<div id="pgElementNext" className="pg-element-next"></div>
 					</section>
 				</div> 
