@@ -88,7 +88,7 @@ import './index.less'
 class EditElement extends React.Component {
 	constructor(props) {
 		super(props)
-		this.state = { keyCtrl: false,v:false,h:false,vPosition:{left:0},hPosition:{top:0} }
+		this.state = { keyCtrl: false,v:false,h:false,vPosition:{left:0},hPosition:{top:0},nearPos:false }
 	}
 	componentDidMount() {
 		
@@ -163,7 +163,7 @@ class EditElement extends React.Component {
 		lay.top    = +pos.y
 		lay.width  = +ref.offsetWidth
 		lay.height = +ref.offsetHeight
-		this.setState({v:false,h:false}) 
+		this.setState({v:false,h:false,nearPos:false}) 
 		actions.updateComp(idx, item)
 	} 
 	//scale
@@ -188,10 +188,9 @@ class EditElement extends React.Component {
 			eles   = data.elements || [],
 			bodySty = {width:540,height:960,left:0,top:0},
 			layout = obj ? {..._.data.layout,...obj} : _.data.layout,
-			InductionLineObj = InductionLine(param,eles,layout,i,bodySty);
-		console.log(JSON.stringify(InductionLineObj)) 
-		/*	v= InductionLineObj.v,h=InductionLineObj.h
-		if(v){
+			InductionLineObj = InductionLine(param,eles,layout,i,bodySty,eleKnock),
+			v= InductionLineObj.v,h=InductionLineObj.h,eleKnock = InductionLineObj.eleKnock
+		if(v){ 
 			this.setState({v:true,vPosition:{left:`${v.left}px`,p_left:v.p_left}})
 		}else{
 			this.setState({v:false,vPosition:{p_left:param.x}})
@@ -200,8 +199,13 @@ class EditElement extends React.Component {
 			this.setState({h:true,hPosition:{top:`${h.top}px`,p_top:h.p_top}})
 		}else{ 
 			this.setState({h:false,hPosition:{p_top:param.y}})
-		}   */
-	}  
+		}
+		if(eleKnock){
+			this.setState({nearPos:nearPosSty(eleKnock)})
+		}else{
+			this.setState({nearPos:false})
+		}   
+	}    
 	//拖拽停止
 	dragStop(e, d, item, idx) {
 		e.stopPropagation()
@@ -209,9 +213,9 @@ class EditElement extends React.Component {
 		let { actions } = this.props
 		let lay = item.data.layout
 		if (lay.left === d.x && lay.top  === d.y) return
-		lay.left = d.x//this.state.vPosition.p_left
-		lay.top  = d.y//this.state.hPosition.p_top
-		this.setState({v:false,h:false})  
+		lay.left = this.state.vPosition.p_left
+		lay.top  = this.state.hPosition.p_top
+		this.setState({v:false,h:false,nearPos:false})   
 		actions.updateComp(idx, item)
 	} 
 	changeEditable = (item, idx) => {
@@ -318,6 +322,14 @@ class EditElement extends React.Component {
 						</div>
 						{state.h ? <div className="inductionLine-h" style={state.hPosition}></div> : null}
 						{state.v ? <div className="inductionLine-v" style={state.vPosition}></div> : null}
+						{
+							state.nearPos ? <div>
+								<div className="lineNear_0" style={state.nearPos[0]}></div>
+								<div className="lineNear_1" style={state.nearPos[1]}></div>
+								<div className="lineNear_2" style={state.nearPos[2]}></div>
+								<div className="lineNear_3" style={state.nearPos[3]}></div>
+							</div> : null
+						} 
 						<div id="pgElementNext" className="pg-element-next"></div>
 					</section>
 				</div> 
@@ -343,3 +355,30 @@ export default connect(
 	mapStateToProps,
 	mapDispatchToProps
 )(EditElement)
+
+
+function nearPosSty(layout){
+	let arr = new Array(4);
+	for(let i = 0;i<4;i++){
+		let objSty = {}
+		if(i == 0){
+			objSty.height = layout.height;
+			objSty.left = layout.left;
+			objSty.top = layout.top;
+		}else if(i == 1){
+			objSty.height = layout.height;
+			objSty.left = layout.left + layout.width;
+			objSty.top = layout.top;
+		}else if(i == 2){
+			objSty.width = layout.width;
+			objSty.left = layout.left;
+			objSty.top = layout.top;
+		}else {
+			objSty.width = layout.width;
+			objSty.left = layout.left;
+			objSty.top = layout.top + layout.height;
+		}
+		arr[i] = objSty
+	}
+	return arr 
+}

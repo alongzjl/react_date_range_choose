@@ -1,13 +1,14 @@
 let InductionLine = (param,eles,layout,i,bodySty) => {
 	let lineObj,nearMax=99999,index=-1,eleObj = eles.filter((_,index)=>index != i)
-	let boxLine = boxObj(param,layout,bodySty)
+	let boxLine = boxObj(param,layout,bodySty,false)
 	if(eleObj.length == 0){
 		lineObj = boxLine
 	}else {
+		let thisLayout = {left:param.x,top:param.y,width:layout.width,height:layout.height}
 		for(let i=0;i<eleObj.length;i++){
 			let pos = eleObj[i].data.layout
-			if(detectKnock(pos,layout)){
-				let nearPos = calcDistance(pos,layout)
+			if(detectKnock(pos,thisLayout)){
+				let nearPos = calcDistance(pos,thisLayout)
 				if(nearPos < nearMax){
 					nearMax = nearPos
 					index = i
@@ -18,12 +19,12 @@ let InductionLine = (param,eles,layout,i,bodySty) => {
 	if(nearMax == 99999){ 
 		lineObj = boxLine
 	}else{
-		lineObj = boxObj(param,layout,eleObj[index].data.layout)
-	} 
+		lineObj = boxObj(param,layout,eleObj[index].data.layout,true)
+	}    
 	return lineObj
 }
 
-let boxObj = (param,layout,bodySty) => {
+let boxObj = (param,layout,bodySty,eleKnock) => {
 	let showLine_v = false,showLine_h = false
 	//中边左对齐
 	if(abs(param.x-bodySty.left-bodySty.width/2)){
@@ -88,20 +89,21 @@ let boxObj = (param,layout,bodySty) => {
 	}else{  
 		showLine_h = false
 	} 
-	return {v:showLine_v,h:showLine_h}
+	let eleKnockPos = eleKnock ? bodySty : false
+	return {v:showLine_v,h:showLine_h,eleKnock:eleKnockPos}
 }
 
+// 计算两个块中心点的位置
 function calcDistance(pos1, pos2){
-	// 计算两个块中心点的位置
-	var c1Left = pos1.left + pos1.width / 2;
-	var c1Top = pos1.top + pos1.height / 2;
+	const c1Left = pos1.left + pos1.width / 2;
+	const c1Top = pos1.top + pos1.height / 2;
 	
-	var c2Left = pos2.left + pos2.width / 2;
-	var c2Top = pos2.top + pos2.height / 2;
+	const c2Left = pos2.left + pos2.width / 2;
+	const c2Top = pos2.top + pos2.height / 2;
 	
 	// 利用勾股定理计算两个中心点的距离
-	var a = c2Left - c1Left;
-	var b = c2Top - c1Top;
+	const a = c2Left - c1Left;
+	const b = c2Top - c1Top;
 	
 	return Math.sqrt(a*a + b*b);
 }
@@ -109,22 +111,21 @@ function calcDistance(pos1, pos2){
 // 碰撞检测函数
 function detectKnock(pos1, pos2){
 	// dom1的四条边
-	var l1 = pos1.left;
-	var t1 = pos1.top;
-	var r1 = l1 + pos1.width;
-	var b1 = t1 + pos1.height;
+	const l1 = pos1.left;
+	const t1 = pos1.top;
+	const r1 = l1 + pos1.width;
+	const b1 = t1 + pos1.height;
 	
 	// dom2的四条边
-	var l2 = pos2.left;
-	var t2 = pos2.top;
-	var r2 = l2 + pos2.width;
-	var b2 = t2 + pos2.height;
+	const l2 = pos2.left;
+	const t2 = pos2.top;
+	const r2 = l2 + pos2.width;
+	const b2 = t2 + pos2.height;
 	
 	// 排除所有没碰上的情况
-	if(l1 > r2 || t1 > b2 || r1 < l2 || b1 < t2){
+	if(l1-r2>5 || t1-b2>5 || l2-r1>5 || t2-b1>5){
 		return false;
-	}
-	
+	} 
 	return true
 }
 

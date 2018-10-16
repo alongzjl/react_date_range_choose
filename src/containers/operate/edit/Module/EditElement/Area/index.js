@@ -19,7 +19,7 @@ export default class Area extends React.Component {
 		let { show = true } = this.props
 		return show
 		?
-		<div className="e-picture" style={cssColorFormat(this.props, 'filterBox')}></div>
+		<div className="e-area" style={cssColorFormat(this.props, 'filterBox')}></div>
 		: null
 	}
 }
