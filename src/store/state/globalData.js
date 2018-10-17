@@ -29,7 +29,8 @@ const globalData = {
 	},
 
 	// 全局特征 
-	feature: {
+	feature: { 
+		reviewRouter:'p_1000'
 	}
 }
 

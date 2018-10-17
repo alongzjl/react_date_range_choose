@@ -1,0 +1,94 @@
+/**
+ * @Author: Along
+ * @Date:   2018-05-03
+
+ */
+
+ .e-SwiperImage {
+  width:100%; 
+  height:100%;
+    position: relative;
+  .outer_box {
+    width:100%; 
+    height:100%;
+    position: relative;
+    .text_show {
+      position: absolute;
+      bottom: 0;
+      left:0;
+      width:100%;
+      text-align: center;
+      z-index: 10;
+    }
+    img { 
+      width:100%; 
+      height:100%;
+    }
+  } 
+  .e-page {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    .ep-page {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+    }
+    .s-disabled {
+      pointer-events: none;
+      opacity: .6;
+    }
+    .ep-item {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      i {
+        display: block;
+      }
+    }
+  } 
+  .swiper-container-image {
+      width: 100%;
+      height: 100%;
+      margin: 0 auto;
+      position: relative;
+      overflow: hidden;
+      list-style: none;
+      padding: 0; 
+      z-index: 1;
+    } 
+    .swiper-slide { 
+      text-align: center;
+      overflow: hidden;
+      background: transparent;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    } 
+ }
+ 
+ .video-react {
+  height:100%!important;
+  width:100%!important;
+  padding-top: 0!important
+}
+.video-react-control-bar {
+  display: none!important;
+}
+.videoButton {
+  display: none!important;
+}
+.swiper-slide .videoRY {
+  width:100%;
+  height:100%;
+  position: relative;
+} 
+.videoRY .shadow {
+  position: absolute;
+  width:100%;
+  height:100%;
+  left: 0;
+  top: 0;
+}

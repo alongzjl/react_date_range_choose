@@ -1,0 +1,77 @@
+.e-list-by-store2 {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	.img_no_store {
+		border-radius: 50%;
+	}
+	.boxStores {
+		height:100%;
+		width:100%;
+		/* display: flex;
+		flex-wrap:wrap;  */ 
+	}
+	.ep-item {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		opacity: 0;
+		i {
+			display: block;
+		}
+		img {
+			display: inherit;
+		}
+	}
+	.ep-item-two {
+		height:100%;
+		width:100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		opacity: 0;
+		i {
+			display: block;
+		}
+		img {
+			display: inherit;
+		}
+	}
+	&.Style1 {
+		.ep-item {
+			float:left;
+			display: flex;
+			flex-direction: column;
+			opacity: 0;
+			p {
+				display: flex;
+				margin-bottom: 0;
+				align-items: center;
+			}
+		}
+		.outDom {
+			float:left;
+			display: flex;
+			flex-direction: column;
+			 pointer-events: auto;
+		}
+		.ep-item-two {
+			height:100%;
+			width:100%;
+			flex-direction: column;
+			opacity: 0;
+			p {
+				display: flex;
+				margin-bottom: 0;
+				align-items: center;
+			}
+		}
+		.ani_add {
+			opacity: 1
+		}
+	}
+	.swiper-container {
+		height:100%;
+		width:100%;
+	}
+}

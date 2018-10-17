@@ -1,0 +1,34 @@
+/*
+* @Author: weijie
+* @Date:   2017-09-28 10:49:49
+ * @Last Modified by: lishengpeng
+ * @Last Modified time: 2018-03-26 12:37:34
+*/
+
+.app {
+	height:100%;
+	&>div {
+		height:100%; 
+	}
+}
+.pg-element-parent {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width:  540px; 
+	box-sizing: border-box; 
+	height: 960px;     
+	margin:0 auto;    
+	overflow:hidden;    
+	.pg-element {
+		height:  100%;
+		width:   100%;
+		position: relative;
+		background-color: #fff;
+		.pge-layout { 
+			width:  100%;
+			height: 100%;
+			z-index: 1;
+		}
+	}
+} 

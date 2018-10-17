@@ -52,7 +52,7 @@ const data = {
 	}, 
 	content: {
 		img:    { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201805191128322385.png' },	// 图片url
-		text:   'L2  2489',  
+		text:   'L2  2489',    
 		router: {},	// 路由 
 	},
 	type:'address',

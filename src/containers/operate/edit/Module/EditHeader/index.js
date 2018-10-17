@@ -6,7 +6,8 @@
  */
 
 import React from 'react'
-import CommonQuestion from 'compEdit/EditCommon/CommonQuestion' 
+import CommonQuestion from 'compEdit/EditCommon/CommonQuestion'
+import ReviewTemplate from 'compEdit/EditCommon/ReviewTemplate'  
 import './index.less'
 import { hashHistory } from 'react-router'
 import { bindActionCreators } from 'redux'
@@ -89,7 +90,7 @@ class Header extends React.Component {
 	}
 	//预览模板
 	review(){
-
+		this.reviewModal.show()
 	}
 	//常见问题
 	question(){
@@ -112,7 +113,6 @@ class Header extends React.Component {
 			theme:   gd.theme,
 			feature: gd.feature
 		}
-		// this.setState({ loading: true })
 		let config = {
 			configPC: {
 				// pageContent: dataFormat.save.pageEach(cfg.pageContent),
@@ -120,9 +120,8 @@ class Header extends React.Component {
 				pageList:    cfg.pageList,
 				globalData:  cfg.globalData
 			}
-		}
-		// this.setState({ loading: false })
-		// return false
+		}  
+		console.log(JSON.stringify(cfg.pageContent)) 
 		let da = {
 			adsFlag: adsFlag || 0,
 			config: JSON.stringify(config),
@@ -249,10 +248,12 @@ class Header extends React.Component {
 						</div>
 					</section>
 				</div>
-				<CommonQuestion
-						ref={com => { this.questionModal = com }}
-					/> 
-			</div>
+				<CommonQuestion ref={com => { this.questionModal = com }} /> 
+				<ReviewTemplate 
+					ref={com => { this.reviewModal = com }} 
+					editConfig={this.props.editConfig}
+					actions={this.props.actions} />
+			</div> 
 		)
 	}
 }

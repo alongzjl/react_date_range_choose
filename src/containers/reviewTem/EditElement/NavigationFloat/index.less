@@ -1,0 +1,113 @@
+/**
+ * @Author: Along
+ * @Date:   2018-05-07
+ 
+ */
+
+.e-navigationFloat {
+	height:100%;
+	width:100%;
+	pointer-events: auto!important;
+	.swiper-container {
+		height:100%;
+		width:100%;
+		.swiper-slide {
+			box-sizing: border-box;
+			display: flex;
+			align-items: center; 
+			text-align: center; 
+			justify-content: space-around;
+			.only {  
+				display: flex;
+				align-items: center; 
+				flex-direction: column;
+				 overflow: hidden; 
+				img {
+					width:100%;
+					height:100%;
+				}  
+				p {
+					margin-bottom:0;
+					width:100%; 
+				}
+			} 
+		}
+	}
+	
+	.s-disabled {
+		pointer-events: none;
+		opacity: .6;
+	}
+	.navigation_box {
+		width:100%;
+		height:100%;
+		box-sizing: border-box;
+		display: flex;
+		flex-direction: column;
+		flex-wrap: wrap;
+		align-items: center; 
+		text-align: center; 
+		justify-content: space-around;
+		position: relative;
+		z-index: 1000;
+		.mainTable {
+			pointer-events: auto;
+			position: absolute;
+			top:0;
+			left:50%;
+			img {
+				height:100%;
+				width:100%;
+			}
+			.navAniFour {
+				position: absolute;
+				top:50%;
+				left:50%;
+				width:100%;
+				height:100%;
+				transform:scale(0.01);
+				pointer-events: none;
+			}
+			.scaleBig {
+				pointer-events: auto;
+				animation-name:scaleBigRY !important;
+				animation-duration: 0.3s;
+    			animation-delay: 0s; 
+    			transition-timing-function:ease;
+			}
+			.scaleLitter {
+				pointer-events: none;
+				animation-name:scaleLitterRY !important;
+				animation-duration: 0.3s;
+    			animation-delay: 0s; 
+    			transition-timing-function:ease;
+			}
+		}
+		.only {  
+			display: flex;
+			align-items: center; 
+			flex-direction: column;
+			 overflow: hidden; 
+			img {
+				width:100%;
+				height:100%;
+			}  
+			p {
+				margin-bottom:0;
+				width:100%; 
+			}
+		}
+
+	}
+	.style_2 {
+
+	} 
+}  
+@keyframes scaleBigRY{
+	0%{transform:scale(.01)}
+	100%{transform:scale(1)}
+}
+@keyframes scaleLitterRY{
+	0%{transform:scale(1)}
+	100%{transform:scale(.01)}
+}

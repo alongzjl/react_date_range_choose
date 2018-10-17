@@ -40,15 +40,16 @@ module.exports = {
     // },
     resolve: {
         extensions: ['', '.js', '.jsx'],
-        alias: {
+        alias: { 
             store:      `${defaultSettings.srcPath}/store`,
             state:      `${defaultSettings.srcPath}/store/state`,
             var:        `${defaultSettings.srcPath}/store/state/var`,
             business:   `${defaultSettings.srcPath}/containers/business`,
             operate:    `${defaultSettings.srcPath}/containers/operate`,
             view:       `${defaultSettings.srcPath}/containers/view`,
+            reviewTem:  `${defaultSettings.srcPath}/containers/reviewTem`,
             actions:    `${defaultSettings.srcPath}/store/actions`,
-            components: `${defaultSettings.srcPath}/components`,
+            components: `${defaultSettings.srcPath}/components`, 
             compEdit:   `${defaultSettings.srcPath}/containers/operate/edit/Module`,
             compEditB:  `${defaultSettings.srcPath}/containers/business/edit/Module`,
             public:     `${defaultSettings.srcPath}/public`,
