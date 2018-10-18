@@ -55,9 +55,9 @@ export default class SwiperByGoods extends React.Component {
 		let new_obj = deepCopy(obj);
 		new_obj.on = { 
 			slideChange:()=>{
-				this.mySwiperRecomImage ? this.setState({realIndex:this.mySwiperRecomImage.realIndex})} : null
+				this.mySwiperRecomImage ? this.setState({realIndex:this.mySwiperRecomImage.realIndex}) : null
 			},    
-			tap:()=>{    
+			tap:()=>{     
 				let { data } = this.props; 
 				data = data.data; 
 				const params = this.state.recommendGoods[this.mySwiperRecomImage.realIndex];
