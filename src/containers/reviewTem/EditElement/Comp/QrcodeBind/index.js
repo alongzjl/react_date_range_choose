@@ -19,10 +19,10 @@ export default class QrcodeBind extends React.Component {
 			width = parseInt(layout.width),
 			size = width > height ? height : width;
 			return (
-				item['landingPageUrl'] ? <div className="e-qrcode-bind">
-					<QRCode size={size} value={item['landingPageUrl']} />
+				item['qrcode'] ? <div className="e-qrcode-bind">
+					<QRCode size={size} value={item['qrcode']} />
 					<div className="eq-text" style={cssColorFormat(this.props, 'text')}>{content.text || ''}</div>
 				</div> : null 
-			) 
+			)   
 	}
 }

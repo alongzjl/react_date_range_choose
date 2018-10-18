@@ -19,19 +19,19 @@ export default class SwiperBind extends React.Component {
 	}  
 	componentWillReceiveProps(props) {
 		props.realIndex ? setTimeout(()=> this.init(props,this.state.random),10) : null
-	}  
+	}     
 	init = (props,random) => {
 		let { data } = props;
-		let swiperOptions = data.data.content.swiperOptions;
-		swiperOptions = this.formatObj(swiperOptions);
-		//delete swiperOptions.pagination;
+		let swiperOptions = deepCopy(data.data.content.swiperOptions);
+		swiperOptions = this.formatObj(swiperOptions); 
+		this.destorySwiper();
 		this.initSwiper(swiperOptions,random);   
 	};       
 	 initSwiper = (swiperOptions,random) => {
 	 	this.mySwiperBindImage = new Swiper(`.swiper-container_bind_${random}`, swiperOptions) 
 	};  
-	formatObj = obj => { 
-		let new_obj = obj;
+	formatObj = obj => {  
+		let new_obj = deepCopy(obj);
 		let autoplay = obj['autoplay'];
 		let delay = obj['delay'];
 		if(autoplay){
@@ -44,24 +44,27 @@ export default class SwiperBind extends React.Component {
 			}
 		}
 		return new_obj 
-	};  
-	componentWillUnmount() {
+	}; 
+	destorySwiper = () => {
 		let newS = this.mySwiperBindImage;
 		if(getAttr(newS) == 'String'){
 			newS.destroy();
 		}else if(getAttr(newS) == 'Array'){
 			newS.forEach(item=>{
 				item.destroy();
-			})
+			}) 
 		}
+	}  
+	componentWillUnmount() {
+		this.destorySwiper()
 	}
 	render() {
 		let { data,item,bind,realIndex,type } = this.props,
 		swiperOptions = data.data.content.swiperOptions,
 		imgs = bind&&item[bind]&&getAttr(item[bind])=='Array' ? item[bind]: [],
-		pointer = type=="recom" ? {pointerEvents:'none'} : {},
-		swiperImage = cssColorFormat(this.props, 'swiperImage')
-		return (
+		pointer = type=="recom" ? {} : {pointerEvents:'auto'}, 
+		swiperImage = cssColorFormat(this.props, 'swiperImage') 
+		return ( 
 			<section className="e-swiper-bind" style={{...swiperImage,...pointer}} id="swiperBind">
 				{
 					imgs.length == 1 ? <img src={imgs[0]}  style={swiperImage} /> :

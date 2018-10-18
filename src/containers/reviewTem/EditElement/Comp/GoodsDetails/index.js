@@ -5,7 +5,7 @@
  **/
 import React from 'react'
 import './index.less'
-
+import * as Server from 'server'
 import Custom from '../Custom'
 
 export default class GoodsDetails extends React.Component {
@@ -13,12 +13,12 @@ export default class GoodsDetails extends React.Component {
 		paramsData:{itemDetails:[],mapParams:{},scrollTop:0,refresh:true}
 	}
 	componentWillMount(){
-		let { query } = this.props,
-			{detail} = query,
-			ipt = this.state.paramsData
-		let detailItem = detail ? JSON.parse(detail) : []
-		ipt.itemDetails = detailItem
-		this.setState({paramsData:ipt})
+		let ipt = this.state.paramsData
+		Server.goods.getGoodsDetails(o => {
+			ipt.itemDetails = o
+			this.setState({paramsData:ipt})
+		})
+		 
 	}
 	componentDidMount(){
 		let dom = document.getElementById('goodsScroll')
@@ -27,7 +27,7 @@ export default class GoodsDetails extends React.Component {
 	componentWillUnmount() {
 		let dom = document.getElementById('goodsScroll')
 		dom.removeEventListener('scroll',this.clickFunc)
-	}
+	} 
 	clickFunc = e => {
 		let { data } = this.props,
 			comp = data.data.components;
@@ -42,17 +42,6 @@ export default class GoodsDetails extends React.Component {
 				paramsData:paramsData
 			})
 		}
-	}
-	getItem = () => {
-		let item = {
-			commodityId:        1,
-			currentPrice:    `122.99`,
-			originalPrice: `100.99`,
-			commodityName:     'TELEFLORA 11朵粉紫玫瑰七夕花束预定当天自提',
-			commodityPicList:['http://rongyi.b0.upaiyun.com/commodity/text/201807191807420161.jpg','http://rongyi.b0.upaiyun.com/commodity/text/201807181419502662.png'],
-			landingPageUrl:    'https://www.baidu.com/'
-		}
-		return item
 	}
 	render() {
 		let { data,animate,animateParams,page,top } = this.props

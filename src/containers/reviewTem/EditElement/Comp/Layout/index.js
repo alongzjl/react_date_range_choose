@@ -36,8 +36,8 @@ export default class Layout extends React.Component {
 				case 'text' : compCon = <Text data={_} type={`Style${styleIdx + 1}`} />;break
 				case 'area' : compCon = (<Area data={_} type={`Style${styleIdx + 1}`} />);break
 				case 'pictureBind' :
-					if(contentBind == "qrcode"){
-						_.data.content.url = itemList['qrcodeUrl']
+					if(contentBind == "qrcode"){ 
+						_.data.content.url = itemList['qrcode']
 						compCon = <QrcodeRY data={_} type={'RY_store'} />
 					}else{
 						let imgObj = contentBind == 'commodityPicList'&&itemList[contentBind] ? itemList[contentBind][0] : itemList[contentBind]

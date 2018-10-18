@@ -19,13 +19,69 @@ export default class SwiperByGoods extends React.Component {
 		random: parseInt(Math.random()*10000),
 		realIndex:0
 	}
-	
 	componentDidMount() {
 		Server.goods.getRecGoodsList(o => {
 			this.setState({ recommendGoods: o })
 		})
+		this.init(this.props,this.state.random)
+	}
+	componentWillReceiveProps(props){
+		this.init(props,this.state.random)
+	}   
+	init = (props,random) => {
+		let { data } = props;
+		let swiperOptions = deepCopy(data.data.content.swiperOptions);
+		swiperOptions = this.formatObj(swiperOptions,random);
+		this.destorySwiper();
+		this.initSwiper(swiperOptions,random);   
+	}; 
+	destorySwiper = () => {
+		let newS = this.mySwiperRecomImage;
+		if(getAttr(newS) == 'String'){
+			newS.destroy();
+		}else if(getAttr(newS) == 'Array'){
+			newS.forEach(item=>{
+				item.destroy();
+			}) 
+		}
 	}  
+	componentWillUnmount(){
+		this.destorySwiper();
+	}      
+	 initSwiper = (swiperOptions,random) => {
+	 	this.mySwiperRecomImage = new Swiper(`.swiper-container_recom_${random}`, swiperOptions) 
+	};  
+	formatObj = (obj,random) => { 
+		let new_obj = deepCopy(obj);
+		new_obj.on = { 
+			slideChange:()=>{
+				this.mySwiperRecomImage ? this.setState({realIndex:this.mySwiperRecomImage.realIndex})} : null
+			},    
+			tap:()=>{    
+				let { data } = this.props; 
+				data = data.data; 
+				const params = this.state.recommendGoods[this.mySwiperRecomImage.realIndex];
+				this.toPage(params)
+			} 
+		}  
+		let autoplay = obj['autoplay'];
+		let delay = obj['delay'];
+		if(autoplay){
+			let autoplayDisableOnInteraction = obj['autoplayDisableOnInteraction'];
+			new_obj.autoplay = {disableOnInteraction:false,delay:delay}
+		}   
+		//new_obj.watchSlidesProgress = true;
+		new_obj.observer = true;//修改swiper自己或子元素时，自动初始化swiper 
+		new_obj.observeParents = true;//修改swiper的父元素时，自动初始化swiper 
+		return new_obj 
+	}; 
 	 
+	toPage = item => {
+		const { animate, animateParams,action,data } = this.props,
+			router = data.data.content.router ? data.data.content.router.url : '',
+			dataStr = checkToJump(item,router,item.commodityId,203);
+			JumpRouter(dataStr,animate,animateParams,action);
+	}  
 	render() { 
 		let props = this.props;
 		let { data } = props;
