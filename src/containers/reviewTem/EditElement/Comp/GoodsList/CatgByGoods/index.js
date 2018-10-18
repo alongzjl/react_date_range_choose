@@ -8,49 +8,18 @@ import React from 'react'
 import Layout from '../../Layout'
 import JumpRouter from '../../../JumpRouter'
 import checkToJump from '../../../checkToJump'
-import {postJSON} from '../../Common/RYAjax'
 import './index.less' 
+import * as Server from 'server'
 
 export default class CatgByStore extends React.Component {
-	state = {
+	state={
 		catgs:[]
 	}
 	componentDidMount(){
-		let catgUrl = configData.RYPostUrl.api + '/mcp-gateway/terminalCategory/getTerminalCategoryList';
-		this.showData(catgUrl);
-		this.setIntervalTimerCatgs(catgUrl);
-	} 
-	//显示数据
-	showData = catgUrl => { 
-		let local = localStorage.getItem('RYCatgsList');
-		local ? this.getCatgs() : this.postCatgs(catgUrl);
-	} 
-	//读取在线数据
-	postCatgs = catgUrl => {
-		RY_interent ? postJSON(catgUrl,{mallId:configData.mallId,currentPage:1,pageSize:100}).then(res=>{
-			if(res.msg == 'success'){
-				localStorage.setItem("RYCatgsList",JSON.stringify(res.data.data.list));
-				this.setState({catgs:res.data.data.list}) 
-			}
-		}) : null
-	} 
-	//定时更新
-	setIntervalTimerCatgs = catgUrl => {
-		RY_interent ? postJSON(catgUrl,{mallId:configData.mallId,currentPage:1,pageSize:100}).then(res=>{
-			if(res.msg == 'success'){
-				localStorage.setItem("RYCatgsList",JSON.stringify(res.data.data.list));
-			}
-		}) : null
-		this.timerCatgs = setInterval(()=>{
-			this.postCatgs(catgUrl);
-		},1000*parseInt(configData.RYPostUrl.getTime))
+		Server.goods.getCategoryList(o => {
+			this.setState({ catgs: o })
+		})
 	}
-	//获取本地数据
-	getCatgs = () => {
-		let local = localStorage.getItem('RYCatgsList');
-		let catgShopsList = JSON.parse(local);
-		this.setState({catgs:catgShopsList});
-	} 
 	//筛选分类
 	toLists = categoryId => {
 		const {ioOuter,action,data,have_goods,animate,animateParams } = this.props,
@@ -59,17 +28,15 @@ export default class CatgByStore extends React.Component {
 		have_goods ? ioOuter(categoryId) : null;
 		let dataStr = checkToJump(typeTo,router,categoryId,203);
 		JumpRouter(dataStr,animate,animateParams,action);
-	}
-	componentWillUnmount(){
-		clearInterval(this.timerCatgs);
-	}	
+	} 
+		
 	render() { 
 		let { data,ioInput } = this.props,
 			catgs = this.state.catgs,
 			styleObj = cssColorFormat(this.props, 'filter'),
 			filterBox = cssColorFormat(this.props, 'filterBox'),
 			filterFlex = cssColorFormat(this.props, 'filterFlex');
-		return (
+		return ( 
 			<section className="e-catg-by-goods" style={filterBox} >
 				<div className="e-catg-by-goods-box" style={filterFlex} >
 					{

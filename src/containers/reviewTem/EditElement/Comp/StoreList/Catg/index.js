@@ -22,10 +22,6 @@ class Catg extends React.Component {
 		const size = data.data.content.size || 4;
 		data.data.content.switch ? this.initSwiper(size) : null
 	}
-	componentWillUnmount() {
-		let { data } = this.props
-		data.data.content.switch ? this.myCatgSwiper.destroy(false) : null
-	}
 	shouldComponentUpdate(nextProps,nextState){
 		if(nextProps.catg !== this.props.catg || nextState.realIndex !== this.state.realIndex){
 			 return true

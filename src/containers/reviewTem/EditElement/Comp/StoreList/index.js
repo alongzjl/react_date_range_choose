@@ -74,12 +74,7 @@ class StoreList extends React.Component {
 			Update:true
 		})
 	}      
- 	componentDidMount() { 
- 		setTimeout(()=>{
-			this.do_data()
-		},1000) 
-	}         
-	ioOuter = (ipt,params) => {
+ 	ioOuter = (ipt,params) => {
 		let { data } = this.props;
 		const size = data.data.content.size;
 		if(!ipt.changePage){

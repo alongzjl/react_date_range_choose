@@ -175,7 +175,7 @@ class IscrollAlong extends React.Component {
         style={{ backgroundColor: this.state.options.backgroundColor }}
       >
         <div className={this.state.loadingDownShow && !this.props.noDown ? 'sl_down sl_show' : 'sl_down'} style={{ backgroundColor: this.state.options.backgroundColor, color: this.state.options.fontColor }}>
-          <img src='./image/loadingshop.gif' />
+          <img src='images/loadingshop.gif' />
           {this.state.options.pulldowningInfo}
         </div>
         <div
@@ -185,7 +185,7 @@ class IscrollAlong extends React.Component {
           <div>
             <div className="scroller-pullDown">
               <span className={this.state.yesDown ? 'icon reverse_icon' : 'icon'} style={{ display: this.props.noDown ? 'none' : 'inline-block' }}>
-                <img src='./image/icon_sldown.png' />
+                <img src='images/icon_sldown.png' />
               </span>
               <span className = "msg" style={{ color: this.state.options.fontColor, display: this.props.noDown ? 'none' : 'inline-block' }}>
                 {this.state.yesDown ? this.state.options.pulldownReadyInfo : this.state.options.pulldownInfo}
@@ -195,7 +195,7 @@ class IscrollAlong extends React.Component {
             <div className="scroller-content">{this.props.children}</div>
             <div className="scroller-pullUp">
               <span className={this.state.yesUp ? 'icon reverse_icon' : 'icon'} style={{ display: this.props.noUp ? 'none' : 'inline-block' }}>
-                <img src='./image/icon_slup.png' />
+                <img src='images/icon_slup.png' />
               </span>
               <span className = "msg" style={{ color: this.state.options.fontColor, display: this.props.noUp ? 'none' : 'inline-block' }}>
                 {this.state.yesUp ? this.state.options.pullupReadyInfo : this.state.options.pullupInfo}
@@ -203,9 +203,9 @@ class IscrollAlong extends React.Component {
                 <span className = "msg" style={{ display: this.props.noUp ? 'inline-block' : 'none' }}>{this.props.noUpStr}</span>
             </div>
           </div>
-        </div>
+        </div> 
         <div className={this.state.loadingUpShow && !this.props.noUp ? 'sl_up sl_show' : 'sl_up'} style={{ backgroundColor: this.state.options.backgroundColor, color: this.state.options.fontColor }}>
-          <img src='./image/loadingshop.gif' />
+          <img src='images/loadingshop.gif' />
           {this.state.options.pullupingInfo}
         </div>
       </div>

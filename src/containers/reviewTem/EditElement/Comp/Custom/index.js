@@ -49,7 +49,7 @@ import './index.less'
  
 
 class Custom extends React.Component {
-	
+	 
 	render() {  
 		let { data, ioInput, ioOuter,floors,categories,shopsInfo,animate,animateParams,action,storeUpdate,have_goods,top } = this.props
 		let comp  = data.data.components,

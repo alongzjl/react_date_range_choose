@@ -21,11 +21,7 @@ class Floor extends React.Component {
 		let { data } = this.props
 		const size = data.data.content.size || 5;
 		data.data.content.switch ? this.initSwiper(size) : null
-	}
-	componentWillUnmount() {
-		let { data } = this.props
-		data.data.content.switch ? this.myFloorSwiper.destroy(false) : null
-	}
+	} 
 	shouldComponentUpdate(nextProps,nextState){
 		if(nextProps.floor !== this.props.floor || nextState.realIndex !== this.state.realIndex){
 			 return true

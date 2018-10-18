@@ -135,7 +135,7 @@ function RenderStyle7({ props, con, weather }) {
 	}
 	return (
 		<div style={cssColorFormat(props, 'image')}>
-			<img src={configData.resourceBasePath+getImg(con.weatherIcon[wn])} />
+			<img src={getImg(con.weatherIcon[wn])} />
 		</div>
 	)
 }
@@ -163,7 +163,7 @@ function RenderStyle8({ props, con, weather }) {
 	}
 	//设置默认天气图标
 	wn = wn ? wn : '晴_多云_阴'
-	css['WebkitMaskImage'] = `url('${configData.resourceBasePath+getImg(con.weatherIcon[wn])}')`
+	css['WebkitMaskImage'] = `url('${getImg(con.weatherIcon[wn])}')`
 	return (
 		<div style={css}></div>
 	)
@@ -184,7 +184,7 @@ function RenderStyle9({ props, con,weather }) {
 		} else {
 			return (<span key={i} style={cssColorFormat(props, 'split')} dangerouslySetInnerHTML={{__html: textBreak(_)}}></span>)
 		}
-	})
+	}) 
 	return (
 		<div style={cssColorFormat(props, 'text')}>{ node }</div>
 	)
