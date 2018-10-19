@@ -12,6 +12,28 @@ import { Player,LoadingSpinner,ControlBar,BigPlayButton } from 'video-react'
 import "video-react/dist/video-react.css"
 import './index.less'
 
+
+class RYSwiper extends React.Component {
+
+	render(){
+		return ()
+	}
+}
+//视频和图片组合轮播
+class ImageAndVideo extends React.Component {
+
+	render(){
+		return ()
+	}
+}
+//单独视频
+class SwiperVideo extends React.Component {
+
+	render(){
+		return ()
+	}
+}
+//单独图片
 class SwiperImage extends React.Component {
 	
 	componentWillReceiveProps(props) {
@@ -191,6 +213,7 @@ class SwiperImage extends React.Component {
 	}
 }
 
+//分页显示
 class PageRY extends React.Component {
 	
 	renderDom(props, totalPage,currentPage) {

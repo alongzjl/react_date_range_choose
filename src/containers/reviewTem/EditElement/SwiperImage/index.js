@@ -108,12 +108,11 @@ class SwiperImage extends React.Component {
             next = realIndex + 1
         clearTimeout(that.timerSlide) 
         that.setState({realIndex:that.mySwiperImage.realIndex})
-        console.log(that.mySwiperImage.realIndex+'---'+realIndex)
         if(!that.mySwiperImage.params.loop){ 
             content = that.state.content[realIndex]
            if(realIndex == that.state.content.length - 1){
             next = 0
-          }
+          } 
           realIndex = realIndex + 1
         }else{
         	if(realIndex == that.state.content.length + 1){

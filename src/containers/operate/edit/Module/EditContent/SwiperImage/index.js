@@ -35,10 +35,12 @@ class SwiperImage extends React.Component {
 		content.push({
 			img: { type: 'custom', img: '' },
 			router: {},
-			type:'image'
+			type:'image',
+			delayOnly:5,
+			date:''
 		})
 		actions.updateComp(null, parentComp? parentComp: data)
-	}
+	} 
 	addVideo() {
 		let props = this.props.data
 		if (!props.editConfig) props = props.data
@@ -49,9 +51,9 @@ class SwiperImage extends React.Component {
 		let { parentComp } = curData
 		content.push({
 			img: { type: 'custom', video: '' },
-			router: {},
-			type:'video'
-		})
+			type:'video', 
+			date:''  
+		}) 
 		actions.updateComp(null, parentComp? parentComp: data)
 	}
 	render() {

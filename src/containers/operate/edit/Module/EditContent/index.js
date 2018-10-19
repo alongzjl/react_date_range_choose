@@ -12,7 +12,7 @@ import { connect }  from 'react-redux'
 import * as actions from 'actions'
 
 import Color       from 'compEdit/EditCommon/Color'
-import { Checkbox, Collapse, Icon, Input, InputNumber, Radio, Select, Switch } from 'antd'
+import { Row, Col, Checkbox, Collapse, Icon, Input, InputNumber, Radio, Select, Switch,Slider } from 'antd'
 const  { TextArea } = Input
 const  { Panel }    = Collapse
 const RadioButton   = Radio.Button
@@ -24,8 +24,8 @@ import ImageUploadComp   from 'compEdit/EditCommon/ImageUploadComp'
 import HtmlUpload        from 'compEdit/EditCommon/HtmlUpload'
 import CompLayout        from 'compEdit/EditCommon/CompLayout'
 import ChildElement      from './ChildElement'
-
 import SwiperImage       from './SwiperImage'
+import DatePickerRY      from './DatePickerRY'
 import Navigation        from './Navigation'
 import NavigationFloat   from './NavigationFloat'
 import Weather           from './Weather'
@@ -158,6 +158,11 @@ class EditContent extends React.Component {
 			<RouterJump data={data} content={val} actions={actions} />
 		)
 	}
+	//日期范围
+	renderDate(cfg, con, val, key, index){
+		let defaultValue = val ? JSON.parse(val) : ''
+		return (<DatePickerRY defaultValue={defaultValue} onChange={value=> this.onChange(value,con,key,cfg,index)}></DatePickerRY>)
+	}   
 	// 上传图片
 	renderImage(cfg, con, val, key, index) {
 		let { data } = this.props
@@ -238,6 +243,27 @@ class EditContent extends React.Component {
 			<Checkbox
 				checked={val || cfg.defaultValue || false} onChange={v => this.onChange(v.target.checked, con, key, cfg, index)}
 			/>
+		)
+	} 
+	// 滑块
+	renderSlider(cfg, con, val, key, index) {
+		return (
+			<Row>
+				<Col span={12}>
+					<Slider
+						min={cfg.min || 0} max={cfg.max || 100} step={cfg.step || 1}
+						value={val} onChange={v => this.onChange(v, con, key, cfg, index)}
+					/>
+				</Col>
+				<Col span={3}></Col>
+				<Col span={9}>
+					<InputNumber
+						min={cfg.min || 0} max={cfg.max || 100} step={cfg.step || 1}
+						value={val} onChange={v => this.onChange(v, con, key, cfg, index)}
+						style={{ width: '100%' }}
+					/>
+				</Col>
+			</Row>
 		)
 	}
 	renderSwitch(cfg, con, val, key, index) {
