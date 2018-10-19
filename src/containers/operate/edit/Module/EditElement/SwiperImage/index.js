@@ -14,26 +14,125 @@ import './index.less'
 
 
 class RYSwiper extends React.Component {
-
+	state = {
+		content:[]
+	}
+	componentDidMount(){
+		let { data } = this.props
+		data = data.data
+		this.setState({content:data.content})
+	}
 	render(){
-		return ()
+		
+		return (<SwiperImageNew content={this.state.content} props={this.props}></SwiperImageNew>)
 	}
 }
+
 //视频和图片组合轮播
-class ImageAndVideo extends React.Component {
+/*class ImageAndVideo extends React.Component {
 
 	render(){
 		return ()
 	}
-}
+}*/
 //单独视频
-class SwiperVideo extends React.Component {
+function OneVideo({content}){
 
-	render(){
-		return ()
+	return (<div className="e-video"> 
+					<video src={content.img.video} controls={false} autoPlay loop>
+						您的浏览器不支持 video 标签。
+					</video> 
+				</div>
+			)
+} 
+ 
+//一张图片
+function OneImage({content,props}){
+
+	return (
+				<div className="e-img">
+					<img src={compImgFormat(props, content.img)} />
+				</div>
+			)
+} 
+
+//只有图片
+class SwiperImageNew extends React.Component {
+
+	state = {
+		random: Date.now() + parseInt(Math.random()*1000),
+		realIndex: 0
+	}
+	componentWillReceiveProps(props) {
+		this.init(props);
+	}
+	componentDidMount() {
+		this.init(this.props)
+	} 
+	init = props => {
+		let swiperOptions = props.props.data.feature.swiperOptions;
+		swiperOptions = formatObj(swiperOptions,()=>{
+			this.mySwiperImage ? this.setState({realIndex:this.mySwiperImage.realIndex}) : null
+		});      
+		destroySwiper(this.mySwiperImage)
+		this.mySwiperImage = new Swiper(`.swiper-container_${this.state.random}`, swiperOptions)   
+	}        
+	   
+	componentWillUnmount() {
+		destroySwiper(this.mySwiperImage)
+	}
+	render() {
+		let { props,content } = this.props
+		return ( 
+			<div className="e-SwiperImage">
+				<div className={`swiper-container swiper-container_${this.state.random} outer_box`}>
+					<div className="swiper-wrapper">
+						{
+							content.map((item,index) => <div className="swiper-slide" key={index}><img src={compImgFormat(props, item.img)} style={cssColorFormat(props, 'swiperImage')} /></div>)
+						}  
+					</div>
+				</div>
+				<PageRY totalPage={content.length} currentPage={this.state.realIndex} props={props}></PageRY>
+			</div>
+		)
 	}
 }
-//单独图片
+
+//销毁swiper
+function destroySwiper(swiper){
+	if(getAttr(swiper) == 'Array'){
+		swiper.map(_=>{
+			_.destroy()
+		}) 
+	}else{
+		swiper&&swiper.destroy()
+	}
+}
+//轮播参数解析
+function formatObj(obj,fn) {
+	let new_obj = {};
+	for(var key in obj){ 
+		if(key == 'autoplay'&& obj[key]){
+			new_obj.autoplay = obj['autoplayOptions']
+		}else if(key == 'slideOptions'){
+			for(var i in obj['slideOptions']){
+				new_obj[i] = obj['slideOptions'][i]
+			}  
+		}else{
+			if(key != 'autoplayOptions'){
+				new_obj[key] = obj[key];
+			}  
+		} 
+	}
+	new_obj.on = {
+		slideChange:()=>{ fn&&fn() }
+	}
+	new_obj.watchSlidesProgress = true;
+	new_obj.observer = true;//修改swiper自己或子元素时，自动初始化swiper 
+	new_obj.observeParents = true;//修改swiper的父元素时，自动初始化swiper 
+	return new_obj  
+};
+
 class SwiperImage extends React.Component {
 	
 	componentWillReceiveProps(props) {
@@ -245,5 +344,5 @@ class PageRY extends React.Component {
 		)
 	}
 }
-
-export default SwiperImage
+ 
+export default RYSwiper 

@@ -351,7 +351,7 @@ class EditContent extends React.Component {
 		let childNode = Object.keys(content).map((p, i) => {
 			if (!conMap[p] || contentFieldFilter[envType][p]) return false
 			let cm     = p == 'img' ? showT : conMap[p]
-			let val    = content[p]
+			let val    = content[p]   
 			let render = this[`render${cm.type}`]
 			if (!render) return false
 			// 根据样式类型渲染对应组件

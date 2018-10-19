@@ -50,12 +50,12 @@ class SwiperImage extends React.Component {
 		let { content }    = data.data
 		let { parentComp } = curData
 		content.push({
-			img: { type: 'custom', video: '' },
-			type:'video', 
-			date:''  
-		}) 
+			img: { type: 'custom', video: '',preview:'' },
+			type:'video',  
+			date:''   
+		})    
 		actions.updateComp(null, parentComp? parentComp: data)
-	}
+	} 
 	render() {
 		let props = this.props.data
 		if (!props.editConfig) props = props.data
@@ -80,7 +80,7 @@ class SwiperImage extends React.Component {
 										</Col>
 									</Row>
 								</div>
-							</div>
+							</div> 
 							<div className="pgsr-ctrl">
 								<div className="pg-img-upload">
 									<Row type="flex" align="middle" style={{ width: '100%' }}>
