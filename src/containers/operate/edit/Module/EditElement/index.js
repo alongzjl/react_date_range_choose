@@ -40,7 +40,7 @@ import ContextMenu       from 'compEdit/EditCommon/ContextMenu'
 import ShortcutKey       from 'compEdit/EditCommon/ShortcutKey'
 import PostMessage       from 'compEdit/EditCommon/PostMessage'
 import RevokeRecovery    from 'compEdit/EditCommon/RevokeRecovery'
-import InductionLine     from 'compEdit/EditElement/InductionLine'
+import { InductionLine,nearPosSty }     from 'compEdit/EditElement/InductionLine'
  
 import * as actions from 'actions'
 import { Icon, message } from 'antd'
@@ -357,28 +357,3 @@ export default connect(
 )(EditElement)
 
 
-function nearPosSty(layout){
-	let arr = new Array(4);
-	for(let i = 0;i<4;i++){
-		let objSty = {}
-		if(i == 0){
-			objSty.height = layout.height;
-			objSty.left = layout.left;
-			objSty.top = layout.top;
-		}else if(i == 1){
-			objSty.height = layout.height;
-			objSty.left = layout.left + layout.width;
-			objSty.top = layout.top;
-		}else if(i == 2){
-			objSty.width = layout.width;
-			objSty.left = layout.left;
-			objSty.top = layout.top;
-		}else {
-			objSty.width = layout.width;
-			objSty.left = layout.left;
-			objSty.top = layout.top + layout.height;
-		}
-		arr[i] = objSty
-	}
-	return arr 
-}

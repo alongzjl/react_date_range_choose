@@ -216,12 +216,12 @@ class Header extends React.Component {
 
 				<div className="peh-right">
 					<section className="comp-list comp-list-b">
-						<div className="cl-item" onClick={this.question.bind(this)}>
+						{/*<div className="cl-item" onClick={this.question.bind(this)}>
 							<div className="cl-item-icon">
 								<img src={require(`images/icon/theme.png`)}/>
 							</div>
 							常见问题
-						</div>
+						</div>*/}
 						<div className="cl-item" onClick={this.review.bind(this)}>
 							<div className="cl-item-icon">
 								<img src={require(`images/icon/theme.png`)}/>

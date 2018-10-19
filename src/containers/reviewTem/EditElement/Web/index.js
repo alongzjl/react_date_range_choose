@@ -23,7 +23,7 @@ class Web extends React.Component {
 			clearInterval(RYTimer);  
 			funcIn(); 
 		}
-	}    
+	}     
 	componentWillUnmount(){  
 		window.removeEventListener('message', this.messageGet,false); 
 	} 
@@ -31,10 +31,7 @@ class Web extends React.Component {
 		let { data } = this.props
 		return ( 
 			<div className="e-web">
-				{
-					RY_interent ? <iframe id={this.state.id} className="ew-iframe" src={data.data.content.url} scrolling={'no'} /> : 
-					<div className="no_intnet_RY"><img src="./image/KD_no_internet.png" /></div>
-				}  
+				<iframe id={this.state.id} className="ew-iframe" src={data.data.content.url} scrolling={'no'} />
 			</div> 
 		) 
 	}

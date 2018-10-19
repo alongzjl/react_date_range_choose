@@ -13,7 +13,7 @@ import './index.less'
 
 import Rnd from 'react-rnd'
 import { Icon, message } from 'antd'
-
+import { InductionLine,nearPosSty }     from 'compEdit/EditElement/InductionLine'
 import Picture      from 'compEdit/EditElement/Picture'
 import Web          from 'compEdit/EditElement/Web'
 import Button       from 'compEdit/EditElement/Button'
@@ -105,7 +105,7 @@ const compContent = (name, data, parent, editConfig, actions, type, ioInput, ioO
 class Custom extends React.Component {
 	constructor(props) {
 		super(props)
-		this.state = {}
+		this.state = {v:false,h:false,vPosition:{left:0},hPosition:{top:0},nearPos:false}
 	}
 	componentWillMount() {}
 
@@ -173,6 +173,7 @@ class Custom extends React.Component {
 		lay.top    = +pos.y
 		lay.width  = +ref.offsetWidth
 		lay.height = +ref.offsetHeight
+		this.setState({v:false,h:false,nearPos:false}) 
 		actions.updateComp(editConfig.curData.compIdx, parent)
 	}
 
@@ -184,17 +185,45 @@ class Custom extends React.Component {
 			width:  +ref.offsetWidth,
 			height: +ref.offsetHeight
 		}
+		this.showLine(pos,item,idx,{width:ref.offsetWidth,height:ref.offsetHeight})
 		this.setState(o)
 	}
-
+	//显示提示线
+	showLine = (param,_,i,obj) => {
+		let { data, actions } = this.props,
+			eles   = data.data.components || [], 
+			bodySty = {...data.data.layout,...{left:0,top:0}}, 
+			layout = obj ? {..._.data.layout,...obj} : _.data.layout,
+			InductionLineObj = InductionLine(param,eles,layout,i,bodySty,eleKnock),
+			v= InductionLineObj.v,h=InductionLineObj.h,eleKnock = InductionLineObj.eleKnock
+		if(v){   
+			this.setState({v:true,vPosition:{left:`${v.left}px`,p_left:v.p_left}})
+		}else{
+			this.setState({v:false,vPosition:{p_left:param.x}})
+		} 
+		if(h){
+			this.setState({h:true,hPosition:{top:`${h.top}px`,p_top:h.p_top}})
+		}else{ 
+			this.setState({h:false,hPosition:{p_top:param.y}})
+		}
+		if(eleKnock){
+			this.setState({nearPos:nearPosSty(eleKnock)})
+		}else{
+			this.setState({nearPos:false})
+		}   
+	}  
+	//拖拽
+	dragMove(e,param,_,i) {
+		this.showLine(param,_,i)
+	}  
 	dragStop(e, d, item, idx, parent) {
 		e.stopPropagation()
 		let { actions, editConfig } = this.props
-		let s   = this.state[idx]
 		let lay = item.data.layout
 		if (lay.left === d.x && lay.top  === d.y) return
-		s.left = lay.left = +d.x
-		s.top  = lay.top  = +d.y
+		lay.left = this.state.vPosition.p_left
+		lay.top  = this.state.hPosition.p_top
+		this.setState({v:false,h:false,nearPos:false})
 		actions.updateComp(editConfig.curData.compIdx, parent)
 	}
 
@@ -271,6 +300,7 @@ class Custom extends React.Component {
 					}}
 					style={{ position: lay.position }}
 					onDragStart={e => this.selectComp(e, _, i, idx, data)}
+					onDrag={(e,param) => this.dragMove(e,param,_,i)}
 					onDragStop={(e, d) => this.dragStop(e, d, _, i, data)}
 					onResizeStart={e => this.selectComp(e, _, i, idx, data)}
 					onResize={(e, dir, ref, delta, pos) => this.dragResize(e, ref, delta, pos, _, i)}
@@ -284,10 +314,20 @@ class Custom extends React.Component {
 					>{ compCon }</div>
 				</Rnd>
 			)
-		})
+		})  
 		return (
-			<section className={`pg-custom ele-${data.name} ${csn} scrollbar`}>
+			<section className={`pg-custom ele-${data.name} ${csn} scrollbar`} id="pg-custom">
 				{ childNode }
+				{state.h ? <div className="inductionLine-h" style={state.hPosition}></div> : null}
+				{state.v ? <div className="inductionLine-v" style={state.vPosition}></div> : null}
+				{
+					state.nearPos ? <div>
+						<div className="lineNear_0" style={state.nearPos[0]}></div>
+						<div className="lineNear_1" style={state.nearPos[1]}></div>
+						<div className="lineNear_2" style={state.nearPos[2]}></div>
+						<div className="lineNear_3" style={state.nearPos[3]}></div>
+					</div> : null
+				}  
 			</section>
 		)
 	}

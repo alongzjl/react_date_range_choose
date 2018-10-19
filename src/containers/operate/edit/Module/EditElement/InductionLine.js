@@ -1,28 +1,3 @@
-let InductionLine = (param,eles,layout,i,bodySty) => {
-	let lineObj,nearMax=99999,index=-1,eleObj = eles.filter((_,index)=>index != i)
-	let boxLine = boxObj(param,layout,bodySty,false)
-	if(eleObj.length == 0){
-		lineObj = boxLine
-	}else {
-		let thisLayout = {left:param.x,top:param.y,width:layout.width,height:layout.height}
-		for(let i=0;i<eleObj.length;i++){
-			let pos = eleObj[i].data.layout
-			if(detectKnock(pos,thisLayout)){
-				let nearPos = calcDistance(pos,thisLayout)
-				if(nearPos < nearMax){
-					nearMax = nearPos
-					index = i
-				}
-			} 
-		} 
-	} 
-	if(nearMax == 99999){ 
-		lineObj = boxLine
-	}else{
-		lineObj = boxObj(param,layout,eleObj[index].data.layout,true)
-	}    
-	return lineObj
-}
 
 let boxObj = (param,layout,bodySty,eleKnock) => {
 	let showLine_v = false,showLine_h = false
@@ -133,4 +108,55 @@ function abs(num){
 	if(Math.abs(num) <= 5) return true
 	return false
 }
-export default InductionLine
+
+export function nearPosSty(layout){
+	let arr = new Array(4);
+	for(let i = 0;i<4;i++){
+		let objSty = {}
+		if(i == 0){
+			objSty.height = layout.height;
+			objSty.left = layout.left;
+			objSty.top = layout.top;
+		}else if(i == 1){
+			objSty.height = layout.height;
+			objSty.left = layout.left + layout.width;
+			objSty.top = layout.top;
+		}else if(i == 2){
+			objSty.width = layout.width;
+			objSty.left = layout.left;
+			objSty.top = layout.top;
+		}else {
+			objSty.width = layout.width;
+			objSty.left = layout.left;
+			objSty.top = layout.top + layout.height;
+		}
+		arr[i] = objSty
+	}
+	return arr 
+}
+   
+export function InductionLine(param,eles,layout,i,bodySty) {
+	let lineObj,nearMax=99999,index=-1,eleObj = eles.filter((_,index)=>index != i)
+	let boxLine = boxObj(param,layout,bodySty,false)
+	if(eleObj.length == 0){
+		lineObj = boxLine 
+	}else {
+		let thisLayout = {left:param.x,top:param.y,width:layout.width,height:layout.height}
+		for(let i=0;i<eleObj.length;i++){
+			let pos = eleObj[i].data.layout
+			if(detectKnock(pos,thisLayout)){
+				let nearPos = calcDistance(pos,thisLayout)
+				if(nearPos < nearMax){
+					nearMax = nearPos
+					index = i
+				}
+			} 
+		} 
+	} 
+	if(nearMax == 99999){ 
+		lineObj = boxLine
+	}else{
+		lineObj = boxObj(param,layout,eleObj[index].data.layout,true)
+	}    
+	return lineObj
+}
