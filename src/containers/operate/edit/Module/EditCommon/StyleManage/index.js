@@ -103,18 +103,18 @@ class StyleManage extends React.Component {
 		let curData   = list[idx]
 		let editNode
 		let listNode  = list.map((_, k) => {
-			let remDom
-			if (list.length > 1) remDom = (<a className="pgs-sl-remove" onClick={this.onRemove.bind(this, k)}><Icon type="close" /></a>)
+			/*let remDom
+			if (list.length > 1) remDom = (<a className="pgs-sl-remove" onClick={this.onRemove.bind(this, k)}><Icon type="close" /></a>)*/
 			return (
 				<li
 					key={k} title={_.name}
 					className={ k === idx? 'pgs-sl-item s-active': 'pgs-sl-item' }
 				>
 					<div className="pgs-sl-sel" onClick={this.onSelect.bind(this, k)}>{ _.name }</div>
-					{ remDom }
+					{ /*remDom*/ } 
 				</li>
 			)
-		})
+		}) 
 		let addNode
 		if (add && list.length < (max || 10)) {
 			addNode = (
