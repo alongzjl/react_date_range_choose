@@ -259,8 +259,18 @@ module.exports = [
 				},
 				{
 					icon: 'image',
-					name: '图片',
-					key:  'weatherLogo'
+					name: '空气质量图标',
+					key:  'kongQi'
+				},
+				{
+					icon: 'image',
+					name: '风力图标',
+					key:  'feng'
+				}, 
+				{
+					icon: 'image',
+					name: '湿度图标',
+					key:  'shiDu'
 				}
 			]
 		},

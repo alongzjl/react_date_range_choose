@@ -20,9 +20,8 @@ const data = {
 		top:      0,
 		left:     0,
 		width:    120,
-		height:   120,
-		lockAspectRatio:false
-	},
+		height:   120 
+	}, 
 	content: {},
 	animation: {
 		className: '',	// 动画样式

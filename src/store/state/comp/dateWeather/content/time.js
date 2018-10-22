@@ -16,7 +16,14 @@ const data = {
 				blur_dis: 0,
 				color:    { type: 'custom', color: '#f58f8f' }
 			},
-			color:        { type: 'custom', color: '#333' }
+			color:        { type: 'custom', color: '#333' },
+			backgroundColor: { type: 'custom', color: '#fff' },
+			borderRadius: {
+				topLeft:     0,
+				topRight:    0,
+				bottomRight: 0,
+				bottomLeft:  0
+			}
 		},
 		split: {
 			fontSize:     24, 
@@ -62,10 +69,10 @@ delete data3.content.split
 
 // 星期
 const data4 = deepCopy(data)
-data4.content.prefix = '星期'
+data4.content.prefix = '周'
 delete data4.content.split
 delete data4.style.split
-
+ 
 // 自定义
 const data5 = deepCopy(data)
 delete data5.content.split

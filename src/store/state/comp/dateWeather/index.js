@@ -1,160 +1,42 @@
-let { authInit, deepCopy, extendRmSL, styleIdxChange } = require('state/common')
-const p = authInit(require('./content/weatherLogo'))
-const t = authInit(require('./content/time'))
-const w = authInit(require('./content/weather'))
-
-const time     = extendRmSL(styleIdxChange(1, deepCopy(t)), {
-	data: {
-		layout: {
-			top:  18,
-			left: 26,
-			width:  110,
-			height: 42
-		},
-		style: {
-			text: {
-				fontSize:   40, 
-				lineHeight: 42,
-			}
-		}
-	}
-})
-const time2    = extendRmSL(styleIdxChange(2, deepCopy(t)), {
-	data: {
-		layout: {
-			top:    60,
-			left:   20,
-			width:  76,
-			height: 24
-		},
-		style: {
-			text: {
-				fontSize:   14, 
-				lineHeight: 24,
-			},
-			split: {
-				fontSize:   14, 
-				lineHeight: 14,
-			}
-		},
-		content: {
-			split: '.'
-		}
-	}
-})
-const time3    = extendRmSL(styleIdxChange(4, deepCopy(t)), {
-	data: {
-		layout: {
-			top:    60,
-			left:   95,
-			width:  50,
-			height: 24
-		},
-		style: {
-			text: {
-				fontSize:     14, 
-				lineHeight:   24,
-			}
-		}
-	}
-})
-const weather  = extendRmSL(deepCopy(w), {
-	data: {
-		layout: {
-			top:    30,
-			left:   200,
-			width:  60,
-			height: 28
-		},
-		style: {
-			text: {
-				textAlign:  'right',
-				fontSize:   24, 
-				lineHeight: 28
-			}
-		}
-	}
-})
-const weather2 = extendRmSL(styleIdxChange(3, deepCopy(w)), {
-	data: {
-		layout: {
-			top:    56,
-			left:   200,
-			width:  60,
-			height: 24
-		},
-		style: {
-			text: {
-				textAlign:  'right',
-				fontSize:   14, 
-				lineHeight: 24
-			}
-		}
-	}
-})
-const weather3 = extendRmSL(styleIdxChange(7, deepCopy(w)), {
-	data: {
-		layout: {
-			top:    30,
-			left:   260,
-			width:  52,
-			height: 52
-		}
-	}
-})
-const pic      = extendRmSL(deepCopy(p), {
-	data: {
-		layout: {
-			top:    35,
-			left:   390,
-			width:  130,
-			height: 32
-		}
-	}
-})
-
-// 店铺列表
-const data = {
-	layout: {
-		position: 'absolute',
-		top:      0,
-		left:     0,
-		width:    540,
-		height:   100
-	},
-	style: {
-	},
-	content: {
-	},
-	animation: {
-		className: '',	// 动画样式
-		direction: '',				// 方向
-		delay: 0,					// 开始时间
-		duration: 1,				// 持续时间
-		iterationCount: 1			// 循环次数
-	},
-	components: [
-		time,
-		time2,
-		time3,
-		weather,
-		weather2,
-		weather3,
-		pic
-	]
-}
-
+const style_6 = require('./style_6')
+const style_5 = require('./style_5')
+const style_4 = require('./style_4')
+const style_3 = require('./style_3')
+const style_2 = require('./style_2')
+const style_1 = require('./style_1')
+let { deepCopy } = require('state/common')
+ 
 module.exports = {
 	name: 'dateWeather',
 	type: 'advanced',
-	data: deepCopy(data),
+	data: deepCopy(style_3), 
 	// 动画设置
 	styleList: {
 		idx:  0,
 		list: [{
 			name: '样式1',
 			img:  '',
-			data: deepCopy(data)
+			data: deepCopy(style_3)
+		},{ 
+			name: '样式2',
+			img:  '',
+			data: deepCopy(style_2)
+		},{
+			name: '样式3',
+			img:  '',
+			data: deepCopy(style_5)
+		},{
+			name: '样式4',
+			img:  '',
+			data: deepCopy(style_1)
+		},{  
+			name: '样式5',
+			img:  '',
+			data: deepCopy(style_6)
+		},{   
+			name: '样式6', 
+			img:  '',
+			data: deepCopy(style_4) 
 		}]
 	},
 	// 功能特性

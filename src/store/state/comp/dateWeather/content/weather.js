@@ -100,7 +100,7 @@ const data3 = extendRmSL(deepCopy(data), {
 delete data3.style.text
 const data4 = extendRmSL(deepCopy(data3), {
 	style: {
-		image: {
+		image: { 
 			backgroundColor: { type: 'main', color: '#000' }
 		}
 	}
