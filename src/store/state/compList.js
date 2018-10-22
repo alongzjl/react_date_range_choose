@@ -271,6 +271,11 @@ module.exports = [
 					icon: 'image',
 					name: '湿度图标',
 					key:  'shiDu'
+				},
+				{
+					icon: 'splitLine',  
+					name: '分割线',
+					key:  'line'
 				}
 			]
 		},

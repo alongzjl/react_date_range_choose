@@ -87,6 +87,7 @@ const weather4 = extendRmSL(styleIdxChange(3, deepCopy(w)), {
 })
 //风向
 const weather5 = extendRmSL(styleIdxChange(4, deepCopy(w)), {
+
 	data: {
 		layout: {
 			top:    51,
@@ -101,7 +102,7 @@ const weather5 = extendRmSL(styleIdxChange(4, deepCopy(w)), {
 				textAlign:'left', 
 				color:    { type: 'custom', color: '#313131' } 
 			}
-		} 
+		}  
 	}
 }) 
 //强度

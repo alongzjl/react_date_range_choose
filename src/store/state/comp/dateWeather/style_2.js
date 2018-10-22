@@ -3,17 +3,17 @@ const kongQi = authInit(require('./content/kongQi'))
 const feng = authInit(require('./content/feng'))
 const shiDu = authInit(require('./content/shiDu'))
 const w = authInit(require('./content/weather'))
- 
+const l = authInit(require('./content/line'))
 
 //自定义
 const weather  = extendRmSL(styleIdxChange(8, deepCopy(w)), {
 	data: {
 		layout: {
 			top:    33,
-			left:   385, 
-			width:  150,  
+			left:   405,  
+			width:  130,   
 			height: 15 
-		},  
+		},   
 		style: {
 			text: {
 				textAlign:  'center',
@@ -89,7 +89,7 @@ const weather5 = extendRmSL(styleIdxChange(4, deepCopy(w)), {
 	data: {
 		layout: {
 			top:    33,
-			left:   320,   
+			left:   310,   
 			width:  46,   
 			height: 15  
 		}, 
@@ -97,7 +97,7 @@ const weather5 = extendRmSL(styleIdxChange(4, deepCopy(w)), {
 			text:{
 				fontSize:   12, 
 				lineHeight: 15,
-				textAlign:'left', 
+				textAlign:'center', 
 				color:    { type: 'custom', color: '#313131' } 
 			}
 		} 
@@ -142,6 +142,21 @@ const ff = extendRmSL(deepCopy(feng), {
 		}
 	}
 })
+const line = extendRmSL(deepCopy(l), {
+	data:{
+		layout:{
+			top:15.5,
+			left:393,  
+			height:30,  
+			width:1
+		}, 
+		style:{ 
+			filterBox:{
+				backgroundColor: { type: 'custom', color: '#ACACAC' }
+			}    
+		} 
+	}
+})
 
 const data = {
 	layout: {
@@ -170,7 +185,8 @@ const data = {
 		weather5,
 		weather6,
 		kq, 
-		ff
+		ff,
+		line
 	]
-} 
+}  
 module.exports = data 

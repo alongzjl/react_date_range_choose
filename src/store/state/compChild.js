@@ -31,8 +31,9 @@ module.exports = {
 	dateWeather: {
 		kongQi:  1,
 		feng:    1,
-		shiDu:   1, 
-		time:    1, 
+		shiDu:   1,
+		line:    1, 
+		time:    1,  
 		weather: 1
 	},
 	goodsList: {

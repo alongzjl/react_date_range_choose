@@ -3,6 +3,7 @@ let { authInit, deepCopy, extendRmSL, styleIdxChange } = require('state/common')
 const kongQi = authInit(require('./content/kongQi'))
 const feng = authInit(require('./content/feng'))
 const shiDu = authInit(require('./content/shiDu'))
+const line = authInit(require('./content/line'))
 const t = authInit(require('./content/time'))
 const w = authInit(require('./content/weather'))
  
@@ -237,7 +238,8 @@ const data = {
 		weather5,
 		weather6,
 		kq, 
-		ff
+		ff,
+		line
 	]
 }
 module.exports = data 
