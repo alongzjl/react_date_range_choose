@@ -14,27 +14,27 @@ module.exports = {
 	styleList: {
 		idx:  0,
 		list: [{
-			name: '样式1',
+			name: '天气+日期常规',
 			img:  '',
 			data: deepCopy(style_3)
 		},{ 
-			name: '样式2',
+			name: '天气常规',
 			img:  '',
 			data: deepCopy(style_2)
 		},{
-			name: '样式3',
+			name: '天气+日期中型',
 			img:  '',
 			data: deepCopy(style_5)
 		},{
-			name: '样式4',
+			name: '天气迷你',
 			img:  '',
 			data: deepCopy(style_1)
 		},{  
-			name: '样式5',
+			name: '日期常规',
 			img:  '',
 			data: deepCopy(style_6)
 		},{   
-			name: '样式6', 
+			name: '日期迷你',  
 			img:  '',
 			data: deepCopy(style_4) 
 		}]
