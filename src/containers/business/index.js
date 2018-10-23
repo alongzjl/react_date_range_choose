@@ -32,27 +32,27 @@ class BusinessComponent extends React.Component {
 	}
 	getFloor() {
 		return (resolve, reject) => {
-			// let { mallMid } = window.uif.userInfo
-			// Ajax.get(`/mcp-gateway/mall/getFloorList?mallId=${mallMid}`).then(res => {
-			// 	storeData.floorList = res.data.list
-			// 	return resolve('楼层数据')
-			// }, err => {
+			 let { mallMid } = window.uif.userInfo
+			 Ajax.get(`/mcp-gateway/mall/getFloorList?mallId=${mallMid}`).then(res => {
+			 	storeData.floorList = res.data.list
+			 	return resolve('楼层数据')
+			 }, err => {
 				storeData.floorList = []
 				return resolve('楼层数据')
-			// })
+			 })
 		}
 	}
 	getCatg() {
 		return (resolve, reject) => {
-			// let { mallMid } = window.uif.userInfo
-			// Ajax.get(`/mcp-gateway/mall/getShopCustomCategoryList?mallId=${mallMid}`).then(res => {
-			// 	storeData.catgList = res.data.list
-			// 	return resolve('业态数据')
-			// }, err => {
+			 let { mallMid } = window.uif.userInfo
+			 Ajax.get(`/mcp-gateway/mall/getShopCustomCategoryList?mallId=${mallMid}`).then(res => {
+			 	storeData.catgList = res.data.list
+			 	return resolve('业态数据')
+			 }, err => {
 				storeData.catgList = []
 				return resolve('业态数据')
-			// })
-		}
+			 })
+		} 
 	}
 	getWeather() {
 		return (resolve) => {
