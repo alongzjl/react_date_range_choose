@@ -11,35 +11,83 @@ import 'swiper/dist/css/swiper.css'
 import { Player,LoadingSpinner,ControlBar,BigPlayButton } from 'video-react'
 import "video-react/dist/video-react.css"
 import './index.less'
-
+import { content_do,everySame,destroySwiper,formatObj } from './content_do'
 
 class RYSwiper extends React.Component {
 	state = {
-		content:[]
+		content:'',
+		type:1, //1--一张图片  2--一个视频 3--图片集合且delay一致 4--其他
+		newContent:[],
+		swiperOptions:''
 	}
 	componentDidMount(){
-		let { data } = this.props
-		data = data.data
-		this.setState({content:data.content})
+		this.getData(this.props)
 	}
-	render(){
-		
-		return (<SwiperImageNew content={this.state.content} props={this.props}></SwiperImageNew>)
+	componentWillReceiveProps(props){
+		this.getData(props)
+	}
+	intervalTimer = () => {
+		this.content_show()
+		clearInterval(this.timer)
+		this.timer = setInterval(this.content_show,60000)
+	} 
+	content_show = () => {
+		let content = content_do(this.state.content)
+		if(getAttr(content) == 'Array'){
+			let type = this.oneSwiper(content)
+			this.setState({newContent:content,type:type})
+			return false
+		} 
+		let now = new Date().getTime()
+		Object.keys(content).map(_=>{
+			if(_ == now){
+				let arr_content = content[_],
+					type = this.oneSwiper(arr_content)
+				this.setState({newContent:arr_content,type:type})
+			}
+		})
+	} 
+	oneSwiper = item => {
+		let arr_content = item,type=1
+		if(arr_content.length == 1){
+			type = arr_content[0].type == "image" ? 1 : 2
+		}else if(arr_content.length > 1){
+			type = everySame(arr_content) ? 3 : 4
+		}else{
+
+		} 
+		return type
+	}
+	getData = props => {
+		let { data } = props,
+			{ feature} = data, 
+			swiperOptions = JSON.stringify(feature.swiperOptions),
+			content = JSON.stringify(data.data.content)
+		if(this.state.content != content || this.state.swiperOptions != swiperOptions){
+			this.setState({content:content,swiperOptions:swiperOptions},()=>{this.intervalTimer()})
+		} 
+	} 
+	componentWillUnmount(){
+		clearInterval(this.timer)
+	}  
+	render(){ 
+		let type = this.state.type,renderDom
+		switch(type){
+			case 1 : renderDom = (<OneImage content={this.state.newContent} prop={this.props}></OneImage>);break
+			case 2 : renderDom = (<OneVideo content={this.state.newContent}></OneVideo>);break
+			case 3 : renderDom = (<SwiperImage content={this.state.newContent} prop={this.props}></SwiperImage>);break
+			case 4 : renderDom = (<SwiperImageVideo content={this.state.newContent} prop={this.props}></SwiperImageVideo>);break
+
+		}
+		return renderDom
 	}
 }
 
-//视频和图片组合轮播
-/*class ImageAndVideo extends React.Component {
-
-	render(){
-		return ()
-	}
-}*/
 //单独视频
 function OneVideo({content}){
-
+	if(content.length == 0) return false
 	return (<div className="e-video"> 
-					<video src={content.img.video} controls={false} autoPlay loop>
+					<video src={content[0].img.video} controls={false} autoPlay loop>
 						您的浏览器不支持 video 标签。
 					</video> 
 				</div>
@@ -47,17 +95,17 @@ function OneVideo({content}){
 } 
  
 //一张图片
-function OneImage({content,props}){
-
+function OneImage({content,prop}){
+	if(content.length == 0) return false
 	return (
 				<div className="e-img">
-					<img src={compImgFormat(props, content.img)} />
+					<img src={compImgFormat(prop, content[0].img)} />
 				</div>
 			)
-} 
+}  
 
-//只有图片
-class SwiperImageNew extends React.Component {
+//只有图片且delay设置一样
+class SwiperImage extends React.Component {
 
 	state = {
 		random: Date.now() + parseInt(Math.random()*1000),
@@ -70,7 +118,7 @@ class SwiperImageNew extends React.Component {
 		this.init(this.props)
 	} 
 	init = props => {
-		let swiperOptions = props.props.data.feature.swiperOptions;
+		let swiperOptions = props.prop.data.feature.swiperOptions;
 		swiperOptions = formatObj(swiperOptions,()=>{
 			this.mySwiperImage ? this.setState({realIndex:this.mySwiperImage.realIndex}) : null
 		});      
@@ -82,58 +130,23 @@ class SwiperImageNew extends React.Component {
 		destroySwiper(this.mySwiperImage)
 	}
 	render() {
-		let { props,content } = this.props
+		let { prop,content } = this.props
 		return ( 
 			<div className="e-SwiperImage">
 				<div className={`swiper-container swiper-container_${this.state.random} outer_box`}>
 					<div className="swiper-wrapper">
 						{
-							content.map((item,index) => <div className="swiper-slide" key={index}><img src={compImgFormat(props, item.img)} style={cssColorFormat(props, 'swiperImage')} /></div>)
+							content.map((item,index) => <div className="swiper-slide" key={index}><img src={compImgFormat(prop, item.img)} style={cssColorFormat(prop, 'swiperImage')} /></div>)
 						}  
 					</div>
 				</div>
-				<PageRY totalPage={content.length} currentPage={this.state.realIndex} props={props}></PageRY>
+				<PageRY totalPage={content.length} currentPage={this.state.realIndex} props={prop}></PageRY>
 			</div>
 		)
 	}
 }
-
-//销毁swiper
-function destroySwiper(swiper){
-	if(getAttr(swiper) == 'Array'){
-		swiper.map(_=>{
-			_.destroy()
-		}) 
-	}else{
-		swiper&&swiper.destroy()
-	}
-}
-//轮播参数解析
-function formatObj(obj,fn) {
-	let new_obj = {};
-	for(var key in obj){ 
-		if(key == 'autoplay'&& obj[key]){
-			new_obj.autoplay = obj['autoplayOptions']
-		}else if(key == 'slideOptions'){
-			for(var i in obj['slideOptions']){
-				new_obj[i] = obj['slideOptions'][i]
-			}  
-		}else{
-			if(key != 'autoplayOptions'){
-				new_obj[key] = obj[key];
-			}  
-		} 
-	}
-	new_obj.on = {
-		slideChange:()=>{ fn&&fn() }
-	}
-	new_obj.watchSlidesProgress = true;
-	new_obj.observer = true;//修改swiper自己或子元素时，自动初始化swiper 
-	new_obj.observeParents = true;//修改swiper的父元素时，自动初始化swiper 
-	return new_obj  
-};
-
-class SwiperImage extends React.Component {
+//视频和图片组合轮播
+class SwiperImageVideo extends React.Component {
 	
 	componentWillReceiveProps(props) {
 		clearTimeout(this.timerSlide)
@@ -145,51 +158,38 @@ class SwiperImage extends React.Component {
 	state = {
 		random: Date.now() + parseInt(Math.random()*1000),
 		realIndex: 0,
-		content:[{img:''}],
+		content:[],
 		delay:1000,
 	    speed:1000,
 	    autoplay:true
 	}
-	to = event => {
-		event.preventDefault()
-	};
 	init = props => {
-		let { data } = props, 
-			 content = data.data.content,
-			 swiperOptions = data.feature.swiperOptions,
-			 delay = swiperOptions.autoplay ? swiperOptions.autoplayOptions.delay : 1000,
-			 autoplay = !swiperOptions.autoplay ? false :true;
-		let contentNew = content.map(_=>{
-			let img = '';
-			if(_.img){
-				if(getAttr(_.img) == 'Object'){
-					Object.keys(_.img).map(key=>{
-						if(key == 'img') img = _.img[key]
-						else if(key == 'video') img = _.img[key]
-					})
-				} 
-			} 
-			return {
-				img:img,
-				title:_.title
+		let { prop,content } = props,
+			{ data } = prop, 
+			swiperOptions = data.feature.swiperOptions,
+			delay = swiperOptions.autoplay ? swiperOptions.autoplayOptions.delay : 1000,
+			autoplay = !swiperOptions.autoplay ? false :true;
+		swiperOptions = formatObj(swiperOptions,()=>{},()=>{
+			if(!this.mySwiperImage || this.mySwiperImage.destroyed || !this.state.autoplay) return
+			let realIndex = this.mySwiperImage.activeIndex;
+			if(this.mySwiperImage.params.loop){ 
+				if(realIndex == this.state.content.length + 1){
+		            this.mySwiperImage.slideTo(1,0,false)
+		            return false
+		          }
 			}
 		});
-		if(contentNew.length <= 1){
-			this.mySwiperImage && this.mySwiperImage.destroy(false);
-			this.setState({content:contentNew})
-			return false
-		}
-		swiperOptions = this.formatObj(swiperOptions);
+		swiperOptions.autoplay = false;
 		this.setState({ 
 			delay:2000,
 			speed:swiperOptions.speed,
 			autoplay:autoplay,
-			content:contentNew,
+			content:content,
 			realIndex:0
 		},()=>{this.initSwiper(swiperOptions,this.firstVideo)})
 	};      
 	 initSwiper = (swiperOptions,fn) => {
-	 	this.mySwiperImage && this.mySwiperImage.destroy(false);
+	 	destroySwiper(this.mySwiperImage)
 	 	this.mySwiperImage = new Swiper(`.swiper-container_${this.state.random}`, swiperOptions) 
 		 setTimeout(()=>{
 	      fn&&fn();
@@ -253,7 +253,7 @@ class SwiperImage extends React.Component {
 	        }
 	        that.refs[`RYPlayer_${realIndex-1}`] ? that.refs[`RYPlayer_${realIndex-1}`].pause() : null
 	        that.refs[`RYPlayer_${realIndex+1}`] ? that.refs[`RYPlayer_${realIndex+1}`].pause() : null
-	        if(content.img&&content.img.indexOf('.mp4') > -1){
+	        if(content.type == 'video'){
 	        	let { player } = that.refs[`RYPlayer_${realIndex}`].getState()
 	            that.refs[`RYPlayer_${realIndex}`].load()
 	            that.refs[`RYPlayer_${realIndex}`].play()
@@ -269,7 +269,7 @@ class SwiperImage extends React.Component {
 		let content = this.state.content[0],
 	        activeIndex = this.mySwiperImage.activeIndex;
 	    if(!this.state.autoplay) return
-	    if(content.img.indexOf('.mp4') > -1){
+	    if(content.type == 'video'){
 	      if(!this.refs) return 
 	      let { player } = this.refs[`RYPlayer_1`].getState()
 	      this.refs[`RYPlayer_1`].play()
@@ -281,32 +281,27 @@ class SwiperImage extends React.Component {
 	    }
 	}; 
 	componentWillUnmount() {
-		this.mySwiperImage.destroy(false)
+		destroySwiper(this.mySwiperImage)
 	};
 	render() {
+		let { prop } = this.props
 		return (
 			<div className="e-SwiperImage" id="e-SwiperImage">
-				{
-					this.state.content.length > 1 ? <div className={`swiper-container swiper-container_${this.state.random} outer_box`}>
+				<div className={`swiper-container swiper-container_${this.state.random} outer_box`}>
 					<div className="swiper-wrapper">
 						{ 
-			             	this.state.content.map((_,index)=><div className="swiper-slide" key={index} style={cssColorFormat(this.props, 'swiperImage')}>
-							 {/*<div className="text_show" style={cssColorFormat(this.props, 'text')}>{_.title}</div>*/}
-			             	 {
-				                _.img.indexOf('.mp4') > -1 ? <div className="videoRY"><Player src={_.img} ref={`RYPlayer_${index+1}`} >
+			             	this.state.content.map((_,index)=><div className="swiper-slide" key={index} style={cssColorFormat(prop, 'swiperImage')}>
+							 {
+				                _.type == 'video' ? <div className="videoRY"><Player src={_.img.video} ref={`RYPlayer_${index+1}`} >
 				                  <BigPlayButton className="videoButton" /> 
 				                  <ControlBar autoHide={true} disableDefaultControls={true} />
-				                </Player><div className="shadow"></div></div> : <img src={_.img} />
+				                </Player><div className="shadow"></div></div> : <img src={compImgFormat(prop, _.img)} />
 				             } 
 			             </div>)
 			          }  
 					</div>
-				</div> : ( this.state.content[0].img.indexOf('.mp4') > -1 ? <div className="videoRY"><Player autoPlay src={this.state.content[0].img} loop >
-				                  <BigPlayButton className="videoButton" /> 
-				                  <ControlBar autoHide={true} disableDefaultControls={true} />
-				                </Player><div className="shadow"></div></div> : <img src={this.state.content[0].img} />)
-				} 
-				<PageRY totalPage={this.state.content.length} currentPage={this.state.realIndex} props={this.props}></PageRY>
+				</div>
+				<PageRY totalPage={this.state.content.length} currentPage={this.state.realIndex} props={prop}></PageRY>
 			</div>
 		)
 	}
