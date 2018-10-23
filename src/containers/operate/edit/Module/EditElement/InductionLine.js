@@ -84,29 +84,40 @@ function calcDistance(pos1, pos2){
 }
 
 // 碰撞检测函数
-function detectKnock(pos1, pos2){
+function detectKnock(pos1, pos2,num){
 	// dom1的四条边
-	const l1 = pos1.left;
-	const t1 = pos1.top;
-	const r1 = l1 + pos1.width;
-	const b1 = t1 + pos1.height;
+	const l = pos1.left;
+	const lc = l + pos1.width/2;
+	const r = l + pos1.width;
+	const t = pos1.top;
+	const tc = t + pos1.height/2;
+	const b = t + pos1.height;
 	
 	// dom2的四条边
-	const l2 = pos2.left;
-	const t2 = pos2.top;
-	const r2 = l2 + pos2.width;
-	const b2 = t2 + pos2.height;
+	const l_2 = pos2.left;
+	const lc_2 = l_2 + pos2.width/2;
+	const r_2 = l_2 + pos2.width;
+	const t_2 = pos2.top;
+	const tc_2 = t_2 + pos2.height/2;
+	const b_2 = t_2 + pos2.height;
 	
-	// 排除所有没碰上的情况
-	if(l1-r2>5 || t1-b2>5 || l2-r1>5 || t2-b1>5){
-		return false;
-	} 
-	return true
-}
-
-function abs(num){
-	if(Math.abs(num) <= 5) return true
+	const is_l = abs(l_2-l,num) || abs(l_2-lc,num) || abs(l_2-r,num)
+	const is_c = abs(lc_2-l,num) || abs(lc_2-lc,num) || abs(lc_2-r,num)
+	const is_r = abs(r_2-l,num) || abs(r_2-lc,num) || abs(r_2-r,num)
+	const is_t = abs(t_2-t,num) || abs(t_2-tc,num) || abs(t_2-b,num)
+	const is_tc = abs(tc_2-t,num) || abs(tc_2-tc,num) || abs(tc_2-b,num)
+	const is_b = abs(b_2-t,num) || abs(b_2-tc,num) || abs(b_2-b,num)
+	// 所有碰上的情况
+	if(is_l || is_c || is_r || is_t || is_tc || is_b){
+		return true;
+	}  
 	return false
+}
+ 
+function abs(num,origin){
+	let number = origin ? origin : 5
+	if(Math.abs(num) <= number) return true
+	return false 
 }
 
 export function nearPosSty(layout){
@@ -144,15 +155,16 @@ export function InductionLine(param,eles,layout,i,bodySty) {
 		let thisLayout = {left:param.x,top:param.y,width:layout.width,height:layout.height}
 		for(let i=0;i<eleObj.length;i++){
 			let pos = eleObj[i].data.layout
-			if(detectKnock(pos,thisLayout)){
+			//如果组件碰撞 
+			if(detectKnock(pos,thisLayout,5)){ 
 				let nearPos = calcDistance(pos,thisLayout)
 				if(nearPos < nearMax){
 					nearMax = nearPos
 					index = i
-				}
-			} 
-		} 
-	} 
+				} 
+			}  
+		}   
+	}  
 	if(nearMax == 99999){ 
 		lineObj = boxLine
 	}else{
