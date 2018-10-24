@@ -1,12 +1,14 @@
 //时间段的处理
 export function content_do(content){
-	content = JSON.parse(content) 
+	content = JSON.parse(content)
+	content = content.map((_,i)=>{ _.index = i+1;return _ }) 
 	let no_date_content = content.filter(_=>_.date === '')
 	let date_content = content.filter(_=>_.date != '')
+	let dateArr = [],dataLast={}
+
 	if(date_content.length == 0){ 
-		return no_date_content
-	}
-	let dateArr = [],dataLast={};
+		return {date:dateArr,content:no_date_content}
+	}   
 	let newArr = date_content.map(_=>{
 		let date = JSON.parse(_.date),
 			start = new Date(date[0]).getTime(),
@@ -23,13 +25,18 @@ export function content_do(content){
 			let s = v.date[0],e = v.date[1]
 			if(_ >= s && _ < e) {
 				every.push(v)
-				dataLast[_] = every
-			}else{
-				dataLast[_] = every
-			} 
+			}
+			every.sort((a,b)=>a.index-b.index>0)
+			dataLast[_] = every 
 		})
-	})
-	return dataLast
+	})  
+	return {date:dateArr,content:dataLast}
+}
+export function sameCheck(obj1,obj2){
+	if(JSON.stringify(obj1) == JSON.stringify(obj2)){
+		return false
+	}
+	return true
 }
 export function everySame(content){
 	let delay = content[0].delay,str = true
