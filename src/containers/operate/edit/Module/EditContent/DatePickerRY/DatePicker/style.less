@@ -1,15 +1,9 @@
    
 .date-picker-group {
-    position: fixed;
-    top: 50%;
-    left: 50%;
     width: 720px;
     height: 420px; 
     padding: 20px;
-    margin: -189px 0 0 -180px;
     background: #fff;
-    box-shadow: 0 3px 33.81px 15.19px rgba(0, 0, 0, 0.05);
-    z-index: 99999999;
     .left,.right {
         width: 320px;
         float: left;
@@ -25,7 +19,7 @@
         box-sizing: border-box;
     }
 
-    table {
+    table {select-group
         width: 100%;
     }
 
@@ -53,25 +47,26 @@
             border: 1px solid #ddd;
             color: #333;
             cursor: pointer;
-
-            &:hover {
-                background: #f0f0f0;
-            }
         }
 
-        .not-now-month {
-            color: #bbb;
-
-            &:hover {
-                background: #fff;
-            }
-        }
-
+        
         .now-date {
             font-weight: 700;
-            color: #000;
-            background: #f0f0f0;
+            color: #fff; 
+            background: #91d5ff;
         }
+        .choosedDate {
+            font-weight: 700;
+            color: #fff; 
+            background: #91d5ff;
+            opacity: .6;
+        }  
+        .not-now-month {
+            color: #bbb;
+            background: #f9f9f9;
+             opacity: 1; 
+             font-weight: normal;
+        } 
     }
 
     .options-group {
@@ -81,7 +76,11 @@
         height: 30px;
         margin-top: 10px;
         width: 90%;
-
+        .showDateAll {
+            height: 32px;
+            line-height: 32px;
+            font-size: 14px;
+        }
         .option-btn {
             display: block;
             position: absolute;
@@ -124,11 +123,23 @@
     justify-content:space-between;
 
     .select-group {
-        position: relative;
-        width: 50%;
-        padding: 0 40px;
+            position: relative;
+            width: 95%;
+            border: 1px solid #ddd;
+            margin: 0 10px;
+    } 
+    .year {
+        padding-left:10px;
+        .value {
+            text-align: right;
+        }
     }
-
+    .month {
+        padding-right: 10px;
+        .value {
+            text-align: left;
+        }
+    }
     .select-main {
         position: absolute;
         top: 32px;
@@ -216,33 +227,32 @@
         position: absolute;
         top: 0;
         width: 30px;
-        height: 30px;
-        border: 1px solid #ddd;
+        height: 28px;
         background: #f9f9f9;
         cursor: pointer;
-
+        z-index: 100;
         .arrow {
             position: absolute;
             top: 50%;
             margin-top: -5px;
             border-top: 5px solid transparent;
             border-bottom: 5px solid transparent;
-        }
+        } 
 
         &.prev-btn {
-            left: 10px;
-
+            left:0;
+            border-right: 1px solid #ddd;
             .arrow {
                 left: 3px;
                 border-left: 6px solid transparent;
                 border-right: 8px solid #666;
             }
         }
-
+ 
         &.next-btn {
-            right: 10px;
-
-            .arrow {
+            right:0;
+            border-left: 1px solid #ddd;
+             .arrow {
                 left: 10px;
                 border-right: 6px solid transparent;
                 border-left: 8px solid #666;
@@ -257,13 +267,9 @@
         line-height: 28px;
         height: 30px;
         padding-right: 10px;
-        font-size: 14px;
+        font-size: 14px; 
         text-align: center;
-        border-top: 1px solid #ddd;
-        border-bottom: 1px solid #ddd;
-        cursor: pointer;
-
-        .arrow {
+        .arrow { 
             position: absolute;
             top: 50%;
             right: 10px;

@@ -40,6 +40,17 @@ class DatePicker {
         if (options.min) this.data.min = new Date(options.min);
         if (options.max) this.data.max = new Date(options.max);
         if (options.isTime) this.data.isTime = options.isTime;
+        if(options.now){
+            let now = new Date(options.now)
+             this.data = Object.assign({},this.data,{
+                year: now.getFullYear(),
+                month: now.getMonth() + 1,
+                date: now.getDate(),
+                hours: now.getHours(),
+                minutes: now.getMinutes(),
+                seconds: now.getSeconds()
+            })
+        } 
         if (options.start) {
             this.data.start = new Date(options.start);
             let d = this.data.start;
@@ -50,8 +61,12 @@ class DatePicker {
                 hours: d.getHours(),
                 minutes: d.getMinutes(),
                 seconds: d.getSeconds()
-            })
-        }
+            }) 
+        } 
+        if(options.type == 'right'&&options.now){
+            let month = new Date(options.now).getMonth() + 1;
+            this.data.month = month + 1;
+        }   
         return this;
     }
 

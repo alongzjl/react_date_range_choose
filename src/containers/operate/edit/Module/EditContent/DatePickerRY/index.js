@@ -2,7 +2,7 @@ import React,{
     Component
 } from "react";
 import {  Input } from 'antd';
-import DatePicker from './DatePicker'
+import DateSet from './dateSet'
 import "./index.less";
  
  
@@ -10,7 +10,8 @@ export default class DatePickerRY extends Component {
 	state={
 		min:'',
 		max:'',
-		show:'点击选择日期范围'
+		show:'点击选择日期范围',
+		now:''
 	}
 	componentWillMount(){ 
 		let now = new Date(),
@@ -18,18 +19,31 @@ export default class DatePickerRY extends Component {
 			min = new Date(str).getTime(),
 			max = min + 90*24*60*60*1000
 		this.setState({min:min,max:max}) 
-	} 
-	dateChange = (date,time,all) => {
-		debugger
-	}
-	closeDate = () => {
-		debugger
+	}  
+	showDate = () => {
+		let now = new Date().getTime()
+		this.setState({now:now},()=>{
+			this.datePickerModal.show()
+		}) 
+	}  
+	dateChange = date => {
+		this.setState({show:`${date[0]}-${date[1]}`})
+		this.props.onChange(JSON.stringify(date))
 	} 
 	render(){
+		let { defaultValue } = this.props,
+			show = defaultValue ? `${defaultValue[0]}-${defaultValue[1]}` : this.state.show
 		return (
 				<div> 
-					<Input defaultValue={this.state.show} value={this.state.show} disabled={true} />
-					<DatePicker min={this.state.min} max={this.state.max} isTime={true} confirm={this.dateChange} cancel={this.closeDate} />
+					<div onClick={this.showDate} className="dateInput">{show}</div>
+					<DateSet 
+						ref={com => { this.datePickerModal = com }} 
+						min={this.state.min} 
+						max={this.state.max} 
+						confirm={this.dateChange}
+						now={this.state.now}
+						defaultValue={defaultValue} 
+					/>
 				</div>
 			)
 	}
