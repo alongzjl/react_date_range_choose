@@ -28,7 +28,7 @@ class TimeSelect extends Component {
                         min={0} max={max} step={1}
                         value={val} onChange={v => this.selectItem(v,max)}
                     />
-                </Col>
+                </Col> 
             </Row>
         )
     } 

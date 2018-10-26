@@ -35,7 +35,7 @@ class DatePicker {
             close: '关闭'
         };
     }
-
+ 
     init(options) {
         if (options.min) this.data.min = new Date(options.min);
         if (options.max) this.data.max = new Date(options.max);
@@ -65,7 +65,12 @@ class DatePicker {
         } 
         if(options.type == 'right'&&options.now){
             let month = new Date(options.now).getMonth() + 1;
-            this.data.month = month + 1;
+            if(month == 12){
+                this.data.month = 1;
+                this.data.year += 1
+            }else{ 
+                this.data.month = month + 1;
+            }
         }   
         return this;
     }

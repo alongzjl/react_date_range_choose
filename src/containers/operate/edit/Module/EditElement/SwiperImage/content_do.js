@@ -39,13 +39,13 @@ export function sameCheck(obj1,obj2){
 	return true
 }
 export function everySame(content){
-	let delay = content[0].delay,str = true
+	let delayOnly = content[0].delayOnly,str = true
 	for(let i=0;i<content.length;i++){
-		if(content[i].delay != delay || content[i].type != 'image'){
+		if(content[i].delayOnly != delayOnly || content[i].type != 'image'){
 			str = false
 			break
 		}  
-	}
+	} 
 	return str 
 }
 //销毁swiper

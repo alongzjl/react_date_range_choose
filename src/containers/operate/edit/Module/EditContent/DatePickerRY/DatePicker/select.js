@@ -12,25 +12,25 @@ class DateSelectItem extends Component {
     }
 
     componentWillMount() {
-        let year = this.props.year,
-            month = this.props.month 
-            this.setState({
-                yStr: year + yStr,
-                mStr: months[month-1],
-                m: month,
-                y:year
-            })
+        let { year,month,anther } = this.props 
+        this.setState({
+            yStr: year + yStr,
+            mStr: months[month-1],
+            m: month,
+            y:year,
+            anther:anther
+        })
     }
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.month) {
-            let year = nextProps.year,
-                month=nextProps.month;
-             this.setState({
+             let { year,month,anther } = nextProps 
+            this.setState({
                 yStr: year + yStr,
                 mStr: months[month-1],
                 m: month,
-                y:year
+                y:year,
+                anther:anther
             })
         }
     }
@@ -69,18 +69,18 @@ class DateSelectItem extends Component {
         this.props.selectHanlder(year,month,this.props.which);
     }
      render() {
-        let { anther,which } = this.props,
+        let { which } = this.props,anther = this.state.anther,
             { year,month } = anther,left = true,right = true
-        if(which == 'left'){
-            if(!(year > this.state.y || (year == this.state.y&&month > this.state.m+1))){
+        if(which == 'left'){ 
+            if((year == this.state.y&&month <= this.state.m+1) || (year==this.state.y+1&&month==1&&this.state.m==12)){
                 left = false;
             }
-        }else{
-             if(!(year < this.state.y || (year == this.state.y&&month < this.state.m-1))){
+        }else{ 
+             if((year==this.state.y-1&&month==12&&this.state.m==1) || (year == this.state.y&&month >= this.state.m-1)){
                 right = false;
-            } 
-        } 
-         return (
+            }  
+        }   
+        return (
             <div className={`select-group`}>
                 { right ? <span className="switch-btn prev-btn" onClick={this.selectLeft.bind(this)}><span className="arrow"></span></span> : null }
                 <span className="value">{this.state.yStr}&nbsp;{this.state.mStr}</span>

@@ -38,6 +38,7 @@ class RYSwiper extends React.Component {
 		if(getAttr(content) == 'Array'){
 			let type = this.oneSwiper(content)
 			sameCheck(this.state.newContent,content) ? this.setState({newContent:content,type:type}) : null
+			clearInterval(this.timer)
 			return false
 		} 
 		let now = new Date().getTime()

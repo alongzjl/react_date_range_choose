@@ -32,23 +32,28 @@ class DatePicker extends Component {
     }
     componentWillMount() {
         this.init(this.props)
-        let { defaultValue } = this.props;
-        if(defaultValue){
-            let start = defaultValue[0].split(' ')[0].split('-').join('/'),
-                end = defaultValue[1].split(' ')[0].split('-').join('/');
-            this.setState({chooseL:defaultValue[0],chooseR:defaultValue[1],d_time_start:start,d_time_end:end}) 
-        } 
+       
     }  
     componentWillReceiveProps(props){
         this.init(props)
     }    
     init(props) {
-        var data_left = {},data_right = {}, _this = this,now = new Date();
+        let { defaultValue,now } = props,data_left = {},data_right = {}, _this = this,n_l='',n_r='';
+        if(defaultValue){
+            let start = defaultValue[0].split(' ')[0].split('-').join('/'),
+                end = defaultValue[1].split(' ')[0].split('-').join('/');
+            n_l = new Date(defaultValue[0]).getTime()
+            n_r = new Date(defaultValue[1]).getTime()
+            this.setState({chooseL:defaultValue[0],chooseR:defaultValue[1],d_time_start:start,d_time_end:end}) 
+        }else{   
+            n_l = n_r = now
+             this.setState({chooseL:'',chooseR:'',d_time_start:'',d_time_end:''}) 
+        }     
         datepicker_left.init({
             min: this.state.min,
             max:  this.state.max,
             isTime: this.state.isTime,
-            now:props.now,
+            now:n_l,
             type:'left'
         }).createMonthDate(function(info) {
             data_left = Object.assign({},data_left,{
@@ -67,7 +72,7 @@ class DatePicker extends Component {
             min: this.state.min,
             max:  this.state.max,
             isTime: this.state.isTime,
-            now:props.now,
+            now:n_r,
             type:'right'
         }).createMonthDate(function(info) {
             data_right = Object.assign({},data_right,{
@@ -76,7 +81,7 @@ class DatePicker extends Component {
         }).createHours(function(info) {
             data_right = Object.assign({},data_right,{
                 hours: info
-            });
+            }); 
         }).createMinutes(function(info) {
             data_right = Object.assign({},data_right,{
                 minutes: info
@@ -90,7 +95,7 @@ class DatePicker extends Component {
                 date: datepicker_left.data.date,
                 hours: datepicker_left.data.hours,
                 minutes: datepicker_left.data.minutes,
-                datetime: now.getFullYear()+''+(now.getMonth()+1)+''+now.getDate(),
+                datetime: new Date(now).getFullYear()+''+(new Date(now).getMonth()+1)+''+new Date(now).getDate(),
                 weeks_list: datepicker_left.lang[datepicker_left.data.lang].weeks
             },
             right:{
@@ -100,7 +105,7 @@ class DatePicker extends Component {
                 date: datepicker_right.data.date,
                 hours: datepicker_right.data.hours,
                 minutes: datepicker_right.data.minutes,
-                datetime: now.getFullYear()+''+(now.getMonth()+1)+''+now.getDate(),
+                datetime: new Date(now).getFullYear()+''+(new Date(now).getMonth()+1)+''+new Date(now).getDate(),
                 weeks_list: datepicker_right.lang[datepicker_right.data.lang].weeks
             } 
         });
@@ -195,23 +200,22 @@ class DatePicker extends Component {
     }    
 
     selectTimeLeft(val,type) {
-        let obj = {},chooseL = this.state.chooseL; 
-        obj[type] = val;
+        let obj = {},chooseL = this.state.chooseL,value = val < 10 ? '0'+val : val
+        obj[type] = val; 
         if(chooseL){
          let date = chooseL.split(' '),
-            time = type == 'hours' ? `${val}:${date[1].split(':')[1]}` : `${date[1].split(':')[0]}:${val}`;
+            time = type == 'hours' ? `${value}:${date[1].split(':')[1]}` : `${date[1].split(':')[0]}:${value}`;
             this.setState({left:{...this.state.left,...obj},chooseL:`${date[0]} ${time}`})
         }else{ 
             this.setState({left:{...this.state.left,...obj}});
         }
     }
-    selectTimeRight(val,type) {
-         let chooseR = this.state.chooseR,
-           obj = {}; 
+    selectTimeRight(val,type) { 
+         let chooseR = this.state.chooseR,obj = {},value = val < 10 ? '0'+val : val; 
         obj[type] = val;
         if(chooseR){ 
             let date = chooseR.split(' '),
-            time = type == 'hours' ? `${val}:${date[1].split(':')[1]}` : `${date[1].split(':')[0]}:${val}`;
+            time = type == 'hours' ? `${value}:${date[1].split(':')[1]}` : `${date[1].split(':')[0]}:${value}`;
             this.setState({right:{...this.state.right,...obj},chooseR:`${date[0]} ${time}`})
         }else{  
             this.setState({right:{...this.state.right,...obj}});
@@ -280,7 +284,7 @@ class DatePicker extends Component {
                                 if (datetime == _this.state.left.datetime) {className = 'now-date';};
                                 let dateNum = new Date(`${item.year}/${item.month}/${item.date}`)
                                 if(dateNum < new Date(_this.state.min) || dateNum > new Date(_this.state.max)){
-                                    style={cursor:'not-allowed'}
+                                    style={cursor:'not-allowed',color:'red'}
                                 }   
                                 if(_this.state.d_time_start&&_this.state.d_time_end && new Date(_this.state.d_time_start) <= dateNum&&dateNum <= new Date(_this.state.d_time_end)){
                                     className ? className += ' choosedDate' : className += 'choosedDate'
@@ -321,7 +325,7 @@ class DatePicker extends Component {
                                 if (datetime == _this.state.right.datetime) className = 'now-date';
                                 let dateNum = new Date(`${item.year}/${item.month}/${item.date}`)
                                 if(dateNum < new Date(_this.state.min) || dateNum > new Date(_this.state.max)){
-                                    style={cursor:'not-allowed'}
+                                    style={cursor:'not-allowed',color:'red'}
                                 }
                                 if(_this.state.d_time_start&&_this.state.d_time_end && new Date(_this.state.d_time_start) <= dateNum&&dateNum <= new Date(_this.state.d_time_end)){
                                     className ? className += ' choosedDate' : className += 'choosedDate'
