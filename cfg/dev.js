@@ -39,6 +39,7 @@ config.devServer = {
 	historyApiFallback: true,
 	stats: 'errors-only',
 	hot: true,
+	host: '0.0.0.0',
 	disableHostCheck:true,
 	port: defaultSettings.port,
 	publicPath: defaultSettings.publicPath,

@@ -5,7 +5,7 @@
  */
  
 
-const filterContent = (data,con) => {
+export function filterContent(data,con) {
 	let content = data.data.content;
 	const t = data.data.type;
 	if( t == "storeInstroInstroduce"||t == "storeInstroTitle"||t == "instroPicture"||t == "instroTitle"){
@@ -22,4 +22,18 @@ const filterContent = (data,con) => {
 	return content
 } 
 
-export default filterContent
+//轮播设置的过滤--商家--大运营
+export function contentSwiper(compName,content){
+	if(compName != 'swiperImage') return content
+	let contentNew = content.map(_=>{
+		if(getEnv() === 'business'){ 
+			!_.delayOnly ? _.delayOnly = 5 : null
+			!_.date ? _.date = '' : null
+		}else{ 
+			delete _.delayOnly
+			delete _.date
+		} 
+		return _
+	})  
+	return contentNew
+}

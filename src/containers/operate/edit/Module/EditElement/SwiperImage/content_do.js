@@ -2,8 +2,8 @@
 export function content_do(content){
 	content = JSON.parse(content)
 	content = content.map((_,i)=>{ _.index = i+1;return _ }) 
-	let no_date_content = content.filter(_=>_.date === '')
-	let date_content = content.filter(_=>_.date != '')
+	let no_date_content = content.filter(_=>_.date === '' || _.date == undefined)
+	let date_content = content.filter(_=>_.date&&_.date != '')
 	let dateArr = [],dataLast={}
 
 	if(date_content.length == 0){ 
@@ -23,12 +23,15 @@ export function content_do(content){
 		let every = JSON.parse(JSON.stringify(no_date_content))
 		newArr.map(v=>{
 			let s = v.date[0],e = v.date[1]
+			if(s > e){
+				s = v.date[1];e = v.date[0]
+			} 
 			if(_ >= s && _ < e) {
 				every.push(v)
-			}
+			}   
 			every.sort((a,b)=>a.index-b.index>0)
 			dataLast[_] = every 
-		})
+		}) 
 	})  
 	return {date:dateArr,content:dataLast}
 }

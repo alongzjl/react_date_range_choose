@@ -82,7 +82,7 @@ const data = {
 			type:'image',
 			delayOnly:5,
 			date:''
-		},
+		}, 
 		{   
 			img: { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201805231506215219.jpg' },
 			//title: '图片3',		// 图片标题

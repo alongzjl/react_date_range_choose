@@ -40,7 +40,7 @@ class RYSwiper extends React.Component {
 			sameCheck(this.state.newContent,content) ? this.setState({newContent:content,type:type}) : null
 			clearInterval(this.timer)
 			return false
-		} 
+		}  
 		let now = new Date().getTime()
 		date.map((_,i)=>{
 			if(i == date.length-1){
@@ -132,17 +132,18 @@ class SwiperImage extends React.Component {
 	init = props => {
 		let { prop,content } = props,
 			swiperOptions = prop.data.feature.swiperOptions;
+
 		//兼容老数据
 		if(swiperOptions.autoplay){
 			content[0].delayOnly ? swiperOptions.autoplayOptions.delay = content[0].delayOnly*1000 : null
-		}
+		} 
 		swiperOptions = formatObj(swiperOptions,()=>{
 			this.mySwiperImage&&!this.mySwiperImage.destroyed ? this.setState({realIndex:this.mySwiperImage.realIndex}) : 
 			this.setState({realIndex:0})
 		});        
 		destroySwiper(this.mySwiperImage)
 		this.mySwiperImage = new Swiper(`.swiper-container_${this.state.random}`, swiperOptions)   
-	}         
+	}          
 	   
 	componentWillUnmount() {
 		destroySwiper(this.mySwiperImage)
@@ -184,6 +185,7 @@ class SwiperImageVideo extends React.Component {
 		let { prop,content } = props,
 			{ data } = prop, 
 			swiperOptions = data.feature.swiperOptions,
+			delay = swiperOptions.autoplayOptions.delay || 1000,
 			autoplay = !swiperOptions.autoplay ? false :true;
 		swiperOptions = formatObj(swiperOptions,()=>{},()=>{
 			if(!this.mySwiperImage || this.mySwiperImage.destroyed || !this.state.autoplay) return
@@ -199,7 +201,8 @@ class SwiperImageVideo extends React.Component {
 		this.setState({ 
 			speed:swiperOptions.speed,
 			autoplay:autoplay,
-			realIndex:0
+			realIndex:0,
+			delay:delay
 		},()=>{this.initSwiper(swiperOptions,this.firstVideo)})
 	};      
 	 initSwiper = (swiperOptions,fn) => {
@@ -242,12 +245,17 @@ class SwiperImageVideo extends React.Component {
 	            that.refs[`RYPlayer_${realIndex}`].load()
 	            that.refs[`RYPlayer_${realIndex}`].play()
 	            that.timerSlide = setTimeout(()=>{
+	               debugger
 	               that.mySwiperImage && !that.mySwiperImage.destroyed ? that.mySwiperImage.slideTo(next,that.state.speed,false) : null
 	            },player.duration*1000)
 	         }else{  
-	         	 that.timerSlide = setTimeout(()=>{that.mySwiperImage && !that.mySwiperImage.destroyed ? that.mySwiperImage.slideTo(next,that.state.speed,false) : null},con.delayOnly*1000)
-	         }    
-	    })
+	         	 let delay = con.delayOnly ? con.delayOnly*1000 : that.state.delay
+	         	  that.timerSlide = setTimeout(()=>{
+	               debugger
+					that.mySwiperImage && !that.mySwiperImage.destroyed ? that.mySwiperImage.slideTo(next,that.state.speed,false) : null
+	         	 },delay)
+	         }      
+	    }) 
 	}; 
 	firstVideo = () => {
 		let { content } = this.props,
@@ -261,7 +269,11 @@ class SwiperImageVideo extends React.Component {
 	         this.mySwiperImage.slideTo(activeIndex+1,this.state.speed,false)
 	      },player.duration*1000)
 	    }else{ 
-	    	setTimeout(()=>{this.mySwiperImage.slideTo(activeIndex+1,this.state.speed,false)},content[0].delayOnly*1000);
+	    	let delay = content[0].delayOnly ? content[0].delayOnly*1000 : this.state.delay
+	    	console.log(delay)
+	    	setTimeout(()=>{
+	    		this.mySwiperImage && !this.mySwiperImage.destroyed ? this.mySwiperImage.slideTo(activeIndex+1,this.state.speed,false) : null
+	    	},delay);  
 	    }
 	}; 
 	componentWillUnmount() {

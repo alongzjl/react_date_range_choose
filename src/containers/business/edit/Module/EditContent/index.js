@@ -21,15 +21,15 @@ const RadioGroup  = Radio.Group
 
 import RouterJump      from 'compEdit/EditCommon/RouterJump'
 import ImageUploadComp from 'compEdit/EditCommon/ImageUploadComp'
-
+import DatePickerRY      from 'compEdit/EditContent/DatePickerRY'
 import SwiperImage       from 'compEdit/EditContent/SwiperImage'
 import Navigation        from 'compEdit/EditContent/Navigation'
 import NavigationFloat   from 'compEdit/EditContent/NavigationFloat'
 import WonderfulActivity from 'compEdit/EditContent/WonderfulActivity'
 import CatgByGoods       from 'compEdit/EditContent/CatgByGoods'
 import SwiperByGoods     from 'compEdit/EditContent/SwiperByGoods'
-
-import * as variable from 'var'
+import { contentSwiper }     from 'compEdit/EditContent/filter'
+import * as variable from 'var'  
 
 var conMap   = variable.contentMap,
 	fieldMap = variable.fieldMap,
@@ -121,7 +121,7 @@ class EditContent extends React.Component {
 				style={{ width: '100%' }}
 			/>
 		)
-	}
+	} 
 	// 标题
 	renderTitle(cfg, data, obj, val, key, index) {
 		return (
@@ -131,6 +131,11 @@ class EditContent extends React.Component {
 				style={{ width: '100%' }}
 			/>
 		)
+	} 
+	//日期范围
+	renderDate(cfg, con, val, key, index){
+		let defaultValue = val ? JSON.parse(val) : ''
+		return (<DatePickerRY defaultValue={defaultValue} onChange={value=> this.onChange(value,con,key,cfg,index)}></DatePickerRY>)
 	} 
 	// 跳转路由
 	renderRouter(cfg, data, obj, val, key, index) {
@@ -289,6 +294,7 @@ class EditContent extends React.Component {
 			let val    = content[p]
 			let auth   = data.auth.content[p]
 			let render = me[`render${cm.type}`]
+			if(p == 'date' || p == 'delayOnly') auth = true // 商家轮播设置时间段显示
 			if (!auth || !render) return false
 			// 根据样式类型渲染对应组件
 			let dom = this[`render${cm.type}`].bind(this, cm, parent, content, val, p, index)()
@@ -364,6 +370,7 @@ class EditContent extends React.Component {
 		let compCon = compContent(compName, this.props, this.updateComp)
 		
 		if (content.length) {
+			content = contentSwiper(compName,content)
 			childNode = content.map((_, i) => {
 				return (
 					<Panel header={`内容${i + 1}`} key={i + 1}>

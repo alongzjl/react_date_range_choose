@@ -32,9 +32,9 @@ import Weather           from './Weather'
 import WonderfulActivity from './WonderfulActivity'
 import ListByStore       from './ListByStore'
 import ThemeColor        from './ThemeColor'
-import filterContent     from './filter'
 import CatgByGoods       from './CatgByGoods'
 import SwiperByGoods     from './SwiperByGoods'
+import { filterContent,contentSwiper }     from './filter'
 
 import * as variable from 'var'
 
@@ -397,6 +397,7 @@ class EditContent extends React.Component {
 
 		if (content.length) {
 			activeKey = Array.from(new Array(content.length + 1), (_, i) => `${i}`)
+			content = contentSwiper(compName,content)
 			childNode = content.map((_, i) => {
 				return (
 					<Panel header={`内容${i + 1}`} key={i + 1}>
