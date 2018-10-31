@@ -25,7 +25,7 @@ import HtmlUpload        from 'compEdit/EditCommon/HtmlUpload'
 import CompLayout        from 'compEdit/EditCommon/CompLayout'
 import ChildElement      from './ChildElement'
 import SwiperImage       from './SwiperImage'
-import DatePickerRY      from './DatePickerRY'
+//import DatePickerRY      from './DatePickerRY'
 import Navigation        from './Navigation'
 import NavigationFloat   from './NavigationFloat'
 import Weather           from './Weather'
@@ -157,12 +157,7 @@ class EditContent extends React.Component {
 		return (
 			<RouterJump data={data} content={val} actions={actions} />
 		)
-	}
-	//日期范围
-	renderDate(cfg, con, val, key, index){
-		let defaultValue = val ? JSON.parse(val) : ''
-		return (<DatePickerRY defaultValue={defaultValue} onChange={value=> this.onChange(value,con,key,cfg,index)}></DatePickerRY>)
-	}   
+	} 
 	// 上传图片
 	renderImage(cfg, con, val, key, index) {
 		let { data } = this.props
@@ -245,8 +240,13 @@ class EditContent extends React.Component {
 			/>
 		)
 	} 
+	//日期范围
+	/*renderDate(cfg, con, val, key, index){
+		let defaultValue = val ? JSON.parse(val) : ''
+		return (<DatePickerRY defaultValue={defaultValue} onChange={value=> this.onChange(value,con,key,cfg,index)}></DatePickerRY>)
+	} */
 	// 滑块
-	renderSlider(cfg, con, val, key, index) {
+	/*renderSlider(cfg, con, val, key, index) {
 		return (
 			<Row>
 				<Col span={12}>
@@ -265,7 +265,7 @@ class EditContent extends React.Component {
 				</Col>
 			</Row>
 		)
-	}
+	}*/
 	renderSwitch(cfg, con, val, key, index) {
 		return (
 			<Switch

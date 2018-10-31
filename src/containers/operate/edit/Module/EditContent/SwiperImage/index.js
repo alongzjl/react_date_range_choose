@@ -32,13 +32,22 @@ class SwiperImage extends React.Component {
 		let { curData }    = editConfig
 		let { content }    = data.data
 		let { parentComp } = curData
-		content.push({
-			img: { type: 'custom', img: '' },
-			router: {},
-			type:'image',
-			delayOnly:5,
-			date:''
-		})
+		if(getEnv() === 'business'){ 
+			content.push({
+				img: { type: 'custom', img: '' },
+				router: {},
+				type:'image',
+				delayOnly:5,
+				date:''
+			})
+		}else{
+			content.push({
+				img: { type: 'custom', img: '' },
+				router: {},
+				type:'image'
+			})
+		}
+		
 		actions.updateComp(null, parentComp? parentComp: data)
 	} 
 	addVideo() {
@@ -49,11 +58,18 @@ class SwiperImage extends React.Component {
 		let { curData }    = editConfig
 		let { content }    = data.data
 		let { parentComp } = curData
-		content.push({
-			img: { type: 'custom', video: '',preview:'' },
-			type:'video',  
-			date:''   
-		})    
+		if(getEnv() === 'business'){
+			content.push({
+				img: { type: 'custom', video: '',preview:'' },
+				type:'video',  
+				date:''   
+			}) 
+		}else{ 
+			content.push({
+				img: { type: 'custom', video: '',preview:'' },
+				type:'video'  
+			}) 
+		}
 		actions.updateComp(null, parentComp? parentComp: data)
 	} 
 	render() {

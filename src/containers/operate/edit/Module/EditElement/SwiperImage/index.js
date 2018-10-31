@@ -18,43 +18,51 @@ class RYSwiper extends React.Component {
 		content:'',
 		type:1, //1--一张图片  2--一个视频 3--图片集合且delay一致 4--其他
 		newContent:[],
-		swiperOptions:''
+		swiperOptions:'',
+		first:false
 	}
 	componentDidMount(){
-		this.getData(this.props)
+		this.content_show()
 	}
 	componentWillReceiveProps(props){
-		this.getData(props)
-	}
+		this.content_show()
+	} 
 	intervalTimer = () => {
 		this.content_show()
-		clearInterval(this.timer)
-		this.timer = setInterval(this.content_show,60000)
-	}  
+		//this.timer = setInterval(this.content_show,60000)
+	}     
 	content_show = () => {
-		let objReturn = content_do(this.state.content),
+		let contentOri = JSON.stringify(this.props.data.data.content),
+			objReturn = content_do(contentOri),
 			content = objReturn.content,
 			date = objReturn.date 
 		if(getAttr(content) == 'Array'){
 			let type = this.oneSwiper(content)
-			sameCheck(this.state.newContent,content) ? this.setState({newContent:content,type:type}) : null
+			sameCheck(this.state.newContent,content) ? this.setState({newContent:content,type:type,first:true}) : null
 			clearInterval(this.timer)
 			return false
-		}  
+		}   
 		let now = new Date().getTime()
 		date.map((_,i)=>{
 			if(i == date.length-1){
 				if(now >= _){
 					let arr_content = content[_],
 						type = this.oneSwiper(arr_content)
-					sameCheck(this.state.newContent,arr_content) ? this.setState({newContent:arr_content,type:type}) : null
+					sameCheck(this.state.newContent,arr_content) ? this.setState({newContent:arr_content,type:type,first:true}) : null
 					clearInterval(this.timer)
+				}  
+			}else if(i == 0){
+				if(_ > now){ 
+					let arr_start = JSON.parse(contentOri) 
+					arr_start = arr_start.filter(_=>_.date == '')
+					let t = this.oneSwiper(arr_start)
+					sameCheck(this.state.newContent,arr_start) ? this.setState({newContent:arr_start,type:t,first:true}) : null
 				} 
 			}else{
 				if(now >= _ && now < date[i+1]){
 					let arr_content = content[_],
 						type = this.oneSwiper(arr_content)
-					sameCheck(this.state.newContent,arr_content) ? this.setState({newContent:arr_content,type:type}) : null
+					sameCheck(this.state.newContent,arr_content) ? this.setState({newContent:arr_content,type:type,first:true}) : null
 				} 
 			}
 		}) 
@@ -71,16 +79,20 @@ class RYSwiper extends React.Component {
 		return type
 	}
 	getData = props => {
-		let { data } = props,
+		/*let { data } = props,
 			{ feature} = data, 
 			swiperOptions = JSON.stringify(feature.swiperOptions),
 			content = JSON.stringify(data.data.content)
 		if(this.state.content != content || this.state.swiperOptions != swiperOptions){
-			this.setState({content:content,swiperOptions:swiperOptions},()=>{this.intervalTimer()})
-		} 
+			this.setState({content:content,swiperOptions:swiperOptions,first:false},()=>{this.intervalTimer()})
+		} */ 
 	} 
 	componentWillUnmount(){
 		clearInterval(this.timer)
+	}  
+	shouldComponentUpdate(newProps, newState){
+		//return newState.first
+		return true
 	}  
 	render(){ 
 		let type = this.state.type,renderDom
@@ -122,10 +134,10 @@ class SwiperImage extends React.Component {
 	state = {
 		random: Date.now() + parseInt(Math.random()*1000),
 		realIndex: 0
-	}
+	} 
 	componentWillReceiveProps(props) {
 		this.init(props);
-	}
+	}  
 	componentDidMount() {
 		this.init(this.props)
 	} 

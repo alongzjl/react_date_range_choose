@@ -12,7 +12,7 @@ import { connect }  from 'react-redux'
 import * as actions from 'actions'
 
 import Color       from 'compEdit/EditCommon/Color'
-import { Card, Checkbox, Collapse, Icon, Input, InputNumber, Radio, Select, Switch } from 'antd'
+import {Row, Col,  Card, Checkbox, Collapse, Icon, Input, InputNumber, Radio, Select, Switch,Slider } from 'antd'
 const  { TextArea } = Input
 const  { Panel }    = Collapse
 const Option = Select.Option
@@ -133,10 +133,10 @@ class EditContent extends React.Component {
 		)
 	} 
 	//日期范围
-	renderDate(cfg, con, val, key, index){
+	renderDate(cfg, data, obj, val, key, index){
 		let defaultValue = val ? JSON.parse(val) : ''
-		return (<DatePickerRY defaultValue={defaultValue} onChange={value=> this.onChange(value,con,key,cfg,index)}></DatePickerRY>)
-	} 
+		return (<DatePickerRY defaultValue={defaultValue} onChange={value=> this.onChange(value,key,obj,index)}></DatePickerRY>)
+	}    
 	// 跳转路由
 	renderRouter(cfg, data, obj, val, key, index) {
 		let { actions } = this.props
@@ -191,6 +191,27 @@ class EditContent extends React.Component {
 				defaultValue={val} onChange={v => this.onChange(v.target.value, key, obj, index)}
 				style={{ width: '100%' }}
 			/>
+		)
+	}
+	// 滑块
+	renderSlider(cfg,data, obj, val, key, index) {
+		return (
+			<Row>
+				<Col span={12}>
+					<Slider
+						min={cfg.min || 0} max={cfg.max || 100} step={cfg.step || 1}
+						value={val} onChange={v => this.onChange(v, key, obj, index)}
+					/>
+				</Col> 
+				<Col span={3}></Col>
+				<Col span={9}>
+					<InputNumber
+						min={cfg.min || 0} max={cfg.max || 100} step={cfg.step || 1}
+						value={val} onChange={v => this.onChange(v, key, obj, index)}
+						style={{ width: '100%' }}
+					/>
+				</Col>
+			</Row>
 		)
 	}
 	// 颜色
@@ -294,7 +315,9 @@ class EditContent extends React.Component {
 			let val    = content[p]
 			let auth   = data.auth.content[p]
 			let render = me[`render${cm.type}`]
-			if(p == 'date' || p == 'delayOnly') auth = true // 商家轮播设置时间段显示
+			if(p == 'date' || p == 'delayOnly') {
+				auth = true // 商家轮播设置时间段显示
+			}
 			if (!auth || !render) return false
 			// 根据样式类型渲染对应组件
 			let dom = this[`render${cm.type}`].bind(this, cm, parent, content, val, p, index)()

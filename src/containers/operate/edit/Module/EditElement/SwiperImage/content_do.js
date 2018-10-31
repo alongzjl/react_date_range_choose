@@ -1,6 +1,6 @@
 //时间段的处理
 export function content_do(content){
-	content = JSON.parse(content)
+	content = JSON.parse(content)  
 	content = content.map((_,i)=>{ _.index = i+1;return _ }) 
 	let no_date_content = content.filter(_=>_.date === '' || _.date == undefined)
 	let date_content = content.filter(_=>_.date&&_.date != '')
@@ -44,7 +44,7 @@ export function sameCheck(obj1,obj2){
 export function everySame(content){
 	let delayOnly = content[0].delayOnly,str = true
 	for(let i=0;i<content.length;i++){
-		if(content[i].delayOnly != delayOnly || content[i].type != 'image'){
+		if((content[i].delayOnly&&content[i].delayOnly != delayOnly) || content[i].type != 'image'){
 			str = false
 			break
 		}  

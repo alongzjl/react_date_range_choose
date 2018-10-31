@@ -55,7 +55,7 @@ export default class VideoList extends React.Component {
 		groupId:42,
 		attribute:''
 	} 
-	componentDidMount(){
+	componentWillMount(){
 		var getData = {
 			type: 2
 		}
