@@ -12,12 +12,12 @@ class Video extends React.Component {
 		random:`RYVideo_${Math.random()*1e5}`,
 		show:false,
 		first:0
-	}
+	} 
 	pausePlay = () => {
 		let dom = document.getElementById(this.state.random);
 		const num = this.state.first + 1
 		!this.state.show ? (dom.pause(),this.setState({show:true,first:num})) : (dom.play(),this.setState({show:false,first:num}))
-	}
+	} 
 	canPlay = () => {
 		const num = this.state.first + 1
 		this.setState({first:num})
@@ -58,12 +58,12 @@ class VideoContent extends React.Component {
 		const { random,content,canPlay,first } = this.props
 		return(
 				<video id={random} 
-				src={configData.resourceBasePath+content.video.video } 
+				src={content.video.video } 
 				controls={false} 
 				autoPlay 
 				loop
 				onCanPlayThrough={first == 0 ? canPlay : null}
-				poster={configData.resourceBasePath+content.video.preview}>  
+				poster={content.video.preview}>  
 					您的浏览器不支持 video 标签。   
 				</video> 
 			)

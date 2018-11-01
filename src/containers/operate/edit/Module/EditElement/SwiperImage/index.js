@@ -110,7 +110,7 @@ class RYSwiper extends React.Component {
 //单独视频
 function OneVideo({content}){
 	if(content.length == 0) return false
-	return (<div className="e-video"> 
+	return (<div className="e-video" id="e-SwiperImage"> 
 					<video src={content[0].img.video} controls={false} autoPlay loop>
 						您的浏览器不支持 video 标签。
 					</video> 
@@ -122,7 +122,7 @@ function OneVideo({content}){
 function OneImage({content,prop}){
 	if(content.length == 0) return false
 	return (
-				<div className="e-img">
+				<div className="e-img" id="e-SwiperImage">
 					<img src={compImgFormat(prop, content[0].img)} />
 				</div>
 			)
@@ -163,7 +163,7 @@ class SwiperImage extends React.Component {
 	render() {
 		let { prop,content } = this.props
 		return ( 
-			<div className="e-SwiperImage">
+			<div className="e-SwiperImage" id="e-SwiperImage">
 				<div className={`swiper-container swiper-container_${this.state.random} outer_box`}>
 					<div className="swiper-wrapper">
 						{
@@ -257,14 +257,12 @@ class SwiperImageVideo extends React.Component {
 	            that.refs[`RYPlayer_${realIndex}`].load()
 	            that.refs[`RYPlayer_${realIndex}`].play()
 	            that.timerSlide = setTimeout(()=>{
-	               debugger
 	               that.mySwiperImage && !that.mySwiperImage.destroyed ? that.mySwiperImage.slideTo(next,that.state.speed,false) : null
 	            },player.duration*1000)
 	         }else{  
 	         	 let delay = con.delayOnly ? con.delayOnly*1000 : that.state.delay
 	         	  that.timerSlide = setTimeout(()=>{
-	               debugger
-					that.mySwiperImage && !that.mySwiperImage.destroyed ? that.mySwiperImage.slideTo(next,that.state.speed,false) : null
+	               that.mySwiperImage && !that.mySwiperImage.destroyed ? that.mySwiperImage.slideTo(next,that.state.speed,false) : null
 	         	 },delay)
 	         }      
 	    }) 
@@ -287,7 +285,7 @@ class SwiperImageVideo extends React.Component {
 	    		this.mySwiperImage && !this.mySwiperImage.destroyed ? this.mySwiperImage.slideTo(activeIndex+1,this.state.speed,false) : null
 	    	},delay);  
 	    }
-	}; 
+	};  
 	componentWillUnmount() {
 		destroySwiper(this.mySwiperImage)
 	};

@@ -14,7 +14,7 @@ import Text              from 'reviewTem/EditElement/Text'
 import QrcodeRY          from 'reviewTem/EditElement/QrcodeRY'
 import Button            from 'reviewTem/EditElement/Button'
 import Video             from 'reviewTem/EditElement/Video'
-import SwiperImage       from 'reviewTem/EditElement/SwiperImage'
+import RYSwiperShow      from 'reviewTem/EditElement/swiperImage'
 import WonderfulActivity from 'reviewTem/EditElement/WonderfulActivity'
 import Time              from 'reviewTem/EditElement/Comp/Common/Time'
 import Weather           from 'reviewTem/EditElement/Comp/Common/Weather'
@@ -23,7 +23,7 @@ import Map2D             from 'reviewTem/EditElement/Map2D'
 import Navigation        from 'reviewTem/EditElement/Navigation'
 import NavigationFloat   from 'reviewTem/EditElement/NavigationFloat'
 import DateWeather       from 'reviewTem/EditElement/Comp/DateWeather'
-import StoreList         from 'reviewTem/EditElement/Comp/StoreList'
+import StoreList         from 'reviewTem/EditElement/Comp/StoreList' 
 import StoreListNew      from 'reviewTem/EditElement/Comp/StoreListNew'
 import StoreDetails      from 'reviewTem/EditElement/Comp/StoreDetails'
 import StoreDetailsNew   from 'reviewTem/EditElement/Comp/StoreDetailsNew'
@@ -90,7 +90,7 @@ class EditElementCommon extends React.Component {
 							 	case "text" : compCon = (<Text data={element} type={`Style${styleIdx + 1}`} animateParams={animateParams} animate={this.leaveAnimate} action={action} />); break
 							 	case "button" : compCon = (<Button data={element} type={`Style${styleIdx + 1}`} animateParams={animateParams} animate={this.leaveAnimate} action={action} />); break
 							 	case "video" : compCon = (<Video data={element} type={`Style${styleIdx + 1}`} />); break
-							 	case "swiperImage" : compCon = (<SwiperImage data={element} type={`Style${styleIdx + 1}`} animateParams={animateParams} animate={this.leaveAnimate} action={action} />); break
+							 	case "swiperImage" : compCon = (<RYSwiperShow data={element} type={`Style${styleIdx + 1}`} animateParams={animateParams} animate={this.leaveAnimate} action={action} />); break
 							 	case "wonderfulActivity" : compCon = (<WonderfulActivity activities={element.data.content} data={element} type={`Style${styleIdx + 1}`} />); break
 							 	case "time" : compCon = (<Time data={element} type={`Style${styleIdx + 1}`} />); break
 							 	case "weather" : compCon = (<Weather data={element} type={`Style${styleIdx + 1}`} />); break

@@ -21,6 +21,7 @@ const Option = Select.Option
 
 import RouterJump        from 'compEdit/EditCommon/RouterJump'
 import ImageUploadComp   from 'compEdit/EditCommon/ImageUploadComp'
+import ImageAndVideoComp   from 'compEdit/EditCommon/ImageAndVideoComp'
 import HtmlUpload        from 'compEdit/EditCommon/HtmlUpload'
 import CompLayout        from 'compEdit/EditCommon/CompLayout'
 import ChildElement      from './ChildElement'
@@ -35,7 +36,6 @@ import ThemeColor        from './ThemeColor'
 import CatgByGoods       from './CatgByGoods'
 import SwiperByGoods     from './SwiperByGoods'
 import { filterContent,contentSwiper }     from './filter'
-
 import * as variable from 'var'
 
 var conMap   = variable.contentMap
@@ -185,6 +185,20 @@ class EditContent extends React.Component {
 				index={index}
 			/>
 		)
+	}
+	//图片视频
+	renderSwiperTwo(cfg, con, val, key, index) {
+		let { data } = this.props
+		return (
+				<ImageAndVideoComp
+					data={data}
+					action={'updateComp'}
+					img={val}
+					con={con}
+					style={{ width: '100%' }}
+					index={index}
+				/>
+			)
 	}
 	// 上传组件
 	renderFile(cfg, con, val, key, index) {
@@ -347,15 +361,15 @@ class EditContent extends React.Component {
 
 	renObj(data, content, index) {
 		content = filterContent(data,content)
-		let ci = 0,showT = content.type == 'video' ? conMap['video'] : conMap['img']
+		let ci = 0
 		let childNode = Object.keys(content).map((p, i) => {
 			if (!conMap[p] || contentFieldFilter[envType][p]) return false
-			let cm     = p == 'img' ? showT : conMap[p]
-			let val    = content[p]   
-			let render = this[`render${cm.type}`]
-			if (!render) return false
-			// 根据样式类型渲染对应组件
-			let dom = this[`render${cm.type}`].bind(this, cm, content, val, p, index)()
+			let cm     = p=="img"&&content.type=="video" ? conMap['video'] : conMap[p]
+			let val    = content[p]     
+			let render = this[`render${cm.type}`] 
+			if (!render) return false 
+			// 根据样式类型渲染对应组件 
+			let dom = data.name == 'swiperImage'&&p=="img" ? this['renderSwiperTwo'].bind(this, cm, content, val, p, index)() : this[`render${cm.type}`].bind(this, cm, content, val, p, index)()
 			ci++
 			return (
 				<div className="pgs-row" key={i} style={{display:`${content.isShowDom&&(p=='size'||p=='pageSwitch') ? content.isShowDom :'flex'}`}}>
@@ -396,15 +410,15 @@ class EditContent extends React.Component {
 			compCon = compContent(compName, this.props, this.updateComp)
 
 		if (content.length) {
-			activeKey = Array.from(new Array(content.length + 1), (_, i) => `${i}`)
+			activeKey = Array.from(new Array(content.length), (_, i) => `${i}`)
 			content = contentSwiper(compName,content)
 			childNode = content.map((_, i) => {
-				return (
-					<Panel header={`内容${i + 1}`} key={i + 1}>
-						{ this.renObj(data, _, i) }
-					</Panel>
-				)
-			})
+				return ( 
+					<Panel header={`内容${i + 1}`} key={`${i}`}> 
+						{ this.renObj(data, _, i) }       
+					</Panel>   
+				)  
+			})  
 		} else {
 			activeKey = ['0']
 			let con = this.renObj(data, content)
@@ -419,7 +433,7 @@ class EditContent extends React.Component {
 		}
 		if (parentComp) {
 			mockData = this.createMock(compName, da)
-		}
+		}   
 		return (
 			<section className="ry-roll-screen-config">
 				{
@@ -436,9 +450,9 @@ class EditContent extends React.Component {
 					: null
 				}
 				{ compCon }
-				<Collapse defaultActiveKey={activeKey}>
-					{ childNode }
-				</Collapse>
+				<Collapse defaultActiveKey={activeKey} activeKey={activeKey}>
+					{ childNode } 
+				</Collapse> 
 			</section>
 		)
 	}

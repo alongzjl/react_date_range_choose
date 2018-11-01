@@ -7,7 +7,7 @@ import React from 'react'
 import './index.less'
 
 import  SwiperSame  from '../SwiperSame'
-
+import PictureAndVideo from 'compEdit/EditCommon/PictureAndVideo'
 import { Row, Col, Collapse, Icon } from 'antd'
 const  { Panel }    = Collapse
 
@@ -18,13 +18,14 @@ class SwiperImage extends React.Component {
 		super(props)
 
 	}
-	componentWillMount() {}
-
-	componentDidMount() {}
-
-	componentWillUnmount() {}
-
-	addImg() {
+	state = {
+		init:false
+	}
+	addImg = () => {
+		this.addImgVideoModal.show()
+		this.setState({init:true})
+	}
+	enter = list => { 
 		let props = this.props.data
 		if (!props.editConfig) props = props.data
 		if (!props.editConfig) return
@@ -32,46 +33,46 @@ class SwiperImage extends React.Component {
 		let { curData }    = editConfig
 		let { content }    = data.data
 		let { parentComp } = curData
-		if(getEnv() === 'business'){ 
-			content.push({
-				img: { type: 'custom', img: '' },
-				router: {},
-				type:'image',
-				delayOnly:5,
-				date:''
-			})
-		}else{
-			content.push({
-				img: { type: 'custom', img: '' },
-				router: {},
-				type:'image'
-			})
-		}
-		
+		let newContent =  this.do_content(list,content)
+		data.data.content = newContent
 		actions.updateComp(null, parentComp? parentComp: data)
 	} 
-	addVideo() {
-		let props = this.props.data
-		if (!props.editConfig) props = props.data
-		if (!props.editConfig) return
-		let { data, actions, editConfig } = props
-		let { curData }    = editConfig
-		let { content }    = data.data
-		let { parentComp } = curData
-		if(getEnv() === 'business'){
-			content.push({
-				img: { type: 'custom', video: '',preview:'' },
-				type:'video',  
-				date:''   
-			}) 
-		}else{ 
-			content.push({
-				img: { type: 'custom', video: '',preview:'' },
-				type:'video'  
-			}) 
-		}
-		actions.updateComp(null, parentComp? parentComp: data)
+	do_content = (list,content) => {
+		list = list.map(_=>{
+			let item = '' 
+			if(_.type == 2){ 
+				item = getEnv() === 'business' ? {img:{type:'custom',video:_.url,preview:_.preview},attribute:_.attribute,router:{},type:'video',date:''} : {img:{type:'custom',video:_.url,preview:_.preview},attribute:_.attribute,router:{},type:'video'}
+			}else{
+				item = getEnv() === 'business' ? {img:{type:'custom',img:_.url},attribute:_.attribute,router:{},type:'image',delayOnly:5,date:''} : {img:{type:'custom',img:_.url},attribute:_.attribute,router:{},type:'image'}
+			} 
+			return item
+		})
+		let newList = deepCopy(list)
+		content.map(_=>{
+			list.map(v=>{
+				if(v.type == "image" && _.type == "image"){
+					if(v.img.img == _.img.img){
+						newList = newList.filter(s=>s.img.img != v.img.img)
+						return
+					}
+				}else if(v.type == 'video' && _.type == "video"){
+					if(v.img.video == _.img.video){
+						newList = newList.filter(s=>s.img.video != v.img.video)
+						return
+					}
+				} 
+			})
+		})   
+		let newContent = content.concat(newList)
+		newContent = newContent.map((_,i)=>{
+			_.index = i+1
+			return _
+		}) 
+		return newContent
 	} 
+	initFn = () =>{
+		this.setState({init:false})
+	}
 	render() {
 		let props = this.props.data
 		if (!props.editConfig) props = props.data
@@ -90,27 +91,23 @@ class SwiperImage extends React.Component {
 								<div className="pg-img-upload">
 									<Row type="flex" align="middle" style={{ width: '100%' }}>
 										<Col span={9}>
-											<div className="add_img" onClick={this.addImg.bind(this)}>
-												<div className="add_text"><Icon type="picture" /></div>
+											<div className="add_img" onClick={this.addImg}>
+												<div className="add_text"><Icon type="plus" /></div>
 											</div>
 										</Col>
 									</Row>
 								</div>
 							</div> 
-							<div className="pgsr-ctrl">
-								<div className="pg-img-upload">
-									<Row type="flex" align="middle" style={{ width: '100%' }}>
-										<Col span={9}>
-											<div className="add_img" onClick={this.addVideo.bind(this)}>
-												<div className="add_text"><Icon type="video-camera" /></div>
-											</div>
-										</Col>
-									</Row>
-								</div>
-							</div>
 						</div>
 					</Panel>
 				</Collapse>
+				<PictureAndVideo
+					ref={com => { this.addImgVideoModal = com }}
+					enter={this.enter}
+					init={this.state.init}
+					initFn={this.initFn}
+
+				/>
 			</div>
 		)
 	}
