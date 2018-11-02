@@ -82,7 +82,7 @@ const dataFormat = {
 								})
 								break
 							default:
-								if(org.length == 0) return //如果默认数据没有的话返回
+								//if(org.length == 0) return //如果默认数据没有的话返回
 								da.map((_, i) => {
 									this.plus(_, org[i] || org[0], i, da)
 								})
@@ -137,7 +137,7 @@ const dataFormat = {
 								})
 								break
 							default:
-								if(org.length == 0) return  //如果默认数据没有的话返回
+								//if(org.length == 0) return  //如果默认数据没有的话返回
 								da.map((_, i) => {
 									this.slim(_, org[i] || org[0], i, da)
 								})
