@@ -10,7 +10,7 @@ import './index.less'
 import { hashHistory } from 'react-router'
 import { bindActionCreators } from 'redux'
 import { connect }  from 'react-redux'
-
+import ReviewTemplate from 'compEdit/EditCommon/ReviewTemplate' 
 const comp     = require('state/comp')
 const compC    = require('state/compChild')
 const compP    = require('state/compParent')
@@ -60,7 +60,10 @@ class Header extends React.Component {
 	formatPage(obj) {
 		obj.elements.map(_ => this.formatEle(_))
 	}
-
+	//预览模板
+	review(){
+		this.reviewModal.show()
+	}
 	saveData() {
 		let { editConfig, location } = this.props
 		let { query } = location
@@ -148,6 +151,12 @@ class Header extends React.Component {
 
 				<div className="peh-right">
 					<section className="comp-list comp-list-b">
+						<div className="cl-item" onClick={this.review.bind(this)}>
+							<div className="cl-item-icon">
+								<img src={require(`images/icon/theme.png`)}/>
+							</div>
+							预览
+						</div>
 						<div className="cl-item" onClick={this.selectTheme.bind(this)}>
 							<div className="cl-item-icon">
 								<img src={require(`images/icon/theme.png`)}/>
@@ -168,6 +177,10 @@ class Header extends React.Component {
 						</div>
 					</section>
 				</div>
+				<ReviewTemplate 
+					ref={com => { this.reviewModal = com }} 
+					editConfig={this.props.editConfig}
+					actions={this.props.actions} />
 			</div>
 		)
 	}

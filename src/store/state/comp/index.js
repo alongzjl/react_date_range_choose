@@ -7,6 +7,8 @@ module.exports = {
 	picture:           authInit(require('./picture')),
 	// 轮播图
 	swiperImage:       authInit(require('./swiperImage')),
+	// 轮播图片和视频
+	swiperImgAndVideo: authInit(require('./swiperImgAndVideo')),
 	// 精彩活动
 	wonderfulActivity: authInit(require('./wonderfulActivity')),
 	// 文本

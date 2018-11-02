@@ -76,7 +76,11 @@ module.exports = [
 					key:  'navigationFloat', 
 				},
 			]
-		},
+		},{
+			icon: 'carousel',
+			name: '图片/视频',
+			key:  'swiperImgAndVideo'
+		},/*,
 		{
 			icon: 'store',
 			name: '店铺列表',
@@ -177,10 +181,10 @@ module.exports = [
 					key:  'instroButton'
 				}
 			]
-		},
+		},*/
 		{
 			icon: 'store',
-			name: '店铺列表(新)',
+			name: '店铺列表',
 			key:  'storeList2',
 			child: [
 				{
@@ -222,7 +226,7 @@ module.exports = [
 		},
 		{
 			icon: 'storeDetails',
-			name: '店铺详情(新)',
+			name: '店铺详情',
 			key:  'storeDetails2',
 			child: [
 				{

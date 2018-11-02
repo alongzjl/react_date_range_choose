@@ -7,6 +7,7 @@ module.exports = {
 	splitLine:         1,
 	button:            1,
 	swiperImage:       1,
+	swiperImgAndVideo: 1,
 	wonderfulActivity: 1,
 	time:              1,
 	weather:           1,
@@ -25,4 +26,4 @@ module.exports = {
 	storeList2:        1,
 	storeDetails2:     1,
 	qrcode:            1,
-}
+}  

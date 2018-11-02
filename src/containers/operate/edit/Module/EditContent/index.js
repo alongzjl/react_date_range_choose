@@ -26,7 +26,7 @@ import HtmlUpload        from 'compEdit/EditCommon/HtmlUpload'
 import CompLayout        from 'compEdit/EditCommon/CompLayout'
 import ChildElement      from './ChildElement'
 import SwiperImage       from './SwiperImage'
-//import DatePickerRY      from './DatePickerRY'
+import SwiperImgAndVideo from './SwiperImgAndVideo'
 import Navigation        from './Navigation'
 import NavigationFloat   from './NavigationFloat'
 import Weather           from './Weather'
@@ -59,12 +59,13 @@ const compContent = (name, data, updateComp) => {
 		weather:           <Weather           {...props} />,
 		wonderfulActivity: <WonderfulActivity {...props} />,
 		swiperImage:       <SwiperImage       {...props} />,
+		swiperImgAndVideo: <SwiperImgAndVideo {...props} />,
 		listByStore:       <ListByStore       {...props} />,
 		map2D:             <ThemeColor        {...props} />,
 		floorMap:          <ThemeColor        {...props} />,
 		catgByGoods:       <CatgByGoods       {...props} />,
 		swiperByGoods:     <SwiperByGoods     {...props} />
-	}
+	} 
 	return render[name]
 }
 
@@ -393,7 +394,9 @@ class EditContent extends React.Component {
 		if (da) obj.layout = plMap[cn]? da.style[plMap[cn]]: da.layout
 		return obj
 	}
-
+	cb = e => {
+		console.log(e)
+	}
 	render() {
 		let { data, actions, editConfig } = this.props
 		let compName = data.name
@@ -450,7 +453,7 @@ class EditContent extends React.Component {
 					: null
 				}
 				{ compCon }
-				<Collapse defaultActiveKey={activeKey} activeKey={activeKey}>
+				<Collapse defaultActiveKey={activeKey} activeKey={activeKey} onChange={this.cb}>
 					{ childNode } 
 				</Collapse> 
 			</section>

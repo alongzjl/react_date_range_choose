@@ -21,6 +21,7 @@ const RadioGroup  = Radio.Group
 
 import RouterJump      from 'compEdit/EditCommon/RouterJump'
 import ImageUploadComp from 'compEdit/EditCommon/ImageUploadComp'
+import ImageAndVideoComp   from 'compEdit/EditCommon/ImageAndVideoComp'
 import DatePickerRY      from 'compEdit/EditContent/DatePickerRY'
 import SwiperImage       from 'compEdit/EditContent/SwiperImage'
 import Navigation        from 'compEdit/EditContent/Navigation'
@@ -169,6 +170,19 @@ class EditContent extends React.Component {
 			/>
 		)
 	}
+	//图片视频
+	renderSwiperTwo(cfg, data,obj, val, key, index) {
+		return (
+				<ImageAndVideoComp
+					data={data}
+					action={'updateComp'}
+					img={val}
+					con={obj}
+					style={{ width: '100%' }}
+					index={index}
+				/>
+			)
+	}
 	// 网址
 	renderUrl(cfg, data, obj, val, key, index) {
 		return (
@@ -304,23 +318,23 @@ class EditContent extends React.Component {
 
 		return (
 			<div>{ childNode }</div>
-		)
+		) 
 	}
 	renObj(parent, data, content, index) {
 		let me = this
 		let ci = 0
 		let childNode = Object.keys(content).map((p, i) => {
 			if (!conMap[p]) return false
-			let cm     = conMap[p]
+			let cm     = p=="img"&&content.type=="video" ? conMap['video'] : conMap[p]
 			let val    = content[p]
 			let auth   = data.auth.content[p]
 			let render = me[`render${cm.type}`]
 			if(p == 'date' || p == 'delayOnly') {
 				auth = true // 商家轮播设置时间段显示
-			}
+			} 
 			if (!auth || !render) return false
 			// 根据样式类型渲染对应组件
-			let dom = this[`render${cm.type}`].bind(this, cm, parent, content, val, p, index)()
+			let dom = data.name == 'swiperImage'&&p=="img" ? this['renderSwiperTwo'].bind(this, cm,parent, content, val, p, index)() : this[`render${cm.type}`].bind(this, cm,parent, content, val, p, index)()
 			ci++
 			return (
 				<div className="pgs-row" key={i}>
@@ -331,7 +345,7 @@ class EditContent extends React.Component {
 					}
 				</div>
 			)
-		})
+		}) 
 		if (!ci) return false
 		return childNode
 	}

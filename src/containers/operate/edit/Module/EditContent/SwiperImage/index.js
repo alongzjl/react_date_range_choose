@@ -36,17 +36,17 @@ class SwiperImage extends React.Component {
 		let newContent =  this.do_content(list,content)
 		data.data.content = newContent
 		actions.updateComp(null, parentComp? parentComp: data)
-	} 
+	}  
 	do_content = (list,content) => {
 		list = list.map(_=>{
 			let item = '' 
 			if(_.type == 2){ 
-				item = getEnv() === 'business' ? {img:{type:'custom',video:_.url,preview:_.preview},attribute:_.attribute,router:{},type:'video',date:''} : {img:{type:'custom',video:_.url,preview:_.preview},attribute:_.attribute,router:{},type:'video'}
+				item = getEnv() === 'business' ? {img:{type:'custom',video:_.url,preview:_.preview},attribute:_.attribute,type:'video',date:''} : {img:{type:'custom',video:_.url,preview:_.preview},attribute:_.attribute,type:'video'}
 			}else{
 				item = getEnv() === 'business' ? {img:{type:'custom',img:_.url},attribute:_.attribute,router:{},type:'image',delayOnly:5,date:''} : {img:{type:'custom',img:_.url},attribute:_.attribute,router:{},type:'image'}
 			} 
 			return item
-		})
+		}) 
 		let newList = deepCopy(list)
 		content.map(_=>{
 			list.map(v=>{
@@ -62,14 +62,10 @@ class SwiperImage extends React.Component {
 					}
 				} 
 			})
-		})   
+		})    
 		let newContent = content.concat(newList)
-		newContent = newContent.map((_,i)=>{
-			_.index = i+1
-			return _
-		}) 
 		return newContent
-	} 
+	}  
 	initFn = () =>{
 		this.setState({init:false})
 	}
@@ -106,7 +102,6 @@ class SwiperImage extends React.Component {
 					enter={this.enter}
 					init={this.state.init}
 					initFn={this.initFn}
-
 				/>
 			</div>
 		)
