@@ -114,19 +114,19 @@ module.exports = {
 			title:  '0'		// 标题样式
 		},
 		layout: 1,
-		swiperOptions: {
+		swiperOptions: { 
 			direction: 'horizontal',//轮播方向 vertical
 			effect:'slide',// 'slide' or 'fade' or 'cube' or 'coverflow' or 'flip'
 			autoplay: true,// 播放开关
 			loop : true,//循环
-			speed: 1,	// 切换速度
+			speedBig: 1,	// 切换速度
 			slideOptions:{
 				spaceBetween:0,
 				slidesPerView:1,
 				centeredSlides:true,
-			},
+			},       
 			autoplayOptions: {
-			delay: 1,//1秒切换一次
+			delayBig: 5,//1秒切换一次
 			//stopOnLastSlide: false,//如果设置为true，当切换到最后一个slide时停止自动切换。（loop模式下无效）。
 			disableOnInteraction: false,//用户操作swiper之后，是否禁止autoplay。默认为true：停止。
 			//reverseDirection: false,//开启反向自动轮播。

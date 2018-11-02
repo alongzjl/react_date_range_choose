@@ -47,8 +47,8 @@ const ctMap = variable.composeTypeMap
 var animeMap = variable.animeCompMap,
 	aStyle   = animeMap.style
 
-const compContent = (name, data, actions, type, idx, csn) => {
-	var props  = { data, actions, type, idx, csn },
+const compContent = (name, data, actions, type, idx, csn,contentEditable) => {
+	var props  = { data, actions, type, idx, csn ,contentEditable},
 		render = {
 		picture:           <Picture           {...props} />,
 		web:               <Web               {...props} />,
@@ -96,7 +96,11 @@ class EditElement extends React.Component {
 		actions.updateCur(curData)	// 更新 当前数据
 		actions.selectComp(data)
 	}
-
+	changeEditable = (item, idx) => {
+		let { actions } = this.props
+		item['feature'].editStatus != undefined ? item['feature'].editStatus = true : null
+		actions.updateComp(idx, item)
+	} 
 	render() {
 		let { data, actions, editConfig, location } = this.props
 		let { pageGroupIdx, pageIdx, compIdx } = editConfig.curData
@@ -122,7 +126,9 @@ class EditElement extends React.Component {
 				ani       = _.data.animation,
 				aniCls    = '',
 				aniSty    = {},
-				compCon   = compContent(compName, _, actions, `Style${styleIdx + 1}`, i, csn)
+				editStatus = _.feature&&_.feature.editStatus,
+				disableDragging = i === compIdx ? editStatus : false, 
+				compCon   = compContent(compName, _, actions, `Style${styleIdx + 1}`, i, csn,disableDragging)
 			
 			if (!compCon) return false
 
@@ -144,6 +150,7 @@ class EditElement extends React.Component {
 					className={`pge-layout${i === compIdx? ' s-active': ''} ${aniCls? aniCls: ''}`}
 					style={{ ...layout, ...aniSty }}
 					onClick={e => this.selectComp(e, _, i)}
+					onDoubleClick={()=>this.changeEditable(_,i)}
 				>
 					{ compCon }
 				</div>

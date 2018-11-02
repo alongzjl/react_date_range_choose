@@ -9,7 +9,7 @@ import './index.less'
 import Custom from '../Custom'
 
 
-class DateWeather extends React.Component {
+class DateWeatherShow extends React.Component {
 	constructor(props) {
 		super(props)
 	}
@@ -31,4 +31,4 @@ class DateWeather extends React.Component {
 	}
 }
 
-export default DateWeather
+export default DateWeatherShow

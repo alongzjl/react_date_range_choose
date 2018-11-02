@@ -188,7 +188,7 @@ class EditContent extends React.Component {
 		)
 	}
 	//图片视频
-	renderSwiperTwo(cfg, con, val, key, index) {
+	renderImgAndVideo(cfg, con, val, key, index) {
 		let { data } = this.props
 		return (
 				<ImageAndVideoComp
@@ -366,12 +366,13 @@ class EditContent extends React.Component {
 		let childNode = Object.keys(content).map((p, i) => {
 			if (!conMap[p] || contentFieldFilter[envType][p]) return false
 			let cm     = p=="img"&&content.type=="video" ? conMap['video'] : conMap[p]
-			let val    = content[p]     
+			data.name == 'swiperImgAndVideo' ? cm.type = 'ImgAndVideo' : null
+			let val    = content[p]      
 			let render = this[`render${cm.type}`] 
 			if (!render) return false 
 			// 根据样式类型渲染对应组件 
-			let dom = data.name == 'swiperImage'&&p=="img" ? this['renderSwiperTwo'].bind(this, cm, content, val, p, index)() : this[`render${cm.type}`].bind(this, cm, content, val, p, index)()
-			ci++
+			let dom = this[`render${cm.type}`].bind(this, cm, content, val, p, index)()
+			ci++ 
 			return (
 				<div className="pgs-row" key={i} style={{display:`${content.isShowDom&&(p=='size'||p=='pageSwitch') ? content.isShowDom :'flex'}`}}>
 					<div className="pgsr-name">{ cm.name }</div>

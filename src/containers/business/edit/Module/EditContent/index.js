@@ -171,7 +171,7 @@ class EditContent extends React.Component {
 		)
 	}
 	//图片视频
-	renderSwiperTwo(cfg, data,obj, val, key, index) {
+	renderImgAndVideo(cfg, data,obj, val, key, index) {
 		return (
 				<ImageAndVideoComp
 					data={data}
@@ -326,6 +326,7 @@ class EditContent extends React.Component {
 		let childNode = Object.keys(content).map((p, i) => {
 			if (!conMap[p]) return false
 			let cm     = p=="img"&&content.type=="video" ? conMap['video'] : conMap[p]
+			data.name == 'swiperImgAndVideo' ? cm.type = 'ImgAndVideo' : null
 			let val    = content[p]
 			let auth   = data.auth.content[p]
 			let render = me[`render${cm.type}`]
@@ -334,7 +335,7 @@ class EditContent extends React.Component {
 			} 
 			if (!auth || !render) return false
 			// 根据样式类型渲染对应组件
-			let dom = data.name == 'swiperImage'&&p=="img" ? this['renderSwiperTwo'].bind(this, cm,parent, content, val, p, index)() : this[`render${cm.type}`].bind(this, cm,parent, content, val, p, index)()
+			let dom = this[`render${cm.type}`].bind(this, cm,parent, content, val, p, index)()
 			ci++
 			return (
 				<div className="pgs-row" key={i}>

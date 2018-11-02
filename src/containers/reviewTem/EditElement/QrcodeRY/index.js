@@ -3,7 +3,7 @@
 import React from 'react'
 import './index.less'
 const QRCode = require('qrcode.react')
-export default class QrcodeRY extends React.Component {
+export default class QrcodeRYShow extends React.Component {
 	componentWillMount() {}
 
 	componentDidMount() {}

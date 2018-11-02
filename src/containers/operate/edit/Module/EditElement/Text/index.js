@@ -34,7 +34,7 @@ class Text extends React.Component {
 	render() {
 		let { data, type,contentEditable } = this.props
 		let styleD = contentEditable ? {cursor:'auto'} : {cursor:'move'}
-		return (
+		return ( 
 			<div className={`e-text`} id="e-text">
 				<div 
 				ref="textDiv"

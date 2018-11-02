@@ -10,7 +10,7 @@ import JumpRouter from '../JumpRouter'
 import checkToJump from '../checkToJump'
 import './index.less'
 
-class Picture extends React.Component {
+class PictureShow extends React.Component {
 	state = {
 		random:`img_${parseInt(Math.random()*1e5)}`
 	}
@@ -37,4 +37,4 @@ class Picture extends React.Component {
 	} 
 }   
 
-export default Picture
+export default PictureShow

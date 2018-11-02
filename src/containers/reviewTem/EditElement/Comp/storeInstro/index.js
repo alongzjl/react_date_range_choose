@@ -8,7 +8,7 @@ import React from 'react'
 import './index.less'
 import Custom from '../Custom'
 
-class StoreInstro extends React.Component {
+class StoreInstroShow extends React.Component {
 	
  	
 	render() {  
@@ -24,4 +24,4 @@ class StoreInstro extends React.Component {
 	}
 }
  
-export default StoreInstro
+export default StoreInstroShow

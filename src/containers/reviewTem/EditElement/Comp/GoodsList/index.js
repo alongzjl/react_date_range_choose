@@ -8,7 +8,7 @@ import React from 'react'
 import './index.less'
 import Custom from '../Custom'
 
-export default class GoodsList extends React.Component {
+export default class GoodsListShow extends React.Component {
 	
 	state = {
 		paramsData:{mapParams:{catgId:'noCatgId'}},

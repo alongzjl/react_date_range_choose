@@ -263,9 +263,9 @@ class EditElement extends React.Component {
 				aniSty    = {},
 				lockAspectRatio = layout.lockAspectRatio,
 				editStatus = _.feature&&_.feature.editStatus;
-			disableDragging = i === compIdx ? editStatus : false
+			disableDragging = i === compIdx ? (compName == 'web' && _.data.content.url ? false : editStatus) : false
 			let compCon   = compContent(compName, _, actions, `Style${styleIdx + 1}`, i, csn, state.keyCtrl,disableDragging)
-			
+			 
 			if (!compCon) return false
 			if (ani.className) {
 				let item = aStyle[ani.className]

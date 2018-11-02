@@ -11,32 +11,36 @@ import Swiper from 'swiper'
 import 'swiper/dist/css/swiper.css'
 import './index.less'
 
-class WonderfulActivity extends React.Component {
+class WonderfulActivityShow extends React.Component {
 	constructor(props) {
 		super(props)
 	}
 	state = {
-		random: 1,
+		random: parseInt(Math.random()*10000),
 		realIndex:0
 	}
-	componentDidMount() { 
-		const number = parseInt(Math.random()*100);
-		let { activities } = this.props
-		this.init(this.props,this.state.random)
+	componentDidMount() {
+		this.init(this.props)
+	} 
+	componentWillReceiveProps(props) {
+		this.init(props)
 	}  
-	to(e) {
-		e.preventDefault()
-	}
-	init(props,random) {
+	init = props => {
 		let swiperOptions = props.data.feature.swiperOptions
-		swiperOptions = this.formatObj(swiperOptions,random)
-		this.mySwiperWon&&this.mySwiperWon.destory(false);
-		this.initSwiper(swiperOptions,random)
+		swiperOptions = this.formatObj(swiperOptions)
+		if(getAttr(this.mySwiperWon) == 'Array'){
+			this.mySwiperWon.map(_=>{
+				_.destroy(false)
+			})
+		}else{
+			this.mySwiperWon&&this.mySwiperWon.destroy(false)
+		}
+		this.initSwiper(swiperOptions)
 	}
-	initSwiper = (swiperOptions,random) => {
-		this.mySwiperWon = new Swiper(`.swiper-container_${random}`, swiperOptions)
-	}
-	formatObj(obj,random) {
+	initSwiper = swiperOptions => {
+		this.mySwiperWon = new Swiper(`.swiper-container_${this.state.random}`, swiperOptions)
+	} 
+	formatObj(obj) {
 		let new_obj = {};
 		for(var key in obj){ 
 			if(key == 'autoplay'&& obj[key]){
@@ -50,7 +54,7 @@ class WonderfulActivity extends React.Component {
 					new_obj[key] = obj[key];
 				}  
 			}   
-		}  
+		}   
 		new_obj.on = {
 			slideChange:()=>{
 				this.mySwiperWon ? this.setState({realIndex:this.mySwiperWon.realIndex}) : null
@@ -62,7 +66,13 @@ class WonderfulActivity extends React.Component {
 		return new_obj
 	}
 	componentWillUnmount() {
-		this.mySwiperWon&&this.mySwiperWon.destroy(false)
+		if(getAttr(this.mySwiperWon) == 'Array'){
+			this.mySwiperWon.map(_=>{
+				_.destroy(false)
+			})
+		}else{
+			this.mySwiperWon&&this.mySwiperWon.destroy(false)
+		}
 	}
 	render() {  
 		let { data,activities,name} = this.props
@@ -70,8 +80,8 @@ class WonderfulActivity extends React.Component {
 			<div className="e-WonderfulActivity">
 				{ 
 					<div style={{height:'100%'}}> 
-						<WonderfulContent props={this.props} activities={activities} random={this.state.random} />
-						<PageRYWon totalPage={activities.list.length} currentPage={this.state.realIndex} props={this.props} /> 
+						<WonderfulContentShow props={this.props} activities={activities} random={this.state.random} />
+						<PageRYWonShow totalPage={activities.list.length} currentPage={this.state.realIndex} props={this.props} /> 
 					</div> 
 				} 
 			</div> 
@@ -79,15 +89,8 @@ class WonderfulActivity extends React.Component {
 	}   
 }
 //轮播单独渲染，不重复渲染
-class WonderfulContent extends React.Component {
-	shouldComponentUpdate(nextProps,nextState){
-		if(nextProps.random == this.props.random){
-			return false
-		} else{
-			return true
-		}
-	}
-	render() {
+class WonderfulContentShow extends React.Component {
+	render() { 
 		let { random,activities,props } = this.props
 		activities = activities.list.map(_ => {
 			return _.img.img 
@@ -104,7 +107,7 @@ class WonderfulContent extends React.Component {
 	}
 } 
 //渲染分页显示组件 
-function PageRYWon({ totalPage,currentPage,props }){
+function PageRYWonShow({ totalPage,currentPage,props }){
 	return (
 			<section className="e-page">
 				<div className="ep-page">{
@@ -125,4 +128,4 @@ function PageRYWon({ totalPage,currentPage,props }){
 			</section>
 		) 
 }
-export default WonderfulActivity
+export default WonderfulActivityShow

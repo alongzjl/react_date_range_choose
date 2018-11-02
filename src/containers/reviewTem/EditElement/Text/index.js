@@ -9,7 +9,7 @@ import JumpRouter from '../JumpRouter'
 import checkToJump from '../checkToJump'
 import './index.less'
 
-class Text extends React.Component {
+class TextShow extends React.Component {
 	
 	toPage = data => {
 		const {animate,animateParams,action} = this.props,
@@ -42,4 +42,4 @@ class Text extends React.Component {
 	}
 }
 
-export default Text
+export default TextShow

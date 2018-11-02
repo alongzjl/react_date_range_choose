@@ -11,7 +11,7 @@ import './index.less'
 import JumpRouter from '../JumpRouter'
 import checkToJump from '../checkToJump'
 
-class NavigationFloat extends React.Component {
+class NavigationFloatShow extends React.Component {
 	
 	state = {
 		realIndex:0,
@@ -245,4 +245,4 @@ function OnlyNavigation({data,props,rysty,classAni,clickFunc}) {
 		</div>   
 	)   
 }
-export default NavigationFloat
+export default NavigationFloatShow

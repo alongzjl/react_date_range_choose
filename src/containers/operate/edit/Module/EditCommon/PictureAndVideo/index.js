@@ -60,6 +60,7 @@ export default class PictureAndVideo extends React.Component {
 		})
 	} 
 	componentWillReceiveProps(props){
+
 		if(!props.init){
 			this.setState({
 				type:1,
@@ -75,6 +76,9 @@ export default class PictureAndVideo extends React.Component {
 			})
 		}
 	} 
+	 shouldComponentUpdate(newProps, newState) {
+	 	  return newProps.init;
+	  } 
 	getTypes = (type,fn) => {
 		var getData = {
 			type: type

@@ -8,7 +8,7 @@
 import React from 'react'
 import './index.less'
 
-export default class Area extends React.Component {
+export default class AreaShow extends React.Component {
 	
 	render() {
 		let { show = true } = this.props,

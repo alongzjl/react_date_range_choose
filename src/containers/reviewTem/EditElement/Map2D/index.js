@@ -7,7 +7,7 @@
 import React from 'react' 
 import './index.less'
 
-class Map2D extends React.Component {
+class Map2DShow extends React.Component {
 	
 	render() {
 		return (
@@ -20,4 +20,4 @@ class Map2D extends React.Component {
 	}  
 } 
  
-export default Map2D
+export default Map2DShow

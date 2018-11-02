@@ -5,31 +5,32 @@
  * @Last modified by:   Liao Hui
  * @Last modified time: 2018-04-24T13:47:49+08:00
  */
- 
+  
 import React from 'react'
-import Picture           from 'reviewTem/EditElement/Picture'
-import Area              from 'reviewTem/EditElement/Area'
-import Web               from 'reviewTem/EditElement/Web'
-import Text              from 'reviewTem/EditElement/Text'
-import QrcodeRY          from 'reviewTem/EditElement/QrcodeRY'
-import Button            from 'reviewTem/EditElement/Button'
-import Video             from 'reviewTem/EditElement/Video'
-import RYSwiperShow      from 'reviewTem/EditElement/swiperImage'
-import WonderfulActivity from 'reviewTem/EditElement/WonderfulActivity'
-import Time              from 'reviewTem/EditElement/Comp/Common/Time'
-import Weather           from 'reviewTem/EditElement/Comp/Common/Weather'
-import SplitLine         from 'reviewTem/EditElement/SplitLine'
-import Map2D             from 'reviewTem/EditElement/Map2D'
-import Navigation        from 'reviewTem/EditElement/Navigation'
-import NavigationFloat   from 'reviewTem/EditElement/NavigationFloat'
-import DateWeather       from 'reviewTem/EditElement/Comp/DateWeather'
-import StoreList         from 'reviewTem/EditElement/Comp/StoreList' 
-import StoreListNew      from 'reviewTem/EditElement/Comp/StoreListNew'
-import StoreDetails      from 'reviewTem/EditElement/Comp/StoreDetails'
-import StoreDetailsNew   from 'reviewTem/EditElement/Comp/StoreDetailsNew'
-import StoreInstro       from 'reviewTem/EditElement/Comp/StoreInstro'
-import GoodsList         from 'reviewTem/EditElement/Comp/GoodsList'
-import GoodsDetails      from 'reviewTem/EditElement/Comp/GoodsDetails'
+import PictureShow           from 'reviewTem/EditElement/Picture'
+import AreaShow              from 'reviewTem/EditElement/Area'
+import WebShow               from 'reviewTem/EditElement/Web'
+import TextShow              from 'reviewTem/EditElement/Text'
+import QrcodeRYShow          from 'reviewTem/EditElement/QrcodeRY'
+import ButtonShow            from 'reviewTem/EditElement/Button'
+import VideoShow             from 'reviewTem/EditElement/Video'
+import SwiperImageShow       from 'reviewTem/EditElement/SwiperImage'
+import SwiperImgAndVideoShow from 'reviewTem/EditElement/SwiperImgAndVideo'
+import WonderfulActivityShow from 'reviewTem/EditElement/WonderfulActivity' 
+import TimeShow              from 'reviewTem/EditElement/Comp/Common/Time' 
+import WeatherShow           from 'reviewTem/EditElement/Comp/Common/Weather'
+import SplitLineShow         from 'reviewTem/EditElement/SplitLine'
+import Map2DShow             from 'reviewTem/EditElement/Map2D'
+import NavigationShow        from 'reviewTem/EditElement/Navigation'
+import NavigationFloatShow   from 'reviewTem/EditElement/NavigationFloat'
+import DateWeatherShow       from 'reviewTem/EditElement/Comp/DateWeather'
+import StoreListShow         from 'reviewTem/EditElement/Comp/StoreList' 
+import StoreListNewShow      from 'reviewTem/EditElement/Comp/StoreListNew'
+import StoreDetailsShow      from 'reviewTem/EditElement/Comp/StoreDetails'
+import StoreDetailsNewShow   from 'reviewTem/EditElement/Comp/StoreDetailsNew'
+import StoreInstroShow       from 'reviewTem/EditElement/Comp/StoreInstro'
+import GoodsListShow         from 'reviewTem/EditElement/Comp/GoodsList'
+import GoodsDetailsShow      from 'reviewTem/EditElement/Comp/GoodsDetails'
 
 import addAnimate from 'reviewTem/page/animateAdd'
 import 'reviewTem/page/index.less'
@@ -83,29 +84,30 @@ class EditElementCommon extends React.Component {
 				                  compCon;
 				                 aniSty.animationDelay = `${noFormatAni.delay + pageInAnimateDelay}s`;
 				              switch (element.name) {
-							 	case "picture" : compCon = (<Picture data={element} type={`Style${styleIdx + 1}`} animateParams={animateParams} animate={this.leaveAnimate} action={action} />); break
-							 	case "area" : compCon = (<Area data={element} type={`Style${styleIdx + 1}`} />); break
-							 	case "qrcode" : compCon = (<QrcodeRY data={element} type={`Style${styleIdx + 1}`} />); break
-							 	case "web" : compCon = (<Web data={element} type={`Style${styleIdx + 1}`} />); break
-							 	case "text" : compCon = (<Text data={element} type={`Style${styleIdx + 1}`} animateParams={animateParams} animate={this.leaveAnimate} action={action} />); break
-							 	case "button" : compCon = (<Button data={element} type={`Style${styleIdx + 1}`} animateParams={animateParams} animate={this.leaveAnimate} action={action} />); break
-							 	case "video" : compCon = (<Video data={element} type={`Style${styleIdx + 1}`} />); break
-							 	case "swiperImage" : compCon = (<RYSwiperShow data={element} type={`Style${styleIdx + 1}`} animateParams={animateParams} animate={this.leaveAnimate} action={action} />); break
-							 	case "wonderfulActivity" : compCon = (<WonderfulActivity activities={element.data.content} data={element} type={`Style${styleIdx + 1}`} />); break
-							 	case "time" : compCon = (<Time data={element} type={`Style${styleIdx + 1}`} />); break
-							 	case "weather" : compCon = (<Weather data={element} type={`Style${styleIdx + 1}`} />); break
-							 	case "splitLine" : compCon = (<SplitLine data={element} type={`Style${styleIdx + 1}`} animateParams={animateParams} animate={this.leaveAnimate} />); break
-							 	case "map2D" : compCon = (<Map2D data={element} type={`Style${styleIdx + 1}`} />); break 
-							 	case "navigation" : compCon = (<Navigation data={element} type={`Style${styleIdx + 1}`} animateParams={animateParams} animate={this.leaveAnimate} action={action} />); break
-							 	case "navigationFloat" : compCon = (<NavigationFloat data={element} type={`Style${styleIdx + 1}`} animateParams={animateParams} animate={this.leaveAnimate} action={action} />); break
-							 	case "dateWeather" : compCon = (<DateWeather data={element} type={`Style${styleIdx + 1}`} animateParams={animateParams} animate={this.leaveAnimate} />); break
-							 	case "storeList" : compCon = (<StoreList data={element} categories={categories} floors={floors} type={`Style${styleIdx + 1}`} animateParams={animateParams} animate={this.leaveAnimate} action={action} />); break
-							 	case "storeDetails" : compCon = (<StoreDetails data={element} type={`Style${styleIdx + 1}`} animateParams={animateParams} animate={this.leaveAnimate} action={action} />); break
-							 	case "storeList2" : compCon = (<StoreListNew data={element} categories={categories} floors={floors} type={`Style${styleIdx + 1}`} animateParams={animateParams} animate={this.leaveAnimate} action={action} />); break
-							 	case "storeDetails2" : compCon = (<StoreDetailsNew data={element} type={`Style${styleIdx + 1}`} animateParams={animateParams} animate={this.leaveAnimate} action={action} />); break
-							 	case "storeInstro" : compCon = (<StoreInstro data={element} type={`Style${styleIdx + 1}`} animateParams={animateParams} animate={this.leaveAnimate} />); break
-						 	 	case "goodsList" : compCon = (<GoodsList data={element} type={`Style${styleIdx + 1}`} animateParams={animateParams} animate={this.leaveAnimate} action={action} query={this.props.query}/>); break
-						 	 	case "goodsDetails" : compCon = (<GoodsDetails data={element} type={`Style${styleIdx + 1}`} top={layout.top} animateParams={animateParams} animate={this.leaveAnimate} action={action} />); break
+							 	case "picture" : compCon = (<PictureShow data={element} type={`Style${styleIdx + 1}`} animateParams={animateParams} animate={this.leaveAnimate} action={action} />); break
+							 	case "area" : compCon = (<AreaShow data={element} type={`Style${styleIdx + 1}`} />); break
+							 	case "qrcode" : compCon = (<QrcodeRYShow data={element} type={`Style${styleIdx + 1}`} />); break
+							 	case "web" : compCon = (<WebShow data={element} type={`Style${styleIdx + 1}`} />); break
+							 	case "text" : compCon = (<TextShow data={element} type={`Style${styleIdx + 1}`} animateParams={animateParams} animate={this.leaveAnimate} action={action} />); break
+							 	case "button" : compCon = (<ButtonShow data={element} type={`Style${styleIdx + 1}`} animateParams={animateParams} animate={this.leaveAnimate} action={action} />); break
+							 	case "video" : compCon = (<VideoShow data={element} type={`Style${styleIdx + 1}`} />); break
+							 	case "swiperImage" : compCon = (<SwiperImageShow data={element} type={`Style${styleIdx + 1}`} animateParams={animateParams} animate={this.leaveAnimate} action={action} />); break
+							 	case "swiperImgAndVideo" : compCon = (<SwiperImgAndVideoShow data={element} type={`Style${styleIdx + 1}`} animateParams={animateParams} animate={this.leaveAnimate} action={action} />); break
+							 	case "wonderfulActivity" : compCon = (<WonderfulActivityShow activities={element.data.content} data={element} type={`Style${styleIdx + 1}`} />); break
+							 	case "time" : compCon = (<TimeShow data={element} type={`Style${styleIdx + 1}`} />); break
+							 	case "weather" : compCon = (<WeatherShow data={element} type={`Style${styleIdx + 1}`} />); break
+							 	case "splitLine" : compCon = (<SplitLineShow data={element} type={`Style${styleIdx + 1}`} animateParams={animateParams} animate={this.leaveAnimate} />); break
+							 	case "map2D" : compCon = (<Map2DShow data={element} type={`Style${styleIdx + 1}`} />); break 
+							 	case "navigation" : compCon = (<NavigationShow data={element} type={`Style${styleIdx + 1}`} animateParams={animateParams} animate={this.leaveAnimate} action={action} />); break
+							 	case "navigationFloat" : compCon = (<NavigationFloatShow data={element} type={`Style${styleIdx + 1}`} animateParams={animateParams} animate={this.leaveAnimate} action={action} />); break
+							 	case "dateWeather" : compCon = (<DateWeatherShow data={element} type={`Style${styleIdx + 1}`} animateParams={animateParams} animate={this.leaveAnimate} />); break
+							 	case "storeList" : compCon = (<StoreListShow data={element} categories={categories} floors={floors} type={`Style${styleIdx + 1}`} animateParams={animateParams} animate={this.leaveAnimate} action={action} />); break
+							 	case "storeDetails" : compCon = (<StoreDetailsShow data={element} type={`Style${styleIdx + 1}`} animateParams={animateParams} animate={this.leaveAnimate} action={action} />); break
+							 	case "storeList2" : compCon = (<StoreListNewShow data={element} categories={categories} floors={floors} type={`Style${styleIdx + 1}`} animateParams={animateParams} animate={this.leaveAnimate} action={action} />); break
+							 	case "storeDetails2" : compCon = (<StoreDetailsNewShow data={element} type={`Style${styleIdx + 1}`} animateParams={animateParams} animate={this.leaveAnimate} action={action} />); break
+							 	case "storeInstro" : compCon = (<StoreInstroShow data={element} type={`Style${styleIdx + 1}`} animateParams={animateParams} animate={this.leaveAnimate} />); break
+						 	 	case "goodsList" : compCon = (<GoodsListShow data={element} type={`Style${styleIdx + 1}`} animateParams={animateParams} animate={this.leaveAnimate} action={action} query={this.props.query}/>); break
+						 	 	case "goodsDetails" : compCon = (<GoodsDetailsShow data={element} type={`Style${styleIdx + 1}`} top={layout.top} animateParams={animateParams} animate={this.leaveAnimate} action={action} />); break
 						 	 default: ; break
 						 } 
 						 return (

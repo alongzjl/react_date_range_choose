@@ -17,8 +17,12 @@ class Web extends React.Component {
 		this.handleFocus(this.props)	
 	}
 	componentWillReceiveProps(props){
-		this.handleFocus(props)
-	} 
+		let { data,contentEditable } = this.props,
+			urlContent = this.urlCheck(data.data.content.url)
+		if(!urlContent){
+			this.handleFocus(props)
+		}
+	}  
 	handleFocus = props => {
 		let { contentEditable } = props
 		if(contentEditable){
@@ -27,7 +31,7 @@ class Web extends React.Component {
 				selectText(dom)
 			} 
 			dom.focus()
-		}
+		} 
 	}
 	handleBlur = e => {
 		let urlContent = this.urlCheck(e.target.innerHTML)
@@ -46,11 +50,11 @@ class Web extends React.Component {
 		let RP = /https?\:\/\/[-\w+&@#/%?=~_|!:,.;]+[-\w+&@#/%=~_|]/
 		return RP.test(val)
 	} 
-	render() {
+	render() { 
 		let { data,contentEditable } = this.props,
 			urlContent = this.urlCheck(data.data.content.url),
 			styleD = contentEditable ? {cursor:'auto'} : {cursor:'move'}
-		return ( 
+		return (  
 			<div className="e-web" id="e-web">
 				{
 					urlContent ? <iframe className="ew-iframe" src={data.data.content.url} scrolling={'no'} /> :
@@ -58,7 +62,7 @@ class Web extends React.Component {
 						className="title"
 						style={styleD}
 						ref="webDiv"
-						contentEditable={contentEditable} 
+						contentEditable={ contentEditable } 
 						onBlur={this.handleBlur}
 						dangerouslySetInnerHTML={{__html: textBreak('请输入url')}}
 						></div>

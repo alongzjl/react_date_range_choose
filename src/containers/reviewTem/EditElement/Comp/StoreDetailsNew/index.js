@@ -10,7 +10,7 @@ import checkToJump from '../../checkToJump'
 import Custom from '../Custom'
 import * as Server from 'server'
 
-class StoreDetailsNew extends React.Component {
+class StoreDetailsNewShow extends React.Component {
 	state = {
 		shopDetais:{NAME:'',LOCAL_LOGO:'',BERTH_NUMBER:'',CONTACT:'',LOCAL_URL:[{LOCAL_URL:''}],DESCRIPTION:''},
 		first:0
@@ -36,4 +36,4 @@ class StoreDetailsNew extends React.Component {
 	}
 }
  
-export default StoreDetailsNew
+export default StoreDetailsNewShow

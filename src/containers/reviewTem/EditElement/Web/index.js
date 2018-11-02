@@ -8,7 +8,7 @@
 import React from 'react'
 import './index.less' 
  
-class Web extends React.Component {
+class WebShow extends React.Component {
 	
 	state = {
 		id:`iframe_RY_${parseInt(Math.random()*1e5)}`
@@ -37,4 +37,4 @@ class Web extends React.Component {
 	}
 }
 
-export default Web
+export default WebShow

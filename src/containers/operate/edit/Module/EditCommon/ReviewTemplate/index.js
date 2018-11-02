@@ -57,10 +57,9 @@ export default class ReviewTemplate extends React.Component {
 	close = () => {
 		this.reviewModal.hide()
 	}
-	
 	render() {
 		return (
-			<div>
+			<div className="ReviewTemplateShadow">
 				<SkyLight
 					dialogStyles={commonCss.dialogStyles}
 					titleStyle={commonCss.titleStyle}

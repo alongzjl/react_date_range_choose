@@ -40,6 +40,7 @@ class ImageAndVideoComp extends React.Component {
 		let { parentComp } = curData
 		if(list[0].type == 2){
 			delete con.img.img
+			delete con.router
 			con.img.preview = list[0].preview
 			con.img.video = list[0].url
 			con.type = 'video'
@@ -47,6 +48,7 @@ class ImageAndVideoComp extends React.Component {
 			delete con.img.preview 
 			con.img.img = list[0].url
 			con.type = 'image'
+			con.router = {}
 		}      
 		con.attribute = list[0].attribute
 		data.data.content[index-1] = con

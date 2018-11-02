@@ -7,7 +7,7 @@
 import React from 'react'
 import './index.less'
 
-class Video extends React.Component {
+class VideoShow extends React.Component {
 	state = {
 		random:`RYVideo_${Math.random()*1e5}`,
 		show:false,
@@ -69,4 +69,4 @@ class VideoContent extends React.Component {
 			)
 	}
 }
-export default Video
+export default VideoShow

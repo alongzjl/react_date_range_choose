@@ -8,7 +8,7 @@ import './index.less'
 import * as Server from 'server'
 import Custom from '../Custom'
 
-export default class GoodsDetails extends React.Component {
+export default class GoodsDetailsShow extends React.Component {
 	state = {
 		paramsData:{itemDetails:[],mapParams:{},scrollTop:0,refresh:true}
 	}

@@ -9,7 +9,7 @@ import './index.less'
 import checkToJump from '../../checkToJump'
 import Custom from '../Custom'
 
-class StoreDetails extends React.Component {
+class StoreDetailsShow extends React.Component {
 	   
 	render() { 
 		let { data,animate,animateParams,action } = this.props;
@@ -24,4 +24,4 @@ class StoreDetails extends React.Component {
 	}
 }
  
-export default StoreDetails
+export default StoreDetailsShow

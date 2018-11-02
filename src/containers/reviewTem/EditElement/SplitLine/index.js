@@ -8,7 +8,7 @@
 import React from 'react'
 import './index.less'
 
-class SplitLine extends React.Component {
+class SplitLineShow extends React.Component {
 	
 	render() {
 		let { data,type } = this.props
@@ -18,4 +18,4 @@ class SplitLine extends React.Component {
 	}
 }
 
-export default SplitLine
+export default SplitLineShow

@@ -24,7 +24,7 @@ export function filterContent(data,con) {
 
 //轮播设置的过滤--商家--大运营
 export function contentSwiper(compName,content){
-	if(compName != 'swiperImage') return content
+	if(compName != 'swiperImgAndVideo') return content
 	let contentNew = content.map(_=>{
 		if(getEnv() === 'business'){ 
 			!_.delayOnly ? _.delayOnly = 5 : null
@@ -34,6 +34,6 @@ export function contentSwiper(compName,content){
 			delete _.date
 		} 
 		return _
-	})  
+	})    
 	return contentNew
 }

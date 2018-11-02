@@ -10,7 +10,7 @@ import JumpRouter from '../JumpRouter'
 import checkToJump from '../checkToJump'
 import './index.less' 
 
-class Navigation extends React.Component {
+class NavigationShow extends React.Component {
 	
 	to = event => {
 		event.preventDefault()
@@ -45,4 +45,4 @@ function OnlyNavigation({data,props,clickFunc}) {
 			</div>
 		)
 }
-export default Navigation
+export default NavigationShow

@@ -9,7 +9,7 @@ import React from 'react'
 import './index.less'
 import Custom from '../Custom'
 
-class StoreListNew extends React.Component {
+class StoreListNewShow extends React.Component {
 	
  	state = {
 		paramsData:{
@@ -135,4 +135,4 @@ class StoreListNew extends React.Component {
 }
 
 
-export default StoreListNew
+export default StoreListNewShow
