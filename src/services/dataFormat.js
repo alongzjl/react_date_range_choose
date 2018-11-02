@@ -70,7 +70,7 @@ const dataFormat = {
 									var dn = _.name,
 										cd = deepCopy(comp[dn]),
 										s1 = _.styleList
-									s1.idx = s1.idx || 0
+									s1.idx = s1.idx || 0 
 									var i1 = s1.idx,
 										l1 = s1.list,
 										s2 = cd.styleList,
@@ -82,6 +82,7 @@ const dataFormat = {
 								})
 								break
 							default:
+								if(org.length == 0) return //如果默认数据没有的话返回
 								da.map((_, i) => {
 									this.plus(_, org[i] || org[0], i, da)
 								})
@@ -117,7 +118,7 @@ const dataFormat = {
 						}
 						break
 					case 'Array':
-						switch(key) {
+						switch(key) { 
 							case 'components':
 							case 'componentLayout':
 								da.map((_, i) => {
@@ -136,6 +137,7 @@ const dataFormat = {
 								})
 								break
 							default:
+								if(org.length == 0) return  //如果默认数据没有的话返回
 								da.map((_, i) => {
 									this.slim(_, org[i] || org[0], i, da)
 								})
