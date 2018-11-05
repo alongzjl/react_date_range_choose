@@ -18,23 +18,22 @@ class RYSwiper extends React.Component {
 		content:'',
 		type:1, //1--一张图片  2--一个视频 3--图片集合且delay一致 4--其他
 		newContent:[],
-		swiperOptions:'',
-		first:false
+		swiperOptions:''
 	}
 	componentDidMount(){
-		this.content_show()
+		this.getData(this.props)
 	}
 	componentWillReceiveProps(props){
-		this.content_show()
+		this.getData(props)
 	} 
-	content_show = () => {
+	content_show = obj => {
 		let contentOri = JSON.stringify(this.props.data.data.content),
 			objReturn = content_do(contentOri),
 			content = objReturn.content,
 			date = objReturn.date 
 		if(getAttr(content) == 'Array'){
-			let type = this.oneSwiper(content)
-			sameCheck(this.state.newContent,content) ? this.setState({newContent:content,type:type,first:true}) : null
+			let type = this.oneSwiper(content),newObj = {newContent:content,type:type,...obj}
+			sameCheck(this.state.newContent,content) ? this.setState(newObj) : null
 			clearInterval(this.timer)
 			return false
 		}   
@@ -43,24 +42,26 @@ class RYSwiper extends React.Component {
 			if(i == date.length-1){
 				if(now >= _){
 					let arr_content = content[_],
-						type = this.oneSwiper(arr_content)
-					sameCheck(this.state.newContent,arr_content) ? this.setState({newContent:arr_content,type:type,first:true}) : null
+						type = this.oneSwiper(arr_content),
+						newObj = {newContent:arr_content,type:type,...obj}
+					sameCheck(this.state.newContent,arr_content) ? this.setState(newObj) : null
 					clearInterval(this.timer)
 				}  
 			}else if(i == 0){
 				if(_ > now){ 
 					let arr_start = JSON.parse(contentOri) 
 					arr_start = arr_start.filter(_=>_.date == '')
-					let t = this.oneSwiper(arr_start)
-					sameCheck(this.state.newContent,arr_start) ? this.setState({newContent:arr_start,type:t,first:true}) : null
+					let t = this.oneSwiper(arr_start),newObj = {newContent:arr_start,type:type,...obj}
+					sameCheck(this.state.newContent,arr_start) ? this.setState(newObj) : null
 				} 
 			}else{
 				if(now >= _ && now < date[i+1]){
 					let arr_content = content[_],
-						type = this.oneSwiper(arr_content)
-					sameCheck(this.state.newContent,arr_content) ? this.setState({newContent:arr_content,type:type,first:true}) : null
+						type = this.oneSwiper(arr_content),
+						newObj = {newContent:arr_content,type:type,...obj}
+					sameCheck(this.state.newContent,arr_content) ? this.setState(newObj) : null
 				} 
-			}
+			} 
 		}) 
 	}  
 	oneSwiper = item => {
@@ -73,23 +74,27 @@ class RYSwiper extends React.Component {
 			type = 1
 		} 
 		return type
-	}
+	} 
 	getData = props => {
 		let { data } = props,
 			{ feature} = data, 
 			swiperOptions = JSON.stringify(feature.swiperOptions),
 			content = JSON.stringify(data.data.content)
-		if(this.state.content != content || this.state.swiperOptions != swiperOptions){
-			this.setState({content:content,swiperOptions:swiperOptions,first:false},()=>{this.content_show()})
-		}   
-	} 
+		this.content_show({content:content,swiperOptions:swiperOptions})	
+	}   
 	componentWillUnmount(){
 		clearInterval(this.timer)
 	}  
 	shouldComponentUpdate(newProps, newState){
-		//return newState.first
-		return true
-	}  
+		let { data } = newProps,
+			{ feature} = data, 
+			swiperOptions = JSON.stringify(feature.swiperOptions),
+			content = JSON.stringify(data.data.content)
+		if(this.state.content != content || this.state.swiperOptions != swiperOptions){
+			return true
+		} 
+		return false
+	}    
 	render(){ 
 		let type = this.state.type,renderDom
 		switch(type){
@@ -237,7 +242,6 @@ class SwiperImageVideo extends React.Component {
 	            next = realIndex + 1
 	        clearTimeout(that.timerSlide) 
 	        that.setState({realIndex:that.mySwiperImage.realIndex})
-	        console.log(that.mySwiperImage.realIndex+'---'+realIndex)
 	        if(!that.mySwiperImage.params.loop){ 
 	            con = content[realIndex]
 	           if(realIndex == content.length - 1){
@@ -280,7 +284,6 @@ class SwiperImageVideo extends React.Component {
 	      },player.duration*1000)
 	    }else{ 
 	    	let delay = content[0].delayOnly ? content[0].delayOnly : this.state.delay
-	    	console.log(delay)
 	    	setTimeout(()=>{
 	    		this.mySwiperImage && !this.mySwiperImage.destroyed ? this.mySwiperImage.slideTo(activeIndex+1,this.state.speed,false) : null
 	    	},delay*1000);  

@@ -365,13 +365,13 @@ class EditContent extends React.Component {
 		let ci = 0
 		let childNode = Object.keys(content).map((p, i) => {
 			if (!conMap[p] || contentFieldFilter[envType][p]) return false
-			let cm     = p=="img"&&content.type=="video" ? conMap['video'] : conMap[p]
-			data.name == 'swiperImgAndVideo' ? cm.type = 'ImgAndVideo' : null
+			let cm     = p=="img"&&content.type=="video" ? conMap['video'] : conMap[p],
+				type = data.name == 'swiperImgAndVideo'&&p=="img" ? 'ImgAndVideo' : cm.type
 			let val    = content[p]      
-			let render = this[`render${cm.type}`] 
+			let render = this[`render${type}`] 
 			if (!render) return false 
 			// 根据样式类型渲染对应组件 
-			let dom = this[`render${cm.type}`].bind(this, cm, content, val, p, index)()
+			let dom = this[`render${type}`].bind(this, cm, content, val, p, index)()
 			ci++ 
 			return (
 				<div className="pgs-row" key={i} style={{display:`${content.isShowDom&&(p=='size'||p=='pageSwitch') ? content.isShowDom :'flex'}`}}>

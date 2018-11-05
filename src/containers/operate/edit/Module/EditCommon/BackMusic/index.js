@@ -6,7 +6,7 @@ import { bindActionCreators } from 'redux'
 import { connect }  from 'react-redux'
 import * as actions from 'actions'
 import {
-	Row, Col, Collapse, InputNumber, Slider, Icon
+	Row, Col, Collapse,Upload, InputNumber, Slider, Icon,message
 } from 'antd'
 import './index.less'
 const Panel  = Collapse.Panel
@@ -55,6 +55,21 @@ class BackMusic extends React.Component {
 			activeKey = Array.from(new Array(1), (_, i) => `${i}`),
 			music = data.data.music,
 			btnNode
+		let defaultParams = {
+		  name: 'file',
+		  action: '/easy-smart-web/audioUpload/uploadBackgroundMusic',
+		  onChange(info) {
+		  	debugger
+		    if (info.file.status !== 'uploading') {
+		      console.log(info.file, info.fileList);
+		    }
+		    if (info.file.status === 'done') {
+		      message.success(`${info.file.name} file uploaded successfully`);
+		    } else if (info.file.status === 'error') {
+		      message.error(`${info.file.name} file upload failed.`);
+		    }
+		  }, 
+		}
 		if (music.url) {
 				btnNode = (
 					<div className="add_img add_video">
@@ -67,7 +82,9 @@ class BackMusic extends React.Component {
 			} else {
 				btnNode = (
 					<div className="add_img" onClick={this.addMusic}>
-						<div className="add_text"><Icon type="plus" /></div>
+						<Upload {...defaultParams}>
+						   <div className="add_text"><Icon type="plus" /></div>
+						 </Upload>
 					</div> 
 				)
 			}

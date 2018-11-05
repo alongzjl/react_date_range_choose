@@ -41,21 +41,16 @@ const commonCss = {
 
 export default class ReviewTemplate extends React.Component {
 	show() {
-		this.reviewModal.show()
+		this.setState({init:true},()=>{this.reviewModal.show()})
 	}
 	state = {
-		
+		init:false
 	} 
 	componentDidMount(){
 		
 	}
-	
-	cancelClick = () => {
-		this.reviewModal.hide()
-	}
-	
-	close = () => {
-		this.reviewModal.hide()
+	onOverlayClicked = () => {
+		this.setState({init:false})
 	}
 	render() {
 		return (
@@ -65,11 +60,14 @@ export default class ReviewTemplate extends React.Component {
 					titleStyle={commonCss.titleStyle}
 					closeButtonStyle={commonCss.closeButtonStyle}
 					hideOnOverlayClicked
+					onOverlayClicked={this.onOverlayClicked}
 					ref={com => { this.reviewModal = com }}
 					title={''}
 				>  
 				<div className="reviewTemplate" id="reviewTemplate"> 
-					 <RouterRY editConfig={this.props.editConfig} actions={this.props.actions}></RouterRY>
+					{
+						this.state.init ?  <RouterRY editConfig={this.props.editConfig} actions={this.props.actions}></RouterRY> : null
+					}
 				</div>     
 				</SkyLight>  
 			</div> 

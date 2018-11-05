@@ -52,7 +52,8 @@ export default class PictureAndVideo extends React.Component {
 		groupIdVideo:'',
 		types:[],
 		currentPageImg:1,
-		currentPageVideo:1
+		currentPageVideo:1,
+		have:true
 	}
 	componentDidMount(){
 		this.getTypes(1,id=>{
@@ -60,25 +61,31 @@ export default class PictureAndVideo extends React.Component {
 		})
 	} 
 	componentWillReceiveProps(props){
-
 		if(!props.init){
-			this.setState({
-				type:1,
-				list:[],
-				groupIdImg:'',
-				groupIdVideo:'',
-				types:[],
-				currentPageImg:1,
-				currentPageVideo:1
-			})
-			this.getTypes(1,id=>{
-				this.setState({groupIdImg:id})
-			})
-		}
+			 this.timer = setTimeout(()=>{
+			 	this.state.have ? this.setState({
+					type:1,
+					list:[],
+					groupIdImg:'',
+					groupIdVideo:'',
+					types:[],
+					currentPageImg:1,
+					currentPageVideo:1
+				},()=>{
+					this.getTypes(1,id=>{
+						this.setState({groupIdImg:id})
+					})
+				}) : null
+			},500)  
+		} 
 	} 
-	 shouldComponentUpdate(newProps, newState) {
+	componentWillUnmount(){
+		this.state.have = false
+		clearTimeout(this.timer)
+	}  
+	/* shouldComponentUpdate(newProps, newState) {
 	 	  return newProps.init;
-	  } 
+	  } */  
 	getTypes = (type,fn) => {
 		var getData = {
 			type: type
@@ -97,7 +104,10 @@ export default class PictureAndVideo extends React.Component {
 	close = () => {
 		this.props.initFn()
 		this.addImgVideoModal.hide()
-	} 
+	}
+	onOverlayClicked = () => {
+		this.props.initFn()
+	}  
 	saveGroupId = (str,id) => {
 		if(this.state.type == 1){
 			if (str == 'page') {
@@ -162,7 +172,8 @@ export default class PictureAndVideo extends React.Component {
 					dialogStyles={{ ...commonCss.dialogStyles, paddingBottom: '40px' }}
 					titleStyle={commonCss.titleStyle}
 					closeButtonStyle={commonCss.closeButtonStyle}
-					hideOnOverlayClicked={false}
+					hideOnOverlayClicked
+					onOverlayClicked={this.onOverlayClicked}
 					ref={com => { this.addImgVideoModal = com }}
 					title={''} 
 				>
@@ -216,26 +227,34 @@ class ImgAndModule extends React.Component {
 		page_size:14,
 		pageSize:14,
 		name:'', 
-		groupId: this.props.groupId
+		groupId: this.props.groupId,
+		have:true
 	} 
 	componentWillMount(){
 		this.getImgList('groupId', this.props.groupId,'init')
 	}  
 	componentWillReceiveProps(props){
 		if(!props.init){
-			let imgList = this.state.imgList
-			imgList = imgList.map(_=>{
-				_.isClicked = false
-				return _
-			})   
-			this.setState({
-				imgList:imgList,
-				groupId:props.groupId,
-				currentPage:props.currentPage
-			})  
-			this.getImgList('groupId', props.groupId,'init')
+			this.timer = setTimeout(()=>{
+				let imgList = this.state.imgList
+				imgList = imgList.map(_=>{
+					_.isClicked = false
+					return _
+				}) 
+				this.state.have ? this.setState({
+					imgList:imgList,
+					groupId:props.groupId,
+					currentPage:props.currentPage
+				},()=>{
+					this.getImgList('groupId', props.groupId,'init')
+				}) : null 
+			},500)
 		} 
-	}
+	} 
+	componentWillUnmount(){
+		this.state.have = false
+		clearTimeout(this.timer)
+	}  
 	getImgList = (str, id,init) => {
 		let currentPage = this.props.currentPage
 		if (str == 'page') {

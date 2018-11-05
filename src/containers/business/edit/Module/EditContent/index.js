@@ -325,17 +325,17 @@ class EditContent extends React.Component {
 		let ci = 0
 		let childNode = Object.keys(content).map((p, i) => {
 			if (!conMap[p]) return false
-			let cm     = p=="img"&&content.type=="video" ? conMap['video'] : conMap[p]
-			data.name == 'swiperImgAndVideo' ? cm.type = 'ImgAndVideo' : null
+			let cm     = p=="img"&&content.type=="video" ? conMap['video'] : conMap[p],
+				type = data.name == 'swiperImgAndVideo'&&p=="img" ? 'ImgAndVideo' : cm.type
 			let val    = content[p]
 			let auth   = data.auth.content[p]
-			let render = me[`render${cm.type}`]
+			let render = me[`render${type}`]
 			if(p == 'date' || p == 'delayOnly') {
 				auth = true // 商家轮播设置时间段显示
 			} 
 			if (!auth || !render) return false
 			// 根据样式类型渲染对应组件
-			let dom = this[`render${cm.type}`].bind(this, cm,parent, content, val, p, index)()
+			let dom = this[`render${type}`].bind(this, cm,parent, content, val, p, index)()
 			ci++
 			return (
 				<div className="pgs-row" key={i}>
