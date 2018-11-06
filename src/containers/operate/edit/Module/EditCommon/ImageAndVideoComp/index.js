@@ -28,8 +28,7 @@ class ImageAndVideoComp extends React.Component {
 		this.setState({ width, height })
 	}
 	changeImg = () => {
-		this.addImgVideoModal.show()
-		this.setState({init:true})
+		this.setState({init:true},()=>{this.addImgVideoModal.show()})
 	} 
 	enter = (list,index) => {
 		if (!list.length) return
@@ -66,10 +65,13 @@ class ImageAndVideoComp extends React.Component {
 	}
 	initFn = () =>{
 		this.setState({init:false})
-	}
+	}  
+	shouldComponentUpdate(nextProps,nextState){
+		return nextState.init
+	} 
 	render() {
 		let { img, editConfig,con, index, data } = this.props
-		let { width, height } = this.state
+		let { width, height,init } = this.state
 		let btnNode
 		let imgVal   = img.img || img.preview
 		let theme  = editConfig.globalData.theme
@@ -130,13 +132,15 @@ class ImageAndVideoComp extends React.Component {
 					</Col>
 					{ selectNode }
 				</Row>
-				<PictureAndVideo
-					ref={com => { this.addImgVideoModal = com }}
-					enter={this.enter}
-					init={this.state.init}
-					initFn={this.initFn}
-					index={index+1}
-				/>
+				{
+					init ? <PictureAndVideo
+								ref={com => { this.addImgVideoModal = com }}
+								enter={this.enter}
+								init={this.state.init}
+								initFn={this.initFn}
+								index={index+1}
+							/> : null
+				} 
 			</div>
 		)
 	}

@@ -40,8 +40,8 @@ class TimeSelect extends Component {
     render() {
          return (
             <div className="date-picker-time-group">
-                {this.renderSlider.bind(this,24,this.props.hours)()}
-                {this.renderSlider.bind(this,60,this.props.minutes)()}
+                {this.renderSlider.bind(this,23,this.props.hours)()}
+                {this.renderSlider.bind(this,59,this.props.minutes)()}
             </div> 
         )
     }

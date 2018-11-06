@@ -21,13 +21,12 @@ class SwiperImgAndVideoShow extends React.Component {
 		newContent:[],
 	}   
 	componentDidMount(){
+		this.content_show()
 		this.intervalTimer()
 	} 
 	intervalTimer = () => {
-		this.content_show()
-		clearInterval(this.timer)
 		this.timer = setInterval(this.content_show,60000)
-	}     
+	}      
 	content_show = () => {
 		let contentOri = JSON.stringify(this.props.data.data.content),
 			objReturn = content_do(contentOri),
@@ -41,20 +40,16 @@ class SwiperImgAndVideoShow extends React.Component {
 		}   
 		let now = new Date().getTime() 
 		date.map((_,i)=>{
-			if(i == date.length-1){
-				if(now >= _){
-					let arr_content = content[_],
-						type = this.oneSwiper(arr_content)
-					sameCheck(this.state.newContent,arr_content) ? this.setState({newContent:arr_content,type:type}) : null
-					clearInterval(this.timer)
-				}  
-			}else if(i == 0){
-				if(_ > now){ 
-					let arr_start = JSON.parse(contentOri) 
-					arr_start = arr_start.filter(_=>_.date == '')
-					let t = this.oneSwiper(arr_start)
-					sameCheck(this.state.newContent,arr_start) ? this.setState({newContent:arr_start,type:t}) : null
-				} 
+			if(i == date.length-1&&now >= _){
+				let arr_content = content[_],
+					type = this.oneSwiper(arr_content)
+				sameCheck(this.state.newContent,arr_content) ? this.setState({newContent:arr_content,type:type}) : null
+				clearInterval(this.timer)
+			}else if(i == 0&&_ > now){
+				let arr_start = JSON.parse(contentOri) 
+				arr_start = arr_start.filter(_=>_.date == '')
+				let t = this.oneSwiper(arr_start)
+				sameCheck(this.state.newContent,arr_start) ? this.setState({newContent:arr_start,type:t}) : null
 			}else{
 				if(now >= _ && now < date[i+1]){
 					let arr_content = content[_],
@@ -74,7 +69,12 @@ class SwiperImgAndVideoShow extends React.Component {
 			type = 1
 		}  
 		return type
-	} 
+	}
+	toPage = data => {
+	 	const {animate,animateParams,action} = this.props,
+		dataStr = checkToJump('RYRouterSet',data);
+		JumpRouter(dataStr,animate,animateParams,action);
+	};
 	componentWillUnmount(){
 		clearInterval(this.timer)
 	}  
@@ -84,10 +84,10 @@ class SwiperImgAndVideoShow extends React.Component {
 	render(){ 
 		let type = this.state.type,renderDom
 		switch(type){
-			case 1 : renderDom = (<OneImageShow content={this.state.newContent} prop={this.props}></OneImageShow>);break
+			case 1 : renderDom = (<OneImageShow content={this.state.newContent} prop={this.props} toPage={this.toPage}></OneImageShow>);break
 			case 2 : renderDom = (<OneVideoShow content={this.state.newContent}></OneVideoShow>);break
-			case 3 : renderDom = (<SwiperImageShow content={this.state.newContent} prop={this.props}></SwiperImageShow>);break
-			case 4 : renderDom = (<SwiperImageVideoShow content={this.state.newContent} prop={this.props}></SwiperImageVideoShow>);break
+			case 3 : renderDom = (<SwiperImageShow content={this.state.newContent} prop={this.props} toPage={this.toPage}></SwiperImageShow>);break
+			case 4 : renderDom = (<SwiperImageVideoShow content={this.state.newContent} prop={this.props} toPage={this.toPage}></SwiperImageVideoShow>);break
 
 		}
 		return renderDom
@@ -106,10 +106,10 @@ function OneVideoShow({content}){
 } 
  
 //一张图片
-function OneImageShow({content,prop}){
+function OneImageShow({content,prop,toPage}){
 	if(content.length == 0) return false
 	return (
-				<div className="e-img">
+				<div className="e-img" onClick={()=>{toPage( content[0].router)}}>
 					<img src={compImgFormat(prop, content[0].img)} />
 				</div>
 			)
@@ -129,7 +129,7 @@ class SwiperImageShow extends React.Component {
 		this.init(this.props)
 	} 
 	init = props => {
-		let { prop,content } = props,
+		let { prop,content,toPage } = props,
 			swiperOptions = deepCopy(prop.data.feature.swiperOptions);
 		if(swiperOptions.autoplay){
 			content[0].delayOnly ? swiperOptions.autoplayOptions.delay = content[0].delayOnly*1000 : swiperOptions.autoplayOptions['delay'] = swiperOptions.autoplayOptions.delayBig*1000
@@ -142,7 +142,11 @@ class SwiperImageShow extends React.Component {
 			this.setState({realIndex:0})
 		});        
 		destroySwiper(this.mySwiperImage)
-		this.mySwiperImage = new Swiper(`.swiper-container_${this.state.random}`, swiperOptions)   
+		this.mySwiperImage = new Swiper(`.swiper-container_${this.state.random}`, swiperOptions) 
+		this.mySwiperImage.on('tap',()=>{
+			const params = content[this.mySwiperImage.realIndex].router;
+			toPage(params)
+		})   
 	}          
 	   
 	componentWillUnmount() {
@@ -217,7 +221,7 @@ class SwiperImageVideoShow extends React.Component {
 	    this.slideChange()
 	};  
 	slideChange = () => {
-	    let that = this,{ content } = that.props
+	    let that = this,{ content,toPage } = that.props
 	    that.mySwiperImage.on('slideChange',()=>{
 	       if(!that.mySwiperImage || that.mySwiperImage.destroyed || !that.state.autoplay){
 	       		that.setState({realIndex:0})
@@ -256,7 +260,13 @@ class SwiperImageVideoShow extends React.Component {
 	         	 },delay*1000) 
 	         }      
 	    }) 
-	}; 
+	    that.mySwiperImage.on('tap',()=>{
+	    	let contentOne = content[that.mySwiperImage.realIndex]
+	    	if(contentOne.type == 'video') return false
+			const params = contentOne.router;
+			toPage(params)
+		})   
+	};  
 	firstVideo = () => {
 		let { content } = this.props,
 	        activeIndex = this.mySwiperImage.activeIndex;

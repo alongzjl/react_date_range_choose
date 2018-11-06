@@ -39,22 +39,18 @@ class RYSwiper extends React.Component {
 		}   
 		let now = new Date().getTime()
 		date.map((_,i)=>{
-			if(i == date.length-1){
-				if(now >= _){
-					let arr_content = content[_],
-						type = this.oneSwiper(arr_content),
-						newObj = {newContent:arr_content,type:type,...obj}
-					sameCheck(this.state.newContent,arr_content) ? this.setState(newObj) : null
-					clearInterval(this.timer)
-				}  
-			}else if(i == 0){
-				if(_ > now){ 
-					let arr_start = JSON.parse(contentOri) 
-					arr_start = arr_start.filter(_=>_.date == '')
-					let t = this.oneSwiper(arr_start),newObj = {newContent:arr_start,type:type,...obj}
-					sameCheck(this.state.newContent,arr_start) ? this.setState(newObj) : null
-				} 
-			}else{
+			if(i == date.length-1&&now >= _){
+				let arr_content = content[_],
+					type = this.oneSwiper(arr_content),
+					newObj = {newContent:arr_content,type:type,...obj}
+				sameCheck(this.state.newContent,arr_content) ? this.setState(newObj) : null
+				clearInterval(this.timer)
+			}else if(i == 0&&_ > now){
+				let arr_start = JSON.parse(contentOri) 
+				arr_start = arr_start.filter(_=>_.date == '')
+				let type = this.oneSwiper(arr_start),newObj = {newContent:arr_start,type:type,...obj}
+				sameCheck(this.state.newContent,arr_start) ? this.setState(newObj) : null
+			}else{ 
 				if(now >= _ && now < date[i+1]){
 					let arr_content = content[_],
 						type = this.oneSwiper(arr_content),

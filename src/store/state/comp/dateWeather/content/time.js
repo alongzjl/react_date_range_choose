@@ -17,7 +17,6 @@ const data = {
 				color:    { type: 'custom', color: '#f58f8f' }
 			},
 			color:        { type: 'custom', color: '#333' },
-			backgroundColor: { type: 'custom', color: '#fff' },
 			borderRadius: {
 				topLeft:     0,
 				topRight:    0,

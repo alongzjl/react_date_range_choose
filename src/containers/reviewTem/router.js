@@ -80,8 +80,16 @@ export default class RouterRY extends React.Component {
 	 	let {pageContent,globalData} = this.props.editConfig,
 	 	homePage = globalData.data.homepage,
 	 	action = {updateGlobal:this.props.actions.updateGlobal,globalData:globalData}
-	 	backHome(homePage,action)
+	 	//backHome(homePage,action)
 	 	this.setState({homePage:homePage})
+	}
+	componentDidMount(){
+		let {globalData} = this.props.editConfig,
+			{ music } = globalData.data
+		if(music){
+			let dom = document.getElementById('RYAudioShow')
+			dom.volume = music.volume/100
+		} 
 	}
 	componentWillReceiveProps(props) {
 		let {pageContent,globalData} = props.editConfig,
@@ -89,7 +97,8 @@ export default class RouterRY extends React.Component {
 	 	this.setState({homePage:homePage})
 	}  
 	render() { 
-		let {pageContent,globalData} = this.props.editConfig
+		let {pageContent,globalData} = this.props.editConfig,
+			{ music } = globalData.data
 		let dom = Object.keys(pageContent).map(_=>{
 			 return pageContent[_].router == this.state.homePage ? <EditElementCommon 
 				pageContent={pageContent[_]} 
@@ -101,7 +110,11 @@ export default class RouterRY extends React.Component {
 				></EditElementCommon> : null
 		}) 
 		return (  
-			<div>{dom}</div> 
+			<div>{dom}
+				{
+					music ? <audio src={music.url} autoPlay loop id="RYAudioShow"></audio> : null
+				}  
+			</div> 
 		)
 	}
 }

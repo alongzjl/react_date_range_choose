@@ -155,7 +155,19 @@ export default class Fetch {
 			Fetch.remote(url, newConfig, resolve, reject);
 		});
 	}
-
+	//音乐上传 
+	static postJSONAUDIO(url, data) {
+		return new Promise((resolve, reject) => {
+			const newConfig = Object.assign({}, {
+				method: 'POST',
+				body: data, 
+				credentials: 'include'
+			})
+			fetch(url, newConfig).then(response => response.json()).then(result => {
+				resolve(result)
+			}) 
+		});
+	}
 	static putJSON(url, data) {
 		return new Promise((resolve, reject) => {
 			const newConfig = Object.assign({}, {

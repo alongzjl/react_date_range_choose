@@ -62,7 +62,7 @@ class EditComponent extends React.Component {
 		actions.selectPage(curData.router)
 	}
 
-	render() {
+	render() { 
 		let { editConfig, location } = this.props
 		let theme  = editConfig.globalData.theme
 		let colors = theme.list[theme.idx].colors

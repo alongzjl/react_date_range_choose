@@ -124,6 +124,7 @@ class Custom extends React.Component {
 	selectComp(e, data, idx, parentIdx, parent) {
 		e.stopPropagation()
 		e.preventDefault()
+		this.setState({v:false,h:false,nearPos:false})
 		this.state[idx] = deepCopy(data.data.layout)
 		let { actions, editConfig, keyCtrl } = this.props
 		let { globalData, curData } = editConfig

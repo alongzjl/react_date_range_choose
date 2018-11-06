@@ -22,8 +22,7 @@ class SwiperImage extends React.Component {
 		init:false
 	}
 	addImg = () => {
-		this.addImgVideoModal.show()
-		this.setState({init:true})
+		this.setState({init:true},()=>{this.addImgVideoModal.show()})
 	}
 	enter = list => { 
 		let props = this.props.data
@@ -69,6 +68,9 @@ class SwiperImage extends React.Component {
 	initFn = () =>{
 		this.setState({init:false})
 	}
+	shouldComponentUpdate(nextProps,nextState){
+		return nextState.init
+	}
 	render() {
 		let props = this.props.data
 		if (!props.editConfig) props = props.data
@@ -97,12 +99,14 @@ class SwiperImage extends React.Component {
 						</div>
 					</Panel>
 				</Collapse>
-				<PictureAndVideo
-					ref={com => { this.addImgVideoModal = com }}
-					enter={this.enter}
-					init={this.state.init}
-					initFn={this.initFn}
-				/>
+				{
+					this.state.init ? <PictureAndVideo
+										ref={com => { this.addImgVideoModal = com }}
+										enter={this.enter}
+										init={this.state.init}
+										initFn={this.initFn}
+									/> : null
+				} 
 			</div>
 		)
 	}

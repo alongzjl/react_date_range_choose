@@ -161,7 +161,7 @@ class Header extends React.Component {
 							<div className="cl-item-icon">
 								<img src={require(`images/icon/theme.png`)}/>
 							</div>
-							主题
+							全局配置
 						</div>
 						<div className="cl-item" onClick={this.saveData.bind(this)}>
 							<div className="cl-item-icon">

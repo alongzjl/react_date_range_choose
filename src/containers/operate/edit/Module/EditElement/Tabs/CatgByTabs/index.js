@@ -24,7 +24,6 @@ export default class CatgByTabs extends React.Component {
 	renderDom = () => {
 		let { data } = this.props,
 			{ content, componentLayout } = data.data
-		debugger
 		return null
 	}
 

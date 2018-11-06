@@ -422,7 +422,7 @@ class EditContent extends React.Component {
 						{ this.renObj(data, _, i) }       
 					</Panel>   
 				)  
-			})  
+			})   
 		} else {
 			activeKey = ['0']
 			let con = this.renObj(data, content)

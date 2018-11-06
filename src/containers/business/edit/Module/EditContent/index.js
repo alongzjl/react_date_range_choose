@@ -24,6 +24,7 @@ import ImageUploadComp from 'compEdit/EditCommon/ImageUploadComp'
 import ImageAndVideoComp   from 'compEdit/EditCommon/ImageAndVideoComp'
 import DatePickerRY      from 'compEdit/EditContent/DatePickerRY'
 import SwiperImage       from 'compEdit/EditContent/SwiperImage'
+import SwiperImgAndVideo from 'compEdit/EditContent/SwiperImgAndVideo'
 import Navigation        from 'compEdit/EditContent/Navigation'
 import NavigationFloat   from 'compEdit/EditContent/NavigationFloat'
 import WonderfulActivity from 'compEdit/EditContent/WonderfulActivity'
@@ -46,6 +47,7 @@ const compContent = (name, data, updateComp) => {
 		navigationFloat:   <NavigationFloat   {...props} />,
 		wonderfulActivity: <WonderfulActivity {...props} />,
 		swiperImage:       <SwiperImage       {...props} />,
+		swiperImgAndVideo: <SwiperImgAndVideo {...props} />,
 		catgByGoods:       <CatgByGoods       {...props} />,
 		swiperByGoods:     <SwiperByGoods     {...props} />
 	}

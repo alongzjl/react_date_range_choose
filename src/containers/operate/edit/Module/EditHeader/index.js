@@ -86,7 +86,6 @@ class Header extends React.Component {
 			delete multiComp.parentIdx
 		}
 		actions.updateGlobal(globalData)
-		console.log(JSON.stringify(multiComp.list))
 	}
 	//预览模板
 	review(){
@@ -121,7 +120,6 @@ class Header extends React.Component {
 				globalData:  cfg.globalData
 			}
 		}  
-		console.log(JSON.stringify(cfg.pageContent)) 
 		let da = {
 			adsFlag: adsFlag || 0,
 			config: JSON.stringify(config),

@@ -27,12 +27,12 @@ export function contentSwiper(compName,content){
 	if(compName != 'swiperImgAndVideo') return content
 	let contentNew = content.map(_=>{
 		if(getEnv() === 'business'){ 
-			!_.delayOnly ? _.delayOnly = 5 : null
+			!_.delayOnly&&_.type=='image' ? _.delayOnly = 5 : null
 			!_.date ? _.date = '' : null
-		}else{ 
+		}else{  
 			delete _.delayOnly
-			delete _.date
-		} 
+			delete _.date 
+		}  
 		return _
 	})    
 	return contentNew

@@ -56,8 +56,8 @@ class EditElementCommon extends React.Component {
 		const { homepage } = globalData.data;
 		pageContent.feature.homeTime ? backHomeTime = pageContent.feature.homeTime : null;
 	  	window.RYTimer ? clearInterval(window.RYTimer) : null;
-	  	homepage != pageContent.router ? funcIn() : null
-	}
+	  	//homepage != pageContent.router ? funcIn() : null
+	} 
 	render() { 
 		let { globalData,categories,floors } = this.props,
 			page  =this.state.page,     

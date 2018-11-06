@@ -233,7 +233,6 @@ class EditTheme extends React.Component {
 				<BackMusic
 					data={editConfig.globalData}
 					action={'updateGlobal'}
-					isBusiness={false}
 				/> 
 			</section>
 		)

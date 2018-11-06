@@ -116,6 +116,7 @@ class EditElement extends React.Component {
 	
 	selectComp(e, data, idx) {
 		e.stopPropagation()
+		this.setState({v:false,h:false,nearPos:false}) 
 		let { keyCtrl } = this.state
 		let { actions, editConfig } = this.props
 		let { curData, globalData } = editConfig
@@ -182,7 +183,20 @@ class EditElement extends React.Component {
 	} 
 	//拖拽
 	dragMove(e,param,_,i) {
+		e.stopPropagation()
 		this.showLine(param,_,i)
+	}
+	//拖拽停止
+	dragStop(e, d, item, idx) {
+		e.stopPropagation()
+		// e.preventDefault()
+		let { actions } = this.props
+		let lay = item.data.layout
+		if (lay.left === d.x && lay.top  === d.y) return
+		lay.left = this.state.vPosition.p_left
+		lay.top  = this.state.hPosition.p_top
+		this.setState({v:false,h:false,nearPos:false})   
+		actions.updateComp(idx, item)
 	} 
 	//显示提示线
 	showLine = (param,_,i,obj) => {
@@ -208,18 +222,6 @@ class EditElement extends React.Component {
 			this.setState({nearPos:false})
 		}   
 	}    
-	//拖拽停止
-	dragStop(e, d, item, idx) {
-		e.stopPropagation()
-		// e.preventDefault()
-		let { actions } = this.props
-		let lay = item.data.layout
-		if (lay.left === d.x && lay.top  === d.y) return
-		lay.left = this.state.vPosition.p_left
-		lay.top  = this.state.hPosition.p_top
-		this.setState({v:false,h:false,nearPos:false})   
-		actions.updateComp(idx, item)
-	} 
 	changeEditable = (item, idx) => {
 		let { actions } = this.props
 		item['feature'].editStatus != undefined ? item['feature'].editStatus = true : null
