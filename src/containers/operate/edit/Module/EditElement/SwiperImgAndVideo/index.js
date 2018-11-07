@@ -26,8 +26,8 @@ class RYSwiper extends React.Component {
 	componentWillReceiveProps(props){
 		this.getData(props)
 	} 
-	content_show = obj => {
-		let contentOri = JSON.stringify(this.props.data.data.content),
+	content_show = (obj,props) => {
+		let contentOri = JSON.stringify(props.data.data.content),
 			objReturn = content_do(contentOri),
 			content = objReturn.content,
 			date = objReturn.date 
@@ -71,12 +71,12 @@ class RYSwiper extends React.Component {
 		} 
 		return type
 	} 
-	getData = props => {
+	getData = props => { 
 		let { data } = props,
 			{ feature} = data, 
 			swiperOptions = JSON.stringify(feature.swiperOptions),
 			content = JSON.stringify(data.data.content)
-		this.content_show({content:content,swiperOptions:swiperOptions})	
+		this.content_show({content:content,swiperOptions:swiperOptions},props)	
 	}   
 	componentWillUnmount(){
 		clearInterval(this.timer)

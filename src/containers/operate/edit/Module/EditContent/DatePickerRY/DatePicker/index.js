@@ -200,26 +200,92 @@ class DatePicker extends Component {
     }    
 
     selectTimeLeft(val,type) {
-        let obj = {},chooseL = this.state.chooseL,value = val < 10 ? '0'+val : val
+        let obj = {},
+            chooseL = this.state.chooseL,
+            chooseR = this.state.chooseR,
+            value = val < 10 ? '0'+val : val
         obj[type] = val; 
         if(chooseL){
-         let date = chooseL.split(' '),
-            time = type == 'hours' ? `${value}:${date[1].split(':')[1]}` : `${date[1].split(':')[0]}:${value}`;
-            this.setState({left:{...this.state.left,...obj},chooseL:`${date[0]} ${time}`})
+             let date = chooseL.split(' '),
+                time = type == 'hours' ? `${value}:${date[1].split(':')[1]}` : `${date[1].split(':')[0]}:${value}`,
+                newData = this.timeCheck(`${date[0]} ${time}`,chooseR,'left');
+            if(newData){
+                let l_obj = {hours:newData.h_l,minutes:newData.m_l,date:newData.day_l},r_obj = {hours:newData.h_r,minutes:newData.m_r,date:newData.day_r}
+                 this.setState({
+                    left:{...this.state.left,...l_obj},
+                    right:{...this.state.right,...r_obj},
+                    chooseL:newData.left,
+                    chooseR:newData.right
+                 })  
+             }else{
+                this.setState({left:{...this.state.left,...obj},chooseL:`${date[0]} ${time}`})
+            }
         }else{ 
             this.setState({left:{...this.state.left,...obj}});
         }
     }
     selectTimeRight(val,type) { 
-         let chooseR = this.state.chooseR,obj = {},value = val < 10 ? '0'+val : val; 
+         let chooseL = this.state.chooseL,
+             chooseR = this.state.chooseR,
+             obj = {},
+            value = val < 10 ? '0'+val : val; 
         obj[type] = val;
         if(chooseR){ 
             let date = chooseR.split(' '),
-            time = type == 'hours' ? `${value}:${date[1].split(':')[1]}` : `${date[1].split(':')[0]}:${value}`;
-            this.setState({right:{...this.state.right,...obj},chooseR:`${date[0]} ${time}`})
+                time = type == 'hours' ? `${value}:${date[1].split(':')[1]}` : `${date[1].split(':')[0]}:${value}`,
+                newData = this.timeCheck(chooseL,`${date[0]} ${time}`,'right');
+            if(newData){ 
+                let l_obj = {hours:newData.h_l,minutes:newData.m_l,date:newData.day_l},r_obj = {hours:newData.h_r,minutes:newData.m_r,date:newData.day_r}
+                 this.setState({
+                    left:{...this.state.left,...l_obj},
+                    right:{...this.state.right,...r_obj},
+                    chooseL:newData.left,
+                    chooseR:newData.right
+                 })  
+            }else{
+                 this.setState({right:{...this.state.right,...obj},chooseR:`${date[0]} ${time}`})
+            }
         }else{  
             this.setState({right:{...this.state.right,...obj}});
-        } 
+        }  
+    }
+    //time大小限制----后者>=前者
+    timeCheck(left,right,str){
+        if(!left || !right) return false
+        left = left.split(' ');right = right.split(' ');
+        let d_l = left[0],d_r = right[0],
+            l_time = left[1].split(':'),r_time = right[1].split(':'),
+            day_l = d_l.split('_')[2],day_r = d_r.split('_')[2],
+            h_l = parseInt(l_time[0]),m_l = parseInt(l_time[1]),
+            h_r = parseInt(r_time[0]),m_r = parseInt(r_time[1])
+        if(d_l < d_r) return false
+        if(h_l >= h_r){
+            str === 'left' ? h_r = h_l : h_l = h_r 
+            if(m_l >= m_r){
+                if(str === 'left'){
+                    if(h_l == 23){
+                        let date = d_r.split('-'),
+                            day = parseInt(date[2]) + 1
+                        date[2] = datepicker_left.digit(day)
+                        m_l >= 59 ?  (m_r = 0,h_r = 0,d_r = date.join('-'),day_l=date[2],this.setState({d_time_end:date.join('/')})) : m_r = m_l + 1
+                    }else{ 
+                        m_l >= 59 ?  (m_r = 0,h_r = h_r + 1) : m_r = m_l + 1
+                    }
+                }else{
+                    if(h_r == 0){
+                         let date = d_l.split('-'),
+                            day = parseInt(date[2]) - 1 
+                        date[2] = datepicker_left.digit(day) 
+                         m_r <= 0 ?  (m_l = 59,h_l = 23,d_l = date.join('-'),day_r=date[2],this.setState({d_time_start:date.join('/')})) : m_l = m_r - 1
+                    }else{
+                         m_r <= 0 ?  (m_l = 59,h_l = h_l - 1) : m_l = m_r - 1
+                    }
+                }
+            }
+        }
+        let new_l = `${d_l} ${datepicker_left.digit(h_l)}:${datepicker_left.digit(m_l)}`,
+            new_r = `${d_r} ${datepicker_left.digit(h_r)}:${datepicker_left.digit(m_r)}`
+        return {left:new_l,right:new_r,h_l:h_l,h_r:h_r,m_l:m_l,m_r:m_r,day_l:day_l,day_r:day_r}
     }  
     // 确定按钮
     // 传出 日期、时间、毫秒数
@@ -236,7 +302,7 @@ class DatePicker extends Component {
         time.push(datepicker_left.digit(this.state[str].minutes));
         let d = date.join('-')+' '+time.join(':');
         let d_time = date.join('/');
-        if(chooseL&&chooseR){
+        if(chooseL&&chooseR){  
             this.setState({chooseL:d,chooseR:'',d_time_start:d_time,d_time_end:''})
         }else if(chooseL&&!chooseR){ 
             if(new Date(d) < new Date(chooseL)){

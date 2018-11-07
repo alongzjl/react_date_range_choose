@@ -17,7 +17,7 @@ class TimeSelect extends Component {
     // 滑块
     renderSlider(max,val) {
         let value = val < 10 ? '0'+val : val
-        let str = max == 24 ? '时' : '分' 
+        let str = max == 23 ? '时' : '分' 
         return (
             <Row>
                 <Col span={6}>
@@ -30,10 +30,10 @@ class TimeSelect extends Component {
                     />
                 </Col> 
             </Row>
-        )
-    } 
+        ) 
+    }  
     selectItem = (v,max) => {
-        let type = max == 24 ? 'hours' : 'minutes'
+        let type = max == 23 ? 'hours' : 'minutes'
         this.props.selectHanlder(v,type);
      } 
 
