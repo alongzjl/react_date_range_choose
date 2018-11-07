@@ -8,11 +8,19 @@ import React from 'react'
 import './index.less'
 
 class Text extends React.Component {
+	state = {
+		first:1
+	}
 	componentDidMount(){
 		this.handleFocus(this.props)	
 	}
 	componentWillReceiveProps(props){
-		this.handleFocus(props)
+		if(props.contentEditable){
+			let num = this.state.first + 1
+			this.setState({first:num})
+		}else{
+			this.setState({first:1})
+		} 
 	} 
 	handleFocus = props => {
 		let { contentEditable } = props
@@ -23,14 +31,17 @@ class Text extends React.Component {
 			} 
 			dom.focus()
 		}
-	}
+	} 
 	handleBlur = e => {
 		let { data, actions } = this.props
 		let { content } = data.data
-		data['feature'].editStatus = false
+		data['feature'].editStatus = true
 		content['text'] = e.target.innerHTML
-		actions.updateComp(null, data)
+		actions.updateComp(null, data) 
 	}
+	shouldComponentUpdate(props,state){
+		return state.first ==1 || state.first == 2
+	}    
 	render() {
 		let { data, type,contentEditable } = this.props
 		let styleD = contentEditable ? {cursor:'auto'} : {cursor:'move'}
@@ -40,7 +51,7 @@ class Text extends React.Component {
 				ref="textDiv"
 				style={{...cssColorFormat(this.props, 'text'),...styleD}}  
 				contentEditable={contentEditable} 
-				onBlur={this.handleBlur}
+				onKeyUp={this.handleBlur}
 				dangerouslySetInnerHTML={{__html: textBreak(data.data.content.text || '双击编辑内容')}}
 				></div>
 			</div>

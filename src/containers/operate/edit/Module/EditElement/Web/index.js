@@ -6,23 +6,25 @@
  */
 
 import React from 'react'
-import { message } from 'antd';
 import './index.less'
 
 class Web extends React.Component {
 	state={
-		url:''
+		url:'',
+		first:1
 	}
 	componentDidMount(){
 		this.handleFocus(this.props)	
 	}
 	componentWillReceiveProps(props){
-		let { data,contentEditable } = this.props,
-			urlContent = this.urlCheck(data.data.content.url)
-		if(!urlContent){
-			this.handleFocus(props)
-		}
-	}  
+		let { contentEditable } = this.props
+		if(props.contentEditable){
+			let num = this.state.first + 1
+			this.setState({first:num})
+		}else{ 
+			this.setState({first:1})
+		}  
+	}   
 	handleFocus = props => {
 		let { contentEditable } = props
 		if(contentEditable){
@@ -31,25 +33,22 @@ class Web extends React.Component {
 				selectText(dom)
 			} 
 			dom.focus()
-		} 
-	}
+		}  
+	} 
 	handleBlur = e => {
-		let urlContent = this.urlCheck(e.target.innerHTML)
 		let { data, actions } = this.props
 		let { content } = data.data
-		data['feature'].editStatus = false
+		data['feature'].editStatus = true
 		content['url'] = e.target.innerHTML
-		if(!urlContent) {
-			content['url'] = ''
-			e.target.innerHTML = '请输入url'
-			message.error('url输入有误,请重新输入');
-		}  
 		actions.updateComp(null, data)
-	}
+	} 
 	urlCheck = val => {
 		let RP = /https?\:\/\/[-\w+&@#/%?=~_|!:,.;]+[-\w+&@#/%=~_|]/
 		return RP.test(val)
 	} 
+	shouldComponentUpdate(props,state){
+		return state.first ==1 || state.first == 2
+	}
 	render() { 
 		let { data,contentEditable } = this.props,
 			urlContent = this.urlCheck(data.data.content.url),
@@ -63,7 +62,7 @@ class Web extends React.Component {
 						style={styleD}
 						ref="webDiv"
 						contentEditable={ contentEditable } 
-						onBlur={this.handleBlur}
+						onKeyUp={this.handleBlur}
 						dangerouslySetInnerHTML={{__html: textBreak('请输入url')}}
 						></div>
 				}

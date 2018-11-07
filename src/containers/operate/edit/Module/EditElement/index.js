@@ -127,10 +127,13 @@ class EditElement extends React.Component {
 		this.state[idx] = deepCopy(data.data.layout)
 		curData.compIdx    = idx
 		curData.parentComp = null
+		if(data.name == 'text' || data.name == 'web'){
+			data.feature.editStatus = false
+		} 
 		actions.updateCur(curData)	// 更新 当前数据
 		actions.selectComp(data)
-	}
-
+	} 
+ 
 	selectMulti(e, idx) {
 		e.stopPropagation()
 		let { keyCtrl } = this.state
@@ -224,6 +227,10 @@ class EditElement extends React.Component {
 	}    
 	changeEditable = (item, idx) => {
 		let { actions } = this.props
+		if(item.name == 'web'){
+			let RP = /https?\:\/\/[-\w+&@#/%?=~_|!:,.;]+[-\w+&@#/%=~_|]/
+			if(RP.test(item.data.content.url)) return false
+		} 
 		item['feature'].editStatus != undefined ? item['feature'].editStatus = true : null
 		actions.updateComp(idx, item)
 	}
@@ -265,11 +272,10 @@ class EditElement extends React.Component {
 				aniSty    = {},
 				lockAspectRatio = layout.lockAspectRatio,
 				editStatus = _.feature&&_.feature.editStatus;
-			disableDragging = i === compIdx ? (compName == 'web' && _.data.content.url ? false : editStatus) : false
+			i === compIdx ? disableDragging = editStatus : null
 			let compCon   = compContent(compName, _, actions, `Style${styleIdx + 1}`, i, csn, state.keyCtrl,disableDragging)
-			 
-			if (!compCon) return false
-			if (ani.className) {
+			if (!compCon) return false 
+			if (ani.className) {  
 				let item = aStyle[ani.className]
 				let { direction, delay, iterationCount } = ani
 				if (!direction || !item.list) ani.direction = item.list? item.list[0] || '': ''
