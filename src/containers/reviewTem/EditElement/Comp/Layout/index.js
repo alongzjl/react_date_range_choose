@@ -10,7 +10,7 @@ import Text         from '../../Text'
 import Area        	from '../../Area'
 import QrcodeRY     from '../../QrcodeRY' 
 import QrcodeBind   from '../QrcodeBind'  
-import Swiperbind from '../Common/Swiperbind'
+import Swiperbind from '../Common/SwiperBind'
 import RYdataMap from '../Common/RYdataMap'
 import './index.less'
 

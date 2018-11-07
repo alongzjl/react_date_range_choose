@@ -10,7 +10,7 @@ import Swiper from 'swiper'
 import JumpRouter from '../../../JumpRouter'
 import checkToJump from '../../../checkToJump'
 import Layout from '../../Layout'
-import aniTime from '../../common/aniTime'
+import aniTime from '../../Common/aniTime'
 import './index.less'
 import 'swiper/dist/css/swiper.css'
 

@@ -40,9 +40,9 @@ import GoodsBar     from '../GoodsDetails/GoodsBar'
 import GoodsBlock   from '../GoodsDetails/GoodsBlock'
 import PictureListBind from '../GoodsDetails/PictureListBind'
 import WonderfulActivity from '../../WonderfulActivity'
-import Swiperbind  from '../Common/Swiperbind'
-import addAnimate from '../../../page/animateAdd'
-import RYdataMap from '../Common/RYdataMap'
+import Swiperbind  from '../Common/SwiperBind'
+import addAnimate from '../../../page/animateAdd' 
+import RYdataMap from '../Common/RYdataMap'   
 
 import './index.less'
 
