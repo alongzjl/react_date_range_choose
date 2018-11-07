@@ -30,7 +30,8 @@ class ImageAndVideoComp extends React.Component {
 	changeImg = () => {
 		this.setState({init:true},()=>{this.addImgVideoModal.show()})
 	} 
-	enter = (list,index) => {
+	enter = (list,index) => { 
+		this.addImgVideoModal.hide()
 		if (!list.length) return
 		let { data, con  ,action, actions, editConfig } = this.props
 		let da = data.data
@@ -66,9 +67,9 @@ class ImageAndVideoComp extends React.Component {
 	initFn = () =>{
 		this.setState({init:false})
 	}  
-	shouldComponentUpdate(nextProps,nextState){
-		return nextState.init
-	} 
+	/*shouldComponentUpdate(nextProps,nextState){
+		return nextState.init || nextState.change
+	} */
 	render() {
 		let { img, editConfig,con, index, data } = this.props
 		let { width, height,init } = this.state

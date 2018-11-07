@@ -45,6 +45,9 @@ export default class PictureAndVideo extends React.Component {
 	show() {
 		this.addImgVideoModal.show()
 	} 
+	hide() {
+		this.addImgVideoModal.hide()
+	}  
 	state = {
 		type:1,
 		list:[],
@@ -83,9 +86,9 @@ export default class PictureAndVideo extends React.Component {
 		this.state.have = false
 		clearTimeout(this.timer)
 	}  
-	/* shouldComponentUpdate(newProps, newState) {
-	 	  return newProps.init;
-	  } */  
+	 shouldComponentUpdate(newProps, newState) {
+	 	  return newProps.init ? newProps.init : false;
+	  }   
 	getTypes = (type,fn) => {
 		var getData = {
 			type: type
@@ -161,7 +164,6 @@ export default class PictureAndVideo extends React.Component {
 	}
 	enter = () => { 
 		this.props.initFn()
-		this.addImgVideoModal.hide()
 		if(this.state.list.length == 0) return
 		this.props.enter(this.state.list,this.props.index)
 	} 

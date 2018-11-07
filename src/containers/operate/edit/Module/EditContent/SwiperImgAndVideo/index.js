@@ -8,7 +8,7 @@ import './index.less'
 
 import  SwiperSame  from '../SwiperSame'
 import PictureAndVideo from 'compEdit/EditCommon/PictureAndVideo'
-import { Row, Col, Collapse, Icon } from 'antd'
+import { Row, Col, Collapse, Icon,message } from 'antd'
 const  { Panel }    = Collapse
 
 
@@ -33,6 +33,11 @@ class SwiperImage extends React.Component {
 		let { content }    = data.data
 		let { parentComp } = curData
 		let newContent =  this.do_content(list,content)
+		if(newContent.length > 40){
+			message.warning('最多只能添加40张素材！')
+			return false
+		} 
+		this.addImgVideoModal.hide() 
 		data.data.content = newContent
 		actions.updateComp(null, parentComp? parentComp: data)
 	}  
@@ -68,9 +73,9 @@ class SwiperImage extends React.Component {
 	initFn = () =>{
 		this.setState({init:false})
 	}
-	shouldComponentUpdate(nextProps,nextState){
+	/*shouldComponentUpdate(nextProps,nextState){
 		return nextState.init
-	}
+	}*/
 	render() {
 		let props = this.props.data
 		if (!props.editConfig) props = props.data
