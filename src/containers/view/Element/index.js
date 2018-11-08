@@ -16,6 +16,7 @@ import Text              from 'compEdit/EditElement/Text'
 import Button            from 'compEdit/EditElement/Button'
 import Video             from 'compEdit/EditElement/Video'
 import SwiperImage       from 'compEdit/EditElement/SwiperImage'
+import SwiperImgAndVideo from 'compEdit/EditElement/SwiperImgAndVideo'
 import WonderfulActivity from 'compEdit/EditElement/WonderfulActivity'
 import Time              from 'compEdit/EditElement/Time'
 import Weather           from 'compEdit/EditElement/Weather'
@@ -54,6 +55,7 @@ const compContent = (name, data, actions, type, idx, csn) => {
 		text:              <Text              {...props} />,
 		button:            <Button            {...props} />,
 		swiperImage:       <SwiperImage       {...props} />,
+		swiperImgAndVideo: <SwiperImgAndVideo {...props} />,
 		wonderfulActivity: <WonderfulActivity {...props} />,
 		time:              <Time              {...props} />,
 		weather:           <Weather           {...props} />,
