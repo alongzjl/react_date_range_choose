@@ -74,6 +74,12 @@ class StyleManage extends React.Component {
 		data[parentKey].idx = newIdx
 		if (action === 'updateComp') {
 			// 除styleList代码 START
+		/*	let layout = data.data.layout,
+				position = {top:layout.top,left:layout.left},
+				newData = deepCopy(list[newIdx].data),
+				newLayout = {...newData.layout,...position}
+			newData.layout = newLayout
+			data.data = newData */ 
 			data.data = deepCopy(list[newIdx].data)
 			// 除styleList代码 END
 			// data.data = data[parentKey].list[newIdx].data

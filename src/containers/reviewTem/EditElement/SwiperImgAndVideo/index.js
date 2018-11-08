@@ -97,7 +97,7 @@ class SwiperImgAndVideoShow extends React.Component {
 //单独视频
 function OneVideoShow({content}){
 	if(content.length == 0) return false
-	return (<div className="e-video"> 
+	return (<div className="e-video" id="e-SwiperImage-show"> 
 					<video src={content[0].img.video} controls={false} autoPlay loop>
 						您的浏览器不支持 video 标签。
 					</video> 
@@ -109,7 +109,7 @@ function OneVideoShow({content}){
 function OneImageShow({content,prop,toPage}){
 	if(content.length == 0) return false
 	return (
-				<div className="e-img" onClick={()=>{toPage( content[0].router)}}>
+				<div className="e-img" id="e-SwiperImage-show" onClick={()=>{toPage( content[0].router)}}>
 					<img src={compImgFormat(prop, content[0].img)} />
 				</div>
 			)
@@ -155,7 +155,7 @@ class SwiperImageShow extends React.Component {
 	render() {
 		let { prop,content } = this.props
 		return ( 
-			<div className="e-SwiperImage">
+			<div className="e-SwiperImage" id="e-SwiperImage-show">
 				<div className={`swiper-container swiper-container_${this.state.random} outer_box`}>
 					<div className="swiper-wrapper">
 						{
@@ -288,10 +288,10 @@ class SwiperImageVideoShow extends React.Component {
 	componentWillUnmount() {
 		destroySwiper(this.mySwiperImage)
 	};
-	render() {
+	render() { 
 		let { prop,content } = this.props
 		return (
-			<div className="e-SwiperImage" id="e-SwiperImage">
+			<div className="e-SwiperImage" id="e-SwiperImage-show">
 				<div className={`swiper-container swiper-container_${this.state.random} outer_box`}>
 					<div className="swiper-wrapper">
 						{ 
