@@ -44,8 +44,8 @@ module.exports = {
 		top:      0,
 		left:     0,
 		width:    540,
-		height:   880
-	},
+		height:   700
+	}, 
 	style: {},
 	content: {
 		size: 12,

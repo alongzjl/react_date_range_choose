@@ -40,14 +40,14 @@ class Catg extends React.Component {
 				slideNextTransitionStart:function(){
 					realIndex = realIndex+1
 					that.setState({realIndex:realIndex})
-					clearInterval(RYTimer);
-					funcIn()
+					//clearInterval(RYTimer);
+					//funcIn()
 				},
 				slidePrevTransitionStart:function(){
 					realIndex = realIndex-1
 					that.setState({realIndex:realIndex})
-					clearInterval(RYTimer);
-					funcIn()
+					//clearInterval(RYTimer);
+					//funcIn()
 				}
 			},
       		observer : true,//修改swiper自己或子元素时，自动初始化swiper 

@@ -7,8 +7,8 @@ const data = {
 		top:      0,
 		left:     0,
 		width:    540,
-		height:   540
-	}, 
+		height:   300
+	},  
 	style: {},
 	content: {
 		mapThemeColor: { type: 'background', color: '#666' }

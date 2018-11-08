@@ -58,10 +58,10 @@ const dataStyle_2 = {
 		top:      0,
 		left:     0,
 		width:    540,
-		height:   900
+		height:   700
 	},
 	style: {
-	},
+	}, 
 	content: {
 		size: 12
 	},

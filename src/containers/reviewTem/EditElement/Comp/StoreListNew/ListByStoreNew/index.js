@@ -48,15 +48,15 @@ class ListByStoreNew extends React.Component {
 					ioInput.currentPage += 1;
 					ioInput.changePage = true;
 					ioOuter(ioInput)
-					clearInterval(RYTimer);
-					funcIn()
+					// clearInterval(RYTimer);
+					// funcIn()
 				},
 				slidePrevTransitionStart:function(){
 					ioInput.currentPage -= 1;
 					ioInput.changePage = true;
 					 ioOuter(ioInput)
-					 clearInterval(RYTimer);
-					 funcIn()
+					 // clearInterval(RYTimer);
+					 // funcIn()
 				}
 			} 
 		} 
@@ -81,7 +81,7 @@ class ListByStoreNew extends React.Component {
 	render() {
 		let { ioInput,shops,type } = this.props
 		return ( 
-			<section className={`e-list-by-store2 ${type}`} style={{...cssColorFormat(this.props, 'filterBox'),height:"100%",width:"100%"}}>
+			<section className={`e-list-by-store2 ${type}`} style={{height:"100%",width:"100%"}}>
 				<RenderSwiperNew props={this.props} ioInput={ioInput} shops={shops} random={this.state.random} toDetails={this.toDetails} />
 			</section>
 		)

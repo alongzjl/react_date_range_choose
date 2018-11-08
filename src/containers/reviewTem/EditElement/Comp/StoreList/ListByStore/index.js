@@ -48,15 +48,15 @@ class ListByStore extends React.Component {
 					ioInput.currentPage += 1;
 					ioInput.changePage = true;
 					ioOuter(ioInput)
-					clearInterval(RYTimer);
-					funcIn()
+					// clearInterval(RYTimer);
+					// funcIn()
 				},
 				slidePrevTransitionStart:function(){
 					ioInput.currentPage -= 1;
 					ioInput.changePage = true;
 					 ioOuter(ioInput)
-					 clearInterval(RYTimer);
-					 funcIn()
+					 // clearInterval(RYTimer);
+					 // funcIn()
 				}
 			}
 		} 
