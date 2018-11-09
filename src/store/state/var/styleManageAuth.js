@@ -15,6 +15,6 @@ module.exports = {
 	storeList:         1,
 	storeDetails:      1,
 	storeInstro:       1,
-	dateWeather:       1,
+	/*dateWeather:       1,*/
 	map2D:             1
 }
