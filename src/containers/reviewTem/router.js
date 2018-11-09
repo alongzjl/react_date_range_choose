@@ -112,8 +112,8 @@ export default class RouterRY extends React.Component {
 		return (  
 			<div>{dom}
 				{
-					music ? <audio src={music.url} autoPlay loop id="RYAudioShow"></audio> : null
-				}  
+					music&&music.url ? <audio src={music.url} autoPlay loop id="RYAudioShow"></audio> : null
+				}   
 			</div> 
 		)
 	}

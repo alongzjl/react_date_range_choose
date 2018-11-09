@@ -31,7 +31,7 @@ class WebShow extends React.Component {
 		let { data } = this.props
 		return ( 
 			<div className="e-web">
-				<iframe id={this.state.id} className="ew-iframe" src={data.data.content.url} scrolling={'no'} />
+				<iframe id={this.state.id} className="ew-iframe-show" src={data.data.content.url} scrolling={'no'} />
 			</div> 
 		) 
 	}
