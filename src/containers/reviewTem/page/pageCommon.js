@@ -115,7 +115,7 @@ class EditElementCommon extends React.Component {
 						 )
 					  })
  		return ( 
-			<div className={`pg-element-parent ${this.state.name}`} style={pageOutAnimate.style}> 
+			<div className={`pg-element-parent-show ${this.state.name}`} style={pageOutAnimate.style}> 
 				<section className={`pg-element ${pageInAnimate.name}`} style={{...bgStyle,...pageInAnimate.style}}>{ childNode }</section>
 			</div>
 		)

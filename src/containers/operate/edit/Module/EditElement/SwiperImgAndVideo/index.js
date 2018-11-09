@@ -33,7 +33,7 @@ class RYSwiper extends React.Component {
 			date = objReturn.date 
 		if(getAttr(content) == 'Array'){
 			let type = this.oneSwiper(content),newObj = {newContent:content,type:type,...obj}
-			sameCheck(this.state.newContent,content) ? this.setState(newObj) : null
+			sameCheck(this.state.newContent,content) ? this.setState(newObj) : this.setState(obj)
 			clearInterval(this.timer)
 			return false
 		}   
@@ -43,19 +43,19 @@ class RYSwiper extends React.Component {
 				let arr_content = content[_],
 					type = this.oneSwiper(arr_content),
 					newObj = {newContent:arr_content,type:type,...obj}
-				sameCheck(this.state.newContent,arr_content) ? this.setState(newObj) : null
+				sameCheck(this.state.newContent,arr_content) ? this.setState(newObj) : this.setState(obj)
 				clearInterval(this.timer)
 			}else if(i == 0&&_ > now){
 				let arr_start = JSON.parse(contentOri) 
 				arr_start = arr_start.filter(_=>_.date == '')
 				let type = this.oneSwiper(arr_start),newObj = {newContent:arr_start,type:type,...obj}
-				sameCheck(this.state.newContent,arr_start) ? this.setState(newObj) : null
+				sameCheck(this.state.newContent,arr_start) ? this.setState(newObj) : this.setState(obj)
 			}else{ 
-				if(now >= _ && now < date[i+1]){
+				if(now >= _ && now < date[i+1]){ 
 					let arr_content = content[_],
 						type = this.oneSwiper(arr_content),
 						newObj = {newContent:arr_content,type:type,...obj}
-					sameCheck(this.state.newContent,arr_content) ? this.setState(newObj) : null
+					sameCheck(this.state.newContent,arr_content) ? this.setState(newObj) : this.setState(obj)
 				} 
 			} 
 		}) 
@@ -152,10 +152,12 @@ class SwiperImage extends React.Component {
 			this.setState({realIndex:0})
 		});         
 		destroySwiper(this.mySwiperImage)
-		this.mySwiperImage = new Swiper(`.swiper-container_${this.state.random}`, swiperOptions)   
+		clearTimeout(this.timer)
+		this.timer = setTimeout(()=>{this.mySwiperImage = new Swiper(`.swiper-container_${this.state.random}`, swiperOptions)},10)
 	}          
 	   
 	componentWillUnmount() {
+		clearTimeout(this.timer)
 		destroySwiper(this.mySwiperImage)
 	}
 	render() {
