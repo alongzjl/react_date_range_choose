@@ -64,8 +64,8 @@ class SwiperImage extends React.Component {
 	};  
 	componentWillUnmount() {
 		clearTimeout(this.timer)
-		this.mySwiperImage.destroy(false)
-	}
+		this.mySwiperImage && this.mySwiperImage.destroy(false)
+	} 
 	getData = props => { 
 		let { data } = props,
 			{ feature} = data, 
