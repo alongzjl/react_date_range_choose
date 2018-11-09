@@ -30,7 +30,6 @@ import NavigationFloat   from 'compEdit/EditContent/NavigationFloat'
 import WonderfulActivity from 'compEdit/EditContent/WonderfulActivity'
 import CatgByGoods       from 'compEdit/EditContent/CatgByGoods'
 import SwiperByGoods     from 'compEdit/EditContent/SwiperByGoods'
-import { contentSwiper }     from 'compEdit/EditContent/filter'
 import * as variable from 'var'  
 
 var conMap   = variable.contentMap,
@@ -410,7 +409,6 @@ class EditContent extends React.Component {
 		let compCon = compContent(compName, this.props, this.updateComp)
 		
 		if (content.length) {
-			content = contentSwiper(compName,content)
 			childNode = content.map((_, i) => {
 				return (
 					<Panel header={`内容${i + 1}`} key={i + 1}>

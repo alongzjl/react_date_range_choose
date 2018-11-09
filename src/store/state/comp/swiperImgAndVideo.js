@@ -63,24 +63,18 @@ const data = {
 			//title: '图片1',		// 图片标题
 			router: {},			// 路由
 			type:'image',
-			delayOnly:5,
-			date:''
 		}, 
 		{ 
 			img: { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201805231506213816.jpg' },
 			//title: '图片2',		// 图片标题
 			router: {},			// 路由
-			type:'image',
-			delayOnly:5,
-			date:''
+			type:'image'
 		}, 
 		{   
 			img: { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201805231506215219.jpg' },
 			//title: '图片3',		// 图片标题
 			router: {},			// 路由
-			type:'image',
-			delayOnly:5,
-			date:''
+			type:'image'
 		}
 	],
 	animation: {

@@ -35,7 +35,7 @@ import ListByStore       from './ListByStore'
 import ThemeColor        from './ThemeColor'
 import CatgByGoods       from './CatgByGoods'
 import SwiperByGoods     from './SwiperByGoods'
-import { filterContent,contentSwiper }     from './filter'
+import { filterContent }     from './filter'
 import * as variable from 'var'
 
 var conMap   = variable.contentMap
@@ -415,7 +415,6 @@ class EditContent extends React.Component {
 
 		if (content.length) {
 			activeKey = Array.from(new Array(content.length), (_, i) => `${i}`)
-			content = contentSwiper(compName,content)
 			childNode = content.map((_, i) => {
 				return ( 
 					<Panel header={`内容${i + 1}`} key={`${i}`}> 

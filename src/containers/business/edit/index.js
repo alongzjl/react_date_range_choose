@@ -20,7 +20,7 @@ import EditElement    from 'compEditB/EditElement'
 import EditStyle      from 'compEditB/EditStyle'
 import EditAnimation  from 'compEdit/EditAnimation'
 import EditTheme      from 'compEditB/EditTheme'
-
+import { setSwiperImgAndVideo } from 'compEdit/EditContent/filter'
 import * as actions from 'actions'
 
 import 'rc-color-picker/assets/index.css'
@@ -49,6 +49,7 @@ class EditComponent extends React.Component {
 
 	render() {
 		let { editConfig, location } = this.props
+		setSwiperImgAndVideo(editConfig)
 		let theme  = editConfig.globalData.theme
 		let colors = theme.list[theme.idx].colors
 		let { curData } = editConfig

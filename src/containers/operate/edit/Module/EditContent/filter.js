@@ -23,17 +23,24 @@ export function filterContent(data,con) {
 } 
 
 //轮播设置的过滤--商家--大运营
-export function contentSwiper(compName,content){
-	if(compName != 'swiperImgAndVideo') return content
-	let contentNew = content.map(_=>{
-		if(getEnv() === 'business'){ 
-			!_.delayOnly&&_.type=='image' ? _.delayOnly = 5 : null
-			!_.date ? _.date = '' : null
-		}else{  
-			delete _.delayOnly
-			delete _.date 
-		}  
-		return _
-	})    
-	return contentNew
+export function setSwiperImgAndVideo(editConfig){
+	let { pageContent } = editConfig
+	Object.keys(pageContent).map(_=>{
+		let page = pageContent[_],elements =  page.elements;
+		elements.map(val=>{
+			if(val.name === "swiperImgAndVideo"){
+				let contentList = deepCopy(val.data.content)
+				if(getAttr(contentList) != 'Array') return
+				contentList.forEach(e=>{
+					!e.delayOnly&&e.type=='image' ? e.delayOnly = 5 : null
+					!e.date ? e.date = '' : null
+				})
+				val.data.content = contentList
+			}
+			return val
+		})
+	})
 }
+
+
+
