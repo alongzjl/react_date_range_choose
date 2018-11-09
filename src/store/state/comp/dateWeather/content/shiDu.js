@@ -1,5 +1,4 @@
 let { deepCopy, extendRmSL } = require('state/common')
-const shidu = require('images/weather/shidu.svg')
 
 const shiDu = extendRmSL(deepCopy(require('../../../comp/area')), {
 	data: {
@@ -14,7 +13,7 @@ const shiDu = extendRmSL(deepCopy(require('../../../comp/area')), {
 			filterBox:{
 				backgroundColor: { type: 'custom', color: '#4a89dc' },
 				opacity: 0.6,
-				WebkitMaskImage:`url('${shidu}')` 
+				WebkitMaskImage:`url('http://rongyi.b0.upaiyun.com/wd/other/store_other/2018/images/shidu.svg')` 
 			}    
 		}  
 	}

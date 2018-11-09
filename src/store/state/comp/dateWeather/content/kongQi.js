@@ -1,5 +1,4 @@
 let { deepCopy, extendRmSL } = require('state/common')
-const kz = require('images/weather/zhiliang.svg')
 
 const kongQi = extendRmSL(deepCopy(require('../../../comp/area')), {
 	data: {
@@ -13,7 +12,7 @@ const kongQi = extendRmSL(deepCopy(require('../../../comp/area')), {
 		style:{
 			filterBox:{
 				backgroundColor: { type: 'custom', color: '#4a89dc' },
-				WebkitMaskImage:`url('${kz}')`,
+				WebkitMaskImage:`url('http://rongyi.b0.upaiyun.com/wd/other/store_other/2018/images/zhiliang.svg')`,
 				opacity: 0.6
 			}   
 		} 
