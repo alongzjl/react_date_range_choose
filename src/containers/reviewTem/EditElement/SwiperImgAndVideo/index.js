@@ -97,8 +97,10 @@ class SwiperImgAndVideoShow extends React.Component {
 //单独视频
 function OneVideoShow({content}){
 	if(content.length == 0) return false
+	let video = content[0].img.video
+	if(!video) return false
 	return (<div className="e-video" id="e-SwiperImage-show"> 
-					<video src={content[0].img.video} controls={false} autoPlay loop>
+					<video src={video} controls={false} autoPlay loop>
 						您的浏览器不支持 video 标签。
 					</video> 
 				</div>
@@ -108,9 +110,11 @@ function OneVideoShow({content}){
 //一张图片
 function OneImageShow({content,prop,toPage}){
 	if(content.length == 0) return false
+	let img = compImgFormat(prop, content[0].img)
+	if(!img) return false
 	return (
 				<div className="e-img" id="e-SwiperImage-show" onClick={()=>{toPage( content[0].router)}}>
-					<img src={compImgFormat(prop, content[0].img)} />
+					<img src={img} />
 				</div>
 			)
 }  
@@ -159,7 +163,9 @@ class SwiperImageShow extends React.Component {
 				<div className={`swiper-container swiper-container_${this.state.random} outer_box`}>
 					<div className="swiper-wrapper">
 						{
-							content.map((item,index) => <div className="swiper-slide" key={index}><img src={compImgFormat(prop, item.img)} style={cssColorFormat(prop, 'swiperImage')} /></div>)
+							content.map((item,index) => <div className="swiper-slide" key={index}>{
+								compImgFormat(prop, item.img) ? <img src={compImgFormat(prop, item.img)} style={cssColorFormat(prop, 'swiperImage')} /> : null
+							}</div>)
 						}  
 					</div>
 				</div>
@@ -246,7 +252,7 @@ class SwiperImageVideoShow extends React.Component {
 	        }
 	        that.refs[`RYPlayer_${realIndex-1}`] ? that.refs[`RYPlayer_${realIndex-1}`].pause() : null
 	        that.refs[`RYPlayer_${realIndex+1}`] ? that.refs[`RYPlayer_${realIndex+1}`].pause() : null
-	        if(con.type == 'video'){
+	        if(con.type == 'video'&&con.img.video){
 	        	let { player } = that.refs[`RYPlayer_${realIndex}`].getState()
 	            that.refs[`RYPlayer_${realIndex}`].load()
 	            that.refs[`RYPlayer_${realIndex}`].play()
@@ -271,7 +277,7 @@ class SwiperImageVideoShow extends React.Component {
 		let { content } = this.props,
 	        activeIndex = this.mySwiperImage.activeIndex;
 	    if(!this.state.autoplay) return
-	    if(content[0].type == 'video'){
+	    if(content[0].type == 'video'&&content[0].img.video){
 	      if(!this.refs) return 
 	      let { player } = this.refs[`RYPlayer_1`].getState()
 	      this.refs[`RYPlayer_1`].play()
@@ -297,10 +303,10 @@ class SwiperImageVideoShow extends React.Component {
 						{ 
 			             	content.map((_,index)=><div className="swiper-slide" key={index} style={cssColorFormat(prop, 'swiperImage')}>
 							 {
-				                _.type == 'video' ? <div className="videoRY"><Player src={_.img.video} ref={`RYPlayer_${index+1}`} >
+				                _.type == 'video'&&_.img.video ? <div className="videoRY"><Player src={_.img.video} ref={`RYPlayer_${index+1}`} >
 				                  <BigPlayButton className="videoButton" /> 
 				                  <ControlBar autoHide={true} disableDefaultControls={true} />
-				                </Player><div className="shadow"></div></div> : <img src={compImgFormat(prop, _.img)} />
+				                </Player><div className="shadow"></div></div> : (compImgFormat(prop, _.img) ? <img src={compImgFormat(prop, _.img)} /> : null)
 				             } 
 			             </div>)
 			          }  

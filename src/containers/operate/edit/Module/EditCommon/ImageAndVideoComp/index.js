@@ -30,8 +30,8 @@ class ImageAndVideoComp extends React.Component {
 	changeImg = () => {
 		this.setState({init:true},()=>{this.addImgVideoModal.show()})
 	} 
-	enter = (list,index) => { 
-		this.addImgVideoModal.hide()
+	enter = (list,index) => {
+		if(index != 'remove') {this.addImgVideoModal.hide()}
 		if (!list.length) return
 		let { data, con  ,action, actions, editConfig } = this.props
 		let da = data.data
@@ -60,10 +60,10 @@ class ImageAndVideoComp extends React.Component {
 		let { parentComp } = curData
 		img.type  = val
 		if (action === 'updateComp') return actions[action](null, parentComp? parentComp: data)
-	}
-	removeImg = () => {
-		this.enter([{ url: '' }])
-	}
+	} 
+	removeImg = type => {
+		type === 'image' ? this.enter([{ url: '',type:1 }],'remove') : this.enter([{ url: '',preview:'',type:2 }],'remove')
+	} 
 	initFn = () =>{
 		this.setState({init:false})
 	}  
@@ -111,7 +111,7 @@ class ImageAndVideoComp extends React.Component {
 					<div className="add_img" style={{ backgroundImage: `url('${imgVal}')` }}>
 						<div className="shadow">
 							<div className="add_text_change" onClick={this.changeImg}><Icon type="reload" /></div>
-							<div className="add_text_remove" onClick={this.removeImg}><Icon type="close" /></div>
+							<div className="add_text_remove" onClick={()=>{this.removeImg(con.type)}}><Icon type="close" /></div>
 						</div>
 					</div>
 				)
