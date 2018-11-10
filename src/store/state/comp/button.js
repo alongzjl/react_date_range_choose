@@ -26,7 +26,7 @@ const data = {
 			opacity:         1, 
 			color:           { type: 'custom', color: '#000' },
 			background: 'center no-repeat',
-			backgroundSize: 'cover',
+			backgroundSize: 'contain',
 			backgroundColor: { type: 'custom', color: '#F58F8F' },
 			backgroundImage: { type: 'custom', img: '' },
 			borderRadius:    {
