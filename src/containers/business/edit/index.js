@@ -34,19 +34,11 @@ class EditComponent extends React.Component {
 	constructor(props) {
 		super(props)
 	}
-
-	componentWillMount() {
-	}
-
-	componentDidMount() {
-	}
-
 	selectPage() {
 		let { actions, editConfig } = this.props
 		let { curData } = editConfig
 		actions.selectPage(curData.router)
 	}
-
 	render() {
 		let { editConfig, location } = this.props
 		setSwiperImgAndVideo(editConfig)

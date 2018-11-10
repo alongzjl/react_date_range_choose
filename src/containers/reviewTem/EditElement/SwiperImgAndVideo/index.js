@@ -127,7 +127,7 @@ class SwiperImageShow extends React.Component {
 		realIndex: 0
 	} 
 	componentWillReceiveProps(props) {
-		this.init(props);
+		this.timer = setTimeout(()=>{ this.init(props) },10);
 	}  
 	componentDidMount() {
 		this.init(this.props)
@@ -154,6 +154,7 @@ class SwiperImageShow extends React.Component {
 	}          
 	   
 	componentWillUnmount() {
+		clearTimeout(this.timer)
 		destroySwiper(this.mySwiperImage)
 	}
 	render() {
@@ -179,6 +180,7 @@ class SwiperImageVideoShow extends React.Component {
 	
 	componentWillReceiveProps(props) {
 		clearTimeout(this.timerSlide)
+		this.timer = setTimeout(()=>{ this.init(props) },10);
 		this.init(props);
 	}
 	componentDidMount() {
@@ -292,6 +294,7 @@ class SwiperImageVideoShow extends React.Component {
 	    }
 	}; 
 	componentWillUnmount() {
+		clearTimeout(this.timer)
 		destroySwiper(this.mySwiperImage)
 	};
 	render() { 

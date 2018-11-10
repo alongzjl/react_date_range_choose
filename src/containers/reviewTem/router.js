@@ -86,7 +86,7 @@ export default class RouterRY extends React.Component {
 	componentDidMount(){
 		let {globalData} = this.props.editConfig,
 			{ music } = globalData.data
-		if(music){
+		if(music&&music.url){
 			let dom = document.getElementById('RYAudioShow')
 			dom.volume = music.volume/100
 		} 
