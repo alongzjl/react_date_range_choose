@@ -40,7 +40,7 @@ var conMap   = variable.contentMap,
 import './index.less'
 
 const compContent = (name, data, updateComp) => {
-	var props  = { data: { data }, updateComp }
+	var props  = { data, updateComp }
 	var render = {
 		navigation:        <Navigation        {...props} />,
 		navigationFloat:   <NavigationFloat   {...props} />,

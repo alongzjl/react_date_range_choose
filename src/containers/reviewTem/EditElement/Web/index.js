@@ -20,8 +20,8 @@ class WebShow extends React.Component {
 	messageGet = messageEvent => {
 		let { type, value } = messageEvent.data;
 		if (type === 'back' && value) { 
-			clearInterval(RYTimer);  
-			funcIn(); 
+			//clearInterval(RYTimer);  
+			//funcIn(); 
 		}
 	}     
 	componentWillUnmount(){  
