@@ -7,7 +7,8 @@
 
 import React from 'react';
 import SkyLight from 'react-skylight';
-import RouterRY from 'reviewTem/router.js'
+import getClientScale from '../getClientScale'
+import RouterRY from 'reviewTem/router'
 import './index.less' 
 const commonCss = {
 	dialogStyles: {
@@ -53,10 +54,11 @@ export default class ReviewTemplate extends React.Component {
 		this.setState({init:false})
 	}
 	render() {
+		let scale =getClientScale(960,80),style={height:parseInt(960*scale),width:parseInt(540*scale),margin:`-${parseInt(960*scale)/2}px auto 0`}
 		return (
 			<div className="ReviewTemplateShadow">
 				<SkyLight
-					dialogStyles={commonCss.dialogStyles}
+					dialogStyles={{...commonCss.dialogStyles,...style}}
 					titleStyle={commonCss.titleStyle}
 					closeButtonStyle={commonCss.closeButtonStyle}
 					hideOnOverlayClicked
@@ -64,7 +66,7 @@ export default class ReviewTemplate extends React.Component {
 					ref={com => { this.reviewModal = com }}
 					title={''}
 				>  
-				<div className="reviewTemplate" id="reviewTemplate"> 
+				<div className="reviewTemplate" id="reviewTemplate" style={{transform:`scale(${scale})`}}> 
 					{
 						this.state.init ?  <RouterRY editConfig={this.props.editConfig} actions={this.props.actions}></RouterRY> : null
 					}
