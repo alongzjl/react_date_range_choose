@@ -52,14 +52,14 @@ class NavigationFloatShow extends React.Component {
 				slideNextTransitionStart:function(){
 					realIndex = realIndex+1
 					that.setState({realIndex:realIndex})
-					clearInterval(RYTimer);
-					funcIn()
+					//clearInterval(RYTimer);
+					//funcIn()
 				},
 				slidePrevTransitionStart:function(){
 					realIndex = realIndex-1
 					that.setState({realIndex:realIndex})
-					clearInterval(RYTimer);
-					funcIn()
+					//clearInterval(RYTimer);
+					//funcIn()
 				}
 			},
       		observer : true,//修改swiper自己或子元素时，自动初始化swiper 
@@ -105,7 +105,7 @@ class NavigationFloatShow extends React.Component {
 			  style_obj = {top:-parseInt(shadow_style.top),left:-parseInt(shadow_style.left)}
 		let chooseDom
 		switch(layout_style){
-			case 1 : chooseDom = (<RenderSwiper props={this.props} random={this.state.random} toPage={this.toPage} toPageFloor={()=>{this.toPageFloor}} />);break
+			case 1 : chooseDom = (<RenderSwiper props={this.props} random={this.state.random} realIndex={this.state.realIndex} toPage={this.toPage} toPageFloor={this.toPageFloor} />);break
 			case 2 : chooseDom = (<RenderDom props={this.props} toPage={this.toPage} />);break
 			case 3 : chooseDom = (<RenderDomThree props={this.props} showTable={this.state.showTable} toPage={this.toPage} mainTab={this.mainTab} first={this.state.first} />);break
 			case 4 : chooseDom = (<RenderDomFour props={this.props} showTable={this.state.showTable} toPage={this.toPage} mainTab={this.mainTab} first={this.state.first} />);break
@@ -131,7 +131,7 @@ function RenderSwiper({ props,random,realIndex,toPage,toPageFloor }) {
 	return (
 			<div className="navigation_box">
 				{
-					pageSwitch ? <div className={realIndex < 1? 's-disabled': ''} style={{ ...cssp, ...cssColorFormat(props, 'PagePrev') }} onClick={toPageFloor(realIndex-1)}></div> : null
+					pageSwitch ? <div className={realIndex < 1? 's-disabled': ''} style={{ ...cssp, ...cssColorFormat(props, 'PagePrev') }} onClick={()=>{toPageFloor(realIndex-1)}}></div> : null
 				}
 				<div style={{width:'100%',height:`${pageSwitch?'70%':'100%'}`}}>
 					<div className={`swiper-container swiper-container_navg swiper-container_navg_${random}`}>
@@ -149,7 +149,7 @@ function RenderSwiper({ props,random,realIndex,toPage,toPageFloor }) {
 				    </div>
 				</div>
 			    {
-					pageSwitch ?  <div className={realIndex >= allPages? 's-disabled': ''} style={{ ...cssn, ...cssColorFormat(props, 'PageNext') }} onClick={toPageFloor(realIndex+1)}></div> : null
+					pageSwitch ?  <div className={realIndex >= allPages? 's-disabled': ''} style={{ ...cssn, ...cssColorFormat(props, 'PageNext') }} onClick={()=>{toPageFloor(realIndex+1)}}></div> : null
 				}
 			</div>
 		)
