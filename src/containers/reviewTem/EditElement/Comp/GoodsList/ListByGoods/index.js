@@ -20,15 +20,16 @@ export default class ListByGoods extends React.Component {
 	state = {
 		list:[],
 		noUp:false,
-		noDown:false
+		noDown:false,
+		totalPage:3
 	}
 	componentDidMount(){
 		this.getData([]);
 	}
 	getData = list=> {
 		Server.goods.getList(6, o => {
-			list = list.concat(0)
-			this.setState({ list: o })
+			list = list.concat(o)
+			this.setState({ list: list })
 		})
 	}
 	//跳转页面
@@ -45,7 +46,7 @@ export default class ListByGoods extends React.Component {
 	//上啦加载
 	onUp = () => { 
 		this.currentPage++;
-		if(this.currentPage <= 2){
+		if(this.currentPage <= 3){
 			this.getData(this.state.list); 
 		}else{
 			let list = this.state.list
