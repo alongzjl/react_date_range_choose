@@ -21,7 +21,7 @@ module.exports = [
 					key:  'picture'
 				},
 				{
-					icon: 'image',
+					icon: 'qrcode',
 					name: '二维码',
 					key:  'qrcode'
 				},
@@ -284,7 +284,7 @@ module.exports = [
 			]
 		},
 		{
-			icon: 'store',
+			icon: 'shops',
 			name: '商品列表',
 			key:  'goodsList',
 			child: [
@@ -316,7 +316,7 @@ module.exports = [
 			]
 		},
 		{
-			icon: 'store',
+			icon: 'shopDetail',
 			name: '商品详情',
 			key: 'goodsDetails',
 			child: [

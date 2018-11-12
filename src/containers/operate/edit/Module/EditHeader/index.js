@@ -222,7 +222,7 @@ class Header extends React.Component {
 						</div>*/}
 						<div className="cl-item" onClick={this.review.bind(this)}>
 							<div className="cl-item-icon">
-								<img src={require(`images/icon/theme.png`)}/>
+								<img src={require(`images/icon/reviewTem.png`)}/>
 							</div>
 							预览
 						</div>
