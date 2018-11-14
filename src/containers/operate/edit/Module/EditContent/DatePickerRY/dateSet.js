@@ -63,6 +63,7 @@ export default class DateSet extends React.Component {
 						cancel={this.cancelClick}
 						now={this.props.now}
 						defaultValue={this.props.defaultValue} 
+						remove={this.props.remove}
 					/>
 				</SkyLight>
 			</div>

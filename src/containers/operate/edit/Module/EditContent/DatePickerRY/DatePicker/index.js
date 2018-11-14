@@ -422,6 +422,7 @@ class DatePicker extends Component {
                     <div className="showDateAll">{showStr}</div>
                     <span className="option-btn confirm-btn" onClick={this.confirm.bind(this)}>{datepicker_left.lang[datepicker_left.data.lang].confirm}</span>
                     <span className="option-btn cancel-btn" onClick={this.cancel.bind(this)}>{datepicker_left.lang[datepicker_left.data.lang].cancel}</span>
+                    { this.state.chooseL ? <span className="option-btn remove-btn" onClick={this.props.remove}>清除</span> : null }
                 </div>
                <div className="left">
                      <div className="date-picker-year-month">

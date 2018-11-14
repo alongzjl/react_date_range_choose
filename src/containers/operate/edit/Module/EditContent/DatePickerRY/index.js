@@ -34,8 +34,12 @@ export default class DatePickerRY extends Component {
 		}) 
 	}  
 	dateChange = date => {
-		this.setState({show:`${date[0]}-${date[1]}`})
-		this.props.onChange(JSON.stringify(date))
+		if(getAttr(date) === 'Array'){
+			this.setState({show:`${date[0]}-${date[1]}`})
+			this.props.onChange(JSON.stringify(date))
+		}else{
+			this.props.onChange(date)
+		}
 	} 
 	render(){
 		let { defaultValue } = this.props,
@@ -49,7 +53,8 @@ export default class DatePickerRY extends Component {
 						max={this.state.max} 
 						confirm={this.dateChange}
 						now={this.state.now}
-						defaultValue={defaultValue} 
+						defaultValue={defaultValue}
+						remove={()=>{this.dateChange('')}} 
 					/>
 				</div>
 			)
