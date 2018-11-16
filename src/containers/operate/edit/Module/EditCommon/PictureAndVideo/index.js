@@ -558,6 +558,7 @@ class ImgModule extends React.Component {
 							showUploadList={false}
 							customRequest={this.customRequest}
 							beforeUpload={this.beforeUpload}
+							accept="image/*"
 						>
 						<div>
 							<Icon type={this.state.loading ? 'loading' : 'plus'} />
