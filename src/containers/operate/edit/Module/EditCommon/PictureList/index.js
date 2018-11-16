@@ -228,7 +228,7 @@ class ImgModule extends React.Component {
 	}
 	beforeUpload = file => {
 		let imgType = false;
-		if(file.type == 'image/png' || file.type == 'image/jpg' || file.type == 'image/svg'){
+		if(file.type.indexOf('image/png') > -1 || file.type.indexOf('image/jpg')>-1 || file.type.indexOf('image/svg')>-1 || file.type.indexOf('image/jpeg')>-1){
 			imgType = true
 		}
 	  if (!imgType) {
