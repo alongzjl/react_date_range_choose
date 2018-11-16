@@ -226,7 +226,16 @@ class ImgModule extends React.Component {
 			})(info.file)
 			reader.readAsDataURL(info.file)
 	}
-	
+	beforeUpload = file => {
+		let imgType = false;
+		if(file.type == 'image/png' || file.type == 'image/jpg' || file.type == 'image/svg'){
+			imgType = true
+		}
+	  if (!imgType) {
+	   message.info('请上传png、jpg、svg格式图片!')
+	  }
+	  return imgType;
+	}
 	render() {
 		let id = window.uif.userInfo.id || '1'
 		const { page_img } = this.props
@@ -244,6 +253,7 @@ class ImgModule extends React.Component {
 							className="avatar-uploader"
 							listType="picture-card"
 							showUploadList={false}
+							beforeUpload={this.beforeUpload}
 							customRequest={this.customRequest}
 						>
 						<div>
